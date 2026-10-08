@@ -28,6 +28,7 @@ LABELS = {
     "event_id": "현장 접수 기록 번호",
     "event": "실제 접수 상태",
     "location": "인수 또는 접수 장소",
+    "closing_date": "인수 대장 마감일",
 }
 INSTRUCTIONS = [
     "자료에 있는 업체별 공급가액과 부가세, 총액을 모아 주세요. 품목별 최저 단가 업체도 비교해서 answer.json으로 보내 주세요.",

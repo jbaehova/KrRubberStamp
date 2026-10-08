@@ -20,15 +20,15 @@ def main():
 
     baseline = answer("A003")
     changed = deepcopy(cases["A003"]["facts"])
-    changed["education"][0]["amount"] -= 2000000
+    changed["education"][0]["scholarship"] = 0
     after = answer("A003", changed)
-    assert baseline["education_credit"] - after["education_credit"] == 225000
+    assert after["education_credit"] - baseline["education_credit"] == 75000
     checks.append(
         {
             "case_id": "A003",
-            "relationship": "장학금 차감 뒤 대학생 한도와 비교",
+            "relationship": "장학금 차감 여부가 실제 교육비 공제와 세액을 변경",
             "baseline_credit": baseline["education_credit"],
-            "below_cap_credit": after["education_credit"],
+            "omitted_scholarship_credit": after["education_credit"],
         }
     )
 

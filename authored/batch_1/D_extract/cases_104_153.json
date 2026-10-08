@@ -1,0 +1,6477 @@
+[
+  {
+    "case_id": "D104",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "멸균 포장재 인수 합본의 지급 근거 수",
+    "instruction": "포장 작업실의 지급 승인란에 인수 근거 수를 적어야 합니다. 합본에 기재된 인수 번호를 기준으로 unique_document_count를 확인해 주세요.",
+    "work_goal": "인수 자료를 합본으로 보관한 뒤에도 지급 근거를 거래 단위로 기록한다.",
+    "design_rationale": "한 파일에 오전 포장지와 오후 밀봉테이프 인수가 함께 실려 있다. 파일 수 대신 서로 다른 인수 번호를 확인하는 좁은 요청이며 어느 하나의 품목 수나 수량으로 거래 수를 대체할 수 없다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "PACK-AM-104",
+          "vendor": "가상포장실험",
+          "date": "2026-05-07",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "멸균포장지",
+              "quantity": 12,
+              "unit_price": 7400
+            }
+          ]
+        },
+        {
+          "document_id": "PACK-PM-104",
+          "vendor": "가상포장실험",
+          "date": "2026-05-07",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "밀봉테이프",
+              "quantity": 6,
+              "unit_price": 5900
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_포장작업실인수합본.xlsx",
+        "format": "xlsx",
+        "title": "포장 작업실 인수 합본",
+        "note": "각 번호는 실제 인수 하나를 뜻한다. 품목 행이나 파일 개수로 인수 수를 세지 않는다. 같은 번호의 동일 자료만 중복으로 본다. 모든 이름은 합성 정보다.",
+        "fields": [
+          "documents"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D105",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "박물관 수장고 필름 구매의 결제 세액",
+    "instruction": "수장고 보존 필름을 결제한 뒤 세액 한 칸이 비었습니다. 명세의 가격 조건대로 vat_total을 계산해 주세요.",
+    "work_goal": "보존 필름과 소형 부속품 결제에서 세액만 회계 칸에 옮긴다.",
+    "design_rationale": "필름의 큰 금액과 절단날 및 고정핀의 작은 금액이 한 인수에 있다. 단가를 먼저 세액으로 바꾸지 않고 수량을 곱한 품목 총액에서 공급가액을 분리해야 하는 원 단위 관계를 작성했다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "FILM-105",
+          "vendor": "가상보존필름",
+          "date": "2026-06-03",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "보존용폴리에스터필름",
+              "quantity": 7,
+              "unit_price": 23003
+            },
+            {
+              "name": "필름절단날",
+              "quantity": 3,
+              "unit_price": 2201
+            },
+            {
+              "name": "필름고정핀",
+              "quantity": 11,
+              "unit_price": 903
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_보존필름명세.pdf",
+        "format": "pdf",
+        "title": "보존 필름 결제 명세",
+        "note": "기재 단가는 부가세 포함이다. 품목마다 수량 곱하기 단가의 10/11에서 원 미만을 버려 공급가액을 정하고 차액을 세액으로 잡아 합산한다. 이름과 번호는 허구다.",
+        "fields": [
+          "documents"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "vat_total"
+    ]
+  },
+  {
+    "case_id": "D106",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "신규 음향실 납품을 판매처별 승인표로 옮기기",
+    "instruction": "음향실 물품 지급을 승인하려고 합니다. 여러 물품을 납품한 판매처도 한 줄로 모아 vendor_totals를 작성해 주세요.",
+    "work_goal": "납품 위치가 다른 실제 인수를 판매처 지급 승인표에 통합한다.",
+    "design_rationale": "첫 판매처는 녹음석과 조정석에 서로 다른 부품을 따로 납품했고 다른 판매처는 문틀 패드를 납품했다. 자료 위치나 품목별로 지급 계정을 나누지 않아야 하며 법인명 차이나 중복은 넣지 않았다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "SOUND-106-M",
+          "vendor": "가상음향부품",
+          "date": "2026-04-06",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "마이크고정나사",
+              "quantity": 18,
+              "unit_price": 1800
+            }
+          ]
+        },
+        {
+          "document_id": "SOUND-106-D",
+          "vendor": "가상실내패드",
+          "date": "2026-04-08",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "문틀완충패드",
+              "quantity": 4,
+              "unit_price": 11200
+            }
+          ]
+        },
+        {
+          "document_id": "SOUND-106-C",
+          "vendor": "가상음향부품",
+          "date": "2026-04-10",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "조정석케이블고리",
+              "quantity": 9,
+              "unit_price": 3600
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_음향실인수목록.hwpx",
+        "format": "hwpx",
+        "title": "음향실 실제 인수 목록",
+        "note": "목록의 각 번호는 별도 완료 구매다. 별도 단가는 수량을 곱한 공급가액에 품목별 10% 원 미만 버림 세액을 더한다. 업체명은 NFKC 후 공백 제거와 영문 소문자화 및 주식회사, (주), ㈜ 제거를 하고 그 이름 오름차순으로 지급 표를 작성한다. 합성 자료다.",
+        "fields": [
+          "documents"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals"
+    ]
+  },
+  {
+    "case_id": "D107",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "응급 안내 패널 표지와 납품 부속표의 지급액",
+    "instruction": "응급 안내 패널 청구서의 표지와 납품 부속표가 따로 왔습니다. 연결 번호를 맞춰 grand_total을 계산해 주세요.",
+    "work_goal": "가격 조건과 물량을 별도 자료에서 연결하여 지급액을 확인한다.",
+    "design_rationale": "표지에는 업체와 세금 조건만 있고 품목 부속표에는 패널과 설치핀의 수량 및 단가가 있다. 서로 다른 문서의 header_record_id 연결을 읽어야 지급액을 계산할 수 있는 실제 첨부 관계다. 모든 자료가 정상 인수여서 선택 예외는 없다.",
+    "exceptions": [],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h107",
+          "document_id": "EMERGENCY-107",
+          "kind": "invoice",
+          "vendor": "가상응급표지",
+          "date": "2026-03-11",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s107",
+          "header_record_id": "h107",
+          "items": [
+            {
+              "name": "응급안내패널",
+              "quantity": 5,
+              "unit_price": 39800
+            },
+            {
+              "name": "패널설치핀",
+              "quantity": 20,
+              "unit_price": 870
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e107",
+          "document_id": "EMERGENCY-107",
+          "event": "received",
+          "date": "2026-03-12",
+          "location": "검수대"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있는 경우만 집계한다. quote, 무인수 및 출고 전 취소는 제외한다. 같은 document_id의 동일 내용은 한 번만 센다. 별도 단가의 공급가액은 수량 곱하기 단가이고 품목별 10% 원 미만 버림 세액을 더한다. 포함 단가는 품목 총액의 10/11 원 미만 버림을 공급가액으로 하고 차액을 세액으로 한다."
+    },
+    "documents": [
+      {
+        "filename": "01_응급표지청구표지.pdf",
+        "format": "pdf",
+        "title": "응급 패널 청구 표지",
+        "note": "이 자료는 부속 품목표의 연결 기준이다. 업체와 번호는 허구다.",
+        "fields": [
+          "headers"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_납품품목표.xlsx",
+        "format": "xlsx",
+        "title": "응급 패널 납품 부속표",
+        "note": "품목표를 표지 연결 번호로 읽는다. 실제 수령 기록과 사무실 처리 기준을 함께 보관한다.",
+        "fields": [
+          "line_sheets",
+          "events",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D108",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "방문 상담 서식의 공급가액 예산 칸",
+    "instruction": "방문 상담 서식 구매를 세금 제외 예산 칸에 기록할 예정입니다. 두 구매 명세에서 supply_total을 확인해 주세요.",
+    "work_goal": "서식과 봉투 구매를 세금 제외 집행 기준으로 합친다.",
+    "design_rationale": "첫 인수에는 신청서와 개인정보 안내지가 함께 있고 둘째 인수에는 봉투가 있다. 인쇄 장수와 봉투 수를 하나의 수량으로 합치면 안 되며 모두 별도 단가라 예외 없는 기본 품목 집계다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "VISIT-108-F",
+          "vendor": "가상상담인쇄",
+          "date": "2026-05-12",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "방문상담신청서",
+              "quantity": 350,
+              "unit_price": 43
+            },
+            {
+              "name": "정보처리안내지",
+              "quantity": 350,
+              "unit_price": 27
+            }
+          ]
+        },
+        {
+          "document_id": "VISIT-108-E",
+          "vendor": "가상서류봉투",
+          "date": "2026-05-13",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "상담서식봉투",
+              "quantity": 120,
+              "unit_price": 260
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_상담서식인쇄.xlsx",
+        "format": "xlsx",
+        "title": "상담 서식 인쇄 구매",
+        "note": "모든 단가는 부가세 별도 공급가액이다. 품목별 수량과 단가를 곱하여 합산한다. 이름과 번호는 합성 정보다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_상담봉투인수.hwpx",
+        "format": "hwpx",
+        "title": "상담 봉투 인수",
+        "note": "서식 인쇄와 별개로 실제 인수한 봉투다. 같은 거래를 다시 출력한 자료가 아니다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "supply_total"
+    ]
+  },
+  {
+    "case_id": "D109",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "현미경 보관품의 한 판매처 재주문 단가",
+    "instruction": "보관품을 재주문하기 전에 지난 실제 구매 단가를 정리해 주세요. cheapest_by_item과 공급가액 지출 supply_total이 필요합니다.",
+    "work_goal": "구매 단가가 시간에 따라 달라진 한 판매처의 재주문 기준을 만든다.",
+    "design_rationale": "후보 업체 대결이 아니라 같은 업체가 첫 인수와 추가 인수에서 다른 단가를 적용한 상황이다. 슬라이드보관상자는 추가 인수 단가를, 제습카드는 첫 인수 단가를 기준으로 삼아야 하므로 최신 자료만 그대로 옮길 수 없다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "MICRO-109-FIRST",
+          "vendor": "가상표본보관",
+          "date": "2026-04-02",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "슬라이드보관상자",
+              "quantity": 4,
+              "unit_price": 28000
+            },
+            {
+              "name": "제습카드",
+              "quantity": 40,
+              "unit_price": 480
+            }
+          ]
+        },
+        {
+          "document_id": "MICRO-109-ADD",
+          "vendor": "가상표본보관",
+          "date": "2026-04-20",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "슬라이드보관상자",
+              "quantity": 2,
+              "unit_price": 26700
+            },
+            {
+              "name": "제습카드",
+              "quantity": 12,
+              "unit_price": 520
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_최초보관품구매.pdf",
+        "format": "pdf",
+        "title": "최초 보관품 실제 구매",
+        "note": "동일 규격별 개당 공급가액 단가를 비교한다. 단가는 별도이며 수량 곱하기 단가를 공급가액으로 합산한다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체의 법인 표기를 제거한다. 품목 배열은 정규화 이름 오름차순이며 동률 업체는 정규화 업체명 오름차순 첫 업체를 고른다. 합성 정보다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_추가보관품구매.xlsx",
+        "format": "xlsx",
+        "title": "추가 보관품 실제 구매",
+        "note": "처음과 같은 규격을 나중에 따로 인수한 구매다. 단가표 개정 공지가 아니라 실제 납품 명세다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "supply_total"
+    ]
+  },
+  {
+    "case_id": "D110",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "비상 대피 인쇄물의 업체별 결제와 전체 세액",
+    "instruction": "비상 대피 자료 제작비를 지급 표에 적어 주세요. vendor_totals와 vat_total을 확인하면 됩니다.",
+    "work_goal": "여러 규격의 인쇄물 지급액과 총 세액을 동시에 확인한다.",
+    "design_rationale": "한 인쇄소의 앞면 안내지와 양면 점검지가 한 명세에 있고 다른 제작소의 코팅 표지판은 별도다. 품목별 공급가액 분리와 판매처 합산을 서로 다른 출력에 반영해야 한다. 대피 경로의 실제 안전 판단을 요구하는 문제는 아니다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "ESCAPE-110-P",
+          "vendor": "가상대피인쇄",
+          "date": "2026-02-17",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "대피동선안내지",
+              "quantity": 140,
+              "unit_price": 331
+            },
+            {
+              "name": "대피점검양면지",
+              "quantity": 65,
+              "unit_price": 517
+            }
+          ]
+        },
+        {
+          "document_id": "ESCAPE-110-S",
+          "vendor": "가상표지제작",
+          "date": "2026-02-18",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "코팅출구표지판",
+              "quantity": 9,
+              "unit_price": 12103
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_인쇄지인수.hwpx",
+        "format": "hwpx",
+        "title": "대피 인쇄지 인수 명세",
+        "note": "각 품목의 포함 지급액은 수량 곱하기 단가다. 그 금액의 10/11에서 원 미만을 버린 공급가액과 차액 세액을 구한 후 업체별로 합친다. 업체 이름은 NFKC 후 공백 제거 및 영문 소문자화하고 법인 표시를 제거한다. 업체 배열은 그 이름 오름차순이다. 합성 자료다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_출구표지판명세.pdf",
+        "format": "pdf",
+        "title": "출구 표지판 인수 명세",
+        "note": "코팅 표지판을 별도로 실제 인수한 자료다. 기재 단가는 부가세 포함이다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "vat_total"
+    ]
+  },
+  {
+    "case_id": "D111",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "구급 교육용 도구의 주문서와 수령부 연결",
+    "instruction": "교육용 도구의 세금계산서는 아직 안 왔지만 지급 검토에 인수 근거가 필요합니다. 주문서와 수령부를 연결해 grand_total과 unique_document_count를 확인해 주세요.",
+    "work_goal": "세금계산서 도착 전에 주문서와 완료 인수 기록으로 구매 근거를 확인한다.",
+    "design_rationale": "하나의 주문을 실제 수령한 이력이 있다. 주문서를 단순 미집행 자료로 버리지 않고 인수 이벤트가 같은 document_id에 연결되는지 확인해야 한다. 견적이나 취소가 없는 정상 구매의 증빙 연결을 설계했다.",
+    "exceptions": [],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h111",
+          "document_id": "AID-ORDER-111",
+          "kind": "order",
+          "vendor": "가상교육도구",
+          "date": "2026-06-01",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s111",
+          "header_record_id": "h111",
+          "items": [
+            {
+              "name": "교육용압박패드",
+              "quantity": 8,
+              "unit_price": 18500
+            },
+            {
+              "name": "실습표시벨트",
+              "quantity": 8,
+              "unit_price": 6400
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e111",
+          "document_id": "AID-ORDER-111",
+          "event": "received",
+          "date": "2026-06-04",
+          "location": "교육 준비실"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있어야 집계한다. quote, 무인수 자료와 출고 전 취소는 제외하고 같은 document_id의 동일 내용은 한 번만 센다. 별도 가격은 품목별 수량 곱하기 단가를 공급가액으로 하고 그 10% 원 미만 버림 세액을 더한다. 포함 가격은 품목 총액의 10/11 원 미만 버림을 공급가액으로 잡고 차액을 세액으로 한다."
+    },
+    "documents": [
+      {
+        "filename": "01_교육도구주문서.xlsx",
+        "format": "xlsx",
+        "title": "교육 도구 주문과 품목 부속표",
+        "note": "단가는 별도다. 수령부와 연결할 원문 번호를 보존했다. 교육장과 업체는 허구다.",
+        "fields": [
+          "headers",
+          "line_sheets"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_교육도구수령부.hwpx",
+        "format": "hwpx",
+        "title": "교육 도구 현장 수령부",
+        "note": "주문 번호를 확인하여 수령을 기록했다. 지급 검토 처리 기준을 함께 보관한다.",
+        "fields": [
+          "events",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "grand_total",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D112",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "임시 통역석 헤드폰 구매의 공급가액 단가",
+    "instruction": "통역석 헤드폰을 추가 구매할 업체를 고르기 위해 실제 구매 이력의 cheapest_by_item만 정리해 주세요. 물량 합계는 이번 답에 넣지 않아도 됩니다.",
+    "work_goal": "가격 조건이 같은 실제 구매에서 개당 공급가액 기준을 제공한다.",
+    "design_rationale": "세 거래가 한 품목의 실제 구매를 기록하지만 가장 큰 구매 물량의 판매처가 최저 단가 업체는 아니다. 두 품목의 업체를 동시에 고르는 기존 사례와 달리 단일 품목의 단가 비교만 요구한다. 모두 별도 단가라 가격 전환 예외는 없다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "INTERPRET-112-A",
+          "vendor": "가상통역장치",
+          "date": "2026-05-04",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "통역석헤드폰",
+              "quantity": 24,
+              "unit_price": 38200
+            }
+          ]
+        },
+        {
+          "document_id": "INTERPRET-112-B",
+          "vendor": "가상청취연결",
+          "date": "2026-05-06",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "통역석헤드폰",
+              "quantity": 6,
+              "unit_price": 36700
+            }
+          ]
+        },
+        {
+          "document_id": "INTERPRET-112-C",
+          "vendor": "가상회의음향",
+          "date": "2026-05-09",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "통역석헤드폰",
+              "quantity": 10,
+              "unit_price": 37900
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_통역석구매이력.xlsx",
+        "format": "xlsx",
+        "title": "통역석 헤드폰 구매 이력",
+        "note": "세 번호는 각각 실제 인수다. 동일 규격의 개당 공급가액 단가를 비교한다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체의 법인 표시를 제거한다. 품목 배열은 그 이름 오름차순이고 동률은 정규화 업체명 오름차순 첫 업체를 고른다. 모든 이름은 허구다.",
+        "fields": [
+          "documents"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item"
+    ]
+  },
+  {
+    "case_id": "D113",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "식물 관찰 키트의 두 품목표를 한 인수로 합치기",
+    "instruction": "관찰 키트가 식물 받침과 관찰표로 나뉘어 기록됐습니다. 같은 인수 표지에 연결해 supply_total과 vat_total을 확인해 주세요.",
+    "work_goal": "한 인수의 여러 품목 부속표를 복원해 세금 칸을 채운다.",
+    "design_rationale": "받침과 관찰표는 서로 다른 첨부 문서에 적혔지만 표지 연결 번호는 같다. 파일별 거래로 생각하지 않고 양쪽 품목을 한 인수에 모두 연결해야 한다. 두 부속표는 중복이나 수정본이 아닌 서로 다른 품목의 정상 첨부다.",
+    "exceptions": [],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h113",
+          "document_id": "PLANTKIT-113",
+          "kind": "invoice",
+          "vendor": "가상관찰키트",
+          "date": "2026-04-09",
+          "price_includes_vat": true
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s113-base",
+          "header_record_id": "h113",
+          "items": [
+            {
+              "name": "식물관찰받침",
+              "quantity": 10,
+              "unit_price": 12101
+            }
+          ]
+        },
+        {
+          "sheet_id": "s113-card",
+          "header_record_id": "h113",
+          "items": [
+            {
+              "name": "관찰기록표",
+              "quantity": 60,
+              "unit_price": 221
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e113",
+          "document_id": "PLANTKIT-113",
+          "event": "received",
+          "date": "2026-04-10",
+          "location": "관찰실"
+        }
+      ],
+      "processing_policy": "품목표의 header_record_id로 같은 표지의 모든 품목을 연결한다. invoice와 order는 document_id의 received가 있을 때 포함한다. quote, 무인수 자료와 출고 전 취소는 제외하고 동일 document_id의 같은 내용은 한 번만 집계한다. 포함 단가의 품목 총액에서 10/11 원 미만을 버려 공급가액을 구하고 차액을 세액으로 한다. 별도는 수량 곱하기 단가를 공급가액으로 하고 품목별 10% 원 미만 버림 세액을 계산한다."
+    },
+    "documents": [
+      {
+        "filename": "01_관찰키트표지.pdf",
+        "format": "pdf",
+        "title": "관찰 키트 인수 표지",
+        "note": "받침과 관찰표의 단가는 모두 포함이다. 수령 기록이 표지에 함께 있다. 모든 정보는 허구다.",
+        "fields": [
+          "headers",
+          "events"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_받침품목표.xlsx",
+        "format": "xlsx",
+        "title": "관찰 받침 부속표",
+        "note": "표지에 연결하는 첫 첨부다. 지급 처리 기준을 함께 보관한다.",
+        "fields": [
+          "line_sheets.0",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_관찰표품목표.hwpx",
+        "format": "hwpx",
+        "title": "관찰 기록표 부속표",
+        "note": "받침과 별개의 품목이며 같은 인수 표지의 두 번째 첨부다.",
+        "fields": [
+          "line_sheets.1"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "supply_total",
+      "vat_total"
+    ]
+  },
+  {
+    "case_id": "D114",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "단일 결제에 담긴 문서 보관함과 교체 손잡이",
+    "instruction": "문서 보관함 결제의 전체 지급액만 경비 승인란에 넣으려 합니다. 보관함과 손잡이를 모두 포함한 grand_total을 알려 주세요.",
+    "work_goal": "완제품과 교체 부속품이 한 명세에 있는 결제 총액을 확인한다.",
+    "design_rationale": "손잡이는 보관함 구성품 표기가 아니라 별도로 추가 구입한 물품 행이다. 단일 판매처의 한 인수에서 두 행을 모두 포함하는지를 확인하는 기본 사무 작업이며 재구매 후보는 요청하지 않았다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "CASE-114",
+          "vendor": "가상문서철물",
+          "date": "2026-02-12",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "잠금문서보관함",
+              "quantity": 3,
+              "unit_price": 58300
+            },
+            {
+              "name": "교체용보관함손잡이",
+              "quantity": 5,
+              "unit_price": 4510
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_보관함결제.hwpx",
+        "format": "hwpx",
+        "title": "문서 보관함 결제 명세",
+        "note": "단가는 부가세 포함 지급 단가다. 각 품목의 수량 곱하기 단가를 합한다. 손잡이 행도 실제 구입했다. 업체와 번호는 합성 정보다.",
+        "fields": [
+          "documents"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D115",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "휴게실 점검 장비의 분리 구매 건수와 세액",
+    "instruction": "휴게실 점검 장비의 구매 실적을 제출해야 합니다. unique_document_count와 vat_total을 확인해 주세요.",
+    "work_goal": "품목 수와 구매 근거 수를 구별하면서 실제 세액을 기록한다.",
+    "design_rationale": "두 측정기가 한 주문으로 인수됐고 배터리와 보관집은 별도의 인수다. 한 자료에 여러 품목이 있다는 이유로 구매 건수를 늘리지 않아야 하며 세액은 모든 품목 행을 계산해야 한다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "CHECK-115-M",
+          "vendor": "가상휴게측정",
+          "date": "2026-03-05",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "온도기록계",
+              "quantity": 2,
+              "unit_price": 57000
+            },
+            {
+              "name": "습도기록계",
+              "quantity": 2,
+              "unit_price": 61500
+            }
+          ]
+        },
+        {
+          "document_id": "CHECK-115-B",
+          "vendor": "가상전원포장",
+          "date": "2026-03-06",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "기록계배터리",
+              "quantity": 16,
+              "unit_price": 1100
+            },
+            {
+              "name": "측정기보관집",
+              "quantity": 4,
+              "unit_price": 7300
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_측정기인수.pdf",
+        "format": "pdf",
+        "title": "휴게실 측정기 인수",
+        "note": "각 document_id가 완료 구매 하나다. 품목별 수량 곱하기 별도 단가의 10%에서 원 미만을 버려 세액을 합한다. 모든 번호와 업체는 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_전원보관품인수.xlsx",
+        "format": "xlsx",
+        "title": "전원 및 보관품 인수",
+        "note": "측정기 인수와 다른 번호로 실제 수령한 부속품이다. 모든 단가는 별도다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "unique_document_count",
+      "vat_total"
+    ]
+  },
+  {
+    "case_id": "D116",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "로봇 조립 교실의 두 회차 납품 지급액",
+    "instruction": "로봇 조립 교실 물품의 vendor_totals와 grand_total을 지급 예정표에 적어 주세요. 회차별 명세는 실제 인수 자료입니다.",
+    "work_goal": "회차별로 다른 품목을 공급한 같은 업체의 지급액을 모은다.",
+    "design_rationale": "첫 회차에 모터와 바퀴를 인수하고 둘째 회차에 연결보드를 인수했다. 뒤 명세가 앞 자료를 대체하지 않으며 같은 업체의 둘째 구매도 합산해야 한다. 예외를 추가하기 위한 사본이나 법인명 차이는 없다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "ROBOT-116-1",
+          "vendor": "가상조립교구",
+          "date": "2026-03-03",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "교육용기어모터",
+              "quantity": 18,
+              "unit_price": 8200
+            },
+            {
+              "name": "조립용고무바퀴",
+              "quantity": 36,
+              "unit_price": 1450
+            }
+          ]
+        },
+        {
+          "document_id": "ROBOT-116-2",
+          "vendor": "가상조립교구",
+          "date": "2026-03-17",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "모터연결보드",
+              "quantity": 18,
+              "unit_price": 6300
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_첫회차인수.hwpx",
+        "format": "hwpx",
+        "title": "첫 회차 조립품 인수",
+        "note": "단가는 부가세 별도다. 품목별 수량 곱하기 단가를 공급가액으로 하고 그 10% 원 미만 버림 세액을 더한다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 거친 이름 오름차순으로 정리한다. 이름과 교육장은 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_둘째회차인수.pdf",
+        "format": "pdf",
+        "title": "둘째 회차 연결보드 인수",
+        "note": "첫 회차 이후 추가로 주문해 실제 받은 별도의 물품이다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D117",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "복구용 사진 종이 한 상자와 소량 추가분",
+    "instruction": "사진 복구 작업에서 사용한 같은 규격 종이의 실제 단가를 확인해 주세요. cheapest_by_item과 전체 결제 grand_total이 필요합니다.",
+    "work_goal": "포장 물량에 좌우되지 않는 동일 규격 재구매 단가와 지출을 확인한다.",
+    "design_rationale": "첫 인수와 소량 추가 인수가 모두 장당 단가로 기재되어 있다. 묶음 가격을 장당 가격으로 다시 나누는 문제가 아니며 큰 상자 구매가 더 저렴하다는 가정을 적용할 수 없다. 같은 판매처의 두 완료 인수를 비교한다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "PHOTO-117-BOX",
+          "vendor": "가상복구용지",
+          "date": "2026-06-02",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "복구사진용지A5",
+              "quantity": 200,
+              "unit_price": 572
+            }
+          ]
+        },
+        {
+          "document_id": "PHOTO-117-ADD",
+          "vendor": "가상복구용지",
+          "date": "2026-06-09",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "복구사진용지A5",
+              "quantity": 35,
+              "unit_price": 550
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_사진용지구매대장.xlsx",
+        "format": "xlsx",
+        "title": "사진 용지 실제 구매 대장",
+        "note": "수량은 모두 장이고 같은 규격이다. 포함 단가에 10/11을 곱해 원 미만을 버린 개당 공급가액 단가를 비교한다. 총 결제는 각 품목의 수량 곱하기 포함 단가를 합한다. 업체와 품목 이름은 NFKC 후 공백 제거 및 영문 소문자화하고 업체의 법인 표시를 제거한다. 품목 순서는 정규화 이름 오름차순이며 동률은 정규화 업체명 오름차순 첫 업체다. 합성 정보다.",
+        "fields": [
+          "documents"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D118",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "구조물 진동 기록장치의 세금 제외 구매비",
+    "instruction": "진동 기록장치의 구매비를 세금 제외 장부에 올려 주세요. 공급가액 합계 supply_total만 확인하면 됩니다.",
+    "work_goal": "기록장치 본체와 부속품의 포함 결제에서 공급가액을 분리한다.",
+    "design_rationale": "본체 한 대와 연결선 및 자석 받침은 각각 품목 총액에서 공급가액을 구해야 한다. 모든 합계를 먼저 10/11로 나누는 방식과 품목별 버림이 다르도록 포함 단가 끝자리와 수량을 직접 작성했다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "VIBRATION-118",
+          "vendor": "가상진동기록",
+          "date": "2026-05-19",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "진동기록장치",
+              "quantity": 1,
+              "unit_price": 457601
+            },
+            {
+              "name": "기록장치연결선",
+              "quantity": 3,
+              "unit_price": 14303
+            },
+            {
+              "name": "자석고정받침",
+              "quantity": 4,
+              "unit_price": 8251
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_진동기록장치인수.pdf",
+        "format": "pdf",
+        "title": "진동 기록장치 인수 명세",
+        "note": "기재 가격은 부가세 포함이다. 품목마다 수량 곱하기 단가에 10/11을 곱하고 원 미만을 버려 공급가액을 정한 뒤 합산한다. 모든 업체와 장치 이력은 허구다.",
+        "fields": [
+          "documents"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "supply_total"
+    ]
+  },
+  {
+    "case_id": "D119",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "가림막 주문 취소와 다른 부품 인수의 지급 범위",
+    "instruction": "공간 분리 공사에서 가림막 주문과 실제 받은 부품이 함께 인계됐습니다. 인수 이력을 연결해 vendor_totals와 grand_total을 확인해 주세요.",
+    "work_goal": "취소 주문이 있는 업체도 실제로 납품한 다른 물품의 지급액은 보존한다.",
+    "design_rationale": "가림막은 출고 전에 취소했지만 같은 업체의 고정발은 다른 번호로 수령했다. 업체 전체를 제외하는 판단과 주문서 전체를 지출로 보는 판단이 모두 틀리도록 별개의 번호와 현장 이벤트를 설계했다. 표지 두 개와 공통 품목표 및 인수 이력이 네 자료로 나뉜다.",
+    "exceptions": [
+      "한 업체의 가림막 주문은 출고 전에 취소됐지만 고정발 주문은 실제 인수했다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h119-wall",
+          "document_id": "DIVIDE-119-W",
+          "kind": "order",
+          "vendor": "가상공간분리",
+          "date": "2026-04-03",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h119-foot",
+          "document_id": "DIVIDE-119-F",
+          "kind": "order",
+          "vendor": "가상공간분리",
+          "date": "2026-04-05",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s119-w",
+          "header_record_id": "h119-wall",
+          "items": [
+            {
+              "name": "이동가림막",
+              "quantity": 6,
+              "unit_price": 68000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s119-f",
+          "header_record_id": "h119-foot",
+          "items": [
+            {
+              "name": "가림막고정발",
+              "quantity": 12,
+              "unit_price": 8500
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e119-w",
+          "document_id": "DIVIDE-119-W",
+          "event": "cancelled_before_dispatch",
+          "date": "2026-04-04",
+          "location": "발주 담당석"
+        },
+        {
+          "event_id": "e119-f",
+          "document_id": "DIVIDE-119-F",
+          "event": "received",
+          "date": "2026-04-08",
+          "location": "재사용 가림막 창고"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 원문 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있을 때만 집계한다. quote, 무인수 자료와 출고 전 취소는 제외하고 같은 document_id의 동일 내용은 한 번만 계산한다. 별도 단가는 품목 수량을 곱한 공급가액과 그 10% 원 미만 버림 세액을 합한다. 포함 가격은 품목 총액의 10/11 원 미만 버림을 공급가액으로 하고 차액을 세액으로 한다. 업체 이름은 NFKC 후 공백 제거와 영문 소문자화 및 법인 표시 제거를 거쳐 그 이름 오름차순으로 정렬한다."
+    },
+    "documents": [
+      {
+        "filename": "01_가림막주문표지.pdf",
+        "format": "pdf",
+        "title": "가림막 주문 표지",
+        "note": "주문 당시의 원문이다. 현장 상황은 진행 기록에서 확인한다. 업체와 장소는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_고정발주문표지.hwpx",
+        "format": "hwpx",
+        "title": "고정발 주문 표지",
+        "note": "같은 업체에 나중에 보낸 별개 번호의 주문이다.",
+        "fields": [
+          "headers.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_주문품목첨부.xlsx",
+        "format": "xlsx",
+        "title": "공간 분리 품목 첨부표",
+        "note": "표지 연결 번호별 품목을 보존한다. 사무실의 공통 지급 기준이 함께 있다.",
+        "fields": [
+          "line_sheets",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "04_진행기록.pdf",
+        "format": "pdf",
+        "title": "공간 분리 주문 진행 기록",
+        "note": "번호별 취소 또는 현장 수령을 실제 발생일로 기록했다.",
+        "fields": [
+          "events"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D120",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "보관 장비 수령을 두 담당자가 각각 기록한 인계",
+    "instruction": "보관 장비 수령 기록을 두 담당자가 보내 왔습니다. 청구 자료와 연결해 unique_document_count와 supply_total을 확인해 주세요.",
+    "work_goal": "수령을 증명하는 기록 수와 실제 구매 문서 수를 구별한다.",
+    "design_rationale": "창고 담당자와 보안 담당자가 같은 번호의 같은 날짜 및 장소 인수를 각각 기록했다. 두 event_id가 다르지만 실제 거래를 두 건으로 늘리지 않아야 한다. 반대로 품목표의 두 물품은 모두 공급가액에 포함한다.",
+    "exceptions": [
+      "한 번의 수령을 증명하는 현장 기록이 서로 다른 담당자 자료에 중복 보관돼 있다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h120",
+          "document_id": "STORE-120",
+          "kind": "invoice",
+          "vendor": "가상보관장비",
+          "date": "2026-05-04",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s120",
+          "header_record_id": "h120",
+          "items": [
+            {
+              "name": "이동보관선반",
+              "quantity": 2,
+              "unit_price": 184000
+            },
+            {
+              "name": "선반고정벨트",
+              "quantity": 6,
+              "unit_price": 4500
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "warehouse120",
+          "document_id": "STORE-120",
+          "event": "received",
+          "date": "2026-05-06",
+          "location": "중앙 보관실"
+        },
+        {
+          "event_id": "security120",
+          "document_id": "STORE-120",
+          "event": "received",
+          "date": "2026-05-06",
+          "location": "중앙 보관실"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있을 때 집계하며 같은 수령을 증명하는 동일 날짜와 장소의 기록은 거래를 추가하지 않는다. quote, 무인수 및 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 센다. 별도 공급가액은 품목별 수량 곱하기 단가다. 포함 가격은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 계산한다."
+    },
+    "documents": [
+      {
+        "filename": "01_보관장비청구.pdf",
+        "format": "pdf",
+        "title": "보관 장비 청구 표지",
+        "note": "품목은 별도 첨부에 있다. 모든 업체와 담당자는 합성 정보다.",
+        "fields": [
+          "headers"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_보관장비품목.xlsx",
+        "format": "xlsx",
+        "title": "보관 장비 품목표",
+        "note": "연결 번호를 사용해 읽는다. 사무실의 자료 처리 기준을 함께 보관했다.",
+        "fields": [
+          "line_sheets",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_창고수령기록.hwpx",
+        "format": "hwpx",
+        "title": "창고 담당 수령 기록",
+        "note": "중앙 보관실에서 수령을 기록했다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_보안수령기록.pdf",
+        "format": "pdf",
+        "title": "보안 담당 수령 기록",
+        "note": "보안 담당자가 확인한 수령의 날짜와 장소 및 원문 번호다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "unique_document_count",
+      "supply_total"
+    ]
+  },
+  {
+    "case_id": "D121",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "기록 수선 도구의 무상 납품 행을 포함한 단가 기록",
+    "instruction": "기록 수선 도구를 다음에 구매할 때 참고할 cheapest_by_item을 정리해 주세요. 실제 지출 grand_total도 함께 확인합니다.",
+    "work_goal": "원자료의 무상 납품 행을 임의로 누락하지 않고 실제 단가와 지출을 제공한다.",
+    "design_rationale": "유상 롤러와 수선붓을 처음 구매한 뒤 판매처가 시연용 수선붓을 별도 번호로 실제 납품했다. 무상 품목도 수량과 0원 단가가 원자료에 있으며 다른 날짜의 유상 추가 구매가 그 기록을 대체하지 않는다. 재구매 판단자가 이력이 무상 공급이었음을 원자료에서 볼 수 있는 설정이다.",
+    "exceptions": [
+      "시연용으로 실제 인수한 수선붓의 기재 단가가 0원이다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "RECORD-121-1",
+          "vendor": "가상기록수선",
+          "date": "2026-02-04",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "수선용롤러",
+              "quantity": 3,
+              "unit_price": 16800
+            },
+            {
+              "name": "수선붓",
+              "quantity": 6,
+              "unit_price": 7400
+            }
+          ]
+        },
+        {
+          "document_id": "RECORD-121-2",
+          "vendor": "가상기록수선",
+          "date": "2026-02-09",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "수선붓",
+              "quantity": 1,
+              "unit_price": 0
+            }
+          ]
+        },
+        {
+          "document_id": "RECORD-121-3",
+          "vendor": "가상보존도구",
+          "date": "2026-02-16",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "수선용롤러",
+              "quantity": 1,
+              "unit_price": 15900
+            }
+          ]
+        },
+        {
+          "document_id": "RECORD-121-4",
+          "vendor": "가상보존도구",
+          "date": "2026-02-19",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "수선붓",
+              "quantity": 2,
+              "unit_price": 6900
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_수선도구최초명세.pdf",
+        "format": "pdf",
+        "title": "수선 도구 최초 구매",
+        "note": "모든 번호는 실제 납품이다. 별도 공급가액은 품목 수량 곱하기 기재 단가이고 그 10% 원 미만 버림 세액을 더한다. 동일 규격의 실제 개당 공급가액 단가를 비교하며 무상 공급 이력도 0원 기재대로 보존한다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 품목 순서는 정규화 이름 오름차순이고 동률은 정규화 업체명 오름차순 첫 업체다. 모든 정보는 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_시연붓납품.hwpx",
+        "format": "hwpx",
+        "title": "시연용 붓 납품 확인",
+        "note": "시연용으로 원자료에 기재된 수량과 실제 단가다. 앞으로의 견적 금액을 제안하는 서류는 아니다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_롤러추가명세.xlsx",
+        "format": "xlsx",
+        "title": "롤러 추가 인수",
+        "note": "다른 업체에서 실제 인수한 같은 규격 롤러다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_붓추가명세.pdf",
+        "format": "pdf",
+        "title": "붓 추가 인수",
+        "note": "별도 날짜의 유상 추가 구매 명세다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D122",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "제본 작업 발주 묶음에서 아직 받지 않은 품목",
+    "instruction": "제본 작업 발주 자료를 실제 구매 장부로 옮겨 주세요. 현장 기록과 연결한 vendor_totals와 unique_document_count가 필요합니다.",
+    "work_goal": "같은 발주 묶음 안에서도 실제 수령한 번호만 구매 장부에 넣는다.",
+    "design_rationale": "두 주문이 같은 날 같은 업체로 발송됐지만 받침틀만 현장에서 수령했고 절단받침은 인수 기록이 없다. 또 다른 업체의 클램프는 수령했다. 날짜와 판매처가 같다고 발주 묶음 전체를 지급 범위로 정하면 안 된다.",
+    "exceptions": [
+      "같은 날 같은 업체에 보낸 주문 중 일부 번호는 아직 인수 기록이 없다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h122-frame",
+          "document_id": "BIND-122-F",
+          "kind": "order",
+          "vendor": "가상제본공구",
+          "date": "2026-03-02",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h122-cut",
+          "document_id": "BIND-122-C",
+          "kind": "order",
+          "vendor": "가상제본공구",
+          "date": "2026-03-02",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h122-clamp",
+          "document_id": "BIND-122-K",
+          "kind": "invoice",
+          "vendor": "가상압착부품",
+          "date": "2026-03-04",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s122-f",
+          "header_record_id": "h122-frame",
+          "items": [
+            {
+              "name": "제본받침틀",
+              "quantity": 2,
+              "unit_price": 74000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s122-c",
+          "header_record_id": "h122-cut",
+          "items": [
+            {
+              "name": "절단받침",
+              "quantity": 2,
+              "unit_price": 52000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s122-k",
+          "header_record_id": "h122-clamp",
+          "items": [
+            {
+              "name": "압착클램프",
+              "quantity": 8,
+              "unit_price": 5900
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e122-f",
+          "document_id": "BIND-122-F",
+          "event": "received",
+          "date": "2026-03-05",
+          "location": "제본 작업대"
+        },
+        {
+          "event_id": "e122-k",
+          "document_id": "BIND-122-K",
+          "event": "received",
+          "date": "2026-03-06",
+          "location": "제본 작업대"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목을 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때만 집계한다. quote, 무인수 자료와 출고 전 취소는 제외하며 동일 document_id의 같은 내용은 한 번만 센다. 별도는 품목별 수량 곱하기 단가의 공급가액에 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 계산한다. 업체는 NFKC 후 공백 제거와 영문 소문자화 및 법인 표시 제거를 하여 정규화 이름 오름차순으로 배열한다."
+    },
+    "documents": [
+      {
+        "filename": "01_제본공구발주표지.xlsx",
+        "format": "xlsx",
+        "title": "같은 날 제본 공구 발주 표지",
+        "note": "발주 묶음의 번호는 각각 독립이다. 업체와 장소는 허구다.",
+        "fields": [
+          "headers.0",
+          "headers.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_클램프청구표지.pdf",
+        "format": "pdf",
+        "title": "클램프 청구 표지",
+        "note": "공구 주문과 다른 판매처의 원문이다.",
+        "fields": [
+          "headers.2"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_제본품목첨부.hwpx",
+        "format": "hwpx",
+        "title": "제본 도구 품목 첨부표",
+        "note": "각 표지의 연결 번호에 해당하는 품목이다. 지급 장부 처리 기준을 보존한다.",
+        "fields": [
+          "line_sheets",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_작업대수령부.pdf",
+        "format": "pdf",
+        "title": "제본 작업대 현장 수령부",
+        "note": "작업대에서 실제 받은 원문 번호를 기록했다.",
+        "fields": [
+          "events"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D123",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "전각 영문 판매처와 별도 약칭 업체의 지급 분리",
+    "instruction": "자료 복원 장비의 판매처 지급 목록이 필요합니다. 원문 업체 이름을 정해진 기준으로 정리해 vendor_totals를 작성해 주세요.",
+    "work_goal": "정규화 가능한 업체 표기만 합치고 짧은 별도 업체명은 보존한다.",
+    "design_rationale": "전각 영문과 반각 영문으로 적힌 같은 회사의 인수가 있고 약칭처럼 보이는 다른 회사가 별도의 두 인수를 했다. NFKC와 소문자화로 정규화하되 글자를 줄이거나 의미를 추정해서 약칭 회사까지 합치는 근거는 없다.",
+    "exceptions": [
+      "같은 영문 업체가 전각과 반각 및 대소문자 차이가 있는 표기로 기재됐다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "RESTORE-123-A",
+          "vendor": "ＦＩＣＴＩＯＮ　ＭＥＤＩＡ",
+          "date": "2026-05-06",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "자료변환연결기",
+              "quantity": 2,
+              "unit_price": 73000
+            }
+          ]
+        },
+        {
+          "document_id": "RESTORE-123-B",
+          "vendor": "Fiction Media",
+          "date": "2026-05-09",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "자료변환연결선",
+              "quantity": 5,
+              "unit_price": 12500
+            }
+          ]
+        },
+        {
+          "document_id": "RESTORE-123-C",
+          "vendor": "FictionMed",
+          "date": "2026-05-12",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "외장자료읽기장치",
+              "quantity": 1,
+              "unit_price": 158000
+            }
+          ]
+        },
+        {
+          "document_id": "RESTORE-123-D",
+          "vendor": "FictionMed",
+          "date": "2026-05-15",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "장치고정받침",
+              "quantity": 2,
+              "unit_price": 17500
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_자료변환연결기.pdf",
+        "format": "pdf",
+        "title": "자료 변환 연결기 인수",
+        "note": "업체명은 NFKC 후 공백을 제거하고 영문을 소문자로 바꾼다. 주식회사, (주), ㈜ 표시를 제거하지만 임의 약칭 추정은 하지 않는다. 업체 배열은 그 이름 오름차순이다. 별도 공급가액은 품목별 수량 곱하기 단가이고 10% 원 미만 버림 세액을 더한다. 모든 이름은 합성 정보다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_자료변환연결선.xlsx",
+        "format": "xlsx",
+        "title": "자료 변환 연결선 인수",
+        "note": "원문의 영문 이름을 그대로 보존했다. 연결기 이후 별개 날짜의 인수다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_자료읽기장치.hwpx",
+        "format": "hwpx",
+        "title": "외장 자료 읽기 장치 인수",
+        "note": "기재된 판매처 이름으로 실제 인수했다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_고정받침.pdf",
+        "format": "pdf",
+        "title": "외장 장치 고정 받침 인수",
+        "note": "읽기 장치와 별도로 받은 받침이다. 단가는 별도다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals"
+    ]
+  },
+  {
+    "case_id": "D124",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "급식 수레 부품의 이미지만 다시 보낸 인수 확인",
+    "instruction": "급식 수레 수리 부품의 자료가 문자 이미지와 파일로 함께 왔습니다. unique_document_count와 grand_total을 확인해 지급 중복을 막아 주세요.",
+    "work_goal": "현장 전송 이미지가 추가 지급 근거인지 원문 번호로 확인한다.",
+    "design_rationale": "바퀴 명세 PDF가 문자용 이미지로 한 번 더 인계됐고 손잡이와 회전핀 구매는 다른 번호다. PDF와 PNG를 모두 받았다는 사실을 거래 수로 옮기지 않아야 한다. 물품은 서로 다른 수리 시점에 실제 받은 세 구매다.",
+    "exceptions": [
+      "바퀴 인수 명세의 동일 내용을 문자 전송용 이미지로 함께 보관했다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "TROLLEY-124-W",
+          "vendor": "가상급식수레",
+          "date": "2026-04-02",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "수레교체바퀴",
+              "quantity": 4,
+              "unit_price": 17600
+            }
+          ]
+        },
+        {
+          "document_id": "TROLLEY-124-H",
+          "vendor": "가상운반손잡이",
+          "date": "2026-04-09",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "수레교체손잡이",
+              "quantity": 2,
+              "unit_price": 20900
+            }
+          ]
+        },
+        {
+          "document_id": "TROLLEY-124-P",
+          "vendor": "가상급식수레",
+          "date": "2026-04-15",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "수레회전핀",
+              "quantity": 4,
+              "unit_price": 4400
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_바퀴인수.pdf",
+        "format": "pdf",
+        "title": "수레 바퀴 인수 명세",
+        "note": "번호가 다른 실제 인수를 각각 세고 같은 번호의 동일 내용은 한 번만 집계한다. 포함 지급액은 품목별 수량 곱하기 단가를 합한다. 모든 정보는 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_바퀴문자사진.png",
+        "format": "png",
+        "title": "수레 바퀴 명세 문자 이미지",
+        "note": "같은 명세를 문자 전송용으로 보관한 이미지다.",
+        "fields": [],
+        "duplicate_of": "01_바퀴인수.pdf",
+        "template_variant": 1
+      },
+      {
+        "filename": "03_손잡이인수.hwpx",
+        "format": "hwpx",
+        "title": "수레 손잡이 인수 명세",
+        "note": "바퀴와 다른 날 실제 인수한 부품이다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "04_회전핀인수.xlsx",
+        "format": "xlsx",
+        "title": "수레 회전핀 구매 대장",
+        "note": "앞선 바퀴 구매의 수정본이 아닌 독립 인수다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "unique_document_count",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D125",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "라벨 프린터 부품의 개정 견적을 구매 이력에서 제외",
+    "instruction": "라벨 프린터 부품 자료에서 실제 구입 기준표를 만들어 주세요. 견적도 섞여 있으므로 인수 기록에 따른 cheapest_by_item과 grand_total을 확인합니다.",
+    "work_goal": "견적의 개정 가격을 실제 구매 이력에 끼워 넣지 않는다.",
+    "design_rationale": "프린터 헤드 실제 인수 한 건과 롤러 실제 인수 한 건이 있고 헤드의 더 낮은 재견적 자료가 나중에 도착했다. 최신 파일을 단가 기준으로 쓰면 실제 구매가 없는 가격을 선택한다. 표지와 품목이 분리된 실구매 하나까지 연결해야 한다.",
+    "exceptions": [
+      "실구매 뒤 도착한 개정 견적의 단가가 구매 인수 단가와 다르다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h125-head",
+          "document_id": "LABEL-125-H",
+          "kind": "invoice",
+          "vendor": "가상라벨부품",
+          "date": "2026-05-04",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h125-roll",
+          "document_id": "LABEL-125-R",
+          "kind": "invoice",
+          "vendor": "가상인쇄롤러",
+          "date": "2026-05-07",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h125-quote",
+          "document_id": "LABEL-125-Q2",
+          "kind": "quote",
+          "vendor": "가상라벨부품",
+          "date": "2026-05-11",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s125-h",
+          "header_record_id": "h125-head",
+          "items": [
+            {
+              "name": "라벨프린터헤드",
+              "quantity": 1,
+              "unit_price": 175000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s125-r",
+          "header_record_id": "h125-roll",
+          "items": [
+            {
+              "name": "라벨프린터롤러",
+              "quantity": 2,
+              "unit_price": 34000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s125-q",
+          "header_record_id": "h125-quote",
+          "items": [
+            {
+              "name": "라벨프린터헤드",
+              "quantity": 1,
+              "unit_price": 158000
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e125-h",
+          "document_id": "LABEL-125-H",
+          "event": "received",
+          "date": "2026-05-05",
+          "location": "표시물 작업석"
+        },
+        {
+          "event_id": "e125-r",
+          "document_id": "LABEL-125-R",
+          "event": "received",
+          "date": "2026-05-08",
+          "location": "표시물 작업석"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때만 집계한다. quote, 무인수와 출고 전 취소는 제외하고 같은 document_id의 동일 내용은 한 번만 센다. 별도는 품목 수량 곱하기 단가에 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 계산한다. 업체와 품목은 NFKC 후 공백 제거와 영문 소문자화 및 업체 법인 표시 제거를 적용한다. 품목 배열은 그 이름 오름차순이고 같은 개당 공급가액 최저 단가는 정규화 업체명 오름차순 첫 업체다. 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다."
+    },
+    "documents": [
+      {
+        "filename": "01_헤드청구표지.pdf",
+        "format": "pdf",
+        "title": "헤드 청구 표지",
+        "note": "실제 인수의 표지다. 업체와 장소는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_헤드품목부속.xlsx",
+        "format": "xlsx",
+        "title": "헤드 품목 부속 및 수령 기록",
+        "note": "원문 표지 번호로 연결한다. 처리 기준을 보존한다.",
+        "fields": [
+          "line_sheets.0",
+          "events",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_롤러청구.hwpx",
+        "format": "hwpx",
+        "title": "롤러 청구와 품목표",
+        "note": "다른 판매처에서 실제 받은 부품의 원자료다.",
+        "fields": [
+          "headers.1",
+          "line_sheets.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_개정견적.pdf",
+        "format": "pdf",
+        "title": "후속 헤드 견적",
+        "note": "향후 발주 상담에서 받은 가격 제안이다. 원문 종류를 보존했다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.2"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D126",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "이동 전시 서류함의 포함 가격과 별도 가격 대조",
+    "instruction": "이동 전시의 서류함 구매비를 세금 칸에 분리해 주세요. supply_total과 vat_total을 확인하면 됩니다.",
+    "work_goal": "한 업체의 날짜별 가격 표시 조건을 각 인수에 적용해 세금 칸을 채운다.",
+    "design_rationale": "서류함 판매처가 첫날에는 포함, 추가 납품에는 별도 가격을 썼고 다른 업체의 봉인 스티커는 포함이다. 같은 업체라는 이유로 첫 가격 조건을 뒤 거래에 일괄 적용하지 않아야 한다. 세금 표시 차이를 단일 예외로 두고 중복이나 이름 통합은 넣지 않았다.",
+    "exceptions": [
+      "같은 업체의 서로 다른 인수에서도 단가의 부가세 포함 여부가 바뀐다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "EXHIBIT-126-1",
+          "vendor": "가상전시보관",
+          "date": "2026-06-02",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "전시서류함",
+              "quantity": 2,
+              "unit_price": 25303
+            }
+          ]
+        },
+        {
+          "document_id": "EXHIBIT-126-2",
+          "vendor": "가상전시보관",
+          "date": "2026-06-05",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "전시서류함",
+              "quantity": 1,
+              "unit_price": 22800
+            }
+          ]
+        },
+        {
+          "document_id": "EXHIBIT-126-3",
+          "vendor": "가상봉인재료",
+          "date": "2026-06-06",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "봉인스티커",
+              "quantity": 75,
+              "unit_price": 133
+            }
+          ]
+        },
+        {
+          "document_id": "EXHIBIT-126-4",
+          "vendor": "가상봉인재료",
+          "date": "2026-06-08",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "보안서류띠",
+              "quantity": 15,
+              "unit_price": 1761
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_첫서류함.pdf",
+        "format": "pdf",
+        "title": "첫 서류함 구매 명세",
+        "note": "각 명세의 포함 여부를 해당 품목에 적용한다. 포함은 수량 곱하기 단가의 10/11 원 미만 버림을 공급가액으로 하고 차액을 세액으로 잡는다. 별도는 수량 곱하기 단가를 공급가액으로 하고 품목별 그 10% 원 미만 버림을 세액으로 한다. 품목별 결과를 합한다. 이름과 번호는 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_추가서류함.xlsx",
+        "format": "xlsx",
+        "title": "추가 서류함 구매 대장",
+        "note": "첫 자료의 재발급이 아닌 별개 인수다. 원문 가격 조건을 보존했다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_봉인스티커.hwpx",
+        "format": "hwpx",
+        "title": "봉인 스티커 인수",
+        "note": "실제 받은 스티커의 수량과 포함 단가다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_보안서류띠.pdf",
+        "format": "pdf",
+        "title": "보안 서류띠 인수",
+        "note": "추가 보안 물품의 실제 인수 번호다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "supply_total",
+      "vat_total"
+    ]
+  },
+  {
+    "case_id": "D127",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "정산 증빙의 문서 번호가 날짜와 일치하지 않는 수리 구매",
+    "instruction": "방문 수리팀 물품비를 마감해 주세요. 문서 날짜와 파일 이름보다 원문 번호를 기준으로 unique_document_count와 grand_total을 확인합니다.",
+    "work_goal": "날짜가 같은 독립 구매와 날짜별로 다시 보관된 동일 원문을 구별한다.",
+    "design_rationale": "동일 날짜의 연결핀과 체결띠 구매는 다른 번호이고 첫 연결핀 명세가 한 주 뒤 보관함에 다시 제출됐다. 재제출 원문 날짜는 바뀌지 않으며 앞 구매와 내용 및 번호가 정확히 같다. 같은 날짜나 같은 파일 저장일로 중복을 판단할 수 없는 인계다.",
+    "exceptions": [
+      "첫 명세가 다른 보관 날짜의 파일 이름으로 다시 제출됐다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "FIX-127-P",
+          "vendor": "가상출장부품",
+          "date": "2026-03-05",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "연결핀",
+              "quantity": 20,
+              "unit_price": 1250
+            }
+          ]
+        },
+        {
+          "document_id": "FIX-127-T",
+          "vendor": "가상출장부품",
+          "date": "2026-03-05",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "체결띠",
+              "quantity": 12,
+              "unit_price": 3100
+            }
+          ]
+        },
+        {
+          "document_id": "FIX-127-B",
+          "vendor": "가상방문공구",
+          "date": "2026-03-08",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "예비체결볼트",
+              "quantity": 30,
+              "unit_price": 430
+            }
+          ]
+        },
+        {
+          "document_id": "FIX-127-P",
+          "vendor": "가상출장부품",
+          "date": "2026-03-05",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "연결핀",
+              "quantity": 20,
+              "unit_price": 1250
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_0305연결핀.pdf",
+        "format": "pdf",
+        "title": "연결핀 실제 인수",
+        "note": "document_id가 같은 동일 내용은 한 번만 계산한다. 날짜가 같아도 번호가 다르면 별개 구매다. 별도 단가의 품목 공급가액은 수량 곱하기 단가이고 10% 원 미만 버림 세액을 더한다. 파일 저장일을 거래 날짜로 사용하지 않는다. 모두 합성 정보다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_0305체결띠.xlsx",
+        "format": "xlsx",
+        "title": "체결띠 실제 인수",
+        "note": "연결핀과 같은 날짜에 구입했지만 별도의 원문 번호다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_0308예비볼트.hwpx",
+        "format": "hwpx",
+        "title": "예비 볼트 실제 인수",
+        "note": "추가 현장 수리에서 실제 받은 별도 구매다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_0312보관제출.pdf",
+        "format": "pdf",
+        "title": "다음 주 보관함 제출 명세",
+        "note": "원문 번호와 날짜 및 물품 내용을 그대로 재제출했다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "unique_document_count",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D128",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "원문에 공백이 들어간 부품과 규격이 다른 부품의 단가표",
+    "instruction": "배선 작업실이 재구매 단가표를 요청했습니다. 같은 품목 표기를 정리해 cheapest_by_item을 작성해 주세요.",
+    "work_goal": "공백 차이는 통합하되 규격 문자가 다른 실제 품목은 분리한다.",
+    "design_rationale": "동일한 케이블클립10은 공백 유무로 두 표기가 있고 케이블클립12는 다른 규격이다. 숫자를 무시해 같은 품목으로 묶으면 다른 규격의 낮은 가격을 잘못 선택한다. 판매처별 규격 공급 범위도 달라 빈 조합의 단가를 만들어 낼 수 없다.",
+    "exceptions": [
+      "동일 규격 품목 이름에 담당자별로 공백이 들어갔다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "WIRE-128-A",
+          "vendor": "가상배선고정",
+          "date": "2026-06-01",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "케이블 클립 10",
+              "quantity": 40,
+              "unit_price": 310
+            },
+            {
+              "name": "케이블클립12",
+              "quantity": 20,
+              "unit_price": 270
+            }
+          ]
+        },
+        {
+          "document_id": "WIRE-128-B",
+          "vendor": "가상전기소품",
+          "date": "2026-06-03",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "케이블클립10",
+              "quantity": 30,
+              "unit_price": 290
+            }
+          ]
+        },
+        {
+          "document_id": "WIRE-128-C",
+          "vendor": "가상배선고정",
+          "date": "2026-06-05",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "케이블 클립 12",
+              "quantity": 25,
+              "unit_price": 320
+            }
+          ]
+        },
+        {
+          "document_id": "WIRE-128-D",
+          "vendor": "가상전기소품",
+          "date": "2026-06-08",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "케이블클립12",
+              "quantity": 15,
+              "unit_price": 300
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_첫배선고정품.pdf",
+        "format": "pdf",
+        "title": "첫 배선 고정품 인수",
+        "note": "품목과 업체는 NFKC 후 공백 제거 및 영문 소문자화한다. 업체 법인 표시만 제거하고 품목 규격 문자는 보존한다. 동일 규격의 개당 공급가액 단가를 비교하며 별도 단가는 그대로다. 품목 순서는 정규화 이름 오름차순이고 최저 동률은 정규화 업체명 오름차순 첫 업체다. 업체와 번호는 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_클립10추가.xlsx",
+        "format": "xlsx",
+        "title": "클립 10 추가 인수",
+        "note": "원문 품목 이름의 공백 유무를 그대로 보관했다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_클립12추가.hwpx",
+        "format": "hwpx",
+        "title": "클립 12 추가 인수",
+        "note": "기재 규격의 별도 실제 구매다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "04_클립12보충.pdf",
+        "format": "pdf",
+        "title": "다른 업체의 클립 12 보충 인수",
+        "note": "동일 규격을 다른 판매처에서 받은 기록이다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item"
+    ]
+  },
+  {
+    "case_id": "D129",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "오디오 기록 메모리의 동률 업체와 실제 지출",
+    "instruction": "오디오 기록용 메모리의 재구매 후보를 확정하려 합니다. cheapest_by_item과 기존 결제 grand_total을 확인해 주세요.",
+    "work_goal": "실제 공급 단가가 같은 후보를 정해진 순서로 선택하고 구매 지출도 보존한다.",
+    "design_rationale": "한 품목에 네 업체의 실제 인수 기록이 있으며 가운데 두 업체의 단가가 같다. 입력 파일 첫 업체와 마지막 업체는 더 비싸고 두 동률 업체의 물량은 다르다. 수량이나 파일 순서 대신 정규화 업체 순서로 판단하는 단일 품목의 승인 업무다.",
+    "exceptions": [
+      "같은 규격 메모리의 최저 공급가액 단가가 서로 다른 업체에서 같다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "AUDIO-129-1",
+          "vendor": "가상저장매체",
+          "date": "2026-05-02",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "오디오기록메모리64",
+              "quantity": 14,
+              "unit_price": 12900
+            }
+          ]
+        },
+        {
+          "document_id": "AUDIO-129-2",
+          "vendor": "가상보관메모리",
+          "date": "2026-05-04",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "오디오기록메모리64",
+              "quantity": 4,
+              "unit_price": 11800
+            }
+          ]
+        },
+        {
+          "document_id": "AUDIO-129-3",
+          "vendor": "가상기록카드",
+          "date": "2026-05-06",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "오디오기록메모리64",
+              "quantity": 7,
+              "unit_price": 11800
+            }
+          ]
+        },
+        {
+          "document_id": "AUDIO-129-4",
+          "vendor": "가상휴대저장",
+          "date": "2026-05-08",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "오디오기록메모리64",
+              "quantity": 5,
+              "unit_price": 12100
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_저장매체명세.pdf",
+        "format": "pdf",
+        "title": "기록 메모리 첫 인수",
+        "note": "실제 인수한 같은 규격의 개당 공급가액 단가를 비교한다. 별도 지급액은 품목 수량 곱하기 단가에 그 10% 원 미만 버림 세액을 더한다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 품목 배열은 그 이름 오름차순이고 최저 동률은 정규화 업체명 오름차순 첫 업체다. 합성 자료다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_보관메모리명세.xlsx",
+        "format": "xlsx",
+        "title": "기록 메모리 둘째 인수",
+        "note": "앞 자료와 다른 판매처의 실제 구매다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_기록카드명세.hwpx",
+        "format": "hwpx",
+        "title": "기록 메모리 셋째 인수",
+        "note": "이 업체에서 받은 물량과 기재 단가다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "04_휴대저장명세.pdf",
+        "format": "pdf",
+        "title": "기록 메모리 넷째 인수",
+        "note": "별도의 번호로 수령한 같은 규격 메모리다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D130",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "차광 커튼 수령부의 보관 스캔과 구매 근거",
+    "instruction": "차광 커튼 자료의 원문과 스캔이 함께 왔습니다. 원문 번호에 따라 supply_total과 unique_document_count를 확인해 주세요.",
+    "work_goal": "수령부를 두 형식으로 보관해도 구매 근거를 늘리지 않는다.",
+    "design_rationale": "청구 표지와 커튼 및 레일 품목표는 따로 있고 수령부 자체가 PDF와 PNG로 보관됐다. 원문 명세의 복사본이 아니라 인수 증명 자료의 스캔이라는 역할을 구별해야 한다. 품목표를 실제 수령 번호에 연결하여 금액과 건수를 확인한다.",
+    "exceptions": [
+      "같은 수령부를 원문 PDF와 보관 이미지로 함께 제출했다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h130",
+          "document_id": "CURTAIN-130",
+          "kind": "invoice",
+          "vendor": "가상차광시설",
+          "date": "2026-04-07",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s130",
+          "header_record_id": "h130",
+          "items": [
+            {
+              "name": "차광커튼폭90",
+              "quantity": 5,
+              "unit_price": 38000
+            },
+            {
+              "name": "커튼레일폭90",
+              "quantity": 5,
+              "unit_price": 15400
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e130",
+          "document_id": "CURTAIN-130",
+          "event": "received",
+          "date": "2026-04-09",
+          "location": "투영실 창가"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 표지에 연결한다. invoice와 order는 document_id의 received가 있는 경우만 포함한다. quote, 무인수와 출고 전 취소는 제외한다. 원문 번호가 같은 동일 내용은 한 번만 센다. 별도 공급가액은 품목 수량 곱하기 단가다. 포함 단가의 품목 총액은 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다."
+    },
+    "documents": [
+      {
+        "filename": "01_커튼청구표지.hwpx",
+        "format": "hwpx",
+        "title": "차광 커튼 청구 표지",
+        "note": "가격 조건과 번호를 기재한 표지다. 업체와 시설은 허구다.",
+        "fields": [
+          "headers"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_커튼품목부속.xlsx",
+        "format": "xlsx",
+        "title": "커튼과 레일 품목 부속표",
+        "note": "표지 연결 번호와 처리 기준을 보존한다.",
+        "fields": [
+          "line_sheets",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_투영실수령부.pdf",
+        "format": "pdf",
+        "title": "투영실 커튼 수령부",
+        "note": "실제 수령 번호와 날짜 및 장소를 기록했다.",
+        "fields": [
+          "events"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_수령부스캔.png",
+        "format": "png",
+        "title": "투영실 수령부 보관 스캔",
+        "note": "직전 수령부를 그대로 이미지로 보관했다.",
+        "fields": [],
+        "duplicate_of": "03_투영실수령부.pdf",
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "supply_total",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D131",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "공유 공구함 판매처의 법인 표기와 지점 글자",
+    "instruction": "공유 공구함 구매의 vendor_totals를 지급 대장에 작성해 주세요. 업체 이름 처리 기준은 첫 명세에 있습니다.",
+    "work_goal": "법인 표시 차이는 통합하되 지점 글자가 포함된 다른 이름은 보존한다.",
+    "design_rationale": "동일 회사의 주식회사 표기는 제거하지만 다른 두 회사의 이름에 붙은 동부와 서부 글자는 제거 대상이 아니다. 실제 법인 동일성을 임의로 추정하는 대신 명시된 문자열 정리 범위를 따르는 지급 작업이다. 동일 회사의 두 품목 구매와 두 별도 업체의 보충 구매가 있다.",
+    "exceptions": [
+      "한 회사가 법인 표시 유무가 다른 원문 이름으로 납품했다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "TOOLBOX-131-A",
+          "vendor": "주식회사 가상 공구함",
+          "date": "2026-03-03",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "공유공구함",
+              "quantity": 2,
+              "unit_price": 79200
+            }
+          ]
+        },
+        {
+          "document_id": "TOOLBOX-131-B",
+          "vendor": "가상공구함동부",
+          "date": "2026-03-05",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "공구칸막이",
+              "quantity": 8,
+              "unit_price": 4400
+            }
+          ]
+        },
+        {
+          "document_id": "TOOLBOX-131-C",
+          "vendor": "가상공구함",
+          "date": "2026-03-09",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "공구함열쇠고리",
+              "quantity": 12,
+              "unit_price": 2200
+            }
+          ]
+        },
+        {
+          "document_id": "TOOLBOX-131-D",
+          "vendor": "가상공구함서부",
+          "date": "2026-03-12",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "공구함받침패드",
+              "quantity": 4,
+              "unit_price": 5500
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_공구함인수.pdf",
+        "format": "pdf",
+        "title": "공구함 본체 인수",
+        "note": "업체 이름은 NFKC 후 공백 제거 및 영문 소문자화하고 주식회사, (주), ㈜만 제거한다. 그 밖의 글자는 보존하며 업체 배열은 정규화 이름 오름차순이다. 포함 지급액의 10/11 원 미만 버림을 품목 공급가액으로 하고 차액을 세액으로 잡는다. 모든 이름은 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_칸막이인수.xlsx",
+        "format": "xlsx",
+        "title": "공구 칸막이 인수",
+        "note": "원문 판매처 이름과 실제 물량을 보존했다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_열쇠고리인수.hwpx",
+        "format": "hwpx",
+        "title": "열쇠 고리 인수",
+        "note": "공구함 이후 별도로 받은 물품의 번호다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "04_받침패드인수.pdf",
+        "format": "pdf",
+        "title": "받침 패드 인수",
+        "note": "다른 판매처의 실제 인수 명세다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals"
+    ]
+  },
+  {
+    "case_id": "D132",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "한 인수의 표본병 로트별 품목 부속표",
+    "instruction": "표본병 납품은 한 인수 아래 로트별 품목표로 나뉘었습니다. 모든 첨부를 연결해 cheapest_by_item과 grand_total을 확인해 주세요.",
+    "work_goal": "같은 품목이 여러 첨부 행에 반복되어도 금액을 모두 보존한다.",
+    "design_rationale": "같은 규격 표본병의 두 로트가 다른 단가로 인수됐고 세 번째 부속표에는 마개가 있다. 같은 품목명이라는 이유로 뒤 로트가 앞 행을 덮어쓰면 지급액이 줄어든다. 최소 단가와 전체 금액은 동일 자료에서도 서로 다른 연산 범위를 가진다.",
+    "exceptions": [
+      "동일 규격 표본병이 한 인수의 서로 다른 로트 부속표에 반복 기재됐다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h132",
+          "document_id": "SPECIMEN-132",
+          "kind": "invoice",
+          "vendor": "가상표본병",
+          "date": "2026-04-14",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "lot132-a",
+          "header_record_id": "h132",
+          "items": [
+            {
+              "name": "표본병250",
+              "quantity": 24,
+              "unit_price": 3400
+            }
+          ]
+        },
+        {
+          "sheet_id": "lot132-b",
+          "header_record_id": "h132",
+          "items": [
+            {
+              "name": "표본병250",
+              "quantity": 16,
+              "unit_price": 3200
+            }
+          ]
+        },
+        {
+          "sheet_id": "lot132-cap",
+          "header_record_id": "h132",
+          "items": [
+            {
+              "name": "표본병마개250",
+              "quantity": 40,
+              "unit_price": 650
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e132",
+          "document_id": "SPECIMEN-132",
+          "event": "received",
+          "date": "2026-04-15",
+          "location": "표본 보관대"
+        }
+      ],
+      "processing_policy": "header_record_id로 같은 표지의 모든 품목 첨부 행을 연결한다. 반복 품목명도 각 행의 실제 수량과 단가를 보존한다. invoice와 order는 document_id의 received가 있을 때 포함한다. quote, 무인수와 출고 전 취소는 제외하며 같은 document_id의 같은 내용은 한 번만 센다. 별도는 품목 수량 곱하기 단가에 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 개당 공급가액 단가를 비교하고 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 품목 순서는 정규화 이름 오름차순이며 동률은 정규화 업체명 오름차순 첫 업체다."
+    },
+    "documents": [
+      {
+        "filename": "01_표본병표지.pdf",
+        "format": "pdf",
+        "title": "표본병 인수 표지와 수령 기록",
+        "note": "로트별 부속표는 이 원문에 연결한다. 업체와 장소는 허구다.",
+        "fields": [
+          "headers",
+          "events"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_첫로트.xlsx",
+        "format": "xlsx",
+        "title": "표본병 첫 로트 품목표",
+        "note": "이 로트의 실제 수량과 단가다. 전체 처리 기준을 함께 보관한다.",
+        "fields": [
+          "line_sheets.0",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_둘째로트.hwpx",
+        "format": "hwpx",
+        "title": "표본병 둘째 로트 품목표",
+        "note": "같은 규격의 별도 로트다. 앞 행을 수정하는 자료가 아니다.",
+        "fields": [
+          "line_sheets.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_마개부속.pdf",
+        "format": "pdf",
+        "title": "표본병 마개 품목 부속표",
+        "note": "같은 인수에 딸린 별도 품목의 원자료다.",
+        "fields": [
+          "line_sheets.2"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D133",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "반사 표지 시험 견적과 실제 주문 수령의 세액",
+    "instruction": "반사 표지 조달 자료를 실제 구매 세액 표에 올려 주세요. 인수 기록으로 범위를 확인해 vat_total과 unique_document_count를 답하면 됩니다.",
+    "work_goal": "시험 견적과 수령을 마친 주문을 원문 종류 및 현장 연결로 구분한다.",
+    "design_rationale": "시험 견적에 있는 반사띠는 실제로 발주하지 않았고 이후 주문한 완성 표지와 지지판은 인수했다. 세금계산서만 인정하거나 견적까지 합산하는 두 접근이 모두 틀린다. 견적과 주문은 다른 품목과 번호를 갖고 수령부는 주문 번호에만 연결된다.",
+    "exceptions": [
+      "시험 견적이 완료 주문의 수령 자료와 함께 인계됐다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h133-q",
+          "document_id": "REFLECT-133-Q",
+          "kind": "quote",
+          "vendor": "가상반사재료",
+          "date": "2026-02-02",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h133-o",
+          "document_id": "REFLECT-133-O",
+          "kind": "order",
+          "vendor": "가상반사재료",
+          "date": "2026-02-05",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s133-q",
+          "header_record_id": "h133-q",
+          "items": [
+            {
+              "name": "시험용반사띠",
+              "quantity": 10,
+              "unit_price": 3900
+            }
+          ]
+        },
+        {
+          "sheet_id": "s133-o",
+          "header_record_id": "h133-o",
+          "items": [
+            {
+              "name": "완성반사표지",
+              "quantity": 8,
+              "unit_price": 12300
+            },
+            {
+              "name": "반사표지지지판",
+              "quantity": 8,
+              "unit_price": 5500
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e133",
+          "document_id": "REFLECT-133-O",
+          "event": "received",
+          "date": "2026-02-08",
+          "location": "표지 보관대"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 원문 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있을 때 포함한다. quote, 무인수 및 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 센다. 별도 공급가액은 품목 수량 곱하기 단가이며 그 10% 원 미만 버림을 세액으로 계산한다. 포함 총액은 품목별 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다."
+    },
+    "documents": [
+      {
+        "filename": "01_시험견적.pdf",
+        "format": "pdf",
+        "title": "반사 표지 시험 견적",
+        "note": "원문 종류와 품목을 그대로 보존한 가격 제안이다. 모든 정보는 허구다.",
+        "fields": [
+          "headers.0",
+          "line_sheets.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_완성표지주문.hwpx",
+        "format": "hwpx",
+        "title": "완성 표지 주문 표지",
+        "note": "품목표 연결에 쓰는 원문 번호와 가격 조건이다.",
+        "fields": [
+          "headers.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_주문품목.xlsx",
+        "format": "xlsx",
+        "title": "완성 표지 주문 품목표",
+        "note": "실제 주문 품목의 단가와 처리 기준을 보존한다.",
+        "fields": [
+          "line_sheets.1",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_표지수령부.pdf",
+        "format": "pdf",
+        "title": "표지 보관대 수령부",
+        "note": "현장에서 받은 주문 번호를 기록했다.",
+        "fields": [
+          "events"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "vat_total",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D134",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "수평 측정대의 인수 표지를 두 양식으로 보관한 지급",
+    "instruction": "수평 측정대 인수 자료가 양식별로 나뉘어 왔습니다. 품목표와 연결해 vendor_totals와 grand_total을 확인해 주세요.",
+    "work_goal": "인수 표지 재작성본과 원본의 동일 번호를 보존해 지급 중복을 막는다.",
+    "design_rationale": "원본 PDF와 내부 HWPX 표지의 record_id는 다르지만 document_id와 업체 및 가격 조건은 같다. 양쪽의 부속표 내용도 동일하게 보관됐다. 별도 연결 기록이라는 이유로 두 번 지급하면 안 되는 자료 관계다.",
+    "exceptions": [
+      "동일 인수의 표지와 부속표가 외부 양식 및 내부 양식으로 이중 보관돼 있다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h134-external",
+          "document_id": "LEVEL-134",
+          "kind": "invoice",
+          "vendor": "가상측정대",
+          "date": "2026-06-03",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h134-internal",
+          "document_id": "LEVEL-134",
+          "kind": "invoice",
+          "vendor": "가상측정대",
+          "date": "2026-06-03",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s134-e",
+          "header_record_id": "h134-external",
+          "items": [
+            {
+              "name": "수평측정대",
+              "quantity": 2,
+              "unit_price": 176000
+            },
+            {
+              "name": "측정대고정패드",
+              "quantity": 8,
+              "unit_price": 4300
+            }
+          ]
+        },
+        {
+          "sheet_id": "s134-i",
+          "header_record_id": "h134-internal",
+          "items": [
+            {
+              "name": "수평측정대",
+              "quantity": 2,
+              "unit_price": 176000
+            },
+            {
+              "name": "측정대고정패드",
+              "quantity": 8,
+              "unit_price": 4300
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e134",
+          "document_id": "LEVEL-134",
+          "event": "received",
+          "date": "2026-06-05",
+          "location": "측정 실습실"
+        }
+      ],
+      "processing_policy": "header_record_id로 각각의 품목표를 원문 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있어야 집계한다. quote, 무인수 및 출고 전 취소는 제외하고 document_id가 같은 동일 내용은 한 번만 계산한다. 별도 공급가액은 품목 수량 곱하기 단가이며 그 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 하여 그 이름 오름차순으로 배열한다."
+    },
+    "documents": [
+      {
+        "filename": "01_외부표지.pdf",
+        "format": "pdf",
+        "title": "측정대 외부 인수 표지",
+        "note": "외부 원문 번호와 가격 조건이다. 업체와 장소는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_내부표지.hwpx",
+        "format": "hwpx",
+        "title": "측정대 내부 보관 표지",
+        "note": "내부 기록의 연결 식별자와 원문 번호를 모두 보존했다.",
+        "fields": [
+          "headers.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_품목표보관.xlsx",
+        "format": "xlsx",
+        "title": "외부 및 내부 품목표 보관",
+        "note": "각 표지에 연결되는 원자료 내용을 보존한다. 공통 처리 기준이 함께 있다.",
+        "fields": [
+          "line_sheets",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_실습실수령부.pdf",
+        "format": "pdf",
+        "title": "측정 실습실 수령부",
+        "note": "현장 수령을 확인한 원문 번호다.",
+        "fields": [
+          "events"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D135",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "공구 정리 패널의 동일 번호가 아닌 동일 금액 청구",
+    "instruction": "공구 정리 패널 자료를 정산해 주세요. 같은 금액으로 보이는 명세라도 원문 번호를 확인한 grand_total과 unique_document_count가 필요합니다.",
+    "work_goal": "동일 금액의 별개 구매를 보존하고 실제 재제출만 제외한다.",
+    "design_rationale": "첫 두 인수는 같은 패널 수량과 단가 및 판매처지만 다른 공간에 설치한 독립 번호다. 첫 인수만 내부 확인서로 다시 제출됐다. 이름과 금액이 같다는 이유로 두 독립 구매까지 합쳐 버리지 않아야 한다.",
+    "exceptions": [
+      "첫 인수의 동일 원문 내용이 내부 확인 양식으로 다시 제출됐다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "PANEL-135-N",
+          "vendor": "가상공구패널",
+          "date": "2026-04-01",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "공구정리패널",
+              "quantity": 2,
+              "unit_price": 63000
+            }
+          ]
+        },
+        {
+          "document_id": "PANEL-135-S",
+          "vendor": "가상공구패널",
+          "date": "2026-04-03",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "공구정리패널",
+              "quantity": 2,
+              "unit_price": 63000
+            }
+          ]
+        },
+        {
+          "document_id": "PANEL-135-H",
+          "vendor": "가상공구패널",
+          "date": "2026-04-07",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "패널걸이핀",
+              "quantity": 24,
+              "unit_price": 1800
+            }
+          ]
+        },
+        {
+          "document_id": "PANEL-135-N",
+          "vendor": "가상공구패널",
+          "date": "2026-04-01",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "공구정리패널",
+              "quantity": 2,
+              "unit_price": 63000
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_북측패널명세.pdf",
+        "format": "pdf",
+        "title": "북측 작업대 패널 인수",
+        "note": "같은 document_id의 동일 내용만 한 번 집계한다. 금액이나 물품이 같아도 번호가 다르면 별개 구매다. 별도는 품목 수량 곱하기 단가의 공급가액에 10% 원 미만 버림 세액을 더한다. 이름과 공간은 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_남측패널명세.xlsx",
+        "format": "xlsx",
+        "title": "남측 작업대 패널 인수",
+        "note": "다른 공간에 설치한 별개 번호의 실제 인수다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_걸이핀.hwpx",
+        "format": "hwpx",
+        "title": "패널 걸이 핀 실제 인수",
+        "note": "패널 설치 이후 받은 부속품이다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_내부확인.pdf",
+        "format": "pdf",
+        "title": "북측 패널 내부 확인 자료",
+        "note": "북측 원문의 번호와 날짜 및 품목을 그대로 기록했다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "grand_total",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D136",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "현장 조사 핀과 표식 카드의 영문 표기 구별",
+    "instruction": "현장 조사 도구의 재구매 기준표를 만들어 주세요. 품목 처리 기준대로 cheapest_by_item과 supply_total을 확인합니다.",
+    "work_goal": "영문 표기 차이만 통합해 실구매 가격 기준과 집행 공급가액을 제공한다.",
+    "design_rationale": "FieldPin은 두 문자 폭과 대소문자로 적혔고 FieldCard는 별개의 품목이다. 네 구매에 품목 범위가 달라 빈 칸을 공통 단가로 채울 수 없다. 이름 처리와 집행액 합계가 서로 다른 출력에 영향을 주는 요청이다.",
+    "exceptions": [
+      "동일 품목 영문 이름의 문자 폭과 대소문자가 자료별로 다르다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "SURVEY-136-P1",
+          "vendor": "가상조사핀",
+          "date": "2026-03-01",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "ＦｉｅｌｄＰｉｎ",
+              "quantity": 45,
+              "unit_price": 810
+            }
+          ]
+        },
+        {
+          "document_id": "SURVEY-136-C1",
+          "vendor": "가상조사카드",
+          "date": "2026-03-04",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "FieldCard",
+              "quantity": 80,
+              "unit_price": 380
+            }
+          ]
+        },
+        {
+          "document_id": "SURVEY-136-M",
+          "vendor": "가상야외기록",
+          "date": "2026-03-06",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "fieldpin",
+              "quantity": 20,
+              "unit_price": 790
+            },
+            {
+              "name": "ＦＩＥＬＤＣＡＲＤ",
+              "quantity": 30,
+              "unit_price": 410
+            }
+          ]
+        },
+        {
+          "document_id": "SURVEY-136-C2",
+          "vendor": "가상조사카드",
+          "date": "2026-03-10",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "fieldcard",
+              "quantity": 40,
+              "unit_price": 360
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_핀인수.pdf",
+        "format": "pdf",
+        "title": "현장 조사 핀 인수",
+        "note": "품목과 업체는 NFKC 후 공백 제거 및 영문 소문자화하고 업체의 법인 표시를 제거한다. 동일 품목의 개당 공급가액 단가를 비교하며 별도 공급가액은 수량 곱하기 기재 단가다. 품목 배열은 정규화 이름 오름차순이고 최저 동률은 정규화 업체명 오름차순 첫 업체다. 업체와 사업은 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_카드인수.xlsx",
+        "format": "xlsx",
+        "title": "현장 조사 카드 인수",
+        "note": "원문의 품목 표기를 보존했다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_핀카드추가.hwpx",
+        "format": "hwpx",
+        "title": "핀과 카드 추가 인수",
+        "note": "두 실제 품목이 함께 있는 별개 구매다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_카드보충.pdf",
+        "format": "pdf",
+        "title": "기록 카드 보충 인수",
+        "note": "처음과 같은 규격의 나중 구매다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "supply_total"
+    ]
+  },
+  {
+    "case_id": "D137",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "교체용 환풍 부품의 선청구와 실제 수령 세액",
+    "instruction": "환풍 부품 선청구 자료도 포함한 인계가 왔습니다. 실제 수령에 연결되는 자료의 vat_total과 grand_total을 확인해 주세요.",
+    "work_goal": "청구 접수 시점과 실제 수령 여부를 구별하여 지급 세액을 정한다.",
+    "design_rationale": "날짜가 더 이른 모터 청구는 수령 이벤트가 없고 뒤쪽 팬 가드와 흡입망은 실제로 도착했다. 단순히 오래된 서류부터 모두 더하지 않아야 한다. 받은 두 품목이 한 표지의 서로 다른 첨부에 있어 세액 계산에 두 행이 모두 필요하다.",
+    "exceptions": [
+      "먼저 도착한 모터 청구 자료에는 현장 수령 기록이 없다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h137-m",
+          "document_id": "VENT-137-M",
+          "kind": "invoice",
+          "vendor": "가상환풍교체",
+          "date": "2026-05-01",
+          "price_includes_vat": true
+        },
+        {
+          "record_id": "h137-g",
+          "document_id": "VENT-137-G",
+          "kind": "invoice",
+          "vendor": "가상환풍교체",
+          "date": "2026-05-05",
+          "price_includes_vat": true
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s137-m",
+          "header_record_id": "h137-m",
+          "items": [
+            {
+              "name": "환풍교체모터",
+              "quantity": 1,
+              "unit_price": 231000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s137-g",
+          "header_record_id": "h137-g",
+          "items": [
+            {
+              "name": "교체팬가드",
+              "quantity": 2,
+              "unit_price": 18703
+            }
+          ]
+        },
+        {
+          "sheet_id": "s137-n",
+          "header_record_id": "h137-g",
+          "items": [
+            {
+              "name": "교체흡입망",
+              "quantity": 2,
+              "unit_price": 9351
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e137-g",
+          "document_id": "VENT-137-G",
+          "event": "received",
+          "date": "2026-05-07",
+          "location": "환풍 부품 검수대"
+        }
+      ],
+      "processing_policy": "header_record_id로 모든 품목 첨부를 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있어야 포함한다. quote, 무인수와 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 센다. 포함 품목 총액의 10/11 원 미만 버림이 공급가액이며 차액이 세액이다. 별도는 품목 수량 곱하기 단가를 공급가액으로 하고 10% 원 미만 버림 세액을 더한다."
+    },
+    "documents": [
+      {
+        "filename": "01_모터선청구.pdf",
+        "format": "pdf",
+        "title": "교체 모터 선청구 원문",
+        "note": "청구 접수 자료의 원문 종류와 금액이다. 모두 합성 정보다.",
+        "fields": [
+          "headers.0",
+          "line_sheets.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_팬가드표지.hwpx",
+        "format": "hwpx",
+        "title": "부속품 청구 표지 및 수령 기록",
+        "note": "검수대 기록과 연결되는 원문 번호를 보존한다.",
+        "fields": [
+          "headers.1",
+          "events"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_팬가드품목.xlsx",
+        "format": "xlsx",
+        "title": "팬 가드 품목 부속표",
+        "note": "표지 연결 번호와 사무실 처리 기준을 보관한다.",
+        "fields": [
+          "line_sheets.1",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_흡입망품목.pdf",
+        "format": "pdf",
+        "title": "흡입망 품목 부속표",
+        "note": "같은 표지에 딸린 별도 품목의 실제 수량과 단가다.",
+        "fields": [
+          "line_sheets.2"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "vat_total",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D138",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "등화 장비 명세의 내부 재기록과 판매처 지급",
+    "instruction": "등화 장비 구매의 vendor_totals와 supply_total을 확인해 주세요. 외부 명세와 내부 대장에 같은 자료가 함께 있으니 원문 번호 기준을 따릅니다.",
+    "work_goal": "내부 대장 전사본을 별도 납품으로 지급하지 않는다.",
+    "design_rationale": "조명 스탠드 명세를 내부 대장에 전사한 자료가 있으며 원문 업체 표기도 그대로 옮겼다. 다른 두 구매는 전구와 전원 케이블의 실제 별개 인수다. 대장과 명세라는 서로 다른 문서 역할이 같은 거래를 두 번 보일 수 있는 상황이다.",
+    "exceptions": [
+      "조명 스탠드 외부 명세가 내부 구매 대장에 동일 내용으로 전사됐다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "LIGHT-138-S",
+          "vendor": "가상등화시설",
+          "date": "2026-02-05",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "조명스탠드",
+              "quantity": 3,
+              "unit_price": 44500
+            }
+          ]
+        },
+        {
+          "document_id": "LIGHT-138-B",
+          "vendor": "가상조명소모품",
+          "date": "2026-02-08",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "교체조명전구",
+              "quantity": 9,
+              "unit_price": 7700
+            }
+          ]
+        },
+        {
+          "document_id": "LIGHT-138-C",
+          "vendor": "가상등화시설",
+          "date": "2026-02-11",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "조명전원케이블",
+              "quantity": 4,
+              "unit_price": 12400
+            }
+          ]
+        },
+        {
+          "document_id": "LIGHT-138-S",
+          "vendor": "가상등화시설",
+          "date": "2026-02-05",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "조명스탠드",
+              "quantity": 3,
+              "unit_price": 44500
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_스탠드명세.pdf",
+        "format": "pdf",
+        "title": "조명 스탠드 외부 명세",
+        "note": "같은 document_id의 동일 내용은 한 번만 집계한다. 별도 공급가액은 품목 수량 곱하기 단가이고 그 10% 원 미만 버림 세액을 더한다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 하여 그 이름 오름차순으로 배열한다. 업체와 번호는 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_전구인수.hwpx",
+        "format": "hwpx",
+        "title": "교체 전구 실제 인수",
+        "note": "스탠드와 다른 판매처 및 번호로 받은 물품이다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_케이블인수.pdf",
+        "format": "pdf",
+        "title": "전원 케이블 실제 인수",
+        "note": "스탠드 뒤에 별도로 실제 받은 물품이다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "04_내부구매대장.xlsx",
+        "format": "xlsx",
+        "title": "내부 구매 대장 전사 자료",
+        "note": "외부 원문의 번호와 업체 및 품목을 그대로 전사했다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "supply_total"
+    ]
+  },
+  {
+    "case_id": "D139",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "수학 교구의 배송지별 수령을 업체 지급으로 합치기",
+    "instruction": "배송지별로 보관된 수학 교구 자료를 업체 지급 표로 옮겨 주세요. vendor_totals와 unique_document_count를 확인합니다.",
+    "work_goal": "법인명 표기 차이로 갈라진 배송 자료를 업체 기준으로 합친다.",
+    "design_rationale": "같은 교구 회사가 세 교실에 다른 물품을 납품하며 서로 다른 법인 표기를 썼고 네 번째 교실은 다른 업체에서 구매했다. 배송지 수를 업체 수로 옮기지 않아야 하지만 인수 번호는 모두 달라 각 구매를 보존해야 한다.",
+    "exceptions": [
+      "같은 교구 회사의 법인 표기와 공백이 배송지 명세마다 다르다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "MATH-139-A",
+          "vendor": "(주)가상수학교구",
+          "date": "2026-04-06",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "자석분수판",
+              "quantity": 8,
+              "unit_price": 9800
+            }
+          ]
+        },
+        {
+          "document_id": "MATH-139-B",
+          "vendor": "가상 수학 교구",
+          "date": "2026-04-08",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "입체도형막대",
+              "quantity": 16,
+              "unit_price": 4300
+            }
+          ]
+        },
+        {
+          "document_id": "MATH-139-C",
+          "vendor": "주식회사 가상수학교구",
+          "date": "2026-04-11",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "좌표격자보드",
+              "quantity": 6,
+              "unit_price": 12600
+            }
+          ]
+        },
+        {
+          "document_id": "MATH-139-D",
+          "vendor": "가상도형모형",
+          "date": "2026-04-13",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "다면체전개모형",
+              "quantity": 4,
+              "unit_price": 18500
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_분수교실인수.pdf",
+        "format": "pdf",
+        "title": "분수 교실 교구 인수",
+        "note": "업체는 NFKC 후 공백 제거 및 영문 소문자화하고 주식회사, (주), ㈜ 표시를 제거한 이름 오름차순으로 정리한다. 번호가 다른 실제 인수는 모두 센다. 별도는 품목 공급가액 수량 곱하기 단가와 그 10% 원 미만 버림 세액을 합한다. 모든 이름과 교실은 허구다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_입체교실인수.xlsx",
+        "format": "xlsx",
+        "title": "입체 교실 교구 인수",
+        "note": "다른 인수 번호의 실제 물품이다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_좌표교실인수.hwpx",
+        "format": "hwpx",
+        "title": "좌표 교실 교구 인수",
+        "note": "원문의 법인 이름을 그대로 옮겼다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_도형교실인수.pdf",
+        "format": "pdf",
+        "title": "도형 교실 교구 인수",
+        "note": "별도 판매처에서 실제 받은 물품이다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D140",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "스탬프 패드 같은 단가와 다른 물량의 세금 조건",
+    "instruction": "스탬프 작업실 구매비의 vendor_totals와 vat_total을 확인해 주세요. 원문마다 다른 가격 조건을 각 인수에 적용합니다.",
+    "work_goal": "단가 숫자가 같다는 이유로 세금 조건을 같게 처리하지 않는다.",
+    "design_rationale": "두 판매처가 같은 숫자의 스탬프패드 단가를 썼지만 하나는 포함이고 하나는 별도다. 다른 두 인수는 잉크와 청소포로 추가됐다. 품목명과 기재 숫자가 같아도 실제 공급가액 및 세액이 다르다는 지급 관계를 작성했다.",
+    "exceptions": [
+      "같은 품목의 같은 숫자 단가가 포함 가격과 별도 가격으로 나뉜다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "STAMP-140-A",
+          "vendor": "가상스탬프도구",
+          "date": "2026-06-02",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "대형스탬프패드",
+              "quantity": 3,
+              "unit_price": 12100
+            }
+          ]
+        },
+        {
+          "document_id": "STAMP-140-B",
+          "vendor": "가상인쇄패드",
+          "date": "2026-06-04",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "대형스탬프패드",
+              "quantity": 2,
+              "unit_price": 12100
+            }
+          ]
+        },
+        {
+          "document_id": "STAMP-140-I",
+          "vendor": "가상스탬프도구",
+          "date": "2026-06-07",
+          "price_includes_vat": true,
+          "items": [
+            {
+              "name": "스탬프보충잉크",
+              "quantity": 6,
+              "unit_price": 6601
+            }
+          ]
+        },
+        {
+          "document_id": "STAMP-140-C",
+          "vendor": "가상인쇄패드",
+          "date": "2026-06-10",
+          "price_includes_vat": false,
+          "items": [
+            {
+              "name": "패드청소포",
+              "quantity": 20,
+              "unit_price": 530
+            }
+          ]
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_스탬프패드명세.pdf",
+        "format": "pdf",
+        "title": "첫 스탬프 패드 인수",
+        "note": "각 원문 포함 여부를 적용한다. 포함 품목 총액의 10/11 원 미만 버림을 공급가액으로 하고 차액을 세액으로 한다. 별도는 수량 곱하기 단가를 공급가액으로 하여 품목별 10% 원 미만 버림 세액을 더한다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 거친 이름 오름차순으로 배열한다. 합성 정보다.",
+        "fields": [
+          "documents.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_다른패드명세.xlsx",
+        "format": "xlsx",
+        "title": "다른 업체 패드 인수",
+        "note": "원문 가격 조건을 보존했다.",
+        "fields": [
+          "documents.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_잉크인수.hwpx",
+        "format": "hwpx",
+        "title": "보충 잉크 인수",
+        "note": "패드 이후 별도로 실제 받은 물품이다.",
+        "fields": [
+          "documents.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_청소포인수.pdf",
+        "format": "pdf",
+        "title": "패드 청소포 인수",
+        "note": "뒤 날짜의 다른 품목 인수다.",
+        "fields": [
+          "documents.3"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "vat_total"
+    ]
+  },
+  {
+    "case_id": "D141",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "철제 모형 운반품 주문의 수령과 미수령 품목 비교",
+    "instruction": "철제 모형 운반품의 실제 구매 이력을 정리해 주세요. 인수 기록에 연결한 cheapest_by_item만 답하면 됩니다.",
+    "work_goal": "미수령 주문 가격을 실제 구매 기준표에서 제외한다.",
+    "design_rationale": "운반손잡이와 모형고정띠는 각기 다른 번호로 받았고 더 싼 손잡이 주문은 아직 현장 수령이 없다. 품목별 실제 가격 이력이 주문과 청구 표지에 나뉘어 있어 원문 종류만으로 모두 제외하거나 모두 포함할 수 없다. 요구를 비교 표 한 개로 좁혔다.",
+    "exceptions": [
+      "운반손잡이의 후속 주문은 단가가 낮지만 수령 기록이 없다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h141-h",
+          "document_id": "MODEL-141-H",
+          "kind": "order",
+          "vendor": "가상모형운반",
+          "date": "2026-05-01",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h141-t",
+          "document_id": "MODEL-141-T",
+          "kind": "invoice",
+          "vendor": "가상모형체결",
+          "date": "2026-05-03",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h141-l",
+          "document_id": "MODEL-141-L",
+          "kind": "order",
+          "vendor": "가상모형체결",
+          "date": "2026-05-09",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s141-h",
+          "header_record_id": "h141-h",
+          "items": [
+            {
+              "name": "모형운반손잡이",
+              "quantity": 4,
+              "unit_price": 13200
+            }
+          ]
+        },
+        {
+          "sheet_id": "s141-t",
+          "header_record_id": "h141-t",
+          "items": [
+            {
+              "name": "모형고정띠",
+              "quantity": 8,
+              "unit_price": 4700
+            }
+          ]
+        },
+        {
+          "sheet_id": "s141-l",
+          "header_record_id": "h141-l",
+          "items": [
+            {
+              "name": "모형운반손잡이",
+              "quantity": 4,
+              "unit_price": 11900
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e141-h",
+          "document_id": "MODEL-141-H",
+          "event": "received",
+          "date": "2026-05-04",
+          "location": "모형 보관실"
+        },
+        {
+          "event_id": "e141-t",
+          "document_id": "MODEL-141-T",
+          "event": "received",
+          "date": "2026-05-06",
+          "location": "모형 보관실"
+        }
+      ],
+      "processing_policy": "header_record_id로 표지와 품목표를 연결한다. invoice와 order는 document_id의 received 기록이 있어야 포함한다. quote, 무인수 및 출고 전 취소는 제외하고 동일 document_id의 같은 내용은 한 번만 센다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 같은 규격의 개당 공급가액 단가를 비교하며 별도 단가는 그대로이고 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 품목 배열은 정규화 이름 오름차순이며 최저 동률은 정규화 업체명 오름차순 첫 업체다."
+    },
+    "documents": [
+      {
+        "filename": "01_운반손잡이주문.pdf",
+        "format": "pdf",
+        "title": "운반 손잡이 주문 원문",
+        "note": "원문 종류와 품목을 그대로 보존했다. 모든 업체와 장소는 허구다.",
+        "fields": [
+          "headers.0",
+          "line_sheets.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_고정띠청구.hwpx",
+        "format": "hwpx",
+        "title": "모형 고정띠 청구 원문",
+        "note": "다른 품목의 인수 확인에 쓸 원문 번호다.",
+        "fields": [
+          "headers.1",
+          "line_sheets.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_후속주문.xlsx",
+        "format": "xlsx",
+        "title": "후속 운반 손잡이 주문",
+        "note": "후속 주문의 가격 제안과 공통 처리 기준을 보관한다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.2",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "04_모형실수령부.pdf",
+        "format": "pdf",
+        "title": "모형 보관실 수령부",
+        "note": "현장에서 실제 받은 원문 번호를 기록했다.",
+        "fields": [
+          "events"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item"
+    ]
+  },
+  {
+    "case_id": "D142",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "벽면 표본 보관 장치의 제안과 취소 이력 마감",
+    "instruction": "벽면 표본 보관 장치의 자료를 지급 마감에 사용하려 합니다. 제안과 주문 진행 기록을 인수 번호로 연결해 vendor_totals, grand_total, unique_document_count를 확인해 주세요.",
+    "work_goal": "서로 다른 조달 단계의 원자료를 현장 기록으로 연결해 실제 지급 범위를 정한다.",
+    "design_rationale": "표본 걸이판과 고정레일 및 완충 받침은 각각 현장에서 받았고 대체 걸이판 견적과 확장레일 취소 주문은 다른 번호다. 견적 업체도 실제 고정레일을 공급했으며 취소 업체도 실제 걸이판을 공급했다. 업체 전체를 제외하지 않고 번호별 단계와 물량을 읽어야 하는 마감 이력을 직접 설계했다.",
+    "exceptions": [
+      "미채택 대체 걸이판 견적이 실제 납품과 함께 보관됐다.",
+      "실제 납품 업체의 별도 확장레일 주문은 출고 전에 취소됐다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h142-board",
+          "document_id": "WALL-142-B",
+          "kind": "invoice",
+          "vendor": "가상표본벽면",
+          "date": "2026-03-02",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h142-rail",
+          "document_id": "WALL-142-R",
+          "kind": "order",
+          "vendor": "가상벽면철물",
+          "date": "2026-03-04",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h142-pad",
+          "document_id": "WALL-142-P",
+          "kind": "invoice",
+          "vendor": "가상표본완충",
+          "date": "2026-03-06",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h142-quote",
+          "document_id": "WALL-142-Q",
+          "kind": "quote",
+          "vendor": "가상벽면철물",
+          "date": "2026-03-01",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h142-expand",
+          "document_id": "WALL-142-X",
+          "kind": "order",
+          "vendor": "가상표본벽면",
+          "date": "2026-03-08",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s142-b",
+          "header_record_id": "h142-board",
+          "items": [
+            {
+              "name": "표본걸이판",
+              "quantity": 3,
+              "unit_price": 83000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s142-r",
+          "header_record_id": "h142-rail",
+          "items": [
+            {
+              "name": "고정레일",
+              "quantity": 6,
+              "unit_price": 14200
+            }
+          ]
+        },
+        {
+          "sheet_id": "s142-p",
+          "header_record_id": "h142-pad",
+          "items": [
+            {
+              "name": "완충받침",
+              "quantity": 12,
+              "unit_price": 3500
+            }
+          ]
+        },
+        {
+          "sheet_id": "s142-q",
+          "header_record_id": "h142-quote",
+          "items": [
+            {
+              "name": "대체표본걸이판",
+              "quantity": 3,
+              "unit_price": 79000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s142-x",
+          "header_record_id": "h142-expand",
+          "items": [
+            {
+              "name": "확장레일",
+              "quantity": 6,
+              "unit_price": 18700
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e142-b",
+          "document_id": "WALL-142-B",
+          "event": "received",
+          "date": "2026-03-05",
+          "location": "표본실 벽면"
+        },
+        {
+          "event_id": "e142-r",
+          "document_id": "WALL-142-R",
+          "event": "received",
+          "date": "2026-03-07",
+          "location": "표본실 벽면"
+        },
+        {
+          "event_id": "e142-p",
+          "document_id": "WALL-142-P",
+          "event": "received",
+          "date": "2026-03-09",
+          "location": "표본실 벽면"
+        },
+        {
+          "event_id": "e142-x",
+          "document_id": "WALL-142-X",
+          "event": "cancelled_before_dispatch",
+          "date": "2026-03-10",
+          "location": "발주 담당석"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 원문 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때만 포함한다. quote, 무인수와 출고 전 취소는 제외하고 같은 document_id의 동일 내용은 한 번만 계산한다. 별도 공급가액은 품목 수량 곱하기 단가이며 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 하여 그 이름 오름차순으로 배열한다."
+    },
+    "documents": [
+      {
+        "filename": "01_걸이판청구.pdf",
+        "format": "pdf",
+        "title": "표본 걸이판 청구 원문",
+        "note": "원문과 품목 부속표를 함께 보관했다. 모든 이름과 장소는 허구다.",
+        "fields": [
+          "headers.0",
+          "line_sheets.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_고정레일주문.xlsx",
+        "format": "xlsx",
+        "title": "고정 레일 주문 원문",
+        "note": "주문 품목과 공통 처리 기준이다.",
+        "fields": [
+          "headers.1",
+          "line_sheets.1",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_받침청구.hwpx",
+        "format": "hwpx",
+        "title": "완충 받침 청구 원문",
+        "note": "독립 번호의 품목과 가격 조건이다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_대체판견적.pdf",
+        "format": "pdf",
+        "title": "대체 걸이판 견적 원문",
+        "note": "가격 제안을 원문 종류 그대로 보존했다.",
+        "fields": [
+          "headers.3",
+          "line_sheets.3"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "05_확장레일주문.hwpx",
+        "format": "hwpx",
+        "title": "확장 레일 주문 원문",
+        "note": "후속 주문 시점의 원문이다.",
+        "fields": [
+          "headers.4",
+          "line_sheets.4"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_걸이판수령.pdf",
+        "format": "pdf",
+        "title": "걸이판 현장 수령 기록",
+        "note": "표본실에서 확인한 수령 번호다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "07_고정레일수령.xlsx",
+        "format": "xlsx",
+        "title": "고정 레일 현장 수령 기록",
+        "note": "주문 번호와 수령 날짜를 보존했다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "08_받침수령.hwpx",
+        "format": "hwpx",
+        "title": "받침 현장 수령 기록",
+        "note": "받침의 실제 현장 기록이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_확장레일진행.pdf",
+        "format": "pdf",
+        "title": "확장 레일 진행 기록",
+        "note": "주문 담당자의 실제 발생 기록이다.",
+        "fields": [
+          "events.3"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "grand_total",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D143",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "수채 재료 인수의 로트 반복과 판매처 표기 통합",
+    "instruction": "수채 작업실의 재료 구매를 지급 표로 옮기고 다음 단가 기준도 남겨 주세요. vendor_totals, cheapest_by_item, supply_total이 필요합니다.",
+    "work_goal": "반복 로트 품목을 누락하지 않으면서 법인 표기가 다른 판매처를 합친다.",
+    "design_rationale": "첫 인수의 수채종이200 두 로트가 단가별 첨부에 나뉘고 같은 판매처의 나중 인수는 다른 법인 이름으로 기재됐다. 새 공급처의 수채종이300은 다른 규격이며 가격이 더 낮아도 200의 후보가 아니다. 원문 세 개를 표지와 부속 및 실제 수령으로 따로 인계하는 자료를 설계했다.",
+    "exceptions": [
+      "한 인수 안에 같은 규격 수채종이가 단가가 다른 두 로트로 나뉜다.",
+      "같은 판매처의 첫 인수와 후속 인수는 법인 표기가 다르다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h143-first",
+          "document_id": "PAINT-143-1",
+          "kind": "invoice",
+          "vendor": "주식회사 가상 수채재료",
+          "date": "2026-04-02",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h143-next",
+          "document_id": "PAINT-143-2",
+          "kind": "order",
+          "vendor": "가상수채재료",
+          "date": "2026-04-12",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h143-other",
+          "document_id": "PAINT-143-3",
+          "kind": "invoice",
+          "vendor": "가상종이상점",
+          "date": "2026-04-15",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s143-a",
+          "header_record_id": "h143-first",
+          "items": [
+            {
+              "name": "수채종이200",
+              "quantity": 40,
+              "unit_price": 1450
+            }
+          ]
+        },
+        {
+          "sheet_id": "s143-b",
+          "header_record_id": "h143-first",
+          "items": [
+            {
+              "name": "수채종이200",
+              "quantity": 20,
+              "unit_price": 1380
+            },
+            {
+              "name": "종이고정테이프",
+              "quantity": 4,
+              "unit_price": 7200
+            }
+          ]
+        },
+        {
+          "sheet_id": "s143-c",
+          "header_record_id": "h143-next",
+          "items": [
+            {
+              "name": "수채종이200",
+              "quantity": 30,
+              "unit_price": 1420
+            }
+          ]
+        },
+        {
+          "sheet_id": "s143-d",
+          "header_record_id": "h143-other",
+          "items": [
+            {
+              "name": "수채종이300",
+              "quantity": 40,
+              "unit_price": 1200
+            },
+            {
+              "name": "종이고정테이프",
+              "quantity": 3,
+              "unit_price": 6800
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e143-1",
+          "document_id": "PAINT-143-1",
+          "event": "received",
+          "date": "2026-04-04",
+          "location": "수채 작업실"
+        },
+        {
+          "event_id": "e143-2",
+          "document_id": "PAINT-143-2",
+          "event": "received",
+          "date": "2026-04-14",
+          "location": "수채 작업실"
+        },
+        {
+          "event_id": "e143-3",
+          "document_id": "PAINT-143-3",
+          "event": "received",
+          "date": "2026-04-17",
+          "location": "수채 작업실"
+        }
+      ],
+      "processing_policy": "header_record_id로 표지에 해당하는 모든 품목표를 연결하고 같은 품목 반복 행의 수량도 모두 보존한다. invoice와 order는 document_id의 received가 있을 때 포함한다. quote, 무인수와 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 계산한다. 별도 공급가액은 품목별 수량 곱하기 단가이고 10% 원 미만 버림 세액을 더한다. 포함 총액은 품목별 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시만 제거한다. 규격 문자는 보존한다. 업체 및 품목 배열은 정규화 이름 오름차순이고 개당 공급가액 최저 단가가 같으면 정규화 업체명 오름차순 첫 업체다. 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다."
+    },
+    "documents": [
+      {
+        "filename": "01_첫인수표지.pdf",
+        "format": "pdf",
+        "title": "수채 재료 첫 인수 표지",
+        "note": "로트별 품목 첨부의 연결 원문이다. 업체와 장소는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_첫로트.xlsx",
+        "format": "xlsx",
+        "title": "첫 인수 첫 로트 품목표",
+        "note": "단가별 로트 기록과 공통 처리 기준이다.",
+        "fields": [
+          "line_sheets.0",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_둘째로트.hwpx",
+        "format": "hwpx",
+        "title": "첫 인수 둘째 로트 품목표",
+        "note": "같은 표지에 연결되는 추가 로트 및 테이프다.",
+        "fields": [
+          "line_sheets.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "04_첫수령.pdf",
+        "format": "pdf",
+        "title": "수채 재료 첫 수령부",
+        "note": "첫 원문 번호의 실제 현장 수령 기록이다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "05_후속표지.hwpx",
+        "format": "hwpx",
+        "title": "수채 재료 후속 주문 표지",
+        "note": "원문 회사 이름을 그대로 보존했다.",
+        "fields": [
+          "headers.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_후속품목.xlsx",
+        "format": "xlsx",
+        "title": "수채 재료 후속 품목표",
+        "note": "실제 후속 주문의 첨부다.",
+        "fields": [
+          "line_sheets.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "07_후속수령.pdf",
+        "format": "pdf",
+        "title": "수채 재료 후속 수령부",
+        "note": "후속 주문 번호에 연결되는 수령이다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "08_다른규격청구.hwpx",
+        "format": "hwpx",
+        "title": "다른 규격 종이 청구와 품목표",
+        "note": "기재된 규격 문자와 실제 품목을 보존했다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.3"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "09_다른규격수령.pdf",
+        "format": "pdf",
+        "title": "다른 규격 종이 수령부",
+        "note": "그 원문 번호의 현장 수령이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "cheapest_by_item",
+      "supply_total"
+    ]
+  },
+  {
+    "case_id": "D144",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "휴대 번역 단말 받침의 전각 품목과 세금 표시",
+    "instruction": "휴대 번역 단말 받침과 충전선을 재구매할 기준이 필요합니다. 자료를 정리해 cheapest_by_item, supply_total, vat_total을 확인해 주세요.",
+    "work_goal": "문자 표기와 세금 조건을 각각 처리해 동일 규격의 실제 단가를 비교한다.",
+    "design_rationale": "DeskBase와 ChargeLead가 각 자료에서 전각 또는 다른 대소문자로 적혔고 포함 여부도 거래별로 다르다. 받침만 인수한 첫 거래와 충전선만 인수한 둘째 거래 및 두 품목을 함께 인수한 셋째 거래를 표지와 품목 및 수령부로 연결해야 한다. 업체 하나를 전체 최저 업체로 정하는 요청은 아니다.",
+    "exceptions": [
+      "동일 품목 영문 이름의 문자 폭 및 대소문자가 다르다.",
+      "실제 인수의 기재 단가는 포함과 별도 가격으로 나뉜다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h144-base",
+          "document_id": "TRANS-144-B",
+          "kind": "invoice",
+          "vendor": "가상통역받침",
+          "date": "2026-02-03",
+          "price_includes_vat": true
+        },
+        {
+          "record_id": "h144-lead",
+          "document_id": "TRANS-144-L",
+          "kind": "order",
+          "vendor": "가상충전연결",
+          "date": "2026-02-05",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h144-kit",
+          "document_id": "TRANS-144-K",
+          "kind": "invoice",
+          "vendor": "가상휴대단말",
+          "date": "2026-02-09",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s144-b",
+          "header_record_id": "h144-base",
+          "items": [
+            {
+              "name": "ＤｅｓｋＢａｓｅ",
+              "quantity": 6,
+              "unit_price": 17603
+            }
+          ]
+        },
+        {
+          "sheet_id": "s144-l",
+          "header_record_id": "h144-lead",
+          "items": [
+            {
+              "name": "ChargeLead",
+              "quantity": 10,
+              "unit_price": 4900
+            }
+          ]
+        },
+        {
+          "sheet_id": "s144-k",
+          "header_record_id": "h144-kit",
+          "items": [
+            {
+              "name": "deskbase",
+              "quantity": 4,
+              "unit_price": 16100
+            },
+            {
+              "name": "ＣＨＡＲＧＥＬＥＡＤ",
+              "quantity": 4,
+              "unit_price": 4650
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e144-b",
+          "document_id": "TRANS-144-B",
+          "event": "received",
+          "date": "2026-02-05",
+          "location": "통역 준비실"
+        },
+        {
+          "event_id": "e144-l",
+          "document_id": "TRANS-144-L",
+          "event": "received",
+          "date": "2026-02-08",
+          "location": "통역 준비실"
+        },
+        {
+          "event_id": "e144-k",
+          "document_id": "TRANS-144-K",
+          "event": "received",
+          "date": "2026-02-11",
+          "location": "통역 준비실"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때 포함하고 quote, 무인수와 출고 전 취소는 제외한다. 같은 document_id의 같은 내용은 한 번만 계산한다. 포함 품목 총액의 10/11 원 미만 버림을 공급가액으로 하고 차액을 세액으로 잡는다. 별도는 수량 곱하기 단가의 공급가액과 품목별 10% 원 미만 버림 세액으로 계산한다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 배열은 정규화 이름 오름차순이고 개당 공급가액 단가를 비교한다. 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이며 최저 동률은 정규화 업체명 오름차순 첫 업체다."
+    },
+    "documents": [
+      {
+        "filename": "01_받침표지.pdf",
+        "format": "pdf",
+        "title": "받침 인수 표지",
+        "note": "포함 여부는 이 표지의 원문 조건이다. 모든 정보는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_받침품목.xlsx",
+        "format": "xlsx",
+        "title": "받침 품목 부속표",
+        "note": "원문 품목 이름과 단가를 보존한다. 공통 처리 기준이 함께 있다.",
+        "fields": [
+          "line_sheets.0",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_받침수령.hwpx",
+        "format": "hwpx",
+        "title": "받침 현장 수령부",
+        "note": "실제 원문 번호의 수령 기록이다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_충전선표지.hwpx",
+        "format": "hwpx",
+        "title": "충전선 주문 표지",
+        "note": "품목표를 연결할 업체와 가격 조건이다.",
+        "fields": [
+          "headers.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_충전선품목.pdf",
+        "format": "pdf",
+        "title": "충전선 품목 부속표",
+        "note": "기재된 문자 표기 그대로 보존했다.",
+        "fields": [
+          "line_sheets.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_충전선수령.xlsx",
+        "format": "xlsx",
+        "title": "충전선 현장 수령부",
+        "note": "실제 수령한 주문 번호다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "07_세트표지.pdf",
+        "format": "pdf",
+        "title": "받침과 충전선 인수 표지",
+        "note": "두 품목을 함께 받은 원문이다.",
+        "fields": [
+          "headers.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "08_세트품목.hwpx",
+        "format": "hwpx",
+        "title": "두 품목의 부속표",
+        "note": "둘째 자료의 수정본이 아닌 별도 구매다.",
+        "fields": [
+          "line_sheets.2"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "09_세트수령.pdf",
+        "format": "pdf",
+        "title": "두 품목 현장 수령부",
+        "note": "원문 번호의 실제 수령이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "supply_total",
+      "vat_total"
+    ]
+  },
+  {
+    "case_id": "D145",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "출입 계수기 납품의 이중 수령 기록과 가격 조건",
+    "instruction": "출입 계수기 설치 자료를 결산해 주세요. 원문과 현장 기록을 연결해 vendor_totals, vat_total, unique_document_count를 확인합니다.",
+    "work_goal": "현장 확인 기록의 반복을 거래 수로 세지 않으면서 거래별 세금 조건을 적용한다.",
+    "design_rationale": "계수기와 연결모듈은 정상 인수됐고 고정판 주문도 실제 받았다. 첫 수령을 설비 담당과 출입 담당이 각각 같은 날짜와 장소로 기록했다. 기재 가격은 첫 거래만 포함이고 뒤 거래는 별도라 동일 업체 물량에도 한 가격 방식으로 계산할 수 없다.",
+    "exceptions": [
+      "계수기 수령을 서로 다른 담당자가 같은 발생 내용으로 각각 기록했다.",
+      "계수기와 추가 부품 인수의 부가세 포함 여부가 다르다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h145-main",
+          "document_id": "COUNT-145-M",
+          "kind": "invoice",
+          "vendor": "가상출입계수",
+          "date": "2026-04-02",
+          "price_includes_vat": true
+        },
+        {
+          "record_id": "h145-module",
+          "document_id": "COUNT-145-L",
+          "kind": "invoice",
+          "vendor": "가상출입계수",
+          "date": "2026-04-08",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h145-plate",
+          "document_id": "COUNT-145-P",
+          "kind": "order",
+          "vendor": "가상설치부품",
+          "date": "2026-04-09",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s145-m",
+          "header_record_id": "h145-main",
+          "items": [
+            {
+              "name": "출입계수기",
+              "quantity": 2,
+              "unit_price": 242003
+            }
+          ]
+        },
+        {
+          "sheet_id": "s145-l",
+          "header_record_id": "h145-module",
+          "items": [
+            {
+              "name": "계수기연결모듈",
+              "quantity": 2,
+              "unit_price": 38000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s145-p",
+          "header_record_id": "h145-plate",
+          "items": [
+            {
+              "name": "계수기고정판",
+              "quantity": 4,
+              "unit_price": 9500
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "install145-m",
+          "document_id": "COUNT-145-M",
+          "event": "received",
+          "date": "2026-04-04",
+          "location": "현관 검수석"
+        },
+        {
+          "event_id": "entry145-m",
+          "document_id": "COUNT-145-M",
+          "event": "received",
+          "date": "2026-04-04",
+          "location": "현관 검수석"
+        },
+        {
+          "event_id": "e145-l",
+          "document_id": "COUNT-145-L",
+          "event": "received",
+          "date": "2026-04-10",
+          "location": "현관 검수석"
+        },
+        {
+          "event_id": "e145-p",
+          "document_id": "COUNT-145-P",
+          "event": "received",
+          "date": "2026-04-12",
+          "location": "현관 검수석"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목을 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있어야 포함한다. 동일 날짜와 장소로 같은 수령을 증명하는 여러 기록은 구매를 추가하지 않는다. quote, 무인수와 출고 전 취소는 제외하고 document_id가 같은 동일 내용은 한 번만 계산한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 별도는 품목 수량 곱하기 단가를 공급가액으로 하고 그 10% 원 미만 버림을 세액으로 한다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 거친 이름 오름차순으로 배열한다."
+    },
+    "documents": [
+      {
+        "filename": "01_계수기표지.pdf",
+        "format": "pdf",
+        "title": "출입 계수기 청구 표지",
+        "note": "기재된 포함 여부를 이 원문 품목에 적용한다. 모든 정보는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_계수기품목.xlsx",
+        "format": "xlsx",
+        "title": "출입 계수기 품목표",
+        "note": "표지 연결 번호와 처리 기준을 함께 보관한다.",
+        "fields": [
+          "line_sheets.0",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_설비담당수령.hwpx",
+        "format": "hwpx",
+        "title": "설비 담당 수령 기록",
+        "note": "설비 담당자가 확인한 원문 번호와 발생 기록이다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_출입담당수령.pdf",
+        "format": "pdf",
+        "title": "출입 담당 수령 기록",
+        "note": "출입 담당자의 별도 확인 기록이다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_모듈표지.hwpx",
+        "format": "hwpx",
+        "title": "연결 모듈 청구 표지",
+        "note": "별도 구매의 가격 조건이다.",
+        "fields": [
+          "headers.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_모듈품목.xlsx",
+        "format": "xlsx",
+        "title": "연결 모듈 품목표",
+        "note": "원문에 연결할 수량과 단가다.",
+        "fields": [
+          "line_sheets.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "07_모듈수령.pdf",
+        "format": "pdf",
+        "title": "연결 모듈 수령 기록",
+        "note": "모듈을 실제 받은 발생 기록이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "08_고정판주문.hwpx",
+        "format": "hwpx",
+        "title": "고정판 주문과 품목표",
+        "note": "주문서 원문과 품목 첨부를 함께 보관했다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_고정판수령.pdf",
+        "format": "pdf",
+        "title": "고정판 수령 기록",
+        "note": "그 주문 번호를 실제 수령한 기록이다.",
+        "fields": [
+          "events.3"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "vat_total",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D146",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "시연용 지지대 무상 인수와 회사 이름 통합",
+    "instruction": "지지대 구매 이력을 재구매 검토 자료로 남겨 주세요. 실제 기재 단가 기준의 cheapest_by_item과 vendor_totals 및 grand_total을 확인합니다.",
+    "work_goal": "무상 실제 인수도 단가 이력에 보존하면서 법인 표기의 차이를 합친다.",
+    "design_rationale": "지지대 본품과 보조고리를 유상 구매한 회사가 별도 주문 번호로 시연용 지지대를 무상 납품했다. 다른 법인 표기로 기록된 나중 인수는 같은 회사의 추가 물품이며 무료 자료를 이전 유상 명세의 수정으로 볼 근거가 없다. 실제 무료 공급 기록이 재구매 단가 판단에 포함된다는 명시된 업무 기준을 적용한다.",
+    "exceptions": [
+      "시연용으로 실제 받은 지지대가 0원 단가로 기재됐다.",
+      "유상 구매와 시연용 및 후속 인수의 법인 표기가 다르다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h146-buy",
+          "document_id": "SUPPORT-146-B",
+          "kind": "invoice",
+          "vendor": "주식회사 가상 지지장치",
+          "date": "2026-03-04",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h146-demo",
+          "document_id": "SUPPORT-146-D",
+          "kind": "order",
+          "vendor": "가상지지장치",
+          "date": "2026-03-09",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h146-add",
+          "document_id": "SUPPORT-146-A",
+          "kind": "invoice",
+          "vendor": "(주)가상지지장치",
+          "date": "2026-03-15",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s146-b",
+          "header_record_id": "h146-buy",
+          "items": [
+            {
+              "name": "도구지지대",
+              "quantity": 5,
+              "unit_price": 28300
+            },
+            {
+              "name": "지지대보조고리",
+              "quantity": 10,
+              "unit_price": 3400
+            }
+          ]
+        },
+        {
+          "sheet_id": "s146-d",
+          "header_record_id": "h146-demo",
+          "items": [
+            {
+              "name": "도구지지대",
+              "quantity": 1,
+              "unit_price": 0
+            }
+          ]
+        },
+        {
+          "sheet_id": "s146-a",
+          "header_record_id": "h146-add",
+          "items": [
+            {
+              "name": "지지대보조고리",
+              "quantity": 6,
+              "unit_price": 3150
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e146-b",
+          "document_id": "SUPPORT-146-B",
+          "event": "received",
+          "date": "2026-03-06",
+          "location": "도구 시연대"
+        },
+        {
+          "event_id": "e146-d",
+          "document_id": "SUPPORT-146-D",
+          "event": "received",
+          "date": "2026-03-11",
+          "location": "도구 시연대"
+        },
+        {
+          "event_id": "e146-a",
+          "document_id": "SUPPORT-146-A",
+          "event": "received",
+          "date": "2026-03-17",
+          "location": "도구 시연대"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때 포함한다. quote, 무인수 및 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 센다. 별도는 품목 수량 곱하기 기재 단가에 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체의 주식회사, (주), ㈜를 제거한다. 실제 인수한 개당 공급가액 단가를 비교하며 무상 공급도 원문 0원대로 보존한다. 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 업체 및 품목 배열은 정규화 이름 오름차순이고 최저 동률은 정규화 업체명 오름차순 첫 업체다."
+    },
+    "documents": [
+      {
+        "filename": "01_유상표지.pdf",
+        "format": "pdf",
+        "title": "지지대 유상 구매 표지",
+        "note": "원문 회사 이름을 그대로 기재했다. 모든 정보는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_유상품목.xlsx",
+        "format": "xlsx",
+        "title": "지지대와 고리 유상 품목표",
+        "note": "실제 기재 단가와 공통 처리 기준이다.",
+        "fields": [
+          "line_sheets.0",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_유상수령.hwpx",
+        "format": "hwpx",
+        "title": "유상 물품 수령 기록",
+        "note": "원문 번호를 현장에서 확인했다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_시연표지.hwpx",
+        "format": "hwpx",
+        "title": "시연 지지대 주문 표지",
+        "note": "시연용 물품의 별도 번호다.",
+        "fields": [
+          "headers.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "05_시연품목.pdf",
+        "format": "pdf",
+        "title": "시연 지지대 품목표",
+        "note": "원문에 적힌 물량과 실제 기재 단가다.",
+        "fields": [
+          "line_sheets.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_시연수령.xlsx",
+        "format": "xlsx",
+        "title": "시연 지지대 수령 기록",
+        "note": "시연대에서 실제 받은 주문 번호다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "07_후속표지.pdf",
+        "format": "pdf",
+        "title": "보조 고리 후속 청구 표지",
+        "note": "후속 구매의 원문 이름과 번호다.",
+        "fields": [
+          "headers.2"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "08_후속품목.hwpx",
+        "format": "hwpx",
+        "title": "보조 고리 후속 품목표",
+        "note": "유상으로 추가 구입한 품목이다.",
+        "fields": [
+          "line_sheets.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_후속수령.pdf",
+        "format": "pdf",
+        "title": "보조 고리 후속 수령 기록",
+        "note": "추가 인수의 실제 발생일이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "vendor_totals",
+      "grand_total"
+    ]
+  },
+  {
+    "case_id": "D147",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "실습용 저울 자료의 전각 업체와 미인수 후속 주문",
+    "instruction": "실습용 저울 구매비를 마감해 주세요. 회사 이름 기준과 수령 기록을 반영한 vendor_totals, supply_total, unique_document_count가 필요합니다.",
+    "work_goal": "업체 이름 정리와 실제 구매 범위 선택을 독립적으로 적용한다.",
+    "design_rationale": "전각 영문 업체의 저울 인수와 반각 이름의 추 세트 인수는 같은 지급 계정에 묶어야 한다. 같은 업체의 후속 저울 주문은 현장 이벤트가 없고 다른 회사의 보호받침은 실제 수령했다. 해당 업체 전체를 제외하거나 후속 주문까지 한꺼번에 더하면 둘 다 틀린다.",
+    "exceptions": [
+      "같은 영문 업체가 전각과 반각 및 대소문자 차이로 표기됐다.",
+      "그 업체의 후속 저울 주문에는 실제 수령 기록이 없다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h147-scale",
+          "document_id": "SCALE-147-A",
+          "kind": "invoice",
+          "vendor": "ＦＩＣＴＩＯＮ　ＳＣＡＬＥ",
+          "date": "2026-05-02",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h147-weight",
+          "document_id": "SCALE-147-B",
+          "kind": "order",
+          "vendor": "Fiction Scale",
+          "date": "2026-05-07",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h147-pad",
+          "document_id": "SCALE-147-C",
+          "kind": "invoice",
+          "vendor": "가상계측보호",
+          "date": "2026-05-09",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h147-next",
+          "document_id": "SCALE-147-D",
+          "kind": "order",
+          "vendor": "fiction scale",
+          "date": "2026-05-15",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s147-a",
+          "header_record_id": "h147-scale",
+          "items": [
+            {
+              "name": "실습용저울",
+              "quantity": 3,
+              "unit_price": 118000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s147-b",
+          "header_record_id": "h147-weight",
+          "items": [
+            {
+              "name": "저울추세트",
+              "quantity": 3,
+              "unit_price": 28500
+            }
+          ]
+        },
+        {
+          "sheet_id": "s147-c",
+          "header_record_id": "h147-pad",
+          "items": [
+            {
+              "name": "저울보호받침",
+              "quantity": 3,
+              "unit_price": 9600
+            }
+          ]
+        },
+        {
+          "sheet_id": "s147-d",
+          "header_record_id": "h147-next",
+          "items": [
+            {
+              "name": "실습용저울",
+              "quantity": 2,
+              "unit_price": 112000
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e147-a",
+          "document_id": "SCALE-147-A",
+          "event": "received",
+          "date": "2026-05-05",
+          "location": "계측 실습실"
+        },
+        {
+          "event_id": "e147-b",
+          "document_id": "SCALE-147-B",
+          "event": "received",
+          "date": "2026-05-10",
+          "location": "계측 실습실"
+        },
+        {
+          "event_id": "e147-c",
+          "document_id": "SCALE-147-C",
+          "event": "received",
+          "date": "2026-05-12",
+          "location": "계측 실습실"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있어야 집계한다. quote, 무인수 및 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 센다. 별도 공급가액은 품목 수량 곱하기 단가이고 그 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 거친 이름 오름차순으로 배열한다."
+    },
+    "documents": [
+      {
+        "filename": "01_저울표지.pdf",
+        "format": "pdf",
+        "title": "실습 저울 청구 표지",
+        "note": "원문 문자 폭과 이름을 보존했다. 모든 정보는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_저울품목.xlsx",
+        "format": "xlsx",
+        "title": "실습 저울 품목표",
+        "note": "실제 구매 물량과 공통 처리 기준이다.",
+        "fields": [
+          "line_sheets.0",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_저울수령.hwpx",
+        "format": "hwpx",
+        "title": "실습 저울 수령부",
+        "note": "현장에서 확인한 원문 번호다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_추표지.hwpx",
+        "format": "hwpx",
+        "title": "저울 추 주문 표지",
+        "note": "저울 본체와 별개의 번호다.",
+        "fields": [
+          "headers.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "05_추품목.pdf",
+        "format": "pdf",
+        "title": "저울 추 품목표",
+        "note": "이 원문에 연결되는 추 세트의 수량과 단가다.",
+        "fields": [
+          "line_sheets.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "06_추수령.xlsx",
+        "format": "xlsx",
+        "title": "저울 추 현장 수령부",
+        "note": "실제 주문을 받은 발생 기록이다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "07_받침청구.pdf",
+        "format": "pdf",
+        "title": "보호 받침 청구와 품목표",
+        "note": "다른 판매처의 실제 구매 자료다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.2"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "08_받침수령.hwpx",
+        "format": "hwpx",
+        "title": "보호 받침 수령부",
+        "note": "받침 원문에 연결되는 수령 기록이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_후속저울주문.pdf",
+        "format": "pdf",
+        "title": "후속 저울 주문과 품목표",
+        "note": "뒤 날짜에 발주한 원문을 그대로 보관했다.",
+        "fields": [
+          "headers.3",
+          "line_sheets.3"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "supply_total",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D148",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "제어 스위치의 대외 청구와 내부 재작성 표지 정산",
+    "instruction": "제어 스위치 설치비의 grand_total과 unique_document_count를 확인해 주세요. 외부 청구와 내부 보관 자료는 원문 번호와 품목 내용을 연결해서 처리합니다.",
+    "work_goal": "표지 연결 식별자가 달라도 동일 원문인지 확인해 지급액을 중복 계산하지 않는다.",
+    "design_rationale": "스위치 최초 인수를 ERP 보관 표지와 품목 첨부로 다시 작성한 자료가 있다. 두 표지의 record_id는 다르지만 인수 번호와 업체 및 날짜와 품목은 같다. 추가 연결캡과 상태등은 별개 인수이고 연결캡만 별도 가격이라 각 표지 조건을 해당 품목에 적용해야 한다.",
+    "exceptions": [
+      "첫 스위치 인수가 내부 표지와 첨부로 동일 내용 재작성됐다.",
+      "연결캡 인수의 단가만 다른 인수와 부가세 포함 여부가 다르다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h148-external",
+          "document_id": "SWITCH-148-S",
+          "kind": "invoice",
+          "vendor": "가상제어스위치",
+          "date": "2026-04-04",
+          "price_includes_vat": true
+        },
+        {
+          "record_id": "h148-cap",
+          "document_id": "SWITCH-148-C",
+          "kind": "invoice",
+          "vendor": "가상제어스위치",
+          "date": "2026-04-08",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h148-light",
+          "document_id": "SWITCH-148-L",
+          "kind": "order",
+          "vendor": "가상상태표시",
+          "date": "2026-04-10",
+          "price_includes_vat": true
+        },
+        {
+          "record_id": "h148-erp",
+          "document_id": "SWITCH-148-S",
+          "kind": "invoice",
+          "vendor": "가상제어스위치",
+          "date": "2026-04-04",
+          "price_includes_vat": true
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s148-s",
+          "header_record_id": "h148-external",
+          "items": [
+            {
+              "name": "제어스위치",
+              "quantity": 6,
+              "unit_price": 14303
+            }
+          ]
+        },
+        {
+          "sheet_id": "s148-c",
+          "header_record_id": "h148-cap",
+          "items": [
+            {
+              "name": "스위치연결캡",
+              "quantity": 12,
+              "unit_price": 2100
+            }
+          ]
+        },
+        {
+          "sheet_id": "s148-l",
+          "header_record_id": "h148-light",
+          "items": [
+            {
+              "name": "제어상태등",
+              "quantity": 6,
+              "unit_price": 6601
+            }
+          ]
+        },
+        {
+          "sheet_id": "s148-erp",
+          "header_record_id": "h148-erp",
+          "items": [
+            {
+              "name": "제어스위치",
+              "quantity": 6,
+              "unit_price": 14303
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e148-s",
+          "document_id": "SWITCH-148-S",
+          "event": "received",
+          "date": "2026-04-06",
+          "location": "제어 설비 검수대"
+        },
+        {
+          "event_id": "e148-c",
+          "document_id": "SWITCH-148-C",
+          "event": "received",
+          "date": "2026-04-10",
+          "location": "제어 설비 검수대"
+        },
+        {
+          "event_id": "e148-l",
+          "document_id": "SWITCH-148-L",
+          "event": "received",
+          "date": "2026-04-13",
+          "location": "제어 설비 검수대"
+        }
+      ],
+      "processing_policy": "header_record_id로 표지별 품목 첨부를 연결한다. invoice와 order는 document_id의 received가 있을 때 포함하고 quote, 무인수 및 출고 전 취소는 제외한다. document_id가 같은 동일 내용은 한 번만 계산한다. 포함 단가의 품목 총액은 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 별도는 품목 수량 곱하기 단가에 10% 원 미만 버림 세액을 더한다."
+    },
+    "documents": [
+      {
+        "filename": "01_외부스위치표지.pdf",
+        "format": "pdf",
+        "title": "외부 스위치 청구 표지",
+        "note": "첨부에 연결할 원문 번호다. 업체와 설비는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_외부스위치품목.xlsx",
+        "format": "xlsx",
+        "title": "외부 스위치 품목표",
+        "note": "첫 청구의 실제 기재 단가와 공통 처리 기준이다.",
+        "fields": [
+          "line_sheets.0",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_스위치수령.hwpx",
+        "format": "hwpx",
+        "title": "스위치 현장 수령부",
+        "note": "실제 수령 원문 번호를 보존했다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_연결캡청구.pdf",
+        "format": "pdf",
+        "title": "연결캡 청구와 품목표",
+        "note": "추가 품목의 가격 조건을 기재했다.",
+        "fields": [
+          "headers.1",
+          "line_sheets.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "05_연결캡수령.xlsx",
+        "format": "xlsx",
+        "title": "연결캡 현장 수령부",
+        "note": "추가 인수 번호의 현장 기록이다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_상태등주문.hwpx",
+        "format": "hwpx",
+        "title": "상태등 주문과 품목표",
+        "note": "다른 공급처의 원문 및 부속표다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.2"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "07_상태등수령.pdf",
+        "format": "pdf",
+        "title": "상태등 현장 수령부",
+        "note": "실제 받은 주문 번호를 기록했다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "08_내부표지.hwpx",
+        "format": "hwpx",
+        "title": "내부 시스템 스위치 보관 표지",
+        "note": "내부 연결 식별자와 대외 원문 번호를 모두 보존했다.",
+        "fields": [
+          "headers.3"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_내부품목.xlsx",
+        "format": "xlsx",
+        "title": "내부 시스템 스위치 품목표",
+        "note": "외부 품목 내용을 그대로 기록한 내부 첨부다.",
+        "fields": [
+          "line_sheets.3"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "grand_total",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D149",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "순회 점검기 연결선의 견적 가격과 실제 세금 단가",
+    "instruction": "순회 점검기 연결선의 실제 구매 기준을 정리해 주세요. 인수에 연결된 cheapest_by_item과 전체 세액 vat_total을 확인합니다.",
+    "work_goal": "미집행 견적을 제외하고 표시 가격이 다른 실구매를 같은 단가 기준으로 비교한다.",
+    "design_rationale": "점검기연결선의 견적이 실제 세 구매보다 낮지만 인수 기록이 없다. 실제 구매 중 둘은 포함 가격이고 하나는 별도 가격이며 한 거래에는 어댑터도 함께 있다. 원문 종류와 수령 연결을 먼저 확인한 다음 품목별 가격을 바꾸어야 하는 순서를 설계했다.",
+    "exceptions": [
+      "실제 인수와 무관한 낮은 단가 견적이 인계 자료에 포함됐다.",
+      "실제 연결선 구매의 부가세 포함 여부가 거래별로 다르다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h149-a",
+          "document_id": "INSPECT-149-A",
+          "kind": "invoice",
+          "vendor": "가상순회점검",
+          "date": "2026-03-03",
+          "price_includes_vat": true
+        },
+        {
+          "record_id": "h149-b",
+          "document_id": "INSPECT-149-B",
+          "kind": "order",
+          "vendor": "가상계기연결",
+          "date": "2026-03-08",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h149-c",
+          "document_id": "INSPECT-149-C",
+          "kind": "invoice",
+          "vendor": "가상현장케이블",
+          "date": "2026-03-11",
+          "price_includes_vat": true
+        },
+        {
+          "record_id": "h149-q",
+          "document_id": "INSPECT-149-Q",
+          "kind": "quote",
+          "vendor": "가상계기연결",
+          "date": "2026-03-01",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s149-a",
+          "header_record_id": "h149-a",
+          "items": [
+            {
+              "name": "점검기연결선",
+              "quantity": 5,
+              "unit_price": 16503
+            }
+          ]
+        },
+        {
+          "sheet_id": "s149-b",
+          "header_record_id": "h149-b",
+          "items": [
+            {
+              "name": "점검기연결선",
+              "quantity": 3,
+              "unit_price": 14800
+            },
+            {
+              "name": "점검기어댑터",
+              "quantity": 3,
+              "unit_price": 7300
+            }
+          ]
+        },
+        {
+          "sheet_id": "s149-c",
+          "header_record_id": "h149-c",
+          "items": [
+            {
+              "name": "점검기연결선",
+              "quantity": 4,
+              "unit_price": 16830
+            }
+          ]
+        },
+        {
+          "sheet_id": "s149-q",
+          "header_record_id": "h149-q",
+          "items": [
+            {
+              "name": "점검기연결선",
+              "quantity": 10,
+              "unit_price": 12000
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e149-a",
+          "document_id": "INSPECT-149-A",
+          "event": "received",
+          "date": "2026-03-06",
+          "location": "순회 점검 준비실"
+        },
+        {
+          "event_id": "e149-b",
+          "document_id": "INSPECT-149-B",
+          "event": "received",
+          "date": "2026-03-10",
+          "location": "순회 점검 준비실"
+        },
+        {
+          "event_id": "e149-c",
+          "document_id": "INSPECT-149-C",
+          "event": "received",
+          "date": "2026-03-14",
+          "location": "순회 점검 준비실"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때 포함하고 quote, 무인수 및 출고 전 취소는 제외한다. 같은 document_id의 동일 내용은 한 번만 집계한다. 포함 품목 총액의 10/11 원 미만 버림을 공급가액으로 하고 차액을 세액으로 한다. 별도는 수량 곱하기 단가의 공급가액과 품목별 10% 원 미만 버림 세액을 계산한다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 배열은 정규화 품목 이름 오름차순이다. 비교는 개당 공급가액이며 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 최저 동률은 정규화 업체명 오름차순 첫 업체다."
+    },
+    "documents": [
+      {
+        "filename": "01_첫연결선표지.pdf",
+        "format": "pdf",
+        "title": "첫 연결선 청구 표지",
+        "note": "가격 조건을 원문 그대로 보존했다. 모든 정보는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_첫연결선품목.xlsx",
+        "format": "xlsx",
+        "title": "첫 연결선 품목표",
+        "note": "원문 수량과 단가 및 공통 처리 기준이다.",
+        "fields": [
+          "line_sheets.0",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_첫연결선수령.hwpx",
+        "format": "hwpx",
+        "title": "첫 연결선 현장 수령부",
+        "note": "실제 수령한 원문 번호다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "04_둘째표지.hwpx",
+        "format": "hwpx",
+        "title": "연결선과 어댑터 주문 표지",
+        "note": "품목표에 적용할 가격 조건이다.",
+        "fields": [
+          "headers.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "05_둘째품목.pdf",
+        "format": "pdf",
+        "title": "연결선과 어댑터 품목표",
+        "note": "서로 다른 두 품목을 실제 주문했다.",
+        "fields": [
+          "line_sheets.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "06_둘째수령.xlsx",
+        "format": "xlsx",
+        "title": "두 품목 현장 수령부",
+        "note": "해당 주문 번호를 실제 수령했다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "07_셋째청구.pdf",
+        "format": "pdf",
+        "title": "셋째 연결선 청구 및 품목표",
+        "note": "다른 공급처의 실제 구매 원문이다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.2"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "08_셋째수령.hwpx",
+        "format": "hwpx",
+        "title": "셋째 연결선 현장 수령부",
+        "note": "그 청구 번호에 연결되는 수령 기록이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "09_상담견적.pdf",
+        "format": "pdf",
+        "title": "연결선 상담 견적",
+        "note": "원문 종류와 제안된 품목 가격을 보존했다.",
+        "fields": [
+          "headers.3",
+          "line_sheets.3"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "vat_total"
+    ]
+  },
+  {
+    "case_id": "D150",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "반납 창구 장치의 주문 상태와 법인 이름 결산",
+    "instruction": "반납 창구 장치의 인계 자료로 실제 구매 장부를 만들어 주세요. vendor_totals, grand_total, unique_document_count를 확인합니다.",
+    "work_goal": "같은 회사의 정상 납품과 미수령 주문을 구별한 뒤 회사 이름을 통합한다.",
+    "design_rationale": "읽기장치와 반납표시등은 같은 회사의 서로 다른 법인 표기로 실제 인수했고 거치판은 다른 업체에서 받았다. 같은 회사의 예비 읽기장치 주문과 다른 업체의 확장 거치판 주문은 현장 이벤트가 없으며 슬롯 견적도 섞여 있다. 인계 자료 여섯 원문을 세 곳의 실제 수령 기록과 연결하는 구조다.",
+    "exceptions": [
+      "실제 납품 회사의 법인 표기가 자료별로 다르다.",
+      "후속 예비 장치와 확장 부품 주문에는 현장 수령 기록이 없다.",
+      "슬롯 상담 견적이 실제 조달 원문들과 함께 보관됐다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h150-reader",
+          "document_id": "RETURN-150-R",
+          "kind": "invoice",
+          "vendor": "(주)가상반납장치",
+          "date": "2026-05-02",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h150-light",
+          "document_id": "RETURN-150-L",
+          "kind": "order",
+          "vendor": "가상 반납 장치",
+          "date": "2026-05-05",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h150-plate",
+          "document_id": "RETURN-150-P",
+          "kind": "invoice",
+          "vendor": "가상창구철물",
+          "date": "2026-05-08",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h150-spare",
+          "document_id": "RETURN-150-S",
+          "kind": "order",
+          "vendor": "주식회사 가상반납장치",
+          "date": "2026-05-12",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h150-extend",
+          "document_id": "RETURN-150-X",
+          "kind": "order",
+          "vendor": "가상창구철물",
+          "date": "2026-05-13",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h150-quote",
+          "document_id": "RETURN-150-Q",
+          "kind": "quote",
+          "vendor": "가상창구슬롯",
+          "date": "2026-05-01",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s150-r",
+          "header_record_id": "h150-reader",
+          "items": [
+            {
+              "name": "반납읽기장치",
+              "quantity": 2,
+              "unit_price": 286000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s150-l",
+          "header_record_id": "h150-light",
+          "items": [
+            {
+              "name": "반납표시등",
+              "quantity": 2,
+              "unit_price": 43000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s150-p",
+          "header_record_id": "h150-plate",
+          "items": [
+            {
+              "name": "장치거치판",
+              "quantity": 2,
+              "unit_price": 37000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s150-s",
+          "header_record_id": "h150-spare",
+          "items": [
+            {
+              "name": "예비반납읽기장치",
+              "quantity": 1,
+              "unit_price": 279000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s150-x",
+          "header_record_id": "h150-extend",
+          "items": [
+            {
+              "name": "확장거치판",
+              "quantity": 2,
+              "unit_price": 42000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s150-q",
+          "header_record_id": "h150-quote",
+          "items": [
+            {
+              "name": "반납투입슬롯",
+              "quantity": 2,
+              "unit_price": 158000
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e150-r",
+          "document_id": "RETURN-150-R",
+          "event": "received",
+          "date": "2026-05-05",
+          "location": "반납 창구"
+        },
+        {
+          "event_id": "e150-l",
+          "document_id": "RETURN-150-L",
+          "event": "received",
+          "date": "2026-05-08",
+          "location": "반납 창구"
+        },
+        {
+          "event_id": "e150-p",
+          "document_id": "RETURN-150-P",
+          "event": "received",
+          "date": "2026-05-10",
+          "location": "반납 창구"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 원문 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때 포함하고 quote, 무인수 및 출고 전 취소는 제외한다. 같은 document_id의 같은 내용은 한 번만 계산한다. 별도 공급가액은 품목별 수량 곱하기 단가이며 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체는 NFKC 후 공백 제거 및 영문 소문자화하고 주식회사, (주), ㈜를 제거한 이름 오름차순으로 배열한다."
+    },
+    "documents": [
+      {
+        "filename": "01_읽기장치청구.pdf",
+        "format": "pdf",
+        "title": "반납 읽기 장치 청구 원문",
+        "note": "원문과 실제 품목을 보존했다. 모든 정보는 허구다.",
+        "fields": [
+          "headers.0",
+          "line_sheets.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_표시등주문.xlsx",
+        "format": "xlsx",
+        "title": "반납 표시등 주문 원문",
+        "note": "회사 표기와 품목 및 공통 처리 기준이다.",
+        "fields": [
+          "headers.1",
+          "line_sheets.1",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_거치판청구.hwpx",
+        "format": "hwpx",
+        "title": "거치판 청구 원문",
+        "note": "다른 공급처의 품목과 가격 조건이다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_예비장치주문.pdf",
+        "format": "pdf",
+        "title": "예비 장치 후속 주문",
+        "note": "후속 주문 당시의 원자료다.",
+        "fields": [
+          "headers.3",
+          "line_sheets.3"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "05_확장판주문.hwpx",
+        "format": "hwpx",
+        "title": "확장 거치판 후속 주문",
+        "note": "추가 발주 자료의 종류와 품목이다.",
+        "fields": [
+          "headers.4",
+          "line_sheets.4"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_슬롯견적.pdf",
+        "format": "pdf",
+        "title": "반납 슬롯 상담 견적",
+        "note": "상담에서 받은 가격 제안을 보존했다.",
+        "fields": [
+          "headers.5",
+          "line_sheets.5"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "07_읽기장치수령.xlsx",
+        "format": "xlsx",
+        "title": "읽기 장치 수령부",
+        "note": "창구에서 실제 받은 원문 번호다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "08_표시등수령.hwpx",
+        "format": "hwpx",
+        "title": "표시등 수령부",
+        "note": "실제 수령한 주문 번호를 보존했다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_거치판수령.pdf",
+        "format": "pdf",
+        "title": "거치판 수령부",
+        "note": "거치판의 실제 현장 수령 기록이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "grand_total",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D151",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "분광 관찰 소모품의 로트 부속과 세금 조건",
+    "instruction": "분광 관찰실 물품의 실제 단가표와 지급 목록이 필요합니다. vendor_totals, cheapest_by_item, vat_total을 확인해 주세요.",
+    "work_goal": "같은 규격의 반복 로트와 다른 가격 조건을 모두 보존해 지급과 단가 기준을 만든다.",
+    "design_rationale": "첫 큐벳 인수는 두 로트의 품목표로 나뉘고 같은 규격인데 기재 단가가 다르다. 다른 업체의 포함 단가 큐벳과 별도 세척솜 구매까지 실제 수령에 연결된다. 품목명 하나당 행 하나로 덮어쓰거나 포함 가격 숫자를 그대로 별도 단가와 비교하면 결과가 달라진다.",
+    "exceptions": [
+      "첫 큐벳 인수가 같은 규격의 단가별 두 로트 첨부로 나뉜다.",
+      "다른 업체 큐벳 인수는 나머지 구매와 부가세 포함 여부가 다르다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h151-first",
+          "document_id": "SPECTRUM-151-A",
+          "kind": "invoice",
+          "vendor": "가상광학소모품",
+          "date": "2026-06-02",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h151-other",
+          "document_id": "SPECTRUM-151-B",
+          "kind": "order",
+          "vendor": "가상분광부품",
+          "date": "2026-06-07",
+          "price_includes_vat": true
+        },
+        {
+          "record_id": "h151-cotton",
+          "document_id": "SPECTRUM-151-C",
+          "kind": "invoice",
+          "vendor": "가상광학소모품",
+          "date": "2026-06-11",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "lot151-1",
+          "header_record_id": "h151-first",
+          "items": [
+            {
+              "name": "관찰큐벳10",
+              "quantity": 12,
+              "unit_price": 6500
+            }
+          ]
+        },
+        {
+          "sheet_id": "lot151-2",
+          "header_record_id": "h151-first",
+          "items": [
+            {
+              "name": "관찰큐벳10",
+              "quantity": 8,
+              "unit_price": 6100
+            }
+          ]
+        },
+        {
+          "sheet_id": "s151-other",
+          "header_record_id": "h151-other",
+          "items": [
+            {
+              "name": "관찰큐벳10",
+              "quantity": 10,
+              "unit_price": 6601
+            }
+          ]
+        },
+        {
+          "sheet_id": "s151-cotton",
+          "header_record_id": "h151-cotton",
+          "items": [
+            {
+              "name": "큐벳세척솜",
+              "quantity": 30,
+              "unit_price": 410
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e151-a",
+          "document_id": "SPECTRUM-151-A",
+          "event": "received",
+          "date": "2026-06-04",
+          "location": "분광 관찰실"
+        },
+        {
+          "event_id": "e151-b",
+          "document_id": "SPECTRUM-151-B",
+          "event": "received",
+          "date": "2026-06-09",
+          "location": "분광 관찰실"
+        },
+        {
+          "event_id": "e151-c",
+          "document_id": "SPECTRUM-151-C",
+          "event": "received",
+          "date": "2026-06-13",
+          "location": "분광 관찰실"
+        }
+      ],
+      "processing_policy": "header_record_id로 표지에 해당하는 모든 로트 품목표를 연결하고 반복 품목 행도 수량과 단가를 모두 보존한다. invoice와 order는 document_id의 received가 있을 때 포함하고 quote, 무인수 및 출고 전 취소는 제외한다. 같은 document_id의 동일 내용은 한 번만 센다. 별도는 품목 수량 곱하기 단가의 공급가액과 그 10% 원 미만 버림 세액으로 계산한다. 포함 총액은 품목별 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 배열은 정규화 이름 오름차순이다. 비교는 동일 규격 개당 공급가액 단가이며 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 최저 동률은 정규화 업체명 오름차순 첫 업체다."
+    },
+    "documents": [
+      {
+        "filename": "01_첫큐벳표지.pdf",
+        "format": "pdf",
+        "title": "첫 큐벳 인수 표지",
+        "note": "로트별 부속표를 연결할 원문이다. 모든 정보는 허구다.",
+        "fields": [
+          "headers.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_첫로트.xlsx",
+        "format": "xlsx",
+        "title": "첫 큐벳 첫 로트 품목표",
+        "note": "실제 로트 기재 단가와 공통 처리 기준이다.",
+        "fields": [
+          "line_sheets.0",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_둘째로트.hwpx",
+        "format": "hwpx",
+        "title": "첫 큐벳 둘째 로트 품목표",
+        "note": "같은 표지의 다른 로트다. 앞 첨부의 수정본이 아니다.",
+        "fields": [
+          "line_sheets.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_첫큐벳수령.pdf",
+        "format": "pdf",
+        "title": "첫 큐벳 현장 수령부",
+        "note": "첫 원문 번호의 실제 수령이다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "05_다른큐벳표지.hwpx",
+        "format": "hwpx",
+        "title": "다른 업체 큐벳 주문 표지",
+        "note": "다른 인수의 가격 조건이다.",
+        "fields": [
+          "headers.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "06_다른큐벳품목.xlsx",
+        "format": "xlsx",
+        "title": "다른 업체 큐벳 품목표",
+        "note": "원문에 연결하는 수량과 기재 단가다.",
+        "fields": [
+          "line_sheets.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "07_다른큐벳수령.pdf",
+        "format": "pdf",
+        "title": "다른 업체 큐벳 수령부",
+        "note": "주문 번호를 실제 받았다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "08_세척솜표지.hwpx",
+        "format": "hwpx",
+        "title": "세척솜 청구 표지",
+        "note": "나중에 추가 인수한 별개 품목이다.",
+        "fields": [
+          "headers.2"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_세척솜품목.xlsx",
+        "format": "xlsx",
+        "title": "세척솜 품목 부속표",
+        "note": "세척솜 원문의 실제 수량과 단가다.",
+        "fields": [
+          "line_sheets.3"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "10_세척솜수령.pdf",
+        "format": "pdf",
+        "title": "세척솜 수령부",
+        "note": "별개 원문 번호의 수령 기록이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "vendor_totals",
+      "cheapest_by_item",
+      "vat_total"
+    ]
+  },
+  {
+    "case_id": "D152",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "회전 전시 받침의 취소 전 주문과 대체 인수 기준",
+    "instruction": "회전 전시 받침 자료로 실제 구매 단가 기준을 만들어 주세요. 상태 기록에 연결한 cheapest_by_item, grand_total, unique_document_count가 필요합니다.",
+    "work_goal": "이전 규격 취소 주문과 현장 수령을 마친 대체 조달을 구분한다.",
+    "design_rationale": "처음 회전받침40 주문은 출고 전에 취소됐고 회전받침30은 다른 번호로 실제 인수했다. 그와 같은 규격의 견적은 또 다른 원문으로 보관됐지만 인수가 없다. 후속 실제 받침30 및 고정판 구매까지 포함하여 낮은 견적 가격이나 취소한 다른 규격을 실구매 기준표에 넣지 않아야 한다.",
+    "exceptions": [
+      "첫 규격의 회전 받침 주문이 출고 전에 취소됐다.",
+      "대체 규격의 미채택 견적이 실제 인수 원문과 함께 보관됐다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h152-old",
+          "document_id": "ROTATE-152-O",
+          "kind": "order",
+          "vendor": "가상회전전시",
+          "date": "2026-02-02",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h152-new",
+          "document_id": "ROTATE-152-N",
+          "kind": "order",
+          "vendor": "가상회전전시",
+          "date": "2026-02-05",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h152-quote",
+          "document_id": "ROTATE-152-Q",
+          "kind": "quote",
+          "vendor": "가상전시회전",
+          "date": "2026-02-04",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h152-later",
+          "document_id": "ROTATE-152-L",
+          "kind": "invoice",
+          "vendor": "가상전시회전",
+          "date": "2026-02-11",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h152-plate",
+          "document_id": "ROTATE-152-P",
+          "kind": "invoice",
+          "vendor": "가상전시고정",
+          "date": "2026-02-13",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s152-o",
+          "header_record_id": "h152-old",
+          "items": [
+            {
+              "name": "회전받침40",
+              "quantity": 2,
+              "unit_price": 157000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s152-n",
+          "header_record_id": "h152-new",
+          "items": [
+            {
+              "name": "회전받침30",
+              "quantity": 2,
+              "unit_price": 121000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s152-q",
+          "header_record_id": "h152-quote",
+          "items": [
+            {
+              "name": "회전받침30",
+              "quantity": 2,
+              "unit_price": 108000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s152-l",
+          "header_record_id": "h152-later",
+          "items": [
+            {
+              "name": "회전받침30",
+              "quantity": 1,
+              "unit_price": 117000
+            }
+          ]
+        },
+        {
+          "sheet_id": "s152-p",
+          "header_record_id": "h152-plate",
+          "items": [
+            {
+              "name": "받침고정판",
+              "quantity": 3,
+              "unit_price": 7900
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "e152-o",
+          "document_id": "ROTATE-152-O",
+          "event": "cancelled_before_dispatch",
+          "date": "2026-02-03",
+          "location": "전시 준비 담당석"
+        },
+        {
+          "event_id": "e152-n",
+          "document_id": "ROTATE-152-N",
+          "event": "received",
+          "date": "2026-02-08",
+          "location": "회전 전시 준비실"
+        },
+        {
+          "event_id": "e152-l",
+          "document_id": "ROTATE-152-L",
+          "event": "received",
+          "date": "2026-02-13",
+          "location": "회전 전시 준비실"
+        },
+        {
+          "event_id": "e152-p",
+          "document_id": "ROTATE-152-P",
+          "event": "received",
+          "date": "2026-02-15",
+          "location": "회전 전시 준비실"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때 포함한다. quote, 무인수 및 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 계산한다. 별도는 품목 수량 곱하기 단가에 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시만 제거하여 규격 문자는 보존한다. 품목 배열은 정규화 이름 오름차순이고 동일 규격 개당 공급가액을 비교한다. 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이며 최저 동률은 정규화 업체명 오름차순 첫 업체다."
+    },
+    "documents": [
+      {
+        "filename": "01_첫규격주문.pdf",
+        "format": "pdf",
+        "title": "첫 규격 회전 받침 주문",
+        "note": "처음 발주 당시의 원자료다. 모든 정보는 허구다.",
+        "fields": [
+          "headers.0",
+          "line_sheets.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_첫규격진행.hwpx",
+        "format": "hwpx",
+        "title": "첫 규격 주문 진행 기록",
+        "note": "실제 발생일과 원문 번호를 보존했다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_대체규격주문.xlsx",
+        "format": "xlsx",
+        "title": "대체 규격 회전 받침 주문",
+        "note": "별개 번호의 품목과 사무실 처리 기준이다.",
+        "fields": [
+          "headers.1",
+          "line_sheets.1",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "04_대체규격수령.pdf",
+        "format": "pdf",
+        "title": "대체 규격 받침 수령부",
+        "note": "실제 받은 주문 번호를 기록했다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_대체규격견적.pdf",
+        "format": "pdf",
+        "title": "다른 업체의 대체 규격 견적",
+        "note": "제안된 가격과 원문 종류를 보존했다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.2"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_후속받침청구.hwpx",
+        "format": "hwpx",
+        "title": "후속 회전 받침 청구 원문",
+        "note": "후속 실구매 품목과 단가다.",
+        "fields": [
+          "headers.3",
+          "line_sheets.3"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "07_후속받침수령.xlsx",
+        "format": "xlsx",
+        "title": "후속 받침 수령부",
+        "note": "청구 번호에 연결되는 현장 수령 기록이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "08_고정판청구.pdf",
+        "format": "pdf",
+        "title": "고정판 청구 원문",
+        "note": "추가 부속품의 실제 원자료다.",
+        "fields": [
+          "headers.4",
+          "line_sheets.4"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "09_고정판수령.hwpx",
+        "format": "hwpx",
+        "title": "고정판 수령부",
+        "note": "별개 부속품 인수의 발생 기록이다.",
+        "fields": [
+          "events.3"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "cheapest_by_item",
+      "grand_total",
+      "unique_document_count"
+    ]
+  },
+  {
+    "case_id": "D153",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "보존 용기의 숫자 비슷한 원문 번호와 수령 확인",
+    "instruction": "보존 용기 구매의 실적 건수를 제출하려 합니다. 원문 번호를 그대로 대조하여 unique_document_count만 확인해 주세요.",
+    "work_goal": "원문 식별자의 앞자리와 중복 확인 기록을 임의로 정리하지 않고 구매 근거를 센다.",
+    "design_rationale": "자료에는 KEEP-051과 KEEP-51이 별개 원문 번호로 있고 둘 다 실제 수령했다. 각 수령을 창고와 작업실 담당이 같은 날짜와 장소로 각각 증명한다. KEEP-151은 실제 인수됐지만 KEEP-0151 후속 주문에는 수령 기록이 없다. 숫자를 정수로 바꿔 번호를 통합하거나 현장 확인 기록 수를 인수 수로 세면 틀리는 인계 관계를 설계했다.",
+    "exceptions": [
+      "같은 수령을 두 담당자가 각각 동일 발생 기록으로 보관했다.",
+      "후속 주문 원문에는 수령 기록이 없다."
+    ],
+    "facts": {
+      "source_contract": "extract_evidence_v1",
+      "headers": [
+        {
+          "record_id": "h153-zero",
+          "document_id": "KEEP-051",
+          "kind": "invoice",
+          "vendor": "가상보존용기",
+          "date": "2026-04-01",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h153-short",
+          "document_id": "KEEP-51",
+          "kind": "order",
+          "vendor": "가상보존용기",
+          "date": "2026-04-03",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h153-hundred",
+          "document_id": "KEEP-151",
+          "kind": "invoice",
+          "vendor": "가상보존받침",
+          "date": "2026-04-08",
+          "price_includes_vat": false
+        },
+        {
+          "record_id": "h153-next",
+          "document_id": "KEEP-0151",
+          "kind": "order",
+          "vendor": "가상보존받침",
+          "date": "2026-04-12",
+          "price_includes_vat": false
+        }
+      ],
+      "line_sheets": [
+        {
+          "sheet_id": "s153-z",
+          "header_record_id": "h153-zero",
+          "items": [
+            {
+              "name": "밀봉보존용기",
+              "quantity": 18,
+              "unit_price": 5600
+            }
+          ]
+        },
+        {
+          "sheet_id": "s153-s",
+          "header_record_id": "h153-short",
+          "items": [
+            {
+              "name": "밀봉보존용기",
+              "quantity": 12,
+              "unit_price": 5700
+            }
+          ]
+        },
+        {
+          "sheet_id": "s153-h",
+          "header_record_id": "h153-hundred",
+          "items": [
+            {
+              "name": "보존용기받침",
+              "quantity": 6,
+              "unit_price": 8300
+            }
+          ]
+        },
+        {
+          "sheet_id": "s153-n",
+          "header_record_id": "h153-next",
+          "items": [
+            {
+              "name": "추가보존용기받침",
+              "quantity": 6,
+              "unit_price": 8100
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "event_id": "warehouse153-z",
+          "document_id": "KEEP-051",
+          "event": "received",
+          "date": "2026-04-04",
+          "location": "보존실 입고대"
+        },
+        {
+          "event_id": "workroom153-z",
+          "document_id": "KEEP-051",
+          "event": "received",
+          "date": "2026-04-04",
+          "location": "보존실 입고대"
+        },
+        {
+          "event_id": "warehouse153-s",
+          "document_id": "KEEP-51",
+          "event": "received",
+          "date": "2026-04-06",
+          "location": "보존실 입고대"
+        },
+        {
+          "event_id": "workroom153-s",
+          "document_id": "KEEP-51",
+          "event": "received",
+          "date": "2026-04-06",
+          "location": "보존실 입고대"
+        },
+        {
+          "event_id": "e153-h",
+          "document_id": "KEEP-151",
+          "event": "received",
+          "date": "2026-04-10",
+          "location": "보존실 입고대"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 표지에 연결하고 document_id의 문자와 앞자리 0을 그대로 보존한다. invoice와 order는 같은 document_id의 received가 있을 때 포함한다. 동일 발생일과 장소의 같은 수령을 증명하는 확인 자료는 별개 구매를 추가하지 않는다. quote, 무인수 및 출고 전 취소는 제외하며 같은 document_id의 동일 원문은 한 번만 센다."
+    },
+    "documents": [
+      {
+        "filename": "01_앞자리있는청구.pdf",
+        "format": "pdf",
+        "title": "보존 용기 청구 원문",
+        "note": "원문 식별자를 문자 그대로 보존했다. 모든 정보는 허구다.",
+        "fields": [
+          "headers.0",
+          "line_sheets.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_짧은번호주문.xlsx",
+        "format": "xlsx",
+        "title": "보존 용기 주문 원문",
+        "note": "번호와 품목 및 공통 식별 처리 기준을 보존했다.",
+        "fields": [
+          "headers.1",
+          "line_sheets.1",
+          "source_contract",
+          "processing_policy"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_받침청구.hwpx",
+        "format": "hwpx",
+        "title": "보존 받침 청구 원문",
+        "note": "다른 원문 번호의 품목이다.",
+        "fields": [
+          "headers.2",
+          "line_sheets.2"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_후속주문.pdf",
+        "format": "pdf",
+        "title": "후속 보존 받침 주문",
+        "note": "후속 주문의 원문 번호와 품목이다.",
+        "fields": [
+          "headers.3",
+          "line_sheets.3"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "05_첫창고확인.hwpx",
+        "format": "hwpx",
+        "title": "첫 용기 창고 확인 기록",
+        "note": "창고 담당자의 실제 수령 기록이다.",
+        "fields": [
+          "events.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_첫작업실확인.pdf",
+        "format": "pdf",
+        "title": "첫 용기 작업실 확인 기록",
+        "note": "작업실 담당자가 확인한 같은 번호의 발생일과 장소다.",
+        "fields": [
+          "events.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "07_둘째창고확인.xlsx",
+        "format": "xlsx",
+        "title": "둘째 용기 창고 확인 기록",
+        "note": "다른 원문 번호의 실제 수령이다.",
+        "fields": [
+          "events.2"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "08_둘째작업실확인.hwpx",
+        "format": "hwpx",
+        "title": "둘째 용기 작업실 확인 기록",
+        "note": "그 수령에 대한 담당자의 별도 확인이다.",
+        "fields": [
+          "events.3"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_받침수령.pdf",
+        "format": "pdf",
+        "title": "보존 받침 수령 기록",
+        "note": "받침 원문의 현장 수령 번호다.",
+        "fields": [
+          "events.4"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "unique_document_count"
+    ]
+  }
+]

@@ -125,3 +125,16 @@ def test_failed_render_does_not_publish_partial_dataset(editorial_source, tmp_pa
         authoring.build_authored(output, preview=True)
     assert not output.exists()
     assert not list(tmp_path.glob(".review-*"))
+
+
+def test_domain_preview_does_not_read_an_unfinished_other_manuscript(editorial_source, tmp_path):
+    path, _ = editorial_source
+    other = path.parents[1] / "C_vat/editorial.json"
+    other.parent.mkdir()
+    other.write_text('[{"case_id": "C998",', encoding="utf-8")
+    summary = authoring.build_authored(
+        tmp_path / "preview", preview=True, file_name="editorial.json", domain="D_extract"
+    )
+    assert summary["accepted"] == 1
+    with pytest.raises(ValueError, match="subset"):
+        authoring.build_authored(tmp_path / "release", domain="D_extract")

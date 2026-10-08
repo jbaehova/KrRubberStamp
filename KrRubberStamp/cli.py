@@ -20,6 +20,11 @@ def main(argv=None):
         "--case-file", help="Preview only: choose a source filename such as preview.json"
     )
     authored.add_argument(
+        "--domain",
+        choices=("A_yearend", "B_payroll", "C_vat", "D_extract"),
+        help="Preview only: inspect one completed domain while other manuscripts are being written",
+    )
+    authored.add_argument(
         "--preview",
         action="store_true",
         help="Build the currently written subset without declaring a complete release",
@@ -67,7 +72,11 @@ def main(argv=None):
                 else Path("data") / f"batch_{args.batch}"
             )
             summary = build_authored(
-                output, batch=args.batch, preview=args.preview, file_name=args.case_file
+                output,
+                batch=args.batch,
+                preview=args.preview,
+                file_name=args.case_file,
+                domain=args.domain,
             )
             result = {key: value for key, value in summary.items() if key != "tasks"}
             result["output"] = str(output)

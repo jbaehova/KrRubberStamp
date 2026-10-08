@@ -304,6 +304,25 @@ def _housing_deduction(housing: dict) -> int:
     return min(cap, housing["interest_paid"])
 
 
+def _special_application(s: dict) -> bool:
+    """Application facts, including rejected claims, determine standard eligibility."""
+    if "special_deductions_requested" in s:
+        if type(s["special_deductions_requested"]) is not bool:
+            raise ValueError("special_deductions_requested must be a boolean application fact")
+        return s["special_deductions_requested"]
+    return bool(
+        s.get("social_insurance")
+        or s.get("housing_mortgage")
+        or s.get("insurance")
+        or s.get("medical")
+        or s.get("education")
+        or s.get("rent", {}).get("payments")
+        or any(
+            row["kind"] in {"statutory", "public", "religious"} for row in s.get("donations", [])
+        )
+    )
+
+
 def calculate(scenario: dict) -> tuple[dict, list[dict]]:
     s = deepcopy(scenario)
     if s.get("reference_year", 2025) != 2025:
@@ -422,7 +441,8 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
             },
             value,
         )
-    choice = s.get("deduction_choice", "itemized")
+    requested_special = _special_application(s)
+    choice = s.get("deduction_choice", "itemized" if requested_special else "standard")
     if choice not in {"itemized", "standard"}:
         raise ValueError("deduction_choice must be itemized or standard")
     standard = 130_000 if choice == "standard" else 0
@@ -481,7 +501,7 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
     record("A_EMPLOYMENT_CREDIT", {"salary": salary, "computed_tax": computed}, earned_credit)
     record(
         "A_STANDARD",
-        {"deduction_choice": choice},
+        {"deduction_choice": choice, "special_deductions_requested": requested_special},
         {
             "standard_credit": standard,
             "special_income_deduction_applied": special,

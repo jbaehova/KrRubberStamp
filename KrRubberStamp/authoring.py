@@ -84,10 +84,12 @@ def project_answer(answer, fields):
     return {key: answer[key] for key in fields}
 
 
-def load_cases(batch=1, source_root=None, file_name=None):
+def load_cases(batch=1, source_root=None, file_name=None, domain=None):
     source_root = Path(source_root) if source_root else authored_root()
     result, seen = [], set()
     for path in sorted((source_root / f"batch_{batch}").glob("*/*.json")):
+        if domain and path.parent.name != domain:
+            continue
         if file_name and path.name != file_name:
             continue
         records = json.loads(path.read_text(encoding="utf-8"))
@@ -120,15 +122,17 @@ def recover_case(metadata):
     return case
 
 
-def _build_authored_at(output, *, batch=1, preview=False, file_name=None):
+def _build_authored_at(output, *, batch=1, preview=False, file_name=None, domain=None):
     from render.authored import render_authored
     from validate import validate_task
 
     if batch != 1:
         raise ValueError("Only Batch 1 is authorized")
-    if file_name and not preview:
-        raise ValueError("A source-file subset is only permitted for a preview")
-    cases = load_cases(batch, file_name=file_name)
+    if (file_name or domain) and not preview:
+        raise ValueError("A source-file or domain subset is only permitted for a preview")
+    if domain and domain not in DOMAINS:
+        raise ValueError("Unknown preview domain")
+    cases = load_cases(batch, file_name=file_name, domain=domain)
     if not cases:
         raise ValueError("No individually authored cases found")
     counts = Counter((case["domain"], case["difficulty"]) for case, _ in cases)
@@ -215,7 +219,7 @@ def _build_authored_at(output, *, batch=1, preview=False, file_name=None):
     return summary
 
 
-def build_authored(output, *, batch=1, preview=False, file_name=None):
+def build_authored(output, *, batch=1, preview=False, file_name=None, domain=None):
     """Publish only a complete validated build, leaving failed work unpublished."""
     output = Path(output)
     if output.is_symlink() or output.exists() and any(output.iterdir()):
@@ -223,7 +227,9 @@ def build_authored(output, *, batch=1, preview=False, file_name=None):
     output.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=f".{output.name}-", dir=output.parent))
     try:
-        summary = _build_authored_at(staging, batch=batch, preview=preview, file_name=file_name)
+        summary = _build_authored_at(
+            staging, batch=batch, preview=preview, file_name=file_name, domain=domain
+        )
         if output.exists():
             output.rmdir()
         staging.rename(output)

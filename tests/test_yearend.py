@@ -329,6 +329,39 @@ def test_standard_choice_removes_special_deductions_and_credits():
     assert gold["standard_credit"] == 130_000
 
 
+def test_no_special_application_gets_standard_even_with_card_and_pension_credit():
+    s = minimal()
+    s.pop("deduction_choice")
+    s["cards"] = [expense(20_000_000, category="debit", payment_method="debit")]
+    s["pension_accounts"] = {"pension_savings": 1_000_000}
+    gold, _ = engine.calculate(s)
+    assert gold["standard_credit"] == 130_000
+    assert gold["credit_card_deduction"] == 1_500_000
+    assert gold["pension_account_credit"] == 120_000
+
+
+def test_rejected_or_below_threshold_claim_is_not_absence_of_application():
+    s = minimal()
+    s.pop("deduction_choice")
+    s["medical"] = [expense(100_000, kind="ordinary")]
+    gold, _ = engine.calculate(s)
+    assert gold["medical_credit"] == gold["standard_credit"] == 0
+    s["medical"][0]["excluded"] = True
+    assert engine.calculate(s)[0]["standard_credit"] == 0
+    s["special_deductions_requested"] = False
+    gold, _ = engine.calculate(s)
+    assert gold["standard_credit"] == 130_000 and gold["medical_credit"] == 0
+
+
+def test_political_and_hometown_credits_coexist_with_standard_without_other_application():
+    s = minimal()
+    s.pop("deduction_choice")
+    s["donations"] = [expense(100_000, kind="political"), expense(100_000, kind="hometown")]
+    gold, _ = engine.calculate(s)
+    assert gold["standard_credit"] == 130_000
+    assert gold["political_credit"] == gold["hometown_credit"] == 90_909
+
+
 def test_engine_does_not_mutate_evidence():
     scenario = generate(92, "hard")
     original = deepcopy(scenario)

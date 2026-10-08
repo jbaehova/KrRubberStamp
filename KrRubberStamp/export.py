@@ -25,6 +25,9 @@ SUPPORT_REPORTS = (
     "payroll_effective_date_audit.md",
     "vat_evidence_contract.md",
     "extract_evidence_contract.md",
+    "yearend_evidence_contract.md",
+    "authored_yearend_first103_editorial.md",
+    "authored_extract_first50_editorial.md",
 )
 
 

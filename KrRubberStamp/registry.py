@@ -14,6 +14,12 @@ PERIODS = {
 def calculate(domain: str, scenario: dict):
     if domain not in DOMAINS:
         raise ValueError(f"Unknown domain: {domain}")
+    if domain == "A_yearend" and "source_contract" in scenario:
+        from rules.a_yearend.evidence import interpret, derivation_trace
+
+        normalized = interpret(scenario)
+        answer, trace = import_module("rules.a_yearend.engine").calculate(normalized)
+        return answer, [derivation_trace(scenario, normalized), *trace]
     if domain == "B_payroll" and "source_contract" in scenario:
         from rules.b_payroll.evidence import interpret, derivation_trace
 
