@@ -1,6 +1,7 @@
 """List completed individual manuscripts for editorial inspection."""
 
 import argparse
+import json
 from pathlib import Path
 
 from KrRubberStamp.authoring import load_cases
@@ -11,11 +12,20 @@ ROOT = Path(__file__).resolve().parents[1]
 def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--case-file", action="append")
+    parser.add_argument("--completed-from", type=Path)
     args = parser.parse_args(argv)
     cases = (
-        [entry for name in args.case_file for entry in load_cases(file_name=name)]
-        if args.case_file
-        else load_cases()
+        (
+            [entry for name in args.case_file for entry in load_cases(file_name=name)]
+            if args.case_file
+            else load_cases()
+        )
+        if not args.completed_from
+        else [
+            entry
+            for source in json.loads(args.completed_from.read_text())["completed_source_files"]
+            for entry in load_cases(file_name=Path(source).name, domain=Path(source).parent.name)
+        ]
     )
     cases.sort(key=lambda entry: entry[0]["case_id"])
     lines = [

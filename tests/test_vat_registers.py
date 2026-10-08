@@ -148,3 +148,27 @@ def test_raw_vehicle_history_survives_physical_documents_without_source_mutation
     assert c["facts"] == original
     _, trace = calculate("C_vat", original)
     assert trace[0]["inputs"]["vehicle_registry"] == original["vehicle_registry"]
+
+
+@pytest.mark.parametrize("amount", [600, 499_000, 500_001])
+def test_invalid_assessment_minimum_or_rounding_is_rejected(amount):
+    raw = case("C050")["facts"]
+    raw["prepaid_assessed_vat"] = amount
+    with pytest.raises(ValueError, match="at least 500000"):
+        answer(raw)
+
+
+def test_prior_return_payment_is_not_deducted_from_additional_transactions_again():
+    raw = case("C086")["facts"]
+    assert raw["prepaid_assessed_vat"] == 0
+    assert raw["prior_declared_vat_paid"] == 600
+    assert answer(raw)["net_vat"] == 500
+    raw["prior_declared_vat_paid"] = 1_500_000
+    assert answer(raw)["net_vat"] == 500
+
+
+def test_prior_return_and_still_valid_notice_cannot_be_claimed_together():
+    raw = case("C086")["facts"]
+    raw["prepaid_assessed_vat"] = 500_000
+    with pytest.raises(ValueError, match="cannot both"):
+        answer(raw)

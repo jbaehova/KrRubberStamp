@@ -222,6 +222,20 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
         credit,
     )
     prepaid = _money(scenario["prepaid_assessed_vat"], "prepaid_assessed_vat")
+    if prepaid and (prepaid < 500_000 or prepaid % 1000):
+        raise ValueError("Assessed VAT notice must be at least 500000 and a multiple of 1000")
+    prior_declared = _money(scenario.get("prior_declared_vat_paid", 0), "prior_declared_vat_paid")
+    if prepaid and (prior_credit or prior_declared):
+        raise ValueError("Prior return and current assessed notice cannot both be claimed")
+    record(
+        "VAT_ASSESSMENT_VALIDITY",
+        {
+            "assessed_notice": prepaid,
+            "prior_declared_vat_paid": prior_declared,
+            "minimum_notice": 500_000,
+        },
+        {"assessment_is_consistent": True, "prior_return_payment_deducted_again": False},
+    )
     net = liability - credit - prepaid
     record(
         "VAT_PREPAID",

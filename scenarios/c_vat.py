@@ -18,6 +18,7 @@ LABELS = {
     "prior_year_site_supply_base": "2025년 사업장별 공급가액 합계",
     "receipt_credit_previously_claimed": "2026년 이미 공제받은 발행세액공제",
     "prepaid_assessed_vat": "2026년 제1기 예정고지 납부세액",
+    "prior_declared_vat_paid": "이전 예정신고 거래의 이미 납부한 세액",
     "business_name": "상호",
     "transactions": "거래 증빙",
     "transaction_id": "실제 거래 고유번호",

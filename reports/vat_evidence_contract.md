@@ -63,6 +63,8 @@
 
 이 대조는 구조화된 자료의 번호와 날짜를 연결하는 업무 계약이다. 공식 차종이나 공급자 상태 자체를 독립적으로 확인한 법률 판단으로 주장하지 않는다. `tests/test_vat_registers.py`는 원자료 변경의 답 변화와 충돌 거절을 확인하며 C099의 실제 PDF 및 XLSX와 HWPX에서 원자료를 복원한다.
 
+예정고지는 [부가가치세법 제48조](https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0048&lsiSeq=276117&urlMode=lsScJoRltInfoR)의 최소 징수액과 천원 미만 절사를 만족하는 유효한 고지액을 제공한다. 실제 예정신고를 하면 예정고지 결정은 취소된다. 같은 해 선행 공제를 제시한 사례는 이전 신고 거래를 현재 추가 목록에서 제외하고 그 납부액도 다시 차감하지 않는다. 이는 [제49조제1항](https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0049&lsiSeq=276117&urlMode=lsScJoRltInfoR)의 이미 신고한 거래 제외와 연결된다. 원고에서 최소액 미만 고지와 중복 차감 전제를 찾아 각 금액 및 납부 경위를 교정했으며 해당 정답은 변경했다.
+
 ## 제한된 해석 범위
 
 | 실제 기록 관계 | 내부 엔진용 사실 |
