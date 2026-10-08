@@ -28,6 +28,7 @@ SUPPORT_REPORTS = (
     "yearend_evidence_contract.md",
     "authored_yearend_first103_editorial.md",
     "authored_extract_first50_editorial.md",
+    "authored_vat_first103_editorial.md",
 )
 
 

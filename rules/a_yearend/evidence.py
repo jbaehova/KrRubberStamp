@@ -41,6 +41,24 @@ def _receipts(source, normalized, group, field, mapping):
         row["excluded"] = mapping[value]
 
 
+def _household_homes(homes, source):
+    if not isinstance(homes, list):
+        raise ValueError("Year-end household homes must be a list")
+    identities = set()
+    for home in homes:
+        if not isinstance(home, dict) or set(home) != {"home_id", "address", "owner_person_id"}:
+            raise ValueError("Household home requires identity, address and household owner")
+        identity = _text(home["home_id"], "home_id")
+        _text(home["address"], "home address")
+        owner = _text(home["owner_person_id"], "home owner")
+        if owner not in {"self", *(p["person_id"] for p in source.get("dependents", []))}:
+            raise ValueError("Home owner is outside the attested household")
+        if identity in identities:
+            raise ValueError("Duplicate household home identity")
+        identities.add(identity)
+    return len(identities)
+
+
 def interpret(source: dict) -> dict:
     if source.get("source_contract") != CONTRACT:
         raise ValueError("Unknown year-end evidence contract")
@@ -54,6 +72,13 @@ def interpret(source: dict) -> dict:
             raise ValueError("Raw rent needs both addresses without a compiled match")
         normalized["rent"]["address_matches"] = _address(rent["contract_address"]) == _address(
             rent["resident_registration_address"]
+        )
+        branches += 1
+    if "household_homes_at_year_end" in rent:
+        if "homeless_household" in rent:
+            raise ValueError("Raw rent exposes a compiled household housing status")
+        normalized["rent"]["homeless_household"] = (
+            _household_homes(rent["household_homes_at_year_end"], source) == 0
         )
         branches += 1
 
@@ -101,22 +126,9 @@ def interpret(source: dict) -> dict:
             raise ValueError("Raw household home list exposes compiled mortgage eligibility")
         if mortgage.get("other_common_requirements_attested") is not True:
             raise ValueError("Other mortgage conditions need a separate attestation")
-        homes = mortgage[homes_field]
-        if not isinstance(homes, list):
-            raise ValueError("Year-end household homes must be a list")
-        identities = set()
-        for home in homes:
-            if not isinstance(home, dict) or set(home) != {"home_id", "address", "owner_person_id"}:
-                raise ValueError("Household home requires identity, address and household owner")
-            identity = _text(home["home_id"], "home_id")
-            _text(home["address"], "home address")
-            owner = _text(home["owner_person_id"], "home owner")
-            if owner not in {"self", *(p["person_id"] for p in source.get("dependents", []))}:
-                raise ValueError("Home owner is outside the attested household")
-            if identity in identities:
-                raise ValueError("Duplicate household home identity")
-            identities.add(identity)
-        normalized["housing_mortgage"]["requirements_met"] = len(identities) == 1
+        normalized["housing_mortgage"]["requirements_met"] = (
+            _household_homes(mortgage[homes_field], source) == 1
+        )
         branches += 1
 
     if "organization_designations" in source:
@@ -166,6 +178,8 @@ def derivation_trace(source: dict, normalized: dict) -> dict:
     outcomes = {}
     if "contract_address" in source.get("rent", {}):
         outcomes["rent.address_matches"] = normalized["rent"]["address_matches"]
+    if "household_homes_at_year_end" in source.get("rent", {}):
+        outcomes["rent.homeless_household"] = normalized["rent"]["homeless_household"]
     for group, field in (
         ("medical", "treatment_purpose"),
         ("cards", "billed_item"),

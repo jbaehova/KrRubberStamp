@@ -49,7 +49,19 @@
 
 직원과 대표의 조직명은 신고하는 `business_name`과 같아야 한다. 고객은 다른 조직의 참여자로 기록한다. `location`은 실제 장소의 `name`과 `kind`를 갖는다. 가족의 별도 사업장 인도에서는 장소를 운영하는 `organization`도 적는다. 참여자 이름과 조직명이 중복되거나 역할이 상충하면 거절한다.
 
-원래 영수증의 `supplier_general` 및 `vat_separately_stated`는 증빙 사실로 유지한다. `vehicle_subject_excise`와 `vehicle_direct_business`도 자료로 제공하는 공식 차량 분류 사실이다. 활동 기록에서 공제 여부를 다시 쓰지 않는다. 자동차 인수나 임차 또는 정비가 아닌 활동에 차량 분류를 켜면 서로 다른 사실로 보아 거절한다.
+원래 영수증의 `vat_separately_stated`는 증빙 사실로 유지한다. 단순한 사례는 공급자와 차량의 공식 분류 사실을 전제로 제공할 수 있다. 공급자 전환이나 차량 등록 대조가 질문의 중심이면 아래 원자료 대장을 사용한다. 활동 기록에서 공제 여부를 다시 쓰지 않는다. 자동차 인수나 임차 또는 정비가 아닌 활동에 차량 분류를 켜면 서로 다른 사실로 보아 거절한다.
+
+## 등록번호와 효력 날짜의 대조
+
+`vehicle_registry`의 각 행에는 `vehicle_id`, `registration_class`, `business_license`, `permitted_operation_id`를 둔다. 공식 차량 분류는 `excise_passenger` 또는 `non_excise_vehicle`이다. 허가 사업은 `none`, `taxi_transport`, `vehicle_rental`, `vehicle_sales` 중 하나다. 허가가 없으면 사업번호는 `null`이고 허가가 있으면 실제 `operations`의 번호를 참조해야 한다. 차량 종류의 법적 분류와 허가 자체는 자료로 주어진 공식 사실이다. 임의의 차명에서 법적 분류를 추론하지 않는다.
+
+등록 이력이 바뀌면 같은 차량번호에 `valid_from`과 `valid_to`를 함께 기재한다. 효력 범위는 양 끝 날짜를 포함한다. 같은 차량의 범위가 겹치면 거절한다. 날짜가 없는 단일 행은 전체 기간의 기록이다. 차량 매입행과 실제 활동의 `vehicle_id`가 같아야 하며 공급일을 포함하는 등록 기록이 정확히 하나 있어야 한다. 해당 기록과 실제 사업번호를 대조한 뒤에만 내부 `vehicle_subject_excise` 및 `vehicle_direct_business`를 복원한다. 원자료 매입행에 이 두 결과를 미리 적으면 거절한다. C099는 5월 임대 등록을 3월 정비에 소급하면 요청 답이 달라지는 사례다.
+
+`supplier_status_records`는 공급자별 `supplier_id`, `status`, `valid_from`, `valid_to`를 기록한다. 과세유형은 `general` 또는 `simplified_no_invoice_duty`다. 매입행에는 `supplier_id`를 두고 공급일에 유효한 기록으로 내부 `supplier_general`을 복원한다. 전환 이후의 현재 상태를 전환 이전 거래에 적용하지 않는다. 겹치는 효력 범위와 누락된 날짜 및 원자료의 미리 선택된 `supplier_general`은 거절한다.
+
+`site_year_records`는 `site_id`, `site_name`, `year`, `supply_base`를 기록한다. 신고 의뢰서의 `filing_site_id`와 전년 기록을 연결해 사업장별 공급가액을 찾는다. 같은 사업장과 연도의 중복 행이나 상호 충돌은 거절한다. 선택된 `prior_year_site_supply_base`를 원자료에 함께 적지 않는다. C050의 두 사업장 대장은 이 연결을 요구한다.
+
+이 대조는 구조화된 자료의 번호와 날짜를 연결하는 업무 계약이다. 공식 차종이나 공급자 상태 자체를 독립적으로 확인한 법률 판단으로 주장하지 않는다. `tests/test_vat_registers.py`는 원자료 변경의 답 변화와 충돌 거절을 확인하며 C099의 실제 PDF 및 XLSX와 HWPX에서 원자료를 복원한다.
 
 ## 제한된 해석 범위
 

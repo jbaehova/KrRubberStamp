@@ -14,7 +14,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def case(identity):
     number = int(identity[1:])
-    name = "cases_004_053.json" if number <= 53 else "cases_054_103.json"
+    name = (
+        "cases_004_053.json"
+        if number <= 53
+        else "cases_054_103.json"
+        if number <= 103
+        else "cases_104_153.json"
+    )
     rows = json.loads((ROOT / "authored/batch_1/A_yearend" / name).read_text())
     return deepcopy(next(row for row in rows if row["case_id"] == identity))
 
@@ -64,6 +70,29 @@ def test_household_home_list_precedes_mortgage_interest_cap():
     assert answer(raw)["housing_income_deduction"] == 0
     raw["housing_mortgage"]["household_homes_at_year_end"].pop()
     assert answer(raw)["housing_income_deduction"] == 8_600_000
+
+
+@pytest.mark.parametrize("identity", ["A149", "A153"])
+def test_rent_household_status_is_derived_from_actual_home_records(identity):
+    raw = case(identity)["facts"]
+    assert "homeless_household" not in raw["rent"]
+    assert answer(raw)["rent_credit"] == 0
+    raw["rent"]["household_homes_at_year_end"] = []
+    assert answer(raw)["rent_credit"] > 0
+
+
+def test_rent_cannot_supply_compiled_status_alongside_household_records():
+    raw = case("A149")["facts"]
+    raw["rent"]["homeless_household"] = False
+    with pytest.raises(ValueError, match="compiled household"):
+        interpret(raw)
+
+
+def test_household_home_owner_must_belong_to_declared_household():
+    raw = case("A149")["facts"]
+    raw["rent"]["household_homes_at_year_end"][0]["owner_person_id"] = "unknown"
+    with pytest.raises(ValueError, match="outside the attested household"):
+        interpret(raw)
 
 
 def test_donation_date_joins_organization_designation_interval():

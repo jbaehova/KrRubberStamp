@@ -593,7 +593,7 @@
       "prior_year_site_supply_base": 920000000,
       "receipt_credit_previously_claimed": 0,
       "prepaid_assessed_vat": 0,
-      "scope_note": "국내 기업 광고 제작업의 10% 과세 거래 전부다. 적법한 종이 세금계산서를 발급하고 수취했으며 다른 공제나 가산세는 없다.",
+      "scope_note": "국내 기업 광고 제작업의 10% 과세 거래 전부다. 적법한 전자 세금계산서를 발급 및 수취했고 업무 자료는 그 출력본이다. 다른 공제나 가산세는 없다.",
       "transactions": [
         {
           "transaction_id": "가상-C009-광고납품",
@@ -2963,16 +2963,17 @@
     "case_id": "C027",
     "domain": "C_vat",
     "difficulty": "medium",
-    "title": "출장 승용차 렌트료를 처리하는 설비업",
-    "instruction": "가상안전밸브의 출장 렌트료가 신고 자료에 들어 있습니다. 실제 출장에 썼다는 사실과 승용차 매입세액 규정을 나누어 판단해 주세요. 매입세액(input_vat), 공제불가 세액(noncreditable_vat), 납부액(payable_vat)을 answer.json에 원 단위 정수로 적어 주세요.",
-    "work_goal": "업무 출장에 사용한 일반 승용차 렌트료의 부가세 처리를 확정한다.",
-    "design_rationale": "사적 사용이 아닌 출장 사용이지만 개별소비세 대상 승용차 임차료다. 사업 관련성만 확인하고 공제하는 판단을 점검한다.",
+    "title": "한 임대 청구서에 묶인 두 차량",
+    "instruction": "가상안전밸브 출장팀이 승용차와 부품 운반용 화물차를 같은 임대사에서 빌렸습니다. 합산 청구서의 차량번호를 등록대장과 연결해 주세요. 전체 매입세액(input_vat), 공제불가 세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat), 점검 매출까지 반영한 납부액(payable_vat)을 answer.json에 원 단위 정수로 적어 주세요.",
+    "work_goal": "합산 임차료 청구서의 두 차량번호를 등록부와 연결한 매입세액 분리",
+    "design_rationale": "한 청구서의 승용차와 화물차 두 줄을 각각 등록번호로 연결해야 한다. 실제 출장에 쓰였다는 공통 사실만으로 두 임차료를 모두 공제하면 틀린다. 두 차량의 공식 분류를 바꾸면 요청한 공제액이 달라진다.",
     "exceptions": [
-      "passenger_car_rental_credit_block"
+      "합산 임차 청구서의 차종별 공제 구분"
     ],
     "answer_fields": [
       "input_vat",
       "noncreditable_vat",
+      "deductible_input_vat",
       "payable_vat"
     ],
     "facts": {
@@ -2986,7 +2987,7 @@
       "prior_year_site_supply_base": 210000000,
       "receipt_credit_previously_claimed": 0,
       "prepaid_assessed_vat": 0,
-      "scope_note": "국내 기업 설비 점검의 10% 과세 자료 전부다. 출장 임차 차량은 개별소비세 대상 일반 승용차이며 운수업 등 직접 영업용이 아니다. 종이 계산서를 보관했고 다른 공제나 가산세는 없다.",
+      "scope_note": "국내 기업 설비 점검의 10% 과세 자료 전부다. 차량별 공식 등록 구분은 별도 대장에 기재했고 자동차 판매나 임대 및 운수업 허가는 없다. 임대사 계산서는 적법한 전자발급본의 출력물이다. 전자발급 세액공제는 신청하지 않았고 다른 공제나 가산세는 없다.",
       "transactions": [
         {
           "transaction_id": "가상-C027-밸브점검",
@@ -3019,9 +3020,25 @@
           "counterparty_consumer": false,
           "supplier_general": true,
           "vat_separately_stated": true,
-          "vehicle_subject_excise": true,
-          "vehicle_direct_business": false,
-          "activity_id": "ACT-C027-임차"
+          "activity_id": "ACT-C027-임차",
+          "vehicle_id": "가상-P027"
+        },
+        {
+          "transaction_id": "가상-C027-부품운반임차",
+          "document_id": "가상-C027-렌트계산서",
+          "direction": "purchase",
+          "date": "2026-04-30",
+          "description": "점검 부품 운반 화물차 임차료",
+          "amount": 2200000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "tax_invoice",
+          "invoice_issued": true,
+          "counterparty_consumer": false,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_id": "가상-F027",
+          "activity_id": "ACT-C027-운반"
         }
       ],
       "source_contract": "vat_activity_evidence_v1",
@@ -3053,7 +3070,45 @@
             }
           ],
           "operation_id": "OPS-C027",
-          "description": "직원이 현장 점검 출장에 임차차량을 사용한 뒤 4월30일 반납했다."
+          "description": "직원이 현장 점검 출장에 임차차량을 사용한 뒤 4월30일 반납했다.",
+          "vehicle_id": "가상-P027"
+        },
+        {
+          "activity_id": "ACT-C027-운반",
+          "transaction_id": "가상-C027-부품운반임차",
+          "document_ids": [
+            "가상-C027-렌트계산서"
+          ],
+          "date": "2026-04-30",
+          "action": "vehicle_lease",
+          "location": {
+            "name": "가상순환공장 부품 운반 도로",
+            "kind": "road"
+          },
+          "participants": [
+            {
+              "name": "가상 부품담당",
+              "role": "employee",
+              "organization": "가상안전밸브"
+            }
+          ],
+          "operation_id": "OPS-C027",
+          "description": "가상-F027에 점검용 부품을 싣고 공장에 운반한 뒤 임대사에 반납했다.",
+          "vehicle_id": "가상-F027"
+        }
+      ],
+      "vehicle_registry": [
+        {
+          "vehicle_id": "가상-P027",
+          "registration_class": "excise_passenger",
+          "business_license": "none",
+          "permitted_operation_id": null
+        },
+        {
+          "vehicle_id": "가상-F027",
+          "registration_class": "non_excise_vehicle",
+          "business_license": "none",
+          "permitted_operation_id": null
         }
       ]
     },
@@ -3063,7 +3118,7 @@
         "format": "hwpx",
         "template_variant": 2,
         "title": "가상안전밸브 출장 업무 안내",
-        "note": "현장 점검을 위해 승용차를 빌렸다. 사업은 설비 점검업이고 자동차 임대나 운수업은 아니다.",
+        "note": "사업은 설비 점검업이다. 차량을 빌린 부서의 역할과 신고할 자료 범위를 기재했다.",
         "fields": [
           "domain",
           "taxpayer_type",
@@ -3100,13 +3155,24 @@
         ]
       },
       {
-        "filename": "04_출장_렌트.pdf",
+        "filename": "04_합산_임차청구.pdf",
         "format": "pdf",
         "template_variant": 3,
-        "title": "출장 승용차 임차 계산서",
-        "note": "임차한 차는 개별소비세 대상 승용차이며 출장 후 반납했다. 금액은 세액 포함 임차료이고 직접 영업용 차량은 아니다.",
+        "title": "두 차량 합산 임차 청구서",
+        "note": "임대사가 같은 날 반납한 두 차량의 임차료를 차량번호별로 한 계산서에 적었다.",
         "fields": [
           "transactions.1",
+          "transactions.2"
+        ]
+      },
+      {
+        "filename": "05_차량등록_반납.xlsx",
+        "format": "xlsx",
+        "template_variant": 0,
+        "title": "차량번호별 등록과 반납 기록",
+        "note": "등록대장의 공식 차량 구분과 출장팀이 기록한 실제 운행 및 반납 내용을 대조한다.",
+        "fields": [
+          "vehicle_registry",
           "activities"
         ]
       }
@@ -3116,16 +3182,17 @@
     "case_id": "C028",
     "domain": "C_vat",
     "difficulty": "medium",
-    "title": "차량 수리비가 섞인 간판 업체",
-    "instruction": "가상길찾는간판의 차량 정비 전표를 확인해 주세요. 대표가 업무 이동에 사용하는 차의 종류를 기록에서 읽고 매입세액(input_vat) 중 공제불가 세액(noncreditable_vat)을 구해 주세요. 간판 공급을 반영한 최종 납부액(payable_vat)을 answer.json에 정수로 적어 주세요.",
-    "work_goal": "일반 승용차의 유지비 세액을 간판 작업 매입과 구별한다.",
-    "design_rationale": "차를 새로 산 것이 아니라 기존 승용차의 정비비다. 업무 이동용이라는 배경에서도 개별소비세 대상 차량 유지비의 공제 제한을 확인해야 한다.",
+    "title": "정비소의 계산서와 카드 전표를 함께 받은 간판 업체",
+    "instruction": "가상길찾는간판 정비소 파일에 계산서와 카드 전표가 함께 있습니다. 같은 정비 작업인지 증빙번호와 차량 인수 기록을 연결해 주세요. 고유 거래 수(unique_transaction_count), 매입세액(input_vat), 공제가능 매입세액(deductible_input_vat), 간판 공급을 반영한 납부액(payable_vat)을 answer.json에 정수로 적어 주세요.",
+    "work_goal": "정비 작업 한 건의 계산서와 카드 결제를 연결해 중복 세액 방지",
+    "design_rationale": "동일한 실제 정비 작업을 공급가액 계산서와 총액 카드 전표로 각각 받았다. 표시 금액이 다르지만 정비 접수번호와 인수 기록이 같아 두 건으로 합산하면 매입세액이 중복된다. 별도 작업번호로 분리하는 반사실에서는 요청 거래 수와 세액이 달라진다.",
     "exceptions": [
-      "passenger_car_maintenance_credit_block"
+      "같은 정비 작업의 계산서와 카드 증빙 중복"
     ],
     "answer_fields": [
+      "unique_transaction_count",
       "input_vat",
-      "noncreditable_vat",
+      "deductible_input_vat",
       "payable_vat"
     ],
     "facts": {
@@ -3139,7 +3206,7 @@
       "prior_year_site_supply_base": 136000000,
       "receipt_credit_previously_claimed": 0,
       "prepaid_assessed_vat": 0,
-      "scope_note": "국내 기업 간판 제작업의 10% 과세 전체 자료다. 정비한 차는 개별소비세 대상 일반 승용차이고 직접 영업용 차량이 아니다. 일반과세 정비소 전표에 세액이 구분되며 카드 수령명세서를 제출한다. 다른 공제와 가산세는 없다.",
+      "scope_note": "국내 기업 간판 제작업의 10% 과세 전체 자료다. 정비 차량은 공식 등록상 화물차로 개별소비세 대상 승용차가 아니다. 정비소는 일반과세자이고 계산서를 적법하게 전자발급했으며 카드 전표에 세액을 구분했다. 전자발급 세액공제는 신청하지 않았고 다른 공제와 가산세는 없다.",
       "transactions": [
         {
           "transaction_id": "가상-C028-간판인도",
@@ -3163,16 +3230,34 @@
           "document_id": "가상-C028-정비카드",
           "direction": "purchase",
           "date": "2026-03-25",
-          "description": "대표 이동용 승용차의 타이어 교체와 정비",
+          "description": "간판 운반 화물차 타이어 교체 카드 결제",
           "amount": 825000,
           "includes_vat": true,
           "taxable": true,
           "evidence": "card_receipt",
-          "invoice_issued": false,
+          "invoice_issued": true,
           "counterparty_consumer": false,
           "supplier_general": true,
           "vat_separately_stated": true,
-          "vehicle_subject_excise": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false,
+          "activity_id": "ACT-C028-정비"
+        },
+        {
+          "transaction_id": "가상-C028-차량정비",
+          "document_id": "가상-C028-정비계산서",
+          "direction": "purchase",
+          "date": "2026-03-25",
+          "description": "동일 화물차 타이어 교체 전자 계산서 출력",
+          "amount": 750000,
+          "includes_vat": false,
+          "taxable": true,
+          "evidence": "tax_invoice",
+          "invoice_issued": true,
+          "counterparty_consumer": false,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
           "vehicle_direct_business": false,
           "activity_id": "ACT-C028-정비"
         }
@@ -3190,7 +3275,8 @@
           "activity_id": "ACT-C028-정비",
           "transaction_id": "가상-C028-차량정비",
           "document_ids": [
-            "가상-C028-정비카드"
+            "가상-C028-정비카드",
+            "가상-C028-정비계산서"
           ],
           "date": "2026-03-25",
           "action": "vehicle_service",
@@ -3206,7 +3292,7 @@
             }
           ],
           "operation_id": "OPS-C028",
-          "description": "대표가 현장 이동에 쓰는 승용차의 타이어를 교체하고 차량을 되찾았다."
+          "description": "대표가 간판 운반 화물차의 타이어 교체를 확인하고 차량을 되찾았다. 정비 접수 한 건에 계산서와 카드 결제 두 증빙을 보관했다."
         }
       ]
     },
@@ -3215,8 +3301,8 @@
         "filename": "01_간판업_확인.pdf",
         "format": "pdf",
         "template_variant": 1,
-        "title": "가상길찾는간판 차량 사용 안내",
-        "note": "차량은 대표의 현장 이동에 사용한다. 간판 제작업이며 자동차 직접 영업을 하지 않는다.",
+        "title": "가상길찾는간판 정비 자료 인계",
+        "note": "간판 운반용 공식 화물차의 정비소 서류를 결제 파일과 함께 보냈다.",
         "fields": [
           "domain",
           "taxpayer_type",
@@ -3253,14 +3339,24 @@
         ]
       },
       {
-        "filename": "04_승용차_정비.pdf",
+        "filename": "04_정비_카드와인수.pdf",
         "format": "pdf",
         "template_variant": 4,
-        "title": "일반 승용차 정비 카드 전표",
-        "note": "개별소비세 대상 승용차의 정비 결제액이다. 직접 영업용 등록은 없으며 일반과세 정비소가 세액을 구분했다.",
+        "title": "화물차 정비 카드 결제와 인수",
+        "note": "정비 접수번호가 실제 거래번호다. 카드 총액과 차량 인수 작업을 기재했다.",
         "fields": [
           "transactions.1",
           "activities"
+        ]
+      },
+      {
+        "filename": "05_정비_전자계산서.hwpx",
+        "format": "hwpx",
+        "template_variant": 0,
+        "title": "같은 정비 접수의 계산서 출력 기록",
+        "note": "정비소가 발급한 전자 계산서의 공급가액 기준 사본이다. 카드 결제와 같은 접수번호를 사용한다.",
+        "fields": [
+          "transactions.2"
         ]
       }
     ]
@@ -3293,7 +3389,7 @@
       "prior_year_site_supply_base": 380000000,
       "receipt_credit_previously_claimed": 0,
       "prepaid_assessed_vat": 0,
-      "scope_note": "국내 생활용품 소매 법인의 10% 과세 거래 전부다. 카드 판매에 별도 계산서는 없고 재고 종이 계산서는 적법하다. 다른 공제나 가산세는 없다.",
+      "scope_note": "국내 생활용품 소매 법인의 10% 과세 거래 전부다. 카드 판매에 별도 계산서는 없고 재고 계산서는 적법한 전자발급본의 출력 자료다. 다른 공제나 가산세는 없다.",
       "transactions": [
         {
           "transaction_id": "가상-C029-소매판매",
@@ -3411,7 +3507,7 @@
         "format": "pdf",
         "template_variant": 1,
         "title": "수납용품 재고 계산서",
-        "note": "일반과세 공급자의 종이 계산서 공급가액이다. 물품은 법인 매장에 입고되었다.",
+        "note": "일반과세 공급자의 전자 계산서 출력본에 적힌 공급가액이다. 물품은 법인 매장에 입고되었다.",
         "fields": [
           "transactions.1",
           "activities"
@@ -5291,7 +5387,7 @@
       "prior_year_site_supply_base": 510000000,
       "receipt_credit_previously_claimed": 0,
       "prepaid_assessed_vat": 0,
-      "scope_note": "국내 침구 소매 법인의 10% 과세 전체 거래다. 종이 계산서와 카드 자료를 보관하며 매입 공급자는 일반과세자이고 세액이 구분된다. 카드 수령명세서를 제출하고 다른 공제나 가산세는 없다.",
+      "scope_note": "국내 침구 소매 법인의 10% 과세 전체 거래다. 적법한 전자 계산서 출력본과 카드 자료를 보관하며 매입 공급자는 일반과세자이고 세액이 구분된다. 카드 수령명세서를 제출하고 다른 공제나 가산세는 없다.",
       "operations": [
         {
           "operation_id": "OPS-C042",
@@ -5451,7 +5547,7 @@
         "format": "pdf",
         "template_variant": 1,
         "title": "가상쉬는숙소 객실 침구 계산서",
-        "note": "숙소 주문의 종이 계산서 공급가액이다. 같은 주문을 카드로 결제하여 다음 자료에도 주문번호가 남았다.",
+        "note": "숙소 주문의 전자 계산서 출력본에 적힌 공급가액이다. 같은 주문을 카드로 결제하여 다음 자료에도 주문번호가 남았다.",
         "fields": [
           "transactions.1"
         ]
@@ -5490,7 +5586,7 @@
         "filename": "09_숙소계산서_스캔.png",
         "format": "png",
         "title": "숙소 침구 계산서 보관 촬영본",
-        "note": "5번 종이 계산서의 보관용 사진이다. 같은 문서번호의 재촬영본이며 추가 주문이 아니다.",
+        "note": "5번 전자 계산서 출력물의 보관용 사진이다. 같은 문서번호의 재촬영본이며 추가 주문이 아니다.",
         "duplicate_of": "05_숙소_계산서.pdf",
         "fields": []
       }
@@ -6613,7 +6709,7 @@
       "prior_year_site_supply_base": 740000000,
       "receipt_credit_previously_claimed": 0,
       "prepaid_assessed_vat": 350000,
-      "scope_note": "국내 자동차 임대 법인의 10% 과세 전체 거래다. 임대용 차량과 대표 이동용 차량은 각각 별도 등록 자료가 있는 개별소비세 대상 승용차다. 매출과 매입 종이 계산서는 적법하고 다른 공제나 가산세는 없다.",
+      "scope_note": "국내 자동차 임대 법인의 10% 과세 전체 거래다. 임대용 차량과 대표 이동용 차량은 각각 별도 등록 자료가 있는 개별소비세 대상 승용차다. 매출과 매입은 적법한 전자 계산서의 출력본이며 다른 공제나 가산세는 없다.",
       "operations": [
         {
           "operation_id": "OPS-C047",
@@ -6858,7 +6954,7 @@
         "filename": "09_배차차량_사진.png",
         "format": "png",
         "title": "임대 차량 구입 계산서 보관 사진",
-        "note": "5번 종이 계산서의 촬영본이다. 같은 차량 인수에 관한 원본 보관 자료다.",
+        "note": "5번 전자 계산서 출력물의 촬영본이다. 같은 차량 인수에 관한 보관 자료다.",
         "duplicate_of": "05_배차용_차량.pdf",
         "fields": []
       }
@@ -7445,8 +7541,6 @@
       "business_name": "가상네모수납",
       "business_type": "individual",
       "consumer_facing_business": true,
-      "prior_year_site_supply_base": 1000000000,
-      "other_site_supply_base": 220000000,
       "receipt_credit_previously_claimed": 0,
       "prepaid_assessed_vat": 1100000,
       "scope_note": "국내 수납용품 소매업의 10% 과세 자료 전부다. 다른 사업장 공급가액은 비교 자료이며 그 사업장의 거래나 발행 공제는 이번 자료에 없다. 카드 매출에 계산서는 없고 적법한 종이 재고 계산서와 세액 구분 카드 전표를 보관한다. 다른 공제나 가산세는 없다.",
@@ -7597,6 +7691,21 @@
           "vehicle_direct_business": false,
           "activity_id": "ACT-C050-표지"
         }
+      ],
+      "filing_site_id": "가상-S050-수납",
+      "site_year_records": [
+        {
+          "site_id": "가상-S050-보관",
+          "site_name": "가상네모보관",
+          "year": 2025,
+          "supply_base": 220000000
+        },
+        {
+          "site_id": "가상-S050-수납",
+          "site_name": "가상네모수납",
+          "year": 2025,
+          "supply_base": 1000000000
+        }
       ]
     },
     "documents": [
@@ -7616,7 +7725,8 @@
           "business_type",
           "consumer_facing_business",
           "scope_note",
-          "operations"
+          "operations",
+          "filing_site_id"
         ]
       },
       {
@@ -7624,10 +7734,9 @@
         "format": "pdf",
         "template_variant": 2,
         "title": "가상네모수납과 다른 사업장 전년 비교",
-        "note": "가상네모수납 자체의 공급가액은 10억원이다. 다른 사업장 공급가액 2억2천만원은 별도 사업장 기록이다. 올해 선행 발행 공제는 없다.",
+        "note": "사업장 코드별 전년 공급가액 대장이다. 신고 요청의 사업장 코드와 대조해 사용한다. 올해 선행 발행 공제는 없다.",
         "fields": [
-          "prior_year_site_supply_base",
-          "other_site_supply_base",
+          "site_year_records",
           "receipt_credit_previously_claimed"
         ]
       },

@@ -7,6 +7,8 @@ The VAT engine retains responsibility for the deduction and settlement rules.
 from copy import deepcopy
 from datetime import date
 
+from . import registers
+
 CONTRACT = "vat_activity_evidence_v1"
 RULE_ID = "VAT_ACTIVITY_EVIDENCE"
 DERIVED = {"purpose", "business_related"}
@@ -81,7 +83,11 @@ def _operations(source):
 
 
 def _activity(row, operations, taxpayer_name):
-    if not isinstance(row, dict) or set(row) != ACTIVITY_FIELDS:
+    if (
+        not isinstance(row, dict)
+        or not ACTIVITY_FIELDS <= row.keys()
+        or set(row) - ACTIVITY_FIELDS - {"vehicle_id"}
+    ):
         raise ValueError("Raw VAT activity has unknown or missing factual fields")
     for field in ("activity_id", "transaction_id", "description"):
         _text(row[field], field)
@@ -95,6 +101,10 @@ def _activity(row, operations, taxpayer_name):
         raise ValueError("Duplicate activity document reference")
     if _text(row["action"], "activity action") not in ACTIONS:
         raise ValueError("Unsupported raw VAT action")
+    if "vehicle_id" in row:
+        _text(row["vehicle_id"], "activity vehicle_id")
+        if not row["action"].startswith("vehicle_"):
+            raise ValueError("Vehicle identity is attached to a non-vehicle activity")
     location = row["location"]
     if (
         not isinstance(location, dict)
@@ -209,6 +219,9 @@ def interpret(source):
     _no_outcomes(source)
     taxpayer_name = _text(source.get("business_name"), "taxpayer business_name")
     operations = _operations(source)
+    vehicles = registers.vehicle_registry(source, operations)
+    suppliers = registers.supplier_registry(source)
+    site_supply = registers.prior_year_site_supply(source)
     activities = source.get("activities")
     if not isinstance(activities, list):
         raise ValueError("Raw VAT activities must be a list")
@@ -227,6 +240,8 @@ def interpret(source):
     if not isinstance(rows, list):
         raise ValueError("Raw VAT transactions must be a list")
     result = deepcopy(source)
+    if site_supply is not None:
+        result["prior_year_site_supply_base"] = site_supply
     linked_documents = {identity: set() for identity in indexed}
     for original, row in zip(rows, result["transactions"], strict=True):
         if not isinstance(original, dict):
@@ -251,11 +266,17 @@ def interpret(source):
             or original["date"] != activity["date"]
         ):
             raise ValueError("Conflicting transaction, document or date activity link")
+        if suppliers is not None:
+            row["supplier_general"] = registers.supplier_general(original, suppliers)
+        if vehicles is not None and activity["action"].startswith("vehicle_"):
+            row.update(registers.vehicle_flags(original, activity, vehicles))
+        elif "vehicle_id" in original or "vehicle_id" in activity:
+            raise ValueError("Vehicle identity needs its vehicle registry")
         for field in ("vehicle_subject_excise", "vehicle_direct_business"):
-            if type(original.get(field)) is not bool:
+            if type(row.get(field)) is not bool:
                 raise ValueError("Official vehicle classification must be a boolean fact")
         if not activity["action"].startswith("vehicle_") and (
-            original["vehicle_subject_excise"] or original["vehicle_direct_business"]
+            row["vehicle_subject_excise"] or row["vehicle_direct_business"]
         ):
             raise ValueError("Vehicle facts conflict with the documented acquisition activity")
         purpose, related = derived[identity]
@@ -269,7 +290,7 @@ def interpret(source):
 
 def derivation_trace(source, normalized):
     """Record factual joins separately from the unchanged VAT engine's law trace."""
-    return {
+    result = {
         "rule_id": RULE_ID,
         "inputs": {
             "source_contract": CONTRACT,
@@ -290,3 +311,38 @@ def derivation_trace(source, normalized):
             if row["direction"] == "purchase"
         ],
     }
+    for field in (
+        "vehicle_registry",
+        "supplier_status_records",
+        "site_year_records",
+        "filing_site_id",
+    ):
+        if field in source:
+            result["inputs"][field] = source[field]
+    if "site_year_records" in source:
+        result["output"].append(
+            {
+                "filing_site_id": source["filing_site_id"],
+                "prior_year_site_supply_base": normalized["prior_year_site_supply_base"],
+            }
+        )
+    for original, row in zip(source["transactions"], normalized["transactions"], strict=True):
+        if original["direction"] != "purchase":
+            continue
+        if "vehicle_registry" in source and "vehicle_id" in original:
+            result["output"].append(
+                {
+                    key: row[key]
+                    for key in (
+                        "transaction_id",
+                        "vehicle_id",
+                        "vehicle_subject_excise",
+                        "vehicle_direct_business",
+                    )
+                }
+            )
+        if "supplier_status_records" in source:
+            result["output"].append(
+                {key: row[key] for key in ("transaction_id", "supplier_id", "supplier_general")}
+            )
+    return result
