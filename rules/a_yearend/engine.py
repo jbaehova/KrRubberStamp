@@ -189,8 +189,9 @@ def _special_credits(s: dict, people: dict, salary: int, income: int) -> dict:
         medical_numerator += eligible_hundredths * rate
     medical_credit = medical_numerator // 10_000
 
-    education_by_person = defaultdict(int)
-    education_levels = {}
+    education_school = defaultdict(int)
+    education_university = defaultdict(int)
+    education_uncapped = 0
     for row in s.get("education", []):
         person = people[row["person_id"]]
         if not _in_employment(row, s) or not row.get("paid_by_self", True):
@@ -206,18 +207,24 @@ def _special_credits(s: dict, people: dict, salary: int, income: int) -> dict:
             continue
         if person["relation"] != "self" and row["level"] == "graduate":
             continue
-        education_by_person[row["person_id"]] += max(0, row["amount"] - row.get("scholarship", 0))
-        education_levels[row["person_id"]] = row["level"]
-    education_base = 0
-    for person_id, amount in education_by_person.items():
-        if (
-            people[person_id]["relation"] == "self"
-            or education_levels[person_id] == "special_disabled"
-        ):
-            education_base += amount
+        amount = max(0, row["amount"] - row.get("scholarship", 0))
+        if row["level"] == "special_disabled":
+            if person.get("disabled", False):
+                education_uncapped += amount
+        elif person["relation"] == "self":
+            education_uncapped += amount
+        elif row["level"] == "university":
+            education_university[row["person_id"]] += amount
         else:
-            cap = 9_000_000 if education_levels[person_id] == "university" else 3_000_000
-            education_base += min(amount, cap)
+            education_school[row["person_id"]] += amount
+    education_base = education_uncapped
+    for person_id in education_school.keys() | education_university.keys():
+        school = min(education_school[person_id], 3_000_000)
+        university = education_university[person_id]
+        # NTS 2025 book p180-181: qualified rehabilitation costs are separate.
+        # A school-to-university transition retains the school sublimit and the
+        # larger annual limit; receipt ordering must never select the limit.
+        education_base += min(school + university, 9_000_000) if university else school
 
     donation = defaultdict(int)
     political = hometown = 0

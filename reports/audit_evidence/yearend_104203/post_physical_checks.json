@@ -1,0 +1,81 @@
+{
+  "case_id": "A177",
+  "document_count": 4,
+  "formats": [
+    "hwpx",
+    "pdf",
+    "xlsx"
+  ],
+  "baseline_all_facts_equal": true,
+  "baseline_requested_gold_equal": true,
+  "value_free_map": true,
+  "mortgage_evidence_pages": 2,
+  "source_file_sha256": {
+    "inputs/01_퇴직확인.hwpx": "2019401dc9e557572d8a348af64e26313d4a6e5b78bf27fe6d027e2fe1f19dda",
+    "inputs/02_주택이자.pdf": "4cfb9e4f7048123594a95d48a85adf09aef6345f6b31ca379e1a2671a933b1c9",
+    "inputs/03_보험날짜.xlsx": "4adb5d1953364fc0b99b076157f46e506a9af02b6fa8d204ce616a66a84ff62a",
+    "inputs/04_지급누계.pdf": "064d80c87376107d6aa853b60de83975518efcaa5cf558e44062c68e3a674290"
+  },
+  "counterfactuals": [
+    {
+      "intervention": "post_retirement_amount",
+      "field": [
+        "housing_mortgage",
+        "interest_payments",
+        4,
+        "amount"
+      ],
+      "file": "inputs/02_주택이자.pdf",
+      "page_index": 1,
+      "before_visible_text": "650,000",
+      "after_value": 1300000,
+      "restored_all_facts_equal_to_single_edit": true,
+      "requested_answers_changed": false,
+      "map_sha256": "fcfe208ead07a9083953bbbc726dd3f7e572447d162518c508c75b72f635412c",
+      "map_byte_identical": true,
+      "before_gold": {
+        "housing_income_deduction": 2400000,
+        "insurance_credit": 37200,
+        "tax_base": 41450000,
+        "final_national_tax": 4260300
+      },
+      "after_gold": {
+        "housing_income_deduction": 2400000,
+        "insurance_credit": 37200,
+        "tax_base": 41450000,
+        "final_national_tax": 4260300
+      },
+      "changed_source_file_sha256": "a78465e965a115287610003be782a2bb6f76115b05bfbc9fec47931aa09e61fc"
+    },
+    {
+      "intervention": "payment_date_into_employment",
+      "field": [
+        "housing_mortgage",
+        "interest_payments",
+        4,
+        "date"
+      ],
+      "file": "inputs/02_주택이자.pdf",
+      "page_index": 0,
+      "before_visible_text": "“2025-05-27”",
+      "after_value": "2025-04-28",
+      "restored_all_facts_equal_to_single_edit": true,
+      "requested_answers_changed": true,
+      "map_sha256": "fcfe208ead07a9083953bbbc726dd3f7e572447d162518c508c75b72f635412c",
+      "map_byte_identical": true,
+      "before_gold": {
+        "housing_income_deduction": 2400000,
+        "insurance_credit": 37200,
+        "tax_base": 41450000,
+        "final_national_tax": 4260300
+      },
+      "after_gold": {
+        "housing_income_deduction": 3050000,
+        "insurance_credit": 37200,
+        "tax_base": 40800000,
+        "final_national_tax": 4162800
+      },
+      "changed_source_file_sha256": "ccfc753cbb59836f30d0a1cbf08023ce513dbda2ba87a4a00c106717691f025e"
+    }
+  ]
+}

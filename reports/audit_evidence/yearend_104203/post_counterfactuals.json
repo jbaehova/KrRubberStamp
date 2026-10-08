@@ -1,0 +1,1990 @@
+{
+  "checks": 77,
+  "distinct_cases": 67,
+  "changes": 74,
+  "invariances": 3,
+  "results": [
+    {
+      "case_id": "A119",
+      "intervention": "Father allocation changes eligible family and his donation",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 0,
+        "basic_deduction": 1500000,
+        "donation_credit": 120000
+      },
+      "after_gold": {
+        "eligible_dependents": 1,
+        "basic_deduction": 3000000,
+        "donation_credit": 345000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A120",
+      "intervention": "Retired insurance payment moved to last employment day",
+      "edits": [
+        [
+          "insurance.1.date",
+          "2025-08-31"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "pension_account_credit": 750000,
+        "insurance_credit": 86400,
+        "total_salary": 38800000,
+        "final_national_tax": 1144500
+      },
+      "after_gold": {
+        "pension_account_credit": 750000,
+        "insurance_credit": 120000,
+        "total_salary": 38800000,
+        "final_national_tax": 1110900
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A121",
+      "intervention": "Spouse earned-only gross exceeds 5m, coherent salary income",
+      "edits": [
+        [
+          "dependents.0.gross_salary",
+          5100000
+        ],
+        [
+          "dependents.0.income_amount",
+          1560000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 3000000,
+        "insurance_credit": 105600,
+        "medical_credit": 291000,
+        "final_national_tax": 4890900
+      },
+      "after_gold": {
+        "basic_deduction": 1500000,
+        "insurance_credit": 0,
+        "medical_credit": 291000,
+        "final_national_tax": 5221500
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A122",
+      "intervention": "Disabled parent other income returns to 1m boundary",
+      "edits": [
+        [
+          "dependents.0.income_amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 0,
+        "additional_deduction": 0,
+        "insurance_credit": 0,
+        "education_credit": 930000
+      },
+      "after_gold": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 111000,
+        "education_credit": 930000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A124",
+      "intervention": "Grandchild basic age returns to 20; education and card remain",
+      "edits": [
+        [
+          "dependents.0.age",
+          20
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 0,
+        "child_credit": 0,
+        "education_credit": 1020000,
+        "credit_card_deduction": 405000
+      },
+      "after_gold": {
+        "eligible_dependents": 1,
+        "child_credit": 250000,
+        "education_credit": 1020000,
+        "credit_card_deduction": 405000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A125",
+      "intervention": "Remove disability; medical ordinary 7m cap becomes operative",
+      "edits": [
+        [
+          "dependents.0.disabled",
+          false
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 1500000,
+        "insurance_credit": 0,
+        "medical_credit": 1873500
+      },
+      "after_gold": {
+        "basic_deduction": 1500000,
+        "insurance_credit": 0,
+        "medical_credit": 1050000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A128",
+      "intervention": "First sibling age returns to 20",
+      "edits": [
+        [
+          "dependents.0.age",
+          20
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 1,
+        "basic_deduction": 3000000,
+        "education_credit": 2475000,
+        "final_national_tax": 960000
+      },
+      "after_gold": {
+        "eligible_dependents": 2,
+        "basic_deduction": 4500000,
+        "education_credit": 2475000,
+        "final_national_tax": 735000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A129",
+      "intervention": "Mother age64 changes uncapped medical to shared ordinary cap",
+      "edits": [
+        [
+          "dependents.1.age",
+          64
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 0,
+        "medical_credit": 2310000
+      },
+      "after_gold": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 0,
+        "medical_credit": 1050000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A130",
+      "intervention": "Lose cultural classification for actual credit payment",
+      "edits": [
+        [
+          "cards.2.category",
+          "credit"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "total_salary": 70000000,
+        "credit_card_deduction": 1155000,
+        "tax_base": 54095000
+      },
+      "after_gold": {
+        "total_salary": 70000000,
+        "credit_card_deduction": 885000,
+        "tax_base": 54365000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A131",
+      "intervention": "Glasses misclassified ordinary must change requested medical",
+      "edits": [
+        [
+          "medical.0.kind",
+          "ordinary"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "child_credit": 250000,
+        "medical_credit": 213000,
+        "credit_card_deduction": 540000,
+        "final_national_tax": 1908500
+      },
+      "after_gold": {
+        "child_credit": 250000,
+        "medical_credit": 240000,
+        "credit_card_deduction": 540000,
+        "final_national_tax": 1881500
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A132",
+      "intervention": "Late rent paid instead on last employment day",
+      "edits": [
+        [
+          "rent.payments.2.date",
+          "2025-09-30"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "rent_credit": 1055700,
+        "donation_credit": 165000,
+        "total_salary": 41500000,
+        "final_national_tax": 1126050
+      },
+      "after_gold": {
+        "rent_credit": 1407600,
+        "donation_credit": 165000,
+        "total_salary": 41500000,
+        "final_national_tax": 774150
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A133",
+      "intervention": "Employee instead bears submitted insurance payment",
+      "edits": [
+        [
+          "insurance.0.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "housing_income_deduction": 18000000,
+        "insurance_credit": 0,
+        "tax_base": 54350000,
+        "final_national_tax": 6784000
+      },
+      "after_gold": {
+        "housing_income_deduction": 18000000,
+        "insurance_credit": 120000,
+        "tax_base": 54350000,
+        "final_national_tax": 6664000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A134",
+      "intervention": "Remove whole-tuition scholarship",
+      "edits": [
+        [
+          "education.0.scholarship",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "education_credit": 0,
+        "donation_credit": 390000,
+        "basic_deduction": 3000000
+      },
+      "after_gold": {
+        "education_credit": 1080000,
+        "donation_credit": 390000,
+        "basic_deduction": 3000000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A135",
+      "intervention": "Mother earned-only gross returns to5m boundary",
+      "edits": [
+        [
+          "dependents.0.gross_salary",
+          5000000
+        ],
+        [
+          "dependents.0.income_amount",
+          1500000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 0,
+        "basic_deduction": 1500000,
+        "insurance_credit": 0,
+        "medical_credit": 790500
+      },
+      "after_gold": {
+        "eligible_dependents": 1,
+        "basic_deduction": 3000000,
+        "insurance_credit": 112800,
+        "medical_credit": 790500
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A136",
+      "intervention": "Disabled spouse earned-only gross rises beyond5m",
+      "edits": [
+        [
+          "dependents.0.gross_salary",
+          5100000
+        ],
+        [
+          "dependents.0.income_amount",
+          1560000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 3000000,
+        "additional_deduction": 3000000,
+        "insurance_credit": 129000,
+        "tax_base": 21050000
+      },
+      "after_gold": {
+        "basic_deduction": 1500000,
+        "additional_deduction": 1000000,
+        "insurance_credit": 0,
+        "tax_base": 24550000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A137",
+      "intervention": "Exact total salary returns from55000001 to55000000",
+      "edits": [
+        [
+          "annual_gross",
+          56200000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "total_salary": 55000001,
+        "pension_account_credit": 562962,
+        "computed_tax": 4890000,
+        "final_national_tax": 3537038,
+        "final_local_tax": 353703
+      },
+      "after_gold": {
+        "total_salary": 55000000,
+        "pension_account_credit": 703703,
+        "computed_tax": 4890000,
+        "final_national_tax": 3396297,
+        "final_local_tax": 339629
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A138",
+      "intervention": "Bank settlement date alone cannot exclude approved card",
+      "edits": [
+        [
+          "cards.1.bank_payment_date",
+          "2025-07-31"
+        ]
+      ],
+      "expectation": "invariant",
+      "before_gold": {
+        "credit_card_deduction": 525000,
+        "total_salary": 32000000,
+        "tax_base": 19925000
+      },
+      "after_gold": {
+        "credit_card_deduction": 525000,
+        "total_salary": 32000000,
+        "tax_base": 19925000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A138",
+      "intervention": "Card actual approval moves after employment",
+      "edits": [
+        [
+          "cards.1.date",
+          "2025-08-01"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "credit_card_deduction": 525000,
+        "total_salary": 32000000,
+        "tax_base": 19925000
+      },
+      "after_gold": {
+        "credit_card_deduction": 0,
+        "total_salary": 32000000,
+        "tax_base": 20450000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A139",
+      "intervention": "Mother is allocated to employee",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 1,
+        "basic_deduction": 3000000,
+        "salary_income": 27900000,
+        "additional_deduction": 500000
+      },
+      "after_gold": {
+        "eligible_dependents": 2,
+        "basic_deduction": 4500000,
+        "salary_income": 27900000,
+        "additional_deduction": 1500000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A140",
+      "intervention": "Unmarried female taxpayer becomes household head",
+      "edits": [
+        [
+          "household_head",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 3000000,
+        "additional_deduction": 0,
+        "salary_income": 27050000,
+        "tax_base": 24050000
+      },
+      "after_gold": {
+        "basic_deduction": 3000000,
+        "additional_deduction": 500000,
+        "salary_income": 27050000,
+        "tax_base": 23550000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A141",
+      "intervention": "Child changes to earned-only with coherent wage income",
+      "edits": [
+        [
+          "dependents.0.earned_income_only",
+          true
+        ],
+        [
+          "dependents.0.income_amount",
+          1380000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 0,
+        "child_credit": 0,
+        "credit_card_deduction": 2250000,
+        "education_credit": 360000
+      },
+      "after_gold": {
+        "eligible_dependents": 1,
+        "child_credit": 250000,
+        "credit_card_deduction": 3000000,
+        "education_credit": 900000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A142",
+      "intervention": "Remove student scholarship while university cap remains",
+      "edits": [
+        [
+          "education.0.scholarship",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 3000000,
+        "credit_card_deduction": 1860000,
+        "education_credit": 1890000,
+        "medical_credit": 243000,
+        "insurance_credit": 110400,
+        "final_national_tax": 3050100
+      },
+      "after_gold": {
+        "basic_deduction": 3000000,
+        "credit_card_deduction": 1860000,
+        "education_credit": 2070000,
+        "medical_credit": 243000,
+        "insurance_credit": 110400,
+        "final_national_tax": 2870100
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A143",
+      "intervention": "After-retirement tuition instead paid last employment day",
+      "edits": [
+        [
+          "education.1.date",
+          "2025-11-30"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "credit_card_deduction": 930000,
+        "education_credit": 540000,
+        "insurance_credit": 91200,
+        "medical_credit": 343800,
+        "pension_account_credit": 315000,
+        "donation_credit": 135000,
+        "computed_tax": 742800,
+        "final_national_tax": 0,
+        "settlement_total": -1056000
+      },
+      "after_gold": {
+        "credit_card_deduction": 930000,
+        "education_credit": 900000,
+        "insurance_credit": 91200,
+        "medical_credit": 343800,
+        "pension_account_credit": 315000,
+        "donation_credit": 135000,
+        "computed_tax": 742800,
+        "final_national_tax": 0,
+        "settlement_total": -1056000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A144",
+      "intervention": "High salary culture actual credit payment changes to debit",
+      "edits": [
+        [
+          "cards.2.payment_method",
+          "debit"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "housing_income_deduction": 6000000,
+        "credit_card_deduction": 2250000,
+        "pension_account_credit": 1020000,
+        "medical_credit": 0,
+        "education_credit": 405000,
+        "insurance_credit": 112800,
+        "final_national_tax": 9410200
+      },
+      "after_gold": {
+        "housing_income_deduction": 6000000,
+        "credit_card_deduction": 2500000,
+        "pension_account_credit": 1020000,
+        "medical_credit": 0,
+        "education_credit": 405000,
+        "insurance_credit": 112800,
+        "final_national_tax": 9350200
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A145",
+      "intervention": "Disabled grandson other income returns to1m",
+      "edits": [
+        [
+          "dependents.1.income_amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 1,
+        "basic_deduction": 3000000,
+        "additional_deduction": 4000000,
+        "education_credit": 660000,
+        "medical_credit": 843000,
+        "insurance_credit": 120000,
+        "credit_card_deduction": 870000,
+        "donation_credit": 237000,
+        "total_tax_credits": 2520000,
+        "final_national_tax": 132000
+      },
+      "after_gold": {
+        "eligible_dependents": 2,
+        "basic_deduction": 4500000,
+        "additional_deduction": 6000000,
+        "education_credit": 660000,
+        "medical_credit": 843000,
+        "insurance_credit": 270000,
+        "credit_card_deduction": 1860000,
+        "donation_credit": 687000,
+        "total_tax_credits": 3370000,
+        "final_national_tax": 0
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A146",
+      "intervention": "Father allocation changes statutory and subsequent mixed limit",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 1500000,
+        "salary_income": 89170000,
+        "political_credit": 1275909,
+        "hometown_credit": 3075909,
+        "donation_credit": 5435100,
+        "final_national_tax": 4993882,
+        "final_local_tax": 499388,
+        "settlement_total": -13681930
+      },
+      "after_gold": {
+        "basic_deduction": 3000000,
+        "salary_income": 89170000,
+        "political_credit": 1275909,
+        "hometown_credit": 3075909,
+        "donation_credit": 6245100,
+        "final_national_tax": 3583882,
+        "final_local_tax": 358388,
+        "settlement_total": -15232930
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A147",
+      "intervention": "Sibling card relation changes to adult child",
+      "edits": [
+        [
+          "dependents.3.relation",
+          "child"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "special_income_deduction": 0,
+        "housing_income_deduction": 0,
+        "donation_credit": 0,
+        "credit_card_deduction": 1800000,
+        "child_credit": 750000,
+        "pension_account_credit": 1275000,
+        "political_credit": 135909,
+        "standard_credit": 130000,
+        "final_national_tax": 236591
+      },
+      "after_gold": {
+        "special_income_deduction": 0,
+        "housing_income_deduction": 0,
+        "donation_credit": 0,
+        "credit_card_deduction": 3000000,
+        "child_credit": 750000,
+        "pension_account_credit": 1275000,
+        "political_credit": 135909,
+        "standard_credit": 130000,
+        "final_national_tax": 56591
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A148",
+      "intervention": "Remove sibling scholarship; capped university tuition changes",
+      "edits": [
+        [
+          "education.0.scholarship",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 6000000,
+        "additional_deduction": 2000000,
+        "medical_credit": 3300000,
+        "education_credit": 1215000,
+        "insurance_credit": 108000,
+        "credit_card_deduction": 1500000
+      },
+      "after_gold": {
+        "basic_deduction": 6000000,
+        "additional_deduction": 2000000,
+        "medical_credit": 3300000,
+        "education_credit": 1350000,
+        "insurance_credit": 108000,
+        "credit_card_deduction": 1500000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A149",
+      "intervention": "Isolate raw home ownership branch of submitted rent",
+      "edits": [
+        [
+          "rent.household_homes_at_year_end",
+          []
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "rent_credit": 0,
+        "housing_income_deduction": 18000000,
+        "credit_card_deduction": 2100000,
+        "pension_account_credit": 1080000,
+        "education_credit": 1185000,
+        "insurance_credit": 115200,
+        "final_national_tax": 1512300
+      },
+      "after_gold": {
+        "rent_credit": 1440000,
+        "housing_income_deduction": 18000000,
+        "credit_card_deduction": 2100000,
+        "pension_account_credit": 1080000,
+        "education_credit": 1185000,
+        "insurance_credit": 115200,
+        "final_national_tax": 72300
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A150",
+      "intervention": "Mother is earned-only at4800000 with coherent income",
+      "edits": [
+        [
+          "dependents.1.earned_income_only",
+          true
+        ],
+        [
+          "dependents.1.income_amount",
+          1440000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 3000000,
+        "medical_credit": 2040000,
+        "insurance_credit": 50400,
+        "credit_card_deduction": 1500000,
+        "donation_credit": 142500
+      },
+      "after_gold": {
+        "basic_deduction": 4500000,
+        "medical_credit": 2040000,
+        "insurance_credit": 120000,
+        "credit_card_deduction": 2500000,
+        "donation_credit": 322500
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A151",
+      "intervention": "Remove first student scholarship, still compare9m cap",
+      "edits": [
+        [
+          "education.0.scholarship",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 1,
+        "child_credit": 250000,
+        "education_credit": 2685000,
+        "credit_card_deduction": 1755000,
+        "insurance_credit": 99600,
+        "medical_credit": 318000,
+        "computed_tax": 3119250,
+        "final_national_tax": 0
+      },
+      "after_gold": {
+        "eligible_dependents": 1,
+        "child_credit": 250000,
+        "education_credit": 2805000,
+        "credit_card_deduction": 1755000,
+        "insurance_credit": 99600,
+        "medical_credit": 318000,
+        "computed_tax": 3119250,
+        "final_national_tax": 0
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A152",
+      "intervention": "Pre-employment insurance shifts to first employment day",
+      "edits": [
+        [
+          "insurance.0.date",
+          "2025-01-09"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "rent_credit": 1190000,
+        "insurance_credit": 87600,
+        "credit_card_deduction": 1545000,
+        "medical_credit": 313500,
+        "pension_account_credit": 300000,
+        "donation_credit": 90000,
+        "final_national_tax": 367150
+      },
+      "after_gold": {
+        "rent_credit": 1190000,
+        "insurance_credit": 112800,
+        "credit_card_deduction": 1545000,
+        "medical_credit": 313500,
+        "pension_account_credit": 300000,
+        "donation_credit": 90000,
+        "final_national_tax": 341950
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A153",
+      "intervention": "Reduce transit amount and inspect individual and combined limits",
+      "edits": [
+        [
+          "cards.3.amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 6000000,
+        "income_deduction_limit_excess": 1000000,
+        "rent_credit": 0,
+        "basic_deduction": 3000000,
+        "insurance_credit": 222000,
+        "donation_credit": 255000,
+        "pension_account_credit": 1080000,
+        "tax_base": 25800000,
+        "final_national_tax": 143000
+      },
+      "after_gold": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 5520000,
+        "income_deduction_limit_excess": 520000,
+        "rent_credit": 0,
+        "basic_deduction": 3000000,
+        "insurance_credit": 222000,
+        "donation_credit": 255000,
+        "pension_account_credit": 1080000,
+        "tax_base": 25800000,
+        "final_national_tax": 143000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A169",
+      "intervention": "Sibling returns to basic age20, medical treatment unchanged",
+      "edits": [
+        [
+          "dependents.0.age",
+          20
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 1500000,
+        "insurance_credit": 0,
+        "medical_credit": 727500,
+        "political_credit": 102909
+      },
+      "after_gold": {
+        "basic_deduction": 3000000,
+        "insurance_credit": 110400,
+        "medical_credit": 727500,
+        "political_credit": 102909
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A170",
+      "intervention": "Employee bears first insurance payment",
+      "edits": [
+        [
+          "insurance.0.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "insurance_credit": 43200,
+        "medical_credit": 372000,
+        "education_credit": 885000
+      },
+      "after_gold": {
+        "insurance_credit": 120000,
+        "medical_credit": 372000,
+        "education_credit": 885000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A171",
+      "intervention": "Family second term becomes university instead of graduate",
+      "edits": [
+        [
+          "education.1.level",
+          "university"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "education_credit": 630000,
+        "basic_deduction": 1500000,
+        "credit_card_deduction": 870000
+      },
+      "after_gold": {
+        "education_credit": 1350000,
+        "basic_deduction": 1500000,
+        "credit_card_deduction": 870000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A172",
+      "intervention": "Head does not claim housing",
+      "edits": [
+        [
+          "rent.head_claims_housing",
+          false
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "rent_credit": 0,
+        "pension_account_credit": 630000,
+        "final_national_tax": 3457500
+      },
+      "after_gold": {
+        "rent_credit": 1407600,
+        "pension_account_credit": 630000,
+        "final_national_tax": 2049900
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A173",
+      "intervention": "First organization designation extends through its payment",
+      "edits": [
+        [
+          "organization_designations.0.valid_to",
+          "2025-12-31"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "donation_credit": 240000,
+        "insurance_credit": 94800,
+        "final_national_tax": 10769200
+      },
+      "after_gold": {
+        "donation_credit": 600000,
+        "insurance_credit": 94800,
+        "final_national_tax": 10409200
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A174",
+      "intervention": "Remove employee university scholarship",
+      "edits": [
+        [
+          "education.0.scholarship",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "education_credit": 1365000,
+        "insurance_credit": 79200,
+        "basic_deduction": 3000000
+      },
+      "after_gold": {
+        "education_credit": 2145000,
+        "insurance_credit": 79200,
+        "basic_deduction": 3000000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A175",
+      "intervention": "Daughter allocation changes from spouse to employee",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 3000000,
+        "child_credit": 250000,
+        "education_credit": 345000
+      },
+      "after_gold": {
+        "basic_deduction": 4500000,
+        "child_credit": 550000,
+        "education_credit": 765000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A176",
+      "intervention": "Remove child insurance reimbursement",
+      "edits": [
+        [
+          "medical.0.reimbursed",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "medical_credit": 354000,
+        "education_credit": 139500,
+        "final_national_tax": 3939000
+      },
+      "after_gold": {
+        "medical_credit": 564000,
+        "education_credit": 139500,
+        "final_national_tax": 3729000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A178",
+      "intervention": "Large area home value crosses exact400m threshold",
+      "edits": [
+        [
+          "rent.standard_value",
+          400000001
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "rent_credit": 1455000,
+        "education_credit": 960000,
+        "final_national_tax": 3513000
+      },
+      "after_gold": {
+        "rent_credit": 0,
+        "education_credit": 960000,
+        "final_national_tax": 4968000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A179",
+      "intervention": "Cosmetic purpose changes to therapeutic raw record",
+      "edits": [
+        [
+          "medical.1.treatment_purpose",
+          "therapeutic"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "medical_credit": 219000,
+        "credit_card_deduction": 1050000,
+        "tax_base": 42800000
+      },
+      "after_gold": {
+        "medical_credit": 819000,
+        "credit_card_deduction": 1050000,
+        "tax_base": 42800000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A180",
+      "intervention": "Parent returns to basic age60",
+      "edits": [
+        [
+          "dependents.0.age",
+          60
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 1500000,
+        "insurance_credit": 0,
+        "medical_credit": 246000,
+        "donation_credit": 315000
+      },
+      "after_gold": {
+        "basic_deduction": 3000000,
+        "insurance_credit": 91200,
+        "medical_credit": 246000,
+        "donation_credit": 315000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A181",
+      "intervention": "Employee disability evidence becomes true",
+      "edits": [
+        [
+          "employee_disabled",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "insurance_credit": 190200,
+        "basic_deduction": 3000000,
+        "additional_deduction": 2000000
+      },
+      "after_gold": {
+        "insurance_credit": 247200,
+        "basic_deduction": 3000000,
+        "additional_deduction": 4000000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A182",
+      "intervention": "Actual credit cultural payment changes to debit",
+      "edits": [
+        [
+          "cards.2.payment_method",
+          "debit"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "credit_card_deduction": 2125000,
+        "education_credit": 1185000,
+        "tax_base": 55425000
+      },
+      "after_gold": {
+        "credit_card_deduction": 2350000,
+        "education_credit": 1185000,
+        "tax_base": 55200000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A183",
+      "intervention": "Mother allocation changes to employee",
+      "edits": [
+        [
+          "dependents.1.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 3000000,
+        "medical_credit": 262500,
+        "donation_credit": 165000,
+        "hometown_credit": 180909
+      },
+      "after_gold": {
+        "basic_deduction": 4500000,
+        "medical_credit": 727500,
+        "donation_credit": 540000,
+        "hometown_credit": 180909
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A184",
+      "intervention": "Child age20 restores single-parent path",
+      "edits": [
+        [
+          "dependents.0.age",
+          20
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 3000000,
+        "additional_deduction": 500000,
+        "child_credit": 0,
+        "education_credit": 900000
+      },
+      "after_gold": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 1000000,
+        "child_credit": 250000,
+        "education_credit": 900000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A185",
+      "intervention": "Management bill becomes ordinary goods/services raw record",
+      "edits": [
+        [
+          "cards.2.billed_item",
+          "ordinary_goods_services"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "credit_card_deduction": 1500000,
+        "special_income_deduction": 3138610,
+        "pension_account_credit": 900000,
+        "tax_base": 44911390
+      },
+      "after_gold": {
+        "credit_card_deduction": 2910000,
+        "special_income_deduction": 3138610,
+        "pension_account_credit": 900000,
+        "tax_base": 43501390
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A186",
+      "intervention": "Remove fixed rate, leaving nondeferred18m cap",
+      "edits": [
+        [
+          "housing_mortgage.fixed_rate",
+          false
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 6000000,
+        "income_deduction_limit_excess": 1000000,
+        "tax_base": 30250000
+      },
+      "after_gold": {
+        "housing_income_deduction": 18000000,
+        "credit_card_deduction": 6000000,
+        "income_deduction_limit_excess": 0,
+        "tax_base": 31250000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A187",
+      "intervention": "Academy becomes primary/secondary school institution",
+      "edits": [
+        [
+          "education.1.institution_type",
+          "primary_secondary_school"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "education_credit": 330000,
+        "insurance_credit": 105600,
+        "child_credit": 250000
+      },
+      "after_gold": {
+        "education_credit": 450000,
+        "insurance_credit": 105600,
+        "child_credit": 250000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A188",
+      "intervention": "Spouse hometown donation holder becomes employee",
+      "edits": [
+        [
+          "donations.1.person_id",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "hometown_credit": 525909,
+        "donation_credit": 285000,
+        "basic_deduction": 3000000,
+        "final_national_tax": 11073091
+      },
+      "after_gold": {
+        "hometown_credit": 825909,
+        "donation_credit": 285000,
+        "basic_deduction": 3000000,
+        "final_national_tax": 10773091
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A189",
+      "intervention": "Taxable salary rises by1won beyond55m",
+      "edits": [
+        [
+          "non_taxable",
+          2399999
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "total_salary": 55000000,
+        "rent_credit": 1224000,
+        "pension_account_credit": 945000,
+        "final_national_tax": 2061000
+      },
+      "after_gold": {
+        "total_salary": 55000001,
+        "rent_credit": 1080000,
+        "pension_account_credit": 756000,
+        "final_national_tax": 2394000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A190",
+      "intervention": "Final application becomes itemized and special claims requested",
+      "edits": [
+        [
+          "deduction_choice",
+          "itemized"
+        ],
+        [
+          "special_deductions_requested",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "standard_credit": 130000,
+        "insurance_credit": 0,
+        "education_credit": 0,
+        "final_national_tax": 5998091
+      },
+      "after_gold": {
+        "standard_credit": 0,
+        "insurance_credit": 100800,
+        "education_credit": 780000,
+        "final_national_tax": 5247291
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A191",
+      "intervention": "Registration address matches actual contract raw text",
+      "edits": [
+        [
+          "rent.resident_registration_address",
+          "가상시 수풀길 91 304호"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "rent_credit": 0,
+        "medical_credit": 826500,
+        "total_tax_credits": 1486500,
+        "final_national_tax": 4543500
+      },
+      "after_gold": {
+        "rent_credit": 1260000,
+        "medical_credit": 826500,
+        "total_tax_credits": 2746500,
+        "final_national_tax": 3283500
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A192",
+      "intervention": "Spouse earned-only gross returns to5m exact boundary",
+      "edits": [
+        [
+          "dependents.1.gross_salary",
+          5000000
+        ],
+        [
+          "dependents.1.income_amount",
+          1500000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 0,
+        "education_credit": 900000,
+        "insurance_credit": 0,
+        "medical_credit": 402000,
+        "credit_card_deduction": 1500000,
+        "settlement_total": -1152250
+      },
+      "after_gold": {
+        "eligible_dependents": 1,
+        "education_credit": 900000,
+        "insurance_credit": 96000,
+        "medical_credit": 402000,
+        "credit_card_deduction": 1500000,
+        "settlement_total": -1505350
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A193",
+      "intervention": "Remove spouse second home from both same household registers",
+      "edits": [
+        [
+          "housing_mortgage.household_homes_at_year_end",
+          [
+            {
+              "home_id": "H193-A",
+              "address": "가상시 새벽길 93 701호",
+              "owner_person_id": "self"
+            }
+          ]
+        ],
+        [
+          "rent.household_homes_at_year_end",
+          [
+            {
+              "home_id": "H193-A",
+              "address": "가상시 새벽길 93 701호",
+              "owner_person_id": "self"
+            }
+          ]
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "housing_income_deduction": 0,
+        "rent_credit": 0,
+        "education_credit": 0,
+        "medical_credit": 697500,
+        "final_national_tax": 7082500
+      },
+      "after_gold": {
+        "housing_income_deduction": 13300000,
+        "rent_credit": 0,
+        "education_credit": 0,
+        "medical_credit": 697500,
+        "final_national_tax": 4322500
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A194",
+      "intervention": "Extend first organization designation across autumn payment",
+      "edits": [
+        [
+          "organization_designations.0.valid_to",
+          "2025-12-31"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 0,
+        "donation_credit": 480000,
+        "medical_credit": 238500,
+        "settlement_total": -1386550
+      },
+      "after_gold": {
+        "eligible_dependents": 0,
+        "donation_credit": 900000,
+        "medical_credit": 238500,
+        "settlement_total": -1848550
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A195",
+      "intervention": "Excluded sibling card belongs to child instead",
+      "edits": [
+        [
+          "dependents.2.relation",
+          "child"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 4500000,
+        "insurance_credit": 64800,
+        "credit_card_deduction": 1500000,
+        "medical_credit": 561000
+      },
+      "after_gold": {
+        "basic_deduction": 4500000,
+        "insurance_credit": 64800,
+        "credit_card_deduction": 2310000,
+        "medical_credit": 561000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A196",
+      "intervention": "Employee bears second general insurance payment",
+      "edits": [
+        [
+          "insurance.1.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 1500000,
+        "additional_deduction": 2000000,
+        "insurance_credit": 156900,
+        "medical_credit": 909000,
+        "education_credit": 630000
+      },
+      "after_gold": {
+        "basic_deduction": 1500000,
+        "additional_deduction": 2000000,
+        "insurance_credit": 184500,
+        "medical_credit": 909000,
+        "education_credit": 630000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A197",
+      "intervention": "Child becomes6and restores uncapped medical path",
+      "edits": [
+        [
+          "dependents.0.age",
+          6
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "basic_deduction": 3000000,
+        "additional_deduction": 0,
+        "medical_credit": 2392500,
+        "education_credit": 315000
+      },
+      "after_gold": {
+        "basic_deduction": 3000000,
+        "additional_deduction": 0,
+        "medical_credit": 2841000,
+        "education_credit": 315000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A198",
+      "intervention": "Father second household home is sold before yearend",
+      "edits": [
+        [
+          "housing_mortgage.household_homes_at_year_end",
+          [
+            {
+              "home_id": "H198-A",
+              "address": "가상시 들빛길 98 301호",
+              "owner_person_id": "self"
+            }
+          ]
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 2,
+        "education_credit": 1200000,
+        "credit_card_deduction": 0,
+        "housing_income_deduction": 0,
+        "tax_base": 56913000
+      },
+      "after_gold": {
+        "eligible_dependents": 2,
+        "education_credit": 1200000,
+        "credit_card_deduction": 0,
+        "housing_income_deduction": 8200000,
+        "tax_base": 48713000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A200",
+      "intervention": "Reduce statutory donation to leave mixed general limit",
+      "edits": [
+        [
+          "donations.2.amount",
+          40000000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "political_credit": 5500909,
+        "hometown_credit": 3075909,
+        "donation_credit": 16785000,
+        "basic_deduction": 3000000,
+        "insurance_credit": 0,
+        "medical_credit": 555000
+      },
+      "after_gold": {
+        "political_credit": 5500909,
+        "hometown_credit": 3075909,
+        "donation_credit": 12385500,
+        "basic_deduction": 3000000,
+        "insurance_credit": 0,
+        "medical_credit": 555000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A201",
+      "intervention": "Fix raw registration address only",
+      "edits": [
+        [
+          "rent.resident_registration_address",
+          "가상시 물빛길 21 601호"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "rent_credit": 0,
+        "education_credit": 660000,
+        "credit_card_deduction": 2250000,
+        "basic_deduction": 4500000,
+        "final_national_tax": 2960000
+      },
+      "after_gold": {
+        "rent_credit": 1134000,
+        "education_credit": 660000,
+        "credit_card_deduction": 2250000,
+        "basic_deduction": 4500000,
+        "final_national_tax": 1826000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A201",
+      "intervention": "School-aged academy becomes school type",
+      "edits": [
+        [
+          "education.1.institution_type",
+          "primary_secondary_school"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "rent_credit": 0,
+        "education_credit": 660000,
+        "credit_card_deduction": 2250000,
+        "basic_deduction": 4500000,
+        "final_national_tax": 2960000
+      },
+      "after_gold": {
+        "rent_credit": 0,
+        "education_credit": 750000,
+        "credit_card_deduction": 2250000,
+        "basic_deduction": 4500000,
+        "final_national_tax": 2870000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A201",
+      "intervention": "Management bill becomes ordinary goods/services",
+      "edits": [
+        [
+          "cards.1.billed_item",
+          "ordinary_goods_services"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "rent_credit": 0,
+        "education_credit": 660000,
+        "credit_card_deduction": 2250000,
+        "basic_deduction": 4500000,
+        "final_national_tax": 2960000
+      },
+      "after_gold": {
+        "rent_credit": 0,
+        "education_credit": 660000,
+        "credit_card_deduction": 2970000,
+        "basic_deduction": 4500000,
+        "final_national_tax": 2852000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A202",
+      "intervention": "Second postpartum payment belongs to another actual birth",
+      "edits": [
+        [
+          "medical.1.birth_event",
+          "B202-second"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "medical_credit": 703500,
+        "education_credit": 510000,
+        "child_credit": 700000,
+        "settlement_total": -2299550
+      },
+      "after_gold": {
+        "medical_credit": 793500,
+        "education_credit": 510000,
+        "child_credit": 700000,
+        "settlement_total": -2398550
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A202",
+      "intervention": "Employee bears company-paid tuition",
+      "edits": [
+        [
+          "education.1.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "medical_credit": 703500,
+        "education_credit": 510000,
+        "child_credit": 700000,
+        "settlement_total": -2299550
+      },
+      "after_gold": {
+        "medical_credit": 703500,
+        "education_credit": 900000,
+        "child_credit": 700000,
+        "settlement_total": -2728550
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A203",
+      "intervention": "Sibling allocation returns to employee",
+      "edits": [
+        [
+          "dependents.2.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 1,
+        "additional_deduction": 3000000,
+        "education_credit": 780000,
+        "medical_credit": 0,
+        "pension_account_credit": 1080000,
+        "settlement_total": -643280
+      },
+      "after_gold": {
+        "eligible_dependents": 2,
+        "additional_deduction": 3000000,
+        "education_credit": 780000,
+        "medical_credit": 355500,
+        "pension_account_credit": 1080000,
+        "settlement_total": -1430330
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A203",
+      "intervention": "Disabled mother earned-only wage exceeds5m coherently",
+      "edits": [
+        [
+          "dependents.0.gross_salary",
+          5100000
+        ],
+        [
+          "dependents.0.income_amount",
+          1560000
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "eligible_dependents": 1,
+        "additional_deduction": 3000000,
+        "education_credit": 780000,
+        "medical_credit": 0,
+        "pension_account_credit": 1080000,
+        "settlement_total": -643280
+      },
+      "after_gold": {
+        "eligible_dependents": 0,
+        "additional_deduction": 0,
+        "education_credit": 780000,
+        "medical_credit": 0,
+        "pension_account_credit": 1080000,
+        "settlement_total": 544720
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A177",
+      "intervention": "Post-retirement May interest amount changes only annual statement",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.4.amount",
+          1300000
+        ]
+      ],
+      "expectation": "invariant",
+      "before_gold": {
+        "housing_income_deduction": 2400000,
+        "insurance_credit": 37200,
+        "tax_base": 41450000,
+        "final_national_tax": 4260300
+      },
+      "after_gold": {
+        "housing_income_deduction": 2400000,
+        "insurance_credit": 37200,
+        "tax_base": 41450000,
+        "final_national_tax": 4260300
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A177",
+      "intervention": "May actual payment date moves inside employment in April",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.4.date",
+          "2025-04-28"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "housing_income_deduction": 2400000,
+        "insurance_credit": 37200,
+        "tax_base": 41450000,
+        "final_national_tax": 4260300
+      },
+      "after_gold": {
+        "housing_income_deduction": 3050000,
+        "insurance_credit": 37200,
+        "tax_base": 40800000,
+        "final_national_tax": 4162800
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A177",
+      "intervention": "April payment instead occurs after retirement",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.3.date",
+          "2025-05-01"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "housing_income_deduction": 2400000,
+        "insurance_credit": 37200,
+        "tax_base": 41450000,
+        "final_national_tax": 4260300
+      },
+      "after_gold": {
+        "housing_income_deduction": 1800000,
+        "insurance_credit": 37200,
+        "tax_base": 42050000,
+        "final_national_tax": 4350300
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A177",
+      "intervention": "Employment extends through annual mortgage and insurance dates",
+      "edits": [
+        [
+          "employment_end",
+          "2025-12-31"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "housing_income_deduction": 2400000,
+        "insurance_credit": 37200,
+        "tax_base": 41450000,
+        "final_national_tax": 4260300
+      },
+      "after_gold": {
+        "housing_income_deduction": 7600000,
+        "insurance_credit": 120000,
+        "tax_base": 36250000,
+        "final_national_tax": 3397500
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A199",
+      "intervention": "Actual credit culture payment changes to debit",
+      "edits": [
+        [
+          "cards.2.payment_method",
+          "debit"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "credit_card_deduction": 1200000,
+        "medical_credit": 96000,
+        "housing_income_deduction": 3600000,
+        "tax_base": 52350000
+      },
+      "after_gold": {
+        "credit_card_deduction": 2100000,
+        "medical_credit": 96000,
+        "housing_income_deduction": 3600000,
+        "tax_base": 51450000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A199",
+      "intervention": "Post-employment November interest amount changes only statement",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.10.amount",
+          1300000
+        ]
+      ],
+      "expectation": "invariant",
+      "before_gold": {
+        "credit_card_deduction": 1200000,
+        "medical_credit": 96000,
+        "housing_income_deduction": 3600000,
+        "tax_base": 52350000
+      },
+      "after_gold": {
+        "credit_card_deduction": 1200000,
+        "medical_credit": 96000,
+        "housing_income_deduction": 3600000,
+        "tax_base": 52350000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "A199",
+      "intervention": "Pre-employment April interest actual payment date moves into May",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.3.date",
+          "2025-05-31"
+        ]
+      ],
+      "expectation": "change",
+      "before_gold": {
+        "credit_card_deduction": 1200000,
+        "medical_credit": 96000,
+        "housing_income_deduction": 3600000,
+        "tax_base": 52350000
+      },
+      "after_gold": {
+        "credit_card_deduction": 1200000,
+        "medical_credit": 96000,
+        "housing_income_deduction": 4200000,
+        "tax_base": 51750000
+      },
+      "passed": true
+    }
+  ]
+}

@@ -155,7 +155,7 @@ def interpret(source: dict) -> dict:
         if mortgage.get("other_common_requirements_attested") is not True:
             raise ValueError("Other mortgage conditions need a separate attestation")
         normalized["housing_mortgage"]["requirements_met"] = (
-            _household_homes(mortgage[homes_field], source) == 1
+            _household_homes(mortgage[homes_field], source) <= 1
         )
         branches += 1
 

@@ -267,6 +267,37 @@ def test_school_cap_is_per_person_and_scholarship_is_removed():
     assert engine.calculate(s)[0]["education_credit"] == 675_000
 
 
+@pytest.mark.parametrize("reverse", [False, True])
+def test_special_education_does_not_remove_same_students_university_cap(reverse):
+    s = minimal()
+    s["dependents"] = [family("C1", age=22, disabled=True)]
+    s["education"] = [
+        expense(12_000_000, person_id="C1", level="university", scholarship=1_000_000),
+        expense(4_000_000, person_id="C1", level="special_disabled"),
+    ][:: -1 if reverse else 1]
+    assert engine.calculate(s)[0]["education_credit"] == 1_950_000
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+def test_school_to_university_transition_keeps_sublimit_and_larger_annual_cap(reverse):
+    s = minimal()
+    s["dependents"] = [family("C1", age=19)]
+    s["education"] = [
+        expense(5_000_000, person_id="C1", level="school"),
+        expense(4_000_000, person_id="C1", level="university"),
+    ][:: -1 if reverse else 1]
+    assert engine.calculate(s)[0]["education_credit"] == 1_050_000
+    s["education"].append(expense(3_000_000, person_id="C1", level="university"))
+    assert engine.calculate(s)[0]["education_credit"] == 1_350_000
+
+
+def test_special_education_requires_disability_even_when_income_eligible():
+    s = minimal()
+    s["dependents"] = [family("C1")]
+    s["education"] = [expense(4_000_000, person_id="C1", level="special_disabled")]
+    assert engine.calculate(s)[0]["education_credit"] == 0
+
+
 def test_rent_salary_boundary_housing_and_cap():
     s = minimal()
     s["annual_gross"] = 55_000_000

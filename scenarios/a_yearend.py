@@ -53,7 +53,7 @@ LABELS = {
     "supported": "실제 부양 여부",
     "assigned_claimant": "가족이 합의한 실제 공제 신청자",
     "requested_by_self": "본인 신청서에 공제 요청 여부",
-    "birth_order_this_year": "올해 출생 또는 입양 자녀의 출생순위",
+    "birth_order_this_year": "당해 출생 또는 입양 자녀의 누적 신고 순위",
     "social_insurance": "근로자 부담 사회보험 실제 납부액",
     "health": "건강보험료",
     "long_term_care": "장기요양보험료",

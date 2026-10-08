@@ -22,6 +22,10 @@ def case(identity):
         else "cases_104_153.json"
         if number <= 153
         else "cases_154_203.json"
+        if number <= 203
+        else "cases_204_253.json"
+        if number <= 253
+        else "cases_254_300.json"
     )
     rows = json.loads((ROOT / "authored/batch_1/A_yearend" / name).read_text())
     return deepcopy(next(row for row in rows if row["case_id"] == identity))
@@ -72,6 +76,29 @@ def test_household_home_list_precedes_mortgage_interest_cap():
     assert answer(raw)["housing_income_deduction"] == 0
     raw["housing_mortgage"]["household_homes_at_year_end"].pop()
     assert answer(raw)["housing_income_deduction"] == 8_600_000
+
+
+def test_year_end_zero_homes_does_not_disqualify_otherwise_attested_mortgage():
+    raw = case("A099")["facts"]
+    raw["housing_mortgage"]["household_homes_at_year_end"] = []
+    assert answer(raw)["housing_income_deduction"] == 8_600_000
+    raw["housing_mortgage"]["other_common_requirements_attested"] = False
+    with pytest.raises(ValueError, match="separate attestation"):
+        answer(raw)
+
+
+@pytest.mark.parametrize("identity,expected", [("A210", 1_250_000), ("A247", 500_000)])
+def test_birth_credit_uses_familys_cumulative_registration_order(identity, expected):
+    raw = case(identity)["facts"]
+    assert answer(raw)["child_credit"] == expected
+
+
+def test_matured_ten_year_mortgage_survives_sale_before_year_end():
+    raw = case("A253")["facts"]
+    assert raw["housing_mortgage"]["term_years"] == 10
+    assert raw["housing_mortgage"]["borrowed_date"] == "2015-05-13"
+    assert raw["housing_mortgage"]["household_homes_at_year_end"] == []
+    assert answer(raw)["housing_income_deduction"] == 6_000_000
 
 
 def test_mortgage_interest_uses_actual_payments_inside_employment_interval():

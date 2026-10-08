@@ -244,9 +244,11 @@ def build_reports(
     lines += [f"- `{rule['rule_id']}`: {rule['description']}" for rule in unverified]
     editorials = [
         ("연말정산 A001부터 A103", "authored_yearend_first103_editorial.md"),
+        ("연말정산 A104부터 A203", "authored_yearend_104203_editorial.md"),
         ("급여 B001부터 B153", "authored_payroll_first153_editorial.md"),
         ("부가세 C001부터 C103", "authored_vat_first103_editorial.md"),
         ("문서 추출 첫 50문항", "authored_extract_first50_editorial.md"),
+        ("문서 추출 D254부터 D300", "authored_extract_254300_editorial.md"),
     ]
     available = [
         (label, project_root / "reports" / name)

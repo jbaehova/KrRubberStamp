@@ -1,0 +1,6083 @@
+[
+  {
+    "case_id": "A254",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "두 회사에서 원천징수한 세금을 하나의 연간 정산에 반영",
+    "instruction": "가상등잔유통의 가상문하람이 이전 회사 원천징수영수증과 현재 회사 마감표를 함께 냈습니다. 합산 급여 확인서에 확정된 총급여를 사용해 국세 결정세액을 계산하고 두 회사 원천징수 누계에 대한 국세 및 지방세 정산액을 전표에 적어 주세요.",
+    "work_goal": "이직 직원의 확정 연간 급여와 두 회사 합산 기납부액으로 환급 전표를 작성한다.",
+    "design_rationale": "자료는 직장별로 도착하지만 제출된 합산 확인서의 급여는 이미 두 회사 금액을 포함한다. 원천징수 누계도 연간 확인액이므로 어느 한 회사 자료를 다시 더하지 않는다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상문하람",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자다. 이전 회사 1월부터 5월 급여와 현재 회사 6월부터 12월 급여를 합산 완료했다. 합산 급여 및 기납부액에 중복이 없고 다른 공제 신청은 없다.",
+      "annual_gross": 48360000,
+      "non_taxable": 2400000,
+      "employee_age": 31,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "public_pension_paid": 2013700,
+      "paid_national_tax": 2689000,
+      "paid_local_tax": 268900
+    },
+    "documents": [
+      {
+        "filename": "01_이직합산확인.xlsx",
+        "format": "xlsx",
+        "title": "두 회사 연간 급여 합산 확정표",
+        "note": "급여와 원천징수액은 전 직장과 현 직장 합산 누계다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "paid_national_tax",
+          "paid_local_tax"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_재직연금.pdf",
+        "format": "pdf",
+        "title": "문하람 연간 재직 및 연금 확인",
+        "note": "이직 사이 근로 공백 없이 연간 근무했고 공적연금은 본인 부담 납부액이다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end",
+          "public_pension_paid"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "final_national_tax",
+      "settlement_national_tax",
+      "settlement_local_tax"
+    ]
+  },
+  {
+    "case_id": "A255",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "퇴직 후 자비 연금 납입을 연간 계좌 한도에 등록",
+    "instruction": "가상해질녘교구의 가상송다빈이 퇴직 후에도 본인 연금저축과 IRP를 납입했습니다. 계좌 납입 증명을 연간 한도로 처리하고 공적연금 소득공제와 개인 연금계좌 세액공제의 결과를 구분해 회신해 주세요.",
+    "work_goal": "급여에서 낸 공적연금과 퇴직 이후 자비 개인 계좌 납입을 연간 정산의 다른 칸에 기록한다.",
+    "design_rationale": "개인 연금계좌 납입은 근로기간 한정 지출과 다르게 연간 납입액을 사용한다. 공적연금 납부액까지 개인 계좌 합산 한도에 섞지 않는 서무 확인 업무다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상송다빈",
+      "reference_year": 2025,
+      "scope_note": "근로소득만 있는 국내 거주자다. 8월 말 퇴직했으며 연금저축 11월 납입과 IRP 12월 납입은 모두 직원 자비다. 이전하거나 돌려받은 금액은 없고 특별공제 신청도 없다.",
+      "annual_gross": 36600000,
+      "non_taxable": 1600000,
+      "employee_age": 45,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-08-31",
+      "public_pension_paid": 1582000,
+      "pension_accounts": {
+        "pension_savings": 5300000,
+        "irp": 3100000
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_퇴직정산.pdf",
+        "format": "pdf",
+        "title": "송다빈 퇴직 급여와 공적연금",
+        "note": "8월까지의 연간 근로소득을 정산한다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end",
+          "public_pension_paid"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_퇴직후계좌납입.hwpx",
+        "format": "hwpx",
+        "title": "퇴직 후 개인 연금계좌 납입 확인서",
+        "note": "계좌 확인액은 재직 종료 이후 자비 납입이며 모두 2025년 납입이다.",
+        "fields": [
+          "pension_accounts"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "pension_deduction",
+      "pension_account_credit",
+      "standard_credit",
+      "tax_base"
+    ]
+  },
+  {
+    "case_id": "A256",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "가족 기본공제 없는 기혼 여성의 부녀자 항목 등록",
+    "instruction": "가상솔방울악기의 가상백가온은 배우자가 별도로 정산해 가족 기본공제를 신청하지 않았습니다. 직원 본인의 근로소득금액을 확인하고 부녀자 추가공제와 과세표준을 승인란에 써 주세요.",
+    "work_goal": "가족 기본공제 인원이 없더라도 기혼 여성 본인의 소득 요건을 확인해 추가공제를 등록한다.",
+    "design_rationale": "부녀자 공제의 기혼 요건은 배우자 기본공제 신청과 다르다. 급여총액을 소득금액으로 바로 대입하면 신청을 잘못 거절할 수 있어 계산 단계가 요청에 포함된다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상백가온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 여성 근로자이며 혼인 상태다. 가족 기본공제는 신청하지 않았고 특별공제 신청도 없다. 배우자는 자기 직장에서 별도로 정산한다.",
+      "annual_gross": 43200000,
+      "non_taxable": 2400000,
+      "employee_age": 39,
+      "employee_sex": "female",
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31"
+    },
+    "documents": [
+      {
+        "filename": "01_혼인신청.hwpx",
+        "format": "hwpx",
+        "title": "백가온 본인 추가공제 신청",
+        "note": "배우자 가족 공제를 신청하지 않는 기혼 여성의 본인 신청서다.",
+        "fields": [
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employee_sex",
+          "marital_status"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_연간근로소득.xlsx",
+        "format": "xlsx",
+        "title": "솔방울악기 연간 근로소득 확인",
+        "note": "비과세 지급액을 총지급액과 분리하여 기록했다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "salary_income",
+      "eligible_dependents",
+      "additional_deduction",
+      "tax_base"
+    ]
+  },
+  {
+    "case_id": "A257",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "무소득 장애인 배우자의 추가공제와 피보험자 등록",
+    "instruction": "가상여울측량의 가상남서후에게 배우자 공제 등록 결과를 보내 주세요. 배우자 장애 확인과 소득 확인을 바탕으로 기본공제액 및 추가공제액을 적고 직원이 낸 배우자 일반보험 세액공제도 계산해 주세요.",
+    "work_goal": "장애인 배우자의 인적공제와 일반 보장성보험 수납을 같은 사람 식별자로 등록한다.",
+    "design_rationale": "배우자는 나이 요건 없이 소득 및 배정 요건을 충족한다. 장애가 있어도 이번 보험은 일반 보장성 상품이므로 장애인 전용보험 공제율로 바꾸지 않는다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상남서후",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 배우자를 실제 부양한다. 배우자에게 2025년 소득이 없고 공제 배정은 직원으로 확정했다. 일반 보장성보험은 직원이 부담했다. 특별공제를 신청했다.",
+      "annual_gross": 59600000,
+      "non_taxable": 2400000,
+      "employee_age": 44,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "spouse",
+          "relation": "spouse",
+          "age": 41,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": true
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "spouse",
+          "date": "2025-09-25",
+          "amount": 870000,
+          "kind": "general",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_배우자확인.pdf",
+        "format": "pdf",
+        "title": "배우자 장애와 소득 확인",
+        "note": "등록된 장애인 배우자를 실제 부양하며 다른 사람에게 배정하지 않았다.",
+        "fields": [
+          "dependents",
+          "marital_status"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_일반보험납부.xlsx",
+        "format": "xlsx",
+        "title": "배우자 일반 보장성보험 납부",
+        "note": "전용 장애인 보험 상품이 아닌 일반 보장성보험의 근로자 부담액이다.",
+        "fields": [
+          "insurance"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_직원접수.hwpx",
+        "format": "hwpx",
+        "title": "여울측량 직원 접수와 연간 급여",
+        "note": "기본 가족과 보험을 본인 신청으로 접수했다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "basic_deduction",
+      "additional_deduction",
+      "insurance_credit",
+      "standard_credit"
+    ]
+  },
+  {
+    "case_id": "A258",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "스무 살 대학생의 가족 등록과 학부 등록금 한도 안내",
+    "instruction": "가상나뭇결시계의 가상유로아가 딸의 가족 등록과 두 학기 등록금 신청을 냈습니다. 가족 기본공제 인원과 딸 교육비 세액공제를 계산하고 국세 결정세액을 안내해 주세요.",
+    "work_goal": "연말 스무 살 대학생의 가족 등록과 한 사람의 연간 학부 등록금을 연결한다.",
+    "design_rationale": "학생의 나이는 가족 기본공제와 자녀세액공제에 모두 적용된다. 학기별 납부액은 같은 사람의 연간 교육비 한도에서 합산한다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상유로아",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자이며 소득 없는 스무 살 딸을 부양한다. 딸 공제는 본인으로 확정했다. 두 학기 등록금을 모두 직원이 냈고 장학금은 없다. 특별공제를 신청했다.",
+      "annual_gross": 55800000,
+      "non_taxable": 1800000,
+      "employee_age": 48,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "daughter",
+          "relation": "child",
+          "age": 20,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "education": [
+        {
+          "person_id": "daughter",
+          "date": "2025-02-14",
+          "amount": 3700000,
+          "level": "university",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "daughter",
+          "date": "2025-08-16",
+          "amount": 4200000,
+          "level": "university",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_가족학부신청.hwpx",
+        "format": "hwpx",
+        "title": "유로아 가족과 학부 등록금 신청",
+        "note": "두 학기 영수증은 같은 딸의 학부 수업료이며 직원이 납부했다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "employee_age",
+          "marital_status",
+          "dependents",
+          "education"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_급여기초.xlsx",
+        "format": "xlsx",
+        "title": "나뭇결시계 급여 정산 기초",
+        "note": "연간 급여와 비과세 금액은 마감 확정액이다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "child_credit",
+      "education_credit",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A259",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "셋째 출생 등록과 성년 형제자매의 자녀 공제 입력",
+    "instruction": "가상숲길완구의 가상채은재는 올해 셋째 아이가 태어났습니다. 소득 없는 첫째와 둘째 및 출생아의 가족 자료를 읽어 가족 공제 인원과 자녀 공제액을 입력하고 출생아의 미숙아 치료비 세액공제를 계산해 주세요.",
+    "work_goal": "세 자녀의 연말 나이와 셋째 출생 순서를 신생아 진료 내역에 연결한다.",
+    "design_rationale": "일반 자녀세액공제의 나이 기준과 올해 출생 공제는 다른 칸에서 계산한다. 출생아의 미숙아 치료비에는 별도 공제율을 적용한다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상채은재",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 소득 없는 세 자녀를 실제 부양하고 본인에게 배정했다. 출생아는 2025년 셋째 출생으로 확인됐고 미숙아 치료비 전액을 직원이 부담했다. 보전금은 없으며 특별공제를 신청했다.",
+      "annual_gross": 71200000,
+      "non_taxable": 2400000,
+      "employee_age": 47,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "first",
+          "relation": "child",
+          "age": 20,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        },
+        {
+          "person_id": "second",
+          "relation": "child",
+          "age": 9,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        },
+        {
+          "person_id": "third",
+          "relation": "child",
+          "age": 0,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "birth_order_this_year": 3
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "third",
+          "date": "2025-05-19",
+          "amount": 4800000,
+          "kind": "premature",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_자녀출생등록.pdf",
+        "format": "pdf",
+        "title": "세 자녀의 출생과 연말 연령 확인",
+        "note": "신생아는 올해 셋째로 출생했고 앞선 두 자녀는 소득이 없다.",
+        "fields": [
+          "dependents",
+          "marital_status"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_신생아치료.xlsx",
+        "format": "xlsx",
+        "title": "출생아 미숙아 치료 수납",
+        "note": "직원이 실제 낸 미숙아 치료비이고 일반 진료를 포함하지 않는다.",
+        "fields": [
+          "medical"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_접수급여.hwpx",
+        "format": "hwpx",
+        "title": "숲길완구 연말 신청 확정",
+        "note": "가족과 신생아 치료비에 대한 본인 정산 신청이다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "child_credit",
+      "medical_credit",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A260",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "일반 보험 한도 미만 납부와 특별 신청 사실의 승인",
+    "instruction": "가상연필봄공방의 가상정리온은 보장성보험 한 건만 특별공제로 신청했습니다. 납부액을 확인해 보험 세액공제와 표준세액공제 입력값을 확정하고 최종 국세를 계산해 주세요.",
+    "work_goal": "작은 보험료라도 실제 특별공제 신청 사실에 따라 최종 적용 방식을 승인한다.",
+    "design_rationale": "공제액이 표준공제보다 작다는 이유로 자동 변경하지 않는 업무다. 실제 선택된 특별공제 방식과 금액을 각각 회신해야 한다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상정리온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 부양가족은 없다. 본인 일반 보장성보험만 특별공제로 신청했으며 표준공제로 바꾸는 요청은 없었다. 보험료는 본인 부담이다.",
+      "annual_gross": 50200000,
+      "non_taxable": 2400000,
+      "employee_age": 34,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "special_deductions_requested": true,
+      "insurance": [
+        {
+          "person_id": "self",
+          "date": "2025-04-21",
+          "amount": 360000,
+          "kind": "general",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_보험신청납부.pdf",
+        "format": "pdf",
+        "title": "정리온 보험료 특별공제 신청과 납부",
+        "note": "신청자는 이 납부액으로 특별공제를 신청했으며 선택 변경을 하지 않았다.",
+        "fields": [
+          "employee_name",
+          "scope_note",
+          "special_deductions_requested",
+          "insurance"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_연간급여.xlsx",
+        "format": "xlsx",
+        "title": "연필봄공방 연간 급여 기초",
+        "note": "연중 계속 재직한 직원의 급여 확정액이다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "insurance_credit",
+      "standard_credit",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A261",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "구호 특례기부 두 증명의 큰 금액 공제 구간 승인",
+    "instruction": "가상지평석재의 가상강시온이 구호 특례기부 영수증 두 장을 제출했습니다. 두 납부액을 같은 연간 기부 종류로 합쳐 기부 세액공제와 국세 결정세액을 승인하고 지방세 결정세액도 기록해 주세요.",
+    "work_goal": "두 번 낸 구호 특례기부의 연간 합산액으로 큰 금액 공제 구간을 적용한다.",
+    "design_rationale": "동일 종류의 적법한 두 영수증은 건별 공제 구간을 새로 시작하지 않는다. 납부자는 직원 본인이며 이월 없이 당해 연도 소득 한도에서 처리한다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상강시온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족 공제는 없다. 두 기부는 직원 본인이 실제 낸 적법한 특례기부이고 반환과 이월액은 없다. 특별공제로 신청했다.",
+      "annual_gross": 92400000,
+      "non_taxable": 2400000,
+      "employee_age": 52,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "donations": [
+        {
+          "person_id": "self",
+          "date": "2025-02-10",
+          "amount": 6200000,
+          "kind": "statutory",
+          "eligible_organization": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-11-20",
+          "amount": 7200000,
+          "kind": "statutory",
+          "eligible_organization": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_구호기부수납.xlsx",
+        "format": "xlsx",
+        "title": "두 구호 특례기부 납부 증명",
+        "note": "서로 다른 납부일의 두 금액은 각각 실제 수납액이며 같은 특례기부 종류다.",
+        "fields": [
+          "donations"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_기부접수.hwpx",
+        "format": "hwpx",
+        "title": "지평석재 기부 정산 신청",
+        "note": "당해 연도 기부를 본인 특별공제로 신청했다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "donation_credit",
+      "final_national_tax",
+      "final_local_tax"
+    ]
+  },
+  {
+    "case_id": "A262",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "성인 무소득 손녀의 카드와 학비 등록을 기본공제와 구분",
+    "instruction": "가상햇무리도예의 가상손예담은 스물세 살 손녀를 부양합니다. 손녀의 대학 등록금과 직원 카드 자료를 정산에 반영하고 기본공제 인원과 교육비 공제액 및 카드 소득공제액을 적어 주세요.",
+    "work_goal": "무소득 성인 손녀의 교육 지출과 직원 카드 지출을 가족 기본공제 인원과 별도로 등록한다.",
+    "design_rationale": "성년 직계비속은 기본공제 나이에서 벗어나지만 교육비의 나이 요건과 같지 않다. 카드 자료는 직원 본인 사용이며 손녀 학비를 카드 소비로 다시 넣지 않는다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상손예담",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자이며 무소득 손녀를 실제 부양하고 관련 공제를 본인에게 배정했다. 손녀 학부 수업료를 직원이 직접 낸다. 카드 사용은 직원 본인의 일반 직불 소비이고 등록금 결제를 포함하지 않는다. 특별공제를 신청했다.",
+      "annual_gross": 51600000,
+      "non_taxable": 2400000,
+      "employee_age": 63,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "granddaughter",
+          "relation": "grandchild",
+          "age": 23,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "education": [
+        {
+          "person_id": "granddaughter",
+          "date": "2025-02-19",
+          "amount": 6800000,
+          "level": "university",
+          "paid_by_self": true
+        }
+      ],
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-10",
+          "amount": 17000000,
+          "category": "debit",
+          "payment_method": "debit"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_손녀학비.pdf",
+        "format": "pdf",
+        "title": "성인 손녀 학부 수업료 및 부양 확인",
+        "note": "무소득 손녀의 학부 등록금은 직원이 부담했다.",
+        "fields": [
+          "dependents",
+          "education",
+          "marital_status"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_직원소비.xlsx",
+        "format": "xlsx",
+        "title": "직원 본인 일반 직불 소비 누계",
+        "note": "공제 대상 일반 소비 누계이며 손녀 등록금 납부는 포함하지 않는다.",
+        "fields": [
+          "cards"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_급여신청.hwpx",
+        "format": "hwpx",
+        "title": "햇무리도예 연간 정산 신청",
+        "note": "가족 교육비와 직원 카드 사용을 신청했다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "education_credit",
+      "credit_card_deduction",
+      "tax_base"
+    ]
+  },
+  {
+    "case_id": "A263",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "고령 장애인 본인의 일반 치료비와 연간 연금 정산",
+    "instruction": "가상선율수리의 가상오하결 정산을 승인해 주세요. 직원 본인의 장애 추가공제와 본인 일반 진료비 세액공제를 계산하고 공적연금 공제액을 확인해 과세표준을 회신하면 됩니다.",
+    "work_goal": "고령 장애인 직원 자신의 인적공제와 본인 진료비 및 공적연금 납부를 승인한다.",
+    "design_rationale": "직원 본인에게 경로우대와 장애 추가공제를 모두 적용한다. 본인 일반 진료비는 부양가족 일반 의료비 한도와 구분하고 공적연금은 소득공제 단계에 반영한다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상오하결",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자 본인은 연말 만 71세이며 세법상 장애인 증명서를 갖췄다. 가족은 신청하지 않았다. 본인 일반 진료비를 직접 냈고 보전받지 않았다. 특별공제로 신청했다.",
+      "annual_gross": 47800000,
+      "non_taxable": 1800000,
+      "employee_age": 71,
+      "employee_disabled": true,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "public_pension_paid": 1240000,
+      "medical": [
+        {
+          "person_id": "self",
+          "date": "2025-09-16",
+          "amount": 8200000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_본인진료장애.pdf",
+        "format": "pdf",
+        "title": "오하결 본인 장애 및 진료 신청",
+        "note": "본인 일반 진료 수납과 세법상 장애 확인을 함께 제출했다.",
+        "fields": [
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employee_disabled",
+          "medical"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_급여연금확인.xlsx",
+        "format": "xlsx",
+        "title": "선율수리 연간 급여와 연금 납부",
+        "note": "공적연금 납부액은 근로자가 실제 부담한 금액이다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "employment_start",
+          "employment_end",
+          "public_pension_paid"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "additional_deduction",
+      "medical_credit",
+      "pension_deduction",
+      "tax_base"
+    ]
+  },
+  {
+    "case_id": "A264",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "직원 대학원과 고향사랑 납부의 서로 다른 공제 승인",
+    "instruction": "가상무지개필름의 가상임채율이 본인 대학원 등록금과 고향사랑 기부 증명을 냈습니다. 두 납부를 같은 종류로 합치지 말고 교육비 및 고향사랑 공제액을 계산해 국세 결정세액을 알려 주세요.",
+    "work_goal": "직원 본인의 대학원 수업료와 적법한 고향사랑 납부를 각각 세액공제 항목으로 입력한다.",
+    "design_rationale": "두 지출은 직원 본인 부담이지만 공제 계산의 구간과 한도가 다르다. 본인 대학원 교육비는 가족 대학원 교육비와 다르게 처리한다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상임채율",
+      "reference_year": 2025,
+      "scope_note": "근로소득만 있는 국내 거주자이며 가족은 신청하지 않았다. 본인 정규 대학원 수업료는 직원이 직접 냈고 장학금은 없다. 고향사랑 기부는 직원 본인의 적법한 2025년 기부로 재난 특례가 아니며 총액이 연간 수납 한도 이하다. 교육비 특별공제를 신청했다.",
+      "annual_gross": 65800000,
+      "non_taxable": 1800000,
+      "employee_age": 38,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "education": [
+        {
+          "person_id": "self",
+          "date": "2025-08-25",
+          "amount": 7300000,
+          "level": "graduate",
+          "paid_by_self": true
+        }
+      ],
+      "donations": [
+        {
+          "person_id": "self",
+          "date": "2025-12-02",
+          "amount": 460000,
+          "kind": "hometown",
+          "eligible_organization": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_본인대학원.pdf",
+        "format": "pdf",
+        "title": "임채율 본인 대학원 납부 증명",
+        "note": "정규 대학원의 본인 수업료이며 반환과 장학금이 없다.",
+        "fields": [
+          "education"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_고향사랑수납.xlsx",
+        "format": "xlsx",
+        "title": "본인 고향사랑 기부 수납 증명",
+        "note": "일반 고향사랑 기부이며 재난 특별 공제율 대상은 아니다.",
+        "fields": [
+          "donations"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_급여신청.hwpx",
+        "format": "hwpx",
+        "title": "무지개필름 정산 신청과 급여",
+        "note": "교육비와 본인 기부금의 항목별 정산 신청이다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "education_credit",
+      "hometown_credit",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A265",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "세대원 임차료의 세대주 미신청 사실을 접수표에 연결",
+    "instruction": "가상바람종제작의 가상신루하 월세 신청을 처리해 주세요. 세대주가 주택 공제를 신청하지 않은 확인서와 본인이 낸 임차료 증명으로 월세 세액공제를 계산하고 지방세 결정세액을 회신해 주세요.",
+    "work_goal": "무주택 세대원이 낸 월세와 세대주 미신청 확인을 연결해 적격 신청을 처리한다.",
+    "design_rationale": "세대원이라는 이유만으로 신청을 제외하지 않고 세대주 공제 신청 여부를 함께 확인한다. 주소 일치와 적격 주택 및 본인 계약자 요건은 확인된 사실로 제출한다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상신루하",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자다. 세대 전체가 무주택이며 직원은 세대원이다. 세대주가 주택 관련 공제를 신청하지 않았고 직원 본인 명의 계약에 주민등록 주소가 일치한다. 직원 자비로 재직 중 월세를 냈으며 특별공제를 신청했다.",
+      "annual_gross": 58400000,
+      "non_taxable": 2400000,
+      "employee_age": 33,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "rent": {
+        "homeless_household": true,
+        "household_head": false,
+        "head_claims_housing": false,
+        "address_matches": true,
+        "eligible_contract_holder": true,
+        "area_sqm": 49,
+        "standard_value": 278000000,
+        "payments": [
+          {
+            "date": "2025-06-30",
+            "amount": 3600000
+          },
+          {
+            "date": "2025-12-31",
+            "amount": 3600000
+          }
+        ]
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_세대주확인.hwpx",
+        "format": "hwpx",
+        "title": "세대주 미신청 및 임차 적격 확인",
+        "note": "직원은 세대원이며 세대주는 주택 공제를 신청하지 않는다. 본인 계약과 주소 및 주택 요건을 확인했다.",
+        "fields": [
+          "rent.homeless_household",
+          "rent.household_head",
+          "rent.head_claims_housing",
+          "rent.address_matches",
+          "rent.eligible_contract_holder",
+          "rent.area_sqm",
+          "rent.standard_value"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_월세납부.xlsx",
+        "format": "xlsx",
+        "title": "직원 월세 반기별 실제 납부액",
+        "note": "두 금액은 서로 겹치지 않는 반기별 월세 실제 납부 합계다.",
+        "fields": [
+          "rent.payments"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_신청급여.pdf",
+        "format": "pdf",
+        "title": "바람종제작 직원 월세 정산 신청",
+        "note": "월세 특별공제 신청에 필요한 직원과 급여 정보다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "rent_credit",
+      "standard_credit",
+      "final_local_tax"
+    ]
+  },
+  {
+    "case_id": "A266",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "장기 변동금리 비거치 대출과 공적연금의 소득공제 승인",
+    "instruction": "가상동그라미금속의 가상서율온 주택이자 공제를 승인해 주세요. 적격 확인이 끝난 장기 변동금리 비거치 대출의 이자 한도를 적용하고 공적연금 공제 및 최종 과세표준을 정산표에 적어 주세요.",
+    "work_goal": "비거치 상환 방식이 있는 장기 대출의 이자 한도를 공적연금과 구분해 적용한다.",
+    "design_rationale": "금리가 변동이어도 비거치 상환 요건이 있으므로 두 조건 모두 없는 장기 대출의 한도로 바꾸지 않는다. 대출과 공적연금은 서로 다른 소득공제 항목이다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상서율온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자다. 연중 재직했으며 본인 단독 소유의 1주택 세대다. 장기주택저당차입금의 취득시기와 기준시가 및 채무자 등 공통 요건을 별도 확인했다. 이자액 전부가 본인 재직 중 납부액이며 특별공제로 신청했다.",
+      "annual_gross": 107400000,
+      "non_taxable": 2400000,
+      "employee_age": 50,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "public_pension_paid": 2841000,
+      "housing_mortgage": {
+        "requirements_met": true,
+        "borrowed_date": "2021-04-22",
+        "term_years": 25,
+        "fixed_rate": false,
+        "non_deferred": true,
+        "interest_paid": 19100000
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_대출조건확인.pdf",
+        "format": "pdf",
+        "title": "서율온 장기 비거치 대출 적격 확인",
+        "note": "변동금리이지만 처음부터 비거치 상환이다. 공통 취득 및 주택 요건을 모두 확인했다.",
+        "fields": [
+          "housing_mortgage"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_정산기초.xlsx",
+        "format": "xlsx",
+        "title": "동그라미금속 급여와 공적연금",
+        "note": "대출 이자와 별개로 본인 공적연금 납부액을 기록했다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end",
+          "public_pension_paid"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "housing_income_deduction",
+      "pension_deduction",
+      "tax_base"
+    ]
+  },
+  {
+    "case_id": "A267",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "칠천만 원 이하 급여의 문화비와 시장비 사용액 등록",
+    "instruction": "가상별자리아카이브의 가상홍시율에게 카드 정산 결과를 보내 주세요. 일반 신용 사용과 공제 대상 문화비 및 시장 사용액을 확인해 카드 소득공제액을 계산하고 과세표준과 국세 산출세액을 적어 주세요.",
+    "work_goal": "공제 대상 문화비와 시장비를 일반 신용 사용과 별도 소비 항목으로 등록한다.",
+    "design_rationale": "총급여가 문화비 적용 기준 이하인 정상 신청이다. 신용카드 결제라도 문화비 및 시장 소비의 별도 분류와 추가 한도 계산을 유지한다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상홍시율",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족과 특별공제 신청은 없다. 모든 카드는 본인 소비이고 재직 기간 사용액이다. 문화비는 등록된 제공업체의 공제 대상 공연과 도서 구입이며 시장 소비도 적격 전통시장 사용으로 확인했다.",
+      "annual_gross": 69400000,
+      "non_taxable": 2400000,
+      "employee_age": 36,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-17",
+          "amount": 18000000,
+          "category": "credit",
+          "payment_method": "credit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-18",
+          "amount": 4200000,
+          "category": "culture",
+          "payment_method": "credit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-19",
+          "amount": 3600000,
+          "category": "market",
+          "payment_method": "credit"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_소비분류표.xlsx",
+        "format": "xlsx",
+        "title": "홍시율 일반 문화 시장 사용액 확정",
+        "note": "세 사용액은 서로 겹치지 않는 적격 소비 누계다.",
+        "fields": [
+          "cards"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_급여접수.pdf",
+        "format": "pdf",
+        "title": "별자리아카이브 연말 신청 범위",
+        "note": "별도 특별공제 신청 없이 본인 카드 사용만 접수했다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "credit_card_deduction",
+      "tax_base",
+      "computed_tax"
+    ]
+  },
+  {
+    "case_id": "A268",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "입사 전과 입사일 주택이자를 납부 날짜로 마감",
+    "instruction": "가상수평책방의 가상도은율 주택대출 자료에는 입사 전 납부도 들어 있습니다. 납부 거래표의 날짜를 근로 시작일과 맞춰 주택이자 소득공제액을 계산하고 국세 결정세액을 알려 주세요.",
+    "work_goal": "연간 대출 납부표에서 실제 재직 기간 이자만 주택 소득공제에 반영한다.",
+    "design_rationale": "대출 조건은 적격이지만 연간 이자 전체를 그대로 넣을 수 없다. 입사일 납부와 그 전날 납부를 서로 다른 거래로 읽어 기간 경계를 확인한다.",
+    "exceptions": [
+      "입사 전 납부한 이자는 근로기간 주택이자 공제에 넣지 않는다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상도은율",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자로 5월 1일 입사했다. 본인 1주택의 적법한 장기주택저당차입금이며 취득시기와 기준시가 및 채무자 등 공통 요건은 별도 확인했다. 이자 거래는 본인 자비 납부이고 특별공제로 신청했다.",
+      "annual_gross": 63600000,
+      "non_taxable": 1600000,
+      "employee_age": 40,
+      "employment_start": "2025-05-01",
+      "employment_end": "2025-12-31",
+      "housing_mortgage": {
+        "requirements_met": true,
+        "borrowed_date": "2022-02-10",
+        "term_years": 20,
+        "fixed_rate": true,
+        "non_deferred": true,
+        "interest_payments": [
+          {
+            "date": "2025-04-30",
+            "amount": 3200000
+          },
+          {
+            "date": "2025-05-01",
+            "amount": 2800000
+          },
+          {
+            "date": "2025-12-30",
+            "amount": 5900000
+          }
+        ]
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_입사등록.hwpx",
+        "format": "hwpx",
+        "title": "도은율 입사 및 정산 신청",
+        "note": "입사일은 5월 1일이며 대출 이자 특별공제를 신청했다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_급여확정.xlsx",
+        "format": "xlsx",
+        "title": "수평책방 재직 급여 확정",
+        "note": "현재 회사 재직 기간의 근로소득 확정액이다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_대출요건.pdf",
+        "format": "pdf",
+        "title": "본인 주택 장기대출 조건 확인",
+        "note": "본인 단독 주택과 공통 요건을 확인했으며 고정금리 비거치 대출이다.",
+        "fields": [
+          "housing_mortgage.requirements_met",
+          "housing_mortgage.borrowed_date",
+          "housing_mortgage.term_years",
+          "housing_mortgage.fixed_rate",
+          "housing_mortgage.non_deferred"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_입사경계납부.xlsx",
+        "format": "xlsx",
+        "title": "입사 전날과 입사일 이자 거래",
+        "note": "인접한 두 날짜의 별도 이자 납부 거래이며 취소 거래가 아니다.",
+        "fields": [
+          "housing_mortgage.interest_payments.0",
+          "housing_mortgage.interest_payments.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_연말이자.pdf",
+        "format": "pdf",
+        "title": "12월 이자 실제 납부 확인",
+        "note": "연말 재직 중 본인 계좌에서 낸 이자다.",
+        "fields": [
+          "housing_mortgage.interest_payments.2"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "housing_income_deduction",
+      "tax_base",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A269",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "계약 호수와 주민등록 호수가 다른 월세 신청 회신",
+    "instruction": "가상작은돛장비의 가상민채온에게 월세 접수 결과를 회신해 주세요. 계약서와 주민등록 주소를 비교한 뒤 월세 공제액을 적고 별도로 제출한 본인 수술비의 의료비 공제 및 최종 국세를 계산해 주세요.",
+    "work_goal": "같은 건물의 다른 호수인 임대계약과 주민등록 자료를 대조해 월세 신청을 판단한다.",
+    "design_rationale": "건물명이 같아도 호수가 다르면 두 주소를 같은 것으로 볼 수 없다. 월세 신청의 부적격을 확인하더라도 본인 치료 영수증의 특별공제 신청을 없애지 않는다.",
+    "exceptions": [
+      "계약 402호와 주민등록 403호의 불일치로 월세 주소 요건을 충족하지 않는다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상민채온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자인 무주택 세대주다. 본인 계약이며 적격 임차 면적 및 기준시가를 확인했다. 주민등록 기록은 제출된 주소가 정확하다. 본인 수술비와 월세를 직원이 부담했고 특별공제를 신청했다.",
+      "annual_gross": 52600000,
+      "non_taxable": 2400000,
+      "employee_age": 35,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "rent": {
+        "homeless_household": true,
+        "household_head": true,
+        "head_claims_housing": false,
+        "contract_address": "가상시 청솔로 18 402호",
+        "resident_registration_address": "가상시 청솔로 18 403호",
+        "eligible_contract_holder": true,
+        "area_sqm": 58,
+        "standard_value": 302000000,
+        "payments": [
+          {
+            "date": "2025-12-20",
+            "amount": 6900000
+          }
+        ]
+      },
+      "medical": [
+        {
+          "person_id": "self",
+          "date": "2025-08-08",
+          "amount": 2400000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_계약내용.pdf",
+        "format": "pdf",
+        "title": "청솔로 402호 임대계약과 임차 요건",
+        "note": "계약서의 호수는 402호로 확정돼 있다.",
+        "fields": [
+          "rent.contract_address",
+          "rent.eligible_contract_holder",
+          "rent.area_sqm",
+          "rent.standard_value"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_주민세대.hwpx",
+        "format": "hwpx",
+        "title": "주민등록 주소와 무주택 세대 확인",
+        "note": "제출된 주민등록 호수는 403호이며 직원은 무주택 세대주다.",
+        "fields": [
+          "rent.resident_registration_address",
+          "rent.homeless_household",
+          "rent.household_head",
+          "rent.head_claims_housing"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_납부치료.xlsx",
+        "format": "xlsx",
+        "title": "월세 실제 납부와 직원 수술 수납",
+        "note": "월세와 수술비는 서로 다른 본인 부담 지출이다.",
+        "fields": [
+          "rent.payments",
+          "medical"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_정산접수.pdf",
+        "format": "pdf",
+        "title": "작은돛장비 정산 신청 범위",
+        "note": "월세와 의료비 특별공제를 함께 신청했다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "rent_credit",
+      "medical_credit",
+      "standard_credit",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A270",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "같은 세대 배우자 주택을 대출 공제의 주택 수에 반영",
+    "instruction": "가상들꽃정밀의 가상윤서리 주택이자 접수를 확인해 주세요. 직원 대출 주택 외에 배우자 보유 주택을 세대 대장에서 찾아 주택이자 소득공제액을 계산하고 공적연금 공제와 과세표준을 회신해 주세요.",
+    "work_goal": "대출자 본인 명의 확인에 그치지 않고 세대 전체의 연말 주택 수를 대조한다.",
+    "design_rationale": "대출의 금리 및 상환 조건은 적격이지만 배우자가 같은 세대에서 주택을 한 채 더 보유한다. 공적연금은 이 주택 수 판정과 무관하게 별도 처리한다.",
+    "exceptions": [
+      "같은 세대의 직원과 배우자 주택 두 채로 연말 1주택 요건을 충족하지 않는다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상윤서리",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자다. 배우자는 같은 세대의 무소득 부양 배우자로 본인에게 공제를 배정했다. 주택 수 외의 장기주택저당차입금 공통 요건은 확인했고 이자 특별공제를 신청했다. 대장에는 세대 전원의 연말 보유 주택이 빠짐없이 실렸다.",
+      "annual_gross": 85400000,
+      "non_taxable": 2400000,
+      "employee_age": 46,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "public_pension_paid": 2943000,
+      "dependents": [
+        {
+          "person_id": "spouse",
+          "relation": "spouse",
+          "age": 44,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "housing_mortgage": {
+        "other_common_requirements_attested": true,
+        "borrowed_date": "2020-09-11",
+        "term_years": 20,
+        "fixed_rate": true,
+        "non_deferred": false,
+        "interest_paid": 11600000,
+        "household_homes_at_year_end": [
+          {
+            "home_id": "home_employee",
+            "address": "가상시 솔등길 4",
+            "owner_person_id": "self"
+          },
+          {
+            "home_id": "home_spouse",
+            "address": "가상시 물빛길 9",
+            "owner_person_id": "spouse"
+          }
+        ]
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_직원대출.pdf",
+        "format": "pdf",
+        "title": "윤서리 대출과 납부이자",
+        "note": "대출은 직원 소유 주택에 설정된 장기 고정금리 차입금이다.",
+        "fields": [
+          "housing_mortgage.borrowed_date",
+          "housing_mortgage.term_years",
+          "housing_mortgage.fixed_rate",
+          "housing_mortgage.non_deferred",
+          "housing_mortgage.interest_paid",
+          "housing_mortgage.other_common_requirements_attested"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_직원주택.hwpx",
+        "format": "hwpx",
+        "title": "직원 명의 연말 주택 대장",
+        "note": "직원 본인 명의 주택 한 채를 기록했다.",
+        "fields": [
+          "housing_mortgage.household_homes_at_year_end.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_배우자주택.pdf",
+        "format": "pdf",
+        "title": "같은 세대 배우자 보유 주택",
+        "note": "배우자가 같은 세대에 거주하며 별도 주택을 보유한다.",
+        "fields": [
+          "housing_mortgage.household_homes_at_year_end.1",
+          "dependents",
+          "marital_status"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_급여연금.xlsx",
+        "format": "xlsx",
+        "title": "들꽃정밀 급여와 공적연금 확정",
+        "note": "대출 공제와 별개의 연간 급여 및 공적연금 납부 자료다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "public_pension_paid"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_정산범위.hwpx",
+        "format": "hwpx",
+        "title": "윤서리 재직 및 신청 범위",
+        "note": "연중 재직한 직원의 대출 이자 특별공제 신청이다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "housing_income_deduction",
+      "pension_deduction",
+      "tax_base"
+    ]
+  },
+  {
+    "case_id": "A271",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "기관 지정 재개 전후 두 기부 영수증의 기간 접수",
+    "instruction": "가상눈꽃창호의 가상진다율이 같은 단체에 두 번 기부했습니다. 단체 지정 자료와 실제 납부 날짜를 연결해 기부 공제액을 계산하고 원천징수 국세 누계에 대한 정산액을 적어 주세요.",
+    "work_goal": "동일 기관의 지정 재개일을 납부 영수증 두 장과 연결해 당해 기부 공제를 마감한다.",
+    "design_rationale": "기관명이 같다는 이유로 두 영수증을 모두 적격으로 보지 않는다. 지정 시작 전 납부와 시작일 납부가 일주일 차이로 들어 있어 날짜 조인이 핵심이다.",
+    "exceptions": [
+      "기부금단체 지정 시작일 이전 납부는 이번 공제용 적격 기부에서 제외한다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상진다율",
+      "reference_year": 2025,
+      "scope_note": "근로소득만 있는 국내 거주자이며 가족은 신청하지 않았다. 기부는 반환 없는 본인 부담 납부이고 별도 이월액이 없다. 단체의 적격 판단은 제출한 지정 유효기간에만 따른다. 기부 특별공제를 신청했다.",
+      "annual_gross": 72800000,
+      "non_taxable": 2400000,
+      "employee_age": 43,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "paid_national_tax": 5300000,
+      "organization_designations": [
+        {
+          "organization_id": "org_amber",
+          "kind": "public",
+          "valid_from": "2025-07-01",
+          "valid_to": "2027-12-31"
+        }
+      ],
+      "donations": [
+        {
+          "person_id": "self",
+          "organization_id": "org_amber",
+          "date": "2025-06-24",
+          "amount": 2500000,
+          "kind": "public"
+        },
+        {
+          "person_id": "self",
+          "organization_id": "org_amber",
+          "date": "2025-07-01",
+          "amount": 1700000,
+          "kind": "public"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_지정재개.hwpx",
+        "format": "hwpx",
+        "title": "호박빛재단 공익단체 지정 기간",
+        "note": "기관 식별자가 org_amber인 단체의 지정 시작일은 7월 1일이다.",
+        "fields": [
+          "organization_designations"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_첫기부.pdf",
+        "format": "pdf",
+        "title": "지정 재개 전 6월 실제 기부",
+        "note": "직원 본인 명의로 6월 24일 수납된 금액이다.",
+        "fields": [
+          "donations.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_둘째기부.xlsx",
+        "format": "xlsx",
+        "title": "지정 시작일 7월 기부 수납",
+        "note": "동일 기관의 지정 시작일에 별도로 납부한 금액이다.",
+        "fields": [
+          "donations.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "04_급여납부세액.xlsx",
+        "format": "xlsx",
+        "title": "눈꽃창호 급여 및 국세 원천징수",
+        "note": "원천징수액은 결정세액이 아니라 이미 낸 국세 누계다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "paid_national_tax"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "05_접수기록.pdf",
+        "format": "pdf",
+        "title": "진다율 기부 공제 접수 기록",
+        "note": "두 영수증의 실제 날짜와 기관 번호를 대조하는 신청이다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "donation_credit",
+      "final_national_tax",
+      "settlement_national_tax"
+    ]
+  },
+  {
+    "case_id": "A272",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "학교 납입총액을 부부의 실제 이체로 나눈 교육비 정산",
+    "instruction": "가상개울연구의 가상하라온이 두 자녀 교육비를 신청했습니다. 초등학교 납입총액 증명과 부부의 이체 내역을 같은 학생에게 연결하고, 직원이 실제 부담한 학교비와 둘째 유치원비로 교육비 세액공제액을 계산해 주세요. 본인과 두 자녀를 합친 기본공제액 및 자녀세액공제액도 회신해 주세요.",
+    "work_goal": "학교가 발급한 학생별 총액을 실제 부담자의 이체 두 건으로 나눠 직원 신청액을 확정한다.",
+    "design_rationale": "초등학생 기본공제는 직원에게 배정됐다. 같은 학생의 학교 납입총액과 부부 계좌의 두 이체를 대조해 직원의 실제 부담분을 확정한다. 유치원생의 별도 납입은 직원 부담으로 정상 처리한다.",
+    "exceptions": [
+      "첫째 학교비 일부를 배우자가 자기 자금으로 내고 직원에게 상환받지 않았다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상하라온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 두 무소득 자녀를 실제 부양하고 두 아이의 기본공제를 본인에게 배정했다. 초등학교 증명 총액 180만원은 직원 이체 110만원과 배우자 이체 70만원의 합계이며 중복 청구가 아니다. 배우자는 자기 자금으로 납부해 직원에게 돌려받지 않았다. 둘째 유치원비는 직원이 전액 부담했다. 적격 수업료만 제출했고 장학금과 회사 지원은 없다. 교육비 특별공제를 신청했으며 자료 밖 공제와 감면 및 이월은 없다.",
+      "annual_gross": 62400000,
+      "non_taxable": 2400000,
+      "employee_age": 41,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "school_child",
+          "relation": "child",
+          "age": 11,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        },
+        {
+          "person_id": "kindergarten_child",
+          "relation": "child",
+          "age": 5,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "education": [
+        {
+          "person_id": "school_child",
+          "date": "2025-03-12",
+          "amount": 1100000,
+          "level": "school",
+          "institution_type": "primary_secondary_school",
+          "paid_by_self": true,
+          "payment_note": "초등학교 납입증명 S272 총액 중 직원 계좌의 실제 이체분"
+        },
+        {
+          "person_id": "school_child",
+          "date": "2025-03-13",
+          "amount": 700000,
+          "level": "school",
+          "institution_type": "primary_secondary_school",
+          "paid_by_self": false,
+          "payment_note": "같은 초등학교 납입증명 S272 총액 중 배우자 계좌의 실제 이체분"
+        },
+        {
+          "person_id": "kindergarten_child",
+          "date": "2025-09-05",
+          "amount": 2600000,
+          "level": "preschool",
+          "institution_type": "kindergarten_or_childcare",
+          "paid_by_self": true,
+          "payment_note": "둘째 유치원 적격 수업료를 직원이 별도 납부"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_학교납입총액.pdf",
+        "format": "pdf",
+        "title": "초등학교 S272 납입총액과 학생 확인",
+        "note": "첫째의 증명 총액은 1,800,000원이다. 다음 직원 이체와 배우자 이체가 이 총액의 구성 내역이며 세 번째 별도 납부가 아니다.",
+        "fields": [
+          "education.0.person_id",
+          "education.0.level",
+          "education.0.institution_type",
+          "education.0.payment_note",
+          "education.1.person_id",
+          "education.1.level",
+          "education.1.institution_type",
+          "education.1.payment_note"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_부부이체.xlsx",
+        "format": "xlsx",
+        "title": "S272 납입액의 직원 및 배우자 실제 부담",
+        "note": "같은 학교 납입증명의 두 구성액을 계좌 주인과 연결한다. 배우자 이체분에 대한 직원 상환은 없다.",
+        "fields": [
+          "education.0.person_id",
+          "education.0.date",
+          "education.0.amount",
+          "education.0.paid_by_self",
+          "education.1.person_id",
+          "education.1.date",
+          "education.1.amount",
+          "education.1.paid_by_self"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_둘째유치원.pdf",
+        "format": "pdf",
+        "title": "둘째 유치원 수업료 직원 납입증명",
+        "note": "학교 증명 S272와 다른 자녀의 유치원비이며 직원이 전액 부담했다.",
+        "fields": [
+          "education.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_두자녀등록.hwpx",
+        "format": "hwpx",
+        "title": "하라온 두 자녀 기본공제 배정",
+        "note": "두 자녀 모두 직원에게 배정했다. 초등학생과 취학 전 아동의 연말 나이를 각각 등록한다.",
+        "fields": [
+          "dependents",
+          "marital_status"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "05_급여접수.xlsx",
+        "format": "xlsx",
+        "title": "개울연구 급여와 교육비 신청 접수",
+        "note": "학생별 학교 증명과 실제 이체 자료를 함께 제출한 특별공제 신청이다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "basic_deduction",
+      "child_credit",
+      "education_credit"
+    ]
+  },
+  {
+    "case_id": "A273",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "카드 명세의 관리비 자동결제와 일반 소비를 항목별 마감",
+    "instruction": "가상새벽패널의 가상권세온 카드 명세를 정리해 주세요. 동일 직불카드에 들어 있는 일반 소비와 아파트 관리비를 청구 항목으로 나누어 카드 소득공제액을 계산하고 국세 산출세액을 적어 주세요.",
+    "work_goal": "결제수단이 같아도 관리비 청구 항목을 카드 공제 사용액에서 분리한다.",
+    "design_rationale": "직불 결제 총액 하나로 처리하면 관리비가 공제 사용액에 섞인다. 두 소비 자료를 원래 청구 항목으로 읽어 최저사용액 이후의 공제액을 재계산해야 한다.",
+    "exceptions": [
+      "아파트 관리비 자동결제는 카드 소득공제 대상 사용액에서 제외한다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상권세온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족과 특별공제 신청은 없다. 모든 카드는 본인 사용이고 재직 기간에 결제했다. 일반 소비는 공제 적격이며 관리비는 공동주택 관리비 자체 납부다.",
+      "annual_gross": 41800000,
+      "non_taxable": 1800000,
+      "employee_age": 30,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-11",
+          "amount": 11200000,
+          "category": "debit",
+          "payment_method": "debit",
+          "billed_item": "ordinary_goods_services"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-12",
+          "amount": 2600000,
+          "category": "debit",
+          "payment_method": "debit",
+          "billed_item": "apartment_management_fee"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_일반소비.xlsx",
+        "format": "xlsx",
+        "title": "권세온 일반 직불 소비 누계",
+        "note": "일반 상품과 서비스 이용액이며 관리비가 포함되지 않았다.",
+        "fields": [
+          "cards.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_관리비납부.pdf",
+        "format": "pdf",
+        "title": "공동주택 관리비 자동납부 내역",
+        "note": "직불카드 결제이지만 청구 항목은 아파트 관리비다.",
+        "fields": [
+          "cards.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_급여.hwpx",
+        "format": "hwpx",
+        "title": "새벽패널 연간 지급과 재직 확인",
+        "note": "연중 계속 재직한 직원의 급여 마감액이다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "04_사용자접수.pdf",
+        "format": "pdf",
+        "title": "권세온 카드 정산 접수 범위",
+        "note": "카드 본인 확인과 청구 항목 분리를 요청했다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "scope_note",
+          "employee_age"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "credit_card_deduction",
+      "tax_base",
+      "computed_tax"
+    ]
+  },
+  {
+    "case_id": "A274",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "같은 치과의 치료 임플란트와 미용 미백의 의료비 구분",
+    "instruction": "가상초승달기계의 가상송온아가 치과 영수증 두 장을 냈습니다. 치료 목적 확인 자료에 따라 의료비 공제액을 계산하고 별도 개인 연금계좌 공제액과 최종 국세도 안내해 주세요.",
+    "work_goal": "의료기관명이 같아도 치료 목적이 다른 두 치과 수납을 따로 판정한다.",
+    "design_rationale": "영수증 발행 기관이 치과라는 사실만으로 모든 지출을 의료비에 넣지 않는다. 기능 회복 치료와 미용 시술을 구분하는 원자료가 공제 결과를 바꾼다.",
+    "exceptions": [
+      "미용 목적 치아 미백은 의료비 공제에서 제외한다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상송온아",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족은 신청하지 않았다. 치료와 미용 목적은 진료기관 확인 자료에 명시됐다. 두 수납은 본인 부담이며 보전금이 없다. 의료비 특별공제를 신청했고 연금계좌 납입은 자비 납입이다.",
+      "annual_gross": 57600000,
+      "non_taxable": 2400000,
+      "employee_age": 37,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "pension_accounts": {
+        "pension_savings": 2100000,
+        "irp": 1000000
+      },
+      "medical": [
+        {
+          "person_id": "self",
+          "date": "2025-04-17",
+          "amount": 2700000,
+          "kind": "ordinary",
+          "treatment_purpose": "therapeutic",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-09-08",
+          "amount": 850000,
+          "kind": "ordinary",
+          "treatment_purpose": "cosmetic",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_치료수납.pdf",
+        "format": "pdf",
+        "title": "기능 회복 임플란트 진료 확인",
+        "note": "의학적 기능 회복을 위한 치료이며 미용 시술이 아니다.",
+        "fields": [
+          "medical.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_미백수납.xlsx",
+        "format": "xlsx",
+        "title": "미용 미백 시술 결제 확인",
+        "note": "별도 미용 목적 미백 시술 비용이다.",
+        "fields": [
+          "medical.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_개인연금.hwpx",
+        "format": "hwpx",
+        "title": "송온아 개인 연금계좌 납입",
+        "note": "의료비와 별도로 본인이 낸 연금저축 및 IRP 금액이다.",
+        "fields": [
+          "pension_accounts"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "04_급여기초.xlsx",
+        "format": "xlsx",
+        "title": "초승달기계 급여 및 재직 기록",
+        "note": "총지급과 비과세를 구분해 마감했다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "05_신청범위.pdf",
+        "format": "pdf",
+        "title": "치과 의료비 접수와 직원 확인",
+        "note": "두 수납의 목적을 따로 읽어 특별공제를 신청했다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "scope_note",
+          "employee_age"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "medical_credit",
+      "pension_account_credit",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A275",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "입사 뒤 추가 납부한 봄학기 등록금의 지급일 정산",
+    "instruction": "가상달맞이건재의 가상이채온은 3월 1일 처음 취업했고 아들의 봄학기 등록금을 입사 전 선납과 입사 후 추가 납부로 나눠 냈습니다. 학기 이름 대신 실제 지급일을 재직 기간과 맞춰 교육비 세액공제액을 계산해 주세요. 가을학기 납부도 반영하고 국세 결정세액과 이미 원천징수한 국세의 정산 차액을 회신해 주세요. 환급은 음수로 적습니다.",
+    "work_goal": "같은 봄학기에 귀속된 두 등록금 지급을 실제 납부일로 나눠 중도 입사자의 교육비 신청을 마감한다.",
+    "design_rationale": "봄학기 수업은 취업 이후에도 계속되지만 입사 전 선납분이 자동으로 재직 중 지출이 되는 것은 아니다. 반대로 봄학기 추가 청구분을 입사 후에 냈으므로 그 금액을 앞선 선납과 함께 제외하면 안 된다. 직원에게 정상 배정된 한 학생의 실제 지급일이 판단 기준이다.",
+    "exceptions": [
+      "같은 봄학기 등록금 중 최초 취업 전 선납분과 취업 후 추가 납부가 함께 제출됐다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상이채온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자로 2025년 3월 1일이 최초 취업일이며 그 전 근로소득과 다른 직장 재직은 없다. 연말 스무 살 무소득 아들을 실제 부양하고 기본공제를 본인에게 배정했다. 봄학기 선납과 추가 청구 및 가을학기 수업료를 직원이 직접 냈다. 봄학기 추가 납부는 기존 선납의 중복 증명이나 연체이자가 아닌 적격 수업료 추가액이다. 장학금과 회사 지원은 없다. 교육비 특별공제를 신청했고 다른 공제와 감면 및 이월은 없다.",
+      "annual_gross": 38400000,
+      "non_taxable": 2400000,
+      "employee_age": 49,
+      "marital_status": "married",
+      "employment_start": "2025-03-01",
+      "employment_end": "2025-12-31",
+      "paid_national_tax": 850000,
+      "dependents": [
+        {
+          "person_id": "son",
+          "relation": "child",
+          "age": 20,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "education": [
+        {
+          "person_id": "son",
+          "date": "2025-02-24",
+          "amount": 6200000,
+          "level": "university",
+          "institution_type": "university",
+          "paid_by_self": true,
+          "course_note": "2025년 봄학기 등록금 선납"
+        },
+        {
+          "person_id": "son",
+          "date": "2025-04-10",
+          "amount": 1300000,
+          "level": "university",
+          "institution_type": "university",
+          "paid_by_self": true,
+          "course_note": "동일 봄학기 확정 추가 수업료의 실제 납부"
+        },
+        {
+          "person_id": "son",
+          "date": "2025-08-20",
+          "amount": 5400000,
+          "level": "university",
+          "institution_type": "university",
+          "paid_by_self": true,
+          "course_note": "2025년 가을학기 등록금 납부"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_첫취업확인.hwpx",
+        "format": "hwpx",
+        "title": "이채온 최초 취업일과 신청 전제",
+        "note": "3월 1일 전에 다른 근로소득이나 재직이 없었다. 봄학기라는 명칭과 재직 기간은 구분한다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end",
+          "marital_status"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_봄학기선납.pdf",
+        "format": "pdf",
+        "title": "취업 전 봄학기 등록금 선납증명",
+        "note": "봄학기 수업료를 2월 24일 실제 납부한 자료다. 강의가 재직 중까지 이어져도 납부일을 바꾸지 않는다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_봄학기추가청구.xlsx",
+        "format": "xlsx",
+        "title": "같은 봄학기의 추가 수업료 실제 납부",
+        "note": "학교가 별도로 확정한 적격 추가 수업료를 4월 10일 냈다. 최초 선납의 재발급이나 장학금 정산이 아니다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "04_가을학기.pdf",
+        "format": "pdf",
+        "title": "아들 가을학기 등록금 직원 납부",
+        "note": "같은 학생의 재직 중 가을학기 납부액이다.",
+        "fields": [
+          "education.2"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "05_학생배정.hwpx",
+        "format": "hwpx",
+        "title": "아들 학생 식별과 가족 신청 배정",
+        "note": "세 납부증명의 학생은 모두 동일한 무소득 아들이며 직원에게 공제를 배정했다.",
+        "fields": [
+          "dependents"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "06_급여원천징수.xlsx",
+        "format": "xlsx",
+        "title": "달맞이건재 귀속 급여와 국세 원천징수",
+        "note": "확정 급여와 이미 낸 국세를 교육비 판단 뒤 결정세액 및 국세 정산에 사용한다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "paid_national_tax"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "education_credit",
+      "final_national_tax",
+      "settlement_national_tax"
+    ]
+  },
+  {
+    "case_id": "A276",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "두 장애 학생의 학부 수업료와 적격 특수교육 한도 구분",
+    "instruction": "가상연못조명의 가상안노을이 장애인 성년 자녀의 대학 등록금과 장애인 배우자의 적격 특수교육 납입증명을 제출했습니다. 두 사람의 장애 증명과 교육기관 유형을 연결해 교육비 세액공제액을 계산해 주세요. 본인을 포함한 기본공제 합계와 두 가족의 장애인 추가공제 합계도 각각 알려 주세요.",
+    "work_goal": "장애 증명이 공통인 두 가족에게 교육기관 유형별로 다른 교육비 한도를 적용한다.",
+    "design_rationale": "한 사람은 일반 대학 학부생이고 다른 사람은 적격 장애인 특수교육기관 수강생이다. 두 사람 모두 장애인이지만 일반 학부 등록금에 특수교육의 무한도를 적용할 수 없다. 학생 식별기호를 따로 유지해 가족 공제의 장애인 요건과 교육비의 기관별 한도를 연결한다.",
+    "exceptions": [
+      "장애인 성년 자녀의 일반 대학 등록금을 특수교육비처럼 전액 공제 대상으로 신청했다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상안노을",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 연중 무소득 배우자와 스물일곱 살 무소득 자녀를 실제 부양하며 두 사람의 공제를 본인에게 배정했다. 두 가족은 모두 연말 유효한 세법상 장애인 증명을 냈다. 자녀는 일반 대학 학부에 재학 중이고 배우자는 소득세법상 적격 장애인 특수교육기관에 다닌다. 성인 배우자의 기관은 18세 미만 아동만 적용되는 발달재활서비스 제공기관이 아니다. 두 교육비는 직원이 전액 부담했고 장학금과 회사 지원이 없다. 교육비 특별공제를 신청했으며 자료 밖 공제와 감면 및 이월은 없다.",
+      "annual_gross": 84200000,
+      "non_taxable": 2400000,
+      "employee_age": 53,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "adult_child",
+          "relation": "child",
+          "age": 27,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": true
+        },
+        {
+          "person_id": "spouse",
+          "relation": "spouse",
+          "age": 51,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": true
+        }
+      ],
+      "education": [
+        {
+          "person_id": "adult_child",
+          "date": "2025-08-29",
+          "amount": 12400000,
+          "level": "university",
+          "institution_type": "university",
+          "paid_by_self": true,
+          "course_note": "장애 학생이 납부한 일반 대학 학부 정규 수업료"
+        },
+        {
+          "person_id": "spouse",
+          "date": "2025-12-08",
+          "amount": 11200000,
+          "level": "special_disabled",
+          "institution_type": "qualified_special_education",
+          "paid_by_self": true,
+          "course_note": "성인 배우자의 적격 장애인 특수교육기관 납입"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_가족장애등록.hwpx",
+        "format": "hwpx",
+        "title": "안노을 두 가족의 관계 및 장애 증명 등록",
+        "note": "무소득 자녀는 성년이지만 세법상 장애인이다. 배우자 장애 증명과 학생 식별기호는 따로 등록한다.",
+        "fields": [
+          "dependents",
+          "marital_status"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_자녀학부납입.pdf",
+        "format": "pdf",
+        "title": "장애인 자녀 일반 학부 연간 수업료",
+        "note": "장애인 학생의 납입이지만 대학은 일반 학부 기관이다. 특수교육기관의 납입증명으로 발급한 자료가 아니다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_배우자특수교육.pdf",
+        "format": "pdf",
+        "title": "배우자 적격 특수교육기관 납입증명",
+        "note": "성인 배우자에게 적용되는 적격 특수교육기관 증명이다. 자녀 대학 자료와 다른 사람의 비용이다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "04_급여.xlsx",
+        "format": "xlsx",
+        "title": "연못조명 연간 급여 마감",
+        "note": "확정 지급액에서 비과세를 분리한다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "05_교육비접수.hwpx",
+        "format": "hwpx",
+        "title": "안노을 가족 교육비 한도 검토 접수",
+        "note": "자녀 대학비를 전액 인정해 달라는 신청을 교육기관 유형과 맞춰 검토한다. 가족 장애인 공제와 교육비 한도는 각각 등록한다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "basic_deduction",
+      "additional_deduction",
+      "education_credit"
+    ]
+  },
+  {
+    "case_id": "A277",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "생활비 지원 없는 독립 부모의 자동 수집 자료 확인",
+    "instruction": "가상비둘기측기의 가상노유안이 자동 수집된 아버지 보험과 병원 자료를 가져왔습니다. 실제 부양 확인서를 읽어 가족 공제 인원과 두 지출의 공제액을 계산하고 직원 본인 카드 공제는 별도로 유지해 주세요.",
+    "work_goal": "자료 제공 동의와 실제 부양을 구별해 독립 생계 부모의 신청 자료를 판단한다.",
+    "design_rationale": "아버지는 나이와 소득 조건은 맞지만 직원이 실제 부양하지 않는다. 자료가 조회된 사실만으로 가족 지출을 자동 포함하지 않는다.",
+    "exceptions": [
+      "직원이 실제 부양하지 않는 독립 생계 아버지의 신청 지출과 가족 기본공제를 제외한다."
+    ],
+    "facts": {
+      "employee_name": "가상노유안",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자다. 아버지는 소득금액 요건 안에 있으나 별도 주거에서 자신의 자산으로 독립 생계를 유지한다. 직원의 생활비 지원이나 실제 부양은 없었다. 아버지 자료가 자동 수집돼 특별공제로 신청됐으며 본인 일반 카드 사용도 있다.",
+      "annual_gross": 55400000,
+      "non_taxable": 2400000,
+      "employee_age": 43,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "father",
+          "relation": "parent",
+          "age": 75,
+          "income_amount": 700000,
+          "supported": false,
+          "assigned_claimant": "self"
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "father",
+          "date": "2025-05-20",
+          "amount": 690000,
+          "kind": "general",
+          "paid_by_self": true
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "father",
+          "date": "2025-07-17",
+          "amount": 4100000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        }
+      ],
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-16",
+          "amount": 15300000,
+          "category": "debit",
+          "payment_method": "debit"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_실제부양확인.hwpx",
+        "format": "hwpx",
+        "title": "아버지 독립 생계 및 부양 확인",
+        "note": "아버지가 독립 생계를 유지하며 직원의 실제 부양은 없었다.",
+        "fields": [
+          "dependents",
+          "scope_note"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_자동수집부모자료.pdf",
+        "format": "pdf",
+        "title": "자동 수집된 아버지 보험 및 병원 자료",
+        "note": "조회된 지출의 존재는 부양 사실을 증명하지 않는다.",
+        "fields": [
+          "insurance",
+          "medical"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_본인카드.xlsx",
+        "format": "xlsx",
+        "title": "노유안 본인 일반 카드 소비",
+        "note": "부모 소비를 포함하지 않는 직원 본인 사용액이다.",
+        "fields": [
+          "cards"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_연간직원자료.pdf",
+        "format": "pdf",
+        "title": "비둘기측기 급여와 재직 기록",
+        "note": "자동 수집 자료도 직원이 특별공제로 신청한 접수 상태다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "insurance_credit",
+      "medical_credit",
+      "credit_card_deduction"
+    ]
+  },
+  {
+    "case_id": "A278",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "단기 근로 배우자의 오백만 원 초과 급여와 의료비 신청",
+    "instruction": "가상보름달와이어의 가상한도율 배우자 자료를 다시 확인해 주세요. 배우자는 근로소득만 있지만 총급여가 오백만 원을 넘었습니다. 가족 기본공제와 배우자 보험 및 치료비 공제액을 각각 계산해 회신해 주세요.",
+    "work_goal": "배우자의 근로소득 총급여 예외 한도와 실제 소득금액을 확인해 가족 및 의료비를 구분한다.",
+    "design_rationale": "근로소득만 있다는 문구만으로 가족 소득 요건을 충족한다고 단정하지 않는다. 배우자 총급여와 그에 맞는 소득금액을 제시하고 의료비의 소득 제한 예외를 별도로 판단한다.",
+    "exceptions": [
+      "배우자의 근로소득 총급여가 오백만 원을 초과하고 소득금액도 백만 원을 넘어 가족 및 보험 공제가 제외된다."
+    ],
+    "facts": {
+      "employee_name": "가상한도율",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 배우자를 실제 부양하며 신청 배정은 본인으로 확정했다. 배우자에게 근로소득 외 소득은 없고 총급여 550만원에 대응하는 근로소득금액은 180만원이다. 직원이 보험과 치료비를 부담했고 보전금은 없으며 특별공제를 신청했다.",
+      "annual_gross": 60400000,
+      "non_taxable": 2400000,
+      "employee_age": 42,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "spouse",
+          "relation": "spouse",
+          "age": 40,
+          "income_amount": 1800000,
+          "earned_income_only": true,
+          "gross_salary": 5500000,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "spouse",
+          "date": "2025-06-15",
+          "amount": 900000,
+          "kind": "general",
+          "paid_by_self": true
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "spouse",
+          "date": "2025-10-12",
+          "amount": 3800000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_배우자소득.xlsx",
+        "format": "xlsx",
+        "title": "배우자 단기 근로소득 확인",
+        "note": "배우자 총급여와 그에 맞는 소득금액을 모두 확정했다.",
+        "fields": [
+          "dependents.0.income_amount",
+          "dependents.0.earned_income_only",
+          "dependents.0.gross_salary"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_부양배정.hwpx",
+        "format": "hwpx",
+        "title": "배우자 관계와 공제 배정",
+        "note": "실제 부양과 직원 본인 신청 배정을 확인했다.",
+        "fields": [
+          "dependents.0.person_id",
+          "dependents.0.relation",
+          "dependents.0.age",
+          "dependents.0.supported",
+          "dependents.0.assigned_claimant",
+          "marital_status"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_배우자보험.pdf",
+        "format": "pdf",
+        "title": "직원이 낸 배우자 보장성보험",
+        "note": "배우자 피보험자의 일반보험을 직원이 부담했다.",
+        "fields": [
+          "insurance"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_배우자치료.xlsx",
+        "format": "xlsx",
+        "title": "배우자 수술비 직원 부담액",
+        "note": "보전받지 않은 치료비의 실제 직원 부담액이다.",
+        "fields": [
+          "medical"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_직원급여.pdf",
+        "format": "pdf",
+        "title": "보름달와이어 연간 급여 기초",
+        "note": "배우자 급여가 아닌 직원의 연간 근로소득이다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "reference_year"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_신청확정.hwpx",
+        "format": "hwpx",
+        "title": "한도율 가족 지출 신청 확정",
+        "note": "가족과 보험 및 치료비를 한 신청에서 접수했다.",
+        "fields": [
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "insurance_credit",
+      "medical_credit"
+    ]
+  },
+  {
+    "case_id": "A279",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "회사가 직접 낸 첫 학기와 직원이 낸 둘째 학기 수업료 구분",
+    "instruction": "가상잔디벤치의 가상심온유 대학원 수업료를 접수해 주세요. 첫 학기는 회사가 학교에 직접 냈고 둘째 학기는 직원이 부담했습니다. 본인 교육비 공제와 국세 결정세액 및 원천징수 정산액을 작성해 주세요.",
+    "work_goal": "교육기관 납부 증명에서 회사 직접 부담과 직원 실제 부담을 학기별로 나눈다.",
+    "design_rationale": "증명서에 학생 이름이 직원으로 같아도 납부자가 다르다. 직원 부담이 없는 학기 금액을 본인 교육비에 포함하지 않는 회계 접수 업무다.",
+    "exceptions": [
+      "회사가 직접 부담한 첫 학기 수업료는 직원 실제 부담 교육비에서 제외한다."
+    ],
+    "facts": {
+      "employee_name": "가상심온유",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족은 신청하지 않았다. 첫 학기 회사 직접 납부액은 직원 부담이나 과세 급여 전환액이 아니며 환수하지 않았다. 둘째 학기는 직원 자비로 낸 본인 정규 대학원비이고 장학금은 없다. 특별공제를 신청했다.",
+      "annual_gross": 78600000,
+      "non_taxable": 2400000,
+      "employee_age": 35,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "paid_national_tax": 6120000,
+      "education": [
+        {
+          "person_id": "self",
+          "date": "2025-02-21",
+          "amount": 4600000,
+          "level": "graduate",
+          "paid_by_self": false
+        },
+        {
+          "person_id": "self",
+          "date": "2025-08-23",
+          "amount": 4800000,
+          "level": "graduate",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_회사납부.pdf",
+        "format": "pdf",
+        "title": "대학원 첫 학기 회사 직접 납부",
+        "note": "회사가 학교에 직접 지급했으며 직원 부담은 없다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_본인납부.xlsx",
+        "format": "xlsx",
+        "title": "대학원 둘째 학기 직원 납부",
+        "note": "직원이 직접 낸 둘째 학기 수업료다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_급여원천징수.xlsx",
+        "format": "xlsx",
+        "title": "잔디벤치 급여 및 국세 납부 누계",
+        "note": "회사 부담 수업료는 이 자료의 직원 과세 급여에 포함되지 않았다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "paid_national_tax"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_본인신청.hwpx",
+        "format": "hwpx",
+        "title": "심온유 교육비 신청 범위",
+        "note": "본인 정규 대학원 수업료의 실제 부담만 특별공제로 신청한다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "education_credit",
+      "final_national_tax",
+      "settlement_national_tax"
+    ]
+  },
+  {
+    "case_id": "A280",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "넓은 임차 주택의 기준시가까지 확인한 월세 접수",
+    "instruction": "가상은빛목재의 가상변라온이 큰 면적의 임차 주택 월세를 신청했습니다. 전용면적 자료와 주택 기준시가 자료를 함께 읽고 월세 공제액을 확정한 뒤 일반 보험 공제 및 표준공제 입력값을 적어 주세요.",
+    "work_goal": "전용면적 기준을 넘는 임차 주택의 대체 기준시가 요건까지 확인한다.",
+    "design_rationale": "면적이 크더라도 기준시가로 요건을 충족할 수 있으므로 두 자료를 함께 보아야 한다. 이번 자료는 대체 가격 기준도 넘어 실제 부적격 판정이 필요하다.",
+    "exceptions": [
+      "임차 전용면적과 기준시가가 각각 허용 기준을 모두 초과해 월세 주택 요건을 충족하지 않는다."
+    ],
+    "facts": {
+      "employee_name": "가상변라온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자인 무주택 세대주다. 직원 본인 임대계약과 주민등록 주소는 일치하고 월세는 본인 부담이다. 임차 주택의 공시 기준시가를 별도로 확인했다. 본인 일반보험과 월세 특별공제를 신청했다.",
+      "annual_gross": 66200000,
+      "non_taxable": 2400000,
+      "employee_age": 45,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "rent": {
+        "homeless_household": true,
+        "household_head": true,
+        "head_claims_housing": false,
+        "address_matches": true,
+        "eligible_contract_holder": true,
+        "area_sqm": 101,
+        "standard_value": 423000000,
+        "payments": [
+          {
+            "date": "2025-12-28",
+            "amount": 9000000
+          }
+        ]
+      },
+      "insurance": [
+        {
+          "person_id": "self",
+          "date": "2025-07-07",
+          "amount": 710000,
+          "kind": "general",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_임차계약.pdf",
+        "format": "pdf",
+        "title": "큰 면적 임차 계약 및 주소 확인",
+        "note": "본인 계약과 주소 일치 및 임차 전용면적을 확인했다.",
+        "fields": [
+          "rent.address_matches",
+          "rent.eligible_contract_holder",
+          "rent.area_sqm"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_주택기준시가.hwpx",
+        "format": "hwpx",
+        "title": "임차 주택 기준시가 및 세대 확인",
+        "note": "기준시가는 매매 희망가가 아닌 해당 주택의 확인된 공시 기준시가다.",
+        "fields": [
+          "rent.standard_value",
+          "rent.homeless_household",
+          "rent.household_head",
+          "rent.head_claims_housing"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_납부보험.xlsx",
+        "format": "xlsx",
+        "title": "월세 실제 납부 및 일반보험 수납",
+        "note": "월세와 보험료는 직원의 실제 부담 납부액이다.",
+        "fields": [
+          "rent.payments",
+          "insurance"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_정산기초.pdf",
+        "format": "pdf",
+        "title": "은빛목재 신청과 연간 급여",
+        "note": "부적격 월세 신청도 포함해 특별공제를 접수했다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "rent_credit",
+      "insurance_credit",
+      "standard_credit"
+    ]
+  },
+  {
+    "case_id": "A281",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "문화비 적용 급여 기준을 넘긴 두 결제수단의 사용액 정리",
+    "instruction": "가상물결센서의 가상공시후 카드 자료를 마감해 주세요. 문화비 제공업체 결제라도 총급여 기준을 확인해 신용 결제와 직불 결제를 각각 재분류하고 교통 사용액과 함께 카드 공제 및 과세표준을 계산해 주세요.",
+    "work_goal": "문화비 기준을 넘는 고액 총급여에서 문화 소비를 원래 결제수단으로 되돌린다.",
+    "design_rationale": "문화 업체 표시만으로 모든 금액을 같은 공제율에 넣으면 안 된다. 같은 소비 유형이어도 신용과 직불이라는 원자료 결제수단의 차이가 공제 결과에 남는다.",
+    "exceptions": [
+      "총급여가 칠천만 원을 초과하므로 문화비 우대 분류 대신 원래 결제수단을 적용한다."
+    ],
+    "facts": {
+      "employee_name": "가상공시후",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족과 특별공제 신청은 없다. 본인 재직 기간 사용액만 있으며 소비 항목 간 중복은 없다. 문화 업체 소비는 적격 업체 결제지만 직원 급여 기준에 따른 재분류가 필요하다.",
+      "annual_gross": 75600000,
+      "non_taxable": 2400000,
+      "employee_age": 40,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-04",
+          "amount": 16400000,
+          "category": "credit",
+          "payment_method": "credit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-05",
+          "amount": 4200000,
+          "category": "culture",
+          "payment_method": "credit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-06",
+          "amount": 5100000,
+          "category": "culture",
+          "payment_method": "debit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-07",
+          "amount": 1600000,
+          "category": "transit",
+          "payment_method": "debit"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_일반교통소비.xlsx",
+        "format": "xlsx",
+        "title": "일반 신용 및 대중교통 사용",
+        "note": "문화 소비를 제외한 일반 신용과 적격 대중교통 사용이다.",
+        "fields": [
+          "cards.0",
+          "cards.3"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_문화신용.pdf",
+        "format": "pdf",
+        "title": "문화 제공업체 신용카드 결제",
+        "note": "원래 결제수단은 신용카드다.",
+        "fields": [
+          "cards.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_문화직불.hwpx",
+        "format": "hwpx",
+        "title": "문화 제공업체 직불카드 결제",
+        "note": "원래 결제수단은 직불카드이며 신용 결제 건과 별도다.",
+        "fields": [
+          "cards.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_급여사용자.xlsx",
+        "format": "xlsx",
+        "title": "물결센서 직원과 연간 급여 확정",
+        "note": "비과세를 제외한 총급여로 문화비 기준을 판단한다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "credit_card_deduction",
+      "tax_base"
+    ]
+  },
+  {
+    "case_id": "A282",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "장애인 전용 상품의 피보험자 증명을 실제 자녀 자격과 대조",
+    "instruction": "가상담쟁이렌즈의 가상문세율이 자녀 보험 두 상품을 냈습니다. 전용 상품의 이름과 실제 피보험자 장애 확인을 대조해 보험 세액공제를 계산하고 자녀 기본공제 인원도 적어 주세요.",
+    "work_goal": "장애인 전용 상품이라고 적힌 보험료와 실제 피보험자 자격을 연결해 공제율을 판단한다.",
+    "design_rationale": "자녀는 기본공제 가능한 나이와 소득 상태지만 장애인 증명은 없다. 전용 상품명만으로 장애인 전용보험 공제를 적용하지 않고 일반 상품은 별도 유지한다.",
+    "exceptions": [
+      "장애인 증명이 없는 자녀의 전용 상품 보험료에는 장애인 전용보험 공제를 적용하지 않는다."
+    ],
+    "facts": {
+      "employee_name": "가상문세율",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 무소득 열아홉 살 자녀를 실제 부양하고 본인에게 공제를 배정했다. 피보험자 자녀는 세법상 장애인에 해당하지 않는 것으로 확인됐다. 두 상품 보험료는 직원 부담이고 보험 특별공제를 신청했다. 장애인전용 보험 증명은 일반 보장성보험 증명으로 전환되지 않으며 별도로 일반 보장성보험이라고 증명한 납입만 일반 공제 대상이다.",
+      "annual_gross": 68800000,
+      "non_taxable": 2400000,
+      "employee_age": 47,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "child",
+          "relation": "child",
+          "age": 19,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": false
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "child",
+          "date": "2025-03-20",
+          "amount": 780000,
+          "kind": "general",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "child",
+          "date": "2025-10-20",
+          "amount": 880000,
+          "kind": "disabled",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_자녀자격.hwpx",
+        "format": "hwpx",
+        "title": "문세율 자녀 가족 및 장애 자격 확인",
+        "note": "가족 요건은 충족하지만 자녀는 세법상 장애인이 아니다.",
+        "fields": [
+          "dependents",
+          "marital_status"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_일반보험.pdf",
+        "format": "pdf",
+        "title": "자녀 일반 보장성보험 납부",
+        "note": "일반 상품의 근로자 부담 보험료다. 장애인전용 상품 증명은 일반 보장성보험 납입으로 전환하지 않는다.",
+        "fields": [
+          "insurance.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_전용상품.xlsx",
+        "format": "xlsx",
+        "title": "자녀 전용 상품 표시 보험료",
+        "note": "상품 구분은 장애인 전용이지만 실제 피보험자 증명은 별도 확인한다. 장애인전용 상품 증명은 일반 보장성보험 납입으로 전환하지 않는다.",
+        "fields": [
+          "insurance.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "04_급여접수.pdf",
+        "format": "pdf",
+        "title": "담쟁이렌즈 보험 신청과 급여",
+        "note": "두 보험상품을 함께 특별공제로 신청했다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "additional_deduction",
+      "insurance_credit"
+    ]
+  },
+  {
+    "case_id": "A283",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "어머니 공제의 최종 형제 배정을 치료와 기부에 연결",
+    "instruction": "가상노을테이프의 가상서우린 어머니 자료를 정리해 주세요. 가족 최종 배정 확인서에 따라 어머니 기본공제와 의료비 및 공익기부를 계산하고 직원 본인 치료비는 남겨 정산해 주세요.",
+    "work_goal": "실제 부양한 어머니의 최종 공제 배정을 가족 지출의 신청자와 연결한다.",
+    "design_rationale": "직원이 돈을 낸 사실과 가족 공제의 최종 배정은 별도 자료다. 어머니가 형제로 확정 배정된 상태라면 직원 본인 진료와 부모 지출을 분리해야 한다.",
+    "exceptions": [
+      "어머니 관련 공제는 최종적으로 다른 형제에게 배정돼 직원의 가족 신청에서 제외한다."
+    ],
+    "facts": {
+      "employee_name": "가상서우린",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자다. 무소득 어머니를 실제 지원했으나 가족 합의에서 어머니 관련 공제를 직원의 형에게 최종 배정했다. 본인과 어머니 진료 및 기부는 각각 실제 납부했고 보전이나 이월은 없다. 직원이 제출 자료의 특별공제를 신청했다.",
+      "annual_gross": 48200000,
+      "non_taxable": 2400000,
+      "employee_age": 38,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "mother",
+          "relation": "parent",
+          "age": 72,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "other"
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "mother",
+          "date": "2025-05-04",
+          "amount": 5200000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-09-24",
+          "amount": 2100000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        }
+      ],
+      "donations": [
+        {
+          "person_id": "mother",
+          "date": "2025-11-28",
+          "amount": 1200000,
+          "kind": "public",
+          "eligible_organization": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_형제최종합의.hwpx",
+        "format": "hwpx",
+        "title": "어머니 공제 최종 가족 합의",
+        "note": "어머니 공제의 최종 신청자는 직원의 형이다.",
+        "fields": [
+          "dependents",
+          "scope_note"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_어머니치료.pdf",
+        "format": "pdf",
+        "title": "어머니 입원 치료비 납부",
+        "note": "직원이 납부했으나 최종 가족 공제 배정을 함께 확인해야 한다.",
+        "fields": [
+          "medical.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_직원치료.xlsx",
+        "format": "xlsx",
+        "title": "서우린 본인 치료비 납부",
+        "note": "본인 지출은 어머니 가족 배정과 구분한다.",
+        "fields": [
+          "medical.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_어머니기부.pdf",
+        "format": "pdf",
+        "title": "어머니 명의 적격 공익기부",
+        "note": "명의자는 어머니이며 반환 없는 당해 적격 기부다.",
+        "fields": [
+          "donations"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "05_급여접수.xlsx",
+        "format": "xlsx",
+        "title": "노을테이프 연간 급여와 신청 접수",
+        "note": "부모 배정 확인 후 본인 정산을 확정한다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "medical_credit",
+      "donation_credit"
+    ]
+  },
+  {
+    "case_id": "A284",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "퇴직 전후 진료비와 연말 구호 기부의 서로 다른 기간 마감",
+    "instruction": "가상하늘톱날의 가상양리안은 9월 말 퇴직한 뒤 치료와 기부를 했습니다. 진료 납부 날짜를 재직 기록과 맞춰 의료비 공제를 계산하고 퇴직 뒤 낸 특례기부의 공제액 및 국세 결정세액을 안내해 주세요.",
+    "work_goal": "퇴직한 직원의 의료비 기간과 연간 기부 자료의 기간 적용을 구분한다.",
+    "design_rationale": "모든 퇴직 후 납부를 일괄 제외하면 연간 기부를 빠뜨리고 모든 연간 자료를 포함하면 의료비를 과다 반영한다. 날짜가 기재된 세 영수증을 종류별로 처리한다.",
+    "exceptions": [
+      "재직 종료 뒤 본인 치료비 납부는 의료비 근로기간 범위에서 제외한다."
+    ],
+    "facts": {
+      "employee_name": "가상양리안",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자가 9월 30일 퇴직했다. 가족은 신청하지 않았다. 두 치료비는 직원 본인이 낸 일반 치료비로 보전이 없고 구호 기부는 본인 당해 적격 특례기부다. 의료비와 기부 특별공제를 신청했다.",
+      "annual_gross": 45200000,
+      "non_taxable": 1800000,
+      "employee_age": 46,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-09-30",
+      "medical": [
+        {
+          "person_id": "self",
+          "date": "2025-09-30",
+          "amount": 2600000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-10-01",
+          "amount": 1500000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        }
+      ],
+      "donations": [
+        {
+          "person_id": "self",
+          "date": "2025-12-03",
+          "amount": 1900000,
+          "kind": "statutory",
+          "eligible_organization": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_퇴직등록.hwpx",
+        "format": "hwpx",
+        "title": "양리안 퇴직일 및 신청 확인",
+        "note": "재직 종료일은 9월 30일이며 뒤 날짜에 새 근로는 없다.",
+        "fields": [
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_퇴직일치료.pdf",
+        "format": "pdf",
+        "title": "재직 마지막 날 치료비 납부",
+        "note": "9월 30일 직원이 실제 낸 일반 치료비다.",
+        "fields": [
+          "medical.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_퇴직후치료.xlsx",
+        "format": "xlsx",
+        "title": "퇴직 다음 날 치료비 납부",
+        "note": "10월 1일 별도로 수납된 본인 일반 치료비다.",
+        "fields": [
+          "medical.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_연말구호기부.pdf",
+        "format": "pdf",
+        "title": "12월 구호 특례기부 납부",
+        "note": "연간 기부의 적법한 본인 수납액이며 이월이 없다.",
+        "fields": [
+          "donations"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_급여마감.xlsx",
+        "format": "xlsx",
+        "title": "하늘톱날 퇴직 연도 급여 확정",
+        "note": "퇴직 때 확정한 연간 지급 및 비과세 금액이다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "medical_credit",
+      "donation_credit",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A285",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "대출 증명 접수 뒤 철회한 특별 신청과 표준 선택 확정",
+    "instruction": "가상빗살설계의 가상태루온은 주택이자 증명을 제출한 후 최종 신청서를 표준공제로 바꿨습니다. 최종 선택에 맞춰 주택이자 공제와 표준공제 적용액을 적고 정치후원 공제 및 과세표준을 계산해 주세요.",
+    "work_goal": "첨부된 주택이자 증명보다 최종 공제 선택 신청을 우선해 정산을 확정한다.",
+    "design_rationale": "적격 대출 증명이 자료에 남아 있지만 최종 특별공제 신청은 철회됐다. 표준 방식에서 유지되는 본인 정치후원 공제와 함께 실제 적용액을 회신한다.",
+    "exceptions": [
+      "최종 표준 선택으로 적격 주택이자 특별소득공제를 적용하지 않는다."
+    ],
+    "facts": {
+      "employee_name": "가상태루온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족은 신청하지 않았다. 대출은 본인 1주택 적격 장기대출이고 연중 재직 중 이자를 냈다. 최종 신청서에서 대출 특별공제 신청을 철회하고 표준공제를 선택했다. 정치후원은 본인 적법한 기부로 이월이 없다.",
+      "annual_gross": 98200000,
+      "non_taxable": 2400000,
+      "employee_age": 51,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "deduction_choice": "standard",
+      "special_deductions_requested": false,
+      "housing_mortgage": {
+        "requirements_met": true,
+        "borrowed_date": "2023-03-11",
+        "term_years": 15,
+        "fixed_rate": false,
+        "non_deferred": false,
+        "interest_paid": 7300000
+      },
+      "donations": [
+        {
+          "person_id": "self",
+          "date": "2025-11-21",
+          "amount": 260000,
+          "kind": "political",
+          "eligible_organization": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_최종신청.hwpx",
+        "format": "hwpx",
+        "title": "태루온 최종 표준 선택 신청",
+        "note": "이 신청이 이전 특별공제 신청을 대체하며 표준 방식으로 확정했다.",
+        "fields": [
+          "deduction_choice",
+          "special_deductions_requested",
+          "scope_note"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_기존대출증명.pdf",
+        "format": "pdf",
+        "title": "이미 접수된 적격 장기대출 증명",
+        "note": "첨부 증명은 남아 있지만 최종 적용 여부는 변경 신청서에 따른다.",
+        "fields": [
+          "housing_mortgage"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_정치후원.xlsx",
+        "format": "xlsx",
+        "title": "태루온 본인 정치후원 수납",
+        "note": "정치후원은 대출 이자와 다른 본인 기부 항목이다.",
+        "fields": [
+          "donations"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_급여확정.pdf",
+        "format": "pdf",
+        "title": "빗살설계 연간 급여와 재직",
+        "note": "최종 신청 방식으로 과세표준을 다시 계산한다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "housing_income_deduction",
+      "standard_credit",
+      "political_credit",
+      "tax_base"
+    ]
+  },
+  {
+    "case_id": "A286",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "같은 세대 고령 형의 학부와 대학원 납부를 교육비에서 구분",
+    "instruction": "가상소나기인쇄판의 가상곽은솔이 함께 사는 형의 학부와 대학원 납부 자료를 냈습니다. 형의 가족 기본공제를 확인하고 교육 단계별로 신청 가능액을 나누어 교육비 공제와 과세표준을 알려 주세요.",
+    "work_goal": "동일 세대 고령 무소득 형의 기본공제와 대학원 교육비 제한을 별도로 확인한다.",
+    "design_rationale": "고령 형은 실제 같은 세대 부양으로 기본공제 나이를 충족한다. 가족 학부 수업료와 가족 대학원비의 자격은 다르므로 학생이 같은 사람이어도 단순 합산하지 않는다.",
+    "exceptions": [
+      "직원 본인이 아닌 형의 대학원 납부액은 가족 교육비 공제에서 제외한다."
+    ],
+    "facts": {
+      "employee_name": "가상곽은솔",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자와 무소득 형은 2025년 내내 주민등록상 같은 세대로 실제 동거했고 직원이 형을 부양했다. 형 공제를 본인에게 확정 배정했다. 직원이 형의 학부 졸업 학기와 대학원 입학 학기 수업료를 직접 냈으며 장학금은 없다. 교육비 특별공제를 신청했다.",
+      "annual_gross": 68600000,
+      "non_taxable": 2400000,
+      "employee_age": 55,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "brother",
+          "relation": "sibling",
+          "age": 61,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "education": [
+        {
+          "person_id": "brother",
+          "date": "2025-02-12",
+          "amount": 3500000,
+          "level": "university",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "brother",
+          "date": "2025-08-12",
+          "amount": 4900000,
+          "level": "graduate",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_세대부양.hwpx",
+        "format": "hwpx",
+        "title": "곽은솔과 형의 동일 세대 및 부양",
+        "note": "형은 연중 실제 동거하는 같은 세대의 무소득 부양가족이다.",
+        "fields": [
+          "dependents",
+          "scope_note"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_학부졸업.pdf",
+        "format": "pdf",
+        "title": "형의 학부 졸업 학기 수업료",
+        "note": "첫 납부는 학부 과정 수업료다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_대학원입학.xlsx",
+        "format": "xlsx",
+        "title": "형의 대학원 입학 학기 수업료",
+        "note": "두 번째 납부는 형의 대학원 과정이다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_급여.xlsx",
+        "format": "xlsx",
+        "title": "소나기인쇄판 급여 확정",
+        "note": "비과세를 제외하기 전 총지급과 비과세 금액이다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "reference_year"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_직원접수.pdf",
+        "format": "pdf",
+        "title": "형 학비를 제출한 직원 접수 기록",
+        "note": "학부와 대학원 납부 자료를 같이 특별공제로 신청했다.",
+        "fields": [
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "education_credit",
+      "tax_base"
+    ]
+  },
+  {
+    "case_id": "A287",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "짧은 재직의 대출 이자와 기관 지정이 끝난 기부를 함께 마감",
+    "instruction": "가상바다유리의 가상박연후는 3월부터 10월까지만 근무했습니다. 대출 이자는 납부일별로 재직 기간을 대조하고 공익기부는 단체 지정 자료와 연결해 주세요. 주택이자 소득공제와 기부 및 연금계좌 세액공제를 계산해 국세 정산액을 전표에 적으면 됩니다.",
+    "work_goal": "근로기간을 쓰는 대출 이자와 기관 유효기간을 쓰는 기부 자료를 각각 맞춰 퇴직 정산한다.",
+    "design_rationale": "은행 거래표와 기부 영수증의 날짜가 서로 다른 법적 판정에 쓰인다. 연금계좌는 연간 자비 납입을 사용해 세 자료를 한 가지 날짜 필터로 처리하는 오류를 막는다.",
+    "exceptions": [
+      "입사 전 및 퇴직 뒤 납부한 주택이자는 근로기간 공제에서 제외한다.",
+      "공익단체 지정 종료 뒤 기부는 적격 기관 기부로 처리하지 않는다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상박연후",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자가 3월 1일 입사해 10월 31일 퇴직했다. 본인 1주택 대출의 공통 적격 요건은 모두 확인했다. 이자와 기부는 본인 부담이며 특별공제로 신청했다. 연금계좌는 반환이나 이전 없는 당해 자비 납입이다. 기부 이월은 없고 기관 지정은 제출된 유효기간에 따른다.",
+      "annual_gross": 70200000,
+      "non_taxable": 1600000,
+      "employee_age": 49,
+      "employment_start": "2025-03-01",
+      "employment_end": "2025-10-31",
+      "paid_national_tax": 5100000,
+      "paid_local_tax": 510000,
+      "housing_mortgage": {
+        "requirements_met": true,
+        "borrowed_date": "2021-05-17",
+        "term_years": 20,
+        "fixed_rate": true,
+        "non_deferred": false,
+        "interest_payments": [
+          {
+            "date": "2025-02-28",
+            "amount": 2400000
+          },
+          {
+            "date": "2025-03-01",
+            "amount": 2300000
+          },
+          {
+            "date": "2025-10-31",
+            "amount": 3200000
+          },
+          {
+            "date": "2025-11-01",
+            "amount": 2800000
+          }
+        ]
+      },
+      "organization_designations": [
+        {
+          "organization_id": "org_wave",
+          "kind": "public",
+          "valid_from": "2024-01-01",
+          "valid_to": "2025-08-31"
+        }
+      ],
+      "donations": [
+        {
+          "person_id": "self",
+          "organization_id": "org_wave",
+          "date": "2025-08-31",
+          "amount": 1600000,
+          "kind": "public"
+        },
+        {
+          "person_id": "self",
+          "organization_id": "org_wave",
+          "date": "2025-09-01",
+          "amount": 2100000,
+          "kind": "public"
+        }
+      ],
+      "pension_accounts": {
+        "pension_savings": 2600000,
+        "irp": 1700000
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_근로기간.hwpx",
+        "format": "hwpx",
+        "title": "박연후 입사와 퇴직 및 신청 범위",
+        "note": "재직 기간은 3월 1일부터 10월 31일까지다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_급여마감.xlsx",
+        "format": "xlsx",
+        "title": "바다유리 퇴직 연도 급여 마감",
+        "note": "급여는 현재 재직 기간의 확정 연간 금액이다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_원천징수.pdf",
+        "format": "pdf",
+        "title": "퇴직 당시 기납부 국세 및 지방세",
+        "note": "세액은 이미 원천징수한 누계로 최종 결정세액과 구분한다.",
+        "fields": [
+          "paid_national_tax",
+          "paid_local_tax"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "04_대출조건.pdf",
+        "format": "pdf",
+        "title": "박연후 장기 대출 적격 및 상환 조건",
+        "note": "주택 수와 취득 및 채무자 공통 요건이 확인된 고정금리 장기대출이다.",
+        "fields": [
+          "housing_mortgage.requirements_met",
+          "housing_mortgage.borrowed_date",
+          "housing_mortgage.term_years",
+          "housing_mortgage.fixed_rate",
+          "housing_mortgage.non_deferred"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "05_입사전후이자.xlsx",
+        "format": "xlsx",
+        "title": "입사 전날과 첫날의 실제 이자 납부",
+        "note": "2월 28일과 3월 1일의 별개 이자 거래다.",
+        "fields": [
+          "housing_mortgage.interest_payments.0",
+          "housing_mortgage.interest_payments.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_퇴직전후이자.pdf",
+        "format": "pdf",
+        "title": "퇴직일과 다음 날 이자 납부",
+        "note": "10월 31일과 11월 1일의 실제 납부 날짜를 확인했다.",
+        "fields": [
+          "housing_mortgage.interest_payments.2",
+          "housing_mortgage.interest_payments.3"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "07_기관지정.hwpx",
+        "format": "hwpx",
+        "title": "물결지원단 공익단체 지정 유효기간",
+        "note": "기관 식별자 org_wave의 유효기간은 8월 31일에 끝났다.",
+        "fields": [
+          "organization_designations"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "08_기부거래.xlsx",
+        "format": "xlsx",
+        "title": "동일 기관 지정 종료 경계 기부",
+        "note": "두 납부는 같은 기관에 각각 실제 수납된 금액이다.",
+        "fields": [
+          "donations"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "09_개인연금.pdf",
+        "format": "pdf",
+        "title": "박연후 연간 개인 연금계좌 확인",
+        "note": "연간 계좌 납입액은 이자 및 기부 거래와 다른 증명이다.",
+        "fields": [
+          "pension_accounts"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "housing_income_deduction",
+      "donation_credit",
+      "pension_account_credit",
+      "settlement_national_tax"
+    ]
+  },
+  {
+    "case_id": "A288",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "이혼 후 두 자녀의 최종 배정과 미용 진료를 지급 내역에 반영",
+    "instruction": "가상창가제본의 가상류도연은 이혼 후 두 자녀 자료를 함께 냈습니다. 최종 배정이 다른 자녀의 학교 및 진료 증명을 구분하고 본인 진료의 치료 목적을 확인해 주세요. 가족 기본공제와 한부모 추가공제 및 교육비와 의료비 공제액을 마감표에 적어 주세요.",
+    "work_goal": "이혼 가정 자녀별 최종 신청자와 본인 치료 목적을 별도 확인해 가족 지출을 정산한다.",
+    "design_rationale": "두 자녀를 실제 지원했어도 최종 공제 신청자는 자녀마다 다르다. 별도 본인 치과 자료에서는 미용 목적 수납을 일반 치료와 구분해 가족 배정과 다른 종류의 예외를 확인한다.",
+    "exceptions": [
+      "첫째 자녀 관련 공제는 전 배우자에게 최종 배정돼 직원 신청에 넣지 않는다.",
+      "본인 미용 목적 진료는 의료비 공제에서 제외한다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상류도연",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 이혼 근로자가 두 무소득 자녀를 실제 지원한다. 가족 합의에서 첫째 관련 공제를 전 배우자에게 배정하고 둘째를 본인에게 배정했다. 학교 수업료와 진료비는 직원이 냈고 보전금이나 장학금은 없다. 의료기관 목적 구분을 확인하고 특별공제를 신청했다.",
+      "annual_gross": 62200000,
+      "non_taxable": 2400000,
+      "employee_age": 43,
+      "marital_status": "divorced",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "older",
+          "relation": "child",
+          "age": 15,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "other"
+        },
+        {
+          "person_id": "younger",
+          "relation": "child",
+          "age": 9,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "education": [
+        {
+          "person_id": "older",
+          "date": "2025-06-10",
+          "amount": 1800000,
+          "level": "school",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "younger",
+          "date": "2025-06-11",
+          "amount": 1300000,
+          "level": "school",
+          "paid_by_self": true
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "older",
+          "date": "2025-07-18",
+          "amount": 2900000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "younger",
+          "date": "2025-08-22",
+          "amount": 2300000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-10-07",
+          "amount": 1100000,
+          "kind": "ordinary",
+          "treatment_purpose": "therapeutic",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-11-03",
+          "amount": 900000,
+          "kind": "ordinary",
+          "treatment_purpose": "cosmetic",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_이혼후배정.hwpx",
+        "format": "hwpx",
+        "title": "두 자녀 최종 가족 공제 배정",
+        "note": "첫째는 전 배우자이고 둘째는 직원 본인의 최종 신청이다.",
+        "fields": [
+          "dependents",
+          "marital_status",
+          "scope_note"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_첫째학교.pdf",
+        "format": "pdf",
+        "title": "첫째 정규 학교 수업료",
+        "note": "직원이 부담한 학교 수업료이나 가족 최종 배정을 따로 확인한다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_둘째학교.xlsx",
+        "format": "xlsx",
+        "title": "둘째 정규 학교 수업료",
+        "note": "본인에게 배정된 둘째의 학교 납부다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_첫째치료.pdf",
+        "format": "pdf",
+        "title": "첫째 치료비 수납",
+        "note": "첫째 일반 치료비이며 보전금이 없다.",
+        "fields": [
+          "medical.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "05_둘째치료.xlsx",
+        "format": "xlsx",
+        "title": "둘째 치료비 수납",
+        "note": "둘째 일반 치료비의 직원 실제 부담액이다.",
+        "fields": [
+          "medical.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "06_직원치료.pdf",
+        "format": "pdf",
+        "title": "류도연 치료 목적 진료",
+        "note": "기능 회복을 위한 치료 목적 진료다.",
+        "fields": [
+          "medical.2"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "07_직원미용.hwpx",
+        "format": "hwpx",
+        "title": "류도연 미용 목적 진료 확인",
+        "note": "일반 진료 영수증처럼 보이지만 확인된 목적은 미용이다.",
+        "fields": [
+          "medical.3"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "08_급여마감.xlsx",
+        "format": "xlsx",
+        "title": "창가제본 연간 급여 확정",
+        "note": "연중 급여에서 비과세 지급을 별도 확인했다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_직원등록.pdf",
+        "format": "pdf",
+        "title": "류도연 재직과 본인 등록",
+        "note": "자녀와 진료 자료의 최종 특별공제 접수 기록이다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "additional_deduction",
+      "child_credit",
+      "education_credit",
+      "medical_credit"
+    ]
+  },
+  {
+    "case_id": "A289",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "단기 취업 두 자녀의 소득과 대학 장학금을 가족 신청에 연결",
+    "instruction": "가상별무늬보온재의 가상여지온 가족 정산을 처리해 주세요. 두 자녀의 근로소득 확인 자료를 각각 읽고 기본공제 및 보험을 판단한 뒤 대학생 등록금의 장학금 차감액을 적용해 주세요. 가족 공제 인원과 보험 및 교육비와 의료비 공제액을 회신해 주세요.",
+    "work_goal": "단기 취업 자녀들의 서로 다른 총급여와 학생 장학금을 사람별로 연결해 공제를 마감한다.",
+    "design_rationale": "두 자녀 모두 근로소득만 있지만 한 명은 총급여 예외 한도 이내이고 다른 한 명은 넘는다. 대학생 장학금은 별도 서류로 들어오며 차감 후 실제 부담액이 공제에 영향을 준다.",
+    "exceptions": [
+      "둘째 자녀의 총급여 및 소득금액 초과로 가족 기본공제와 보험 공제를 제외한다.",
+      "첫째 대학 등록금 총액에서 학교 장학금을 차감한다."
+    ],
+    "facts": {
+      "employee_name": "가상여지온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 두 자녀를 실제 부양하고 공제를 본인에게 배정했다. 두 자녀 모두 근로소득만 있다. 첫째 총급여 480만원의 소득금액은 144만원이고 둘째 총급여 520만원의 소득금액은 162만원이다. 등록금 총액에는 장학금이 아직 빠지지 않았으며 보험과 진료비는 직원 부담이다. 보전금은 없고 특별공제를 신청했다.",
+      "annual_gross": 76200000,
+      "non_taxable": 2400000,
+      "employee_age": 48,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "first",
+          "relation": "child",
+          "age": 20,
+          "income_amount": 1440000,
+          "earned_income_only": true,
+          "gross_salary": 4800000,
+          "supported": true,
+          "assigned_claimant": "self"
+        },
+        {
+          "person_id": "second",
+          "relation": "child",
+          "age": 18,
+          "income_amount": 1620000,
+          "earned_income_only": true,
+          "gross_salary": 5200000,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "education": [
+        {
+          "person_id": "first",
+          "date": "2025-08-11",
+          "amount": 7800000,
+          "scholarship": 1700000,
+          "level": "university",
+          "paid_by_self": true
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "first",
+          "date": "2025-05-12",
+          "amount": 620000,
+          "kind": "general",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "second",
+          "date": "2025-05-13",
+          "amount": 790000,
+          "kind": "general",
+          "paid_by_self": true
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "second",
+          "date": "2025-10-22",
+          "amount": 4100000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_가족관계배정.hwpx",
+        "format": "hwpx",
+        "title": "두 자녀 관계와 부양 및 배정 확인",
+        "note": "두 자녀를 실제 부양하며 둘 다 직원에게 신청을 배정했다.",
+        "fields": [
+          "dependents.0.person_id",
+          "dependents.0.relation",
+          "dependents.0.age",
+          "dependents.0.supported",
+          "dependents.0.assigned_claimant",
+          "dependents.1.person_id",
+          "dependents.1.relation",
+          "dependents.1.age",
+          "dependents.1.supported",
+          "dependents.1.assigned_claimant",
+          "marital_status"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_첫째소득.xlsx",
+        "format": "xlsx",
+        "title": "첫째 단기 근로 총급여와 소득금액",
+        "note": "근로소득만 있으며 총급여와 공제 후 소득금액을 함께 확정했다.",
+        "fields": [
+          "dependents.0.income_amount",
+          "dependents.0.earned_income_only",
+          "dependents.0.gross_salary"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_둘째소득.pdf",
+        "format": "pdf",
+        "title": "둘째 단기 근로 총급여와 소득금액",
+        "note": "둘째의 근로소득 외 소득은 없으나 총급여가 첫째와 다르다.",
+        "fields": [
+          "dependents.1.income_amount",
+          "dependents.1.earned_income_only",
+          "dependents.1.gross_salary"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_등록금총액.pdf",
+        "format": "pdf",
+        "title": "첫째 대학 등록금 총액",
+        "note": "장학금을 빼기 전 학부 수업료 총액이다.",
+        "fields": [
+          "education.0.person_id",
+          "education.0.date",
+          "education.0.amount",
+          "education.0.level",
+          "education.0.paid_by_self"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_장학금확정.hwpx",
+        "format": "hwpx",
+        "title": "첫째 학교 장학금 최종 확정",
+        "note": "등록금 증명의 동일 학생에게 대응하는 장학금이다.",
+        "fields": [
+          "education.0.person_id",
+          "education.0.scholarship"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_자녀보험.xlsx",
+        "format": "xlsx",
+        "title": "두 자녀 일반보험 직원 납부",
+        "note": "피보험자가 다른 두 보험료는 각각 직원이 부담했다.",
+        "fields": [
+          "insurance"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "07_둘째진료.pdf",
+        "format": "pdf",
+        "title": "둘째 일반 치료비 납부",
+        "note": "직원 부담 치료비이며 실손 보전금이 없다.",
+        "fields": [
+          "medical"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "08_급여확정.xlsx",
+        "format": "xlsx",
+        "title": "별무늬보온재 연간 지급 확정",
+        "note": "본인 급여 자료를 자녀 소득 확인과 혼동하지 않는다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_접수요약.hwpx",
+        "format": "hwpx",
+        "title": "여지온 가족 지출 정산 접수",
+        "note": "사람별 소득과 장학금 자료를 연결해 특별공제를 신청했다.",
+        "fields": [
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "insurance_credit",
+      "education_credit",
+      "medical_credit"
+    ]
+  },
+  {
+    "case_id": "A290",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "큰 주택이자와 카드 공제 합계에 관리비 및 미용 수납을 분리",
+    "instruction": "가상송림축판의 가상황루온 정산을 마감해 주세요. 본인 1주택 대장과 장기대출 조건을 연결하고 카드의 관리비 및 진료의 미용 수납을 구분해 주세요. 주택이자와 카드 소득공제 및 합계 제한 초과액을 적고 의료비 공제와 최종 국세를 계산해 주세요.",
+    "work_goal": "큰 주택 및 카드 소득공제의 합계 한도를 적용하기 전에 원자료 제외 항목을 구분한다.",
+    "design_rationale": "큰 공제 금액만 합산하는 문제가 아니라 세대 주택 대장과 카드 청구 항목 및 진료 목적을 먼저 확인해야 한다. 원자료 정리 결과가 개별 공제액과 합계 초과액에 각각 드러난다.",
+    "exceptions": [
+      "관리비 카드 자동납부는 카드 소득공제 사용액에서 제외한다.",
+      "미용 목적 수납은 의료비 공제에 넣지 않는다.",
+      "카드와 주택이자 소득공제 합계가 종합 한도를 넘는 부분을 과세표준에 되돌린다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상황루온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족은 신청하지 않았다. 세대 전원 보유 주택은 본인 한 채이고 대출의 주택 수 외 공통 요건은 확인했다. 카드 항목은 중복 없는 본인 소비다. 의료비 목적은 기관 확인이며 보전금이 없고 본인 부담이다. 주택이자와 의료비 특별공제를 신청했다.",
+      "annual_gross": 70600000,
+      "non_taxable": 2400000,
+      "employee_age": 50,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "housing_mortgage": {
+        "other_common_requirements_attested": true,
+        "borrowed_date": "2020-10-10",
+        "term_years": 30,
+        "fixed_rate": true,
+        "non_deferred": true,
+        "interest_paid": 21500000,
+        "household_homes_at_year_end": [
+          {
+            "home_id": "pine_home",
+            "address": "가상시 송림로 20",
+            "owner_person_id": "self"
+          }
+        ]
+      },
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-13",
+          "amount": 24700000,
+          "category": "debit",
+          "payment_method": "debit",
+          "billed_item": "ordinary_goods_services"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-14",
+          "amount": 8000000,
+          "category": "market",
+          "payment_method": "credit",
+          "billed_item": "ordinary_goods_services"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-15",
+          "amount": 3000000,
+          "category": "debit",
+          "payment_method": "debit",
+          "billed_item": "apartment_management_fee"
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "self",
+          "date": "2025-05-14",
+          "amount": 3100000,
+          "kind": "ordinary",
+          "treatment_purpose": "therapeutic",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-10-18",
+          "amount": 1400000,
+          "kind": "ordinary",
+          "treatment_purpose": "cosmetic",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_세대주택.hwpx",
+        "format": "hwpx",
+        "title": "황루온 세대의 연말 보유 주택",
+        "note": "세대 전원의 보유 주택을 누락 없이 확인했으며 본인 한 채다.",
+        "fields": [
+          "housing_mortgage.household_homes_at_year_end",
+          "housing_mortgage.other_common_requirements_attested"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_대출조건.pdf",
+        "format": "pdf",
+        "title": "고정금리 비거치 장기대출 이자 확인",
+        "note": "연중 재직 중 본인이 실제 낸 이자와 대출 조건이다.",
+        "fields": [
+          "housing_mortgage.borrowed_date",
+          "housing_mortgage.term_years",
+          "housing_mortgage.fixed_rate",
+          "housing_mortgage.non_deferred",
+          "housing_mortgage.interest_paid"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_일반직불.xlsx",
+        "format": "xlsx",
+        "title": "황루온 일반 직불 사용 누계",
+        "note": "시장 소비 및 관리비를 제외한 본인 일반 소비다.",
+        "fields": [
+          "cards.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_시장소비.pdf",
+        "format": "pdf",
+        "title": "적격 전통시장 실제 사용액",
+        "note": "공제 대상 전통시장 사용이며 다른 카드 누계와 겹치지 않는다.",
+        "fields": [
+          "cards.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "05_관리비.xlsx",
+        "format": "xlsx",
+        "title": "아파트 관리비 직불 자동납부",
+        "note": "일반 상품 구입이 아닌 관리비 청구 항목이다.",
+        "fields": [
+          "cards.2"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_치료수납.pdf",
+        "format": "pdf",
+        "title": "본인 치료 목적 진료 수납",
+        "note": "진료기관이 치료 목적임을 확인했다.",
+        "fields": [
+          "medical.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "07_미용수납.hwpx",
+        "format": "hwpx",
+        "title": "본인 미용 목적 수납 확인",
+        "note": "별도 미용 시술이며 치료 수납과 구분한다.",
+        "fields": [
+          "medical.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "08_급여.xlsx",
+        "format": "xlsx",
+        "title": "송림축판 연간 급여 기초",
+        "note": "총급여 및 카드 최저사용액의 기준이 되는 급여다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_신청접수.pdf",
+        "format": "pdf",
+        "title": "황루온 재직 및 특별공제 신청",
+        "note": "주택과 진료 신청의 근로기간 및 본인 부담을 확인했다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "housing_income_deduction",
+      "credit_card_deduction",
+      "income_deduction_limit_excess",
+      "medical_credit",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A291",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "기관 지정과 배우자 최종 배정을 큰 일반 기부 순서에 맞춰 정산",
+    "instruction": "가상물수리도금의 가상윤하겸이 여러 일반 기부 종류를 한꺼번에 신청했습니다. 배우자의 최종 공제 배정을 확인하고 기관 지정 유효기간을 영수증 날짜와 맞춰 주세요. 일반 기부 세액공제와 가족 공제 인원 및 공적연금 공제를 계산한 뒤 국세 정산액을 회신해 주세요.",
+    "work_goal": "일반 기부의 가족 최종 배정과 기관 자격을 먼저 구분한 뒤 종류별 소득 한도를 순서대로 적용한다.",
+    "design_rationale": "배우자를 실제 부양했어도 최종 신청을 배우자의 다른 직장으로 배정했다. 기관의 지정 시작일 전후 수납과 큰 특례 및 종교 기부를 함께 읽어 명의 및 유효기간을 다르게 확인한다.",
+    "exceptions": [
+      "배우자 명의 기부는 최종 공제 배정을 배우자 본인에게 확정해 직원 신청에 넣지 않는다.",
+      "지정 유효기간 밖 공익기부 영수증은 적격 기부에서 제외한다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상윤하겸",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 배우자를 실제 지원한다. 배우자의 소득금액은 90만원으로 가족 소득 범위 안이지만 배우자 관련 공제는 배우자가 자기 직장의 연말정산에서 신청하기로 최종 배정했다. 모든 기부는 당해 실제 수납이며 반환과 이월은 없다. 일반 기부 특별공제를 신청했고 기관 자격은 제출된 지정 유효기간에 따른다.",
+      "annual_gross": 87600000,
+      "non_taxable": 2400000,
+      "employee_age": 46,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "spouse",
+          "relation": "spouse",
+          "age": 44,
+          "income_amount": 900000,
+          "supported": true,
+          "assigned_claimant": "other"
+        }
+      ],
+      "organization_designations": [
+        {
+          "organization_id": "org_rescue",
+          "kind": "statutory",
+          "valid_from": "2024-01-01",
+          "valid_to": "2026-12-31"
+        },
+        {
+          "organization_id": "org_field",
+          "kind": "public",
+          "valid_from": "2025-05-01",
+          "valid_to": "2026-12-31"
+        },
+        {
+          "organization_id": "org_chapel",
+          "kind": "religious",
+          "valid_from": "2024-01-01",
+          "valid_to": "2026-12-31"
+        }
+      ],
+      "donations": [
+        {
+          "person_id": "self",
+          "organization_id": "org_rescue",
+          "date": "2025-06-02",
+          "amount": 22500000,
+          "kind": "statutory"
+        },
+        {
+          "person_id": "self",
+          "organization_id": "org_field",
+          "date": "2025-04-30",
+          "amount": 3400000,
+          "kind": "public"
+        },
+        {
+          "person_id": "spouse",
+          "organization_id": "org_field",
+          "date": "2025-05-01",
+          "amount": 5900000,
+          "kind": "public"
+        },
+        {
+          "person_id": "self",
+          "organization_id": "org_chapel",
+          "date": "2025-11-23",
+          "amount": 9800000,
+          "kind": "religious"
+        }
+      ],
+      "public_pension_paid": 2931200,
+      "paid_national_tax": 6500000,
+      "pension_accounts": {
+        "pension_savings": 2800000,
+        "irp": 1400000
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_명의배정.hwpx",
+        "format": "hwpx",
+        "title": "윤하겸과 배우자 명의 및 배정 확인",
+        "note": "배우자의 관련 공제는 배우자 본인 직장의 신청으로 최종 배정했다.",
+        "fields": [
+          "dependents",
+          "marital_status",
+          "scope_note"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_공적연금.pdf",
+        "format": "pdf",
+        "title": "윤하겸 본인 공적연금 납부",
+        "note": "급여에서 실제 부담한 공적연금으로 개인 연금계좌와 다르다.",
+        "fields": [
+          "public_pension_paid"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_국세원천징수.xlsx",
+        "format": "xlsx",
+        "title": "연간 국세 원천징수 납부 누계",
+        "note": "최종 국세가 아니라 이미 원천징수한 누계다.",
+        "fields": [
+          "paid_national_tax"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_개인연금.pdf",
+        "format": "pdf",
+        "title": "본인 개인 연금저축과 IRP 납입",
+        "note": "공적연금과 별도로 납입한 본인 자비 연금계좌다.",
+        "fields": [
+          "pension_accounts"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "05_기관지정.hwpx",
+        "format": "hwpx",
+        "title": "세 일반 기부기관 지정 등록부",
+        "note": "기관 번호별 기부 종류와 유효기간을 별도로 기록했다.",
+        "fields": [
+          "organization_designations"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "06_구호특례.xlsx",
+        "format": "xlsx",
+        "title": "큰 구호 특례기부 실제 수납",
+        "note": "기관 번호 org_rescue에 대한 본인 기부다.",
+        "fields": [
+          "donations.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "07_공익경계기부.pdf",
+        "format": "pdf",
+        "title": "들판재단 지정 시작 전후 기부",
+        "note": "동일 기관 org_field의 시작 전날과 시작일 납부지만 기부 명의는 다르다.",
+        "fields": [
+          "donations.1",
+          "donations.2"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "08_종교기부.xlsx",
+        "format": "xlsx",
+        "title": "본인 종교단체 기부 수납",
+        "note": "유효 지정된 종교단체의 당해 본인 기부다.",
+        "fields": [
+          "donations.3"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_급여접수.pdf",
+        "format": "pdf",
+        "title": "물수리도금 급여와 기부 신청 접수",
+        "note": "당해 소득 한도로 처리하며 이월 기부는 없다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "pension_deduction",
+      "donation_credit",
+      "pension_account_credit",
+      "settlement_national_tax"
+    ]
+  },
+  {
+    "case_id": "A292",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "세대주 주택 신청과 중도 입사 월세 및 직접 낸 수업료 마감",
+    "instruction": "가상여름음향의 가상정라후 월세 접수를 처리해 주세요. 세대주 주택 공제 신청 확인과 주민등록 주소를 대조하고 월세 날짜 및 본인 대학원비의 납부 주체를 확인해 주세요. 월세와 교육비 및 의료비 세액공제를 적고 최종 국세를 알려 주세요.",
+    "work_goal": "세대원의 월세 중복 신청 여부와 근로기간 및 학교 비용의 납부 주체를 교차 확인한다.",
+    "design_rationale": "주소는 정규화 뒤 일치하지만 월세의 다른 요건이 막힌다. 세대주 신청을 확인하고도 교육비에서 회사 부담 학기를 본인 납부로 오인하지 않아야 하는 접수 마감이다.",
+    "exceptions": [
+      "세대주가 주택 공제를 신청해 세대원 직원의 월세 공제를 적용하지 않는다.",
+      "입사 전 월세 납부는 근로기간 신청 범위 밖이다.",
+      "회사가 직접 낸 본인 대학원 학기는 직원 실제 부담 교육비에 넣지 않는다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상정라후",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자가 4월 1일 입사했다. 무주택 세대원이며 세대주가 적법한 주택 관련 공제를 신청했다고 확인했다. 직원 본인 계약이고 주택 면적 및 기준시가는 적격이다. 첫 학기 수업료는 회사가 직접 부담했고 직원 급여나 환수금이 아니며 둘째 학기는 자비다. 본인 치료비에 보전금은 없고 특별공제를 신청했다.",
+      "annual_gross": 56600000,
+      "non_taxable": 1800000,
+      "employee_age": 32,
+      "employment_start": "2025-04-01",
+      "employment_end": "2025-12-31",
+      "rent": {
+        "homeless_household": true,
+        "household_head": false,
+        "head_claims_housing": true,
+        "contract_address": "가상시 여름로 11 ５１０호",
+        "resident_registration_address": "가상시 여름로11 510호",
+        "eligible_contract_holder": true,
+        "area_sqm": 51,
+        "standard_value": 282000000,
+        "payments": [
+          {
+            "date": "2025-03-31",
+            "amount": 1800000
+          },
+          {
+            "date": "2025-12-31",
+            "amount": 5400000
+          }
+        ]
+      },
+      "education": [
+        {
+          "person_id": "self",
+          "date": "2025-04-18",
+          "amount": 3900000,
+          "level": "graduate",
+          "paid_by_self": false
+        },
+        {
+          "person_id": "self",
+          "date": "2025-08-18",
+          "amount": 4100000,
+          "level": "graduate",
+          "paid_by_self": true
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "self",
+          "date": "2025-11-11",
+          "amount": 2500000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_세대주신청.hwpx",
+        "format": "hwpx",
+        "title": "세대주 주택 공제 신청 확인",
+        "note": "직원은 세대원이며 세대주의 주택 공제 신청은 확정돼 있다.",
+        "fields": [
+          "rent.homeless_household",
+          "rent.household_head",
+          "rent.head_claims_housing",
+          "scope_note"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_임대계약.pdf",
+        "format": "pdf",
+        "title": "여름로 임대계약의 주소와 주택",
+        "note": "계약서 동호수에 전각 숫자를 사용했다.",
+        "fields": [
+          "rent.contract_address",
+          "rent.eligible_contract_holder",
+          "rent.area_sqm",
+          "rent.standard_value"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_전입기록.hwpx",
+        "format": "hwpx",
+        "title": "직원 주민등록 주소 기록",
+        "note": "공백 표시가 계약서와 다르지만 실제 호수는 510호다.",
+        "fields": [
+          "rent.resident_registration_address"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_월세거래.xlsx",
+        "format": "xlsx",
+        "title": "입사 전 및 재직 중 월세 납부",
+        "note": "두 금액은 서로 겹치지 않는 실제 월세 납부 합계다.",
+        "fields": [
+          "rent.payments"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_회사수업료.pdf",
+        "format": "pdf",
+        "title": "회사 직접 부담 대학원 수업료",
+        "note": "직원이 부담하지 않았고 과세 급여로 바뀌지 않았다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_본인수업료.xlsx",
+        "format": "xlsx",
+        "title": "둘째 학기 직원 자비 수업료",
+        "note": "정규 대학원 수업료를 직원이 직접 납부했다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "07_직원치료.pdf",
+        "format": "pdf",
+        "title": "정라후 본인 치료비 수납",
+        "note": "재직 중 본인 일반 치료비의 실제 부담액이다.",
+        "fields": [
+          "medical"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "08_급여확정.xlsx",
+        "format": "xlsx",
+        "title": "여름음향 입사 연도 급여",
+        "note": "총지급액과 비과세 금액이 구분돼 있다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_재직접수.hwpx",
+        "format": "hwpx",
+        "title": "정라후 재직과 특별공제 접수",
+        "note": "입사일과 정산 신청자 정보를 기록했다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "rent_credit",
+      "education_credit",
+      "medical_credit",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A293",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "소득 있는 장애인 부모의 특수교육과 학부 및 보험 신청 분리",
+    "instruction": "가상햇살도금의 가상천이온이 어머니의 재활 특수교육과 일반 학부 수업료 및 보험 자료를 냈습니다. 어머니 소득과 장애 증명을 확인하고 교육기관 유형을 연결해 주세요. 가족 공제 인원과 교육비 및 보험 및 의료비 공제액을 회신해 주세요.",
+    "work_goal": "장애인 부모의 소득 제한 예외가 있는 특수교육을 일반 부모 학비와 보험에서 분리한다.",
+    "design_rationale": "장애 증명만으로 모든 부모 지출이 적격이 되지 않는다. 부모의 일반 학부와 높은 소득을 확인하면서 특수교육 및 치료비의 별도 요건을 유지해야 한다.",
+    "exceptions": [
+      "어머니 소득금액이 가족 소득 한도를 넘어 기본공제와 보험 공제를 적용하지 않는다.",
+      "직계존속의 일반 학부 수업료는 교육비 공제에 넣지 않는다.",
+      "미용 목적 진료는 장애인 증명이 있어도 의료비 공제에 넣지 않는다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상천이온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자가 같은 세대의 어머니를 실제 부양하며 신청 배정은 본인이다. 어머니는 세법상 장애인이고 종합소득금액 230만원이 있다. 적격 특수교육기관을 별도 확인했다. 모든 지출은 직원 부담이며 치료 보전금과 장학금은 없다. 특별공제를 신청했다.",
+      "annual_gross": 78200000,
+      "non_taxable": 2400000,
+      "employee_age": 50,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "mother",
+          "relation": "parent",
+          "age": 74,
+          "income_amount": 2300000,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": true
+        }
+      ],
+      "education": [
+        {
+          "person_id": "mother",
+          "date": "2025-05-14",
+          "amount": 5900000,
+          "level": "special_disabled",
+          "institution_type": "qualified_special_education",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "mother",
+          "date": "2025-08-15",
+          "amount": 3700000,
+          "level": "university",
+          "institution_type": "university",
+          "paid_by_self": true
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "mother",
+          "date": "2025-03-23",
+          "amount": 910000,
+          "kind": "disabled",
+          "paid_by_self": true
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "mother",
+          "date": "2025-09-19",
+          "amount": 4300000,
+          "kind": "ordinary",
+          "treatment_purpose": "therapeutic",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "mother",
+          "date": "2025-10-04",
+          "amount": 1600000,
+          "kind": "ordinary",
+          "treatment_purpose": "cosmetic",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_가족장애.hwpx",
+        "format": "hwpx",
+        "title": "어머니 장애 및 실제 부양 확인",
+        "note": "같은 세대 어머니의 장애인 증명과 직원 신청 배정을 확인했다.",
+        "fields": [
+          "dependents.0.person_id",
+          "dependents.0.relation",
+          "dependents.0.age",
+          "dependents.0.supported",
+          "dependents.0.assigned_claimant",
+          "dependents.0.disabled",
+          "scope_note"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_어머니소득.xlsx",
+        "format": "xlsx",
+        "title": "어머니 종합소득금액 확인",
+        "note": "금액은 수입금액이 아니라 2025년 확인된 소득금액이다.",
+        "fields": [
+          "dependents.0.income_amount"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_특수교육.pdf",
+        "format": "pdf",
+        "title": "적격 재활 특수교육기관 수납",
+        "note": "장애인 특수교육 공제 대상 기관의 직원 부담 납부다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_일반학부.xlsx",
+        "format": "xlsx",
+        "title": "어머니 일반 대학 학부 수업료",
+        "note": "특수교육 과정이 아닌 일반 학부 수업료다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "05_전용보험.pdf",
+        "format": "pdf",
+        "title": "어머니 장애인 전용보험 납부",
+        "note": "피보험자는 어머니이며 보험료는 직원이 냈다.",
+        "fields": [
+          "insurance"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_치료확인.hwpx",
+        "format": "hwpx",
+        "title": "어머니 치료 목적 진료 수납",
+        "note": "의료기관에서 치료 목적을 확인한 실제 부담 수납이다.",
+        "fields": [
+          "medical.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "07_미용확인.pdf",
+        "format": "pdf",
+        "title": "어머니 미용 목적 진료 수납",
+        "note": "별도 미용 목적 시술로 확인됐다.",
+        "fields": [
+          "medical.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "08_급여.xlsx",
+        "format": "xlsx",
+        "title": "햇살도금 급여와 비과세 확정",
+        "note": "직원의 연간 급여 기준 자료다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_직원접수.pdf",
+        "format": "pdf",
+        "title": "천이온 특별공제 접수 기록",
+        "note": "어머니 자료의 예외 요건을 종류별로 확인한다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "education_credit",
+      "insurance_credit",
+      "medical_credit"
+    ]
+  },
+  {
+    "case_id": "A294",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "같은 세대 장애인 동생의 학비와 형제 카드 및 회사 부담비 정리",
+    "instruction": "가상돌담축의 가상임소온은 장애인 동생과 함께 삽니다. 동생의 가족 요건과 교육 및 전용보험을 확인하고 형제 카드 사용은 본인 카드와 구분해 주세요. 직원 대학원비 중 회사 직접 부담액도 나누어 가족 공제와 교육비 및 보험과 카드 공제액을 적어 주세요.",
+    "work_goal": "동일 세대 장애인 동생의 가족 혜택과 형제 카드 제한 및 직원 비용의 회사 부담을 분리한다.",
+    "design_rationale": "장애인 동생은 성년이어도 인적공제 나이 예외를 적용할 수 있다. 이 자격이 형제 카드 사용 제한을 바꾸지 않으며 직원 명의 학교 비용도 실제 납부 주체를 다시 읽는다.",
+    "exceptions": [
+      "성년 장애인 동생은 나이 제한 예외로 기본공제에 포함한다.",
+      "형제자매 카드 사용액은 직원의 카드 공제에서 제외한다.",
+      "회사가 직접 부담한 직원 수업료는 직원 교육비에 포함하지 않는다."
+    ],
+    "facts": {
+      "employee_name": "가상임소온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자와 무소득 장애인 동생은 연중 주민등록상 같은 세대로 실제 동거했으며 직원이 부양한다. 동생 신청은 본인으로 확정했다. 동생 학부와 전용보험은 직원 자비다. 본인 대학원 첫 학기는 회사 직접 부담으로 과세 급여나 환수금이 아니고 둘째 학기는 자비다. 특별공제를 신청했다.",
+      "annual_gross": 63400000,
+      "non_taxable": 2400000,
+      "employee_age": 32,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "sibling",
+          "relation": "sibling",
+          "age": 23,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": true
+        }
+      ],
+      "education": [
+        {
+          "person_id": "sibling",
+          "date": "2025-02-17",
+          "amount": 5400000,
+          "level": "university",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-03-03",
+          "amount": 3600000,
+          "level": "graduate",
+          "paid_by_self": false
+        },
+        {
+          "person_id": "self",
+          "date": "2025-09-03",
+          "amount": 3900000,
+          "level": "graduate",
+          "paid_by_self": true
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "sibling",
+          "date": "2025-05-27",
+          "amount": 970000,
+          "kind": "disabled",
+          "paid_by_self": true
+        }
+      ],
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-08",
+          "amount": 17600000,
+          "category": "debit",
+          "payment_method": "debit"
+        },
+        {
+          "person_id": "sibling",
+          "date": "2025-12-09",
+          "amount": 4100000,
+          "category": "debit",
+          "payment_method": "debit"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_동거장애확인.hwpx",
+        "format": "hwpx",
+        "title": "임소온과 장애인 동생의 동일 세대",
+        "note": "연중 실제 동거한 같은 세대의 무소득 장애인 동생을 직원이 부양한다.",
+        "fields": [
+          "dependents",
+          "scope_note"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_동생학부.pdf",
+        "format": "pdf",
+        "title": "동생 학부 수업료 직원 납부",
+        "note": "동생 학부 수업료를 직원이 실제 부담했다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_회사대학원.xlsx",
+        "format": "xlsx",
+        "title": "본인 대학원 회사 직접 납부",
+        "note": "직원 부담이 없으며 회사가 학교에 직접 지급했다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_본인대학원.pdf",
+        "format": "pdf",
+        "title": "본인 대학원 자비 납부",
+        "note": "둘째 학기는 직원 본인이 직접 냈다.",
+        "fields": [
+          "education.2"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_동생보험.hwpx",
+        "format": "hwpx",
+        "title": "동생 장애인 전용 보장성보험",
+        "note": "전용 상품 및 실제 피보험자의 장애 요건을 모두 확인했다.",
+        "fields": [
+          "insurance"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_직원카드.xlsx",
+        "format": "xlsx",
+        "title": "임소온 본인 직불 사용액",
+        "note": "동생의 카드 사용을 포함하지 않은 본인 소비 누계다.",
+        "fields": [
+          "cards.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "07_동생카드.pdf",
+        "format": "pdf",
+        "title": "동생 명의 카드 사용 누계",
+        "note": "장애인 동생 자신의 카드 명의로 지출했다.",
+        "fields": [
+          "cards.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "08_연간급여.xlsx",
+        "format": "xlsx",
+        "title": "돌담축 급여와 비과세 확정",
+        "note": "연간 총지급과 비과세를 분리해 확정했다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_직원등록.pdf",
+        "format": "pdf",
+        "title": "임소온 재직과 신청자 등록",
+        "note": "가족 학비와 보험 및 본인 학비를 특별공제로 신청했다.",
+        "fields": [
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "additional_deduction",
+      "education_credit",
+      "insurance_credit",
+      "credit_card_deduction"
+    ]
+  },
+  {
+    "case_id": "A295",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "한 출산의 두 조리원과 두 사람 안경 및 실손 보전을 연간 합산",
+    "instruction": "가상아침별직물의 가상고윤아 의료비 정산을 처리해 주세요. 같은 출산 사건의 두 조리원 수납과 본인 및 배우자 안경을 사람별로 묶고 실손보험 지급을 병원 수납에서 차감해 주세요. 의료비 세액공제와 올해 출생 자녀 공제 및 국세 결정세액을 적어 주세요.",
+    "work_goal": "출산 사건별 한도와 사람별 안경 한도 및 치료비 보전금을 다른 식별자로 연결한다.",
+    "design_rationale": "조리원은 장소가 달라도 같은 출산 사건이고 안경은 구매일이 달라도 같은 사람의 연간 한도다. 실손 지급은 해당 병원 수납에만 연결해 각 제한의 대상이 서로 다름을 확인한다.",
+    "exceptions": [
+      "같은 출산 사건의 두 조리원 납부액에는 사건별 한도를 한 번만 적용한다.",
+      "본인 안경 두 구매는 개인별 연간 한도를 함께 사용한다.",
+      "병원 수납에서 실손 보전액을 빼고 실제 부담액을 계산한다."
+    ],
+    "facts": {
+      "employee_name": "가상고윤아",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 무소득 배우자와 올해 둘째로 태어난 신생아를 부양하며 신청은 본인이다. 두 조리원은 같은 출산 사건이다. 모든 안경은 시력교정용으로 확인됐고 직원이 지출을 부담했다. 실손 보전은 표시된 본인 병원 수납에만 대응한다. 의료비 특별공제를 신청했다.",
+      "annual_gross": 55400000,
+      "non_taxable": 2400000,
+      "employee_age": 36,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "spouse",
+          "relation": "spouse",
+          "age": 35,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        },
+        {
+          "person_id": "newborn",
+          "relation": "child",
+          "age": 0,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "birth_order_this_year": 2
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "spouse",
+          "date": "2025-05-20",
+          "amount": 1700000,
+          "kind": "postpartum",
+          "birth_event": "birth_second",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "spouse",
+          "date": "2025-05-30",
+          "amount": 1200000,
+          "kind": "postpartum",
+          "birth_event": "birth_second",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-02-13",
+          "amount": 310000,
+          "kind": "glasses",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-10-13",
+          "amount": 330000,
+          "kind": "glasses",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "spouse",
+          "date": "2025-07-15",
+          "amount": 420000,
+          "kind": "glasses",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-08-11",
+          "amount": 3100000,
+          "reimbursed": 900000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_출산가족.hwpx",
+        "format": "hwpx",
+        "title": "고윤아 부양가족과 둘째 출생 확인",
+        "note": "올해 둘째 출생 사건과 배우자 및 신생아 배정을 확인했다.",
+        "fields": [
+          "dependents",
+          "marital_status",
+          "scope_note"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_첫조리원.pdf",
+        "format": "pdf",
+        "title": "첫 조리원 실제 수납 확인",
+        "note": "출산 사건 birth_second에 대응하는 첫 수납이다.",
+        "fields": [
+          "medical.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_옮긴조리원.xlsx",
+        "format": "xlsx",
+        "title": "같은 출산의 둘째 조리원 수납",
+        "note": "옮긴 조리원이지만 동일한 birth_second 출산 사건이다.",
+        "fields": [
+          "medical.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_본인첫안경.pdf",
+        "format": "pdf",
+        "title": "고윤아 2월 시력교정 안경",
+        "note": "본인 시력교정용 안경의 첫 구매다.",
+        "fields": [
+          "medical.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "05_본인둘째안경.hwpx",
+        "format": "hwpx",
+        "title": "고윤아 10월 시력교정 안경",
+        "note": "동일 직원의 연간 두 번째 안경 구매다.",
+        "fields": [
+          "medical.3"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_배우자안경.xlsx",
+        "format": "xlsx",
+        "title": "배우자 시력교정 안경 수납",
+        "note": "본인 안경과 다른 사람인 배우자의 구매다.",
+        "fields": [
+          "medical.4"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "07_병원보전.pdf",
+        "format": "pdf",
+        "title": "본인 병원 수납과 대응 실손보험",
+        "note": "이 수납의 보전액은 90만원이며 다른 영수증에 대응하지 않는다.",
+        "fields": [
+          "medical.5"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "08_급여확정.xlsx",
+        "format": "xlsx",
+        "title": "아침별직물 연간 급여 자료",
+        "note": "의료비 최저사용액 기준의 급여를 확정했다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_직원접수.pdf",
+        "format": "pdf",
+        "title": "고윤아 재직 및 의료비 신청",
+        "note": "사람과 출산 사건 및 병원 수납을 각각 연결하는 특별공제 신청이다.",
+        "fields": [
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "medical_credit",
+      "child_credit",
+      "final_national_tax"
+    ]
+  },
+  {
+    "case_id": "A296",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "고액 급여 문화비와 다른 신청자 부모 카드 및 학원 납부 정리",
+    "instruction": "가상수달합판의 가상배라원 카드와 자녀 학비를 마감해 주세요. 총급여에 따라 문화 소비의 결제수단을 적용하고 어머니 최종 배정과 학교 및 학원 기관 유형을 각각 확인해 주세요. 카드와 교육비 공제 및 가족 기본공제 인원을 회신해 주세요.",
+    "work_goal": "소비 분류의 급여 기준과 부모 배정 및 자녀 교육기관 유형을 별도로 확인한다.",
+    "design_rationale": "카드 제공 자료에 부모와 문화 업체 표시가 함께 들어 있어 한 가지 이유로 모든 소비를 제외하기 쉽다. 자녀 교육 자료는 카드와 다른 기관 유형 판단을 요청한다.",
+    "exceptions": [
+      "고액 총급여 때문에 문화비를 원래 신용 결제수단으로 재분류한다.",
+      "어머니 관련 공제는 다른 자녀에게 최종 배정돼 직원 카드 사용액에 합산하지 않는다.",
+      "취학 자녀의 사설학원 납부는 교육비 공제에서 제외한다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상배라원",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 어머니와 자녀를 실제 지원했다. 어머니 공제를 직원의 누나에게 최종 배정했고 무소득 자녀 공제는 본인이다. 문화 소비는 적격 업체 결제이나 급여 기준을 확인해야 한다. 학교 수업료는 적격이고 학원은 취학 후 사설학원이다. 학비는 직원 부담이며 특별공제를 신청했다.",
+      "annual_gross": 81400000,
+      "non_taxable": 2400000,
+      "employee_age": 44,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "mother",
+          "relation": "parent",
+          "age": 70,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "other"
+        },
+        {
+          "person_id": "child",
+          "relation": "child",
+          "age": 12,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-01",
+          "amount": 18100000,
+          "category": "credit",
+          "payment_method": "credit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-02",
+          "amount": 5700000,
+          "category": "culture",
+          "payment_method": "credit"
+        },
+        {
+          "person_id": "mother",
+          "date": "2025-12-03",
+          "amount": 4300000,
+          "category": "debit",
+          "payment_method": "debit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-04",
+          "amount": 6100000,
+          "category": "debit",
+          "payment_method": "debit"
+        }
+      ],
+      "education": [
+        {
+          "person_id": "child",
+          "date": "2025-05-10",
+          "amount": 2200000,
+          "level": "school",
+          "institution_type": "primary_secondary_school",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "child",
+          "date": "2025-09-10",
+          "amount": 1700000,
+          "level": "school",
+          "institution_type": "private_academy",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_가족최종배정.hwpx",
+        "format": "hwpx",
+        "title": "배라원 부모와 자녀의 최종 공제 배정",
+        "note": "어머니는 누나에게 배정했고 자녀는 직원 본인에게 배정했다.",
+        "fields": [
+          "dependents",
+          "marital_status",
+          "scope_note"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_일반신용.xlsx",
+        "format": "xlsx",
+        "title": "배라원 일반 신용카드 사용",
+        "note": "문화 소비와 구분된 일반 소비다.",
+        "fields": [
+          "cards.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_문화신용.pdf",
+        "format": "pdf",
+        "title": "적격 문화 업체 신용카드 소비",
+        "note": "문화 업체에서 신용으로 결제한 실제 사용액이다.",
+        "fields": [
+          "cards.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_어머니카드.xlsx",
+        "format": "xlsx",
+        "title": "어머니 명의 직불 소비",
+        "note": "직원 본인이 아닌 어머니의 카드 명의다.",
+        "fields": [
+          "cards.2"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "05_본인직불.pdf",
+        "format": "pdf",
+        "title": "배라원 본인 일반 직불 소비",
+        "note": "어머니 및 문화 소비와 중복 없는 본인 일반 사용액이다.",
+        "fields": [
+          "cards.3"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "06_학교수업료.hwpx",
+        "format": "hwpx",
+        "title": "자녀 학교 수업료 공제용 증명",
+        "note": "적격 정규 학교 수업료만 기재했다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "07_사설학원.xlsx",
+        "format": "xlsx",
+        "title": "취학 자녀 사설학원 결제",
+        "note": "이미 학교에 재학 중인 자녀의 사설학원 납부다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "08_급여확정.pdf",
+        "format": "pdf",
+        "title": "수달합판 고액 급여 확정",
+        "note": "비과세를 제외한 총급여로 문화비 기준을 판정한다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_직원등록.hwpx",
+        "format": "hwpx",
+        "title": "배라원 재직과 신청자 확인",
+        "note": "가족별 최종 배정과 기관 유형을 확인하는 신청이다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "credit_card_deduction",
+      "education_credit",
+      "tax_base"
+    ]
+  },
+  {
+    "case_id": "A297",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "사별 직원의 취업 자녀와 손자 및 퇴직 후 보험과 주택이자 마감",
+    "instruction": "가상들녘나사산의 가상길윤서 퇴직 정산을 처리해 주세요. 취업한 자녀와 손자의 소득 및 나이를 확인하고 보험과 주택이자의 실제 납부 날짜를 재직 기록에 맞춰 주세요. 가족 기본공제 및 추가공제와 보험 및 주택이자 공제액을 적어 주세요.",
+    "work_goal": "사별 직원의 서로 다른 직계비속 자격과 퇴직 날짜를 가족 및 주택 신청에 적용한다.",
+    "design_rationale": "사별이라는 사실만으로 한부모 공제가 자동 발생하지 않으며 인정되는 직계비속을 확인해야 한다. 대출 이자와 보험 납부도 각각 실제 날짜를 읽어 재직 기간에 포함한다.",
+    "exceptions": [
+      "자녀의 소득금액 초과로 가족 기본공제를 제외한다.",
+      "퇴직 뒤 보험 및 주택이자 납부는 각각 근로기간 공제에서 제외한다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상길윤서",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 사별 여성 근로자가 성인 자녀와 손자를 실제 부양하며 신청 배정은 본인이다. 성인 자녀는 종합소득금액 260만원이고 손자는 무소득이다. 본인 1주택 대출의 공통 적격 요건은 확인했다. 보험과 이자는 본인 자비이며 8월 31일 퇴직 뒤 새 근로는 없다. 특별공제를 신청했다.",
+      "annual_gross": 49600000,
+      "non_taxable": 1600000,
+      "employee_age": 70,
+      "employee_sex": "female",
+      "marital_status": "widowed",
+      "household_head": true,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-08-31",
+      "dependents": [
+        {
+          "person_id": "daughter",
+          "relation": "child",
+          "age": 20,
+          "income_amount": 2600000,
+          "supported": true,
+          "assigned_claimant": "self"
+        },
+        {
+          "person_id": "grandson",
+          "relation": "grandchild",
+          "age": 14,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "self",
+          "date": "2025-08-31",
+          "amount": 620000,
+          "kind": "general",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-09-01",
+          "amount": 410000,
+          "kind": "general",
+          "paid_by_self": true
+        }
+      ],
+      "housing_mortgage": {
+        "requirements_met": true,
+        "borrowed_date": "2019-03-14",
+        "term_years": 15,
+        "fixed_rate": false,
+        "non_deferred": true,
+        "interest_payments": [
+          {
+            "date": "2025-08-31",
+            "amount": 5600000
+          },
+          {
+            "date": "2025-09-01",
+            "amount": 3900000
+          }
+        ]
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_사별가족.hwpx",
+        "format": "hwpx",
+        "title": "길윤서 사별과 세대 및 가족 배정",
+        "note": "직원은 사별한 여성 세대주이며 자녀와 손자를 실제 부양한다.",
+        "fields": [
+          "dependents.0.person_id",
+          "dependents.0.relation",
+          "dependents.0.age",
+          "dependents.0.supported",
+          "dependents.0.assigned_claimant",
+          "dependents.1",
+          "employee_sex",
+          "marital_status",
+          "household_head",
+          "scope_note"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "02_자녀소득.xlsx",
+        "format": "xlsx",
+        "title": "성인 자녀 종합소득금액 확인",
+        "note": "성인 자녀의 금액은 소득금액이며 손자의 소득과 다르다.",
+        "fields": [
+          "dependents.0.income_amount"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "03_퇴직일보험.pdf",
+        "format": "pdf",
+        "title": "재직 마지막 날 일반보험 납부",
+        "note": "8월 31일 실제 납부 거래다.",
+        "fields": [
+          "insurance.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_퇴직후보험.xlsx",
+        "format": "xlsx",
+        "title": "퇴직 다음 날 일반보험 납부",
+        "note": "9월 1일 별개 보험 납부 거래다.",
+        "fields": [
+          "insurance.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_대출요건.pdf",
+        "format": "pdf",
+        "title": "길윤서 장기 비거치 대출 조건",
+        "note": "주택 수 및 취득 등 공통 요건을 충족한 본인 대출이다.",
+        "fields": [
+          "housing_mortgage.requirements_met",
+          "housing_mortgage.borrowed_date",
+          "housing_mortgage.term_years",
+          "housing_mortgage.fixed_rate",
+          "housing_mortgage.non_deferred"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_퇴직일이자.xlsx",
+        "format": "xlsx",
+        "title": "퇴직일까지 실제 낸 주택이자",
+        "note": "이 금액은 8월 31일 본인 이자 납부다.",
+        "fields": [
+          "housing_mortgage.interest_payments.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "07_퇴직후이자.pdf",
+        "format": "pdf",
+        "title": "퇴직 다음 날 실제 낸 주택이자",
+        "note": "9월 1일 납부는 재직 기간 거래와 별개다.",
+        "fields": [
+          "housing_mortgage.interest_payments.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "08_급여확정.xlsx",
+        "format": "xlsx",
+        "title": "들녘나사산 퇴직 연도 급여",
+        "note": "퇴직 때 확정한 연간 지급과 비과세 금액이다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_재직등록.hwpx",
+        "format": "hwpx",
+        "title": "길윤서 연말 나이와 재직 등록",
+        "note": "직원 연말 나이와 마지막 재직일을 확인했다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "additional_deduction",
+      "insurance_credit",
+      "housing_income_deduction"
+    ]
+  },
+  {
+    "case_id": "A298",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "맞벌이 배우자 치료와 부모 재활 및 다른 배정 자녀의 학비 구분",
+    "instruction": "가상초록종이틀의 가상변시우에게 가족 정산을 회신해 주세요. 배우자의 소득과 장애인 아버지의 실제 부양 및 자녀 최종 배정을 확인해 주세요. 배우자 보험과 진료는 분리하고 아버지 특수교육과 자녀 장학금 자료를 연결해 가족 공제 및 보험과 의료비 및 교육비 공제액을 적어 주세요.",
+    "work_goal": "가족별 소득과 배정의 다른 상태를 보험 및 의료비와 교육비 신청에 각각 적용한다.",
+    "design_rationale": "배우자의 소득 초과는 의료비까지 자동 거절하는 사유가 아니다. 장애인 부모 특수교육과 자녀의 최종 다른 신청 배정은 또 다른 판단이므로 지출 종류와 사람 식별자를 함께 읽는다.",
+    "exceptions": [
+      "소득 있는 배우자의 기본공제 및 보험은 제외하되 실제 부담 의료비는 별도 판정한다.",
+      "자녀의 최종 공제 신청은 배우자에게 배정돼 직원 교육비 및 가족 공제에서 제외한다."
+    ],
+    "facts": {
+      "employee_name": "가상변시우",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 배우자와 장애인 아버지 및 자녀를 실제 지원한다. 배우자 종합소득금액은 820만원이다. 무소득 아버지 신청은 본인이고 무소득 자녀 신청은 배우자로 최종 배정했다. 아버지 교육은 적격 장애인 특수교육이다. 지출은 직원 부담이며 의료비 보전금은 없고 특별공제를 신청했다.",
+      "annual_gross": 79400000,
+      "non_taxable": 2400000,
+      "employee_age": 46,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "spouse",
+          "relation": "spouse",
+          "age": 44,
+          "income_amount": 8200000,
+          "supported": true,
+          "assigned_claimant": "self"
+        },
+        {
+          "person_id": "father",
+          "relation": "parent",
+          "age": 73,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": true
+        },
+        {
+          "person_id": "child",
+          "relation": "child",
+          "age": 19,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "other"
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "spouse",
+          "date": "2025-05-08",
+          "amount": 760000,
+          "kind": "general",
+          "paid_by_self": true
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "spouse",
+          "date": "2025-06-22",
+          "amount": 3900000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "father",
+          "date": "2025-09-04",
+          "amount": 3100000,
+          "kind": "ordinary",
+          "paid_by_self": true
+        }
+      ],
+      "education": [
+        {
+          "person_id": "father",
+          "date": "2025-07-18",
+          "amount": 5400000,
+          "level": "special_disabled",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "child",
+          "date": "2025-08-17",
+          "amount": 6700000,
+          "scholarship": 1900000,
+          "level": "university",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_부양배정.hwpx",
+        "format": "hwpx",
+        "title": "변시우 가족의 실제 부양 및 최종 배정",
+        "note": "부모는 직원 본인이고 자녀는 배우자에게 최종 배정했다.",
+        "fields": [
+          "dependents.0.person_id",
+          "dependents.0.relation",
+          "dependents.0.age",
+          "dependents.0.supported",
+          "dependents.0.assigned_claimant",
+          "dependents.1",
+          "dependents.2",
+          "marital_status",
+          "scope_note"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_배우자소득.xlsx",
+        "format": "xlsx",
+        "title": "배우자 종합소득금액 확인",
+        "note": "표시 금액은 배우자의 확정 종합소득금액이다.",
+        "fields": [
+          "dependents.0.income_amount"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "03_배우자보험.pdf",
+        "format": "pdf",
+        "title": "직원 부담 배우자 일반보험",
+        "note": "피보험자 배우자의 소득 요건을 별도 확인해야 한다.",
+        "fields": [
+          "insurance"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_배우자수술.xlsx",
+        "format": "xlsx",
+        "title": "배우자 수술비 직원 부담액",
+        "note": "배우자 소득과 별도로 실제 의료비 부담을 확인했다.",
+        "fields": [
+          "medical.0"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "05_아버지치료.pdf",
+        "format": "pdf",
+        "title": "장애인 아버지 일반 진료 수납",
+        "note": "아버지의 치료비에 보전금은 없다.",
+        "fields": [
+          "medical.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_아버지재활.hwpx",
+        "format": "hwpx",
+        "title": "아버지 적격 특수교육 납부",
+        "note": "공제 대상 장애인 특수교육기관의 직원 부담 납부다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "07_자녀학부.xlsx",
+        "format": "xlsx",
+        "title": "자녀 학부 총액과 장학금 확인",
+        "note": "장학금 차감 전 총액이며 최종 자녀 배정은 별도 문서에 있다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "08_급여확정.pdf",
+        "format": "pdf",
+        "title": "초록종이틀 급여 마감액",
+        "note": "직원 본인의 연간 총지급과 비과세 금액이다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_직원등록.hwpx",
+        "format": "hwpx",
+        "title": "변시우 재직과 가족 신청 등록",
+        "note": "가족별 자료를 별도 판정하는 특별공제 접수다.",
+        "fields": [
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "additional_deduction",
+      "insurance_credit",
+      "medical_credit",
+      "education_credit"
+    ]
+  },
+  {
+    "case_id": "A299",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "최종 표준 신청과 본인 전용 기부 및 가족 카드 자료 마감",
+    "instruction": "가상해오름기와의 가상서도하가 최종 신청을 표준공제로 확정했습니다. 남아 있는 보험 및 교육 증명과 최종 신청을 맞추고 가족 카드와 본인 정치후원 및 고향사랑 기부와 연금계좌를 항목별로 처리해 주세요. 실제 적용 공제액과 국세 및 지방세 정산 합계를 적어 주세요.",
+    "work_goal": "표준 선택으로 취소되는 신청과 유지되는 본인 전용 기부 및 다른 공제를 구별해 최종 정산한다.",
+    "design_rationale": "많은 첨부 증명이 있어도 최종 신청 방식이 실제 적용을 정한다. 소득 없는 동생 카드도 가족 요건과 다른 제한을 가지므로 표준 방식과 별도로 판단한다.",
+    "exceptions": [
+      "최종 표준 선택으로 보험 및 교육 특별공제를 실제 정산에 적용하지 않는다.",
+      "같은 세대 동생의 카드 사용은 형제자매 관계 제한으로 제외한다."
+    ],
+    "facts": {
+      "employee_name": "가상서도하",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자와 무소득 열아홉 살 동생은 연중 실제 같은 세대에 살고 직원이 부양하며 신청 배정은 본인이다. 직원은 최종 표준 신청으로 특별공제 신청을 철회했다. 보험과 학부는 본인 부담 자료이지만 최종 선택에 따른다. 본인 기부는 적법한 당해 납부이며 고향사랑은 재난 특례가 아닌 연간 65만원이다. 연금계좌는 자비 납입이다.",
+      "annual_gross": 68400000,
+      "non_taxable": 2400000,
+      "employee_age": 30,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "deduction_choice": "standard",
+      "special_deductions_requested": false,
+      "paid_national_tax": 4300000,
+      "paid_local_tax": 430000,
+      "dependents": [
+        {
+          "person_id": "sibling",
+          "relation": "sibling",
+          "age": 19,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "self",
+          "date": "2025-04-03",
+          "amount": 880000,
+          "kind": "general",
+          "paid_by_self": true
+        }
+      ],
+      "education": [
+        {
+          "person_id": "sibling",
+          "date": "2025-08-19",
+          "amount": 5800000,
+          "level": "university",
+          "paid_by_self": true
+        }
+      ],
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-02",
+          "amount": 22000000,
+          "category": "debit",
+          "payment_method": "debit"
+        },
+        {
+          "person_id": "sibling",
+          "date": "2025-12-03",
+          "amount": 4600000,
+          "category": "debit",
+          "payment_method": "debit"
+        }
+      ],
+      "donations": [
+        {
+          "person_id": "self",
+          "date": "2025-10-11",
+          "amount": 350000,
+          "kind": "political",
+          "eligible_organization": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-11-13",
+          "amount": 650000,
+          "kind": "hometown",
+          "eligible_organization": true
+        }
+      ],
+      "pension_accounts": {
+        "pension_savings": 4500000,
+        "irp": 2100000
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_최종표준신청.hwpx",
+        "format": "hwpx",
+        "title": "서도하 최종 공제 선택과 철회",
+        "note": "이 문서가 종전 특별공제 신청을 대체하며 표준 선택으로 확정했다.",
+        "fields": [
+          "deduction_choice",
+          "special_deductions_requested",
+          "scope_note"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_동생세대확인.pdf",
+        "format": "pdf",
+        "title": "동일 세대 동생 부양 및 배정",
+        "note": "동생은 실제 같은 세대에서 연중 동거한 무소득 부양가족이다.",
+        "fields": [
+          "dependents"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_첨부보험.xlsx",
+        "format": "xlsx",
+        "title": "본인 보험료 기존 첨부 증명",
+        "note": "첨부 증명은 남아 있지만 최종 신청 방식에 따라 실제 적용한다.",
+        "fields": [
+          "insurance"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_첨부학부.pdf",
+        "format": "pdf",
+        "title": "동생 학부 기존 수업료 증명",
+        "note": "직원이 낸 학부 수업료이며 최종 선택은 별도 신청서에 있다.",
+        "fields": [
+          "education"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_본인카드.xlsx",
+        "format": "xlsx",
+        "title": "서도하 본인 일반 직불 사용",
+        "note": "동생의 사용을 제외한 본인 사용 누계다.",
+        "fields": [
+          "cards.0"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_동생카드.pdf",
+        "format": "pdf",
+        "title": "동생 명의 카드 사용 증명",
+        "note": "동생의 카드 명의와 직불 결제수단을 기록했다.",
+        "fields": [
+          "cards.1"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "07_본인기부.hwpx",
+        "format": "hwpx",
+        "title": "본인 정치후원 및 일반 고향사랑 수납",
+        "note": "두 본인 전용 기부는 서로 다른 종류이며 반환이나 이월이 없다.",
+        "fields": [
+          "donations"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "08_연금계좌.xlsx",
+        "format": "xlsx",
+        "title": "서도하 개인 연금계좌 납입",
+        "note": "표준 선택과 별도로 계산하는 당해 자비 계좌 납입이다.",
+        "fields": [
+          "pension_accounts"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_급여기납부.pdf",
+        "format": "pdf",
+        "title": "해오름기와 급여와 원천징수 누계",
+        "note": "국세와 지방세 기납부액을 각각 기록했다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "paid_national_tax",
+          "paid_local_tax"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "10_직원등록.hwpx",
+        "format": "hwpx",
+        "title": "서도하 연말 재직 및 본인 확인",
+        "note": "최종 공제 선택으로 환급 전표를 작성한다.",
+        "fields": [
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "standard_credit",
+      "insurance_credit",
+      "education_credit",
+      "credit_card_deduction",
+      "political_credit",
+      "hometown_credit",
+      "pension_account_credit",
+      "settlement_total"
+    ]
+  },
+  {
+    "case_id": "A300",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "연말 통합 접수에서 보유 주택과 임차 주소 및 기관 지정과 학교비 대조",
+    "instruction": "가상물안개밸브의 가상장서온 최종 정산을 처리해 주세요. 재직 중 납부한 주택이자를 거래 날짜와 맞추고 동일 세대의 보유 주택 대장을 월세 신청에도 연결해 주세요. 학교와 학원 기관 유형 및 공익단체 지정 기간을 대조해 주택이자와 월세 및 교육비와 기부 공제를 계산하고 국세 정산액을 적어 주세요.",
+    "work_goal": "통합 접수의 주택 보유 자료를 대출과 월세에 일관되게 사용하면서 각 납부 날짜 및 기관 유형을 따로 확인한다.",
+    "design_rationale": "대출 공제에는 적격인 본인 1주택이 월세 무주택 요건에는 걸림이 된다. 주소 표기 차이 자체는 정규화 뒤 일치하며 학교 및 기부 문서는 다른 종류의 기관 자격 판단을 요구한다.",
+    "exceptions": [
+      "세대가 본인 주택을 보유해 별도 임차 월세의 무주택 요건을 충족하지 않는다.",
+      "재직 시작 전 주택이자 거래는 근로기간 공제에 넣지 않는다.",
+      "취학 자녀의 사설학원 납부는 교육비 공제에 넣지 않는다.",
+      "공익단체 지정 시작 전 기부는 적격 기관 기부에서 제외한다."
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "employee_name": "가상장서온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 2월 1일 입사했다. 무소득 자녀를 실제 부양하고 본인에게 신청을 배정했다. 세대 전원의 연말 보유 주택은 본인 한 채이며 직장 근처 임차 주소에 주민등록도 일치한다. 장기대출의 주택 수 외 공통 요건은 확인했다. 모든 지출은 본인 부담이고 장학금이나 이월은 없다. 특별공제를 신청했다.",
+      "annual_gross": 82200000,
+      "non_taxable": 2200000,
+      "employee_age": 45,
+      "marital_status": "married",
+      "employment_start": "2025-02-01",
+      "employment_end": "2025-12-31",
+      "paid_national_tax": 6100000,
+      "dependents": [
+        {
+          "person_id": "child",
+          "relation": "child",
+          "age": 11,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "housing_mortgage": {
+        "other_common_requirements_attested": true,
+        "borrowed_date": "2022-06-03",
+        "term_years": 20,
+        "fixed_rate": true,
+        "non_deferred": true,
+        "interest_payments": [
+          {
+            "date": "2025-01-31",
+            "amount": 1500000
+          },
+          {
+            "date": "2025-02-01",
+            "amount": 2200000
+          },
+          {
+            "date": "2025-12-29",
+            "amount": 6800000
+          }
+        ],
+        "household_homes_at_year_end": [
+          {
+            "home_id": "mist_home",
+            "address": "가상시 안개길 12",
+            "owner_person_id": "self"
+          }
+        ]
+      },
+      "rent": {
+        "household_head": true,
+        "head_claims_housing": false,
+        "contract_address": "가상시 물안개로 8 ７０２호",
+        "resident_registration_address": "가상시 물안개로8 702호",
+        "eligible_contract_holder": true,
+        "area_sqm": 52,
+        "standard_value": 318000000,
+        "payments": [
+          {
+            "date": "2025-12-30",
+            "amount": 8200000
+          }
+        ],
+        "household_homes_at_year_end": [
+          {
+            "home_id": "mist_home",
+            "address": "가상시 안개길 12",
+            "owner_person_id": "self"
+          }
+        ]
+      },
+      "education": [
+        {
+          "person_id": "child",
+          "date": "2025-05-15",
+          "amount": 1750000,
+          "level": "school",
+          "institution_type": "primary_secondary_school",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "child",
+          "date": "2025-09-15",
+          "amount": 1250000,
+          "level": "school",
+          "institution_type": "private_academy",
+          "paid_by_self": true
+        }
+      ],
+      "organization_designations": [
+        {
+          "organization_id": "org_mist",
+          "kind": "public",
+          "valid_from": "2025-06-01",
+          "valid_to": "2027-12-31"
+        }
+      ],
+      "donations": [
+        {
+          "person_id": "self",
+          "organization_id": "org_mist",
+          "date": "2025-05-31",
+          "amount": 1400000,
+          "kind": "public"
+        },
+        {
+          "person_id": "self",
+          "organization_id": "org_mist",
+          "date": "2025-06-01",
+          "amount": 2100000,
+          "kind": "public"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_세대주택.hwpx",
+        "format": "hwpx",
+        "title": "장서온 세대 전체 연말 보유 주택",
+        "note": "대출과 월세 신청에 공통으로 쓰는 동일한 본인 1주택 대장이다.",
+        "fields": [
+          "housing_mortgage.household_homes_at_year_end",
+          "rent.household_homes_at_year_end",
+          "rent.household_head",
+          "rent.head_claims_housing"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_대출요건.pdf",
+        "format": "pdf",
+        "title": "장서온 장기 고정 비거치 대출 조건",
+        "note": "주택 수 외 취득과 채무자 등 공통 적격 요건을 확인했다.",
+        "fields": [
+          "housing_mortgage.other_common_requirements_attested",
+          "housing_mortgage.borrowed_date",
+          "housing_mortgage.term_years",
+          "housing_mortgage.fixed_rate",
+          "housing_mortgage.non_deferred"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_이자거래.xlsx",
+        "format": "xlsx",
+        "title": "입사 전 및 재직 중 주택이자 거래",
+        "note": "세 금액은 실제 납부일을 갖는 서로 별개인 이자 거래다.",
+        "fields": [
+          "housing_mortgage.interest_payments"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_임차계약.pdf",
+        "format": "pdf",
+        "title": "직장 근처 임차 주택 계약과 요건",
+        "note": "계약 호수의 숫자는 전각으로 표시돼 있다.",
+        "fields": [
+          "rent.contract_address",
+          "rent.eligible_contract_holder",
+          "rent.area_sqm",
+          "rent.standard_value"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "05_전입납부.xlsx",
+        "format": "xlsx",
+        "title": "임차 주소 주민등록과 실제 월세",
+        "note": "주민등록 주소 및 월세는 대출 주택 주소와 다른 현재 임차 주소다.",
+        "fields": [
+          "rent.resident_registration_address",
+          "rent.payments"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "06_자녀등록.hwpx",
+        "format": "hwpx",
+        "title": "장서온 자녀 부양과 최종 배정",
+        "note": "무소득 자녀 관련 공제는 직원 본인에게 확정했다.",
+        "fields": [
+          "dependents",
+          "marital_status"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "07_학교증명.pdf",
+        "format": "pdf",
+        "title": "자녀 정규 학교 수업료 증명",
+        "note": "공제 대상 학교 수업료만 포함한 증명이다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "08_학원영수증.xlsx",
+        "format": "xlsx",
+        "title": "취학 자녀 사설학원 실제 납부",
+        "note": "정규 학교가 아닌 사설학원 납부다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "09_기관지정.hwpx",
+        "format": "hwpx",
+        "title": "물안개지원회 지정 시작일 확인",
+        "note": "기관 번호 org_mist의 적격 지정은 6월 1일부터다.",
+        "fields": [
+          "organization_designations"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "10_기부경계.pdf",
+        "format": "pdf",
+        "title": "지정 시작 전후 본인 기부 수납",
+        "note": "같은 기관의 5월 31일과 6월 1일 별도 납부다.",
+        "fields": [
+          "donations"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "11_급여기납부.xlsx",
+        "format": "xlsx",
+        "title": "물안개밸브 급여 및 국세 납부",
+        "note": "합산 급여와 이미 낸 국세 누계를 확정했다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "paid_national_tax"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "12_재직신청.hwpx",
+        "format": "hwpx",
+        "title": "장서온 재직 및 통합 접수 범위",
+        "note": "자료 종류별 자격과 실제 납부 날짜를 대조해 특별공제를 신청했다.",
+        "fields": [
+          "source_contract",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "housing_income_deduction",
+      "rent_credit",
+      "education_credit",
+      "donation_credit",
+      "settlement_national_tax"
+    ]
+  }
+]
