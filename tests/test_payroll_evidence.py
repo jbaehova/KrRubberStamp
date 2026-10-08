@@ -163,3 +163,101 @@ def test_payroll_preview_uses_raw_evidence_trace_and_preserves_known_results():
     assert answer["night_pay"] == 48804
     assert answer["net_pay"] == 4010685
     assert trace[0]["output"]["payment_date"] == "2026-03-03"
+
+
+def _authored(identity):
+    root = Path(__file__).resolve().parents[1] / "authored/batch_1/B_payroll"
+    for name in ("cases_004_053.json", "cases_054_103.json", "cases_104_153.json"):
+        for case in json.loads((root / name).read_text()):
+            if case["case_id"] == identity:
+                return deepcopy(case["facts"])
+    raise AssertionError(identity)
+
+
+def test_june_insurance_assessment_is_independent_of_july_execution():
+    raw = _authored("B089")
+    answer, _ = calculate("B_payroll", raw)
+    assert answer["effective_payment_date"] == "2026-07-03"
+    assert answer["pension_base_income"] == 6370000
+    assert answer["national_pension"] == 302570
+    raw["payment_records"][1]["date"] = "2026-06-30"
+    moved, _ = calculate("B_payroll", raw)
+    assert moved["effective_payment_date"] == "2026-06-30"
+    assert moved["national_pension"] == answer["national_pension"]
+    raw["insurance_assessment_month"] = "2026-07"
+    assert calculate("B_payroll", raw)[0]["national_pension"] == 308750
+
+
+@pytest.mark.parametrize("month", [None, "2026-7", "2026-13", "2025-06", 6])
+def test_missing_or_invalid_insurance_assessment_month_is_rejected(month):
+    raw = _authored("B089")
+    raw["insurance_assessment_month"] = month
+    with pytest.raises((ValueError, TypeError)):
+        calculate("B_payroll", raw)
+
+
+def test_substitute_public_holiday_paid_wage_is_separate_from_work_premium():
+    raw = _authored("B043")
+    original = deepcopy(raw)
+    answer, trace = calculate("B_payroll", raw)
+    assert answer["paid_holiday_pay"] == 71000
+    assert answer["holiday_pay"] == 294650
+    assert answer["gross_pay"] == 1863750
+    assert raw == original
+    assert any(row["rule_id"] == "B.PAID_HOLIDAY" for row in trace)
+    raw["paid_holiday_records"][0]["included_in_regular_pay"] = True
+    included, _ = calculate("B_payroll", raw)
+    assert included["paid_holiday_pay"] == 0
+    assert included["gross_pay"] == answer["gross_pay"] - 71000
+    assert included["holiday_pay"] == answer["holiday_pay"]
+
+
+@pytest.mark.parametrize("workers,hours", [(4, 25), (19, 14)])
+def test_public_holiday_eligibility_differs_from_labor_day(workers, hours):
+    raw = _authored("B043")
+    raw["workplace_employee_count"] = workers
+    raw["weekly_hours"] = hours
+    row = raw["paid_holiday_records"][0]
+    row["four_week_scheduled_minutes"] = hours * 4 * 60
+    assert interpret(raw)["paid_holiday_minutes"] == 0
+    row["date"] = "2026-05-01"
+    row["kind"] = "labor_day"
+    raw["holiday_dates"].append(row["date"])
+    assert interpret(raw)["paid_holiday_minutes"] == hours * 60 // 5
+
+
+def test_paid_holiday_raw_contract_rejects_duplicate_weekly_and_fractional_time():
+    raw = _authored("B043")
+    raw["paid_holiday_records"].append(deepcopy(raw["paid_holiday_records"][0]))
+    with pytest.raises(ValueError, match="unique"):
+        interpret(raw)
+    raw = _authored("B043")
+    raw["paid_holiday_records"][0]["kind"] = "weekly_holiday"
+    with pytest.raises(ValueError, match="Weekly"):
+        interpret(raw)
+    raw = _authored("B043")
+    raw["paid_holiday_records"][0]["normal_worker_four_week_days"] = 19
+    with pytest.raises(ValueError, match="whole-minute"):
+        interpret(raw)
+    raw = _authored("B043")
+    raw["paid_holiday_records"][0]["four_week_scheduled_minutes"] = 2400
+    with pytest.raises(ValueError, match="conflicts"):
+        interpret(raw)
+
+
+def test_monthly_paid_holiday_base_is_not_added_twice():
+    from rules.b_payroll.engine import calculate as payroll_calculate
+    from scenarios.b_payroll import generate
+
+    normalized = generate(11, "easy")
+    normalized["paid_holiday_minutes"] = 480
+    with pytest.raises(ValueError, match="already includes"):
+        payroll_calculate(normalized)
+
+
+def test_declared_holiday_work_cannot_hide_in_normal_clock_records():
+    raw = source()
+    del raw["regular_schedule"]
+    raw["work_records"] = [record(category="regular")]
+    with pytest.raises(ValueError, match="additional-work"):
+        interpret(raw)

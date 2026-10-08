@@ -12,6 +12,7 @@ DERIVED = {
     "holiday_shifts",
     "payment_date",
     "employer_provides_meals",
+    "paid_holiday_minutes",
 }
 
 
@@ -107,6 +108,32 @@ def interpret(source):
     holiday_dates = set(source["holiday_dates"])
     for value in holiday_dates:
         datetime.strptime(value, "%Y-%m-%d")
+    paid_minutes = 0
+    paid_dates = set()
+    for row in source.get("paid_holiday_records", []):
+        day = row["date"]
+        if day not in holiday_dates or day in paid_dates:
+            raise ValueError("Paid holiday date must be unique and declared a holiday")
+        paid_dates.add(day)
+        kind = row["kind"]
+        if kind not in {"public_holiday", "labor_day"}:
+            raise ValueError("Weekly holiday pay must not be counted as separate paid holiday")
+        if kind == "labor_day" and day[5:] != "05-01":
+            raise ValueError("Labor day must be May 1")
+        scheduled = _integer(row["four_week_scheduled_minutes"], "four week minutes")
+        if scheduled != source["weekly_hours"] * 4 * 60:
+            raise ValueError("Four week scheduled time conflicts with the contractual weekly time")
+        days = _integer(row["normal_worker_four_week_days"], "normal worker days")
+        if not 0 < days <= 28 or scheduled % days:
+            raise ValueError("Paid holiday evidence requires whole-minute proportional time")
+        included = row["included_in_regular_pay"]
+        if type(included) is not bool:
+            raise ValueError("Paid holiday inclusion must be factual boolean")
+        eligible = kind == "labor_day" or (
+            source["workplace_employee_count"] >= 5 and source["weekly_hours"] >= 15
+        )
+        if eligible and not included:
+            paid_minutes += scheduled // days
     approved = _approved_records(source["work_records"])
     occupied = []
     for record in approved:
@@ -122,6 +149,8 @@ def interpret(source):
                 raise ValueError(
                     "Regular schedule and individual regular records would double count"
                 )
+            if work_date in holiday_dates:
+                raise ValueError("Declared holiday work must use the additional-work category")
             regular += minutes
         elif record["category"] == "additional":
             if work_date in holiday_dates:
@@ -170,6 +199,7 @@ def interpret(source):
             "holiday_shifts": [holidays[day] for day in sorted(holidays)],
             "payment_date": latest[0]["date"],
             "employer_provides_meals": service == "employer_catering",
+            "paid_holiday_minutes": paid_minutes,
         }
     )
     return result
@@ -186,6 +216,7 @@ def derivation_trace(source, normalized):
             "week_attendance": source["week_attendance"],
             "payment_records": source["payment_records"],
             "meal_service": source["meal_service"],
+            "paid_holiday_records": source.get("paid_holiday_records", []),
         },
         "output": {key: normalized[key] for key in sorted(DERIVED)},
     }

@@ -37,6 +37,8 @@ LABELS = {
     "employee_age": "직원 만 나이",
     "synthetic_id": "가상 급여 자료 식별번호",
     "payment_date": "급여 지급일",
+    "effective_payment_date": "실행 또는 최종 승인 기록으로 확정한 실제 급여 지급일",
+    "insurance_assessment_month": "공단 통지서의 보험 부과월",
     "pay_basis": "급여 방식(monthly=월급제, hourly=시급제)",
     "base_salary": "월 정액 기본급(원)",
     "fixed_allowance": "정기적 일률적 소정근로 대가인 직무수당(원)",
@@ -193,7 +195,7 @@ def _add_rule_evidence(scenario: dict) -> None:
         "meal_rule": "소득세법 제12조 제3호 러목: 식사를 별도 제공받지 않는 근로자의 월 20만원 이하 식대 비과세.",
         "pension_rule": (
             "국민연금공단 2026 안내: 근로자 4.75%. 신고액의 천원 미만 버림. "
-            "2026-01~06 하한 400,000원, 상한 6,370,000원. "
+            "공단 보험 부과월 2026-01~06 하한 400,000원, 상한 6,370,000원. "
             "2026-07~12 하한 410,000원, 상한 6,590,000원. 적용 기준소득월액에 요율을 곱한다."
         ),
         "health_rule": (
@@ -235,6 +237,7 @@ def generate(seed: int, difficulty: str) -> dict:
         "company_name": f"가상사업장-{rng.randrange(10000):04d}",
         "employee_age": rng.randint(26, 57),
         "payment_date": f"2026-{month:02d}-25",
+        "insurance_assessment_month": f"2026-{month:02d}",
         "pay_basis": "monthly",
         "base_salary": monthly - meals - fixed,
         "fixed_allowance": fixed,
@@ -375,5 +378,12 @@ LABELS.update(
         "evidence_handling_policy": "승인본과 지급 기록 처리 규약",
         "family_count_over_eleven": "공제대상가족 11명 초과 계산 규정",
         "payroll_column": "당시 급여대장의 입력란",
+        "paid_holiday_minutes": "정규 임금 외 별도 유급휴일 임금 대상 시간(분)",
+        "paid_holiday_pay": "실제 근로 대가와 별도인 유급휴일 임금(원)",
+        "paid_holiday_records": "주휴와 구분한 공휴일 유급 임금의 원시 근거",
+        "kind": "공휴일 또는 노동절 구분",
+        "four_week_scheduled_minutes": "직전 4주 소정근로 시간(분)",
+        "normal_worker_four_week_days": "비교 통상근로자의 4주 소정근로일 수",
+        "included_in_regular_pay": "해당 유급휴일 임금이 정규 임금에 이미 포함되었는지",
     }
 )

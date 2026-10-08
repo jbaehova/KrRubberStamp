@@ -41,8 +41,8 @@
   verified: false
   verification_notes: 합성 계약 기반 산술 검증. 공식 자료의 실제 급여명세서 예시와 동일한 구성은 없음.
 - rule_id: B.PENSION
-  description: 공단 통지 기준소득 신고액 천원 미만 버림. 2026 근로자4.75%. 1~6월 40만원~637만원, 7~12월 41만원~659만원. 보험료10원 미만 버림.
-  source: "국민연금공단 2026 Q&A, https://www.nps.or.kr/pnsinfo/ntpsklg/getOHAF0097M0.do ; 2025.7 상하한 https://www.nps.or.kr/html/download/memberGuide_2.pdf ; 국민연금법 제117조 및 국고금관리법 제47조."
+  description: 공단 통지 기준소득 신고액 천원 미만 버림. 2026 근로자4.75%. 공단 보험 부과월 1~6월 40만원~637만원, 7~12월 41만원~659만원. 실제 급여 이체일과 구분. 보험료10원 미만 버림.
+  source: "국민연금공단 2026 Q&A, https://www.nps.or.kr/pnsinfo/ntpsklg/getOHAF0097M0.do ; 2025.7 상하한 https://www.nps.or.kr/html/download/memberGuide_2.pdf ; 2026년 7월 조정 통지 https://www.nps.or.kr/pnsgdnc/newgdnc/getOHAE0001M1.do?pstId=ZZ202600000000000147 ; 국민연금법 제117조 및 국고금관리법 제47조."
   effective_period: "2026-01-01~2026-12-31. 상하한 변경 2026-07-01"
   verified: true
   verification_notes: 공단이 직접 제시한 기준소득월액100만원 47,500원 및200만원95,000원. 263만6천원125,210원 및395만4천원187,810원 예시 회귀 포함.
@@ -101,3 +101,9 @@
   effective_period: "2026 개별 집필 자료 계약"
   verified: false
   verification_notes: 합성 증빙 처리 규약이므로 대응하는 공단 공식 숫자 예시는 없다. 출퇴근 및 휴게 경계와 수정 승인, 지급 실행 우선순위를 별도 회귀 검사한다.
+- rule_id: B.PAID_HOLIDAY
+  description: 시급제 공휴일의 유급 임금 100%를 실제 휴일근로 대가와 별도 합산. 단시간 근로자는 4주 소정근로 시간과 통상근로자의 4주 소정근로일 수로 비례. 정규 임금 포함분과 주휴수당 중복 금지.
+  source: "근로기준법 제18조 및 제55조와 시행령 별표2. 고용노동부 https://1350.moel.go.kr/rtmview.do?id=1000323476 ; https://www.moel.go.kr/minwon/fastcounsel/fastcounselView.do?inetDcssMngId=202108181232364201000 . 문항의 별도 임금 포함 여부와 비교 근로일수는 입력 사실."
+  effective_period: "2026"
+  verified: false
+  verification_notes: 공식 안내의 100%와 실제근로 150% 구분 및 비례 시간 산식 확인. 엔진과 일치하는 독립된 원 단위 공식 수치 예시 미확보. 분수 분 단위 비례시간은 범위 밖으로 두고 거절.

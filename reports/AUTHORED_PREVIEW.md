@@ -182,9 +182,9 @@
 
 | 파일 | 자료의 역할과 기재 내용 |
 |---|---|
-| [가상서연 정액 월급 계약서](../data/authored_preview/B_payroll/B1_B001_6d53171b/inputs/01_근로계약서.pdf) | 기본급과 정기 수당의 지급 근거다. 월급에 주휴 임금이 포함되어 있음을 확인한다. |
-| [가상모닝제본 4월 급여 마감표](../data/authored_preview/B_payroll/B1_B001_6d53171b/inputs/02_4월마감표.xlsx) | 확인된 근태와 공단별 기준액이다. 총지급액과 이체액은 아직 없다. |
-| [2026년 공제 기준과 공식 표 발췌](../data/authored_preview/B_payroll/B1_B001_6d53171b/inputs/03_급여계산기준.hwpx) | 법정 계산 기준과 공식 간이세액표 인접 행이다. 직원의 공제 합계와 실지급액은 없다. |
+| [가상서연 정액 월급 계약서](../data/authored_preview/B_payroll/B1_B001_09f47ab4/inputs/01_근로계약서.pdf) | 기본급과 정기 수당의 지급 근거다. 월급에 주휴 임금이 포함되어 있음을 확인한다. |
+| [가상모닝제본 4월 급여 마감표](../data/authored_preview/B_payroll/B1_B001_09f47ab4/inputs/02_4월마감표.xlsx) | 확인된 근태와 공단별 기준액이다. 총지급액과 이체액은 아직 없다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다. |
+| [2026년 공제 기준과 공식 표 발췌](../data/authored_preview/B_payroll/B1_B001_09f47ab4/inputs/03_급여계산기준.hwpx) | 법정 계산 기준과 공식 간이세액표 인접 행이다. 직원의 공제 합계와 실지급액은 없다. |
 
 계산한 정답:
 
@@ -224,12 +224,12 @@
 
 | 파일 | 자료의 역할과 기재 내용 |
 |---|---|
-| [가상이루 주 20시간 시급제 계약서](../data/authored_preview/B_payroll/B1_B002_464b2f6b/inputs/01_단시간근로계약서.pdf) | 소정근로일과 시급을 정한 계약이다. 정규 임금에 주휴 임금은 포함되지 않는다. |
-| [가상저녁책방 4월 정규 근태 집계](../data/authored_preview/B_payroll/B1_B002_464b2f6b/inputs/02_4월근태집계.xlsx) | 무급 결근을 이미 한 번 차감한 정규 유급 시간이다. 주휴 시간은 포함하지 않았다. |
-| [무급 결근 확인과 주휴 대상 주 기록](../data/authored_preview/B_payroll/B1_B002_464b2f6b/inputs/03_결근확인과주휴대상주.hwpx) | 결근 승인과 네 주의 출근 기록이다. 월 근태표와 같은 결근을 증명한다. |
-| [급여 공제용 보험 기준액 통지](../data/authored_preview/B_payroll/B1_B002_464b2f6b/inputs/04_보험기준액통지.pdf) | 이번 급여에 사용할 공단 기준액이다. 보험 정산분은 없다. |
-| [5월 8일 이체와 인사 정보 확인](../data/authored_preview/B_payroll/B1_B002_464b2f6b/inputs/05_이체와인사확인.hwpx) | 지급 예정일과 원천징수 신청 상태를 확인했다. |
-| [단시간 주휴와 2026년 공제 계산 기준](../data/authored_preview/B_payroll/B1_B002_464b2f6b/inputs/06_주휴와공제기준.pdf) | 비례 주휴시간 산식과 공식 간이세액표 인접 행이다. 직원의 지급액은 없다. |
+| [가상이루 주 20시간 시급제 계약서](../data/authored_preview/B_payroll/B1_B002_34688c82/inputs/01_단시간근로계약서.pdf) | 소정근로일과 시급을 정한 계약이다. 정규 임금에 주휴 임금은 포함되지 않는다. |
+| [가상저녁책방 4월 정규 근태 집계](../data/authored_preview/B_payroll/B1_B002_34688c82/inputs/02_4월근태집계.xlsx) | 배정 일수와 일일 소정근로 분수 및 승인된 무급 결근의 원자료다. 결근을 한 번 차감하고 주휴는 별도로 계산한다. |
+| [무급 결근 확인과 주휴 대상 주 기록](../data/authored_preview/B_payroll/B1_B002_34688c82/inputs/03_결근확인과주휴대상주.hwpx) | 결근 승인과 네 주의 출근 기록이다. 월 근태표와 같은 결근을 증명한다. |
+| [급여 공제용 보험 기준액 통지](../data/authored_preview/B_payroll/B1_B002_34688c82/inputs/04_보험기준액통지.pdf) | 이번 급여에 사용할 공단 기준액이다. 보험 정산분은 없다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다. |
+| [5월 8일 이체와 인사 정보 확인](../data/authored_preview/B_payroll/B1_B002_34688c82/inputs/05_이체와인사확인.hwpx) | 지급 예정일과 원천징수 신청 상태를 확인했다. |
+| [단시간 주휴와 2026년 공제 계산 기준](../data/authored_preview/B_payroll/B1_B002_34688c82/inputs/06_주휴와공제기준.pdf) | 비례 주휴시간 산식과 공식 간이세액표 인접 행이다. 직원의 지급액은 없다. |
 
 계산한 정답:
 
@@ -274,16 +274,16 @@
 
 | 파일 | 자료의 역할과 기재 내용 |
 |---|---|
-| [가상도윤 월급제 계약](../data/authored_preview/B_payroll/B1_B003_e8a190e8/inputs/01_현장책임자계약.pdf) | 기본급과 소정근로 조건이다. 주휴 임금 포함과 추가 휴일 작업의 별도 지급 범위를 적었다. |
-| [직무수당과 식대 지급 약정](../data/authored_preview/B_payroll/B1_B003_e8a190e8/inputs/02_정기수당약정.hwpx) | 정기 수당 금액과 단수 처리 약정이다. 현금 식대 지급과 비과세 판단은 구분한다. |
-| [취소된 이체 계획과 실제 지급 확인](../data/authored_preview/B_payroll/B1_B003_e8a190e8/inputs/03_이체계획취소와실행확인.xlsx) | 취소된 2월 계획과 실제 3월 이체의 상태를 함께 적었다. 최종 이체 금액은 미작성이다. |
-| [평일 연장 최종 승인본](../data/authored_preview/B_payroll/B1_B003_e8a190e8/inputs/04_평일연장최종승인.xlsx) | 중복 복사를 취소한 최종 승인이다. 폐기된 초안 숫자도 수정 사유로 남겼다. |
-| [2월 22일 현장 작업 승인](../data/authored_preview/B_payroll/B1_B003_e8a190e8/inputs/05_일요일작업승인.pdf) | 작업 시작과 종료 및 두 휴게 구간이다. 휴일 작업과 야간 겹침을 검산할 수 있다. |
-| [평일 연장란에 복사된 기존 승인 차수](../data/authored_preview/B_payroll/B1_B003_e8a190e8/inputs/06_근태초안대조.xlsx) | 근태 기록 번호를 최종 승인본과 맞춰 주세요. 이 표는 승인 차수 1의 보관 기록이며 변경 후에도 인수인계 폴더에 남았습니다. |
-| [2월 회사 식사 제공 확인](../data/authored_preview/B_payroll/B1_B003_e8a190e8/inputs/07_식사제공확인.pdf) | 현금 식대와 별도로 식사를 제공한 사실이다. 비과세 결론은 적지 않았다. |
-| [2월 부과 보험 기준액 통지](../data/authored_preview/B_payroll/B1_B003_e8a190e8/inputs/08_2월보험기준액통지.xlsx) | 이번 명세서에 공제할 보험 기준액이다. 원천세의 실제 지급일 자료와 구분한다. |
-| [기본공제 가족과 원천징수 신청 확인](../data/authored_preview/B_payroll/B1_B003_e8a190e8/inputs/09_부양가족확인.pdf) | 가족의 생년월일과 승인을 확인한다. 원천징수 선택 비율 변경 신청은 없다. |
-| [상시 근로자 확인과 공식 계산 기준](../data/authored_preview/B_payroll/B1_B003_e8a190e8/inputs/10_사업장과공식기준.hwpx) | 사업장 규모와 수당 법정 기준, 지급 시기별 자녀 공제 기준 및 공식 간이세액표 발췌다. 재마감 결과 숫자는 없다. |
+| [가상도윤 월급제 계약](../data/authored_preview/B_payroll/B1_B003_c4f00c3c/inputs/01_현장책임자계약.pdf) | 기본급과 소정근로 조건이다. 주휴 임금 포함과 추가 휴일 작업의 별도 지급 범위를 적었다. |
+| [직무수당과 식대 지급 약정](../data/authored_preview/B_payroll/B1_B003_c4f00c3c/inputs/02_정기수당약정.hwpx) | 정기 수당 금액과 단수 처리 약정이다. 현금 식대 지급과 비과세 판단은 구분한다. |
+| [취소된 이체 계획과 실제 지급 확인](../data/authored_preview/B_payroll/B1_B003_c4f00c3c/inputs/03_이체계획취소와실행확인.xlsx) | 취소된 2월 계획과 실제 3월 이체의 상태를 함께 적었다. 최종 이체 금액은 미작성이다. |
+| [평일 연장 최종 승인본](../data/authored_preview/B_payroll/B1_B003_c4f00c3c/inputs/04_평일연장최종승인.xlsx) | 중복 복사를 취소한 최종 승인이다. 폐기된 초안 숫자도 수정 사유로 남겼다. |
+| [2월 22일 현장 작업 승인](../data/authored_preview/B_payroll/B1_B003_c4f00c3c/inputs/05_일요일작업승인.pdf) | 작업 시작과 종료 및 두 휴게 구간이다. 휴일 작업과 야간 겹침을 검산할 수 있다. |
+| [평일 연장란에 복사된 기존 승인 차수](../data/authored_preview/B_payroll/B1_B003_c4f00c3c/inputs/06_근태초안대조.xlsx) | 근태 기록 번호를 최종 승인본과 맞춰 주세요. 이 표는 승인 차수 1의 보관 기록이며 변경 후에도 인수인계 폴더에 남았습니다. |
+| [2월 회사 식사 제공 확인](../data/authored_preview/B_payroll/B1_B003_c4f00c3c/inputs/07_식사제공확인.pdf) | 현금 식대와 별도로 식사를 제공한 사실이다. 비과세 결론은 적지 않았다. |
+| [2월 부과 보험 기준액 통지](../data/authored_preview/B_payroll/B1_B003_c4f00c3c/inputs/08_2월보험기준액통지.xlsx) | 이번 명세서에 공제할 보험 기준액이다. 원천세의 실제 지급일 자료와 구분한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다. |
+| [기본공제 가족과 원천징수 신청 확인](../data/authored_preview/B_payroll/B1_B003_c4f00c3c/inputs/09_부양가족확인.pdf) | 가족의 생년월일과 승인을 확인한다. 원천징수 선택 비율 변경 신청은 없다. |
+| [상시 근로자 확인과 공식 계산 기준](../data/authored_preview/B_payroll/B1_B003_c4f00c3c/inputs/10_사업장과공식기준.hwpx) | 사업장 규모와 수당 법정 기준, 지급 시기별 자녀 공제 기준 및 공식 간이세액표 발췌다. 재마감 결과 숫자는 없다. |
 
 계산한 정답:
 

@@ -139,10 +139,16 @@ def health_employee(base_income: int, due: bool = True) -> int:
 
 
 def calculate(scenario: dict) -> tuple[dict, list[dict]]:
-    """Return whole-won answer fields and serializable rule-ID calculation traces."""
+    """Return whole-won wage fields, the effective date and rule-ID traces."""
     paid = date.fromisoformat(scenario["payment_date"])
     if paid.year != 2026:
         raise ValueError("this engine supports 2026 only")
+    assessment_month = scenario.get("insurance_assessment_month")
+    if not isinstance(assessment_month, str) or len(assessment_month) != 7:
+        raise ValueError("insurance_assessment_month must be a 2026 YYYY-MM month")
+    assessment = date.fromisoformat(assessment_month + "-01")
+    if assessment.year != 2026 or assessment.isoformat()[:7] != assessment_month:
+        raise ValueError("insurance_assessment_month must be a 2026 YYYY-MM month")
     trace = []
 
     def record(rule_id: str, inputs: dict, output: dict | int) -> None:
@@ -155,7 +161,12 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
     if any(x < 0 for x in (monthly_salary, fixed, meals, variable)):
         raise ValueError("wages must be nonnegative")
     ordinary_monthly = monthly_salary + fixed + meals
+    paid_holiday_minutes = scenario.get("paid_holiday_minutes", 0)
+    if type(paid_holiday_minutes) is not int or paid_holiday_minutes < 0:
+        raise ValueError("paid_holiday_minutes must be nonnegative whole minutes")
     if scenario["pay_basis"] == "monthly":
+        if paid_holiday_minutes:
+            raise ValueError("Monthly salary already includes paid holiday wages")
         divisor = scenario["monthly_divisor_hours"]
         if divisor <= 0 or not scenario["weekly_holiday_included"]:
             raise ValueError("monthly scenario requires a positive divisor and included weekly pay")
@@ -187,6 +198,13 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
             "hourly_exact_denominator": hourly.denominator,
         },
     )
+    paid_holiday_pay = wage_won(hourly * paid_holiday_minutes / 60)
+    if "paid_holiday_minutes" in scenario:
+        record(
+            "PAID_HOLIDAY",
+            {"paid_holiday_minutes": paid_holiday_minutes, "pay_basis": scenario["pay_basis"]},
+            paid_holiday_pay,
+        )
 
     premium_applies = scenario["workplace_employee_count"] >= 5
     overtime_minutes = scenario["overtime_minutes"]
@@ -253,7 +271,17 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
     )
 
     exempt_meals = 0 if scenario["employer_provides_meals"] else min(200000, meals)
-    gross = base_pay + fixed + meals + variable + overtime + night + holiday + weekly_pay
+    gross = (
+        base_pay
+        + fixed
+        + meals
+        + variable
+        + overtime
+        + night
+        + holiday
+        + weekly_pay
+        + paid_holiday_pay
+    )
     taxable = gross - exempt_meals
     record(
         "MEAL_EXEMPT",
@@ -271,18 +299,20 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
             "night_pay": night,
             "holiday_pay": holiday,
             "weekly_holiday_pay": weekly_pay,
+            "paid_holiday_pay": paid_holiday_pay,
         },
         {"gross_pay": gross, "taxable_pay": taxable},
     )
 
     pension, bounded = pension_employee(
-        scenario["pension_notified_income"], paid.month, scenario["pension_due"]
+        scenario["pension_notified_income"], assessment.month, scenario["pension_due"]
     )
     record(
         "PENSION",
         {
             "notified_income": scenario["pension_notified_income"],
-            "month": paid.month,
+            "insurance_assessment_month": assessment_month,
+            "month": assessment.month,
             "due": scenario["pension_due"],
             "employee_rate": "0.0475",
         },
@@ -346,6 +376,7 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
         raise ValueError("deductions exceed pay: unsupported arrears/low-pay scenario")
     record("NET", {"gross_pay": gross, "deductions": deductions}, gross - deductions)
     gold = {
+        "effective_payment_date": paid.isoformat(),
         "ordinary_monthly_wage": ordinary_monthly,
         "ordinary_hourly_wage_floor": int(hourly),
         "base_pay": base_pay,
@@ -356,6 +387,7 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
         "night_pay": night,
         "holiday_pay": holiday,
         "weekly_holiday_pay": weekly_pay,
+        "paid_holiday_pay": paid_holiday_pay,
         "gross_pay": gross,
         "taxable_pay": taxable,
         "non_taxable_pay": exempt_meals,

@@ -29,6 +29,10 @@ SUPPORT_REPORTS = (
     "authored_yearend_first103_editorial.md",
     "authored_extract_first50_editorial.md",
     "authored_vat_first103_editorial.md",
+    "audit_evidence/vat_first103/post_counterfactuals.json",
+    "audit_evidence/vat_first103/post_engine_plan_checks.json",
+    "audit_evidence/vat_first103/post_visible_source_cf.json",
+    "audit_evidence/vat_first103/post_snapshot.json",
 )
 
 
@@ -400,6 +404,7 @@ def _write_export(tasks, manifests, evidence, rules, document_root, batches, out
     for filename in SUPPORT_REPORTS:
         path = document_root / "reports" / filename
         if path.is_file():
+            (output / "reports" / filename).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(path, output / "reports" / filename)
     for batch, values in evidence.items():
         for item in values.values():

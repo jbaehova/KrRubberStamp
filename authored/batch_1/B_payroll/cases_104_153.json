@@ -3,15 +3,18 @@
     "case_id": "B104",
     "domain": "B_payroll",
     "difficulty": "easy",
-    "title": "급여 미지급금 계정의 두 지급처를 분리하는 전표",
-    "instruction": "가상나루기록사의 급여 미지급금 계정을 닫으려 합니다. 직원 계좌로 보낼 금액과 공제 기관에 보관할 금액을 별도 전표로 옮길 수 있도록 총지급액, 공제 합계, 실지급액을 계산해 주세요. 계약의 지급 항목과 기관별 신고 기준은 서로 다른 자료입니다.",
-    "work_goal": "하나의 급여 채무를 직원 지급과 기관 납부로 나누어 회계 전표를 준비한다.",
-    "design_rationale": "보험료는 이번 지급 총액에서 역산하지 않고 공단 통지를 사용한다. 원천세와 지방소득세도 기관 보관 금액에 포함한다.",
+    "title": "통상임금 마스터와 당월 실적 지급 분리",
+    "instruction": "가상나루기록사는 정액 계약의 통상임금 마스터와 4월 원천세 급여란을 따로 갱신합니다. 계약의 소정근로 대가와 당월 판매량에 따라 확정된 비정기 실적 수당을 구분해 통상 월 임금과 표시 시급을 작성해 주세요. 지급 총액, 비과세 식대 및 간이세액표용 과세급여도 구합니다.",
+    "work_goal": "당월 실적 지급을 통상임금 마스터와 원천세 급여란에 서로 맞는 범위로 기록한다.",
+    "design_rationale": "정액 소정근로 대가는 통상임금에 포함하며 이번 달 실적에 따라 발생한 별도 수당은 과세 지급에만 합산한다. 식대는 통상임금에 포함하면서 비과세 한도로 구분한다.",
     "exceptions": [],
     "answer_fields": [
+      "ordinary_monthly_wage",
+      "ordinary_hourly_wage_floor",
+      "variable_allowance",
       "gross_pay",
-      "total_deductions",
-      "net_pay"
+      "non_taxable_pay",
+      "taxable_pay"
     ],
     "facts": {
       "employee_name": "가상기록담당104",
@@ -22,7 +25,7 @@
       "base_salary": 3170000,
       "fixed_allowance": 80000,
       "meal_allowance": 150000,
-      "variable_allowance": 0,
+      "variable_allowance": 125000,
       "monthly_divisor_hours": 209,
       "hourly_rate": 0,
       "regular_minutes": 0,
@@ -43,56 +46,56 @@
       "family_count": 2,
       "eligible_children": 0,
       "withholding_percent": 100,
-      "scope_note": "대한민국 거주자인 계속가입 직원의 주휴 포함 정액급여다. 당월 가산수당과 정산 보험료가 없다. 본인과 배우자 공제가 등록되어 있다. 음식물 별도 제공 없이 현금 식대를 지급한다.",
+      "scope_note": "계속가입 거주자 월급 직원이다. 기본급과 정액 직무수당 및 정액 식대는 정기적 일률적 소정근로 대가다. 별도 실적 수당은 4월 판매량을 마감한 이번 달 한 번의 과세 지급이며 다개월 상여가 아니다. 고정 지급 보장이 없고 소정근로 대가로 정기적 일률적으로 지급되는 수당이 아니다. 음식물 제공 및 추가 근로와 보험 정산은 없다.",
       "settlement_policy": "보험료 및 세금 각 항목은 10원 미만 버림한다. 표시 시급은 원 미만 버림한다.",
       "withholding_reference": {
         "source_url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=164357181",
         "effective_period": "원문 별표 개정 2026-02-27. 가족수별 기본 표 세액은 2023년 표와 동일.",
         "table_rows": [
           {
-            "wage_from_won": 3220000,
-            "wage_below_won": 3240000,
-            "family_tax_1": 93170,
-            "family_tax_2": 75670,
-            "family_tax_3": 40120,
-            "family_tax_4": 33950,
-            "family_tax_5": 28700,
-            "family_tax_6": 23450,
-            "family_tax_7": 18390,
-            "family_tax_8": 15020,
-            "family_tax_9": 11640,
-            "family_tax_10": 8270,
-            "family_tax_11": 4890
+            "wage_from_won": 3340000,
+            "wage_below_won": 3360000,
+            "family_tax_1": 107660,
+            "family_tax_2": 85940,
+            "family_tax_3": 49940,
+            "family_tax_4": 37870,
+            "family_tax_5": 32620,
+            "family_tax_6": 27370,
+            "family_tax_7": 22120,
+            "family_tax_8": 17540,
+            "family_tax_9": 14170,
+            "family_tax_10": 10790,
+            "family_tax_11": 7420
           },
           {
-            "wage_from_won": 3240000,
-            "wage_below_won": 3260000,
-            "family_tax_1": 95430,
-            "family_tax_2": 77380,
-            "family_tax_3": 41770,
-            "family_tax_4": 34610,
-            "family_tax_5": 29360,
-            "family_tax_6": 24110,
-            "family_tax_7": 18860,
-            "family_tax_8": 15440,
-            "family_tax_9": 12070,
-            "family_tax_10": 8690,
-            "family_tax_11": 5320
+            "wage_from_won": 3360000,
+            "wage_below_won": 3380000,
+            "family_tax_1": 110100,
+            "family_tax_2": 87650,
+            "family_tax_3": 51510,
+            "family_tax_4": 38500,
+            "family_tax_5": 33250,
+            "family_tax_6": 28000,
+            "family_tax_7": 22750,
+            "family_tax_8": 17950,
+            "family_tax_9": 14570,
+            "family_tax_10": 11200,
+            "family_tax_11": 7820
           },
           {
-            "wage_from_won": 3260000,
-            "wage_below_won": 3280000,
-            "family_tax_1": 97880,
-            "family_tax_2": 79100,
-            "family_tax_3": 43420,
-            "family_tax_4": 35270,
-            "family_tax_5": 30020,
-            "family_tax_6": 24770,
-            "family_tax_7": 19520,
-            "family_tax_8": 15870,
-            "family_tax_9": 12490,
-            "family_tax_10": 9120,
-            "family_tax_11": 5740
+            "wage_from_won": 3380000,
+            "wage_below_won": 3400000,
+            "family_tax_1": 112550,
+            "family_tax_2": 89370,
+            "family_tax_3": 53070,
+            "family_tax_4": 39950,
+            "family_tax_5": 33880,
+            "family_tax_6": 28630,
+            "family_tax_7": 23380,
+            "family_tax_8": 18350,
+            "family_tax_9": 14970,
+            "family_tax_10": 11600,
+            "family_tax_11": 8220
           }
         ],
         "family_count_over_eleven": "소득세법 시행령 별표2 제4호: 공제대상가족이 11명을 초과하면 11명 표 세액에서 (10명 표 세액 - 11명 표 세액) 곱하기 11명 초과 가족 수를 차감한다. 음수 결과는 0원으로 처리한다.",
@@ -109,14 +112,21 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
+      },
+      "insurance_assessment_month": "2026-04",
+      "performance_record": {
+        "period": "2026-04",
+        "basis": "당월 판매량별 건당 지급",
+        "approved_on": "2026-04-23",
+        "payment_kind": "한 달 실적에 따른 비정기 변동 수당"
       }
     },
     "documents": [
       {
         "filename": "01_채무발생.pdf",
         "format": "pdf",
-        "title": "급여 채무 발생 계약",
-        "note": "직원에게 약정한 정액 항목이다. 기관 신고 기준과 혼동하지 않는다.",
+        "title": "정액 소정근로 대가의 통상임금 마스터",
+        "note": "정액 항목은 마스터에 포함한다. 실적 지급은 별도 승인 자료다.",
         "fields": [
           "employee_name",
           "company_name",
@@ -126,7 +136,6 @@
           "base_salary",
           "fixed_allowance",
           "meal_allowance",
-          "variable_allowance",
           "monthly_divisor_hours",
           "hourly_rate",
           "weekly_hours",
@@ -137,10 +146,10 @@
         "template_variant": 4
       },
       {
-        "filename": "02_납부기준.xlsx",
+        "filename": "02_4월실적.xlsx",
         "format": "xlsx",
-        "title": "기관 보관 계정의 부과 기초",
-        "note": "본인 부담분만 산정한다. 가족 등록은 원천세 계산에 사용한다.",
+        "title": "4월 판매량 마감 수당과 기관 통지",
+        "note": "당월 실적 지급은 과세 지급 총액에 합산하며 통상임금 마스터에는 넣지 않는다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -150,15 +159,18 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month",
+          "variable_allowance",
+          "performance_record"
         ],
         "template_variant": 1
       },
       {
         "filename": "03_전표범위.hwpx",
         "format": "hwpx",
-        "title": "미지급금 전표 마감 범위와 공식 기준",
-        "note": "추가 근로나 음식물 제공은 없다. 총 채무와 두 지급처의 금액을 대조한다.",
+        "title": "통상임금과 원천세 입력 범위 기준",
+        "note": "정액 통상임금과 과세 지급 총액 및 식대 비과세를 구분한다.",
         "fields": [
           "regular_minutes",
           "qualifying_weeks",
@@ -285,7 +297,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-05"
     },
     "documents": [
       {
@@ -315,7 +328,7 @@
         "filename": "02_검수공제.pdf",
         "format": "pdf",
         "title": "정상 지급일과 공제 등록",
-        "note": "부과와 가족 등록은 확정된 통지다. 과세급여를 공단 보수와 혼동하지 않는다.",
+        "note": "부과와 가족 등록은 확정된 통지다. 과세급여를 공단 보수와 혼동하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "payment_date",
           "pension_notified_income",
@@ -326,7 +339,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 3
       },
@@ -460,7 +474,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-09"
     },
     "documents": [
       {
@@ -491,7 +506,7 @@
         "filename": "02_기관별통지.xlsx",
         "format": "xlsx",
         "title": "공단별 해당 지급 신고액",
-        "note": "건강과 고용의 신고 기준은 각 통지에 적힌 숫자를 사용한다.",
+        "note": "건강과 고용의 신고 기준은 각 통지에 적힌 숫자를 사용한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -501,7 +516,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -660,7 +676,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-09"
     },
     "documents": [
       {
@@ -706,7 +723,7 @@
         "filename": "03_인수공제.pdf",
         "format": "pdf",
         "title": "계약 종료 지급의 기관 확인과 법정 기준",
-        "note": "이번 계산에만 적용되는 부과 통지다. 퇴직 정산 자료가 아니다.",
+        "note": "이번 계산에만 적용되는 부과 통지다. 퇴직 정산 자료가 아니다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -718,7 +735,8 @@
           "eligible_children",
           "withholding_percent",
           "withholding_reference",
-          "law_reference"
+          "law_reference",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       }
@@ -854,7 +872,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-04"
     },
     "documents": [
       {
@@ -901,7 +920,7 @@
         "filename": "03_반출기준.hwpx",
         "format": "hwpx",
         "title": "정상 공제 통지와 수당 계산 참조",
-        "note": "시급 표시의 버림과 수당 지급의 올림은 목적이 다르다.",
+        "note": "시급 표시의 버림과 수당 지급의 올림은 목적이 다르다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -913,7 +932,8 @@
           "eligible_children",
           "withholding_percent",
           "withholding_reference",
-          "law_reference"
+          "law_reference",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       }
@@ -1051,7 +1071,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-05"
     },
     "documents": [
       {
@@ -1098,7 +1119,7 @@
         "filename": "03_정원신고.xlsx",
         "format": "xlsx",
         "title": "당월 공제 통지와 휴일 지급 참조",
-        "note": "실제 휴일 근로 대가에 평일 연장 가산을 다시 더하지 않는다.",
+        "note": "실제 휴일 근로 대가에 평일 연장 가산을 다시 더하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -1110,7 +1131,8 @@
           "eligible_children",
           "withholding_percent",
           "law_reference",
-          "withholding_reference"
+          "withholding_reference",
+          "insurance_assessment_month"
         ],
         "template_variant": 2
       }
@@ -1227,7 +1249,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-10"
     },
     "documents": [
       {
@@ -1273,7 +1296,7 @@
         "filename": "03_새벽공제.pdf",
         "format": "pdf",
         "title": "해당 지급 부과 통지와 야간 기준",
-        "note": "확정된 기관 자격을 사용한다. 이 카드 외 근로는 없다.",
+        "note": "확정된 기관 자격을 사용한다. 이 카드 외 근로는 없다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -1285,7 +1308,8 @@
           "eligible_children",
           "withholding_percent",
           "law_reference",
-          "withholding_reference"
+          "withholding_reference",
+          "insurance_assessment_month"
         ],
         "template_variant": 1
       }
@@ -1401,7 +1425,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-08"
     },
     "documents": [
       {
@@ -1432,7 +1457,7 @@
         "filename": "02_배식등록.hwpx",
         "format": "hwpx",
         "title": "배식 제공 확인과 부과 등록",
-        "note": "현물 점심 확인은 현금 지급 항목을 새로 만드는 자료가 아니다.",
+        "note": "현물 점심 확인은 현금 지급 항목을 새로 만드는 자료가 아니다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "employer_provides_meals",
           "pension_notified_income",
@@ -1443,7 +1468,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 2
       },
@@ -1576,7 +1602,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-11"
     },
     "documents": [
       {
@@ -1607,7 +1634,7 @@
         "filename": "02_공제가족.pdf",
         "format": "pdf",
         "title": "해당 지급의 가족 등록과 공단 통지",
-        "note": "공제는 승인된 가족 정보와 선택 비율을 사용한다.",
+        "note": "공제는 승인된 가족 정보와 선택 비율을 사용한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -1617,7 +1644,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -1751,7 +1779,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-04"
     },
     "documents": [
       {
@@ -1782,7 +1811,7 @@
         "filename": "02_단수통지.xlsx",
         "format": "xlsx",
         "title": "연금 신고액과 건강 보수의 끝자리",
-        "note": "원문 숫자를 그대로 제공한다. 기관 간에 입력값을 재사용하지 않는다.",
+        "note": "원문 숫자를 그대로 제공한다. 기관 간에 입력값을 재사용하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -1792,7 +1821,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 1
       },
@@ -1926,7 +1956,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-10"
     },
     "documents": [
       {
@@ -1957,7 +1988,7 @@
         "filename": "02_여섯가족.hwpx",
         "format": "hwpx",
         "title": "본인 포함 가족과 네 자녀 승인 등록",
-        "note": "기본공제 가족 열과 자녀 공제 산식은 별도로 적용한다.",
+        "note": "기본공제 가족 열과 자녀 공제 산식은 별도로 적용한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "family_count",
           "eligible_children",
@@ -1967,7 +1998,8 @@
           "employment_notified_income",
           "pension_due",
           "health_due",
-          "employment_due"
+          "employment_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -2101,7 +2133,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-06"
     },
     "documents": [
       {
@@ -2132,7 +2165,7 @@
         "filename": "02_식사확인.pdf",
         "format": "pdf",
         "title": "별도 음식물 제공 확인과 보험 등록",
-        "note": "비과세 식대 요건의 실제 식사 제공 여부를 확인한다.",
+        "note": "비과세 식대 요건의 실제 식사 제공 여부를 확인한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "employer_provides_meals",
           "pension_notified_income",
@@ -2143,7 +2176,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -2276,7 +2310,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-01"
     },
     "documents": [
       {
@@ -2307,7 +2342,7 @@
         "filename": "02_기본등록.hwpx",
         "format": "hwpx",
         "title": "기본 가족과 기관 기준 등록",
-        "note": "각 기관 통지와 본인 한 명 등록이 확정되었다.",
+        "note": "각 기관 통지와 본인 한 명 등록이 확정되었다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -2317,7 +2352,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 3
       },
@@ -2474,7 +2510,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-08"
     },
     "documents": [
       {
@@ -2520,7 +2557,7 @@
         "filename": "03_기록부과.hwpx",
         "format": "hwpx",
         "title": "단기 지급 기관 통지와 단수 기준",
-        "note": "이 기간에 적용되는 부과만 사용한다.",
+        "note": "이 기간에 적용되는 부과만 사용한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -2532,7 +2569,8 @@
           "eligible_children",
           "withholding_percent",
           "withholding_reference",
-          "law_reference"
+          "law_reference",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       }
@@ -2651,7 +2689,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-07"
     },
     "documents": [
       {
@@ -2682,7 +2721,7 @@
         "filename": "02_입금공제.xlsx",
         "format": "xlsx",
         "title": "안내용 기관 통지와 가족 등록",
-        "note": "실제 입금액에서 차감하는 공제 기초다.",
+        "note": "실제 입금액에서 차감하는 공제 기초다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -2692,7 +2731,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 2
       },
@@ -2853,7 +2893,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-09"
     },
     "documents": [
       {
@@ -2909,7 +2950,7 @@
         "filename": "04_창고공제.xlsx",
         "format": "xlsx",
         "title": "해당 지급 기관과 가족 등록",
-        "note": "기관별 기초는 확정 통지다.",
+        "note": "기관별 기초는 확정 통지다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -2919,7 +2960,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 1
       },
@@ -3092,7 +3134,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-07"
     },
     "documents": [
       {
@@ -3150,7 +3193,7 @@
         "filename": "04_색인부과.hwpx",
         "format": "hwpx",
         "title": "해당 지급 자격과 가족 등록",
-        "note": "급여 외 정산을 추가하지 않는다.",
+        "note": "급여 외 정산을 추가하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -3160,7 +3203,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -3326,7 +3370,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-04"
     },
     "documents": [
       {
@@ -3382,7 +3427,7 @@
         "filename": "04_수선공제.pdf",
         "format": "pdf",
         "title": "당월 기관 기준과 기본공제 등록",
-        "note": "기관 기준에서 근태 임금을 다시 추정하지 않는다.",
+        "note": "기관 기준에서 근태 임금을 다시 추정하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -3392,7 +3437,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 3
       },
@@ -3564,7 +3610,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-04"
     },
     "documents": [
       {
@@ -3620,7 +3667,7 @@
         "filename": "04_복원부과.hwpx",
         "format": "hwpx",
         "title": "기관별 부과 기초와 가족 등록",
-        "note": "승인 근로와 보험 신고는 독립 기초다.",
+        "note": "승인 근로와 보험 신고는 독립 기초다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -3630,7 +3677,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 2
       },
@@ -3774,7 +3822,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-02"
     },
     "documents": [
       {
@@ -3827,7 +3876,7 @@
         "filename": "04_사진일정.pdf",
         "format": "pdf",
         "title": "근로 범위와 공단별 확정 통지",
-        "note": "이 지급의 보험 신고액에 정산분이 없다.",
+        "note": "이 지급의 보험 신고액에 정산분이 없다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "regular_schedule",
           "week_attendance",
@@ -3840,7 +3889,8 @@
           "employment_notified_income",
           "pension_due",
           "health_due",
-          "employment_due"
+          "employment_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 3
       },
@@ -3975,7 +4025,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-08"
     },
     "documents": [
       {
@@ -4030,7 +4081,7 @@
         "filename": "04_검사부과.hwpx",
         "format": "hwpx",
         "title": "해당 지급 부과 자격과 가족 등록",
-        "note": "다른 달 부과 상태를 추정해서 추가하지 않는다.",
+        "note": "다른 달 부과 상태를 추정해서 추가하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -4040,7 +4091,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -4196,7 +4248,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-05"
     },
     "documents": [
       {
@@ -4252,7 +4305,7 @@
         "filename": "04_제작신고.pdf",
         "format": "pdf",
         "title": "제작 직원 공제 기초 등록",
-        "note": "기관 통지는 해당 지급에 확정되었다.",
+        "note": "기관 통지는 해당 지급에 확정되었다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -4262,7 +4315,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -4432,7 +4486,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-09"
     },
     "documents": [
       {
@@ -4488,7 +4543,7 @@
         "filename": "04_버들등록.hwpx",
         "format": "hwpx",
         "title": "공단과 가족 등록의 확정 기초",
-        "note": "기관의 신고 기준을 사용한다.",
+        "note": "기관의 신고 기준을 사용한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -4498,7 +4553,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 1
       },
@@ -4628,7 +4684,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-05"
     },
     "documents": [
       {
@@ -4659,10 +4716,11 @@
         "filename": "02_연금부과.xlsx",
         "format": "xlsx",
         "title": "국민연금 해당 지급 부과 통지",
-        "note": "통지에서 부과와 기준을 확인했다.",
+        "note": "통지에서 부과와 기준을 확인했다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -4715,25 +4773,23 @@
     "case_id": "B128",
     "domain": "B_payroll",
     "difficulty": "medium",
-    "title": "연금 부과 종료 뒤 유지된 두 다른 사회보험",
-    "instruction": "가상비탈문서사의 기관 통지에는 국민연금 부과 종료와 건강보험 및 고용보험 계속 부과가 표시되어 있습니다. 이번 연금 공제액, 건강보험료, 장기요양보험료, 고용보험료를 각각 계산해 주세요. 연금 부과 종료를 다른 기관의 공제 종료로 복사하지 않고 전체 공제 합계로 연결합니다.",
-    "work_goal": "한 보험의 부과 종료 통지를 기관별 공제 원장에 정확하게 반영한다.",
-    "design_rationale": "부과 종료는 기관별 확정 사실이다. 연금이 없어도 다른 보험료와 세금은 지급에서 계속 차감된다.",
+    "title": "소재 배포 연장 카드의 수정 승인 마감",
+    "instruction": "가상비탈문서사의 소재 배포 연장 카드가 수정 승인되었습니다. 폐기된 카드와 최종 승인 기록을 대조하고 무급 휴게를 제외한 평일 연장수당을 계산해 주세요. 정액 월급에 추가한 총지급액과 과세급여 및 공단 공제 후 실지급액을 작성합니다.",
+    "work_goal": "수정 승인으로 확정된 추가 근로를 급여 원장에 한 번 반영한다.",
+    "design_rationale": "초기 카드와 수정 카드의 근로 번호는 같으며 최종 승인본만 실제 지급 사건이다. 상태를 선택한 다음 시각에서 시간을 구하여 수당을 계산하고 독립 보험 통지를 적용한다.",
     "exceptions": [
-      "국민연금만 부과 종료되었으며 건강과 고용은 계속 부과한다."
+      "같은 근로 번호의 초기 카드가 폐기되고 시간이 늘어난 최종 승인본이 확정되었다."
     ],
     "answer_fields": [
-      "national_pension",
-      "health_insurance",
-      "long_term_care",
-      "employment_insurance",
-      "total_deductions"
+      "overtime_pay",
+      "gross_pay",
+      "taxable_pay",
+      "net_pay"
     ],
     "facts": {
       "employee_name": "가상문서담당128",
       "company_name": "가상비탈문서사",
-      "employee_age": 62,
-      "payment_date": "2026-09-28",
+      "employee_age": 41,
       "pay_basis": "monthly",
       "base_salary": 4680000,
       "fixed_allowance": 120000,
@@ -4741,74 +4797,68 @@
       "variable_allowance": 0,
       "monthly_divisor_hours": 209,
       "hourly_rate": 0,
-      "regular_minutes": 0,
       "weekly_hours": 40,
-      "qualifying_weeks": 0,
       "weekly_holiday_included": true,
       "workplace_employee_count": 20,
-      "overtime_minutes": 0,
-      "night_minutes": 0,
-      "holiday_shifts": [],
-      "employer_provides_meals": false,
       "pension_notified_income": 4800000,
       "health_notified_income": 4870000,
       "employment_notified_income": 4830000,
-      "pension_due": false,
+      "pension_due": true,
       "health_due": true,
       "employment_due": true,
       "family_count": 2,
       "eligible_children": 0,
       "withholding_percent": 100,
-      "scope_note": "62세 거주자 직원의 연금 부과 종료가 확정 통지되었다. 건강과 고용 계속 부과 및 해당 지급 기준도 독립적으로 통지되었다. 자격 사유를 나이만으로 다시 판정하지 않는다. 주휴 포함 정액이고 현금 식대 외 음식물 및 가산근로와 보험 정산이 없다.",
+      "scope_note": "거주자 계속가입 월급 직원이며 주휴는 정액에 포함된다. 근로 번호가 같은 기록은 최신 approved만 반영하고 superseded는 폐기한다. 이번 추가 기록은 소정근로 종료 뒤 평일 연장으로22시 전에 끝났다. 음식물과 현금 식대는 중복 제공하지 않으며 기관별 당월 정상 부과 및 정산 없음이 확정되었다.",
       "settlement_policy": "기관별 보험과 세금 항목은 10원 미만 버림한다.",
       "withholding_reference": {
         "source_url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=164357181",
         "effective_period": "원문 별표 개정 2026-02-27. 가족수별 기본 표 세액은 2023년 표와 동일.",
         "table_rows": [
           {
-            "wage_from_won": 4780000,
-            "wage_below_won": 4800000,
-            "family_tax_1": 304610,
-            "family_tax_2": 276020,
-            "family_tax_3": 209470,
-            "family_tax_4": 190720,
-            "family_tax_5": 171970,
-            "family_tax_6": 153220,
-            "family_tax_7": 134470,
-            "family_tax_8": 115720,
-            "family_tax_9": 96970,
-            "family_tax_10": 81090,
-            "family_tax_11": 67960
+            "wage_from_won": 4880000,
+            "wage_below_won": 4900000,
+            "family_tax_1": 318640,
+            "family_tax_2": 289970,
+            "family_tax_3": 222370,
+            "family_tax_4": 203620,
+            "family_tax_5": 184870,
+            "family_tax_6": 166120,
+            "family_tax_7": 147370,
+            "family_tax_8": 128620,
+            "family_tax_9": 109870,
+            "family_tax_10": 91120,
+            "family_tax_11": 76990
           },
           {
-            "wage_from_won": 4800000,
-            "wage_below_won": 4820000,
-            "family_tax_1": 307420,
-            "family_tax_2": 278810,
-            "family_tax_3": 212050,
-            "family_tax_4": 193300,
-            "family_tax_5": 174550,
-            "family_tax_6": 155800,
-            "family_tax_7": 137050,
-            "family_tax_8": 118300,
-            "family_tax_9": 99550,
-            "family_tax_10": 82890,
-            "family_tax_11": 69770
+            "wage_from_won": 4900000,
+            "wage_below_won": 4920000,
+            "family_tax_1": 321440,
+            "family_tax_2": 292760,
+            "family_tax_3": 224950,
+            "family_tax_4": 206200,
+            "family_tax_5": 187450,
+            "family_tax_6": 168700,
+            "family_tax_7": 149950,
+            "family_tax_8": 131200,
+            "family_tax_9": 112450,
+            "family_tax_10": 93700,
+            "family_tax_11": 78800
           },
           {
-            "wage_from_won": 4820000,
-            "wage_below_won": 4840000,
-            "family_tax_1": 310220,
-            "family_tax_2": 281600,
-            "family_tax_3": 214630,
-            "family_tax_4": 195880,
-            "family_tax_5": 177130,
-            "family_tax_6": 158380,
-            "family_tax_7": 139630,
-            "family_tax_8": 120880,
-            "family_tax_9": 102130,
-            "family_tax_10": 84700,
-            "family_tax_11": 71570
+            "wage_from_won": 4920000,
+            "wage_below_won": 4940000,
+            "family_tax_1": 324250,
+            "family_tax_2": 295550,
+            "family_tax_3": 227530,
+            "family_tax_4": 208780,
+            "family_tax_5": 190030,
+            "family_tax_6": 171280,
+            "family_tax_7": 152530,
+            "family_tax_8": 133780,
+            "family_tax_9": 115030,
+            "family_tax_10": 96280,
+            "family_tax_11": 80600
           }
         ],
         "family_count_over_eleven": "소득세법 시행령 별표2 제4호: 공제대상가족이 11명을 초과하면 11명 표 세액에서 (10명 표 세액 - 11명 표 세액) 곱하기 11명 초과 가족 수를 차감한다. 음수 결과는 0원으로 처리한다.",
@@ -4825,19 +4875,56 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-09",
+      "source_contract": "payroll_evidence_v1",
+      "regular_schedule": {
+        "working_days": 20,
+        "minutes_per_day": 480,
+        "unpaid_absences": []
+      },
+      "week_attendance": [],
+      "holiday_dates": [],
+      "payment_records": [
+        {
+          "revision": 1,
+          "status": "approved",
+          "date": "2026-09-28"
+        }
+      ],
+      "meal_service": "none",
+      "work_records": [
+        {
+          "record_id": "소재배포0922",
+          "revision": 1,
+          "status": "superseded",
+          "category": "additional",
+          "start": "2026-09-22 18:00",
+          "end": "2026-09-22 20:00",
+          "breaks": []
+        },
+        {
+          "record_id": "소재배포0922",
+          "revision": 2,
+          "status": "approved",
+          "category": "additional",
+          "start": "2026-09-22 18:00",
+          "end": "2026-09-22 21:00",
+          "breaks": []
+        }
+      ]
     },
     "documents": [
       {
-        "filename": "01_문서급여.hwpx",
+        "filename": "01_소재정액.hwpx",
         "format": "hwpx",
-        "title": "문서 담당 정액 지급 계약",
-        "note": "연금 공제 변경 후에도 지급 계약은 같은 정액이다.",
+        "title": "소재 담당 소정근로 정액 계약",
+        "note": "추가 카드 상태와 시각은 별도 원장에서 확정한다.",
         "fields": [
           "employee_name",
           "company_name",
           "employee_age",
-          "payment_date",
+          "source_contract",
           "pay_basis",
           "base_salary",
           "fixed_allowance",
@@ -4849,62 +4936,59 @@
           "weekly_holiday_included",
           "scope_note",
           "settlement_policy"
-        ],
-        "template_variant": 4
+        ]
       },
       {
-        "filename": "02_연금종료.pdf",
+        "filename": "02_초기카드.pdf",
         "format": "pdf",
-        "title": "해당 지급의 연금 부과 종료 확인",
-        "note": "다른 보험의 상태는 이 통지에서 추정하지 않는다.",
+        "title": "폐기된 소재 배포 최초 카드",
+        "note": "이 기록은 superseded로 폐기되었다.",
+        "fields": [
+          "work_records.0"
+        ]
+      },
+      {
+        "filename": "03_승인카드.xlsx",
+        "format": "xlsx",
+        "title": "최종 승인 배포 카드와 정상 일정",
+        "note": "승인 근로와 휴게 원자료이며 시간이 늘어난 최종 기록이다.",
+        "fields": [
+          "work_records.1",
+          "regular_schedule",
+          "week_attendance",
+          "holiday_dates",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "04_소재공단.hwpx",
+        "format": "hwpx",
+        "title": "독립 보험 통지 및 지급과 가족 등록",
+        "note": "기관별 부과월과 기준 및 지급 신청을 확인한다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
-        ],
-        "template_variant": 1
-      },
-      {
-        "filename": "03_계속부과.xlsx",
-        "format": "xlsx",
-        "title": "건강과 고용 계속 부과 통지",
-        "note": "각 기관의 독립 기준으로 근로자 부담을 계산한다.",
-        "fields": [
+          "pension_due",
+          "insurance_assessment_month",
           "health_notified_income",
           "health_due",
           "employment_notified_income",
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
-        ],
-        "template_variant": 3
+          "withholding_percent",
+          "payment_records",
+          "meal_service"
+        ]
       },
       {
-        "filename": "04_문서범위.hwpx",
-        "format": "hwpx",
-        "title": "정액 외 지급 범위 확인",
-        "note": "추가 근로와 별도 음식물은 없다.",
-        "fields": [
-          "regular_minutes",
-          "qualifying_weeks",
-          "workplace_employee_count",
-          "overtime_minutes",
-          "night_minutes",
-          "holiday_shifts",
-          "employer_provides_meals"
-        ],
-        "template_variant": 0
-      },
-      {
-        "filename": "05_종료참조.pdf",
+        "filename": "05_소재기준.pdf",
         "format": "pdf",
-        "title": "기관별 공제 유지와 세금 참조",
-        "note": "공제 합계에는 계속 부과되는 보험과 세금이 포함된다.",
+        "title": "평일 연장과 해당 지급 공제 공식 기준",
+        "note": "최종 근로 사실을 확정한 뒤 공식 배율과 세액표를 적용한다.",
         "fields": [
           "law_reference",
           "withholding_reference"
-        ],
-        "template_variant": 2
+        ]
       }
     ]
   },
@@ -4913,13 +4997,14 @@
     "domain": "B_payroll",
     "difficulty": "medium",
     "title": "실행 번호와 계획 번호를 대조한 반기 연금 적용",
-    "instruction": "가상세모소재실의 지급 자료에는 실행된 은행 기록과 그 뒤에 만든 높은 번호의 계획이 함께 있습니다. 기록 상태로 실제 지급일을 정하여 연금 적용 기준과 근로자 부담액을 계산해 주세요. 총공제액을 구할 때 건강과 고용에는 각 기관 통지의 기준을 사용합니다.",
-    "work_goal": "반기 상한을 번호 순서가 아닌 실제 지급 실행의 시기에 연결한다.",
-    "design_rationale": "취소나 승인 계획의 높은 번호보다 실행 기록을 우선한다. 고액 연금 신고 기준이라 잘못된 반기 선택이 실제 공제 차이로 이어진다.",
+    "instruction": "가상세모소재실에는 은행 실행 기록과 그 뒤에 작성한 높은 번호의 계획이 함께 있습니다. 실제 지급일을 effective_payment_date에 YYYY-MM-DD로 작성하고 공단의 별도 보험 부과월로 연금 기준소득월액과 근로자 부담액을 계산해 주세요. 건강과 고용의 독립 통지 기준을 사용한 총공제액도 구합니다.",
+    "work_goal": "지급 실행 원장과 보험 부과 원장을 각각의 확정 근거로 대조한다.",
+    "design_rationale": "높은 번호의 미실행 계획은 은행 실행일을 바꾸지 않는다. 지급일을 바꾸면 요청한 날짜가 변하지만 부과월을 고정한 연금 금액은 유지되어야 한다.",
     "exceptions": [
-      "실행되지 않은 후속 계획의 날짜와 실제 실행일이 연금 반기 경계 양쪽에 있다."
+      "이미 실행된 은행 기록 뒤에 더 높은 번호의 아직 실행하지 않은 계획이 남아 있다."
     ],
     "answer_fields": [
+      "effective_payment_date",
       "pension_base_income",
       "national_pension",
       "total_deductions"
@@ -4969,7 +5054,7 @@
         }
       ],
       "meal_service": "none",
-      "scope_note": "거주자 계속가입 정액급여다. 은행 실행을 후속 승인 계획보다 우선한다. 공단 통지는 이 지급의 상하한 적용 전 기준이고 정산분이 없다. 주휴 포함 계약이며 현금 식대 외 음식물과 근로 가산이 없다.",
+      "scope_note": "거주자 계속가입 정액급여다. 은행 실행을 후속 승인 계획보다 우선한다. 공단 통지는 이 지급의 상하한 적용 전 기준이고 정산분이 없다. 주휴 포함 계약이며 현금 식대 외 음식물과 근로 가산이 없다. 공단의 보험 부과월은 통지에 별도로 확정되어 있고 은행 실행일이 바뀌어도 같은 부과분의 연금 상하한은 바뀌지 않는다.",
       "settlement_policy": "보험과 세금 각 항목은 10원 미만 버림한다.",
       "withholding_reference": {
         "source_url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=164357181",
@@ -5035,7 +5120,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-06"
     },
     "documents": [
       {
@@ -5076,10 +5162,11 @@
         "filename": "03_소재연금.hwpx",
         "format": "hwpx",
         "title": "연금 상한 적용 전 신고 통지",
-        "note": "반기 기준을 적용하기 전 공단의 원래 신고액이다.",
+        "note": "반기 기준을 적용하기 전 공단의 원래 신고액이다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -5109,7 +5196,7 @@
         "filename": "05_반기참조.hwpx",
         "format": "hwpx",
         "title": "반기 상한과 공제 계산 기준",
-        "note": "두 기간의 기준을 모두 제공한다. 실제 실행일로 선택한다.",
+        "note": "반기별 기준을 모두 제공한다. 연금은 공단 부과월로 선택하고 원천세는 실제 지급일로 적용한다.",
         "fields": [
           "law_reference",
           "withholding_reference"
@@ -5231,7 +5318,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-04"
     },
     "documents": [
       {
@@ -5273,7 +5361,7 @@
         "filename": "03_소리등록.xlsx",
         "format": "xlsx",
         "title": "연금 고용과 가족 등록",
-        "note": "건강 자격과 독립적으로 부과 및 세금을 계산한다.",
+        "note": "건강 자격과 독립적으로 부과 및 세금을 계산한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "pension_due",
@@ -5281,7 +5369,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -5438,7 +5527,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-09"
     },
     "documents": [
       {
@@ -5494,7 +5584,7 @@
         "filename": "04_식탁부과.pdf",
         "format": "pdf",
         "title": "직원 공단과 가족 등록",
-        "note": "기관 기준은 확정되어 있다.",
+        "note": "기관 기준은 확정되어 있다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -5504,7 +5594,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 1
       },
@@ -5660,7 +5751,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-11"
     },
     "documents": [
       {
@@ -5716,7 +5808,7 @@
         "filename": "04_돌담공제.hwpx",
         "format": "hwpx",
         "title": "당월 기관과 가족 등록",
-        "note": "급여에서 추정한 보수를 사용하지 않는다.",
+        "note": "급여에서 추정한 보수를 사용하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -5726,7 +5818,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -5883,7 +5976,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-04"
     },
     "documents": [
       {
@@ -5939,7 +6033,7 @@
         "filename": "04_달빛등록.pdf",
         "format": "pdf",
         "title": "기관 신고와 가족 등록",
-        "note": "이번 지급의 확정 기초다.",
+        "note": "이번 지급의 확정 기초다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -5949,7 +6043,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -6131,7 +6226,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-09"
     },
     "documents": [
       {
@@ -6186,7 +6282,7 @@
         "filename": "04_편집등록.hwpx",
         "format": "hwpx",
         "title": "해당 지급 부과와 가족 등록",
-        "note": "이 지급 자격은 기관 통지대로 사용한다.",
+        "note": "이 지급 자격은 기관 통지대로 사용한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -6196,7 +6292,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -6356,7 +6453,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-11"
     },
     "documents": [
       {
@@ -6412,7 +6510,7 @@
         "filename": "04_느티부과.pdf",
         "format": "pdf",
         "title": "기관 확정 신고와 가족 등록",
-        "note": "보험은 각 통지의 해당 지급 기준으로 계산한다.",
+        "note": "보험은 각 통지의 해당 지급 기준으로 계산한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -6422,7 +6520,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -6553,7 +6652,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-04"
     },
     "documents": [
       {
@@ -6596,14 +6696,15 @@
         "filename": "03_말간기관.pdf",
         "format": "pdf",
         "title": "공단별 신고와 부과 확인",
-        "note": "소득세 부징수가 보험 공제를 없애지는 않는다.",
+        "note": "소득세 부징수가 보험 공제를 없애지는 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
           "employment_notified_income",
           "pension_due",
           "health_due",
-          "employment_due"
+          "employment_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 2
       },
@@ -6769,7 +6870,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-10"
     },
     "documents": [
       {
@@ -6800,14 +6902,15 @@
         "filename": "02_영상기관.xlsx",
         "format": "xlsx",
         "title": "근로자 자격과 공단별 신고 기준",
-        "note": "공단 부과가 확정되었다. 근로자 부담분만 계산한다.",
+        "note": "공단 부과가 확정되었다. 근로자 부담분만 계산한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
           "employment_notified_income",
           "pension_due",
           "health_due",
-          "employment_due"
+          "employment_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -6965,7 +7068,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-09"
     },
     "documents": [
       {
@@ -7008,14 +7112,15 @@
         "filename": "03_넓은뜰보험.xlsx",
         "format": "xlsx",
         "title": "공단별 당월 부과 기준",
-        "note": "연금 기준도 공단 통지를 그대로 사용한다.",
+        "note": "연금 기준도 공단 통지를 그대로 사용한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
           "employment_notified_income",
           "pension_due",
           "health_due",
-          "employment_due"
+          "employment_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 3
       },
@@ -7162,7 +7267,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-08"
     },
     "documents": [
       {
@@ -7202,7 +7308,7 @@
         "filename": "03_살구공단.xlsx",
         "format": "xlsx",
         "title": "공단 기준과 가족 확정 등록",
-        "note": "이번 과세급여 증가로 공단 신고액을 다시 계산하지 않는다.",
+        "note": "이번 과세급여 증가로 공단 신고액을 다시 계산하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -7212,7 +7318,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 2
       },
@@ -7380,7 +7487,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-05"
     },
     "documents": [
       {
@@ -7436,7 +7544,7 @@
         "filename": "04_초승공제.hwpx",
         "format": "hwpx",
         "title": "공단과 가족 등록 기초",
-        "note": "기관별 확정 신고 기준을 사용한다.",
+        "note": "기관별 확정 신고 기준을 사용한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -7446,7 +7554,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -7576,7 +7685,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-01"
     },
     "documents": [
       {
@@ -7619,14 +7729,15 @@
         "filename": "03_책장기관.xlsx",
         "format": "xlsx",
         "title": "기관별 당월 확정 부과 기초",
-        "note": "소액 세액 판단과 보험 부과는 별개다.",
+        "note": "소액 세액 판단과 보험 부과는 별개다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
           "employment_notified_income",
           "pension_due",
           "health_due",
-          "employment_due"
+          "employment_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -7826,7 +7937,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-09"
     },
     "documents": [
       {
@@ -7911,10 +8023,11 @@
         "filename": "07_장비연금.pdf",
         "format": "pdf",
         "title": "해당 지급 연금 신고 통지",
-        "note": "확정된 연금 기준이다.",
+        "note": "확정된 연금 기준이다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -8132,7 +8245,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-06"
     },
     "documents": [
       {
@@ -8227,7 +8341,7 @@
         "filename": "08_지도기관.pdf",
         "format": "pdf",
         "title": "해당 지급 기관 자격과 가족 등록",
-        "note": "보험은 확정 통지 자격대로만 부과한다.",
+        "note": "보험은 확정 통지 자격대로만 부과한다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -8237,7 +8351,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 2
       },
@@ -8400,7 +8515,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-10"
     },
     "documents": [
       {
@@ -8486,10 +8602,11 @@
         "filename": "07_은하연금.pdf",
         "format": "pdf",
         "title": "해당 지급 연금 신고 기준",
-        "note": "상하한 전 공단 확정 통지다.",
+        "note": "상하한 전 공단 확정 통지다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -8524,12 +8641,12 @@
     "domain": "B_payroll",
     "difficulty": "hard",
     "title": "네 명 사업장의 소정 야간과 휴일 기록 및 낮은 연금 통지",
-    "instruction": "가상밤결제본실은 상시 네 명 사업장이고 시급 직원에게 소정 야간 작업과 별도 휴일 작업이 있습니다. 승인 카드와 출근 확인을 보고 기본급 및 주휴수당을 구하고, 휴일 실제 근로 대가와 야간 가산액을 적용 범위에 따라 계산해 주세요. 은행 기록에서 지급 시기를 읽어 낮은 연금 신고 기준에 적용할 하한도 정합니다. 최종 실지급액까지 필요합니다.",
+    "instruction": "가상밤결제본실은 상시 네 명 사업장이고 시급 직원에게 소정 야간 작업과 별도 휴일 작업이 있습니다. 승인 카드와 출근 확인을 보고 기본급 및 주휴수당을 구하고, 휴일 실제 근로 대가와 야간 가산액을 적용 범위에 따라 계산해 주세요. 은행 기록과 별도 보험 부과 통지를 읽고 부과월에 맞는 낮은 연금 신고액의 하한을 적용합니다. 최종 실지급액까지 필요합니다.",
     "work_goal": "소규모 사업장의 실제 근로 대가와 사회보험 하한을 별도 기준으로 마감한다.",
-    "design_rationale": "상시 네 명 사실은 연장 및 야간 가산을 제한하지만 실제 근로 대가를 없애지 않는다. 실제 지급월의 연금 하한은 낮은 공단 신고액과 연결한다.",
+    "design_rationale": "상시 네 명 사실은 연장 및 야간 가산을 제한하지만 실제 근로 대가를 없애지 않는다. 공단 보험 부과월의 연금 하한은 낮은 공단 신고액과 연결한다.",
     "exceptions": [
       "상시 근로자 네 명으로 법정 가산 적용 범위 밖이다.",
-      "낮은 공단 연금 신고액에 지급 시기의 하한을 적용해야 한다."
+      "낮은 공단 연금 신고액에 보험 부과월의 하한을 적용해야 한다."
     ],
     "answer_fields": [
       "base_pay",
@@ -8677,7 +8794,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-07"
     },
     "documents": [
       {
@@ -8752,10 +8870,11 @@
         "filename": "06_낮은연금.xlsx",
         "format": "xlsx",
         "title": "연금의 상하한 전 낮은 신고 통지",
-        "note": "하한을 적용하기 전 원래 신고액이다.",
+        "note": "하한을 적용하기 전 원래 신고액이다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 2
       },
@@ -8947,7 +9066,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-02"
     },
     "documents": [
       {
@@ -9020,10 +9140,11 @@
         "filename": "06_구름연금.hwpx",
         "format": "hwpx",
         "title": "연금 부과와 신고 통지",
-        "note": "실제 지급 시기의 연금 상한을 사용한다.",
+        "note": "공단 통지의 보험 부과월로 연금 상한을 적용한다. 은행 실행일은 원천세 적용일이다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -9240,7 +9361,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-05"
     },
     "documents": [
       {
@@ -9325,10 +9447,11 @@
         "filename": "07_측정연금.hwpx",
         "format": "hwpx",
         "title": "해당 지급 연금 기준 통지",
-        "note": "상하한 전 확정 기준이다.",
+        "note": "상하한 전 확정 기준이다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -9555,7 +9678,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-04"
     },
     "documents": [
       {
@@ -9650,7 +9774,7 @@
         "filename": "08_색채기관.hwpx",
         "format": "hwpx",
         "title": "해당 지급 기관 자격과 가족 등록",
-        "note": "이번 부과 통지는 정산분이 없다.",
+        "note": "이번 부과 통지는 정산분이 없다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -9660,7 +9784,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 3
       },
@@ -9826,7 +9951,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-11"
     },
     "documents": [
       {
@@ -9879,10 +10005,11 @@
         "filename": "04_숲연금.hwpx",
         "format": "hwpx",
         "title": "연금의 해당 지급 확정 신고",
-        "note": "현재 급여와 동일하다고 가정하지 않는다.",
+        "note": "현재 급여와 동일하다고 가정하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 0
       },
@@ -10123,7 +10250,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-08"
     },
     "documents": [
       {
@@ -10217,7 +10345,7 @@
         "filename": "08_제작부과.xlsx",
         "format": "xlsx",
         "title": "공단별 통지와 가족 등록",
-        "note": "지급액에서 공단 보수를 역산하지 않는다.",
+        "note": "지급액에서 공단 보수를 역산하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
           "health_notified_income",
@@ -10227,7 +10355,8 @@
           "employment_due",
           "family_count",
           "eligible_children",
-          "withholding_percent"
+          "withholding_percent",
+          "insurance_assessment_month"
         ],
         "template_variant": 3
       },
@@ -10397,7 +10526,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-11"
     },
     "documents": [
       {
@@ -10428,10 +10558,11 @@
         "filename": "02_글씨연금.pdf",
         "format": "pdf",
         "title": "연금 해당 지급 부과 종료 통지",
-        "note": "다른 보험 자격으로 복사하지 않는다.",
+        "note": "다른 보험 자격으로 복사하지 않는다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },
@@ -10670,7 +10801,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-03"
     },
     "documents": [
       {
@@ -10756,10 +10888,11 @@
         "filename": "07_문진연금.pdf",
         "format": "pdf",
         "title": "계획 지급에 사용할 연금 통지",
-        "note": "상하한 적용 전 공단 기준이다.",
+        "note": "상하한 적용 전 공단 기준이다. 보험 부과월은 통지서에 별도 기재한 월이며 급여 이체일과 구분한다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 3
       },
@@ -10794,8 +10927,8 @@
     "domain": "B_payroll",
     "difficulty": "hard",
     "title": "단시간 결근 주와 분할 휴일 및 지급 기록의 통합 마감",
-    "instruction": "가상한낮배움터의 시급 마감은 결근 주와 한 휴일의 두 작업을 함께 다룹니다. 소정 일정에서 결근을 반영한 기본급과 실제 개근 주휴를 구해 주세요. 수정 승인 카드와 같은 휴일의 야간 카드를 하루로 묶어 휴일수당 및 야간 가산을 계산합니다. 은행 실행 상태를 우선하여 연금 적용 기준을 정하고 신청된 80퍼센트 세액 및 최종 실지급액까지 작성합니다.",
-    "work_goal": "정규근로와 주휴 및 같은 하루 휴일 가산을 확정한 뒤 실제 지급월 공제로 마감한다.",
+    "instruction": "가상한낮배움터의 시급 마감은 결근 주와 한 휴일의 두 작업을 함께 다룹니다. 소정 일정에서 결근을 반영한 기본급과 실제 개근 주휴를 구해 주세요. 수정 승인 카드와 같은 휴일의 야간 카드를 하루로 묶어 휴일수당 및 야간 가산을 계산합니다. 은행 실행일과 별도 보험 부과월을 각각 확인하고 신청된 80퍼센트 세액 및 최종 실지급액까지 작성합니다. 실행 상태로 확정한 실제 지급일을 effective_payment_date에 YYYY-MM-DD로 작성해 주세요. 국민연금 상하한은 은행 지급일 대신 공단 통지의 보험 부과월을 기준으로 적용합니다.",
+    "work_goal": "정규근로와 개근 주휴 및 같은 하루 휴일 가산을 확정하고 지급일과 보험 부과월을 구분한다.",
     "design_rationale": "결근 일정과 주별 출근 및 수정 근로와 은행 상태는 각각 다른 확정 기준이다. 같은 날 분할 근로와 실제 지급일을 복원한 뒤 원천세와 보험을 계산한다.",
     "exceptions": [
       "둘째 주 소정일 하루를 결근했다.",
@@ -10804,6 +10937,7 @@
       "80퍼센트 원천징수 신청이 해당 지급에 유효하다."
     ],
     "answer_fields": [
+      "effective_payment_date",
       "base_pay",
       "weekly_holiday_pay",
       "holiday_pay",
@@ -10878,12 +11012,12 @@
           "revision": 1,
           "status": "approved",
           "category": "additional",
-          "start": "2026-06-14 08:00",
-          "end": "2026-06-14 14:00",
+          "start": "2026-06-21 08:00",
+          "end": "2026-06-21 14:00",
           "breaks": [
             {
-              "start": "2026-06-14 12:00",
-              "end": "2026-06-14 13:00"
+              "start": "2026-06-21 12:00",
+              "end": "2026-06-21 13:00"
             }
           ]
         },
@@ -10892,12 +11026,12 @@
           "revision": 2,
           "status": "approved",
           "category": "additional",
-          "start": "2026-06-14 08:00",
-          "end": "2026-06-14 15:00",
+          "start": "2026-06-21 08:00",
+          "end": "2026-06-21 15:00",
           "breaks": [
             {
-              "start": "2026-06-14 12:00",
-              "end": "2026-06-14 13:00"
+              "start": "2026-06-21 12:00",
+              "end": "2026-06-21 13:00"
             }
           ]
         },
@@ -10906,18 +11040,18 @@
           "revision": 1,
           "status": "approved",
           "category": "additional",
-          "start": "2026-06-14 19:00",
-          "end": "2026-06-14 23:00",
+          "start": "2026-06-21 19:00",
+          "end": "2026-06-21 23:00",
           "breaks": [
             {
-              "start": "2026-06-14 21:00",
-              "end": "2026-06-14 21:20"
+              "start": "2026-06-21 21:00",
+              "end": "2026-06-21 21:20"
             }
           ]
         }
       ],
       "holiday_dates": [
-        "2026-06-14"
+        "2026-06-21"
       ],
       "payment_records": [
         {
@@ -10932,7 +11066,7 @@
         }
       ],
       "meal_service": "none",
-      "scope_note": "거주자 계속가입 시급 직원의 해당 월 지급이다. 주 32시간 계약이며 결근일을 기본급과 그 주 개근 요건에 각각 반영한다. 확인 일요일은 법정 유급 주휴일이다. 동일 작업 approved 중 최고 revision을 선택하고 날짜별 독립 작업은 합산한다. executed 지급은 approved 계획보다 우선한다. 기관 기준은 해당 지급 확정 통지이고 정산분 및 정액 수당이 없다.",
+      "scope_note": "거주자 계속가입 시급 직원의 해당 월 지급이다. 주 32시간 계약이며 결근일을 기본급과 그 주 개근 요건에 각각 반영한다. 확인 일요일은 법정 유급 주휴일이다. 동일 작업 approved 중 최고 revision을 선택하고 날짜별 독립 작업은 합산한다. executed 지급은 approved 계획보다 우선한다. 기관 기준은 해당 지급 확정 통지이고 정산분 및 정액 수당이 없다. 공단의 보험 부과월은 통지에 별도로 확정되어 있고 은행 실행일이 바뀌어도 같은 부과분의 연금 상하한은 바뀌지 않는다.",
       "settlement_policy": "기본급과 각 수당은 항목별 월합계 원 미만 올림한다. 표 세액에 80퍼센트 신청을 적용하며 각 공제는 10원 미만 버림한다.",
       "withholding_reference": {
         "source_url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=164357181",
@@ -10998,7 +11132,8 @@
         "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
         "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
         "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
-      }
+      },
+      "insurance_assessment_month": "2026-06"
     },
     "documents": [
       {
@@ -11083,10 +11218,11 @@
         "filename": "07_배움연금.hwpx",
         "format": "hwpx",
         "title": "연금 상하한 전 해당 지급 통지",
-        "note": "지급일 기록으로 적용 시기를 정한다.",
+        "note": "6월 보험 부과 통지의 상하한 전 신고액이다. 은행 실행일로 보험 부과월을 바꾸지 않는다.",
         "fields": [
           "pension_notified_income",
-          "pension_due"
+          "pension_due",
+          "insurance_assessment_month"
         ],
         "template_variant": 4
       },

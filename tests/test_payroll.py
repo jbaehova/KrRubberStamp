@@ -259,7 +259,12 @@ def test_generation_determinism_variation_labels_and_exception_count(difficulty)
         assert scenario["employee_name"].startswith("가상")
         assert scenario["company_name"].startswith("가상")
         result, trace = calculate(scenario)
-        assert all(type(value) is int and value >= 0 for value in result.values())
+        assert result["effective_payment_date"] == scenario["payment_date"]
+        assert all(
+            type(value) is int and value >= 0
+            for key, value in result.items()
+            if key != "effective_payment_date"
+        )
         assert result["gross_pay"] - result["total_deductions"] == result["net_pay"]
         assert json.dumps(result, sort_keys=True) == json.dumps(
             calculate(deepcopy(scenario))[0], sort_keys=True
@@ -316,7 +321,12 @@ def test_property_more_eligible_children_does_not_increase_withholding(pay, chil
 def test_property_generated_payroll_nonnegative_and_conservation(seed, difficulty):
     scenario = generate(seed, difficulty)
     result, _ = calculate(scenario)
-    assert all(type(value) is int and value >= 0 for value in result.values())
+    assert result["effective_payment_date"] == scenario["payment_date"]
+    assert all(
+        type(value) is int and value >= 0
+        for key, value in result.items()
+        if key != "effective_payment_date"
+    )
     assert result["net_pay"] + result["total_deductions"] == result["gross_pay"]
     assert result["taxable_pay"] + result["non_taxable_pay"] == result["gross_pay"]
 
