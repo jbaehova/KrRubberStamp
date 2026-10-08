@@ -89,6 +89,11 @@ def _oracle(task_dir: Path, domain: str) -> dict:
 
     scenario = restore_scenario(task_dir)
     answer, trace = calculate(domain, scenario)
+    metadata = task_metadata(task_dir)
+    if "authorship" in metadata:
+        from KrRubberStamp.authoring import project_answer
+
+        answer = project_answer(answer, metadata["answer_fields"])
     return answer
 
 

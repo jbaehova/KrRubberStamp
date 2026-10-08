@@ -1,0 +1,65 @@
+task_id: B1_B002_464b2f6b
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: '가상저녁책방의 가상이루 직원이 4월 주휴수당을 문의했습니다. 계약서와 근태표를 대조하고 승인된 무급 결근 한 건을 반영해
+  설명에 사용할 숫자를 구해 주세요. 4월 중 도래한 일요일 네 번의 주휴가 이번 마감 대상이며 5월 3일 주휴는 다음 마감에서 처리합니다. 결근확인서는
+  근태표와 같은 한 건을 증명하므로 두 번 차감하지 마세요. 아래 항목을 원 단위 정수로 작성해 주세요.
+
+
+  - base_pay: 정규 유급 근로분의 임금
+
+  - weekly_holiday_pay: 별도로 지급할 주휴수당
+
+  - gross_pay: 총지급액
+
+  - total_deductions: 보험료와 원천세 공제 합계
+
+  - net_pay: 5월 8일 이체액'
+input_files:
+- path: inputs/01_단시간근로계약서.pdf
+  format: pdf
+- path: inputs/02_4월근태집계.xlsx
+  format: xlsx
+- path: inputs/03_결근확인과주휴대상주.hwpx
+  format: hwpx
+- path: inputs/04_보험기준액통지.pdf
+  format: pdf
+- path: inputs/05_이체와인사확인.hwpx
+  format: hwpx
+- path: inputs/06_주휴와공제기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - gross_pay
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-7829ac92-1907-5618-87e1-ced37d28fda7
+scenario_seed: 5065194343930375022
+scenario_hash: 8fb02d33ff5c70a5c7d8bfbb81d4337049d2769b43b9c3556284434c93678bd3
+authorship:
+  method: individually_written
+  case_id: B002
+  case_sha256: 464b2f6b5449ab6e78245c7bb05fbd0840917caecb805e49fc71947c20b3cea2
+  source_file: batch_1/B_payroll/preview.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- gross_pay
+- total_deductions
+- net_pay

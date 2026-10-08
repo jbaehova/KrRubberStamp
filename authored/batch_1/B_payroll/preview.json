@@ -1,0 +1,808 @@
+[
+  {
+    "case_id": "B001",
+    "domain": "B_payroll",
+    "difficulty": "easy",
+    "title": "외주 명세서 도착 전 급여 이체 승인표 완성",
+    "instruction": "가상모닝제본 급여 담당입니다. 외주 담당자의 명세서가 아직 안 와서 가상서연의 4월 이체 승인표를 먼저 채우려고 합니다. 계약서와 마감표를 보고 아래 네 칸을 원 단위 정수로 작성해 주세요. 추가 근무나 별도 지급 건은 없습니다. 보험료는 마감표의 공단 통지 기준액으로 계산하고 첨부한 공식 기준을 적용해 주세요.\n\n- gross_pay: 총지급액\n- non_taxable_pay: 비과세 지급액\n- total_deductions: 근로자 부담 보험료와 세금의 공제 합계\n- net_pay: 실제 이체할 금액",
+    "work_goal": "직원 한 명의 정상 급여 이체 승인표를 외주 명세서 수령 전에 완성한다.",
+    "design_rationale": "계약서의 정액 지급 조건과 마감표의 공단 통지 기준액을 연결한다. 이체 승인에 필요한 네 결과만 요구하며 분쟁이나 경계 조건은 넣지 않는다.",
+    "exceptions": [],
+    "answer_fields": [
+      "gross_pay",
+      "non_taxable_pay",
+      "total_deductions",
+      "net_pay"
+    ],
+    "facts": {
+      "company_name": "가상모닝제본",
+      "employee_name": "가상서연",
+      "employee_age": 34,
+      "payment_date": "2026-04-30",
+      "pay_basis": "monthly",
+      "base_salary": 3150000,
+      "fixed_allowance": 150000,
+      "meal_allowance": 200000,
+      "variable_allowance": 0,
+      "monthly_divisor_hours": 209,
+      "hourly_rate": 0,
+      "regular_minutes": 10560,
+      "weekly_hours": 40,
+      "qualifying_weeks": 4,
+      "weekly_holiday_included": true,
+      "workplace_employee_count": 12,
+      "overtime_minutes": 0,
+      "night_minutes": 0,
+      "holiday_shifts": [],
+      "employer_provides_meals": false,
+      "pension_notified_income": 3300000,
+      "health_notified_income": 3300000,
+      "employment_notified_income": 3300000,
+      "pension_due": true,
+      "health_due": true,
+      "employment_due": true,
+      "family_count": 1,
+      "eligible_children": 0,
+      "withholding_percent": 100,
+      "contract_scope": "대한민국 거주자인 계속근로 직원의 2026년 4월 정액 월급이다. 4월 전 기간 재직했으며 세 보험의 일반 사업장가입자로 통지받았다. 보험 정산분과 지원금은 없다. 성과수당과 상여금은 지급하지 않는다. 직무수당과 현금 식대는 정기적이고 일률적인 소정근로의 대가다.",
+      "settlement_policy": "통상시급은 원래 분수를 유지한다. 지급 항목은 월 합산 후 원 미만을 올림한다. 보험료와 원천세는 항목별 10원 미만을 버린다.",
+      "attendance_scope": "4월 소정근로를 모두 이행했다. 정규 근로와 주휴 임금은 정액 월급에 포함된다. 연장근로와 야간근로, 법정 유급휴일의 별도 근무는 없다.",
+      "closing_evidence": {
+        "payroll_period": "2026-04-01~2026-04-30",
+        "regular_workdays": 22,
+        "hours_per_day": 8,
+        "pension_notice_period": "2026년 4월 부과분",
+        "health_notice_period": "2026년 4월 부과분",
+        "employment_notice_period": "2026년 4월 부과분",
+        "family_approval": "본인만 기본공제 대상으로 승인됨. 배우자와 자녀 공제 신청 없음.",
+        "meal_provision_check": "구내식당과 식권이 없고 별도 식사 제공도 없음.",
+        "payment_approval_status": "계약서의 지급 항목은 승인됨. 이체 승인표의 합계 칸은 미작성."
+      },
+      "withholding_reference": {
+        "source_url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=164357181",
+        "effective_period": "원문 별표 개정 2026-02-27. 가족수별 기본 표 세액은 2023년 표와 동일.",
+        "table_rows": [
+          {
+            "wage_from_won": 3280000,
+            "wage_below_won": 3300000,
+            "family_tax_1": 100320,
+            "family_tax_2": 80810,
+            "family_tax_3": 45070,
+            "family_tax_4": 35920,
+            "family_tax_5": 30670,
+            "family_tax_6": 25420,
+            "family_tax_7": 20170,
+            "family_tax_8": 16290,
+            "family_tax_9": 12910,
+            "family_tax_10": 9540,
+            "family_tax_11": 6160
+          },
+          {
+            "wage_from_won": 3300000,
+            "wage_below_won": 3320000,
+            "family_tax_1": 102770,
+            "family_tax_2": 82520,
+            "family_tax_3": 46720,
+            "family_tax_4": 36580,
+            "family_tax_5": 31330,
+            "family_tax_6": 26080,
+            "family_tax_7": 20830,
+            "family_tax_8": 16710,
+            "family_tax_9": 13340,
+            "family_tax_10": 9960,
+            "family_tax_11": 6590
+          },
+          {
+            "wage_from_won": 3320000,
+            "wage_below_won": 3340000,
+            "family_tax_1": 105210,
+            "family_tax_2": 84230,
+            "family_tax_3": 48370,
+            "family_tax_4": 37240,
+            "family_tax_5": 31990,
+            "family_tax_6": 26740,
+            "family_tax_7": 21490,
+            "family_tax_8": 17140,
+            "family_tax_9": 13760,
+            "family_tax_10": 10390,
+            "family_tax_11": 7010
+          }
+        ],
+        "children_credit_january_february": "8세부터 20세까지 기본공제 자녀 1명 12,500원. 2명 29,160원. 3명 이상 29,160원에 2명 초과 자녀당 25,000원을 가산. 기본 표 세액에서 공제하며 음수는 0원.",
+        "children_credit_march_december": "8세부터 20세까지 기본공제 자녀 1명 20,830원. 2명 45,830원. 3명 이상 45,830원에 2명 초과 자녀당 33,330원을 가산. 기본 표 세액에서 공제하며 음수는 0원."
+      },
+      "law_reference": {
+        "ordinary_rule": "근로기준법 제56조 및 고용노동부 2025-02-06 통상임금 지침. 월 기본급에 정기적 일률적 소정근로 대가인 직무수당과 식대를 더해 통상임금을 산정한다. 5인 이상은 평일 연장 1.5배. 야간 가산분은 0.5배 추가. 휴일 1일 8시간 이내는 1.5배, 초과 시간은 2배이며 연장 가산을 다시 더하지 않는다.",
+        "weekly_rule": "근로기준법 제18조 및 제55조. 주 15시간 이상이고 해당 주 소정근로일에 개근한 경우 주40시간 통상근로자에 비례하여 주휴시간 = 주 소정근로시간/40*8. 월급에 포함된 주휴수당을 추가 지급액에 중복해서 더하지 않는다.",
+        "meal_rule": "소득세법 제12조 제3호 러목: 식사를 별도 제공받지 않는 근로자의 월 20만원 이하 식대 비과세.",
+        "pension_rule": "국민연금공단 2026 안내: 근로자 4.75%. 신고액의 천원 미만 버림. 2026-01~06 하한 400,000원, 상한 6,370,000원. 2026-07~12 하한 410,000원, 상한 6,590,000원. 적용 기준소득월액에 요율을 곱한다.",
+        "health_rule": "건강보험공단 2026 안내: 보수월액 7.19%의 50%인 근로자 3.595%. 근로자 월 보험료 하한 10,080원, 상한 4,591,740원.",
+        "care_rule": "건강보험공단 2026 안내: 근로자 건강보험료 * (0.9448% / 7.19%). 비율의 중간 반올림 없음.",
+        "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
+        "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
+        "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_근로계약서.pdf",
+        "format": "pdf",
+        "title": "가상서연 정액 월급 계약서",
+        "note": "기본급과 정기 수당의 지급 근거다. 월급에 주휴 임금이 포함되어 있음을 확인한다.",
+        "fields": [
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "contract_scope",
+          "settlement_policy"
+        ]
+      },
+      {
+        "filename": "02_4월마감표.xlsx",
+        "format": "xlsx",
+        "title": "가상모닝제본 4월 급여 마감표",
+        "note": "확인된 근태와 공단별 기준액이다. 총지급액과 이체액은 아직 없다.",
+        "fields": [
+          "payment_date",
+          "regular_minutes",
+          "qualifying_weeks",
+          "workplace_employee_count",
+          "overtime_minutes",
+          "night_minutes",
+          "holiday_shifts",
+          "employer_provides_meals",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "attendance_scope",
+          "closing_evidence"
+        ]
+      },
+      {
+        "filename": "03_급여계산기준.hwpx",
+        "format": "hwpx",
+        "title": "2026년 공제 기준과 공식 표 발췌",
+        "note": "법정 계산 기준과 공식 간이세액표 인접 행이다. 직원의 공제 합계와 실지급액은 없다.",
+        "fields": [
+          "withholding_reference",
+          "law_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B002",
+    "domain": "B_payroll",
+    "difficulty": "medium",
+    "title": "단시간 직원의 하루 결근과 주휴 정산",
+    "instruction": "가상저녁책방의 가상이루 직원이 4월 주휴수당을 문의했습니다. 계약서와 근태표를 대조하고 승인된 무급 결근 한 건을 반영해 설명에 사용할 숫자를 구해 주세요. 4월 중 도래한 일요일 네 번의 주휴가 이번 마감 대상이며 5월 3일 주휴는 다음 마감에서 처리합니다. 결근확인서는 근태표와 같은 한 건을 증명하므로 두 번 차감하지 마세요. 아래 항목을 원 단위 정수로 작성해 주세요.\n\n- base_pay: 정규 유급 근로분의 임금\n- weekly_holiday_pay: 별도로 지급할 주휴수당\n- gross_pay: 총지급액\n- total_deductions: 보험료와 원천세 공제 합계\n- net_pay: 5월 8일 이체액",
+    "work_goal": "하루 결근이 있는 시급제 직원의 주휴수당 문의에 답하고 실제 이체액을 확정한다.",
+    "design_rationale": "한 건의 무급 결근이 정규 유급 시간과 개근 주수에 영향을 준다. 월 근태 기간과 주휴일 기준 주간 기록을 구분하여 정규 임금과 주휴 임금을 따로 계산한다. 입력에는 지급 대상 총 분수와 주휴 인정 주 수를 제공하지 않는다. 배정 일수와 일일 분수, 결근 증빙 및 주별 출근일에서 직접 판정해야 한다.",
+    "exceptions": [
+      "4월 15일 하루 무급 결근으로 해당 주의 개근 요건을 충족하지 못함"
+    ],
+    "answer_fields": [
+      "base_pay",
+      "weekly_holiday_pay",
+      "gross_pay",
+      "total_deductions",
+      "net_pay"
+    ],
+    "facts": {
+      "company_name": "가상저녁책방",
+      "employee_name": "가상이루",
+      "employee_age": 29,
+      "pay_basis": "hourly",
+      "base_salary": 0,
+      "fixed_allowance": 0,
+      "meal_allowance": 0,
+      "variable_allowance": 0,
+      "monthly_divisor_hours": 0,
+      "hourly_rate": 22000,
+      "weekly_hours": 20,
+      "weekly_holiday_included": false,
+      "workplace_employee_count": 9,
+      "pension_notified_income": 2288000,
+      "health_notified_income": 2288000,
+      "employment_notified_income": 2288000,
+      "pension_due": true,
+      "health_due": true,
+      "employment_due": true,
+      "family_count": 1,
+      "eligible_children": 0,
+      "withholding_percent": 100,
+      "contract_scope": "대한민국 거주자인 계속근로 단시간 직원이다. 월요일부터 금요일까지 하루 4시간씩 근무한다. 시급 외 정액 수당은 없으며 주휴 임금은 정규 임금과 별도로 지급한다. 세 보험의 일반 사업장가입자로 통지받았다. 보험 정산분과 지원금은 없다. 시급제의 월 통상임금 표시액은 0원이다.",
+      "settlement_policy": "시급에 실제 유급 근로시간을 곱한다. 주휴 임금 등 지급 항목은 항목별 월 합산 후 원 미만을 올림한다. 보험료와 원천세는 항목별 10원 미만을 버린다.",
+      "attendance_scope": "정규 유급 시간에는 주휴 시간이 들어 있지 않다. 연장근로와 야간근로, 법정 유급휴일 별도 근무는 없었다. 4월 정규 임금은 4월 1일부터 30일까지의 실제 유급 근로를 대상으로 한다.",
+      "absence_evidence": {
+        "record_id": "가상근태-4월15일",
+        "date": "2026-04-15",
+        "absence_type": "개인 사정으로 하루 무급 결근",
+        "scheduled_minutes": 240,
+        "approved_on": "2026-04-16",
+        "paid_leave_used": false,
+        "other_absences": "없음"
+      },
+      "insurance_evidence": {
+        "notice_status": "5월 8일 급여에서 공제하도록 확정된 공단 통지",
+        "basis_change_status": "세 공단의 기준액 변경 통지 없음",
+        "settlement_charge": "추가 정산 없음",
+        "scope_note": "이번 지급액으로 공단 통지 기준액을 바꾸지 않는다."
+      },
+      "payment_evidence": {
+        "transfer_scheduled_on": "2026-05-08",
+        "family_approval": "본인만 기본공제 승인",
+        "withholding_application": "비율 변경 신청 없음. 100% 적용.",
+        "meal_arrangement": "현금 식대와 식사 제공 모두 없음"
+      },
+      "withholding_reference": {
+        "source_url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=164357181",
+        "effective_period": "원문 별표 개정 2026-02-27. 가족수별 기본 표 세액은 2023년 표와 동일.",
+        "table_rows": [
+          {
+            "wage_from_won": 2100000,
+            "wage_below_won": 2110000,
+            "family_tax_1": 22740,
+            "family_tax_2": 16810,
+            "family_tax_3": 8580,
+            "family_tax_4": 5210,
+            "family_tax_5": 1830,
+            "family_tax_6": 0,
+            "family_tax_7": 0,
+            "family_tax_8": 0,
+            "family_tax_9": 0,
+            "family_tax_10": 0,
+            "family_tax_11": 0
+          },
+          {
+            "wage_from_won": 2110000,
+            "wage_below_won": 2120000,
+            "family_tax_1": 23060,
+            "family_tax_2": 17020,
+            "family_tax_3": 8780,
+            "family_tax_4": 5400,
+            "family_tax_5": 2030,
+            "family_tax_6": 0,
+            "family_tax_7": 0,
+            "family_tax_8": 0,
+            "family_tax_9": 0,
+            "family_tax_10": 0,
+            "family_tax_11": 0
+          },
+          {
+            "wage_from_won": 2120000,
+            "wage_below_won": 2130000,
+            "family_tax_1": 23380,
+            "family_tax_2": 17220,
+            "family_tax_3": 8980,
+            "family_tax_4": 5600,
+            "family_tax_5": 2230,
+            "family_tax_6": 0,
+            "family_tax_7": 0,
+            "family_tax_8": 0,
+            "family_tax_9": 0,
+            "family_tax_10": 0,
+            "family_tax_11": 0
+          }
+        ],
+        "children_credit_january_february": "8세부터 20세까지 기본공제 자녀 1명 12,500원. 2명 29,160원. 3명 이상 29,160원에 2명 초과 자녀당 25,000원을 가산. 기본 표 세액에서 공제하며 음수는 0원.",
+        "children_credit_march_december": "8세부터 20세까지 기본공제 자녀 1명 20,830원. 2명 45,830원. 3명 이상 45,830원에 2명 초과 자녀당 33,330원을 가산. 기본 표 세액에서 공제하며 음수는 0원."
+      },
+      "law_reference": {
+        "ordinary_rule": "근로기준법 제56조 및 고용노동부 2025-02-06 통상임금 지침. 월 기본급에 정기적 일률적 소정근로 대가인 직무수당과 식대를 더해 통상임금을 산정한다. 5인 이상은 평일 연장 1.5배. 야간 가산분은 0.5배 추가. 휴일 1일 8시간 이내는 1.5배, 초과 시간은 2배이며 연장 가산을 다시 더하지 않는다.",
+        "weekly_rule": "근로기준법 제18조 및 제55조. 주 15시간 이상이고 해당 주 소정근로일에 개근한 경우 주40시간 통상근로자에 비례하여 주휴시간 = 주 소정근로시간/40*8. 월급에 포함된 주휴수당을 추가 지급액에 중복해서 더하지 않는다.",
+        "meal_rule": "소득세법 제12조 제3호 러목: 식사를 별도 제공받지 않는 근로자의 월 20만원 이하 식대 비과세.",
+        "pension_rule": "국민연금공단 2026 안내: 근로자 4.75%. 신고액의 천원 미만 버림. 2026-01~06 하한 400,000원, 상한 6,370,000원. 2026-07~12 하한 410,000원, 상한 6,590,000원. 적용 기준소득월액에 요율을 곱한다.",
+        "health_rule": "건강보험공단 2026 안내: 보수월액 7.19%의 50%인 근로자 3.595%. 근로자 월 보험료 하한 10,080원, 상한 4,591,740원.",
+        "care_rule": "건강보험공단 2026 안내: 근로자 건강보험료 * (0.9448% / 7.19%). 비율의 중간 반올림 없음.",
+        "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
+        "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
+        "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
+      },
+      "source_contract": "payroll_evidence_v1",
+      "regular_schedule": {
+        "working_days": 22,
+        "minutes_per_day": 240,
+        "unpaid_absences": [
+          {
+            "record_id": "가상근태-4월15일",
+            "date": "2026-04-15",
+            "minutes": 240
+          }
+        ]
+      },
+      "week_attendance": [
+        {
+          "week_id": "2026-03-30~2026-04-05",
+          "scheduled_days": 5,
+          "attended_days": 5
+        },
+        {
+          "week_id": "2026-04-06~2026-04-12",
+          "scheduled_days": 5,
+          "attended_days": 5
+        },
+        {
+          "week_id": "2026-04-13~2026-04-19",
+          "scheduled_days": 5,
+          "attended_days": 4
+        },
+        {
+          "week_id": "2026-04-20~2026-04-26",
+          "scheduled_days": 5,
+          "attended_days": 5
+        }
+      ],
+      "work_records": [],
+      "holiday_dates": [],
+      "payment_records": [
+        {
+          "revision": 1,
+          "status": "approved",
+          "date": "2026-05-08"
+        }
+      ],
+      "meal_service": "none",
+      "evidence_handling_policy": "정규 배정에서 승인된 무급 결근만 차감한다. 같은 기록 번호의 결근 확인은 같은 사건이다. 4월에 도래한 일요일 주휴 네 번을 대상으로 소정근로일 개근을 판정한다. 5월3일 주휴는 다음 마감에 반영한다. 승인된 이체 예정일을 사용한다."
+    },
+    "documents": [
+      {
+        "filename": "01_단시간근로계약서.pdf",
+        "format": "pdf",
+        "title": "가상이루 주 20시간 시급제 계약서",
+        "note": "소정근로일과 시급을 정한 계약이다. 정규 임금에 주휴 임금은 포함되지 않는다.",
+        "fields": [
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "contract_scope",
+          "settlement_policy"
+        ]
+      },
+      {
+        "filename": "02_4월근태집계.xlsx",
+        "format": "xlsx",
+        "title": "가상저녁책방 4월 정규 근태 집계",
+        "note": "무급 결근을 이미 한 번 차감한 정규 유급 시간이다. 주휴 시간은 포함하지 않았다.",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "attendance_scope"
+        ]
+      },
+      {
+        "filename": "03_결근확인과주휴대상주.hwpx",
+        "format": "hwpx",
+        "title": "무급 결근 확인과 주휴 대상 주 기록",
+        "note": "결근 승인과 네 주의 출근 기록이다. 월 근태표와 같은 결근을 증명한다.",
+        "fields": [
+          "absence_evidence",
+          "week_attendance"
+        ]
+      },
+      {
+        "filename": "04_보험기준액통지.pdf",
+        "format": "pdf",
+        "title": "급여 공제용 보험 기준액 통지",
+        "note": "이번 급여에 사용할 공단 기준액이다. 보험 정산분은 없다.",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_evidence"
+        ]
+      },
+      {
+        "filename": "05_이체와인사확인.hwpx",
+        "format": "hwpx",
+        "title": "5월 8일 이체와 인사 정보 확인",
+        "note": "지급 예정일과 원천징수 신청 상태를 확인했다.",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "workplace_employee_count",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "payment_evidence",
+          "source_contract",
+          "evidence_handling_policy"
+        ]
+      },
+      {
+        "filename": "06_주휴와공제기준.pdf",
+        "format": "pdf",
+        "title": "단시간 주휴와 2026년 공제 계산 기준",
+        "note": "비례 주휴시간 산식과 공식 간이세액표 인접 행이다. 직원의 지급액은 없다.",
+        "fields": [
+          "withholding_reference",
+          "law_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B003",
+    "domain": "B_payroll",
+    "difficulty": "hard",
+    "title": "실제 이체일이 바뀐 현장 책임자의 급여 재마감",
+    "instruction": "가상야간복구의 2월 급여 초안을 다시 확인해 주세요. 가상도윤 급여는 2월 27일 이체 계획이 취소되어 3월 3일 실제 지급했습니다. 근태 초안에는 일요일 작업이 평일 연장란에도 복사되어 있었고 최종 승인본은 따로 첨부했습니다. 휴일 작업의 휴게시간을 뺀 실제 근로와 야간 겹침을 확인해 중복 지급을 막아 주세요. 회사는 현금 식대 외에 실제 식사도 제공했습니다. 승인 문서와 실제 지급일을 기준으로 아래 항목을 원 단위 정수로 작성해 주세요. 수당 계산에서 통상시급을 먼저 정수로 잘라 계산하지 마세요.\n\n- ordinary_hourly_wage_floor: 통상시급 표시액\n- overtime_pay: 평일 연장수당\n- holiday_pay: 휴일수당\n- night_pay: 야간 가산분\n- non_taxable_pay: 비과세 지급액\n- taxable_pay: 원천징수 대상 급여\n- income_tax: 소득세\n- local_income_tax: 지방소득세\n- net_pay: 최종 실지급액",
+    "work_goal": "근태 초안의 중복과 실제 지급일 변경을 반영하여 현장 책임자의 급여 재마감을 완료한다.",
+    "design_rationale": "취소된 지급 계획과 실제 이체 날짜를 구분하고 근태의 초안과 최종 승인본을 구분한다. 휴일 8시간 초과분과 야간 가산을 계산한 뒤 식사 제공 증빙을 과세 구분에 연결한다. 최종 근로 분수와 야간 분수 및 평일 연장 합계는 입력에 쓰지 않는다. 출퇴근 시각과 휴게 구간, 법정 휴일 달력 및 승인 차수를 대조해 복원해야 한다.",
+    "exceptions": [
+      "2월 27일 계획이 취소되고 실제 지급일이 3월 3일로 바뀜",
+      "10시간 30분 휴일 작업이 평일 연장 초안에 중복 복사되었으며 일부는 야간과 겹침",
+      "현금 식대와 별도로 회사가 실제 식사를 제공함"
+    ],
+    "answer_fields": [
+      "ordinary_hourly_wage_floor",
+      "overtime_pay",
+      "holiday_pay",
+      "night_pay",
+      "non_taxable_pay",
+      "taxable_pay",
+      "income_tax",
+      "local_income_tax",
+      "net_pay"
+    ],
+    "facts": {
+      "company_name": "가상야간복구",
+      "employee_name": "가상도윤",
+      "employee_age": 41,
+      "pay_basis": "monthly",
+      "base_salary": 3670000,
+      "fixed_allowance": 210000,
+      "meal_allowance": 200000,
+      "variable_allowance": 0,
+      "monthly_divisor_hours": 209,
+      "hourly_rate": 0,
+      "weekly_hours": 40,
+      "weekly_holiday_included": true,
+      "workplace_employee_count": 23,
+      "pension_notified_income": 3880000,
+      "health_notified_income": 3880000,
+      "employment_notified_income": 3880000,
+      "pension_due": true,
+      "health_due": true,
+      "employment_due": true,
+      "family_count": 4,
+      "eligible_children": 2,
+      "withholding_percent": 100,
+      "contract_scope": "대한민국 거주자인 계속근로 직원의 2월 정액 급여다. 소정근로와 주휴 임금은 월급에 포함된다. 세 보험의 일반 사업장가입자로 통지받았으며 보험료 지원과 정산분은 없다. 별도 실적급과 상여는 없다. 일요일 법정 유급 주휴일의 추가 실제 작업 임금은 정액 월급에 포함하지 않는다.",
+      "settlement_policy": "기본급과 정기 직무수당, 현금 식대는 모두 정기적이고 일률적인 소정근로의 대가다. 통상시급의 분수를 보존하여 수당을 항목별 월 합산하고 원 미만을 올림한다. 통상시급 표시액만 원 미만을 버린다. 보험료와 세금은 항목별 10원 미만을 버린다.",
+      "attendance_scope": "평일 연장은 2월 26일 최종 승인본을 사용한다. 휴일 작업은 휴일수당 기록에만 넣는다. 야간 합계에는 평일 연장과 휴일의 야간 겹침을 포함한다. 야간 기록은 근로 임금에 더할 가산분만 계산한다.",
+      "payment_evidence": {
+        "payroll_month": "2026-02",
+        "cancelled_transfer_plan": "2026-02-27",
+        "cancelled_plan_status": "은행 실행 전 취소. 2월 지급 내역 없음.",
+        "actual_transfer_date": "2026-03-03",
+        "receipt_id": "가상이체-3월3일",
+        "approval_note": "실제 지급 날짜로 원천세를 재마감할 것. 최종 이체 금액은 보완 대기."
+      },
+      "meal_provision_evidence": {
+        "arrangement": "회사 부담의 식권으로 매 근무일 실제 식사를 제공함",
+        "cash_allowance_status": "계약서의 월 현금 식대 200,000원도 지급",
+        "receipt_owner": "가상야간복구",
+        "period": "2026년 2월 전 기간"
+      },
+      "insurance_evidence": {
+        "notice_period": "2026년 2월 부과분",
+        "collection_payment": "3월 3일 지급한 2월 급여 명세서",
+        "status": "공단 기준액 확정. 지급일 변경으로 추가 정산 없음."
+      },
+      "family_evidence": {
+        "employee": "가상도윤",
+        "spouse": "가상한봄. 소득 요건 충족, 기본공제 승인.",
+        "children": [
+          {
+            "name": "가상도별",
+            "birth_date": "2012-09-08",
+            "approval": "소득 요건 충족, 기본공제 승인"
+          },
+          {
+            "name": "가상도해",
+            "birth_date": "2017-07-21",
+            "approval": "소득 요건 충족, 기본공제 승인"
+          }
+        ],
+        "approved_family_count_including_employee": 4,
+        "approved_children_age_eight_to_twenty": 2,
+        "withholding_selection_status": "변경 신청 없음. 100% 적용."
+      },
+      "employee_count_evidence": {
+        "count_period": "2026년 2월",
+        "count_basis": "인사 담당자가 확인한 상시 근로자 수",
+        "approved_count": 23
+      },
+      "withholding_reference": {
+        "source_url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=164357181",
+        "effective_period": "원문 별표 개정 2026-02-27. 가족수별 기본 표 세액은 2023년 표와 동일.",
+        "table_rows": [
+          {
+            "wage_from_won": 4480000,
+            "wage_below_won": 4500000,
+            "family_tax_1": 260040,
+            "family_tax_2": 231670,
+            "family_tax_3": 168270,
+            "family_tax_4": 149520,
+            "family_tax_5": 130770,
+            "family_tax_6": 112020,
+            "family_tax_7": 93370,
+            "family_tax_8": 80250,
+            "family_tax_9": 67120,
+            "family_tax_10": 54000,
+            "family_tax_11": 40870
+          },
+          {
+            "wage_from_won": 4500000,
+            "wage_below_won": 4520000,
+            "family_tax_1": 262840,
+            "family_tax_2": 234460,
+            "family_tax_3": 170850,
+            "family_tax_4": 152100,
+            "family_tax_5": 133350,
+            "family_tax_6": 114600,
+            "family_tax_7": 95850,
+            "family_tax_8": 82050,
+            "family_tax_9": 68930,
+            "family_tax_10": 55800,
+            "family_tax_11": 42680
+          },
+          {
+            "wage_from_won": 4520000,
+            "wage_below_won": 4540000,
+            "family_tax_1": 265650,
+            "family_tax_2": 237250,
+            "family_tax_3": 173430,
+            "family_tax_4": 154680,
+            "family_tax_5": 135930,
+            "family_tax_6": 117180,
+            "family_tax_7": 98430,
+            "family_tax_8": 83860,
+            "family_tax_9": 70730,
+            "family_tax_10": 57610,
+            "family_tax_11": 44480
+          }
+        ],
+        "children_credit_january_february": "8세부터 20세까지 기본공제 자녀 1명 12,500원. 2명 29,160원. 3명 이상 29,160원에 2명 초과 자녀당 25,000원을 가산. 기본 표 세액에서 공제하며 음수는 0원.",
+        "children_credit_march_december": "8세부터 20세까지 기본공제 자녀 1명 20,830원. 2명 45,830원. 3명 이상 45,830원에 2명 초과 자녀당 33,330원을 가산. 기본 표 세액에서 공제하며 음수는 0원."
+      },
+      "law_reference": {
+        "ordinary_rule": "근로기준법 제56조 및 고용노동부 2025-02-06 통상임금 지침. 월 기본급에 정기적 일률적 소정근로 대가인 직무수당과 식대를 더해 통상임금을 산정한다. 5인 이상은 평일 연장 1.5배. 야간 가산분은 0.5배 추가. 휴일 1일 8시간 이내는 1.5배, 초과 시간은 2배이며 연장 가산을 다시 더하지 않는다.",
+        "weekly_rule": "근로기준법 제18조 및 제55조. 주 15시간 이상이고 해당 주 소정근로일에 개근한 경우 주40시간 통상근로자에 비례하여 주휴시간 = 주 소정근로시간/40*8. 월급에 포함된 주휴수당을 추가 지급액에 중복해서 더하지 않는다.",
+        "meal_rule": "소득세법 제12조 제3호 러목: 식사를 별도 제공받지 않는 근로자의 월 20만원 이하 식대 비과세.",
+        "pension_rule": "국민연금공단 2026 안내: 근로자 4.75%. 신고액의 천원 미만 버림. 2026-01~06 하한 400,000원, 상한 6,370,000원. 2026-07~12 하한 410,000원, 상한 6,590,000원. 적용 기준소득월액에 요율을 곱한다.",
+        "health_rule": "건강보험공단 2026 안내: 보수월액 7.19%의 50%인 근로자 3.595%. 근로자 월 보험료 하한 10,080원, 상한 4,591,740원.",
+        "care_rule": "건강보험공단 2026 안내: 근로자 건강보험료 * (0.9448% / 7.19%). 비율의 중간 반올림 없음.",
+        "employment_rule": "고용노동부 고용보험 안내: 근로자 실업급여 보험료 = 고지 월평균보수 * 0.9%.",
+        "tax_rounding_rule": "소득세법 시행령 제194조의 원천징수 선택 비율은 자녀 공제 후 적용한다. 소득세법 제86조: 한 번의 지급에 대한 원천징수 소득세 1,000원 미만은 징수하지 않는다. 세금은 10원 미만 버림한다.",
+        "local_tax_rule": "지방세법 제103조의13: 원천징수 소득세의 10%를 개인지방소득세로 특별징수."
+      },
+      "source_contract": "payroll_evidence_v1",
+      "regular_schedule": {
+        "working_days": 17,
+        "minutes_per_day": 480,
+        "unpaid_absences": []
+      },
+      "week_attendance": [],
+      "holiday_dates": [
+        "2026-02-22"
+      ],
+      "work_records": [
+        {
+          "record_id": "가상근태-2월19일",
+          "revision": 1,
+          "status": "approved",
+          "category": "additional",
+          "start": "2026-02-19 22:00",
+          "end": "2026-02-19 23:30",
+          "breaks": []
+        },
+        {
+          "record_id": "가상근태-2월22일",
+          "revision": 2,
+          "status": "approved",
+          "category": "additional",
+          "start": "2026-02-22 14:00",
+          "end": "2026-02-23 01:30",
+          "breaks": [
+            {
+              "start": "2026-02-22 18:30",
+              "end": "2026-02-22 19:00"
+            },
+            {
+              "start": "2026-02-22 21:00",
+              "end": "2026-02-22 21:30"
+            }
+          ],
+          "payroll_column": "휴일 작업란"
+        },
+        {
+          "record_id": "가상근태-2월22일",
+          "revision": 1,
+          "status": "approved",
+          "category": "additional",
+          "start": "2026-02-22 14:00",
+          "end": "2026-02-23 01:30",
+          "breaks": [
+            {
+              "start": "2026-02-22 18:30",
+              "end": "2026-02-22 19:00"
+            },
+            {
+              "start": "2026-02-22 21:00",
+              "end": "2026-02-22 21:30"
+            }
+          ],
+          "payroll_column": "평일 연장란"
+        }
+      ],
+      "payment_records": [
+        {
+          "revision": 1,
+          "status": "cancelled",
+          "date": "2026-02-27"
+        },
+        {
+          "revision": 2,
+          "status": "executed",
+          "date": "2026-03-03"
+        }
+      ],
+      "meal_service": "employer_catering",
+      "evidence_handling_policy": "같은 근태 기록 번호는 승인된 수정 차수 중 가장 큰 차수의 내용으로 한 번만 집계한다. 법정 유급휴일 날짜의 추가 작업은 휴일 근로로 다룬다. 휴게 구간은 실제 근로와 야간 겹침에서 제외한다. 월급의 정규 배정분은 이미 포함되고 추가 작업만 수당에 반영한다. 이체 계획이 취소된 때에는 은행에서 실행한 실제 지급일로 원천세를 계산한다."
+    },
+    "documents": [
+      {
+        "filename": "01_현장책임자계약.pdf",
+        "format": "pdf",
+        "title": "가상도윤 월급제 계약",
+        "note": "기본급과 소정근로 조건이다. 주휴 임금 포함과 추가 휴일 작업의 별도 지급 범위를 적었다.",
+        "fields": [
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "contract_scope",
+          "regular_schedule",
+          "week_attendance"
+        ]
+      },
+      {
+        "filename": "02_정기수당약정.hwpx",
+        "format": "hwpx",
+        "title": "직무수당과 식대 지급 약정",
+        "note": "정기 수당 금액과 단수 처리 약정이다. 현금 식대 지급과 비과세 판단은 구분한다.",
+        "fields": [
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "settlement_policy"
+        ]
+      },
+      {
+        "filename": "03_이체계획취소와실행확인.xlsx",
+        "format": "xlsx",
+        "title": "취소된 이체 계획과 실제 지급 확인",
+        "note": "취소된 2월 계획과 실제 3월 이체의 상태를 함께 적었다. 최종 이체 금액은 미작성이다.",
+        "fields": [
+          "payment_records",
+          "payment_evidence"
+        ]
+      },
+      {
+        "filename": "04_평일연장최종승인.xlsx",
+        "format": "xlsx",
+        "title": "평일 연장 최종 승인본",
+        "note": "중복 복사를 취소한 최종 승인이다. 폐기된 초안 숫자도 수정 사유로 남겼다.",
+        "fields": [
+          "work_records.0"
+        ]
+      },
+      {
+        "filename": "05_일요일작업승인.pdf",
+        "format": "pdf",
+        "title": "2월 22일 현장 작업 승인",
+        "note": "작업 시작과 종료 및 두 휴게 구간이다. 휴일 작업과 야간 겹침을 검산할 수 있다.",
+        "fields": [
+          "work_records.1",
+          "holiday_dates"
+        ]
+      },
+      {
+        "filename": "06_근태초안대조.xlsx",
+        "format": "xlsx",
+        "title": "평일 연장란에 복사된 기존 승인 차수",
+        "note": "근태 기록 번호를 최종 승인본과 맞춰 주세요. 이 표는 승인 차수 1의 보관 기록이며 변경 후에도 인수인계 폴더에 남았습니다.",
+        "fields": [
+          "work_records.2",
+          "attendance_scope"
+        ]
+      },
+      {
+        "filename": "07_식사제공확인.pdf",
+        "format": "pdf",
+        "title": "2월 회사 식사 제공 확인",
+        "note": "현금 식대와 별도로 식사를 제공한 사실이다. 비과세 결론은 적지 않았다.",
+        "fields": [
+          "meal_service",
+          "meal_provision_evidence"
+        ]
+      },
+      {
+        "filename": "08_2월보험기준액통지.xlsx",
+        "format": "xlsx",
+        "title": "2월 부과 보험 기준액 통지",
+        "note": "이번 명세서에 공제할 보험 기준액이다. 원천세의 실제 지급일 자료와 구분한다.",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_evidence"
+        ]
+      },
+      {
+        "filename": "09_부양가족확인.pdf",
+        "format": "pdf",
+        "title": "기본공제 가족과 원천징수 신청 확인",
+        "note": "가족의 생년월일과 승인을 확인한다. 원천징수 선택 비율 변경 신청은 없다.",
+        "fields": [
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "family_evidence"
+        ]
+      },
+      {
+        "filename": "10_사업장과공식기준.hwpx",
+        "format": "hwpx",
+        "title": "상시 근로자 확인과 공식 계산 기준",
+        "note": "사업장 규모와 수당 법정 기준, 지급 시기별 자녀 공제 기준 및 공식 간이세액표 발췌다. 재마감 결과 숫자는 없다.",
+        "fields": [
+          "workplace_employee_count",
+          "employee_count_evidence",
+          "withholding_reference",
+          "law_reference",
+          "source_contract",
+          "evidence_handling_policy"
+        ]
+      }
+    ]
+  }
+]

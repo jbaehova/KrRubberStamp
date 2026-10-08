@@ -1,0 +1,73 @@
+task_id: B1_C003_749635a3
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상모퉁이조명이 진열 공간을 확장한 뒤 상반기 환급 예상액을 확인하려고 합니다. 영업팀과 경리가 따로 모은 자료라 같은 주문의
+  계산서와 카드 전표가 함께 있고, 6월에 주문받았지만 7월에 설치한 건도 들어 있습니다. 공급 완료일과 주문번호를 대조하여 이번 과세기간의 실제
+  거래 수(unique_transaction_count), 매출 공급가액(tax_base) 및 매출세액(output_vat)을 구해 주세요. 공제가능
+  매입세액(deductible_input_vat)과 이번에 적용할 영수증 발행세액공제(receipt_credit)를 계산해 주세요. 납부한 예정고지
+  세액(prepaid_vat)을 차감한 최종 환급액(refund_vat)까지 원 단위 정수로 계산하여 answer.json에 저장해 주세요.
+input_files:
+- path: inputs/01_확장매장_신고의뢰.hwpx
+  format: hwpx
+- path: inputs/02_일반손님_카드판매.xlsx
+  format: xlsx
+- path: inputs/03_테라스_납품계산서.pdf
+  format: pdf
+- path: inputs/04_테라스_카드결제.pdf
+  format: pdf
+- path: inputs/05_현금영수증_판매.xlsx
+  format: xlsx
+- path: inputs/06_확장공간_재고입고.pdf
+  format: pdf
+- path: inputs/07_조명_진열설비.xlsx
+  format: xlsx
+- path: inputs/08_서점_설치완료.pdf
+  format: pdf
+- path: inputs/09_월말_재고검수.pdf
+  format: pdf
+- path: inputs/10_확장재고_계산서스캔.png
+  format: png
+  duplicate_of: inputs/06_확장공간_재고입고.pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    prepaid_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - tax_base
+  - output_vat
+  - deductible_input_vat
+  - receipt_credit
+  - prepaid_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-7413f6da-89ad-52c7-979f-b9b5b9028239
+scenario_seed: 8400961132685479115
+scenario_hash: 430d1afe6d860a6accd617b6d6dfd62a2d38f9a3da0d302e2f8d070e7c40fa1d
+authorship:
+  method: individually_written
+  case_id: C003
+  case_sha256: 749635a3d594cccbfdf0cb5453f119665c68a78d4845851d83a00dc99bd04e15
+  source_file: batch_1/C_vat/preview.json
+answer_fields:
+- unique_transaction_count
+- tax_base
+- output_vat
+- deductible_input_vat
+- receipt_credit
+- prepaid_vat
+- refund_vat

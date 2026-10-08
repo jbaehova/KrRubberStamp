@@ -1,0 +1,53 @@
+task_id: B1_B001_6d53171b
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: '가상모닝제본 급여 담당입니다. 외주 담당자의 명세서가 아직 안 와서 가상서연의 4월 이체 승인표를 먼저 채우려고 합니다.
+  계약서와 마감표를 보고 아래 네 칸을 원 단위 정수로 작성해 주세요. 추가 근무나 별도 지급 건은 없습니다. 보험료는 마감표의 공단 통지 기준액으로
+  계산하고 첨부한 공식 기준을 적용해 주세요.
+
+
+  - gross_pay: 총지급액
+
+  - non_taxable_pay: 비과세 지급액
+
+  - total_deductions: 근로자 부담 보험료와 세금의 공제 합계
+
+  - net_pay: 실제 이체할 금액'
+input_files:
+- path: inputs/01_근로계약서.pdf
+  format: pdf
+- path: inputs/02_4월마감표.xlsx
+  format: xlsx
+- path: inputs/03_급여계산기준.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    gross_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - gross_pay
+  - non_taxable_pay
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-120cff8b-9b26-5aeb-9ed5-226cef3b4673
+scenario_seed: 7877665580460995296
+scenario_hash: 7fcfed25ad748b2853affe81762aa50f7a580111f7de17eb1fcc1a7cc7310cb0
+authorship:
+  method: individually_written
+  case_id: B001
+  case_sha256: 6d53171b96b2f2e00a0ddb624c3b86a2e27d6d8ba6c00083ccdf56aeac9ec8db
+  source_file: batch_1/B_payroll/preview.json
+answer_fields:
+- gross_pay
+- non_taxable_pay
+- total_deductions
+- net_pay

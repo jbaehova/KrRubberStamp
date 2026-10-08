@@ -1,0 +1,709 @@
+[
+  {
+    "case_id": "C001",
+    "domain": "C_vat",
+    "difficulty": "easy",
+    "title": "첫 신고를 앞둔 주방용품점의 세금 예산",
+    "instruction": "가상다시쓰는주방의 상반기 매장을 맡게 된 새 경리입니다. 매출표의 결제금액과 매입자료의 공급가액을 같은 기준으로 정리하고, 다음 달 세금 계좌에 옮길 부가세 금액을 확인해 주세요. 첨부한 세 자료에 나온 거래가 이번 신고 대상의 전부입니다. 매출 공급가액(tax_base)과 매출세액(output_vat)을 먼저 구해 주세요. 공제할 매입세액(deductible_input_vat)과 영수증 발행세액공제(receipt_credit)를 반영한 최종 납부액(payable_vat)을 원 단위 정수로 계산하여 answer.json에 저장해 주세요.",
+    "answer_fields": ["tax_base", "output_vat", "deductible_input_vat", "receipt_credit", "payable_vat"],
+    "work_goal": "매장 운영자가 매출 결제금액을 공급가액으로 오해하지 않도록 상반기 신고 합계와 세금 계좌 이체액을 확정한다.",
+    "design_rationale": "첫 신고라는 실무 목적을 중심으로 한 단순한 대조 문제다. 판매자료는 부가세 포함 결제금액이고 상품 매입자료는 공급가액 별도 표시다. 같은 거래를 여러 번 보여주거나 불공제 지출을 섞지 않아 금액 기준을 읽고 정상적인 소매업 신고를 완성하는 데 집중한다.",
+    "exceptions": [],
+    "facts": {
+      "domain": "C_vat",
+      "reference_period": "2026년 제1기 확정신고",
+      "synthetic_id": "가상자료-C001-주방",
+      "taxpayer_type": "general",
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "business_name": "가상다시쓰는주방",
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 74000000,
+      "receipt_credit_previously_claimed": 0,
+      "prepaid_assessed_vat": 0,
+      "scope_note": "국내 주방용품 소매업의 10% 과세 거래만 있다. 첨부한 매출과 매입이 신고 대상 전체이며 세금계산서는 종이로 발급하고 받았다. 매입 증빙은 적법하게 보관하며 신용카드 수령명세서를 제출한다. 전자신고세액공제와 가산세 및 다른 공제는 적용하지 않는다.",
+      "transactions": [
+        {
+          "transaction_id": "가상-C001-매장카드",
+          "document_id": "가상-C001-결제표-1",
+          "direction": "sale",
+          "date": "2026-03-31",
+          "description": "재사용 주방용품의 소비자 카드 판매",
+          "amount": 3300000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "card_receipt",
+          "invoice_issued": false,
+          "counterparty_consumer": true,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C001-현금판매",
+          "document_id": "가상-C001-결제표-2",
+          "direction": "sale",
+          "date": "2026-06-30",
+          "description": "주방용품 묶음의 현금영수증 발급 판매",
+          "amount": 1650000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "cash_receipt",
+          "invoice_issued": false,
+          "counterparty_consumer": true,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C001-상품입고",
+          "document_id": "가상-C001-납품계산서",
+          "direction": "purchase",
+          "date": "2026-02-12",
+          "description": "판매할 실리콘 덮개와 보관용기 입고",
+          "amount": 1800000,
+          "includes_vat": false,
+          "taxable": true,
+          "evidence": "tax_invoice",
+          "invoice_issued": true,
+          "counterparty_consumer": false,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C001-포장재",
+          "document_id": "가상-C001-포장재전표",
+          "direction": "purchase",
+          "date": "2026-05-08",
+          "description": "매장에서 고객에게 상품을 전달하는 종이 포장재",
+          "amount": 220000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "card_receipt",
+          "invoice_issued": false,
+          "counterparty_consumer": false,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_매장_마감안내.pdf",
+        "format": "pdf",
+        "title": "가상다시쓰는주방 경리 인수인계 메모",
+        "note": "매장은 개인사업자가 운영하는 일반과세 소매점이다. 지난 해 공급가액은 7,400만원이었고, 올해 먼저 공제받은 영수증 발행 공제나 납부한 예정고지는 없다. 이번에는 창고의 상품 입고와 포장재 구입까지 같이 정리한다. 판매자료에 적힌 날짜는 공급이 끝난 날이다.",
+        "fields": ["domain", "reference_period", "synthetic_id", "taxpayer_type", "period_start", "period_end", "business_name", "business_type", "consumer_facing_business", "prior_year_site_supply_base", "receipt_credit_previously_claimed", "prepaid_assessed_vat", "scope_note"]
+      },
+      {
+        "filename": "02_매장_판매마감.xlsx",
+        "format": "xlsx",
+        "title": "가상다시쓰는주방 카드와 현금 판매표",
+        "note": "두 줄은 각각 카드 판매와 현금영수증 판매의 공급 완료 합계다. 결제금액에는 부가세가 들어 있고 각 전표에는 세액이 따로 표시되어 있다. 고객에게 별도 세금계산서를 발급한 매출은 없다.",
+        "fields": ["transactions.0", "transactions.1"]
+      },
+      {
+        "filename": "03_상품과_포장재_매입.pdf",
+        "format": "pdf",
+        "title": "가상다시쓰는주방 상품 납품서와 포장재 전표",
+        "note": "가상보관상사의 상품 납품 계산서에는 공급가액이 적혀 있다. 가상포장연구소의 카드 전표에는 부가세 포함 결제액이 적혀 있다. 두 공급자는 모두 일반과세자이며 매장에 입고된 물건이다.",
+        "fields": ["transactions.2", "transactions.3"]
+      }
+    ]
+  },
+  {
+    "case_id": "C002",
+    "domain": "C_vat",
+    "difficulty": "medium",
+    "title": "공방 체험 판매와 납품 매출을 마감하는 경리",
+    "instruction": "가상한칸목공방에서 상반기 부가세 초안을 요청했습니다. 체험 손님 결제표와 기업 납품 계산서가 따로 있고, 대표 카드로 결제한 광고와 식사도 함께 들어 있습니다. 마지막 활동기록으로 식사의 사용 목적을 확인해 주세요. 매출 공급가액(tax_base)과 매출세액(output_vat)을 구한 뒤 매입세액 합계(input_vat)를 공제불가 세액(noncreditable_vat)과 공제가능 세액(deductible_input_vat)으로 구분해 주세요. 영수증 발행세액공제(receipt_credit)를 반영한 최종 납부액(payable_vat)까지 원 단위 정수로 계산하여 answer.json에 저장해 주세요.",
+    "answer_fields": [
+      "tax_base",
+      "output_vat",
+      "input_vat",
+      "noncreditable_vat",
+      "deductible_input_vat",
+      "receipt_credit",
+      "payable_vat"
+    ],
+    "work_goal": "공방의 서로 다른 판매 경로를 통합하고 거래처 미팅 식사가 섞인 대표 카드 지출의 부가세 처리를 확정한다.",
+    "design_rationale": "공방은 소비자 체험상품과 기업 납품을 동시에 판매한다. 매입 카드 명세서만으로는 식사의 용도를 판단할 수 없어 날짜와 전표번호를 활동기록에 연결해야 한다. 사업용 광고와 접대 식사를 같은 카드 결제라는 이유로 같은 방식으로 처리하는 실수를 구별한다.",
+    "exceptions": [
+      "hospitality_purchase"
+    ],
+    "facts": {
+      "domain": "C_vat",
+      "reference_period": "2026년 제1기 확정신고",
+      "synthetic_id": "가상자료-C002-공방",
+      "taxpayer_type": "general",
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "business_name": "가상한칸목공방",
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 182000000,
+      "receipt_credit_previously_claimed": 0,
+      "prepaid_assessed_vat": 0,
+      "scope_note": "완성 목공품과 유상 체험상품을 판매하는 일반과세 소매업이다. 첨부 거래는 모두 국내 10% 과세이고 이 자료가 상반기 신고 대상의 전부다. 세금계산서는 종이로 발급하거나 받았다. 대표 카드의 매입 증빙에도 부가세가 구분되어 있고 공급자는 모두 일반과세자다. 증빙을 보관하며 신용카드 수령명세서를 제출한다. 전자신고세액공제와 가산세 및 다른 공제는 적용하지 않는다.",
+      "transactions": [
+        {
+          "transaction_id": "가상-C002-체험상품",
+          "document_id": "가상-C002-체험카드표",
+          "direction": "sale",
+          "date": "2026-06-30",
+          "description": "일반 손님에게 판매한 목공 체험상품과 완성품",
+          "amount": 13200000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "card_receipt",
+          "invoice_issued": false,
+          "counterparty_consumer": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C002-기업납품",
+          "document_id": "가상-C002-납품세금계산서",
+          "direction": "sale",
+          "date": "2026-05-20",
+          "description": "가상늘봄기획에 납품한 기념품용 나무 받침대",
+          "amount": 8000000,
+          "includes_vat": false,
+          "taxable": true,
+          "evidence": "tax_invoice",
+          "invoice_issued": true,
+          "counterparty_consumer": false,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C002-원재료",
+          "document_id": "가상-C002-목재매입계산서",
+          "direction": "purchase",
+          "date": "2026-02-26",
+          "description": "체험상품과 납품 기념품을 만들 원목과 부자재",
+          "amount": 6000000,
+          "includes_vat": false,
+          "taxable": true,
+          "evidence": "tax_invoice",
+          "invoice_issued": true,
+          "counterparty_consumer": false,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false,
+          "activity_id": "가상-C002-활동-1"
+        },
+        {
+          "transaction_id": "가상-C002-진열대",
+          "document_id": "가상-C002-진열대영수증",
+          "direction": "purchase",
+          "date": "2026-03-05",
+          "description": "매장 완성품을 놓는 이동식 진열대",
+          "amount": 1100000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "cash_receipt",
+          "invoice_issued": false,
+          "counterparty_consumer": false,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false,
+          "activity_id": "가상-C002-활동-2"
+        },
+        {
+          "transaction_id": "가상-C002-체험광고",
+          "document_id": "가상-C002-대표카드-0410",
+          "direction": "purchase",
+          "date": "2026-04-10",
+          "description": "공방 주말 체험상품의 지역 광고 제작",
+          "amount": 990000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "card_receipt",
+          "invoice_issued": false,
+          "counterparty_consumer": false,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false,
+          "activity_id": "가상-C002-활동-3"
+        },
+        {
+          "transaction_id": "가상-C002-납품처식사",
+          "document_id": "가상-C002-대표카드-0522",
+          "direction": "purchase",
+          "date": "2026-05-22",
+          "description": "가상나무식당 카드 결제",
+          "amount": 660000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "card_receipt",
+          "invoice_issued": false,
+          "counterparty_consumer": false,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false,
+          "activity_id": "가상-C002-활동-4"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "operations": [
+        {
+          "operation_id": "가상-C002-제품판매",
+          "description": "공방 매장에서 완성 목공품과 유상 체험상품을 판매하고 주문 기념품을 납품한다.",
+          "output_taxable": true
+        }
+      ],
+      "activities": [
+        {
+          "activity_id": "가상-C002-활동-1",
+          "transaction_id": "가상-C002-원재료",
+          "document_ids": [
+            "가상-C002-목재매입계산서"
+          ],
+          "date": "2026-02-26",
+          "action": "delivery",
+          "location": {
+            "name": "가상한칸목공방 제작실",
+            "kind": "worksite"
+          },
+          "participants": [
+            {
+              "name": "가상김공방",
+              "role": "proprietor",
+              "organization": "가상한칸목공방"
+            }
+          ],
+          "operation_id": "가상-C002-제품판매",
+          "description": "원목과 부자재를 제작실에 인도받았다. 유상 체험상품과 주문받은 기념품의 제작에 사용했다."
+        },
+        {
+          "activity_id": "가상-C002-활동-2",
+          "transaction_id": "가상-C002-진열대",
+          "document_ids": [
+            "가상-C002-진열대영수증"
+          ],
+          "date": "2026-03-05",
+          "action": "delivery",
+          "location": {
+            "name": "가상한칸목공방 매장",
+            "kind": "worksite"
+          },
+          "participants": [
+            {
+              "name": "가상김공방",
+              "role": "proprietor",
+              "organization": "가상한칸목공방"
+            }
+          ],
+          "operation_id": "가상-C002-제품판매",
+          "description": "이동식 진열대를 매장에 설치하고 판매할 완성 목공품을 올려 놓았다."
+        },
+        {
+          "activity_id": "가상-C002-활동-3",
+          "transaction_id": "가상-C002-체험광고",
+          "document_ids": [
+            "가상-C002-대표카드-0410"
+          ],
+          "date": "2026-04-10",
+          "action": "service",
+          "location": {
+            "name": "가상한칸목공방 매장",
+            "kind": "worksite"
+          },
+          "participants": [
+            {
+              "name": "가상김공방",
+              "role": "proprietor",
+              "organization": "가상한칸목공방"
+            }
+          ],
+          "operation_id": "가상-C002-제품판매",
+          "description": "가상거리디자인이 만든 주말 체험상품 광고를 검수했다. 광고에는 공방의 방문 예약처와 체험상품 판매 안내를 담았다."
+        },
+        {
+          "activity_id": "가상-C002-활동-4",
+          "transaction_id": "가상-C002-납품처식사",
+          "document_ids": [
+            "가상-C002-대표카드-0522"
+          ],
+          "date": "2026-05-22",
+          "action": "meal",
+          "location": {
+            "name": "가상나무식당",
+            "kind": "restaurant"
+          },
+          "participants": [
+            {
+              "name": "가상김공방",
+              "role": "proprietor",
+              "organization": "가상한칸목공방"
+            },
+            {
+              "name": "가상한구매",
+              "role": "customer",
+              "organization": "가상늘봄기획"
+            },
+            {
+              "name": "가상최구매",
+              "role": "customer",
+              "organization": "가상늘봄기획"
+            }
+          ],
+          "operation_id": "가상-C002-제품판매",
+          "description": "기념품을 납품받은 가상늘봄기획의 구매 담당자 두 명이 다음 분기 주문 협의를 위해 방문했다. 협의 후 대표와 담당자들이 함께 식사했고 대표 카드로 결제했다."
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_공방_신고의뢰.hwpx",
+        "format": "hwpx",
+        "title": "가상한칸목공방의 상반기 신고 의뢰서",
+        "note": "개인사업자의 공방 매장으로 지난해 공급가액은 1억8,200만원이다. 올해 다른 기간에서 먼저 받은 발행세액공제는 없고 예정고지도 납부하지 않았다. 체험상품은 교육기관의 면세 수업이 아닌 매장 판매 상품이며 납품과 함께 전부 10% 과세한다.",
+        "fields": [
+          "domain",
+          "reference_period",
+          "synthetic_id",
+          "taxpayer_type",
+          "period_start",
+          "period_end",
+          "business_name",
+          "business_type",
+          "consumer_facing_business",
+          "prior_year_site_supply_base",
+          "receipt_credit_previously_claimed",
+          "prepaid_assessed_vat",
+          "scope_note",
+          "source_contract",
+          "operations"
+        ]
+      },
+      {
+        "filename": "02_체험상품_카드판매.xlsx",
+        "format": "xlsx",
+        "title": "가상한칸목공방 체험상품 판매 마감",
+        "note": "일반 방문 손님이 카드로 결제한 체험상품과 완성 목공품의 판매 합계다. 모두 매장 서비스와 제품 공급이 끝났으며 별도 세금계산서는 발급하지 않았다. 금액은 부가세 포함 카드 결제액이다.",
+        "fields": [
+          "transactions.0"
+        ]
+      },
+      {
+        "filename": "03_기업_기념품_납품.pdf",
+        "format": "pdf",
+        "title": "가상늘봄기획 주문 기념품 납품 자료",
+        "note": "주문한 나무 받침대는 5월20일 전부 검수되었다. 기념품 구매처에 발행한 종이 세금계산서의 공급가액을 적었고 세액은 별도다. 체험 손님 카드표의 판매와는 다른 주문이다.",
+        "fields": [
+          "transactions.1"
+        ]
+      },
+      {
+        "filename": "04_원재료와_진열대.pdf",
+        "format": "pdf",
+        "title": "가상한칸목공방 목재 입고와 매장 집기 구입",
+        "note": "가상목재창고의 원재료 계산서는 공급가액을 기록했다. 가상매장집기의 진열대 영수증은 부가세 포함 금액이다. 원재료는 판매 제품 제작에 쓰였고 진열대는 공방 매장에 설치되어 있다.",
+        "fields": [
+          "transactions.2",
+          "transactions.3",
+          "activities.0",
+          "activities.1"
+        ]
+      },
+      {
+        "filename": "05_대표_카드지출.xlsx",
+        "format": "xlsx",
+        "title": "가상한칸목공방 대표 카드 지출 전표",
+        "note": "4월10일 가상거리디자인의 광고 제작과 5월22일 가상나무식당의 결제가 있다. 두 카드 전표 모두 일반과세 공급자의 세액이 구분되어 있으며 같은 대표 카드로 결제했다. 식당 전표의 사용 내역은 뒤의 활동기록에 별도로 남겨두었다.",
+        "fields": [
+          "transactions.4",
+          "transactions.5"
+        ]
+      },
+      {
+        "filename": "06_납품처_미팅기록.pdf",
+        "format": "pdf",
+        "title": "가상한칸목공방 5월22일 납품처 방문 기록",
+        "note": "가상늘봄기획의 구매 담당자 두 명이 다음 분기 주문 협의를 위해 공방을 방문했다. 대표가 가상나무식당에서 이들을 대접했고 직원의 통상 식사나 체험 손님용 재료 구입은 아니었다. 대표카드 전표번호 가상-C002-대표카드-0522와 연결된다.",
+        "fields": [
+          "activities.2",
+          "activities.3"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "C003",
+    "domain": "C_vat",
+    "difficulty": "hard",
+    "title": "조명 매장의 재고 확대와 6월 말 납품 경계",
+    "instruction": "가상모퉁이조명이 진열 공간을 확장한 뒤 상반기 환급 예상액을 확인하려고 합니다. 영업팀과 경리가 따로 모은 자료라 같은 주문의 계산서와 카드 전표가 함께 있고, 6월에 주문받았지만 7월에 설치한 건도 들어 있습니다. 공급 완료일과 주문번호를 대조하여 이번 과세기간의 실제 거래 수(unique_transaction_count), 매출 공급가액(tax_base) 및 매출세액(output_vat)을 구해 주세요. 공제가능 매입세액(deductible_input_vat)과 이번에 적용할 영수증 발행세액공제(receipt_credit)를 계산해 주세요. 납부한 예정고지 세액(prepaid_vat)을 차감한 최종 환급액(refund_vat)까지 원 단위 정수로 계산하여 answer.json에 저장해 주세요.",
+    "answer_fields": ["unique_transaction_count", "tax_base", "output_vat", "deductible_input_vat", "receipt_credit", "prepaid_vat", "refund_vat"],
+    "work_goal": "매장 확장에 투입한 자금 일부를 돌려받을 수 있는지 확인하고 재고 공급자에게 지급할 다음 달 잔금 계획에 사용할 환급 예상액을 확정한다.",
+    "design_rationale": "한 주문의 카드 결제와 세금계산서가 서로 다른 부가세 표시 방식으로 기록되어 있어 금액만 비교해서는 중복을 놓칠 수 있다. 주문서 작성일과 실제 공급 완료일의 차이도 신고 범위를 바꾼다. 이를 해결한 뒤 확대 재고와 진열 설비의 매입세액을 반영하면 환급 상태가 되어 발행세액공제의 적용 순서와 예정고지 차감을 함께 판단해야 한다.",
+    "exceptions": ["same_order_invoice_and_card_evidence", "supply_completed_outside_period", "input_vat_exceeds_output_vat", "prepaid_assessment_refund_interaction"],
+    "facts": {
+      "domain": "C_vat",
+      "reference_period": "2026년 제1기 확정신고",
+      "synthetic_id": "가상자료-C003-조명",
+      "taxpayer_type": "general",
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "business_name": "가상모퉁이조명",
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 650000000,
+      "receipt_credit_previously_claimed": 0,
+      "prepaid_assessed_vat": 800000,
+      "scope_note": "개인사업자가 운영하는 국내 조명 소매점이며 모든 거래는 10% 과세다. 첨부 자료가 신고 범위를 판단할 전체 자료다. 주문금이나 계약금의 선결제는 없으며 거래일은 제품 인도와 설치가 모두 완료된 실제 공급일이다. 세금계산서는 종이로 발급하거나 받았고 모든 매입 증빙을 보관하며 신용카드 수령명세서를 제출한다. 전자신고세액공제와 가산세 및 다른 공제는 적용하지 않는다.",
+      "transactions": [
+        {
+          "transaction_id": "가상-C003-일반매장판매",
+          "document_id": "가상-C003-카드마감",
+          "direction": "sale",
+          "date": "2026-06-30",
+            "description": "단독주택 리모델링 고객 한 명의 실내 조명기구 주문 인도",
+          "amount": 22000000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "card_receipt",
+          "invoice_issued": false,
+          "counterparty_consumer": true,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C003-주문-테라스",
+          "document_id": "가상-C003-테라스계산서",
+          "direction": "sale",
+          "date": "2026-06-19",
+          "description": "가상숲테라스의 매장 조명 납품과 설치 완료",
+          "amount": 12000000,
+          "includes_vat": false,
+          "taxable": true,
+          "evidence": "tax_invoice",
+          "invoice_issued": true,
+          "counterparty_consumer": false,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C003-주문-테라스",
+          "document_id": "가상-C003-테라스카드전표",
+          "direction": "sale",
+          "date": "2026-06-19",
+          "description": "가상숲테라스 주문 대금의 법인카드 결제",
+          "amount": 13200000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "card_receipt",
+          "invoice_issued": true,
+          "counterparty_consumer": false,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C003-현금영수증판매",
+          "document_id": "가상-C003-현금마감",
+          "direction": "sale",
+          "date": "2026-06-30",
+            "description": "다른 주택 고객 한 명에게 공급 완료한 거실 조명 주문",
+          "amount": 5500000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "cash_receipt",
+          "invoice_issued": false,
+          "counterparty_consumer": true,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C003-확장재고",
+          "document_id": "가상-C003-재고계산서",
+          "direction": "purchase",
+          "date": "2026-04-23",
+          "description": "확장 진열 공간에서 판매할 펜던트 조명과 스탠드 재고",
+          "amount": 30000000,
+          "includes_vat": false,
+          "taxable": true,
+          "evidence": "tax_invoice",
+          "invoice_issued": true,
+          "counterparty_consumer": false,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C003-진열설비",
+          "document_id": "가상-C003-설비카드전표",
+          "direction": "purchase",
+          "date": "2026-05-14",
+          "description": "조명 상품 시연용 레일과 매장 전시벽 설치 설비",
+          "amount": 16500000,
+          "includes_vat": true,
+          "taxable": true,
+          "evidence": "card_receipt",
+          "invoice_issued": false,
+          "counterparty_consumer": false,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C003-주문-서점",
+          "document_id": "가상-C003-서점설치완료서",
+          "direction": "sale",
+          "date": "2026-07-01",
+          "description": "가상새벽서점의 독서공간 조명 납품과 설치 완료",
+          "amount": 6000000,
+          "includes_vat": false,
+          "taxable": true,
+          "evidence": "tax_invoice",
+          "invoice_issued": true,
+          "counterparty_consumer": false,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        },
+        {
+          "transaction_id": "가상-C003-월말입고",
+          "document_id": "가상-C003-월말입고계산서",
+          "direction": "purchase",
+          "date": "2026-06-30",
+          "description": "상반기 마지막 날 검수 완료한 교체용 조명기구 재고",
+          "amount": 8000000,
+          "includes_vat": false,
+          "taxable": true,
+          "evidence": "tax_invoice",
+          "invoice_issued": true,
+          "counterparty_consumer": false,
+          "purpose": "business",
+          "business_related": true,
+          "supplier_general": true,
+          "vat_separately_stated": true,
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_확장매장_신고의뢰.hwpx",
+        "format": "hwpx",
+        "title": "가상모퉁이조명 환급 예상액 확인 요청",
+        "note": "지난해 사업장 공급가액 6억5,000만원인 개인 소매점이다. 올해 먼저 받은 발행세액공제는 없으며 4월 예정고지로 80만원을 납부했다. 판매 규모를 늘리려고 재고와 진열 설비를 마련했고 다음 달 재고 대금 지급 전에 이번 신고의 자금 영향을 확인하려 한다. 주문금이나 계약금을 먼저 받은 거래는 없다.",
+        "fields": ["domain", "reference_period", "synthetic_id", "taxpayer_type", "period_start", "period_end", "business_name", "business_type", "consumer_facing_business", "prior_year_site_supply_base", "receipt_credit_previously_claimed", "prepaid_assessed_vat", "scope_note"]
+      },
+      {
+        "filename": "02_일반손님_카드판매.xlsx",
+        "format": "xlsx",
+        "title": "가상모퉁이조명 단독주택 고객 주문 카드 전표",
+        "note": "단독주택을 리모델링하던 일반 손님 한 명에게 실내 조명기구를 6월30일 전부 인도했다. 한 주문의 카드 전표이며 여러 손님의 판매를 합친 표가 아니다. 별도 세금계산서는 발급하지 않았다. 가상-C003-주문-테라스의 거래처 주문과는 다른 고객이고 금액은 부가세 포함 결제액이다.",
+        "fields": ["transactions.0"]
+      },
+      {
+        "filename": "03_테라스_납품계산서.pdf",
+        "format": "pdf",
+        "title": "가상숲테라스 조명 납품 계산서",
+        "note": "가상-C003-주문-테라스는 6월19일 납품과 설치를 완료했다. 가상숲테라스에 종이 세금계산서를 발급했으며 이 문서의 금액은 공급가액이다. 대금은 같은 날 카드로 받아 뒤의 결제 전표와 같은 주문번호를 쓴다.",
+        "fields": ["transactions.1"]
+      },
+      {
+        "filename": "04_테라스_카드결제.pdf",
+        "format": "pdf",
+        "title": "가상숲테라스 주문의 카드 결제 전표",
+        "note": "고객이 가상-C003-주문-테라스 전체 대금을 법인카드로 결제했다. 결제액에는 부가세가 포함되어 있다. 납품팀의 계산서와 결제팀의 전표가 각각 전달되어 같은 주문번호가 두 자료에 남았다. 세금계산서도 함께 발급한 주문이다.",
+        "fields": ["transactions.2"]
+      },
+      {
+        "filename": "05_현금영수증_판매.xlsx",
+        "format": "xlsx",
+        "title": "가상모퉁이조명 거실 조명 주문 현금영수증",
+        "note": "다른 주택 고객 한 명에게 거실 조명기구를 6월30일 인도한 한 주문이다. 현금영수증을 발급했고 별도 세금계산서는 발급하지 않았다. 단독주택 전체 조명의 카드 주문과 겹치는 결제는 없으며 적힌 금액은 부가세 포함이다.",
+        "fields": ["transactions.3"]
+      },
+      {
+        "filename": "06_확장공간_재고입고.pdf",
+        "format": "pdf",
+        "title": "가상빛창고 확장 재고 납품 자료",
+        "note": "가상빛창고는 일반과세 공급자이며 확장 공간에서 판매할 재고를 4월23일 인도했다. 종이 세금계산서의 공급가액이 적혀 있고 세액은 별도로 표시했다. 아래 스캔본도 이 종이 계산서를 보관용으로 촬영한 것이다.",
+        "fields": ["transactions.4"]
+      },
+      {
+        "filename": "07_조명_진열설비.xlsx",
+        "format": "xlsx",
+        "title": "가상전시공작소 진열 설비 설치 전표",
+        "note": "일반과세자인 가상전시공작소가 상품 시연용 레일과 전시벽을 매장에 설치했다. 카드 결제액에는 세액이 포함되어 있고 전표에도 세액이 별도 표시된다. 대표의 주택 설비나 토지 조성 비용은 아니다.",
+        "fields": ["transactions.5"]
+      },
+      {
+        "filename": "08_서점_설치완료.pdf",
+        "format": "pdf",
+        "title": "가상새벽서점 조명 설치 확인서",
+        "note": "가상새벽서점의 주문 접수는 6월25일이었다. 다만 조명기구 인도와 최종 설치는 모두 7월1일 완료했고 그날 종이 세금계산서를 발급했다. 선결제는 없었다. 영업팀은 6월에 받은 주문이라는 이유로 이 확인서까지 상반기 자료에 넣어 전달했다.",
+        "fields": ["transactions.6"]
+      },
+      {
+        "filename": "09_월말_재고검수.pdf",
+        "format": "pdf",
+        "title": "가상밤빛유통 6월30일 재고 입고 확인",
+        "note": "가상밤빛유통의 교체용 조명기구는 6월30일 창고에 들어왔고 같은 날 검수를 끝냈다. 판매용 재고의 종이 세금계산서 공급가액이다. 주문만 접수된 서점 납품과 달리 이번 건은 6월 안에 실제 인도가 끝난 매입이다.",
+        "fields": ["transactions.7"]
+      },
+      {
+        "filename": "10_확장재고_계산서스캔.png",
+        "format": "png",
+        "title": "가상빛창고 재고 계산서 보관 스캔",
+        "note": "6번 자료의 종이 세금계산서를 경리 휴대전화로 촬영한 보관본이다. 문서번호 가상-C003-재고계산서가 같은 별도 촬영 자료이며 추가 납품은 없다.",
+        "duplicate_of": "06_확장공간_재고입고.pdf",
+        "fields": []
+      }
+    ]
+  }
+]

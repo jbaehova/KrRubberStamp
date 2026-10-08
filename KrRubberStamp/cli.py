@@ -11,6 +11,19 @@ def main(argv=None):
         prog="krt", description="KrRubberStamp offline benchmark utilities"
     )
     commands = parser.add_subparsers(dest="command", required=True)
+    authored = commands.add_parser(
+        "build-authored", help="Render independently written cases, without generating their facts"
+    )
+    authored.add_argument("--batch", type=int, default=1)
+    authored.add_argument("--output", type=Path)
+    authored.add_argument(
+        "--case-file", help="Preview only: choose a source filename such as preview.json"
+    )
+    authored.add_argument(
+        "--preview",
+        action="store_true",
+        help="Build the currently written subset without declaring a complete release",
+    )
     gen = commands.add_parser(
         "generate", help="Generate a fresh seeded task set without model calls"
     )
@@ -19,7 +32,7 @@ def main(argv=None):
     gen.add_argument("--output", type=Path)
     gen.add_argument("--batch", type=int, default=1)
     valid = commands.add_parser(
-        "validate", help="Rebuild answers from rendered inputs and seeded scenarios"
+        "validate", help="Rebuild answers from rendered inputs and their source facts"
     )
     valid.add_argument("--batch", type=int, default=1)
     valid.add_argument("--data", type=Path)
@@ -45,7 +58,20 @@ def main(argv=None):
     export.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     try:
-        if args.command == "generate":
+        if args.command == "build-authored":
+            from .authoring import build_authored
+
+            output = args.output or (
+                Path("data/authored_preview")
+                if args.preview
+                else Path("data") / f"batch_{args.batch}"
+            )
+            summary = build_authored(
+                output, batch=args.batch, preview=args.preview, file_name=args.case_file
+            )
+            result = {key: value for key, value in summary.items() if key != "tasks"}
+            result["output"] = str(output)
+        elif args.command == "generate":
             from scenarios.batch import generate_batch
 
             output = args.output or Path("data/generated") / f"seed_{args.seed}_n_{args.n}"

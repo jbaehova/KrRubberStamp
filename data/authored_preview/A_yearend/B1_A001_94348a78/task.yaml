@@ -1,0 +1,64 @@
+task_id: B1_A001_94348a78
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상하늘빛 제작소의 급여 담당자입니다. 가상이도윤 직원은 첫 연말정산이라 연금저축 납입액을 환급액과 혼동하고 있어요. 총지급액에서
+  비과세 금액을 뺀 총급여와 연금계좌 세액공제액을 확인한 뒤, 소득세와 지방소득세의 결정세액 및 기납부세액을 각각 작성해 주세요. 다음 급여에 반영할
+  두 세금의 차감징수세액과 합계도 필요합니다. 답안 스키마에 맞춰 환급액은 음수로 표시해 주세요.
+input_files:
+- path: inputs/01_급여와원천징수누계.xlsx
+  format: xlsx
+- path: inputs/02_직원공제신청서.hwpx
+  format: hwpx
+- path: inputs/03_연금저축납입증명.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    total_salary:
+      type: integer
+    pension_account_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+    final_local_tax:
+      type: integer
+    paid_national_tax:
+      type: integer
+    paid_local_tax:
+      type: integer
+    settlement_national_tax:
+      type: integer
+    settlement_local_tax:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - total_salary
+  - pension_account_credit
+  - final_national_tax
+  - final_local_tax
+  - paid_national_tax
+  - paid_local_tax
+  - settlement_national_tax
+  - settlement_local_tax
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-db583d04-ed06-535d-9b53-1da365d942a2
+scenario_seed: 10679312865487328987
+scenario_hash: 23d5c108b85fb50d3188aed5691d5e3292dccc303414c33907fc2e360559295f
+authorship:
+  method: individually_written
+  case_id: A001
+  case_sha256: 94348a7840a196dbe59d6e24bb9929d4194cf5575d74d33c01b9268f82efea5e
+  source_file: batch_1/A_yearend/preview.json
+answer_fields:
+- total_salary
+- pension_account_credit
+- final_national_tax
+- final_local_tax
+- paid_national_tax
+- paid_local_tax
+- settlement_national_tax
+- settlement_local_tax
+- settlement_total

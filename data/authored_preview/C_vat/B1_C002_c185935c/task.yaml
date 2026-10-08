@@ -1,0 +1,64 @@
+task_id: B1_C002_c185935c
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상한칸목공방에서 상반기 부가세 초안을 요청했습니다. 체험 손님 결제표와 기업 납품 계산서가 따로 있고, 대표 카드로 결제한
+  광고와 식사도 함께 들어 있습니다. 마지막 활동기록으로 식사의 사용 목적을 확인해 주세요. 매출 공급가액(tax_base)과 매출세액(output_vat)을
+  구한 뒤 매입세액 합계(input_vat)를 공제불가 세액(noncreditable_vat)과 공제가능 세액(deductible_input_vat)으로
+  구분해 주세요. 영수증 발행세액공제(receipt_credit)를 반영한 최종 납부액(payable_vat)까지 원 단위 정수로 계산하여 answer.json에
+  저장해 주세요.
+input_files:
+- path: inputs/01_공방_신고의뢰.hwpx
+  format: hwpx
+- path: inputs/02_체험상품_카드판매.xlsx
+  format: xlsx
+- path: inputs/03_기업_기념품_납품.pdf
+  format: pdf
+- path: inputs/04_원재료와_진열대.pdf
+  format: pdf
+- path: inputs/05_대표_카드지출.xlsx
+  format: xlsx
+- path: inputs/06_납품처_미팅기록.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - output_vat
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-a318c87f-3c0e-52cb-9446-3bdf862c48c4
+scenario_seed: 13944713847570217746
+scenario_hash: 60b389c98fc57f5c6b09f8db135a07734a9f060dc09ef73798580781f90657a9
+authorship:
+  method: individually_written
+  case_id: C002
+  case_sha256: c185935cb2e4bb120665b5526a23072ea00cc4acadf6c11f3c361fadf2cd6ccc
+  source_file: batch_1/C_vat/preview.json
+answer_fields:
+- tax_base
+- output_vat
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

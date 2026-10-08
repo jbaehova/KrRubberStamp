@@ -159,7 +159,7 @@ rules:
     또는33,330원. 음수0 처리.
   source: 국세청 기존 원천징수 안내 https://b.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7862&mi=6426
     ; 소득세법 시행령 별표2 제3호(2026.2.27 개정), https://www.law.go.kr/LSW/flDownload.do?flSeq=164357181
-    ; 대통령령 제36129호 부칙 제1조제3호 및 제15조 https://www.law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=003956&lsRvsGubun=all
+    ; 대통령령 제36129호 부칙 제1조제3호 및 제15조 https://www.law.go.kr/LSW/lsRvsDocInfoR.do?lsiSeq=283631&chrClsCd=010202&lsRvsGubun=Doc
   effective_period: 2026-01-01~2026-02-28 기존 공제. 2026-03-01 이후 개정 공제
   verified: false
   verification_notes: 두 시점의 공제금액과 2026년3월1일 이후 원천징수 적용은 대통령령 제36129호 부칙 원문으로 확인. 다만
@@ -172,6 +172,14 @@ rules:
   verified: false
   verification_notes: 공식0.9% 확인. 급여에서 항목별10원 버림은 명시 합성 약정으로 고지 납부액과 급여 공제액의 차이 가능성을
     범위 밖으로 둠. 공식 수치 예시 미확보.
+- rule_id: B.EVIDENCE_RECONCILIATION
+  description: 개별 집필 자료의 승인본과 지급 실행 기록을 대조하고 휴게시간을 제외한 근로 구간에서 실제 분수 및 야간 겹침을 계산한다.
+  source: DATA_SPEC.md의 원시 근태 증빙 계약. 문항에 명시한 합성 회사의 승인본 처리 및 지급 기록 대조 규약. 세법상 별도 요율이
+    아니라 입력 사실 복원 규약이며 수당의 법적 적용은 B.OVERTIME, B.NIGHT, B.HOLIDAY, B.WEEKLY를 따른다.
+  effective_period: 2026 개별 집필 자료 계약
+  verified: false
+  verification_notes: 합성 증빙 처리 규약이므로 대응하는 공단 공식 숫자 예시는 없다. 출퇴근 및 휴게 경계와 수정 승인, 지급
+    실행 우선순위를 별도 회귀 검사한다.
 - rule_id: B.GROSS
   description: 지급항목 합계와 식대 비과세 차감 후 간이세액표용 월 급여 산출.
   source: 소득세법 제20조 및 제12조. 시나리오의 합성 근로계약에 정한 지급항목 합산.
@@ -321,6 +329,15 @@ rules:
   effective_period: not-applicable
   verified: false
   verification_note: 문자 정규화 사양과 자체 회귀 검증은 확보했으나 국세청이나 공단의 동일 업체명 집계 계산 예시는 없음
+- rule_id: VAT_ACTIVITY_EVIDENCE
+  description: 개별 집필 활동 기록의 실제 참여자와 장소 및 증빙번호를 연결해 엔진용 매입 사실을 복원
+  source: DATA_SPEC.md의 개별 집필 사실 복원 계약 및 reports/vat_evidence_contract.md의 vat_activity_evidence_v1
+    계약
+  effective_period: 2026-01-01/2026-06-30
+  verified: false
+  verification_note: 업무 데이터 계약이다. 정부가 발표한 법규나 공식 숫자 사례로 주장하지 않는다. 공제 법규는 기존 VAT_HOSPITALITY,
+    VAT_NONBUSINESS, VAT_PASSENGER_CAR, VAT_EXEMPT_LAND 및 VAT_INPUT_EVIDENCE가 처리한다.
+    원자료의 모호한 활동과 상충하는 연결은 거절한다.
 - rule_id: VAT_CREDIT_ANNUAL_LIMIT
   description: 2026년 신용카드 등 발행세액공제 연간 한도 1000만원에서 이미 공제한 금액을 차감
   source: 부가가치세법 제46조제1항제3호 https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0046&lsiSeq=276117&urlMode=lsScJoRltInfoR

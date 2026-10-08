@@ -1,0 +1,69 @@
+task_id: B1_D002_faacf851
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 전시관 음성 해설 제작 사업의 장비 구입비를 마감하려고 합니다. 본관 녹음실과 순회 녹음팀에서 실제 인수한 다섯 건을 모두
+  합산해 업체별 공급가액, 부가세와 총액을 정리해 주세요. 사업 전체 공급가액 합계, 부가세 합계와 지출 총액도 필요합니다. 일부 판매처는 부가세
+  포함 단가를 기재했으므로 문서별 price_includes_vat를 확인하세요. 품목 수량 단위는 모두 개입니다. 부가세 포함 거래는 각 품목의
+  수량 곱하기 단가를 총액으로 보고 총액 곱하기 10 나누기 11에서 원 미만을 버려 공급가액을 구한 뒤 차액을 부가세로 처리하세요. 부가세 별도
+  거래는 각 품목의 수량 곱하기 단가를 공급가액으로 보고 그 금액의 10%에서 원 미만을 버려 부가세를 구하세요. answer.json에는 vendor_totals,
+  supply_total, vat_total, grand_total만 작성하세요. 업체명은 NFKC 정규화 후 공백과 주식회사, (주), ㈜ 표기를
+  제거하고 영문은 소문자로 바꾸세요. vendor_totals는 정규화 업체명 오름차순입니다.
+input_files:
+- path: inputs/01_본관녹음실_장비인수.pdf
+  format: pdf
+- path: inputs/02_보조녹음실_결제내역.xlsx
+  format: xlsx
+- path: inputs/03_외부해설사_장비지원.hwpx
+  format: hwpx
+- path: inputs/04_순회팀_부속품납품.pdf
+  format: pdf
+- path: inputs/05_대체녹음석_구매완료.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - supply_total
+  - vat_total
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-f5c93477-10b2-5e12-b4b3-ca1b0a34c2a7
+scenario_seed: 18063085234459761064
+scenario_hash: 4ee90471354b2d63e619b608572ddc31544c648be290be04e927d55738a74c29
+authorship:
+  method: individually_written
+  case_id: D002
+  case_sha256: faacf8518393d9a819a2680e4d8247646badc53e55ea84753899f5b4a29b3851
+  source_file: batch_1/D_extract/preview.json
+answer_fields:
+- vendor_totals
+- supply_total
+- vat_total
+- grand_total

@@ -1,0 +1,53 @@
+task_id: B1_D001_5cedbbc3
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 대피소 세 곳의 물품 보충이 끝났습니다. 다음 주 추가 발주에 쓸 수 있도록 첨부한 세 건의 구매 명세에서 품목별로 가장 낮은
+  공급가액 단가와 그 업체를 찾아 주세요. 세 건의 부가세 포함 지출 총액도 알려 주세요. 견적이 아니라 서로 다른 납품을 실제 인수한 자료이며
+  세 건을 모두 집계합니다. 모든 단가는 부가세 별도이고 모든 품목의 수량 단위는 개입니다. answer.json에는 cheapest_by_item과
+  grand_total만 작성하세요. 품목명은 NFKC 정규화 후 공백을 제거하고 영문은 소문자로 바꾸세요. 업체명도 같은 방식으로 정규화하고 주식회사,
+  (주), ㈜ 표기를 제거하세요. cheapest_by_item은 정규화 품목명 오름차순입니다. 단가가 같으면 정규화 업체명 오름차순의 첫 업체를
+  고릅니다. 각 품목의 공급가액은 수량 곱하기 단가이며 그 금액의 10%에서 원 미만을 버린 부가세를 더합니다.
+input_files:
+- path: inputs/01_동부대피소_인수명세.pdf
+  format: pdf
+- path: inputs/02_중앙대피소_구매대장.xlsx
+  format: xlsx
+- path: inputs/03_서부대피소_납품확인.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-1c2517d3-5973-5e4d-8933-5260c2648170
+scenario_seed: 6696214668526822590
+scenario_hash: 0a91cbf2546c56f81b889b6fa127131611de7214ec9d58b16177864ffb459d95
+authorship:
+  method: individually_written
+  case_id: D001
+  case_sha256: 5cedbbc3514d24be20d487e2a4e9eaffed3406e6d9fa4bfbc7dfb6b0cfb6961f
+  source_file: batch_1/D_extract/preview.json
+answer_fields:
+- cheapest_by_item
+- grand_total

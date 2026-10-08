@@ -1,0 +1,98 @@
+task_id: B1_D003_d8a22869
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 이동 수리 작업실 여덟 곳의 장비 조달 자료를 넘겨받았습니다. 업체별 지급 총액을 대조하고 다음 설치분의 품목별 최저 단가
+  업체를 정해야 합니다. 재발급 PDF 한 장과 스캔 사본 한 장이 함께 들어 있으므로 같은 document_id의 내용이 동일한 자료는 한 번만
+  집계하세요. 서로 다른 document_id는 같은 업체와 같은 품목이어도 각각 실제 인수한 거래입니다. 법인명 앞의 주식회사, (주), ㈜ 표기와
+  공백 차이는 동일 업체를 뜻합니다. 모든 품목 규격과 수량 단위는 같고 단위는 개이며 품목 이름의 공백도 동일 품목의 표기 차이입니다. 부가세
+  포함 단가는 각 품목의 수량 곱하기 단가를 총액으로 보고 총액 곱하기 10 나누기 11에서 원 미만을 버려 공급가액을 구한 뒤 차액을 부가세로
+  처리하세요. 부가세 별도 단가는 수량 곱하기 단가를 공급가액으로 보고 그 금액의 10%에서 원 미만을 버려 부가세를 구하세요. 최저 단가 비교는
+  공급가액 기준 개당 단가입니다. 부가세 포함 단가의 비교용 공급가액 단가는 기재 단가 곱하기 10 나누기 11에서 원 미만을 버린 값입니다. answer.json에는
+  vendor_totals, cheapest_by_item, grand_total, unique_document_count만 작성하세요. 업체명과
+  품목명은 NFKC 정규화 후 공백을 제거하고 영문은 소문자로 바꾸세요. 업체명에서는 법인 표기를 제거하세요. vendor_totals는 정규화
+  업체명 오름차순이며 cheapest_by_item은 정규화 품목명 오름차순입니다. 최저 단가가 같으면 정규화 업체명 오름차순의 첫 업체를 고르세요.
+  unique_document_count는 파일 수가 아니라 중복 제거 후의 서로 다른 거래 문서 번호 수입니다.
+input_files:
+- path: inputs/01_북부작업실_인수명세.pdf
+  format: pdf
+- path: inputs/02_중앙작업실_구매대장.xlsx
+  format: xlsx
+- path: inputs/03_동부작업실_인수명세.pdf
+  format: pdf
+- path: inputs/04_서부작업실_납품확인.hwpx
+  format: hwpx
+- path: inputs/05_남부작업실_결제대장.xlsx
+  format: xlsx
+- path: inputs/06_항구작업실_인수명세.pdf
+  format: pdf
+- path: inputs/07_언덕작업실_구매내역.xlsx
+  format: xlsx
+- path: inputs/08_강변작업실_인수확인.hwpx
+  format: hwpx
+- path: inputs/09_동부작업실_명세재발급.pdf
+  format: pdf
+- path: inputs/10_북부작업실_보관스캔.png
+  format: png
+  duplicate_of: inputs/01_북부작업실_인수명세.pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  - grand_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-17db53cb-b5a0-50e2-8378-5e6ed4d3051d
+scenario_seed: 15610083693909135449
+scenario_hash: 38f772363b7e1ffb653a890b11e7bac05e1cfec96b053f538ed393c414668754
+authorship:
+  method: individually_written
+  case_id: D003
+  case_sha256: d8a22869f1925059f38a691fb7e1e3fb8a5b78720846103e0beba4e4367e51fd
+  source_file: batch_1/D_extract/preview.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item
+- grand_total
+- unique_document_count

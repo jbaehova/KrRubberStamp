@@ -85,8 +85,26 @@ def validate_task(task_dir: Path) -> dict:
         if schema_errors:
             raise ValueError("gold violates answer_schema: " + schema_errors[0].message)
         result["gates"]["schema"] = True
-        regenerated = generate_scenario(domain, task["scenario_seed"], difficulty)
+        authored_case = None
+        if "authorship" in task:
+            from KrRubberStamp.authoring import recover_case, project_answer
+
+            if task["authorship"].get("method") != "individually_written":
+                raise ValueError("Unknown authorship method")
+            authored_case = recover_case(task)
+            regenerated = authored_case["facts"]
+            if task.get("answer_fields") != authored_case["answer_fields"]:
+                raise ValueError("Answer request differs from individually authored case")
+            planned = {
+                f"inputs/{doc['filename']}": doc["format"] for doc in authored_case["documents"]
+            }
+            if declared != planned:
+                raise ValueError("Inputs differ from individually authored document plan")
+        else:
+            regenerated = generate_scenario(domain, task["scenario_seed"], difficulty)
         expected, expected_trace = calculate(domain, regenerated)
+        if authored_case:
+            expected = project_answer(expected, authored_case["answer_fields"])
         if json_bytes(expected) != (task_dir / "gold.json").read_bytes():
             raise ValueError("regenerated gold bytes differ")
         if json_bytes(expected_trace) != (task_dir / "trace.json").read_bytes():
@@ -106,12 +124,21 @@ def validate_task(task_dir: Path) -> dict:
         if restored != regenerated:
             raise ValueError("source document reconstruction differs from generated scenario")
         reconstructed_gold, _ = calculate(domain, restored)
+        if authored_case:
+            reconstructed_gold = project_answer(reconstructed_gold, authored_case["answer_fields"])
         if json_bytes(reconstructed_gold) != json_bytes(gold):
             raise ValueError("source-only answer differs from gold")
         result["gates"]["solvability"] = True
-        if task["instruction"] != instruction_for(domain, difficulty, task["scenario_seed"]):
+        expected_instruction = (
+            authored_case["instruction"]
+            if authored_case
+            else instruction_for(domain, difficulty, task["scenario_seed"])
+        )
+        if task["instruction"] != expected_instruction:
             raise ValueError("instruction contradicts deterministic wording/period")
-        exceptions = regenerated.get("exceptions", [])
+        exceptions = (
+            authored_case["exceptions"] if authored_case else regenerated.get("exceptions", [])
+        )
         if difficulty == "medium" and len(exceptions) != 1:
             raise ValueError("medium must have exactly one scenario exception")
         if difficulty == "hard" and len(exceptions) < 2:

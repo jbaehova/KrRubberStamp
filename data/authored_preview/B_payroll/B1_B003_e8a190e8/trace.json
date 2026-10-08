@@ -1,0 +1,272 @@
+[
+  {
+    "inputs": {
+      "holiday_dates": [
+        "2026-02-22"
+      ],
+      "meal_service": "employer_catering",
+      "payment_records": [
+        {
+          "date": "2026-02-27",
+          "revision": 1,
+          "status": "cancelled"
+        },
+        {
+          "date": "2026-03-03",
+          "revision": 2,
+          "status": "executed"
+        }
+      ],
+      "regular_schedule": {
+        "minutes_per_day": 480,
+        "unpaid_absences": [],
+        "working_days": 17
+      },
+      "source_contract": "payroll_evidence_v1",
+      "week_attendance": [],
+      "work_records": [
+        {
+          "breaks": [],
+          "category": "additional",
+          "end": "2026-02-19 23:30",
+          "record_id": "가상근태-2월19일",
+          "revision": 1,
+          "start": "2026-02-19 22:00",
+          "status": "approved"
+        },
+        {
+          "breaks": [
+            {
+              "end": "2026-02-22 19:00",
+              "start": "2026-02-22 18:30"
+            },
+            {
+              "end": "2026-02-22 21:30",
+              "start": "2026-02-22 21:00"
+            }
+          ],
+          "category": "additional",
+          "end": "2026-02-23 01:30",
+          "payroll_column": "휴일 작업란",
+          "record_id": "가상근태-2월22일",
+          "revision": 2,
+          "start": "2026-02-22 14:00",
+          "status": "approved"
+        },
+        {
+          "breaks": [
+            {
+              "end": "2026-02-22 19:00",
+              "start": "2026-02-22 18:30"
+            },
+            {
+              "end": "2026-02-22 21:30",
+              "start": "2026-02-22 21:00"
+            }
+          ],
+          "category": "additional",
+          "end": "2026-02-23 01:30",
+          "payroll_column": "평일 연장란",
+          "record_id": "가상근태-2월22일",
+          "revision": 1,
+          "start": "2026-02-22 14:00",
+          "status": "approved"
+        }
+      ]
+    },
+    "output": {
+      "employer_provides_meals": true,
+      "holiday_shifts": [
+        {
+          "holiday_night_minutes": 210,
+          "minutes": 630
+        }
+      ],
+      "night_minutes": 300,
+      "overtime_minutes": 90,
+      "payment_date": "2026-03-03",
+      "qualifying_weeks": 0,
+      "regular_minutes": 8160
+    },
+    "rule_id": "B.EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "base_salary": 3670000,
+      "fixed_allowance": 210000,
+      "hourly_rate": 0,
+      "meal_allowance": 200000,
+      "monthly_divisor_hours": 209,
+      "pay_basis": "monthly",
+      "regular_minutes": 8160
+    },
+    "output": {
+      "hourly_exact_denominator": 209,
+      "hourly_exact_numerator": 4080000,
+      "ordinary_monthly_wage": 4080000
+    },
+    "rule_id": "B.ORDINARY"
+  },
+  {
+    "inputs": {
+      "overtime_minutes_excluding_holiday": 90,
+      "premium_applies": true
+    },
+    "output": 43924,
+    "rule_id": "B.OVERTIME"
+  },
+  {
+    "inputs": {
+      "night_minutes_including_overlap": 300,
+      "premium_applies": true
+    },
+    "output": 48804,
+    "rule_id": "B.NIGHT"
+  },
+  {
+    "inputs": {
+      "holiday_shifts": [
+        {
+          "holiday_night_minutes": 210,
+          "minutes": 630
+        }
+      ],
+      "premium_applies": true
+    },
+    "output": 331867,
+    "rule_id": "B.HOLIDAY"
+  },
+  {
+    "inputs": {
+      "already_included": true,
+      "qualifying_weeks": 0,
+      "weekly_hours": 40
+    },
+    "output": {
+      "weekly_holiday_entitlement": 0,
+      "weekly_holiday_pay": 0
+    },
+    "rule_id": "B.WEEKLY"
+  },
+  {
+    "inputs": {
+      "employer_provides_meals": true,
+      "meal_allowance": 200000
+    },
+    "output": 0,
+    "rule_id": "B.MEAL_EXEMPT"
+  },
+  {
+    "inputs": {
+      "base_pay": 3670000,
+      "fixed_allowance": 210000,
+      "holiday_pay": 331867,
+      "meal_allowance": 200000,
+      "night_pay": 48804,
+      "overtime_pay": 43924,
+      "variable_allowance": 0,
+      "weekly_holiday_pay": 0
+    },
+    "output": {
+      "gross_pay": 4504595,
+      "taxable_pay": 4504595
+    },
+    "rule_id": "B.GROSS"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.0475",
+      "month": 3,
+      "notified_income": 3880000
+    },
+    "output": {
+      "national_pension": 184300,
+      "pension_base_income": 3880000
+    },
+    "rule_id": "B.PENSION"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.03595",
+      "notified_income": 3880000
+    },
+    "output": 139480,
+    "rule_id": "B.HEALTH"
+  },
+  {
+    "inputs": {
+      "health_premium": 139480,
+      "ratio": "0.9448 / 7.19"
+    },
+    "output": 18320,
+    "rule_id": "B.LONG_TERM_CARE"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.009",
+      "notified_income": 3880000
+    },
+    "output": 34920,
+    "rule_id": "B.EMPLOYMENT"
+  },
+  {
+    "inputs": {
+      "family_count": 4,
+      "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+      "table_interval_won": [
+        4500000,
+        4520000
+      ],
+      "taxable_pay": 4504595
+    },
+    "output": 152100,
+    "rule_id": "B.TAX_TABLE"
+  },
+  {
+    "inputs": {
+      "eligible_children": 2,
+      "payment_date": "2026-03-03"
+    },
+    "output": 45830,
+    "rule_id": "B.CHILD_CREDIT"
+  },
+  {
+    "inputs": {
+      "before_small_tax_waiver": 106270,
+      "child_credit": 45830,
+      "eligible_children": 2,
+      "family_count": 4,
+      "payment_date": "2026-03-03",
+      "small_tax_waiver_below_won": 1000,
+      "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+      "table_interval_won": [
+        4500000,
+        4520000
+      ],
+      "table_tax_before_children_floor_won": 152100,
+      "taxable_pay": 4504595,
+      "withholding_percent": 100
+    },
+    "output": 106270,
+    "rule_id": "B.WITHHOLDING"
+  },
+  {
+    "inputs": {
+      "income_tax": 106270,
+      "rate": "0.1"
+    },
+    "output": 10620,
+    "rule_id": "B.LOCAL_TAX"
+  },
+  {
+    "inputs": {
+      "deductions": 493910,
+      "gross_pay": 4504595
+    },
+    "output": 4010685,
+    "rule_id": "B.NET"
+  }
+]

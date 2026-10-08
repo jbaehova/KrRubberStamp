@@ -1,0 +1,49 @@
+task_id: B1_C001_93e0cb3a
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상다시쓰는주방의 상반기 매장을 맡게 된 새 경리입니다. 매출표의 결제금액과 매입자료의 공급가액을 같은 기준으로 정리하고,
+  다음 달 세금 계좌에 옮길 부가세 금액을 확인해 주세요. 첨부한 세 자료에 나온 거래가 이번 신고 대상의 전부입니다. 매출 공급가액(tax_base)과
+  매출세액(output_vat)을 먼저 구해 주세요. 공제할 매입세액(deductible_input_vat)과 영수증 발행세액공제(receipt_credit)를
+  반영한 최종 납부액(payable_vat)을 원 단위 정수로 계산하여 answer.json에 저장해 주세요.
+input_files:
+- path: inputs/01_매장_마감안내.pdf
+  format: pdf
+- path: inputs/02_매장_판매마감.xlsx
+  format: xlsx
+- path: inputs/03_상품과_포장재_매입.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - output_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-b7e5785c-8bc4-5de0-a7a4-e2f0aeaa3973
+scenario_seed: 10655740172422481128
+scenario_hash: 0352da0a1a4a7e203b3c5fb8606fbce5e8778bd19a736a8c1038e4c4a195addb
+authorship:
+  method: individually_written
+  case_id: C001
+  case_sha256: 93e0cb3af41a04e8352540597ac8f06af7dced46e634de2b4c243e4441660a54
+  source_file: batch_1/C_vat/preview.json
+answer_fields:
+- tax_base
+- output_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

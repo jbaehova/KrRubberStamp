@@ -134,6 +134,11 @@ def _add_rule_evidence(scenario: dict) -> None:
         "source_url": table["source"],
         "effective_period": "원문 별표 개정 2026-02-27. 가족수별 기본 표 세액은 2023년 표와 동일.",
         "table_rows": [_table_row(r) for r in excerpt],
+        "family_count_over_eleven": (
+            "소득세법 시행령 별표2 제4호: 공제대상가족이 11명을 초과하면 "
+            "11명 표 세액에서 (10명 표 세액 - 11명 표 세액) 곱하기 11명 초과 가족 수를 차감한다. "
+            "음수 결과는 0원으로 처리한다."
+        ),
         "children_credit_january_february": (
             "8세부터 20세까지 기본공제 자녀 1명 12,500원. "
             "2명 29,160원. 3명 이상 29,160원에 2명 초과 자녀당 25,000원을 가산. "
@@ -343,3 +348,32 @@ def generate(seed: int, difficulty: str) -> dict:
             scenario["exceptions"].append("monthly_variable_allowance")
     _add_rule_evidence(scenario)
     return scenario
+
+
+LABELS.update(
+    {
+        "source_contract": "원시 증빙 대조 계약",
+        "regular_schedule": "계약상 정규근로 배정",
+        "working_days": "해당 월 정규 배정 일수",
+        "minutes_per_day": "하루 정규 배정 근로 분수",
+        "unpaid_absences": "승인된 무급 결근 기록",
+        "week_attendance": "주별 소정근로일과 출근일",
+        "week_id": "주 구분",
+        "scheduled_days": "소정근로일 수",
+        "attended_days": "출근한 소정근로일 수",
+        "work_records": "출퇴근과 승인 이력",
+        "record_id": "증빙 기록 번호",
+        "revision": "수정 차수",
+        "status": "승인 또는 실행 상태",
+        "category": "정규 배정 또는 추가 작업",
+        "start": "시작 시각",
+        "end": "종료 시각",
+        "breaks": "휴게 구간",
+        "holiday_dates": "계약상 법정 유급휴일 날짜",
+        "payment_records": "급여 이체 계획과 실행 기록",
+        "meal_service": "근무일 식사 제공 방식",
+        "evidence_handling_policy": "승인본과 지급 기록 처리 규약",
+        "family_count_over_eleven": "공제대상가족 11명 초과 계산 규정",
+        "payroll_column": "당시 급여대장의 입력란",
+    }
+)

@@ -1,0 +1,444 @@
+[
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C003-월말입고계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C003-월말입고"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C003-카드마감"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C003-일반매장판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C003-서점설치완료서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C003-주문-서점"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C003-테라스계산서",
+        "가상-C003-테라스카드전표"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C003-주문-테라스"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C003-설비카드전표"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C003-진열설비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C003-현금마감"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "가상-C003-현금영수증판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C003-재고계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C003-확장재고"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-30",
+      "transaction_id": "가상-C003-월말입고"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 8000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C003-월말입고"
+    },
+    "output": {
+      "gross": 8800000,
+      "supply_base": 8000000,
+      "vat": 800000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C003-월말입고",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 800000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-30",
+      "transaction_id": "가상-C003-일반매장판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 22000000,
+      "includes_vat": true,
+      "transaction_id": "가상-C003-일반매장판매"
+    },
+    "output": {
+      "gross": 22000000,
+      "supply_base": 20000000,
+      "vat": 2000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 20000000
+    },
+    "output": 2000000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "가상-C003-일반매장판매"
+    },
+    "output": {
+      "eligible_gross": 22000000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-07-01",
+      "transaction_id": "가상-C003-주문-서점"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-19",
+      "transaction_id": "가상-C003-주문-테라스"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 12000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C003-주문-테라스"
+    },
+    "output": {
+      "gross": 13200000,
+      "supply_base": 12000000,
+      "vat": 1200000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 12000000
+    },
+    "output": 1200000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "가상-C003-주문-테라스"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-14",
+      "transaction_id": "가상-C003-진열설비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 16500000,
+      "includes_vat": true,
+      "transaction_id": "가상-C003-진열설비"
+    },
+    "output": {
+      "gross": 16500000,
+      "supply_base": 15000000,
+      "vat": 1500000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C003-진열설비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 1500000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-30",
+      "transaction_id": "가상-C003-현금영수증판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5500000,
+      "includes_vat": true,
+      "transaction_id": "가상-C003-현금영수증판매"
+    },
+    "output": {
+      "gross": 5500000,
+      "supply_base": 5000000,
+      "vat": 500000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 5000000
+    },
+    "output": 500000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "가상-C003-현금영수증판매"
+    },
+    "output": {
+      "eligible_gross": 5500000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-23",
+      "transaction_id": "가상-C003-확장재고"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 30000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C003-확장재고"
+    },
+    "output": {
+      "gross": 33000000,
+      "supply_base": 30000000,
+      "vat": 3000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C003-확장재고",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 3000000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 650000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 27500000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 357500,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 357500
+    },
+    "output": 357500,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 357500,
+      "liability_before_credit": -1600000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -1600000,
+      "prepaid_assessed_vat": 800000
+    },
+    "output": -2400000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 5300000,
+      "output_vat": 3700000,
+      "prepaid_vat": 800000,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 5300000,
+      "input_vat": 5300000,
+      "net_vat": -2400000,
+      "noncreditable_vat": 0,
+      "output_vat": 3700000,
+      "payable_vat": 0,
+      "prepaid_vat": 800000,
+      "receipt_credit": 0,
+      "refund_vat": 2400000,
+      "tax_base": 37000000,
+      "unique_transaction_count": 6
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,98 @@
+task_id: B1_A003_21b595d5
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상별숲 건축사무소 급여 담당자입니다. 가상서유진 직원의 제출 화면에서 성년 아들과 어머니가 모두 가족 공제 대상처럼 묶여
+  보여서 그대로 마감하기 어렵습니다. 가족 확인서와 장애인 증명, 어머니 소득 확인을 맞춰 본인을 제외한 기본공제 가능 가족 수를 알려 주세요.
+  기본공제액과 추가공제액, 자녀 세액공제액도 필요합니다. 가족별 요건에 맞춘 카드 소득공제액을 구하고, 아들 보험료와 장학금을 받은 등록금 및 어머니
+  보전금이 있는 병원비를 반영한 보험료와 교육비 및 의료비 세액공제액을 작성해 주세요. 마지막으로 소득세와 지방소득세의 결정세액 및 차감징수세액을
+  각각 구해 두 차감징수액의 합계까지 답안 스키마에 넣어 주세요. 환급은 음수로 표시해 주세요.
+input_files:
+- path: inputs/01_직원인사확인서.hwpx
+  format: hwpx
+- path: inputs/02_급여원천징수누계.xlsx
+  format: xlsx
+- path: inputs/03_어머니소득부양확인.hwpx
+  format: hwpx
+- path: inputs/04_성년자녀장애인확인.pdf
+  format: pdf
+- path: inputs/05_어머니병원비보전명세.pdf
+  format: pdf
+- path: inputs/06_직원본인진료비.pdf
+  format: pdf
+- path: inputs/07_대학등록금장학금명세.xlsx
+  format: xlsx
+- path: inputs/08_자녀보험납입증명.pdf
+  format: pdf
+- path: inputs/09_연금계좌납입증명.pdf
+  format: pdf
+- path: inputs/10_명의별카드사용명세.xlsx
+  format: xlsx
+- path: inputs/11_추가공제미신청확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    child_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    education_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+    final_local_tax:
+      type: integer
+    settlement_national_tax:
+      type: integer
+    settlement_local_tax:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - additional_deduction
+  - child_credit
+  - credit_card_deduction
+  - insurance_credit
+  - education_credit
+  - medical_credit
+  - final_national_tax
+  - final_local_tax
+  - settlement_national_tax
+  - settlement_local_tax
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-90e62536-a528-57d9-8e3f-748a9d124c7f
+scenario_seed: 2429012317740127933
+scenario_hash: 560919fdcc5df9d4d31ae622f549e2efb9c468b6d4a08dae3acf318c843ea454
+authorship:
+  method: individually_written
+  case_id: A003
+  case_sha256: 21b595d561f2d6bdfd84b797ba5452b5012cd7e0e1a1eec0f5dad2f9ac84a32b
+  source_file: batch_1/A_yearend/preview.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- additional_deduction
+- child_credit
+- credit_card_deduction
+- insurance_credit
+- education_credit
+- medical_credit
+- final_national_tax
+- final_local_tax
+- settlement_national_tax
+- settlement_local_tax
+- settlement_total

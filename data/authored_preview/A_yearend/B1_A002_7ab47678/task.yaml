@@ -1,0 +1,71 @@
+task_id: B1_A002_7ab47678
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상다솜 편집실의 연말정산 담당자입니다. 4월에 입사한 가상문하린 직원이 간소화 자료를 연간 전체로 내려받았습니다. 급여 자료는
+  우리 회사분만 있고, 카드 명세와 병원 영수증에는 입사 전 지출도 섞여 있어요. 입사일과 각 지출 날짜를 맞춰 카드 소득공제액과 의료비 세액공제액을
+  계산해 주세요. 총급여와 과세표준도 함께 남겨 주시고, 소득세 및 지방소득세의 결정세액과 차감징수세액을 각각 작성해 주세요. 두 차감징수액의 합계까지
+  답안 스키마에 담고 환급이면 음수로 표시해 주세요.
+input_files:
+- path: inputs/01_중도입사신청확인서.hwpx
+  format: hwpx
+- path: inputs/02_입사후급여누계.xlsx
+  format: xlsx
+- path: inputs/03_연간카드명세.xlsx
+  format: xlsx
+- path: inputs/04_3월진료비영수증.pdf
+  format: pdf
+- path: inputs/05_9월진료비영수증.pdf
+  format: pdf
+- path: inputs/06_연금계좌납입확인.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    total_salary:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+    tax_base:
+      type: integer
+    final_national_tax:
+      type: integer
+    final_local_tax:
+      type: integer
+    settlement_national_tax:
+      type: integer
+    settlement_local_tax:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - total_salary
+  - credit_card_deduction
+  - medical_credit
+  - tax_base
+  - final_national_tax
+  - final_local_tax
+  - settlement_national_tax
+  - settlement_local_tax
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-9cb4922d-8537-5b91-89e6-01594f97ac2f
+scenario_seed: 8841822228638852261
+scenario_hash: ce056f05a9da8696bd4864482b0952dc1a386ae6c520e8b6f1894e56d044bfe2
+authorship:
+  method: individually_written
+  case_id: A002
+  case_sha256: 7ab47678912be4a5e505ea4cadb0a0c6491ed467756d6bb7c94e43c36d9d2ac5
+  source_file: batch_1/A_yearend/preview.json
+answer_fields:
+- total_salary
+- credit_card_deduction
+- medical_credit
+- tax_base
+- final_national_tax
+- final_local_tax
+- settlement_national_tax
+- settlement_local_tax
+- settlement_total

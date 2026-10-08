@@ -1,0 +1,375 @@
+[
+  {
+    "case_id": "D001",
+    "domain": "D_extract",
+    "difficulty": "easy",
+    "title": "장마 대피소 보충 물품의 다음 발주 단가",
+    "instruction": "대피소 세 곳의 물품 보충이 끝났습니다. 다음 주 추가 발주에 쓸 수 있도록 첨부한 세 건의 구매 명세에서 품목별로 가장 낮은 공급가액 단가와 그 업체를 찾아 주세요. 세 건의 부가세 포함 지출 총액도 알려 주세요. 견적이 아니라 서로 다른 납품을 실제 인수한 자료이며 세 건을 모두 집계합니다. 모든 단가는 부가세 별도이고 모든 품목의 수량 단위는 개입니다. answer.json에는 cheapest_by_item과 grand_total만 작성하세요. 품목명은 NFKC 정규화 후 공백을 제거하고 영문은 소문자로 바꾸세요. 업체명도 같은 방식으로 정규화하고 주식회사, (주), ㈜ 표기를 제거하세요. cheapest_by_item은 정규화 품목명 오름차순입니다. 단가가 같으면 정규화 업체명 오름차순의 첫 업체를 고릅니다. 각 품목의 공급가액은 수량 곱하기 단가이며 그 금액의 10%에서 원 미만을 버린 부가세를 더합니다.",
+    "answer_fields": ["cheapest_by_item", "grand_total"],
+    "work_goal": "이미 집행한 대피소 보충비를 확인하고 다음 보충 발주의 품목별 후보 업체를 정한다.",
+    "design_rationale": "동일 규격의 물품을 세 대피소가 따로 구매한 상황을 직접 설계했다. 전체 물량을 한 업체에 몰아 주는 문제 대신 품목마다 저렴한 업체가 달라지는 실무 판단을 요청한다. 대피소별 인수 완료 명세가 각각 하나의 거래를 증명하므로 문서 사이에 중복이나 추가 해석은 없다. 담요는 가상안심키트가 저렴하고 접이식 물통은 가상야간조달이 저렴하도록 가격 관계를 의도적으로 작성했다.",
+    "exceptions": [],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "SHELTER-20260612-01",
+          "vendor": "가상비상창고",
+          "date": "2026-06-12",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "보온담요", "quantity": 40, "unit_price": 16000},
+            {"name": "접이식물통", "quantity": 20, "unit_price": 9000},
+            {"name": "비상랜턴", "quantity": 12, "unit_price": 18000}
+          ]
+        },
+        {
+          "document_id": "SHELTER-20260612-02",
+          "vendor": "가상안심키트",
+          "date": "2026-06-12",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "보온담요", "quantity": 48, "unit_price": 15500},
+            {"name": "비상랜턴", "quantity": 20, "unit_price": 19000}
+          ]
+        },
+        {
+          "document_id": "SHELTER-20260613-01",
+          "vendor": "가상야간조달",
+          "date": "2026-06-13",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "보온담요", "quantity": 30, "unit_price": 17000},
+            {"name": "접이식물통", "quantity": 24, "unit_price": 8500},
+            {"name": "비상랜턴", "quantity": 8, "unit_price": 18500}
+          ]
+        }
+      ],
+      "comparison_basis": "동일 규격 물품의 개당 공급가액 단가. 모든 단가는 부가세 별도이며 세 명세는 각각 별개의 인수 완료 거래이다.",
+      "synthetic_notice": "모든 업체와 거래는 이 문제를 위해 작성한 허구이다. 실제 업체 식별번호는 사용하지 않는다."
+    },
+    "documents": [
+      {
+        "filename": "01_동부대피소_인수명세.pdf",
+        "format": "pdf",
+        "title": "동부 대피소 보충 물품 인수 명세",
+        "note": "6월 12일 인수 완료. 모든 단가는 부가세 별도이다. 담요와 물통의 수량 단위도 개이다.",
+        "fields": ["documents.0", "comparison_basis", "synthetic_notice"]
+      },
+      {
+        "filename": "02_중앙대피소_구매대장.xlsx",
+        "format": "xlsx",
+        "title": "중앙 대피소 구매 대장",
+        "note": "6월 12일 중앙 대피소가 직접 인수한 물품의 구매 내역이다. 동부 대피소 명세와 별개의 거래이다.",
+        "fields": ["documents.1"]
+      },
+      {
+        "filename": "03_서부대피소_납품확인.pdf",
+        "format": "pdf",
+        "title": "서부 대피소 야간 납품 확인서",
+        "note": "6월 13일 야간 보충분을 인수했다. 전날 다른 대피소에 납품한 물량의 사본이 아니다.",
+        "fields": ["documents.2"]
+      }
+    ]
+  },
+  {
+    "case_id": "D002",
+    "domain": "D_extract",
+    "difficulty": "medium",
+    "title": "음성 해설 제작 사업의 장비비 정산",
+    "instruction": "전시관 음성 해설 제작 사업의 장비 구입비를 마감하려고 합니다. 본관 녹음실과 순회 녹음팀에서 실제 인수한 다섯 건을 모두 합산해 업체별 공급가액, 부가세와 총액을 정리해 주세요. 사업 전체 공급가액 합계, 부가세 합계와 지출 총액도 필요합니다. 일부 판매처는 부가세 포함 단가를 기재했으므로 문서별 price_includes_vat를 확인하세요. 품목 수량 단위는 모두 개입니다. 부가세 포함 거래는 각 품목의 수량 곱하기 단가를 총액으로 보고 총액 곱하기 10 나누기 11에서 원 미만을 버려 공급가액을 구한 뒤 차액을 부가세로 처리하세요. 부가세 별도 거래는 각 품목의 수량 곱하기 단가를 공급가액으로 보고 그 금액의 10%에서 원 미만을 버려 부가세를 구하세요. answer.json에는 vendor_totals, supply_total, vat_total, grand_total만 작성하세요. 업체명은 NFKC 정규화 후 공백과 주식회사, (주), ㈜ 표기를 제거하고 영문은 소문자로 바꾸세요. vendor_totals는 정규화 업체명 오름차순입니다.",
+    "answer_fields": ["vendor_totals", "supply_total", "vat_total", "grand_total"],
+    "work_goal": "사업비 정산을 위해 판매처별 지출과 사업 전체 공급가액 및 부가세를 분리한다.",
+    "design_rationale": "문화시설의 접근성 사업이라는 목적에 맞춰 녹음 장비와 마이크 부속품을 직접 선정했다. 본관 초기 설치와 보조 녹음실 설치가 있고 이후 순회팀에 별도 장비를 추가한 구매 이력이다. 거래가 발생한 장소와 시점이 달라 동일 업체의 여러 문서도 실제로 합산해야 한다. 문제의 유일한 예외는 판매처별 부가세 기재 관행 차이이며 견적과 실구매를 섞거나 불필요한 서류로 개수를 늘리지 않았다.",
+    "exceptions": ["판매처마다 부가세 포함 단가와 부가세 별도 단가의 기재 방식이 다르다."],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "VOICE-20260204-01",
+          "vendor": "가상파장오디오",
+          "date": "2026-02-04",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "음성녹음용콘덴서마이크", "quantity": 2, "unit_price": 88000},
+            {"name": "탁상마이크스탠드", "quantity": 2, "unit_price": 28000},
+            {"name": "원형팝필터", "quantity": 2, "unit_price": 11000}
+          ]
+        },
+        {
+          "document_id": "VOICE-20260211-01",
+          "vendor": "가상선율장비",
+          "date": "2026-02-11",
+          "price_includes_vat": true,
+          "items": [
+            {"name": "음성녹음용콘덴서마이크", "quantity": 2, "unit_price": 93500},
+            {"name": "탁상마이크스탠드", "quantity": 2, "unit_price": 33000},
+            {"name": "원형팝필터", "quantity": 2, "unit_price": 11000}
+          ]
+        },
+        {
+          "document_id": "VOICE-20260223-01",
+          "vendor": "가상조용한방",
+          "date": "2026-02-23",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "음성녹음용콘덴서마이크", "quantity": 1, "unit_price": 90000},
+            {"name": "원형팝필터", "quantity": 4, "unit_price": 10500}
+          ]
+        },
+        {
+          "document_id": "VOICE-20260303-01",
+          "vendor": "가상파장오디오",
+          "date": "2026-03-03",
+          "price_includes_vat": true,
+          "items": [
+            {"name": "탁상마이크스탠드", "quantity": 3, "unit_price": 29700},
+            {"name": "원형팝필터", "quantity": 6, "unit_price": 12100}
+          ]
+        },
+        {
+          "document_id": "VOICE-20260317-01",
+          "vendor": "가상선율장비",
+          "date": "2026-03-17",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "음성녹음용콘덴서마이크", "quantity": 1, "unit_price": 86000},
+            {"name": "탁상마이크스탠드", "quantity": 1, "unit_price": 26000},
+            {"name": "원형팝필터", "quantity": 1, "unit_price": 10500}
+          ]
+        }
+      ],
+      "comparison_basis": "다섯 문서 모두 실제로 인수한 별개 거래이다. 기재 단가의 부가세 포함 여부는 문서별로 따르며 품목마다 공급가액과 세액을 계산한 다음 합산한다.",
+      "synthetic_notice": "전시관 사업과 모든 업체는 허구이다. 실제 업체 식별번호는 사용하지 않는다."
+    },
+    "documents": [
+      {
+        "filename": "01_본관녹음실_장비인수.pdf",
+        "format": "pdf",
+        "title": "본관 녹음실 초기 장비 인수서",
+        "note": "첫 녹음실 설치 물량이다. 금액은 부가세 별도 단가이며 실제 인수한 수량을 기재했다.",
+        "fields": ["documents.0", "comparison_basis", "synthetic_notice"]
+      },
+      {
+        "filename": "02_보조녹음실_결제내역.xlsx",
+        "format": "xlsx",
+        "title": "보조 녹음실 장비 결제 내역",
+        "note": "보조 녹음실에 별도 설치한 장비이다. 단가는 부가세 포함 결제 단가이다.",
+        "fields": ["documents.1"]
+      },
+      {
+        "filename": "03_외부해설사_장비지원.hwpx",
+        "format": "hwpx",
+        "title": "외부 해설사 녹음용 장비 지원 구매서",
+        "note": "외부 해설사가 별도 공간에서 작업할 수 있도록 구입해 인계했다. 단가는 부가세 별도이다.",
+        "fields": ["documents.2"]
+      },
+      {
+        "filename": "04_순회팀_부속품납품.pdf",
+        "format": "pdf",
+        "title": "순회 녹음팀 부속품 납품 명세",
+        "note": "세 순회팀의 추가 작업대에 배치한 부속품이다. 본관 초기 인수분과 별개이며 단가는 부가세 포함이다.",
+        "fields": ["documents.3"]
+      },
+      {
+        "filename": "05_대체녹음석_구매완료.xlsx",
+        "format": "xlsx",
+        "title": "대체 녹음석 설치 구매 완료 내역",
+        "note": "해설 재녹음 대기 물량을 처리하기 위해 별도 녹음석을 설치했다. 단가는 부가세 별도이다.",
+        "fields": ["documents.4"]
+      }
+    ]
+  },
+  {
+    "case_id": "D003",
+    "domain": "D_extract",
+    "difficulty": "hard",
+    "title": "이동 수리 작업실 조달 증빙의 중복 결산",
+    "instruction": "이동 수리 작업실 여덟 곳의 장비 조달 자료를 넘겨받았습니다. 업체별 지급 총액을 대조하고 다음 설치분의 품목별 최저 단가 업체를 정해야 합니다. 재발급 PDF 한 장과 스캔 사본 한 장이 함께 들어 있으므로 같은 document_id의 내용이 동일한 자료는 한 번만 집계하세요. 서로 다른 document_id는 같은 업체와 같은 품목이어도 각각 실제 인수한 거래입니다. 법인명 앞의 주식회사, (주), ㈜ 표기와 공백 차이는 동일 업체를 뜻합니다. 모든 품목 규격과 수량 단위는 같고 단위는 개이며 품목 이름의 공백도 동일 품목의 표기 차이입니다. 부가세 포함 단가는 각 품목의 수량 곱하기 단가를 총액으로 보고 총액 곱하기 10 나누기 11에서 원 미만을 버려 공급가액을 구한 뒤 차액을 부가세로 처리하세요. 부가세 별도 단가는 수량 곱하기 단가를 공급가액으로 보고 그 금액의 10%에서 원 미만을 버려 부가세를 구하세요. 최저 단가 비교는 공급가액 기준 개당 단가입니다. 부가세 포함 단가의 비교용 공급가액 단가는 기재 단가 곱하기 10 나누기 11에서 원 미만을 버린 값입니다. answer.json에는 vendor_totals, cheapest_by_item, grand_total, unique_document_count만 작성하세요. 업체명과 품목명은 NFKC 정규화 후 공백을 제거하고 영문은 소문자로 바꾸세요. 업체명에서는 법인 표기를 제거하세요. vendor_totals는 정규화 업체명 오름차순이며 cheapest_by_item은 정규화 품목명 오름차순입니다. 최저 단가가 같으면 정규화 업체명 오름차순의 첫 업체를 고르세요. unique_document_count는 파일 수가 아니라 중복 제거 후의 서로 다른 거래 문서 번호 수입니다.",
+    "answer_fields": ["vendor_totals", "cheapest_by_item", "grand_total", "unique_document_count"],
+    "work_goal": "사본을 잘못 더한 지급 결산을 방지하면서 공급업체의 실제 납품 단가를 비교한다.",
+    "design_rationale": "작업실을 차례로 개설하며 같은 업체에서 여러 번 납품받은 이력을 직접 구성했다. 거래 여덟 건을 물리적 증빙 열 장으로 받는 인수인계 상황이다. 동부 작업실의 명세 재발급본은 원본과 문서 번호 및 내용이 완전히 같고 북부 작업실 자료는 스캔까지 보관되어 있다. 업체별 법인 표기 차이를 통합하지 않으면 지급 대조표가 갈라진다. 작업등과 멀티탭은 최저 공급가액 단가가 동률인 업체가 있어 동률 처리까지 필요하다. 사본 두 장을 제외한 나머지 증빙은 모두 서로 다른 작업실의 실제 구매를 증명한다.",
+    "exceptions": [
+      "동부 작업실 명세의 재발급본과 북부 작업실 명세의 스캔 사본이 원본과 중복된다.",
+      "같은 업체를 주식회사, (주), ㈜와 공백이 다른 이름으로 기재했다.",
+      "거래별로 부가세 포함 단가와 부가세 별도 단가가 섞여 있다.",
+      "작업등과 멀티탭의 최저 공급가액 단가가 업체 사이에서 동률이다."
+    ],
+    "facts": {
+      "documents": [
+        {
+          "document_id": "MOBILE-20260402-NORTH",
+          "vendor": "가상현장공구",
+          "date": "2026-04-02",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "충전식작업등", "quantity": 6, "unit_price": 42000},
+            {"name": "방진멀티탭", "quantity": 6, "unit_price": 18000},
+            {"name": "접이식공구함", "quantity": 4, "unit_price": 55000}
+          ]
+        },
+        {
+          "document_id": "MOBILE-20260406-CENTRAL",
+          "vendor": "가상순회장비",
+          "date": "2026-04-06",
+          "price_includes_vat": true,
+          "items": [
+            {"name": "충전식작업등", "quantity": 4, "unit_price": 45100},
+            {"name": "방진멀티탭", "quantity": 4, "unit_price": 20900},
+            {"name": "접이식공구함", "quantity": 4, "unit_price": 59400}
+          ]
+        },
+        {
+          "document_id": "MOBILE-20260413-EAST",
+          "vendor": "(주) 가상이동정비",
+          "date": "2026-04-13",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "충전식작업등", "quantity": 8, "unit_price": 40000},
+            {"name": "방진멀티탭", "quantity": 8, "unit_price": 18500},
+            {"name": "접이식공구함", "quantity": 6, "unit_price": 56000}
+          ]
+        },
+        {
+          "document_id": "MOBILE-20260420-WEST",
+          "vendor": "주식회사 가상현장공구",
+          "date": "2026-04-20",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "충전식 작업등", "quantity": 5, "unit_price": 40000},
+            {"name": "방진 멀티탭", "quantity": 5, "unit_price": 17500},
+            {"name": "접이식 공구함", "quantity": 2, "unit_price": 53000}
+          ]
+        },
+        {
+          "document_id": "MOBILE-20260504-SOUTH",
+          "vendor": "㈜가상순회장비",
+          "date": "2026-05-04",
+          "price_includes_vat": true,
+          "items": [
+            {"name": "충전식작업등", "quantity": 3, "unit_price": 44000},
+            {"name": "방진멀티탭", "quantity": 3, "unit_price": 19800},
+            {"name": "접이식공구함", "quantity": 3, "unit_price": 58300}
+          ]
+        },
+        {
+          "document_id": "MOBILE-20260512-HARBOR",
+          "vendor": "가상이동정비",
+          "date": "2026-05-12",
+          "price_includes_vat": true,
+          "items": [
+            {"name": "충전식작업등", "quantity": 2, "unit_price": 44000},
+            {"name": "방진멀티탭", "quantity": 6, "unit_price": 18700},
+            {"name": "접이식공구함", "quantity": 2, "unit_price": 60500}
+          ]
+        },
+        {
+          "document_id": "MOBILE-20260525-HILL",
+          "vendor": "(주)가상 현장 공구",
+          "date": "2026-05-25",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "충전식작업등", "quantity": 4, "unit_price": 41500},
+            {"name": "방진멀티탭", "quantity": 4, "unit_price": 17000},
+            {"name": "접이식공구함", "quantity": 4, "unit_price": 52500}
+          ]
+        },
+        {
+          "document_id": "MOBILE-20260608-RIVER",
+          "vendor": "가상순회장비",
+          "date": "2026-06-08",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "충전식작업등", "quantity": 4, "unit_price": 40500},
+            {"name": "방진멀티탭", "quantity": 4, "unit_price": 17200},
+            {"name": "접이식공구함", "quantity": 4, "unit_price": 53000}
+          ]
+        },
+        {
+          "document_id": "MOBILE-20260413-EAST",
+          "vendor": "(주) 가상이동정비",
+          "date": "2026-04-13",
+          "price_includes_vat": false,
+          "items": [
+            {"name": "충전식작업등", "quantity": 8, "unit_price": 40000},
+            {"name": "방진멀티탭", "quantity": 8, "unit_price": 18500},
+            {"name": "접이식공구함", "quantity": 6, "unit_price": 56000}
+          ]
+        }
+      ],
+      "comparison_basis": "모든 거래는 실제 인수한 동일 규격 장비이다. 문서 번호가 같은 완전히 동일한 내용의 명세와 스캔 사본은 중복 합산하지 않는다. 최저 단가는 부가세를 뺀 개당 단가이며 동률이면 정규화 업체명 오름차순의 첫 업체를 고른다.",
+      "synthetic_notice": "모든 작업실과 업체 및 거래는 이 문제를 위해 작성한 허구이다. 실제 업체 식별번호는 사용하지 않는다."
+    },
+    "documents": [
+      {
+        "filename": "01_북부작업실_인수명세.pdf",
+        "format": "pdf",
+        "title": "북부 이동 수리 작업실 장비 인수 명세",
+        "note": "4월 2일 처음 개설한 작업실의 인수분이다. 이 명세의 스캔 사본도 파일 묶음에 있으므로 같은 거래를 두 번 더하지 않는다.",
+        "fields": ["documents.0", "comparison_basis", "synthetic_notice"]
+      },
+      {
+        "filename": "02_중앙작업실_구매대장.xlsx",
+        "format": "xlsx",
+        "title": "중앙 이동 수리 작업실 구매 대장",
+        "note": "중앙 작업실의 신규 장비 인수분이다. 가상순회장비의 단가는 부가세 포함이다.",
+        "fields": ["documents.1"]
+      },
+      {
+        "filename": "03_동부작업실_인수명세.pdf",
+        "format": "pdf",
+        "title": "동부 이동 수리 작업실 장비 인수 명세",
+        "note": "동부 작업실의 원본 명세이다. MOBILE-20260413-EAST 번호를 확인하고 재발급본과 대조한다.",
+        "fields": ["documents.2"]
+      },
+      {
+        "filename": "04_서부작업실_납품확인.hwpx",
+        "format": "hwpx",
+        "title": "서부 이동 수리 작업실 납품 확인서",
+        "note": "주식회사 가상현장공구가 서부 작업실에 별도로 납품한 거래이다. 북부 작업실의 인수분과 문서 번호가 다르다.",
+        "fields": ["documents.3"]
+      },
+      {
+        "filename": "05_남부작업실_결제대장.xlsx",
+        "format": "xlsx",
+        "title": "남부 이동 수리 작업실 결제 대장",
+        "note": "㈜가상순회장비의 남부 납품분이다. 중앙 작업실과 공급업체가 같지만 별도로 인수한 거래이며 단가는 부가세 포함이다.",
+        "fields": ["documents.4"]
+      },
+      {
+        "filename": "06_항구작업실_인수명세.pdf",
+        "format": "pdf",
+        "title": "항구 이동 수리 작업실 장비 인수 명세",
+        "note": "항구 작업실의 소형 장비 배치분이다. 동부 작업실 명세와 공급업체가 같고 문서 번호는 다르다. 단가는 부가세 포함이다.",
+        "fields": ["documents.5"]
+      },
+      {
+        "filename": "07_언덕작업실_구매내역.xlsx",
+        "format": "xlsx",
+        "title": "언덕 이동 수리 작업실 구매 내역",
+        "note": "공급업체 표기의 공백이 다른 구매 대장이다. 가상현장공구와 동일 업체이며 언덕 작업실에 납품된 별개 거래이다.",
+        "fields": ["documents.6"]
+      },
+      {
+        "filename": "08_강변작업실_인수확인.hwpx",
+        "format": "hwpx",
+        "title": "강변 이동 수리 작업실 장비 인수 확인서",
+        "note": "6월 8일 개설한 강변 작업실의 신규 장비 인수분이다. 이전 납품분의 정정 또는 취소 자료가 아니다.",
+        "fields": ["documents.7"]
+      },
+      {
+        "filename": "09_동부작업실_명세재발급.pdf",
+        "format": "pdf",
+        "title": "동부 이동 수리 작업실 인수 명세 재발급본",
+        "note": "원본을 찾지 못한 담당자가 다시 받은 사본이다. 문서 번호와 작성일 및 모든 거래 내용이 03번 원본과 같다. 재발급은 추가 납품을 뜻하지 않는다.",
+        "fields": ["documents.8"]
+      },
+      {
+        "filename": "10_북부작업실_보관스캔.png",
+        "format": "png",
+        "title": "북부 작업실 원본 명세의 보관 스캔",
+        "note": "01_북부작업실_인수명세.pdf의 스캔 사본이다. 별개의 납품 문서가 아니다.",
+        "duplicate_of": "01_북부작업실_인수명세.pdf",
+        "fields": []
+      }
+    ]
+  }
+]
