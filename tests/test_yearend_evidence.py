@@ -20,6 +20,8 @@ def case(identity):
         else "cases_054_103.json"
         if number <= 103
         else "cases_104_153.json"
+        if number <= 153
+        else "cases_154_203.json"
     )
     rows = json.loads((ROOT / "authored/batch_1/A_yearend" / name).read_text())
     return deepcopy(next(row for row in rows if row["case_id"] == identity))
@@ -70,6 +72,65 @@ def test_household_home_list_precedes_mortgage_interest_cap():
     assert answer(raw)["housing_income_deduction"] == 0
     raw["housing_mortgage"]["household_homes_at_year_end"].pop()
     assert answer(raw)["housing_income_deduction"] == 8_600_000
+
+
+def test_mortgage_interest_uses_actual_payments_inside_employment_interval():
+    raw = case("A177")["facts"]
+    original = deepcopy(raw)
+    assert answer(raw)["housing_income_deduction"] == 2_400_000
+    assert raw == original
+    raw["housing_mortgage"]["interest_payments"][4]["amount"] = 9_000_000
+    assert answer(raw)["housing_income_deduction"] == 2_400_000
+    raw["housing_mortgage"]["interest_payments"][4].update(date="2025-04-30", amount=650_000)
+    assert answer(raw)["housing_income_deduction"] == 3_050_000
+    raw["housing_mortgage"]["interest_payments"][0]["date"] = "2025-01-01"
+    assert answer(raw)["housing_income_deduction"] == 3_050_000
+
+
+def test_high_salary_culture_credit_payment_and_mortgage_period_both_affect_answer():
+    raw = case("A199")["facts"]
+    before = answer(raw)
+    assert before["housing_income_deduction"] == 3_600_000
+    assert before["credit_card_deduction"] == 1_200_000
+    raw["cards"][2]["payment_method"] = "debit"
+    assert answer(raw)["credit_card_deduction"] == 2_100_000
+    raw["housing_mortgage"]["interest_payments"][10]["date"] = "2025-10-31"
+    assert answer(raw)["housing_income_deduction"] == 4_200_000
+
+
+@pytest.mark.parametrize(
+    "mutate,message",
+    [
+        (lambda s: s["housing_mortgage"].update(interest_paid=7_600_000), "compiled employment"),
+        (lambda s: s.update(employment_start="2025-05-01"), "interval is reversed"),
+        (lambda s: s["housing_mortgage"].update(interest_payments={}), "must be a list"),
+        (
+            lambda s: s["housing_mortgage"]["interest_payments"][0].update(amount=-1),
+            "nonnegative integer",
+        ),
+        (
+            lambda s: s["housing_mortgage"]["interest_payments"][0].update(amount=True),
+            "nonnegative integer",
+        ),
+        (
+            lambda s: s["housing_mortgage"]["interest_payments"][0].update(date="2025-02-30"),
+            "day is out of range",
+        ),
+    ],
+)
+def test_invalid_or_precomputed_mortgage_payment_evidence_is_rejected(mutate, message):
+    raw = case("A177")["facts"]
+    mutate(raw)
+    with pytest.raises(ValueError, match=message):
+        interpret(raw)
+
+
+def test_mortgage_payment_identity_cannot_repeat():
+    raw = case("A177")["facts"]
+    for row in raw["housing_mortgage"]["interest_payments"][:2]:
+        row["payment_id"] = "same-payment"
+    with pytest.raises(ValueError, match="Duplicate mortgage"):
+        interpret(raw)
 
 
 @pytest.mark.parametrize("identity", ["A149", "A153"])

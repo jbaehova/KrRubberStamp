@@ -92,6 +92,8 @@ LABELS = {
     "calculation_notes": "정산 계산 안내",
     "rule_reference": "적용 규정 안내",
     "housing_mortgage": "장기주택저당차입금 자료",
+    "interest_payments": "주택대출 이자의 실제 납부일과 납부액",
+    "payment_id": "이자 출금 식별번호",
     "requirements_met": "주택 및 차입자 공통 요건 확인",
     "borrowed_date": "차입 약정일",
     "term_years": "약정 상환 기간 연수",

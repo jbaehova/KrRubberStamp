@@ -11,14 +11,22 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     cases = load_cases(file_name="preview.json")
+    batch_dir = ROOT / "data/batch_1"
+    complete = (batch_dir / "manifest.json").is_file()
+    if not complete:
+        batch_dir = ROOT / "data/authored_preview"
     built = {}
-    for path in (ROOT / "data/authored_preview").glob("*/*/task.yaml"):
+    for path in batch_dir.glob("*/*/task.yaml"):
         metadata = yaml.safe_load(path.read_text(encoding="utf-8"))
         built[metadata["authorship"]["case_id"]] = (path.parent, metadata)
     lines = [
         "# 직접 작성한 문항 미리보기",
         "",
-        "기존 자동생성 1,200문항은 공개 후보에서 제외했다. 여기에는 개별적으로 작성한 첫 12문항을 담았다. Batch 1의 전체 집필은 진행 중이며 이 파일은 완료 보고서가 아니다.",
+        (
+            "개별 집필을 완료한 Batch 1의 첫 12문항을 담았다. 입력 파일 링크는 최종 배치의 현재 문항을 가리킨다. 전체 검증 결과는 BATCH_1_REPORT.md에 있다."
+            if complete
+            else "기존 자동생성 1,200문항은 공개 후보에서 제외했다. 여기에는 개별적으로 작성한 첫 12문항을 담았다. Batch 1의 전체 집필은 진행 중이며 이 파일은 완료 보고서가 아니다."
+        ),
         "",
         "각 사례의 업무 목적과 사실을 먼저 작성하고 증빙 배치와 질문별 답안 항목을 정했다. 문항 생성기를 호출하거나 이전 문항의 이름과 숫자를 바꾸어 작성하지 않았다. 정답과 trace는 규칙 엔진에서 계산했다.",
         "",

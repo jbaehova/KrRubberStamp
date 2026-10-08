@@ -242,6 +242,25 @@ def build_reports(
         "",
     ]
     lines += [f"- `{rule['rule_id']}`: {rule['description']}" for rule in unverified]
+    editorials = [
+        ("연말정산 A001부터 A103", "authored_yearend_first103_editorial.md"),
+        ("급여 B001부터 B153", "authored_payroll_first153_editorial.md"),
+        ("부가세 C001부터 C103", "authored_vat_first103_editorial.md"),
+        ("문서 추출 첫 50문항", "authored_extract_first50_editorial.md"),
+    ]
+    available = [
+        (label, project_root / "reports" / name)
+        for label, name in editorials
+        if (project_root / "reports" / name).is_file()
+    ]
+    if available:
+        lines += ["", "## 개별 원고 편집 감사", ""]
+        lines += [f"- [{label}]({_link(path, output)})" for label, path in available]
+        lines += [
+            "",
+            "각 기록의 명시된 범위에서 질문과 원자료 및 문서 관계를 직접 읽고, 조건을 바꾸어 요청 답의 변화 또는 불변성을 확인했습니다. 발견한 법률 전제와 날짜 모순 및 의미 중복을 교정했습니다. 이 기록을 전체 1,200문항의 전문가 승인으로 확대하지 않습니다.",
+            "",
+        ]
     lines += [
         "",
         "연말정산 공식 전체 정산 예시와 간이세액표의 공식 숫자 셀, 부가세 완성 신고서 사례는 서로 다른 근거 단위입니다. 한 사례의 여러 중간값을 여러 독립 완성 사례로 세지 않습니다. 세부 범위는 각 분야 연구 보고서에서 확인해야 합니다. 분야 D는 자체 업무 집계 규약이므로 대응하는 국세청이나 공단 공식 예시가 없습니다.",

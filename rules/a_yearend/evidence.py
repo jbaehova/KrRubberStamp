@@ -120,6 +120,34 @@ def interpret(source: dict) -> dict:
         branches += 1
 
     mortgage = source.get("housing_mortgage", {})
+    if "interest_payments" in mortgage:
+        if "interest_paid" in mortgage:
+            raise ValueError("Raw mortgage payments expose compiled employment-period interest")
+        payments = mortgage["interest_payments"]
+        if not isinstance(payments, list):
+            raise ValueError("Mortgage interest payments must be a list")
+        start = _date(source["employment_start"], "employment start")
+        end = _date(source["employment_end"], "employment end")
+        if start > end:
+            raise ValueError("Employment interval is reversed")
+        eligible_interest = 0
+        identities = set()
+        for payment in payments:
+            if not isinstance(payment, dict) or not {"date", "amount"} <= payment.keys():
+                raise ValueError("Mortgage payment requires its actual date and amount")
+            paid = _date(payment["date"], "mortgage payment date")
+            amount = payment["amount"]
+            if type(amount) is not int or amount < 0:
+                raise ValueError("Mortgage interest amount must be a nonnegative integer")
+            if "payment_id" in payment:
+                identity = _text(payment["payment_id"], "mortgage payment identity")
+                if identity in identities:
+                    raise ValueError("Duplicate mortgage interest payment identity")
+                identities.add(identity)
+            if start <= paid <= end:
+                eligible_interest += amount
+        normalized["housing_mortgage"]["interest_paid"] = eligible_interest
+        branches += 1
     homes_field = "household_homes_at_year_end"
     if homes_field in mortgage:
         if "requirements_met" in mortgage:
@@ -192,6 +220,8 @@ def derivation_trace(source: dict, normalized: dict) -> dict:
         outcomes["housing_mortgage.requirements_met"] = normalized["housing_mortgage"][
             "requirements_met"
         ]
+    if "interest_payments" in source.get("housing_mortgage", {}):
+        outcomes["housing_mortgage.interest_paid"] = normalized["housing_mortgage"]["interest_paid"]
     if "organization_designations" in source:
         for index, row in enumerate(normalized.get("donations", [])):
             outcomes[f"donations.{index}.eligible_organization"] = row["eligible_organization"]
