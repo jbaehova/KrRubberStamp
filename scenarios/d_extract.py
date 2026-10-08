@@ -1,4 +1,5 @@
 from copy import deepcopy
+import hashlib
 import random
 
 LABELS = {
@@ -48,7 +49,7 @@ def generate(seed: int, difficulty: str) -> dict:
     rng = random.Random(seed)
     n = {"easy": 2, "medium": 5, "hard": 8}[difficulty]
     vendor_count = {"easy": 2, "medium": 3, "hard": 4}[difficulty]
-    tag = f"{seed % 100000000:08d}"
+    tag = hashlib.sha256(str(seed).encode()).hexdigest()[:12]
     vendors = [f"가상종이상사{tag}{i}" for i in range(vendor_count)]
     business_ids = [invalid_business_number(rng) for _ in vendors]
     catalog = ["복사용지", "문서보관함", "사무용펜", "파일철", "포장봉투"]

@@ -2,12 +2,13 @@
 
 from copy import deepcopy
 from datetime import date, timedelta
+import hashlib
 import random
 
 LABELS = {
     "domain": "분야",
     "reference_period": "기준 기간",
-    "seed": "시드",
+    "synthetic_id": "가상 자료 묶음 번호",
     "difficulty": "난이도",
     "period_start": "과세기간 시작일",
     "period_end": "과세기간 종료일",
@@ -66,16 +67,17 @@ def generate(seed: int, difficulty: str) -> dict:
     if difficulty not in {"easy", "medium", "hard"}:
         raise ValueError("difficulty must be easy, medium or hard")
     rng = random.Random(seed)
+    tag = hashlib.sha256(str(seed).encode()).hexdigest()[:16]
     count = {"easy": 5, "medium": 9, "hard": 15}[difficulty]
     scenario = {
         "domain": "C_vat",
         "reference_period": "2026년 제1기 (일반과세자)",
-        "seed": seed,
+        "synthetic_id": f"가상VAT-{tag}",
         "difficulty": difficulty,
         "taxpayer_type": "general",
         "period_start": "2026-01-01",
         "period_end": "2026-06-30",
-        "business_name": f"가상별빛상점{abs(seed) % 100000:05d}",
+        "business_name": f"가상별빛상점{tag}",
         "business_type": "individual",
         "consumer_facing_business": True,
         "prior_year_site_supply_base": rng.randrange(100, 850) * 1_000_000,
@@ -96,7 +98,7 @@ def generate(seed: int, difficulty: str) -> dict:
         )
         scenario["transactions"].append(
             {
-                "transaction_id": f"V{abs(seed):08d}-{index:03d}",
+                "transaction_id": f"V{tag}-{index:03d}",
                 "document_id": f"DOC-{index:03d}",
                 "direction": "sale" if sale else "purchase",
                 "date": (date(2026, 1, 1) + timedelta(days=rng.randrange(181))).isoformat(),
