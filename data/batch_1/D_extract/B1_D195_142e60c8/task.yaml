@@ -1,0 +1,61 @@
+task_id: B1_D195_142e60c8
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 촉각 지도 재료의 실제 단가표와 세액을 남겨 주세요. cheapest_by_item과 vat_total을 answer.json에
+  작성합니다.
+input_files:
+- path: inputs/01_선재표지.pdf
+  format: pdf
+- path: inputs/02_다른재료표지.hwpx
+  format: hwpx
+- path: inputs/03_촉각선첫로트.xlsx
+  format: xlsx
+- path: inputs/04_촉각선다음로트.pdf
+  format: pdf
+- path: inputs/05_대체판매처선재.hwpx
+  format: hwpx
+- path: inputs/06_점자표지.xlsx
+  format: xlsx
+- path: inputs/07_접착판.pdf
+  format: pdf
+- path: inputs/08_선재수령.hwpx
+  format: hwpx
+- path: inputs/09_부속재료수령.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-50ad694f-978f-5b91-9d5d-382148079a49
+scenario_seed: 1454206144846754153
+scenario_hash: 6a87b826e40ae0ff7f76538ba0dbe967e8675109ddd6853ceeba8769912dfe96
+authorship:
+  method: individually_written
+  case_id: D195
+  case_sha256: 142e60c8b5c7f169d56147b2521640cf7d4bb22f2c77dd05e0b8eb3066dd1462
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item
+- vat_total

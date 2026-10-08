@@ -1,0 +1,249 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C008-포장",
+          "date": "2026-04-22",
+          "description": "발송 담당자가 꽃병 파손을 막는 포장재를 받아 주문 발송에 사용했다.",
+          "document_ids": [
+            "가상-C008-포장계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상물든꽃병 발송대"
+          },
+          "operation_id": "OPS-C008",
+          "participants": [
+            {
+              "name": "가상 포장담당",
+              "organization": "가상물든꽃병",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C008-완충포장"
+        }
+      ],
+      "operations": [
+        {
+          "description": "유리 꽃병 소매 판매",
+          "operation_id": "OPS-C008",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C008-포장",
+          "date": "2026-04-22",
+          "document_id": "가상-C008-포장계산서",
+          "transaction_id": "가상-C008-완충포장"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C008-포장계산서",
+        "purpose": "business",
+        "transaction_id": "가상-C008-완충포장"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C008-카드판매"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C008-꽃병판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C008-포장계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C008-완충포장"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-13",
+      "transaction_id": "가상-C008-꽃병판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 6600000,
+      "includes_vat": true,
+      "transaction_id": "가상-C008-꽃병판매"
+    },
+    "output": {
+      "gross": 6600000,
+      "supply_base": 6000000,
+      "vat": 600000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 6000000
+    },
+    "output": 600000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "가상-C008-꽃병판매"
+    },
+    "output": {
+      "eligible_gross": 6600000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-22",
+      "transaction_id": "가상-C008-완충포장"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1500000,
+      "includes_vat": false,
+      "transaction_id": "가상-C008-완충포장"
+    },
+    "output": {
+      "gross": 1650000,
+      "supply_base": 1500000,
+      "vat": 150000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C008-완충포장",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 150000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 48000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 6600000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 85800,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 85800
+    },
+    "output": 85800,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 85800,
+      "liability_before_credit": 450000
+    },
+    "output": 85800,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 560000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 364200,
+      "prepaid_assessed_vat": 560000
+    },
+    "output": -195800,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 150000,
+      "output_vat": 600000,
+      "prepaid_vat": 560000,
+      "receipt_credit": 85800
+    },
+    "output": {
+      "deductible_input_vat": 150000,
+      "input_vat": 150000,
+      "net_vat": -195800,
+      "noncreditable_vat": 0,
+      "output_vat": 600000,
+      "payable_vat": 0,
+      "prepaid_vat": 560000,
+      "receipt_credit": 85800,
+      "refund_vat": 195800,
+      "tax_base": 6000000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

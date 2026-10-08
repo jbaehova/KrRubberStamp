@@ -1,0 +1,61 @@
+task_id: B1_C099_12418917
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상주말대여는 관리용으로 쓰던 승용차를 등록 임대 영업 차량으로 전환했습니다. 전환 전후의 실제 사용과 수리 날짜를 확인하고
+  별도의 임차 증빙 중복도 연결하세요. 고유 거래 수(unique_transaction_count), 불공제 세액(noncreditable_vat),
+  공제가능 매입세액(deductible_input_vat), 발행세액공제(receipt_credit), 납부액(payable_vat)을 answer.json에
+  정수로 작성해 주세요.
+input_files:
+- path: inputs/01_대여업_신고.hwpx
+  format: hwpx
+- path: inputs/02_차량등록_변경.xlsx
+  format: xlsx
+- path: inputs/03_고객임대_카드.pdf
+  format: pdf
+- path: inputs/04_관리당시_정비.hwpx
+  format: hwpx
+- path: inputs/05_등록후_정비.xlsx
+  format: xlsx
+- path: inputs/06_7월예약_실제정비.hwpx
+  format: hwpx
+- path: inputs/07_보조차량_임차계산서.pdf
+  format: pdf
+- path: inputs/08_보조차량_임차카드.xlsx
+  format: xlsx
+- path: inputs/09_예정고지_납부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-a471764c-f421-5fe7-8ad1-4e8b71313599
+scenario_seed: 1315483301314442956
+scenario_hash: 020903fb6fd34e9004920a76c21ec78929a326c261904048b9607393756cbdb2
+authorship:
+  method: individually_written
+  case_id: C099
+  case_sha256: 12418917c2ce36cc9828d20e4b95c420916dceccacfab1e9865e444ac1473429
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

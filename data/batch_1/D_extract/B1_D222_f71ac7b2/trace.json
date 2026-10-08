@@ -1,0 +1,183 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-12",
+          "document_id": "OPTIC-SIGN-1",
+          "event": "received",
+          "event_id": "OPTIC-A-IN",
+          "location": "안경점접수대"
+        },
+        {
+          "date": "2026-02-10",
+          "document_id": "OPTIC-SIGN-2",
+          "event": "cancelled_before_dispatch",
+          "event_id": "OPTIC-B-STOP",
+          "location": "안내판제작출고실"
+        },
+        {
+          "date": "2026-02-12",
+          "document_id": "OPTIC-FIX-3",
+          "event": "received",
+          "event_id": "OPTIC-FIX-IN",
+          "location": "안경점접수대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-07",
+          "document_id": "OPTIC-SIGN-1",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "OPTIC-A-C",
+          "vendor": "가상시야표시"
+        },
+        {
+          "date": "2026-02-08",
+          "document_id": "OPTIC-SIGN-2",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "OPTIC-B-C",
+          "vendor": "가상시야표시"
+        },
+        {
+          "date": "2026-02-09",
+          "document_id": "OPTIC-FIX-3",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "OPTIC-FIX-C",
+          "vendor": "가상매장고정"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "OPTIC-A-C",
+          "items": [
+            {
+              "name": "검안안내판A3",
+              "quantity": 2,
+              "unit_price": 18600
+            }
+          ],
+          "sheet_id": "OPTIC-A-L"
+        },
+        {
+          "header_record_id": "OPTIC-B-C",
+          "items": [
+            {
+              "name": "검안안내판A2",
+              "quantity": 2,
+              "unit_price": 29200
+            }
+          ],
+          "sheet_id": "OPTIC-B-L"
+        },
+        {
+          "header_record_id": "OPTIC-FIX-C",
+          "items": [
+            {
+              "name": "안내판고정집게",
+              "quantity": 4,
+              "unit_price": 2400
+            }
+          ],
+          "sheet_id": "OPTIC-FIX-L"
+        }
+      ],
+      "processing_policy": "첨부를 header_record_id로 연결한다. invoice와 order는 document_id에 received가 있는 경우만 실제 구매다. cancelled_before_dispatch는 인수 구매가 아니다. 별도 단가는 공급가액이며 행 세액은 공급가액의 10%에서 원 미만을 버린다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "OPTIC-SIGN-2"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "OPTIC-FIX-3",
+        "OPTIC-SIGN-1"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "OPTIC-SIGN-1",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 18600
+    },
+    "output": {
+      "supply": 37200,
+      "total": 40920,
+      "vat": 3720
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상시야표시"
+    },
+    "output": "가상시야표시",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "OPTIC-FIX-3",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 2400
+    },
+    "output": {
+      "supply": 9600,
+      "total": 10560,
+      "vat": 960
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상매장고정"
+    },
+    "output": "가상매장고정",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "검안안내판a3",
+          "unit_price": 18600,
+          "vendor": "가상시야표시"
+        },
+        {
+          "item": "안내판고정집게",
+          "unit_price": 2400,
+          "vendor": "가상매장고정"
+        }
+      ],
+      "grand_total": 51480,
+      "supply_total": 46800,
+      "unique_document_count": 2,
+      "vat_total": 4680,
+      "vendor_totals": [
+        {
+          "supply": 9600,
+          "total": 10560,
+          "vat": 960,
+          "vendor": "가상매장고정"
+        },
+        {
+          "supply": 37200,
+          "total": 40920,
+          "vat": 3720,
+          "vendor": "가상시야표시"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

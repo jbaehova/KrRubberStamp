@@ -1,0 +1,436 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "service",
+          "activity_id": "C148-진열설치",
+          "date": "2026-04-08",
+          "description": "직원이 기존 건물의 진열장 설치를 확인했다. 토지 공사는 포함하지 않았다.",
+          "document_ids": [
+            "C148-진열계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상기존 매장 내부"
+          },
+          "operation_id": "C148-소매",
+          "participants": [
+            {
+              "name": "가상차매장",
+              "organization": "가상넓힌자리",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C148-진열"
+        },
+        {
+          "action": "ground_work",
+          "activity_id": "C148-토지다짐",
+          "date": "2026-04-09",
+          "description": "직원이 추가 토지 자체의 평탄화와 다짐 공사를 확인했다.",
+          "document_ids": [
+            "C148-다짐계산서"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "가상추가토지 148번 필지"
+          },
+          "operation_id": "C148-소매",
+          "participants": [
+            {
+              "name": "가상차매장",
+              "organization": "가상넓힌자리",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C148-다짐"
+        },
+        {
+          "action": "meal",
+          "activity_id": "C148-주문식사",
+          "date": "2026-04-10",
+          "description": "대표가 확장 주문의 고객과 협의 후 함께 식사했다.",
+          "document_ids": [
+            "C148-식당카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상확장식당"
+          },
+          "operation_id": "C148-소매",
+          "participants": [
+            {
+              "name": "가상강대표",
+              "organization": "가상넓힌자리",
+              "role": "proprietor"
+            },
+            {
+              "name": "가상정주문",
+              "organization": "가상주문사",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "C148-식사"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 가정용 수납 소매 영업",
+          "operation_id": "C148-소매",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C148-진열설치",
+          "date": "2026-04-08",
+          "document_id": "C148-진열계산서",
+          "transaction_id": "C148-진열"
+        },
+        {
+          "activity_id": "C148-토지다짐",
+          "date": "2026-04-09",
+          "document_id": "C148-다짐계산서",
+          "transaction_id": "C148-다짐"
+        },
+        {
+          "activity_id": "C148-주문식사",
+          "date": "2026-04-10",
+          "document_id": "C148-식당카드",
+          "transaction_id": "C148-식사"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C148-진열계산서",
+        "purpose": "business",
+        "transaction_id": "C148-진열"
+      },
+      {
+        "business_related": true,
+        "document_id": "C148-다짐계산서",
+        "purpose": "land",
+        "transaction_id": "C148-다짐"
+      },
+      {
+        "business_related": true,
+        "document_id": "C148-식당카드",
+        "purpose": "hospitality",
+        "transaction_id": "C148-식사"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C148-다짐계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C148-다짐"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C148-식당카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C148-식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C148-진열계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C148-진열"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C148-판매카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C148-판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-09",
+      "transaction_id": "C148-다짐"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3300000,
+      "includes_vat": true,
+      "transaction_id": "C148-다짐"
+    },
+    "output": {
+      "gross": 3300000,
+      "supply_base": 3000000,
+      "vat": 300000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "C148-다짐",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 300000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-10",
+      "transaction_id": "C148-식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 495000,
+      "includes_vat": true,
+      "transaction_id": "C148-식사"
+    },
+    "output": {
+      "gross": 495000,
+      "supply_base": 450000,
+      "vat": 45000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "C148-식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 45000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-08",
+      "transaction_id": "C148-진열"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5610000,
+      "includes_vat": true,
+      "transaction_id": "C148-진열"
+    },
+    "output": {
+      "gross": 5610000,
+      "supply_base": 5100000,
+      "vat": 510000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C148-진열",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 510000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-12",
+      "transaction_id": "C148-판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 26400000,
+      "includes_vat": true,
+      "transaction_id": "C148-판매"
+    },
+    "output": {
+      "gross": 26400000,
+      "supply_base": 24000000,
+      "vat": 2400000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 24000000
+    },
+    "output": 2400000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C148-판매"
+    },
+    "output": {
+      "eligible_gross": 26400000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 1000000010
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 26400000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 1890000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 1890000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 1890000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 510000,
+      "output_vat": 2400000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 510000,
+      "input_vat": 855000,
+      "net_vat": 1890000,
+      "noncreditable_vat": 345000,
+      "output_vat": 2400000,
+      "payable_vat": 1890000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 24000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,70 @@
+task_id: B1_D235_490094fc
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 간판 제작소의 판재와 프레임을 실제 인수 기준으로 정리해 주세요. vendor_totals와 cheapest_by_item이
+  필요합니다.
+input_files:
+- path: inputs/01_판재주문.xlsx
+  format: xlsx
+- path: inputs/02_판재품목.pdf
+  format: pdf
+- path: inputs/03_프레임청구.hwpx
+  format: hwpx
+- path: inputs/04_판재출고상태.pdf
+  format: pdf
+- path: inputs/05_제작소인수.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-caf06fe0-29e5-5949-96e9-6e66f229c65a
+scenario_seed: 5260368178665838536
+scenario_hash: 929392a8ebc12dcd54d57b104e9e8c778f7e1d4dfd4a0d12a7e87328ecf4973b
+authorship:
+  method: individually_written
+  case_id: D235
+  case_sha256: 490094fce52557c8196dbdb7d401c0442c15c7190b51f566d2733309bf9b8bbe
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item

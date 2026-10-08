@@ -1,0 +1,422 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "금속전",
+          "date": "2026-04-24",
+          "description": "4월 금속 재료 인수",
+          "document_ids": [
+            "금속전표1"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "정밀 탭 창고"
+          },
+          "operation_id": "탭제조",
+          "participants": [
+            {
+              "name": "가상소제조",
+              "organization": "가상정밀탭",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C192-전구매"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "금속후",
+          "date": "2026-05-14",
+          "description": "5월 금속 재료 인수",
+          "document_ids": [
+            "금속전표2"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "정밀 탭 창고"
+          },
+          "operation_id": "탭제조",
+          "participants": [
+            {
+              "name": "가상소제조",
+              "organization": "가상정밀탭",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C192-후구매"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "관리정비",
+          "date": "2026-06-10",
+          "description": "관리 승용차 유지 정비 완료",
+          "document_ids": [
+            "관리전표"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "정밀 탭 차고"
+          },
+          "operation_id": "탭제조",
+          "participants": [
+            {
+              "name": "가상소제조",
+              "organization": "가상정밀탭",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C192-정비",
+          "vehicle_id": "가상-M192"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 정밀 탭 제조",
+          "operation_id": "탭제조",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "금속전",
+          "date": "2026-04-24",
+          "document_id": "금속전표1",
+          "transaction_id": "C192-전구매"
+        },
+        {
+          "activity_id": "금속후",
+          "date": "2026-05-14",
+          "document_id": "금속전표2",
+          "transaction_id": "C192-후구매"
+        },
+        {
+          "activity_id": "관리정비",
+          "date": "2026-06-10",
+          "document_id": "관리전표",
+          "transaction_id": "C192-정비"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "supplier_status_records": [
+        {
+          "status": "simplified_no_invoice_duty",
+          "supplier_id": "가상-금속192",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-04-30"
+        },
+        {
+          "status": "general",
+          "supplier_id": "가상-금속192",
+          "valid_from": "2026-05-01",
+          "valid_to": "2026-12-31"
+        },
+        {
+          "status": "general",
+          "supplier_id": "가상-정비192",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-12-31"
+        }
+      ],
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-M192"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "금속전표1",
+        "purpose": "business",
+        "transaction_id": "C192-전구매"
+      },
+      {
+        "business_related": true,
+        "document_id": "금속전표2",
+        "purpose": "business",
+        "transaction_id": "C192-후구매"
+      },
+      {
+        "business_related": true,
+        "document_id": "관리전표",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C192-정비"
+      },
+      {
+        "supplier_general": false,
+        "supplier_id": "가상-금속192",
+        "transaction_id": "C192-전구매"
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "가상-금속192",
+        "transaction_id": "C192-후구매"
+      },
+      {
+        "transaction_id": "C192-정비",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-M192",
+        "vehicle_subject_excise": true
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "가상-정비192",
+        "transaction_id": "C192-정비"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "금속전표1"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C192-전구매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "관리전표"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C192-정비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "금속전표2"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C192-후구매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-24",
+      "transaction_id": "C192-전구매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 990000,
+      "includes_vat": true,
+      "transaction_id": "C192-전구매"
+    },
+    "output": {
+      "gross": 990000,
+      "supply_base": 900000,
+      "vat": 90000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "C192-전구매",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 90000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-10",
+      "transaction_id": "C192-정비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 462000,
+      "includes_vat": true,
+      "transaction_id": "C192-정비"
+    },
+    "output": {
+      "gross": 462000,
+      "supply_base": 420000,
+      "vat": 42000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C192-정비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 42000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-14",
+      "transaction_id": "C192-후구매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1430000,
+      "includes_vat": true,
+      "transaction_id": "C192-후구매"
+    },
+    "output": {
+      "gross": 1430000,
+      "supply_base": 1300000,
+      "vat": 130000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C192-후구매",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 130000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 427000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -130000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -130000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -130000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 130000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 130000,
+      "input_vat": 262000,
+      "net_vat": -130000,
+      "noncreditable_vat": 132000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 130000,
+      "tax_base": 0,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

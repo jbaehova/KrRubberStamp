@@ -1,0 +1,47 @@
+task_id: B1_B007_9d39eaaf
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상바람문구의 가상강다윤 급여에서 보험 공제 항목을 확인해 주세요. 이번 달 급여를 보험 기준으로 다시 추정하지 말고 첨부된
+  공단별 확정 통지액을 사용해 국민연금, 건강보험과 장기요양보험 및 고용보험 근로자 부담액을 구해 주세요. 네 항목이 반영된 공제 합계도 필요합니다.
+input_files:
+- path: inputs/01_직원급여확인.hwpx
+  format: hwpx
+- path: inputs/02_공단통지모음.xlsx
+  format: xlsx
+- path: inputs/03_보험요율.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    employment_insurance:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - national_pension
+  - health_insurance
+  - long_term_care
+  - employment_insurance
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-3664ffc1-2b1c-5d3a-93bd-7bd31d51faa6
+scenario_seed: 11329344377565688793
+scenario_hash: d8926dcf7de227a544b9f482cabd21941ee2b0f477c2ee24e14dde0537bc2241
+authorship:
+  method: individually_written
+  case_id: B007
+  case_sha256: 9d39eaaf9adf33d910995c5b305e212629c2a1ee5095c4abcb5e6a7925e18ba0
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- national_pension
+- health_insurance
+- long_term_care
+- employment_insurance
+- total_deductions

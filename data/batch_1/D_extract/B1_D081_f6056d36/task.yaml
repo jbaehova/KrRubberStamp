@@ -1,0 +1,54 @@
+task_id: B1_D081_f6056d36
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 행사 비표를 판매처 계정별로 합칩니다. 이름 표기를 통합한 vendor_totals와 전체 vat_total을 답하세요. 업체
+  및 품목 금액 처리 기준은 설명회 대장에 있습니다.
+input_files:
+- path: inputs/01_봄포럼.pdf
+  format: pdf
+- path: inputs/02_설명회.xlsx
+  format: xlsx
+- path: inputs/03_여름대회.hwpx
+  format: hwpx
+- path: inputs/04_현장행사.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-66bc8c4a-19a5-5865-97b4-b6fe4a276e48
+scenario_seed: 17727695588154774943
+scenario_hash: c8406f3e7568d6de4d425fde47ccd284d44247228adab03fa5d029fe36891078
+authorship:
+  method: individually_written
+  case_id: D081
+  case_sha256: f6056d364a39959f77eebfc28d8bac4eb55b1209c65a246a52cb0586314d7a6e
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals
+- vat_total

@@ -1,0 +1,64 @@
+task_id: B1_D197_8e0d2e2c
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 안내 방송 확장 부품의 실제 지급액을 판매처별로 정리해 주세요. vendor_totals와 grand_total을 answer.json에
+  작성합니다.
+input_files:
+- path: inputs/01_실제발행표지.pdf
+  format: pdf
+- path: inputs/02_제안표지.xlsx
+  format: xlsx
+- path: inputs/03_브래킷품목.hwpx
+  format: hwpx
+- path: inputs/04_접속함품목.pdf
+  format: pdf
+- path: inputs/05_전원판품목.xlsx
+  format: xlsx
+- path: inputs/06_제안품목.hwpx
+  format: hwpx
+- path: inputs/07_방송담당수령.pdf
+  format: pdf
+- path: inputs/08_시설담당수령.hwpx
+  format: hwpx
+- path: inputs/09_후속전원판수령.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-90715150-6447-5283-be18-e16fd230a6ed
+scenario_seed: 10235888295321509690
+scenario_hash: 533dd44f9b002641d8464671a3c4db909b09023268503e1f15501fef30f57d48
+authorship:
+  method: individually_written
+  case_id: D197
+  case_sha256: 8e0d2e2c2b379f3af198f2298a5e1e657427a7d38bb00506a6f83eb315055b24
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals
+- grand_total

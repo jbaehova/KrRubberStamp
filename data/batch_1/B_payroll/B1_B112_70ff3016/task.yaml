@@ -1,0 +1,39 @@
+task_id: B1_B112_70ff3016
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상달오름우편실은 원천세 보관 계좌에서 소득세와 지방소득세를 따로 인출합니다. 등록된 가족과 정상 지급액으로 두 세금을 계산해
+  주세요. 이 직원의 원천징수용 과세급여도 함께 적어 세액표 행을 확인할 수 있게 합니다.
+input_files:
+- path: inputs/01_우편지급.xlsx
+  format: xlsx
+- path: inputs/02_공제가족.pdf
+  format: pdf
+- path: inputs/03_인출참조.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+  required:
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-fbee601e-6785-52e1-87b2-f25b6c5ee8c2
+scenario_seed: 8142279524313220519
+scenario_hash: 78c79ab5469e1fb793e86b171439e6ed5b835b9c9ae7e60f26ecfd400df5028c
+authorship:
+  method: individually_written
+  case_id: B112
+  case_sha256: 70ff301674a045a787b33cd1c64847cf9829f8d8c8d52075631a9c32123f78b8
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- taxable_pay
+- income_tax
+- local_income_tax

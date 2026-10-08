@@ -1,0 +1,59 @@
+task_id: B1_A250_39a3343e
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상솔바람철 가상엄나겸의 가족 정산을 확인해 주세요. 직원 연령과 혼인 상태를 보고 손자녀 및 취업 자녀의 인적공제를 판단합니다.
+  배우자가 아닌 다른 가족이 낸 직원 보험과 손자녀 진료의 보전액도 반영해 추가공제 및 보험료와 의료비 공제액을 적어 주세요.
+input_files:
+- path: inputs/01_직원가족.hwpx
+  format: hwpx
+- path: inputs/02_손자녀명부.pdf
+  format: pdf
+- path: inputs/03_취업자녀.xlsx
+  format: xlsx
+- path: inputs/04_보험부담.pdf
+  format: pdf
+- path: inputs/05_손자녀진료.pdf
+  format: pdf
+- path: inputs/06_진료보전.xlsx
+  format: xlsx
+- path: inputs/07_대학장학.hwpx
+  format: hwpx
+- path: inputs/08_급여확정.xlsx
+  format: xlsx
+- path: inputs/09_마감신청.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    additional_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    education_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - additional_deduction
+  - insurance_credit
+  - medical_credit
+  - education_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-94a58d6e-7b1b-50ee-ba48-3516034781ad
+scenario_seed: 4153220722859210202
+scenario_hash: 4113d1c154a3e2c062b03c391b6c9ab19f7e7833cc8564568c1253f588d2d43a
+authorship:
+  method: individually_written
+  case_id: A250
+  case_sha256: 39a3343e23d075dab2ec576cd0a2e1e058b8e9de9d01b123cd69c4daaab3558f
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- eligible_dependents
+- additional_deduction
+- insurance_credit
+- medical_credit
+- education_credit

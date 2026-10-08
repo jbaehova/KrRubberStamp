@@ -1,0 +1,438 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "허가정비",
+          "date": "2026-03-30",
+          "description": "말소 전 실제 대여 차량 정비",
+          "document_ids": [
+            "전정비전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "차문 대여 차고"
+          },
+          "operation_id": "차문대여",
+          "participants": [
+            {
+              "name": "합성클론",
+              "organization": "가상차문임대",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "정비전-296",
+          "vehicle_id": "차문차-296"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "말소정비",
+          "date": "2026-04-08",
+          "description": "말소 후 관리팀 전용 사용 차를 정비",
+          "document_ids": [
+            "후정비카드"
+          ],
+          "location": {
+            "kind": "road",
+            "name": "차문 관리 운행 도로"
+          },
+          "operation_id": "차문관리",
+          "participants": [
+            {
+              "name": "합성클론",
+              "organization": "가상차문임대",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "정비후-296",
+          "vehicle_id": "차문차-296"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "표지구매",
+          "date": "2026-04-08",
+          "description": "대여사업 관리 표지를 별도 공급자에게 수령",
+          "document_ids": [
+            "표지현금"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "차문 표지 보관실"
+          },
+          "operation_id": "차문관리",
+          "participants": [
+            {
+              "name": "합성클론",
+              "organization": "가상차문임대",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "표지-296"
+        }
+      ],
+      "operations": [
+        {
+          "description": "허가 과세 차량 대여",
+          "operation_id": "차문대여",
+          "output_taxable": true
+        },
+        {
+          "description": "과세 대여 사업 관리 이동 및 표지 관리",
+          "operation_id": "차문관리",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "허가정비",
+          "date": "2026-03-30",
+          "document_id": "전정비전자",
+          "transaction_id": "정비전-296"
+        },
+        {
+          "activity_id": "말소정비",
+          "date": "2026-04-08",
+          "document_id": "후정비카드",
+          "transaction_id": "정비후-296"
+        },
+        {
+          "activity_id": "표지구매",
+          "date": "2026-04-08",
+          "document_id": "표지현금",
+          "transaction_id": "표지-296"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "supplier_status_records": [
+        {
+          "status": "general",
+          "supplier_id": "정비상-296",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-12-31"
+        },
+        {
+          "status": "simplified_no_invoice_duty",
+          "supplier_id": "표지상-296",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-12-31"
+        }
+      ],
+      "vehicle_registry": [
+        {
+          "business_license": "vehicle_rental",
+          "permitted_operation_id": "차문대여",
+          "registration_class": "excise_passenger",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-03-31",
+          "vehicle_id": "차문차-296"
+        },
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "valid_from": "2026-04-01",
+          "valid_to": "2026-12-31",
+          "vehicle_id": "차문차-296"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "전정비전자",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "정비전-296"
+      },
+      {
+        "business_related": true,
+        "document_id": "후정비카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "정비후-296"
+      },
+      {
+        "business_related": true,
+        "document_id": "표지현금",
+        "purpose": "business",
+        "transaction_id": "표지-296"
+      },
+      {
+        "transaction_id": "정비전-296",
+        "vehicle_direct_business": true,
+        "vehicle_id": "차문차-296",
+        "vehicle_subject_excise": true
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "정비상-296",
+        "transaction_id": "정비전-296"
+      },
+      {
+        "transaction_id": "정비후-296",
+        "vehicle_direct_business": false,
+        "vehicle_id": "차문차-296",
+        "vehicle_subject_excise": true
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "정비상-296",
+        "transaction_id": "정비후-296"
+      },
+      {
+        "supplier_general": false,
+        "supplier_id": "표지상-296",
+        "transaction_id": "표지-296"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "전정비전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "정비전-296"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "후정비카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "정비후-296"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "표지현금"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "표지-296"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-30",
+      "transaction_id": "정비전-296"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1012000,
+      "includes_vat": true,
+      "transaction_id": "정비전-296"
+    },
+    "output": {
+      "gross": 1012000,
+      "supply_base": 920000,
+      "vat": 92000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "정비전-296",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 92000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-08",
+      "transaction_id": "정비후-296"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1364000,
+      "includes_vat": true,
+      "transaction_id": "정비후-296"
+    },
+    "output": {
+      "gross": 1364000,
+      "supply_base": 1240000,
+      "vat": 124000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "정비후-296",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 124000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-08",
+      "transaction_id": "표지-296"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 462000,
+      "includes_vat": true,
+      "transaction_id": "표지-296"
+    },
+    "output": {
+      "gross": 462000,
+      "supply_base": 420000,
+      "vat": 42000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "표지-296",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 42000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 395000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -92000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -92000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -92000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 92000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 92000,
+      "input_vat": 258000,
+      "net_vat": -92000,
+      "noncreditable_vat": 166000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 92000,
+      "tax_base": 0,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

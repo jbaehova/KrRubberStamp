@@ -1,0 +1,55 @@
+task_id: B1_A197_5f59374b
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상노루귀검사의 가상서도은 가족 의료비 자료를 확인해 주세요. 환자별 나이와 장애인 증명, 부모 소득 및 본인 진료 목적을
+  읽고 의료비 세액공제액을 계산합니다. 가족 기본공제액과 추가공제액 및 부모 특수교육비의 세액공제액도 적어 주세요.
+input_files:
+- path: inputs/01_직원신청.hwpx
+  format: hwpx
+- path: inputs/02_지급누계.xlsx
+  format: xlsx
+- path: inputs/03_자녀연령.pdf
+  format: pdf
+- path: inputs/04_부모소득.hwpx
+  format: hwpx
+- path: inputs/05_자녀입원.pdf
+  format: pdf
+- path: inputs/06_부모치료.pdf
+  format: pdf
+- path: inputs/07_본인치료.pdf
+  format: pdf
+- path: inputs/08_본인미용.pdf
+  format: pdf
+- path: inputs/09_부모특수교육.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+    education_credit:
+      type: integer
+  required:
+  - basic_deduction
+  - additional_deduction
+  - medical_credit
+  - education_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-cfbac914-1fdc-51e7-be47-d7e56adb537f
+scenario_seed: 6870583502473664002
+scenario_hash: df5f1cd855e55b23759e2e9b5e3112ff0a67e4e7c7c56d6c06491ef572917bb3
+authorship:
+  method: individually_written
+  case_id: A197
+  case_sha256: 5f59374b289a16029c2a56bb7b07fd484c7831df39078788f838b42469d006dc
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- basic_deduction
+- additional_deduction
+- medical_credit
+- education_credit

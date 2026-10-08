@@ -1,0 +1,176 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-04",
+          "document_id": "MODEL-141-H",
+          "event": "received",
+          "event_id": "e141-h",
+          "location": "모형 보관실"
+        },
+        {
+          "date": "2026-05-06",
+          "document_id": "MODEL-141-T",
+          "event": "received",
+          "event_id": "e141-t",
+          "location": "모형 보관실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-01",
+          "document_id": "MODEL-141-H",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h141-h",
+          "vendor": "가상모형운반"
+        },
+        {
+          "date": "2026-05-03",
+          "document_id": "MODEL-141-T",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h141-t",
+          "vendor": "가상모형체결"
+        },
+        {
+          "date": "2026-05-09",
+          "document_id": "MODEL-141-L",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h141-l",
+          "vendor": "가상모형체결"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h141-h",
+          "items": [
+            {
+              "name": "모형운반손잡이",
+              "quantity": 4,
+              "unit_price": 13200
+            }
+          ],
+          "sheet_id": "s141-h"
+        },
+        {
+          "header_record_id": "h141-t",
+          "items": [
+            {
+              "name": "모형고정띠",
+              "quantity": 8,
+              "unit_price": 4700
+            }
+          ],
+          "sheet_id": "s141-t"
+        },
+        {
+          "header_record_id": "h141-l",
+          "items": [
+            {
+              "name": "모형운반손잡이",
+              "quantity": 4,
+              "unit_price": 11900
+            }
+          ],
+          "sheet_id": "s141-l"
+        }
+      ],
+      "processing_policy": "header_record_id로 표지와 품목표를 연결한다. invoice와 order는 document_id의 received 기록이 있어야 포함한다. quote, 무인수 및 출고 전 취소는 제외하고 동일 document_id의 같은 내용은 한 번만 센다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 같은 규격의 개당 공급가액 단가를 비교하며 별도 단가는 그대로이고 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 품목 배열은 정규화 이름 오름차순이며 최저 동률은 정규화 업체명 오름차순 첫 업체다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "MODEL-141-L"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "MODEL-141-H",
+        "MODEL-141-T"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "MODEL-141-H",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 13200
+    },
+    "output": {
+      "supply": 52800,
+      "total": 58080,
+      "vat": 5280
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상모형운반"
+    },
+    "output": "가상모형운반",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "MODEL-141-T",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 4700
+    },
+    "output": {
+      "supply": 37600,
+      "total": 41360,
+      "vat": 3760
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상모형체결"
+    },
+    "output": "가상모형체결",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "모형고정띠",
+          "unit_price": 4700,
+          "vendor": "가상모형체결"
+        },
+        {
+          "item": "모형운반손잡이",
+          "unit_price": 13200,
+          "vendor": "가상모형운반"
+        }
+      ],
+      "grand_total": 99440,
+      "supply_total": 90400,
+      "unique_document_count": 2,
+      "vat_total": 9040,
+      "vendor_totals": [
+        {
+          "supply": 52800,
+          "total": 58080,
+          "vat": 5280,
+          "vendor": "가상모형운반"
+        },
+        {
+          "supply": 37600,
+          "total": 41360,
+          "vat": 3760,
+          "vendor": "가상모형체결"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

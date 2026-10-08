@@ -1,0 +1,195 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-13",
+          "document_id": "MODEL-BUY-6",
+          "event": "received",
+          "event_id": "MODEL-A-IN",
+          "location": "실물교육실"
+        },
+        {
+          "date": "2026-05-14",
+          "document_id": "MODEL-BASE-8",
+          "event": "received",
+          "event_id": "MODEL-B-IN",
+          "location": "실물교육실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-04",
+          "document_id": "MODEL-PROP-4",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "MODEL-PROP-C",
+          "vendor": "가상실물교육"
+        },
+        {
+          "date": "2026-05-11",
+          "document_id": "MODEL-BUY-6",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "MODEL-A-C",
+          "vendor": "가상모형제작"
+        },
+        {
+          "date": "2026-05-12",
+          "document_id": "MODEL-BASE-8",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "MODEL-B-C",
+          "vendor": "가상실물교육"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "MODEL-PROP-C",
+          "items": [
+            {
+              "name": "지형모형A",
+              "quantity": 3,
+              "unit_price": 48000
+            }
+          ],
+          "sheet_id": "MODEL-PROP-L"
+        },
+        {
+          "header_record_id": "MODEL-A-C",
+          "items": [
+            {
+              "name": "지형모형A",
+              "quantity": 3,
+              "unit_price": 71500
+            },
+            {
+              "name": "모형받침A",
+              "quantity": 3,
+              "unit_price": 13500
+            }
+          ],
+          "sheet_id": "MODEL-A-L"
+        },
+        {
+          "header_record_id": "MODEL-B-C",
+          "items": [
+            {
+              "name": "모형받침A",
+              "quantity": 2,
+              "unit_price": 11200
+            }
+          ],
+          "sheet_id": "MODEL-B-L"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 표지에 연결한다. invoice 또는 order에 received 기록이 있는 자료만 실제 구매다. quote와 인수 없는 주문은 제외한다. 별도 단가는 개당 공급가액이다. 이름은 NFKC 후 공백 제거 및 영문 소문자로 정리하고 업체의 법인 표기는 제거한다. 품목별 최저 단가를 품목명 순으로 배열하며 동률이면 정규화 업체명 순 첫 업체를 쓴다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "MODEL-PROP-4"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "MODEL-BASE-8",
+        "MODEL-BUY-6"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "MODEL-BUY-6",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 71500
+    },
+    "output": {
+      "supply": 214500,
+      "total": 235950,
+      "vat": 21450
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "MODEL-BUY-6",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 13500
+    },
+    "output": {
+      "supply": 40500,
+      "total": 44550,
+      "vat": 4050
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상모형제작"
+    },
+    "output": "가상모형제작",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "MODEL-BASE-8",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 11200
+    },
+    "output": {
+      "supply": 22400,
+      "total": 24640,
+      "vat": 2240
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상실물교육"
+    },
+    "output": "가상실물교육",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "모형받침a",
+          "unit_price": 11200,
+          "vendor": "가상실물교육"
+        },
+        {
+          "item": "지형모형a",
+          "unit_price": 71500,
+          "vendor": "가상모형제작"
+        }
+      ],
+      "grand_total": 305140,
+      "supply_total": 277400,
+      "unique_document_count": 2,
+      "vat_total": 27740,
+      "vendor_totals": [
+        {
+          "supply": 255000,
+          "total": 280500,
+          "vat": 25500,
+          "vendor": "가상모형제작"
+        },
+        {
+          "supply": 22400,
+          "total": 24640,
+          "vat": 2240,
+          "vendor": "가상실물교육"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

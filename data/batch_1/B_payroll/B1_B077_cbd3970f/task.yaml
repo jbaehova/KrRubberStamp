@@ -1,0 +1,45 @@
+task_id: B1_B077_cbd3970f
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상길벗조사실의 회사 급식은 전월에 종료됐고 이번 달에는 현금 식대만 지급합니다. 종료 확인과 당월 지급 약정을 읽어 비과세
+  지급액, 과세급여와 소득세를 구해 주세요. 현금 식대를 통상임금에서 빼지 않도록 월 통상임금도 함께 작성합니다.
+input_files:
+- path: inputs/01_조사실임금.pdf
+  format: pdf
+- path: inputs/02_급식종료.hwpx
+  format: hwpx
+- path: inputs/03_당월마감.xlsx
+  format: xlsx
+- path: inputs/04_종료후식대.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-f039d48a-485e-5d7d-b09c-aeb2cc83cb54
+scenario_seed: 14687248902541086587
+scenario_hash: 8de9e1e86f001f846b9411175ab078f95ad1ecf7e0f08a3824978a02000c8c1c
+authorship:
+  method: individually_written
+  case_id: B077
+  case_sha256: cbd3970f7bb50f7be1ea68b764791683a3e9e091b006a66e69492fb45c594a48
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- ordinary_monthly_wage
+- non_taxable_pay
+- taxable_pay
+- income_tax

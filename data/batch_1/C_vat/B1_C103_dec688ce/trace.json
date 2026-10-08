@@ -1,0 +1,514 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C103-판매활동",
+          "date": "2026-03-02",
+          "description": "판매 직원이 과세로 팔 도구 한 묶음을 한 번 받아 두 증빙을 보관했다.",
+          "document_ids": [
+            "C103-물품카드",
+            "C103-물품계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상세칸수업 도구 판매대"
+          },
+          "operation_id": "C103-판매",
+          "participants": [
+            {
+              "name": "가상 판매직원",
+              "organization": "가상세칸수업",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C103-판매물품"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C103-교육활동",
+          "date": "2026-03-04",
+          "description": "교육 직원이 면세 교육 수업에만 사용할 별도 물품을 교육실에 받았다. 판매대와 공통 사용하지 않는다.",
+          "document_ids": [
+            "C103-교육계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상세칸수업 면세 교육실"
+          },
+          "operation_id": "C103-교육",
+          "participants": [
+            {
+              "name": "가상 교육직원",
+              "organization": "가상세칸수업",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C103-교육물품"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C103-가족활동",
+          "date": "2026-03-05",
+          "description": "가족 생활에만 사용할 다른 물품을 가족이 주거지에 받았다.",
+          "document_ids": [
+            "C103-가족카드"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "가상대표 가족 주거지"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상 가족수령인",
+              "organization": "가상대표가정",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "C103-가족물품"
+        }
+      ],
+      "operations": [
+        {
+          "description": "소비자 작업 도구 과세 판매",
+          "operation_id": "C103-판매",
+          "output_taxable": true
+        },
+        {
+          "description": "관청 허가 등 법령 면세 요건을 충족한 교육 용역",
+          "operation_id": "C103-교육",
+          "output_taxable": false
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C103-판매활동",
+          "date": "2026-03-02",
+          "document_id": "C103-물품카드",
+          "transaction_id": "C103-판매물품"
+        },
+        {
+          "activity_id": "C103-판매활동",
+          "date": "2026-03-02",
+          "document_id": "C103-물품계산서",
+          "transaction_id": "C103-판매물품"
+        },
+        {
+          "activity_id": "C103-교육활동",
+          "date": "2026-03-04",
+          "document_id": "C103-교육계산서",
+          "transaction_id": "C103-교육물품"
+        },
+        {
+          "activity_id": "C103-가족활동",
+          "date": "2026-03-05",
+          "document_id": "C103-가족카드",
+          "transaction_id": "C103-가족물품"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C103-물품카드",
+        "purpose": "business",
+        "transaction_id": "C103-판매물품"
+      },
+      {
+        "business_related": true,
+        "document_id": "C103-물품계산서",
+        "purpose": "business",
+        "transaction_id": "C103-판매물품"
+      },
+      {
+        "business_related": true,
+        "document_id": "C103-교육계산서",
+        "purpose": "exempt_business",
+        "transaction_id": "C103-교육물품"
+      },
+      {
+        "business_related": false,
+        "document_id": "C103-가족카드",
+        "purpose": "private",
+        "transaction_id": "C103-가족물품"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C103-가족카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C103-가족물품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C103-판매카드",
+        "C103-판매계산서"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "C103-계산서판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C103-교육계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C103-교육물품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C103-물품카드",
+        "C103-물품계산서"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "C103-판매물품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C103-판매현금영수증"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "C103-현금판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-05",
+      "transaction_id": "C103-가족물품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "C103-가족물품"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "C103-가족물품",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 100000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-11",
+      "transaction_id": "C103-계산서판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5500000,
+      "includes_vat": true,
+      "transaction_id": "C103-계산서판매"
+    },
+    "output": {
+      "gross": 5500000,
+      "supply_base": 5000000,
+      "vat": 500000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 5000000
+    },
+    "output": 500000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "C103-계산서판매"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-04",
+      "transaction_id": "C103-교육물품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "C103-교육물품"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "exempt_business",
+      "supplier_general": true,
+      "transaction_id": "C103-교육물품",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 100000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-02",
+      "transaction_id": "C103-판매물품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "C103-판매물품"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C103-판매물품",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 100000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-13",
+      "transaction_id": "C103-현금판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "C103-현금판매"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1000000
+    },
+    "output": 100000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C103-현금판매"
+    },
+    "output": {
+      "eligible_gross": 1100000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 278000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 1100000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 14300,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 9990000,
+      "annual_limit": 10000000,
+      "raw_credit": 14300
+    },
+    "output": 10000,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 10000,
+      "liability_before_credit": 500000
+    },
+    "output": 10000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 600000
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 490000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 490000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 100000,
+      "output_vat": 600000,
+      "prepaid_vat": 0,
+      "receipt_credit": 10000
+    },
+    "output": {
+      "deductible_input_vat": 100000,
+      "input_vat": 300000,
+      "net_vat": 490000,
+      "noncreditable_vat": 200000,
+      "output_vat": 600000,
+      "payable_vat": 490000,
+      "prepaid_vat": 0,
+      "receipt_credit": 10000,
+      "refund_vat": 0,
+      "tax_base": 6000000,
+      "unique_transaction_count": 5
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

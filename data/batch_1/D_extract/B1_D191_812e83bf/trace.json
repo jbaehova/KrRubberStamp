@@ -1,0 +1,234 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-09-04",
+          "document_id": "MIX-TANK-11",
+          "event": "received",
+          "event_id": "MIX-TANK-IN",
+          "location": "재료혼합실"
+        },
+        {
+          "date": "2026-09-04",
+          "document_id": "MIX-TOOL-12",
+          "event": "received",
+          "event_id": "MIX-TOOL-IN",
+          "location": "재료혼합실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-09-01",
+          "document_id": "MIX-TANK-11",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "MIX-TANK-C",
+          "vendor": "가상혼합재료"
+        },
+        {
+          "date": "2026-09-02",
+          "document_id": "MIX-TOOL-12",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "MIX-TOOL-C",
+          "vendor": "가상혼합재료"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "MIX-TANK-C",
+          "items": [
+            {
+              "name": "재료혼합통5L",
+              "quantity": 7,
+              "unit_price": 14890
+            }
+          ],
+          "sheet_id": "MIX-TANK-LOT-A"
+        },
+        {
+          "header_record_id": "MIX-TANK-C",
+          "items": [
+            {
+              "name": "재료혼합통5L",
+              "quantity": 3,
+              "unit_price": 16270
+            }
+          ],
+          "sheet_id": "MIX-TANK-LOT-B"
+        },
+        {
+          "header_record_id": "MIX-TANK-C",
+          "items": [
+            {
+              "name": "혼합통마개5L",
+              "quantity": 10,
+              "unit_price": 1313
+            }
+          ],
+          "sheet_id": "MIX-TANK-CAP"
+        },
+        {
+          "header_record_id": "MIX-TOOL-C",
+          "items": [
+            {
+              "name": "혼합교반봉",
+              "quantity": 4,
+              "unit_price": 5287
+            }
+          ],
+          "sheet_id": "MIX-ROD-L"
+        },
+        {
+          "header_record_id": "MIX-TOOL-C",
+          "items": [
+            {
+              "name": "혼합통세척솔",
+              "quantity": 4,
+              "unit_price": 3897
+            }
+          ],
+          "sheet_id": "MIX-BRUSH-L"
+        }
+      ],
+      "processing_policy": "각 품목표는 header_record_id로 표지에 연결하고 같은 표지의 모든 행을 합한다. 품목명이 반복돼도 행을 덮어쓰지 않는다. invoice 또는 order에 received가 있는 번호만 구매다. 별도 단가의 행별 수량 곱하기 단가를 공급가액으로 하고 그 10%의 원 미만을 버려 세액을 합한다. 건수는 서로 다른 실제 인수 document_id 수다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "MIX-TANK-11",
+        "MIX-TOOL-12"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "MIX-TANK-11",
+      "includes_vat": false,
+      "quantity": 7,
+      "unit_price": 14890
+    },
+    "output": {
+      "supply": 104230,
+      "total": 114653,
+      "vat": 10423
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "MIX-TANK-11",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 16270
+    },
+    "output": {
+      "supply": 48810,
+      "total": 53691,
+      "vat": 4881
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "MIX-TANK-11",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 1313
+    },
+    "output": {
+      "supply": 13130,
+      "total": 14443,
+      "vat": 1313
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상혼합재료"
+    },
+    "output": "가상혼합재료",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "MIX-TOOL-12",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 5287
+    },
+    "output": {
+      "supply": 21148,
+      "total": 23262,
+      "vat": 2114
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "MIX-TOOL-12",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 3897
+    },
+    "output": {
+      "supply": 15588,
+      "total": 17146,
+      "vat": 1558
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상혼합재료"
+    },
+    "output": "가상혼합재료",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "재료혼합통5l",
+          "unit_price": 14890,
+          "vendor": "가상혼합재료"
+        },
+        {
+          "item": "혼합교반봉",
+          "unit_price": 5287,
+          "vendor": "가상혼합재료"
+        },
+        {
+          "item": "혼합통마개5l",
+          "unit_price": 1313,
+          "vendor": "가상혼합재료"
+        },
+        {
+          "item": "혼합통세척솔",
+          "unit_price": 3897,
+          "vendor": "가상혼합재료"
+        }
+      ],
+      "grand_total": 223195,
+      "supply_total": 202906,
+      "unique_document_count": 2,
+      "vat_total": 20289,
+      "vendor_totals": [
+        {
+          "supply": 202906,
+          "total": 223195,
+          "vat": 20289,
+          "vendor": "가상혼합재료"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

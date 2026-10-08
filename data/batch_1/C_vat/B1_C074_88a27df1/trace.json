@@ -1,0 +1,309 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_delivery",
+          "activity_id": "C074-화물활동",
+          "date": "2026-02-23",
+          "description": "틀 적재 납품용 공식 화물차를 차고에서 직원이 인수했다.",
+          "document_ids": [
+            "C074-화물계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상옮기는틀 차량 차고"
+          },
+          "operation_id": "C074-납품",
+          "participants": [
+            {
+              "name": "가상 배송직원",
+              "organization": "가상옮기는틀",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C074-화물차",
+          "vehicle_id": "가상-F074"
+        },
+        {
+          "action": "vehicle_delivery",
+          "activity_id": "C074-관리활동",
+          "date": "2026-02-24",
+          "description": "관리 직원 이동용 일반 승용차를 인수했다. 자동차 자체를 임대하거나 운송 영업에 직접 쓰지 않는다.",
+          "document_ids": [
+            "C074-관리계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상옮기는틀 차량 차고"
+          },
+          "operation_id": "C074-납품",
+          "participants": [
+            {
+              "name": "가상 관리직원",
+              "organization": "가상옮기는틀",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C074-관리차",
+          "vehicle_id": "가상-P074"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업에 틀 제작 납품",
+          "operation_id": "C074-납품",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C074-화물활동",
+          "date": "2026-02-23",
+          "document_id": "C074-화물계산서",
+          "transaction_id": "C074-화물차"
+        },
+        {
+          "activity_id": "C074-관리활동",
+          "date": "2026-02-24",
+          "document_id": "C074-관리계산서",
+          "transaction_id": "C074-관리차"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "non_excise_vehicle",
+          "vehicle_id": "가상-F074"
+        },
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-P074"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C074-화물계산서",
+        "purpose": "passenger_car_purchase",
+        "transaction_id": "C074-화물차"
+      },
+      {
+        "business_related": true,
+        "document_id": "C074-관리계산서",
+        "purpose": "passenger_car_purchase",
+        "transaction_id": "C074-관리차"
+      },
+      {
+        "transaction_id": "C074-화물차",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-F074",
+        "vehicle_subject_excise": false
+      },
+      {
+        "transaction_id": "C074-관리차",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-P074",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C074-관리계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C074-관리차"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C074-화물계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C074-화물차"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-24",
+      "transaction_id": "C074-관리차"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 18700000,
+      "includes_vat": true,
+      "transaction_id": "C074-관리차"
+    },
+    "output": {
+      "gross": 18700000,
+      "supply_base": 17000000,
+      "vat": 1700000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_purchase",
+      "supplier_general": true,
+      "transaction_id": "C074-관리차",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 1700000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-23",
+      "transaction_id": "C074-화물차"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 22000000,
+      "includes_vat": false,
+      "transaction_id": "C074-화물차"
+    },
+    "output": {
+      "gross": 24200000,
+      "supply_base": 22000000,
+      "vat": 2200000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_purchase",
+      "supplier_general": true,
+      "transaction_id": "C074-화물차",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 2200000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 210000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -2200000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -2200000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -2200000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 2200000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 2200000,
+      "input_vat": 3900000,
+      "net_vat": -2200000,
+      "noncreditable_vat": 1700000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 2200000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,49 @@
+task_id: B1_D110_bb02505d
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 비상 대피 자료 제작비를 지급 표에 적어 주세요. vendor_totals와 vat_total을 확인하면 됩니다.
+input_files:
+- path: inputs/01_인쇄지인수.hwpx
+  format: hwpx
+- path: inputs/02_출구표지판명세.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-d8ce8f9e-a5d4-51c8-9e47-53a5e30d3661
+scenario_seed: 13475421398521043996
+scenario_hash: 7fbf980dfc4d48f65b4a1ee7bdf1904e82d641e9f755b5aa8f8597d8a45cd85c
+authorship:
+  method: individually_written
+  case_id: D110
+  case_sha256: bb02505db98b5c1ced1def071f1e100813875a1bf50631d7955255c679168aa7
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals
+- vat_total

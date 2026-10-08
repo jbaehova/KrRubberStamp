@@ -1,0 +1,56 @@
+task_id: B1_A046_e30d805e
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상미루운영의 가상최가람 의료비 마감표를 작성합니다. 배우자와 고령 아버지의 진료비를 같은 한도로 처리하지 말고 아버지의 실손
+  지급도 연결해 주세요. 본인 안경 구매 두 번의 연간 한도를 함께 반영한 의료비 세액공제액을 구하고, 가족 기본공제와 추가공제 및 최종 소득세도
+  적어 주세요.
+input_files:
+- path: inputs/01_직원.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_배우자.pdf
+  format: pdf
+- path: inputs/04_아버지.hwpx
+  format: hwpx
+- path: inputs/05_배우자병원.pdf
+  format: pdf
+- path: inputs/06_아버지병원.pdf
+  format: pdf
+- path: inputs/07_실손지급.pdf
+  format: pdf
+- path: inputs/08_안경1.pdf
+  format: pdf
+- path: inputs/09_안경2.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - basic_deduction
+  - additional_deduction
+  - medical_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-ad8b9459-f319-5d34-a307-3dc6a0cb0c44
+scenario_seed: 16360874165660990848
+scenario_hash: 744984a3485cc8542f61e57ccfa2abe605bdc4284e57f7a7803cdf03415fdcd3
+authorship:
+  method: individually_written
+  case_id: A046
+  case_sha256: e30d805ebb16bd80c22db08ced2a9d03a9a0b4a7ae65e6559a63bad0db2a985d
+  source_file: batch_1/A_yearend/cases_004_053.json
+answer_fields:
+- basic_deduction
+- additional_deduction
+- medical_credit
+- final_national_tax

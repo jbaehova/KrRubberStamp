@@ -1,0 +1,400 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "C091-승합활동",
+          "date": "2026-02-18",
+          "description": "직원이 공식 11인승 승합차의 정비를 완료 인수했다.",
+          "document_ids": [
+            "C091-승합카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상운반표 차량 인수 장소"
+          },
+          "operation_id": "C091-안내표",
+          "participants": [
+            {
+              "name": "가상 납품직원",
+              "organization": "가상운반표",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C091-승합정비",
+          "vehicle_id": "가상-V091-승합"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "C091-승용활동",
+          "date": "2026-02-20",
+          "description": "직원이 사무 이동용 일반 승용차 정비를 완료 인수했다.",
+          "document_ids": [
+            "C091-승용카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상운반표 차량 인수 장소"
+          },
+          "operation_id": "C091-안내표",
+          "participants": [
+            {
+              "name": "가상 관리직원",
+              "organization": "가상운반표",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C091-승용정비",
+          "vehicle_id": "가상-P091-관리"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C091-윤활활동",
+          "date": "2026-02-21",
+          "description": "차량이 아닌 안내표 인쇄 장비용 윤활재를 직원이 받았다.",
+          "document_ids": [
+            "C091-윤활계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상운반표 인쇄 장비실"
+          },
+          "operation_id": "C091-안내표",
+          "participants": [
+            {
+              "name": "가상 인쇄직원",
+              "organization": "가상운반표",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C091-윤활재"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 안내표 제작 납품",
+          "operation_id": "C091-안내표",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C091-승합활동",
+          "date": "2026-02-18",
+          "document_id": "C091-승합카드",
+          "transaction_id": "C091-승합정비"
+        },
+        {
+          "activity_id": "C091-승용활동",
+          "date": "2026-02-20",
+          "document_id": "C091-승용카드",
+          "transaction_id": "C091-승용정비"
+        },
+        {
+          "activity_id": "C091-윤활활동",
+          "date": "2026-02-21",
+          "document_id": "C091-윤활계산서",
+          "transaction_id": "C091-윤활재"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "non_excise_vehicle",
+          "vehicle_id": "가상-V091-승합"
+        },
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-P091-관리"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C091-승합카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C091-승합정비"
+      },
+      {
+        "business_related": true,
+        "document_id": "C091-승용카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C091-승용정비"
+      },
+      {
+        "business_related": true,
+        "document_id": "C091-윤활계산서",
+        "purpose": "business",
+        "transaction_id": "C091-윤활재"
+      },
+      {
+        "transaction_id": "C091-승합정비",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-V091-승합",
+        "vehicle_subject_excise": false
+      },
+      {
+        "transaction_id": "C091-승용정비",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-P091-관리",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C091-승용카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C091-승용정비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C091-승합카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C091-승합정비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C091-윤활계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C091-윤활재"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-20",
+      "transaction_id": "C091-승용정비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 330000,
+      "includes_vat": true,
+      "transaction_id": "C091-승용정비"
+    },
+    "output": {
+      "gross": 330000,
+      "supply_base": 300000,
+      "vat": 30000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C091-승용정비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 30000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-18",
+      "transaction_id": "C091-승합정비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 440000,
+      "includes_vat": true,
+      "transaction_id": "C091-승합정비"
+    },
+    "output": {
+      "gross": 440000,
+      "supply_base": 400000,
+      "vat": 40000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C091-승합정비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 40000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-21",
+      "transaction_id": "C091-윤활재"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 170000,
+      "includes_vat": false,
+      "transaction_id": "C091-윤활재"
+    },
+    "output": {
+      "gross": 187000,
+      "supply_base": 170000,
+      "vat": 17000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C091-윤활재",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 17000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 162000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -57000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -57000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -57000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 57000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 57000,
+      "input_vat": 87000,
+      "net_vat": -57000,
+      "noncreditable_vat": 30000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 57000,
+      "tax_base": 0,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

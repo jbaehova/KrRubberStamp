@@ -1,0 +1,47 @@
+task_id: B1_B127_12abb1f9
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상느린발행실 직원의 첫 지급 통지는 국민연금 부과가 있고 건강보험 부과는 없습니다. 기관 통지 그대로 연금 부담액과 건강보험료
+  및 장기요양보험료를 계산해 주세요. 각 기관의 자격을 서로 같은 값으로 복사하지 않습니다. 직원에게 지급할 순액도 필요합니다.
+input_files:
+- path: inputs/01_발행급여.pdf
+  format: pdf
+- path: inputs/02_연금부과.xlsx
+  format: xlsx
+- path: inputs/03_건강자격.hwpx
+  format: hwpx
+- path: inputs/04_발행범위.pdf
+  format: pdf
+- path: inputs/05_자격공식.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - national_pension
+  - health_insurance
+  - long_term_care
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-7d910c1e-5362-5264-9767-a4d12a20890f
+scenario_seed: 1345364598782764222
+scenario_hash: c8da252dceff5ac4f399c37baf4f7d1b251cd205efa6b08cadfd1b82b2ceda32
+authorship:
+  method: individually_written
+  case_id: B127
+  case_sha256: 12abb1f97bd524be106b375dc94ae4d70f9729a2d7459213848937a9741f1a9c
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- national_pension
+- health_insurance
+- long_term_care
+- net_pay

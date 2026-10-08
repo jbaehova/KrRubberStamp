@@ -1,0 +1,45 @@
+task_id: B1_A087_b6a6777a
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상햇무리양조의 가상허도겸은 병원비가 카드 명세에도 보여서 하나를 빼야 하는지 물었습니다. 같은 병원 결제가 의료비와 신용카드
+  등 사용금액의 요건을 각각 충족하는지 검토해 두 공제액을 계산해 주세요. 두 공제를 반영한 과세표준과 소득세 결정세액도 적습니다.
+input_files:
+- path: inputs/01_질의확인.hwpx
+  format: hwpx
+- path: inputs/02_급여대장.xlsx
+  format: xlsx
+- path: inputs/03_카드소비.xlsx
+  format: xlsx
+- path: inputs/04_병원진료.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    credit_card_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+    tax_base:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - credit_card_deduction
+  - medical_credit
+  - tax_base
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-9738db44-5a4b-5ab4-962e-467dd39db971
+scenario_seed: 13161338331026527438
+scenario_hash: 5b7245c9da36c484d6ff5eed3a6ba5bf9d2922a58a9468c200a80a4d6d67f184
+authorship:
+  method: individually_written
+  case_id: A087
+  case_sha256: b6a6777af59194ce90060f82a0ce782cbd76146c20aa83c7f3e58653aa14b1de
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- credit_card_deduction
+- medical_credit
+- tax_base
+- final_national_tax

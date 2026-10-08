@@ -1,0 +1,64 @@
+task_id: B1_B142_0b540cb1
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상노을장비실은 주휴일에 오전 운반과 저녁 설치를 따로 승인했습니다. 저녁 설치 카드의 수정 휴게를 반영하고 두 작업을 같은
+  휴일 하루로 합산하여 휴일수당과 야간 가산을 계산해 주세요. 당월 실적금은 지급에는 포함하지만 통상시급에서 구별합니다. 원천세용 과세급여와 최종
+  실지급액까지 마감합니다.
+input_files:
+- path: inputs/01_장비계약.pdf
+  format: pdf
+- path: inputs/02_오전운반.hwpx
+  format: hwpx
+- path: inputs/03_설치이전.xlsx
+  format: xlsx
+- path: inputs/04_설치수정.hwpx
+  format: hwpx
+- path: inputs/05_장비일정.pdf
+  format: pdf
+- path: inputs/06_장비성과.xlsx
+  format: xlsx
+- path: inputs/07_장비연금.pdf
+  format: pdf
+- path: inputs/08_장비등록.hwpx
+  format: hwpx
+- path: inputs/09_장비공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_hourly_wage_floor:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_hourly_wage_floor
+  - holiday_pay
+  - night_pay
+  - taxable_pay
+  - income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-63049c19-bcb6-58b1-8e21-99640ba2ef79
+scenario_seed: 816291388625912694
+scenario_hash: c37334f42f19d41d102f929e866ca6e33096546f6d36c4057e99b4a819048565
+authorship:
+  method: individually_written
+  case_id: B142
+  case_sha256: 0b540cb16c420376c9beb6669b61edb1eb91d114dd663f33910d16ba862962b0
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- ordinary_hourly_wage_floor
+- holiday_pay
+- night_pay
+- taxable_pay
+- income_tax
+- net_pay

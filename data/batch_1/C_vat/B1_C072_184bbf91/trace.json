@@ -1,0 +1,287 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C072-기계활동",
+          "date": "2026-04-18",
+          "description": "대표가 가족의 별도 꽃집 기계 대금을 대신 결제했고 꽃집 가족이 2층에서 기계를 받아 사용했다.",
+          "document_ids": [
+            "C072-기계카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상공동건물 2층 꽃포장실",
+            "organization": "가상가족꽃집"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상 가족수령자",
+              "organization": "가상가족꽃집",
+              "role": "household_member"
+            },
+            {
+              "name": "가상 상자대표",
+              "organization": "가상접는상자",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "C072-포장기계"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C072-풀활동",
+          "date": "2026-04-19",
+          "description": "1층 직원이 상자 제작 접착풀을 받아 사용했다.",
+          "document_ids": [
+            "C072-풀계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상접는상자 1층 작업실"
+          },
+          "operation_id": "C072-상자",
+          "participants": [
+            {
+              "name": "가상 제작직원",
+              "organization": "가상접는상자",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C072-접착풀"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 주문 상자 제작",
+          "operation_id": "C072-상자",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C072-기계활동",
+          "date": "2026-04-18",
+          "document_id": "C072-기계카드",
+          "transaction_id": "C072-포장기계"
+        },
+        {
+          "activity_id": "C072-풀활동",
+          "date": "2026-04-19",
+          "document_id": "C072-풀계산서",
+          "transaction_id": "C072-접착풀"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": false,
+        "document_id": "C072-기계카드",
+        "purpose": "private",
+        "transaction_id": "C072-포장기계"
+      },
+      {
+        "business_related": true,
+        "document_id": "C072-풀계산서",
+        "purpose": "business",
+        "transaction_id": "C072-접착풀"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C072-풀계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C072-접착풀"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C072-기계카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C072-포장기계"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-19",
+      "transaction_id": "C072-접착풀"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 720000,
+      "includes_vat": false,
+      "transaction_id": "C072-접착풀"
+    },
+    "output": {
+      "gross": 792000,
+      "supply_base": 720000,
+      "vat": 72000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C072-접착풀",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 72000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-18",
+      "transaction_id": "C072-포장기계"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1980000,
+      "includes_vat": true,
+      "transaction_id": "C072-포장기계"
+    },
+    "output": {
+      "gross": 1980000,
+      "supply_base": 1800000,
+      "vat": 180000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "C072-포장기계",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 180000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 54000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -72000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -72000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -72000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 72000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 72000,
+      "input_vat": 252000,
+      "net_vat": -72000,
+      "noncreditable_vat": 180000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 72000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

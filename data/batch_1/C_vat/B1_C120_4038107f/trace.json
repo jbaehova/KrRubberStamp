@@ -1,0 +1,281 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C120-매트인도",
+          "date": "2026-03-18",
+          "description": "가족이 매트를 받아 거실 운동 공간에 놓고 사용했다.",
+          "document_ids": [
+            "C120-매트계산서"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "가상대표 가족 거실"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상정가족",
+              "organization": "가상대표가구",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "C120-매트"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C120-포장인수",
+          "date": "2026-03-20",
+          "description": "직원이 판매 기구 포장재를 출고장에서 받았다.",
+          "document_ids": [
+            "C120-포장계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상도매 출고장"
+          },
+          "operation_id": "C120-포장",
+          "participants": [
+            {
+              "name": "가상유출고",
+              "organization": "가상힘센공급",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C120-포장재"
+        }
+      ],
+      "operations": [
+        {
+          "description": "운동기구 과세 도매 포장",
+          "operation_id": "C120-포장",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C120-매트인도",
+          "date": "2026-03-18",
+          "document_id": "C120-매트계산서",
+          "transaction_id": "C120-매트"
+        },
+        {
+          "activity_id": "C120-포장인수",
+          "date": "2026-03-20",
+          "document_id": "C120-포장계산서",
+          "transaction_id": "C120-포장재"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": false,
+        "document_id": "C120-매트계산서",
+        "purpose": "private",
+        "transaction_id": "C120-매트"
+      },
+      {
+        "business_related": true,
+        "document_id": "C120-포장계산서",
+        "purpose": "business",
+        "transaction_id": "C120-포장재"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C120-매트계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C120-매트"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C120-포장계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C120-포장재"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-18",
+      "transaction_id": "C120-매트"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1320000,
+      "includes_vat": true,
+      "transaction_id": "C120-매트"
+    },
+    "output": {
+      "gross": 1320000,
+      "supply_base": 1200000,
+      "vat": 120000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "C120-매트",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 120000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-20",
+      "transaction_id": "C120-포장재"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 594000,
+      "includes_vat": true,
+      "transaction_id": "C120-포장재"
+    },
+    "output": {
+      "gross": 594000,
+      "supply_base": 540000,
+      "vat": 54000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C120-포장재",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 54000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 267000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -54000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -54000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -54000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 54000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 54000,
+      "input_vat": 174000,
+      "net_vat": -54000,
+      "noncreditable_vat": 120000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 54000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

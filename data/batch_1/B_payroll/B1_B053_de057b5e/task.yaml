@@ -1,0 +1,73 @@
+task_id: B1_B053_de057b5e
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상풀잎영상실의 가상도하경은 주 30시간 시급제 직원입니다. 소정 일정과 무급 결근 및 주별 출근을 보고 기본급과 주휴수당을
+  구해 주세요. 삼일절과 대체공휴일의 분 단위 승인 기록에서 휴게와 야간을 반영해 휴일수당과 야간 가산수당을 계산해 주세요. 승인된 120% 원천징수
+  비율을 적용한 소득세와 총지급액 및 실지급액을 작성해 주세요. 각 수당 월 합계에서 원 미만 올림합니다. 대체공휴일에 별도로 지급할 기본 유급휴일
+  임금은 paid_holiday_pay에 작성하고 총지급액에 합산해 주세요.
+input_files:
+- path: inputs/01_영상시급약정.hwpx
+  format: hwpx
+- path: inputs/02_소정결근.xlsx
+  format: xlsx
+- path: inputs/03_주별출근.pdf
+  format: pdf
+- path: inputs/04_삼일절원시.xlsx
+  format: xlsx
+- path: inputs/05_대체휴일원시.pdf
+  format: pdf
+- path: inputs/06_공휴일인원.hwpx
+  format: hwpx
+- path: inputs/07_보험통지.xlsx
+  format: xlsx
+- path: inputs/08_선택은행.pdf
+  format: pdf
+- path: inputs/09_분단위공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    income_tax:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - holiday_pay
+  - night_pay
+  - income_tax
+  - gross_pay
+  - net_pay
+  - paid_holiday_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-2f1bdd3d-4a4e-5853-aa86-b2f40cfbb1db
+scenario_seed: 15998328897306486148
+scenario_hash: 11cb7613e6b72ba9890e849d90f914baefad615d688347869b2ebb68b152d1fd
+authorship:
+  method: individually_written
+  case_id: B053
+  case_sha256: de057b5e8bd1e584d853a7920b054683ab62f8665acd2f927b6453a2ac71bdfa
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- holiday_pay
+- night_pay
+- income_tax
+- gross_pay
+- net_pay
+- paid_holiday_pay

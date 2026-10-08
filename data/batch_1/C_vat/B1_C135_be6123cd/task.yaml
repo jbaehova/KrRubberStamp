@@ -1,0 +1,41 @@
+task_id: B1_C135_be6123cd
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상작은소매의 업종 확인, 손님 결제, 단말기 점검 증빙을 읽고 발행 공제(receipt_credit), 불공제세액(noncreditable_vat),
+  납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_소매업확인.hwpx
+  format: hwpx
+- path: inputs/02_손님요청.xlsx
+  format: xlsx
+- path: inputs/03_카드전표.pdf
+  format: pdf
+- path: inputs/04_단말점검.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - noncreditable_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-5e72679b-5052-5bac-be9d-8e22f71e42d9
+scenario_seed: 13718285306177038591
+scenario_hash: d22743cbf26ed5b5c4a34737c120cef0169330e50c527b4ed9754b013b708867
+authorship:
+  method: individually_written
+  case_id: C135
+  case_sha256: be6123cdaa24a8ffb3dc3ec5cae1c96d03bdd3b49532efcb484371a2a0be0474
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- receipt_credit
+- noncreditable_vat
+- payable_vat

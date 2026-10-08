@@ -1,0 +1,59 @@
+task_id: B1_B293_7e55805c
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상기울어진목록실의 월급 직원은 밤 소정근로 휴게를 정정했습니다. 유효 승인에서 야간 가산과 총지급액을 구해 주세요. 인상
+  식대의 비과세 한도와 80퍼센트 신청을 적용한 과세급여 및 소득세도 작성해 주세요.
+input_files:
+- path: inputs/01_소정변경.pdf
+  format: pdf
+- path: inputs/02_식대개정.hwpx
+  format: hwpx
+- path: inputs/03_휴게초기.xlsx
+  format: xlsx
+- path: inputs/04_휴게최종.pdf
+  format: pdf
+- path: inputs/05_가족선택.hwpx
+  format: hwpx
+- path: inputs/06_은행범위.xlsx
+  format: xlsx
+- path: inputs/07_연금등록.pdf
+  format: pdf
+- path: inputs/08_건강고용.xlsx
+  format: xlsx
+- path: inputs/09_소정세무원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+  required:
+  - night_pay
+  - gross_pay
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-5371a2c4-ffbb-5f41-9961-1230c6f96afd
+scenario_seed: 9103323354908151787
+scenario_hash: 380480e42e33f8ffef4f65bbf2fbe3c9d44db2a9a088c2a62ee64d6bc96a55ce
+authorship:
+  method: individually_written
+  case_id: B293
+  case_sha256: 7e55805c1cd14feb46017442927385ac5c928b9da3e2b50d43b9eb7e96b55b91
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- night_pay
+- gross_pay
+- non_taxable_pay
+- taxable_pay
+- income_tax

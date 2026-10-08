@@ -1,0 +1,386 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "재료반입",
+          "date": "2026-04-30",
+          "description": "흡음재 한 공급을 인수하고 두 증빙을 받았다.",
+          "document_ids": [
+            "흡음전자",
+            "흡음카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "흡음벽 작업 창고"
+          },
+          "operation_id": "벽음설치",
+          "participants": [
+            {
+              "name": "가상정벽음",
+              "organization": "가상벽음설치",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C201-흡음재"
+        },
+        {
+          "action": "meal",
+          "activity_id": "고객점심",
+          "date": "2026-05-07",
+          "description": "설치 직원과 주문 고객이 점심을 함께 먹었다.",
+          "document_ids": [
+            "점심카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상벽음식당"
+          },
+          "operation_id": "벽음설치",
+          "participants": [
+            {
+              "name": "가상정벽음",
+              "organization": "가상벽음설치",
+              "role": "employee"
+            },
+            {
+              "name": "가상심고객",
+              "organization": "가상심가정",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "C201-식대"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 흡음벽 설치",
+          "operation_id": "벽음설치",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "재료반입",
+          "date": "2026-04-30",
+          "document_id": "흡음전자",
+          "transaction_id": "C201-흡음재"
+        },
+        {
+          "activity_id": "재료반입",
+          "date": "2026-04-30",
+          "document_id": "흡음카드",
+          "transaction_id": "C201-흡음재"
+        },
+        {
+          "activity_id": "고객점심",
+          "date": "2026-05-07",
+          "document_id": "점심카드",
+          "transaction_id": "C201-식대"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "흡음전자",
+        "purpose": "business",
+        "transaction_id": "C201-흡음재"
+      },
+      {
+        "business_related": true,
+        "document_id": "흡음카드",
+        "purpose": "business",
+        "transaction_id": "C201-흡음재"
+      },
+      {
+        "business_related": true,
+        "document_id": "점심카드",
+        "purpose": "hospitality",
+        "transaction_id": "C201-식대"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "점심카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C201-식대"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "예약현금"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "C201-예약설치"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "설치카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C201-현재설치"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "흡음전자",
+        "흡음카드"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "C201-흡음재"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-07",
+      "transaction_id": "C201-식대"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 220000,
+      "includes_vat": true,
+      "transaction_id": "C201-식대"
+    },
+    "output": {
+      "gross": 220000,
+      "supply_base": 200000,
+      "vat": 20000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "C201-식대",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 20000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "date": "2026-07-03",
+      "transaction_id": "C201-예약설치"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-12",
+      "transaction_id": "C201-현재설치"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 4400000,
+      "includes_vat": true,
+      "transaction_id": "C201-현재설치"
+    },
+    "output": {
+      "gross": 4400000,
+      "supply_base": 4000000,
+      "vat": 400000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 4000000
+    },
+    "output": 400000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C201-현재설치"
+    },
+    "output": {
+      "eligible_gross": 4400000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-30",
+      "transaction_id": "C201-흡음재"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1500000,
+      "includes_vat": false,
+      "transaction_id": "C201-흡음재"
+    },
+    "output": {
+      "gross": 1650000,
+      "supply_base": 1500000,
+      "vat": 150000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C201-흡음재",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 150000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 379000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 4400000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 57200,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 57200
+    },
+    "output": 57200,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 57200,
+      "liability_before_credit": 250000
+    },
+    "output": 57200,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 192800,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 192800,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 150000,
+      "output_vat": 400000,
+      "prepaid_vat": 0,
+      "receipt_credit": 57200
+    },
+    "output": {
+      "deductible_input_vat": 150000,
+      "input_vat": 170000,
+      "net_vat": 192800,
+      "noncreditable_vat": 20000,
+      "output_vat": 400000,
+      "payable_vat": 192800,
+      "prepaid_vat": 0,
+      "receipt_credit": 57200,
+      "refund_vat": 0,
+      "tax_base": 4000000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

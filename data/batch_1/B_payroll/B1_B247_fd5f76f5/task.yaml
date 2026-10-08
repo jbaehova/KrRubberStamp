@@ -1,0 +1,63 @@
+task_id: B1_B247_fd5f76f5
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상인쇄목록실의 가족 승인에는 본인 포함 열세 명과 적격 자녀 네 명이 있습니다. 당월 실적금을 지급하되 월 통상임금과 구분해
+  주세요. 최종 과세급여의 소득세에만 승인 원천징수 비율을 적용하고 지방소득세 및 보험 공제를 합산해 전체 공제액을 구해 주세요.
+input_files:
+- path: inputs/01_정액계약.pdf
+  format: pdf
+- path: inputs/02_식대약정.hwpx
+  format: hwpx
+- path: inputs/03_실적확정.xlsx
+  format: xlsx
+- path: inputs/04_가족승인.pdf
+  format: pdf
+- path: inputs/05_자녀와비율.hwpx
+  format: hwpx
+- path: inputs/06_실행일.xlsx
+  format: xlsx
+- path: inputs/07_연금부과.pdf
+  format: pdf
+- path: inputs/08_건강고용.xlsx
+  format: xlsx
+- path: inputs/09_원문세무.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    variable_allowance:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - variable_allowance
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-0cf2c6cc-d9fe-5248-bf21-e9db52011509
+scenario_seed: 18257442210135584046
+scenario_hash: b8356389249b1ac43701940eb87d353c8592e5df6250be281ac7dc0a6785398a
+authorship:
+  method: individually_written
+  case_id: B247
+  case_sha256: fd5f76f5425aad2e9a5423c40301459530ed4c33379452c9c636dbc23824ac22
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- ordinary_monthly_wage
+- variable_allowance
+- taxable_pay
+- income_tax
+- local_income_tax
+- total_deductions

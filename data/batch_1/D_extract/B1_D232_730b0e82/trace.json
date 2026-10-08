@@ -1,0 +1,196 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-07-06",
+          "document_id": "HUB-ROLL-03",
+          "event": "received",
+          "event_id": "LABEL-ROLL-IN",
+          "location": "배달거점발송대"
+        },
+        {
+          "date": "2026-07-07",
+          "document_id": "HUB-CLEAN-04",
+          "event": "received",
+          "event_id": "LABEL-CLEAN-IN",
+          "location": "배달거점발송대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-07-01",
+          "document_id": "HUB-PRINT-QA",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "LABEL-Q-A",
+          "vendor": "가상라벨시스템"
+        },
+        {
+          "date": "2026-07-02",
+          "document_id": "HUB-PRINT-QB",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "LABEL-Q-B",
+          "vendor": "가상송장기술"
+        },
+        {
+          "date": "2026-07-03",
+          "document_id": "HUB-ROLL-03",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "LABEL-ROLL-C",
+          "vendor": "가상라벨시스템"
+        },
+        {
+          "date": "2026-07-04",
+          "document_id": "HUB-CLEAN-04",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "LABEL-CLEAN-C",
+          "vendor": "가상송장기술"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "LABEL-Q-A",
+          "items": [
+            {
+              "name": "거점라벨프린터A",
+              "quantity": 1,
+              "unit_price": 390000
+            }
+          ],
+          "sheet_id": "LABEL-Q-A-L"
+        },
+        {
+          "header_record_id": "LABEL-Q-B",
+          "items": [
+            {
+              "name": "거점라벨프린터B",
+              "quantity": 1,
+              "unit_price": 420000
+            }
+          ],
+          "sheet_id": "LABEL-Q-B-L"
+        },
+        {
+          "header_record_id": "LABEL-ROLL-C",
+          "items": [
+            {
+              "name": "송장라벨롤",
+              "quantity": 12,
+              "unit_price": 6200
+            }
+          ],
+          "sheet_id": "LABEL-ROLL-L"
+        },
+        {
+          "header_record_id": "LABEL-CLEAN-C",
+          "items": [
+            {
+              "name": "프린터청소키트",
+              "quantity": 2,
+              "unit_price": 14700
+            }
+          ],
+          "sheet_id": "LABEL-CLEAN-L"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 표지에 연결한다. invoice 또는 order의 document_id에 received가 있는 원문만 구매다. quote는 인수 구매가 아니며 같은 document_id의 동일 내용은 한 번 센다. 별도 단가는 공급가액이고 행 세액은 공급가액의 10%에서 원 미만을 버린다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "HUB-PRINT-QA",
+        "HUB-PRINT-QB"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "HUB-CLEAN-04",
+        "HUB-ROLL-03"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "HUB-ROLL-03",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 6200
+    },
+    "output": {
+      "supply": 74400,
+      "total": 81840,
+      "vat": 7440
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상라벨시스템"
+    },
+    "output": "가상라벨시스템",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "HUB-CLEAN-04",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 14700
+    },
+    "output": {
+      "supply": 29400,
+      "total": 32340,
+      "vat": 2940
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상송장기술"
+    },
+    "output": "가상송장기술",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "송장라벨롤",
+          "unit_price": 6200,
+          "vendor": "가상라벨시스템"
+        },
+        {
+          "item": "프린터청소키트",
+          "unit_price": 14700,
+          "vendor": "가상송장기술"
+        }
+      ],
+      "grand_total": 114180,
+      "supply_total": 103800,
+      "unique_document_count": 2,
+      "vat_total": 10380,
+      "vendor_totals": [
+        {
+          "supply": 74400,
+          "total": 81840,
+          "vat": 7440,
+          "vendor": "가상라벨시스템"
+        },
+        {
+          "supply": 29400,
+          "total": 32340,
+          "vat": 2940,
+          "vendor": "가상송장기술"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

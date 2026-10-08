@@ -1,0 +1,236 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-14",
+          "document_id": "RENTROOM-0214-A",
+          "event": "received",
+          "event_id": "e84a",
+          "location": "대관실 거울석"
+        },
+        {
+          "date": "2026-02-17",
+          "document_id": "RENTROOM-0217-B",
+          "event": "received",
+          "event_id": "e84b",
+          "location": "대관실 바닥"
+        },
+        {
+          "date": "2026-02-20",
+          "document_id": "RENTROOM-0220-C",
+          "event": "received",
+          "event_id": "e84c",
+          "location": "대관실 입구"
+        },
+        {
+          "date": "2026-02-18",
+          "document_id": "ORDER-RR-0216",
+          "event": "cancelled_before_dispatch",
+          "event_id": "e84x",
+          "location": "발주 담당 접수"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-14",
+          "document_id": "RENTROOM-0214-A",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h84a",
+          "vendor": "가상대관집기"
+        },
+        {
+          "date": "2026-02-17",
+          "document_id": "RENTROOM-0217-B",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h84b",
+          "vendor": "가상대관집기"
+        },
+        {
+          "date": "2026-02-20",
+          "document_id": "RENTROOM-0220-C",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h84c",
+          "vendor": "가상공간정리"
+        },
+        {
+          "date": "2026-02-16",
+          "document_id": "ORDER-RR-0216",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h84x",
+          "vendor": "가상대관집기"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h84a",
+          "items": [
+            {
+              "name": "이동거울",
+              "quantity": 2,
+              "unit_price": 87000
+            }
+          ],
+          "sheet_id": "s84a"
+        },
+        {
+          "header_record_id": "h84b",
+          "items": [
+            {
+              "name": "바닥보호패드",
+              "quantity": 16,
+              "unit_price": 3200
+            }
+          ],
+          "sheet_id": "s84b"
+        },
+        {
+          "header_record_id": "h84c",
+          "items": [
+            {
+              "name": "신발보관선반",
+              "quantity": 2,
+              "unit_price": 68000
+            }
+          ],
+          "sheet_id": "s84c"
+        },
+        {
+          "header_record_id": "h84x",
+          "items": [
+            {
+              "name": "이동행거",
+              "quantity": 4,
+              "unit_price": 79000
+            }
+          ],
+          "sheet_id": "s84x"
+        }
+      ],
+      "processing_policy": "모든 원자료 표지에 header_record_id로 품목표를 연결한다. invoice나 order는 document_id의 received 기록이 있어야 실제 인수에 포함한다. quote, 인수 기록 없는 자료 및 출고 전 취소 기록은 제외한다. 같은 document_id의 동일 내용은 한 번만 집계한다. 포함 품목 총액의 10/11 원 미만 버림이 공급가액이고 차액이 부가세다. 별도 공급가액은 단가 곱하기 수량이고 품목별 그 10% 원 미만 버림이 부가세다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하며 업체의 주식회사, (주), ㈜를 제거한다. 업체 배열 및 품목 배열은 해당 정규화 이름 오름차순이다. 동일 규격 개당 공급가액 단가를 비교하고 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 최저 단가가 같으면 정규화 업체명 오름차순 첫 업체를 고른다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "ORDER-RR-0216"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "RENTROOM-0214-A",
+        "RENTROOM-0217-B",
+        "RENTROOM-0220-C"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "RENTROOM-0214-A",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 87000
+    },
+    "output": {
+      "supply": 174000,
+      "total": 191400,
+      "vat": 17400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상대관집기"
+    },
+    "output": "가상대관집기",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "RENTROOM-0217-B",
+      "includes_vat": false,
+      "quantity": 16,
+      "unit_price": 3200
+    },
+    "output": {
+      "supply": 51200,
+      "total": 56320,
+      "vat": 5120
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상대관집기"
+    },
+    "output": "가상대관집기",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "RENTROOM-0220-C",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 68000
+    },
+    "output": {
+      "supply": 136000,
+      "total": 149600,
+      "vat": 13600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상공간정리"
+    },
+    "output": "가상공간정리",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "바닥보호패드",
+          "unit_price": 3200,
+          "vendor": "가상대관집기"
+        },
+        {
+          "item": "신발보관선반",
+          "unit_price": 68000,
+          "vendor": "가상공간정리"
+        },
+        {
+          "item": "이동거울",
+          "unit_price": 87000,
+          "vendor": "가상대관집기"
+        }
+      ],
+      "grand_total": 397320,
+      "supply_total": 361200,
+      "unique_document_count": 3,
+      "vat_total": 36120,
+      "vendor_totals": [
+        {
+          "supply": 136000,
+          "total": 149600,
+          "vat": 13600,
+          "vendor": "가상공간정리"
+        },
+        {
+          "supply": 225200,
+          "total": 247720,
+          "vat": 22520,
+          "vendor": "가상대관집기"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

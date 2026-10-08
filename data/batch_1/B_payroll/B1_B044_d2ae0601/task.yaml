@@ -1,0 +1,68 @@
+task_id: B1_B044_d2ae0601
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상연두화학의 가상지해원 급여에서 과세 구분과 수당 기준을 함께 점검합니다. 식사 제공 확인서와 현금 식대 계약 및 당월 실적수당
+  승인서를 대조하여 월 통상임금, 비과세급여와 과세급여를 구해 주세요. 자녀 공제 후 승인된 80% 비율을 반영한 소득세와 지방소득세, 총지급액
+  및 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_정액지급계약.hwpx
+  format: hwpx
+- path: inputs/02_식당제공확인.pdf
+  format: pdf
+- path: inputs/03_실적수당승인.xlsx
+  format: xlsx
+- path: inputs/04_정상근무기록.xlsx
+  format: xlsx
+- path: inputs/05_연금통지.pdf
+  format: pdf
+- path: inputs/06_보험보수통지.hwpx
+  format: hwpx
+- path: inputs/07_자녀비율신청.pdf
+  format: pdf
+- path: inputs/08_은행지급.xlsx
+  format: xlsx
+- path: inputs/09_과세통상기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-cc80fddb-741a-5f5d-aa47-227b754eaa96
+scenario_seed: 15181077995887126670
+scenario_hash: b96f11cb2b1c392ca24205085c6274830590d7002f7fbd1543c76d0c3463fd0d
+authorship:
+  method: individually_written
+  case_id: B044
+  case_sha256: d2ae06012459e88e0e8b81ffdd375750ecb04a8b58fac8157acd9c886e834683
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- ordinary_monthly_wage
+- non_taxable_pay
+- taxable_pay
+- income_tax
+- local_income_tax
+- gross_pay
+- net_pay

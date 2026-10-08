@@ -1,0 +1,62 @@
+task_id: B1_A095_91a0b0e5
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상물결생명의 가상공유현은 본인 수술과 배우자 입원 및 올해 태어난 미숙아 진료와 난임 시술 자료를 제출했습니다. 가족 명세에
+  맞춰 기본공제액과 자녀세액공제액을 구해 주세요. 보험금이 보전한 본인 수술비를 조정하고 일반 의료비 한도 및 진료 종류별 공제율을 적용해 의료비
+  세액공제액을 계산합니다. 소득세 결정세액과 기납부액을 비교한 두 세금의 정산 합계도 적어 주세요. 환급은 음수입니다.
+input_files:
+- path: inputs/01_직원확인.hwpx
+  format: hwpx
+- path: inputs/02_급여확정.xlsx
+  format: xlsx
+- path: inputs/03_배우자명세.pdf
+  format: pdf
+- path: inputs/04_신생아출생.hwpx
+  format: hwpx
+- path: inputs/05_배우자입원.pdf
+  format: pdf
+- path: inputs/06_본인수술.pdf
+  format: pdf
+- path: inputs/07_수술보험금.xlsx
+  format: xlsx
+- path: inputs/08_미숙아진료.pdf
+  format: pdf
+- path: inputs/09_난임시술.pdf
+  format: pdf
+- path: inputs/10_기납부누계.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    child_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - basic_deduction
+  - child_credit
+  - medical_credit
+  - final_national_tax
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-de2b04d5-a328-5b67-a759-ee161de49326
+scenario_seed: 10493581632832917289
+scenario_hash: 42c6d2efbc9a630fcf2892705fc94346fe88120ec97cd8a593e1b3d4fb328a26
+authorship:
+  method: individually_written
+  case_id: A095
+  case_sha256: 91a0b0e5ce91cf2957cabb97826c56b138af0d1207745464982cd52af507d96c
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- basic_deduction
+- child_credit
+- medical_credit
+- final_national_tax
+- settlement_total

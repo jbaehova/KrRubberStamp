@@ -1,0 +1,61 @@
+task_id: B1_C043_c2e12a74
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상맑은세제는 지난해 사업장 공급가액이 정확히 10억원이었습니다. 올해 대량 카드 주문과 현금 장부 매출을 구분하고 파일함에서
+  찾은 작년 매입도 공급일로 나눠 주세요. 매출 공급가액(tax_base), 공제가능 매입세액(deductible_input_vat), 영수증 발행세액공제(receipt_credit),
+  실제 거래 수(unique_transaction_count), 납부액(payable_vat)을 answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_세제점_신고.hwpx
+  format: hwpx
+- path: inputs/02_전년_공급가액.pdf
+  format: pdf
+- path: inputs/03_선납_확인.xlsx
+  format: xlsx
+- path: inputs/04_대량_카드.pdf
+  format: pdf
+- path: inputs/05_현금_장부.xlsx
+  format: xlsx
+- path: inputs/06_올해_입고.pdf
+  format: pdf
+- path: inputs/07_작년_계산서.pdf
+  format: pdf
+- path: inputs/08_재고_수령.hwpx
+  format: hwpx
+- path: inputs/09_작년원본_사진.png
+  format: png
+  duplicate_of: inputs/07_작년_계산서.pdf
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    unique_transaction_count:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - deductible_input_vat
+  - receipt_credit
+  - unique_transaction_count
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-b9ce0219-d667-5134-ada9-12bae81ab22a
+scenario_seed: 14042551792989386285
+scenario_hash: a1b299e993753c178b13cf735273dbed6a3041b241107e39209190b7ea8a21f3
+authorship:
+  method: individually_written
+  case_id: C043
+  case_sha256: c2e12a748128362d2d4c8d29da14ed4b2209e656b5421dd73b78fc823c3b369e
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- tax_base
+- deductible_input_vat
+- receipt_credit
+- unique_transaction_count
+- payable_vat

@@ -1,0 +1,51 @@
+task_id: B1_D136_63617e14
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 현장 조사 도구의 재구매 기준표를 만들어 주세요. 품목 처리 기준대로 cheapest_by_item과 supply_total을
+  확인합니다.
+input_files:
+- path: inputs/01_핀인수.pdf
+  format: pdf
+- path: inputs/02_카드인수.xlsx
+  format: xlsx
+- path: inputs/03_핀카드추가.hwpx
+  format: hwpx
+- path: inputs/04_카드보충.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-151212d5-3dc8-515c-87d0-7040de7a0ffc
+scenario_seed: 7161143507255175331
+scenario_hash: 74d24b1fe0b0d98e274da2a7763b7baadd88ca76db27008c814bc6fd740de675
+authorship:
+  method: individually_written
+  case_id: D136
+  case_sha256: 63617e14178a28a3068b20356ee427a8975fd8ec8e68c5c307ad6ecd2165407b
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- supply_total

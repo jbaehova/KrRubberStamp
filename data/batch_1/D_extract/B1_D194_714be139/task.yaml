@@ -1,0 +1,83 @@
+task_id: B1_D194_714be139
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 방문 해설용 지도 케이스 자료를 지급과 재구매 표로 정리해 주세요. vendor_totals와 cheapest_by_item
+  및 grand_total이 필요합니다.
+input_files:
+- path: inputs/01_초기청구표지.pdf
+  format: pdf
+- path: inputs/02_둘째구매표지.hwpx
+  format: hwpx
+- path: inputs/03_후속구매표지.pdf
+  format: pdf
+- path: inputs/04_초기케이스품목.xlsx
+  format: xlsx
+- path: inputs/05_어깨끈품목.pdf
+  format: pdf
+- path: inputs/06_둘째케이스품목.xlsx
+  format: xlsx
+- path: inputs/07_후속품목.hwpx
+  format: hwpx
+- path: inputs/08_회계재제출.xlsx
+  format: xlsx
+- path: inputs/09_원본보관스캔.png
+  format: png
+  duplicate_of: inputs/01_초기청구표지.pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-3398994e-32f4-513e-b9e9-a257aa4713ba
+scenario_seed: 8163866386430201494
+scenario_hash: 4dfe1218f348eb8f192daf3c9886120d351167b00c2ce8fbcd8e90616181784f
+authorship:
+  method: individually_written
+  case_id: D194
+  case_sha256: 714be13974ec8e96930362c4acd6260d9e45b81c85d880d4e13d55991f7046fb
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item
+- grand_total

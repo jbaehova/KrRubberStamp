@@ -1,0 +1,59 @@
+task_id: B1_A196_c109bf4e
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상돌단풍도면의 가상공다율 정산을 마감해 주세요. 직원과 어머니의 장애인 증명 및 어머니 소득을 확인하고 보험 계약의 실제
+  납부자도 맞춰 봅니다. 기본공제액 및 추가공제액, 보험료와 의료비 및 교육비의 세액공제액을 각각 적어 주세요.
+input_files:
+- path: inputs/01_본인증명.hwpx
+  format: hwpx
+- path: inputs/02_급여누계.xlsx
+  format: xlsx
+- path: inputs/03_어머니자격.pdf
+  format: pdf
+- path: inputs/04_본인일반보험.pdf
+  format: pdf
+- path: inputs/05_배우자결제.xlsx
+  format: xlsx
+- path: inputs/06_본인전용보험.pdf
+  format: pdf
+- path: inputs/07_부모전용보험.hwpx
+  format: hwpx
+- path: inputs/08_부모치료.pdf
+  format: pdf
+- path: inputs/09_특수교육.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    education_credit:
+      type: integer
+  required:
+  - basic_deduction
+  - additional_deduction
+  - insurance_credit
+  - medical_credit
+  - education_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-96e43495-efe4-5bf1-85af-016947ce23bf
+scenario_seed: 13909859268387224049
+scenario_hash: 74fba5c320a56018ee483b8c21523c4b3acaeb2400c28d4b48d34c3947415304
+authorship:
+  method: individually_written
+  case_id: A196
+  case_sha256: c109bf4e97e539f16a34c0f841c4a36b19960ad6ce37f90294c07abc89712479
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- basic_deduction
+- additional_deduction
+- insurance_credit
+- medical_credit
+- education_credit

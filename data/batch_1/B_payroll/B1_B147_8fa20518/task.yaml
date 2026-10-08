@@ -1,0 +1,67 @@
+task_id: B1_B147_8fa20518
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상해오름측정실은 당월 실적금 지급과 평일 추가 카드 수정을 함께 승인했습니다. 정기 임금과 실적금을 구분하여 월 통상임금을
+  구하고, 승인 상태와 번호로 추가 근로를 확정해 연장수당을 계산해 주세요. 최종 과세급여가 고액 산식의 어느 구간인지 판단한 뒤 소득세와 지방소득세
+  및 실지급액을 마감합니다. 현장 제출 스캔 사본은 같은 수정 승인 식별자이므로 별도 작업으로 더하지 않습니다.
+input_files:
+- path: inputs/01_측정정액.hwpx
+  format: hwpx
+- path: inputs/02_측정성과.pdf
+  format: pdf
+- path: inputs/03_추가이전.xlsx
+  format: xlsx
+- path: inputs/04_추가수정.pdf
+  format: pdf
+- path: inputs/05_추가초안.pdf
+  format: pdf
+- path: inputs/06_측정일정.xlsx
+  format: xlsx
+- path: inputs/07_측정연금.hwpx
+  format: hwpx
+- path: inputs/08_측정보수.pdf
+  format: pdf
+- path: inputs/09_측정공식.hwpx
+  format: hwpx
+- path: inputs/10_현장승인사본.png
+  format: png
+  duplicate_of: inputs/04_추가수정.pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    overtime_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - overtime_pay
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-31ca99f2-0665-5554-8006-8161ce82e230
+scenario_seed: 10349840498159625973
+scenario_hash: 44c2fbde0669011bca09a0c1cf5491a492e6c9e10b9dde979d027fdd4d86827f
+authorship:
+  method: individually_written
+  case_id: B147
+  case_sha256: 8fa20518e6c1a6f57bfdd97927e706ab0543fb308001609102caf8c698faf722
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- ordinary_monthly_wage
+- overtime_pay
+- taxable_pay
+- income_tax
+- local_income_tax
+- net_pay

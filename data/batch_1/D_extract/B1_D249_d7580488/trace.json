@@ -1,0 +1,191 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-10",
+          "document_id": "ROAST-TEMP-5",
+          "event": "received",
+          "event_id": "ROAST-A-IN",
+          "location": "로스터정비준비대"
+        },
+        {
+          "date": "2026-06-11",
+          "document_id": "ROAST-TEMP-7",
+          "event": "received",
+          "event_id": "ROAST-B-IN",
+          "location": "로스터정비준비대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-05",
+          "document_id": "ROAST-TEMP-5",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "ROAST-SENSOR-A",
+          "vendor": "가상로스터부품"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "ROAST-TEMP-7",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "ROAST-SENSOR-B",
+          "vendor": "가상열측정부속"
+        },
+        {
+          "date": "2026-05-29",
+          "document_id": "ROAST-TEMP-Q",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "ROAST-Q-C",
+          "vendor": "가상로스터부품"
+        },
+        {
+          "date": "2026-06-08",
+          "document_id": "ROAST-FILTER-8",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "ROAST-FILTER-C",
+          "vendor": "가상집진부속"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "ROAST-SENSOR-A",
+          "items": [
+            {
+              "name": "로스터온도센서T3",
+              "quantity": 3,
+              "unit_price": 28601
+            }
+          ],
+          "sheet_id": "ROAST-A-L"
+        },
+        {
+          "header_record_id": "ROAST-SENSOR-B",
+          "items": [
+            {
+              "name": "로스터온도센서T3",
+              "quantity": 1,
+              "unit_price": 25800
+            }
+          ],
+          "sheet_id": "ROAST-B-L"
+        },
+        {
+          "header_record_id": "ROAST-Q-C",
+          "items": [
+            {
+              "name": "로스터온도센서T3",
+              "quantity": 3,
+              "unit_price": 21000
+            }
+          ],
+          "sheet_id": "ROAST-Q-L"
+        },
+        {
+          "header_record_id": "ROAST-FILTER-C",
+          "items": [
+            {
+              "name": "로스터집진필터",
+              "quantity": 2,
+              "unit_price": 48300
+            }
+          ],
+          "sheet_id": "ROAST-FILTER-L"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 연결한다. invoice 또는 order 번호에 received가 있으면 구매이며 quote와 수령 없는 주문은 구매가 아니다. 포함 행 공급가액은 행 총액의 10/11에서 원 미만을 버리고 차액은 세액이다. 포함 개당 비교 단가는 단가의 10/11에서 원 미만을 버린다. 별도 단가는 공급가액이며 행 세액은 그 10%에서 원 미만을 버린다. 품목 및 업체는 NFKC 후 공백 제거 및 영문 소문자로 정리하고 업체 법인 표현을 제거해 이름 순으로 배열한다. 가격 동률이면 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "ROAST-FILTER-8",
+        "ROAST-TEMP-Q"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "ROAST-TEMP-5",
+        "ROAST-TEMP-7"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "ROAST-TEMP-5",
+      "includes_vat": true,
+      "quantity": 3,
+      "unit_price": 28601
+    },
+    "output": {
+      "supply": 78002,
+      "total": 85803,
+      "vat": 7801
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상로스터부품"
+    },
+    "output": "가상로스터부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "ROAST-TEMP-7",
+      "includes_vat": false,
+      "quantity": 1,
+      "unit_price": 25800
+    },
+    "output": {
+      "supply": 25800,
+      "total": 28380,
+      "vat": 2580
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상열측정부속"
+    },
+    "output": "가상열측정부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "로스터온도센서t3",
+          "unit_price": 25800,
+          "vendor": "가상열측정부속"
+        }
+      ],
+      "grand_total": 114183,
+      "supply_total": 103802,
+      "unique_document_count": 2,
+      "vat_total": 10381,
+      "vendor_totals": [
+        {
+          "supply": 78002,
+          "total": 85803,
+          "vat": 7801,
+          "vendor": "가상로스터부품"
+        },
+        {
+          "supply": 25800,
+          "total": 28380,
+          "vat": 2580,
+          "vendor": "가상열측정부속"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

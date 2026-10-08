@@ -1,0 +1,39 @@
+task_id: B1_B108_8a60b49e
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상잔광보관소에서 자료 반출 작업을 마치고 종료 버튼을 누른 시각이 승인 카드에 남았습니다. 카드의 시작과 종료로 평일 연장수당을
+  계산해 주세요. 월 통상임금과 표시 시급도 같이 작성하되 표시 시급을 수당의 계산 기초로 다시 쓰지는 않습니다.
+input_files:
+- path: inputs/01_반출임금.pdf
+  format: pdf
+- path: inputs/02_종료버튼.xlsx
+  format: xlsx
+- path: inputs/03_반출기준.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    ordinary_hourly_wage_floor:
+      type: integer
+    overtime_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - ordinary_hourly_wage_floor
+  - overtime_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-a651a04d-d8ea-5ae5-90ce-b72f4ce80624
+scenario_seed: 9971168165708184231
+scenario_hash: c172d07e4793ac09fd50d9ce418963186fb2888a65d1924312cfd0f442a8e79b
+authorship:
+  method: individually_written
+  case_id: B108
+  case_sha256: 8a60b49e00b83aa7e73914d2b64ed99c12cafbb8a605636aca55df8964f2a929
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- ordinary_monthly_wage
+- ordinary_hourly_wage_floor
+- overtime_pay

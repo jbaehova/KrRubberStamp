@@ -1,0 +1,51 @@
+task_id: B1_D087_e2eb6a40
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 게시판 고정품을 다시 구입합니다. 표기가 다른 같은 품목을 통합한 cheapest_by_item과 전체 vat_total을
+  확인해 주세요. 이름 및 계산 기준은 추가 클립 대장에 있습니다.
+input_files:
+- path: inputs/01_옛클립.pdf
+  format: pdf
+- path: inputs/02_새클립.xlsx
+  format: xlsx
+- path: inputs/03_첫받침.hwpx
+  format: hwpx
+- path: inputs/04_추가받침.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8bd3ca9d-e132-54c1-aaac-18eda271c66d
+scenario_seed: 16351279696117780308
+scenario_hash: 415e2dd66583fbf068959630f58305297ea08b699217458240a01fe3cdbfabf3
+authorship:
+  method: individually_written
+  case_id: D087
+  case_sha256: e2eb6a4036284f54be9b8f7fa27839c91c724077e085800d0035667a8f1882a4
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item
+- vat_total

@@ -1,0 +1,55 @@
+task_id: B1_B290_27f99187
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상책갈피점검실의 시급 종료 지급에는 결근 주와 같은 카드 사본 및 구분이 정정된 출동이 있습니다. 승인 기록을 대조해 기본
+  대가, 주휴수당과 연장수당을 구하고 총지급액을 적어 주세요.
+input_files:
+- path: inputs/01_점검약정.pdf
+  format: pdf
+- path: inputs/02_월요일원본.xlsx
+  format: xlsx
+- path: inputs/03_월요일사본.hwpx
+  format: hwpx
+- path: inputs/04_나머지소정.xlsx
+  format: xlsx
+- path: inputs/05_구분초기.pdf
+  format: pdf
+- path: inputs/06_구분최종.hwpx
+  format: hwpx
+- path: inputs/07_결근및실행.xlsx
+  format: xlsx
+- path: inputs/08_기관가족.pdf
+  format: pdf
+- path: inputs/09_구분원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - overtime_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-871a61e8-7d44-5b89-9076-878906e96dbb
+scenario_seed: 2880493449531975681
+scenario_hash: 85217156c47c782081bd932874cf9a9b78699a7af2d099f4081dcdbe43dde222
+authorship:
+  method: individually_written
+  case_id: B290
+  case_sha256: 27f99187e53168018a9a8629f8bc0bef26f0b178d790c6c13fb1723c6dd9b9e9
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- overtime_pay
+- gross_pay

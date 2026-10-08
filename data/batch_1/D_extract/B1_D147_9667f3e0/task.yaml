@@ -1,0 +1,68 @@
+task_id: B1_D147_9667f3e0
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 실습용 저울 구매비를 마감해 주세요. 회사 이름 기준과 수령 기록을 반영한 vendor_totals, supply_total,
+  unique_document_count가 필요합니다.
+input_files:
+- path: inputs/01_저울표지.pdf
+  format: pdf
+- path: inputs/02_저울품목.xlsx
+  format: xlsx
+- path: inputs/03_저울수령.hwpx
+  format: hwpx
+- path: inputs/04_추표지.hwpx
+  format: hwpx
+- path: inputs/05_추품목.pdf
+  format: pdf
+- path: inputs/06_추수령.xlsx
+  format: xlsx
+- path: inputs/07_받침청구.pdf
+  format: pdf
+- path: inputs/08_받침수령.hwpx
+  format: hwpx
+- path: inputs/09_후속저울주문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - supply_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-ba988c16-0f51-5449-bd66-4d9543c4b660
+scenario_seed: 10837899173612726342
+scenario_hash: 69d1ca5462534c5740f8d4a68ca9bb7191f5171f8d3a9150e43746fb8ee0d04a
+authorship:
+  method: individually_written
+  case_id: D147
+  case_sha256: 9667f3e072afa846444d6b59d7690cd8d43ceb582aa186b096003c5459c8a3f6
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals
+- supply_total
+- unique_document_count

@@ -1,0 +1,60 @@
+task_id: B1_A098_78420770
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상샛강자동화의 가상진가람은 성과급 포함 확정 급여로 정산을 다시 요청했습니다. 근로소득세액공제의 급여 한도와 연금계좌 공제율을
+  확정해 각각 계산해 주세요. 문화비는 결제수단에 따라 처리하고 카드 소득공제액을 구합니다. 월세 신청도 같은 확정 급여로 판단해 월세 세액공제액을
+  적고 최종 소득세를 계산합니다.
+input_files:
+- path: inputs/01_확정정산신청.hwpx
+  format: hwpx
+- path: inputs/02_성과급포함급여.xlsx
+  format: xlsx
+- path: inputs/03_연금저축.pdf
+  format: pdf
+- path: inputs/04_IRP.pdf
+  format: pdf
+- path: inputs/05_일반신용소비.xlsx
+  format: xlsx
+- path: inputs/06_일반체크소비.xlsx
+  format: xlsx
+- path: inputs/07_문화비결제.xlsx
+  format: xlsx
+- path: inputs/08_임대차요건.pdf
+  format: pdf
+- path: inputs/09_월세납부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    employment_credit:
+      type: integer
+    pension_account_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    rent_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - employment_credit
+  - pension_account_credit
+  - credit_card_deduction
+  - rent_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-8809b902-2cd4-5ba7-a466-b1d4c2f35f59
+scenario_seed: 8665496813952095083
+scenario_hash: 3ab9546649eb06c3a9c8e2f8923f09f5b70199fa1fc41ea7075fa44fca2e1e5a
+authorship:
+  method: individually_written
+  case_id: A098
+  case_sha256: 78420770c5e4d36b198ee4f44ce7256238c45f5212623046f4c4856f651e12be
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- employment_credit
+- pension_account_credit
+- credit_card_deduction
+- rent_credit
+- final_national_tax

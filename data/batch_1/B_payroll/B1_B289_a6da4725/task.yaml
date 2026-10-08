@@ -1,0 +1,55 @@
+task_id: B1_B289_a6da4725
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상도안전달국은 7월 정액 월급을 6월30일에 선지급했습니다. 남은 7월 계획보다 실제 실행을 우선해 effective_payment_date를
+  YYYY-MM-DD로 적어 주세요. 7월 부과 연금의 기준소득과 공제액 및 실지급액도 계산해 주세요.
+input_files:
+- path: inputs/01_선지급약정.pdf
+  format: pdf
+- path: inputs/02_정기수당.hwpx
+  format: hwpx
+- path: inputs/03_칠월연금.xlsx
+  format: xlsx
+- path: inputs/04_건강통지.pdf
+  format: pdf
+- path: inputs/05_고용통지.xlsx
+  format: xlsx
+- path: inputs/06_후속계획.hwpx
+  format: hwpx
+- path: inputs/07_선지급실행.pdf
+  format: pdf
+- path: inputs/08_가족등록.xlsx
+  format: xlsx
+- path: inputs/09_반기원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - effective_payment_date
+  - pension_base_income
+  - national_pension
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-d341521c-af05-5f08-9722-406939c65b85
+scenario_seed: 12023000383583227193
+scenario_hash: 64b6a0db408ca97826134673465a532719fadefb05be6920a64e08a5ef5270c1
+authorship:
+  method: individually_written
+  case_id: B289
+  case_sha256: a6da4725f5dd0d395d62acbf2754daea741059d3dd0cd01893e70d0ebade7e66
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- effective_payment_date
+- pension_base_income
+- national_pension
+- net_pay

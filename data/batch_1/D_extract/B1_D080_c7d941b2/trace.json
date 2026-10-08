@@ -1,0 +1,193 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-07",
+          "document_id": "WATERCASE-0407-A",
+          "event": "received",
+          "event_id": "e80a",
+          "location": "동부 관측팀"
+        },
+        {
+          "date": "2026-04-12",
+          "document_id": "WATERCASE-0412-B",
+          "event": "received",
+          "event_id": "e80b",
+          "location": "서부 관측팀"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-07",
+          "document_id": "WATERCASE-0407-A",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h80a",
+          "vendor": "가상수질보호"
+        },
+        {
+          "date": "2026-04-12",
+          "document_id": "WATERCASE-0412-B",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h80b",
+          "vendor": "가상측정상자"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h80a",
+          "items": [
+            {
+              "name": "방수관측케이스",
+              "quantity": 3,
+              "unit_price": 71500
+            },
+            {
+              "name": "케이스완충폼",
+              "quantity": 3,
+              "unit_price": 8800
+            }
+          ],
+          "sheet_id": "s80a"
+        },
+        {
+          "header_record_id": "h80b",
+          "items": [
+            {
+              "name": "방수관측케이스",
+              "quantity": 2,
+              "unit_price": 62000
+            },
+            {
+              "name": "케이스완충폼",
+              "quantity": 2,
+              "unit_price": 9000
+            }
+          ],
+          "sheet_id": "s80b"
+        }
+      ],
+      "processing_policy": "모든 원자료 표지에 header_record_id로 품목표를 연결한다. invoice나 order는 document_id의 received 기록이 있어야 실제 인수에 포함한다. quote, 인수 기록 없는 자료 및 출고 전 취소 기록은 제외한다. 같은 document_id의 동일 내용은 한 번만 집계한다. 포함 품목 총액의 10/11 원 미만 버림이 공급가액이고 차액이 부가세다. 별도 공급가액은 단가 곱하기 수량이고 품목별 그 10% 원 미만 버림이 부가세다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하며 업체의 주식회사, (주), ㈜를 제거한다. 업체 배열 및 품목 배열은 해당 정규화 이름 오름차순이다. 동일 규격 개당 공급가액 단가를 비교하고 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 최저 단가가 같으면 정규화 업체명 오름차순 첫 업체를 고른다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "WATERCASE-0407-A",
+        "WATERCASE-0412-B"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "WATERCASE-0407-A",
+      "includes_vat": true,
+      "quantity": 3,
+      "unit_price": 71500
+    },
+    "output": {
+      "supply": 195000,
+      "total": 214500,
+      "vat": 19500
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "WATERCASE-0407-A",
+      "includes_vat": true,
+      "quantity": 3,
+      "unit_price": 8800
+    },
+    "output": {
+      "supply": 24000,
+      "total": 26400,
+      "vat": 2400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상수질보호"
+    },
+    "output": "가상수질보호",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "WATERCASE-0412-B",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 62000
+    },
+    "output": {
+      "supply": 124000,
+      "total": 136400,
+      "vat": 12400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "WATERCASE-0412-B",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 9000
+    },
+    "output": {
+      "supply": 18000,
+      "total": 19800,
+      "vat": 1800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상측정상자"
+    },
+    "output": "가상측정상자",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "방수관측케이스",
+          "unit_price": 62000,
+          "vendor": "가상측정상자"
+        },
+        {
+          "item": "케이스완충폼",
+          "unit_price": 8000,
+          "vendor": "가상수질보호"
+        }
+      ],
+      "grand_total": 397100,
+      "supply_total": 361000,
+      "unique_document_count": 2,
+      "vat_total": 36100,
+      "vendor_totals": [
+        {
+          "supply": 219000,
+          "total": 240900,
+          "vat": 21900,
+          "vendor": "가상수질보호"
+        },
+        {
+          "supply": 142000,
+          "total": 156200,
+          "vat": 14200,
+          "vendor": "가상측정상자"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,305 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "월말입고",
+          "date": "2026-03-31",
+          "description": "접기 재료의 월말 입고",
+          "document_ids": [
+            "포장카드1"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "상자 제작 창고"
+          },
+          "operation_id": "상자접기",
+          "participants": [
+            {
+              "name": "가상홍접기",
+              "organization": "가상포장접기",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C174-월말"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "월초입고",
+          "date": "2026-04-01",
+          "description": "접기 재료의 다음날 입고",
+          "document_ids": [
+            "포장카드2"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "상자 제작 창고"
+          },
+          "operation_id": "상자접기",
+          "participants": [
+            {
+              "name": "가상홍접기",
+              "organization": "가상포장접기",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C174-월초"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 상자 제작",
+          "operation_id": "상자접기",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "월말입고",
+          "date": "2026-03-31",
+          "document_id": "포장카드1",
+          "transaction_id": "C174-월말"
+        },
+        {
+          "activity_id": "월초입고",
+          "date": "2026-04-01",
+          "document_id": "포장카드2",
+          "transaction_id": "C174-월초"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "supplier_status_records": [
+        {
+          "status": "simplified_no_invoice_duty",
+          "supplier_id": "가상-S174",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-03-31"
+        },
+        {
+          "status": "general",
+          "supplier_id": "가상-S174",
+          "valid_from": "2026-04-01",
+          "valid_to": "2026-12-31"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "포장카드1",
+        "purpose": "business",
+        "transaction_id": "C174-월말"
+      },
+      {
+        "business_related": true,
+        "document_id": "포장카드2",
+        "purpose": "business",
+        "transaction_id": "C174-월초"
+      },
+      {
+        "supplier_general": false,
+        "supplier_id": "가상-S174",
+        "transaction_id": "C174-월말"
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "가상-S174",
+        "transaction_id": "C174-월초"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "포장카드1"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C174-월말"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "포장카드2"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C174-월초"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-31",
+      "transaction_id": "C174-월말"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 671000,
+      "includes_vat": true,
+      "transaction_id": "C174-월말"
+    },
+    "output": {
+      "gross": 671000,
+      "supply_base": 610000,
+      "vat": 61000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "C174-월말",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 61000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-01",
+      "transaction_id": "C174-월초"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 913000,
+      "includes_vat": true,
+      "transaction_id": "C174-월초"
+    },
+    "output": {
+      "gross": 913000,
+      "supply_base": 830000,
+      "vat": 83000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C174-월초",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 83000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 238000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -83000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -83000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -83000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 83000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 83000,
+      "input_vat": 144000,
+      "net_vat": -83000,
+      "noncreditable_vat": 61000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 83000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

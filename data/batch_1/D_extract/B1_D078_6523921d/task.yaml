@@ -1,0 +1,51 @@
+task_id: B1_D078_6523921d
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 보관함과 자물쇠의 재구매 자료를 만들어 주세요. cheapest_by_item과 근거 거래 수 unique_document_count가
+  필요합니다. 가격이 같을 때의 선택 기준은 공용석 대장에 있습니다.
+input_files:
+- path: inputs/01_운영석.pdf
+  format: pdf
+- path: inputs/02_공용석.xlsx
+  format: xlsx
+- path: inputs/03_잠금보강.hwpx
+  format: hwpx
+- path: inputs/04_추가잠금.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - cheapest_by_item
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-ccc21806-560d-5553-b602-05af79d2c306
+scenario_seed: 7287829277109312797
+scenario_hash: 15965dc15611a916991a6d2060b522e4fa4764faf77eb84fb529f1ef35fdd112
+authorship:
+  method: individually_written
+  case_id: D078
+  case_sha256: 6523921d6dcadd1d9eef791f104a21f962bfeedec68bb496558fb393387ade28
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item
+- unique_document_count

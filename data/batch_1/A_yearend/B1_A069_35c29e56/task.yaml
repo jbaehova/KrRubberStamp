@@ -1,0 +1,46 @@
+task_id: B1_A069_35c29e56
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상보리정보의 가상윤찬해는 스물두 살 무소득 자녀의 카드 사용내역을 제출했습니다. 기본공제 대상 인원과 기본공제액 및 자녀세액공제액을
+  먼저 확인해 주세요. 직원과 자녀의 카드 명세를 함께 읽고 신용카드 등 사용금액 소득공제액도 계산합니다. 기본공제에서 제외됐다는 이유로 카드 내역까지
+  모두 버리지 마세요.
+input_files:
+- path: inputs/01_가족신청.hwpx
+  format: hwpx
+- path: inputs/02_급여누계.xlsx
+  format: xlsx
+- path: inputs/03_자녀소득확인.pdf
+  format: pdf
+- path: inputs/04_가족카드명세.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    child_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - child_credit
+  - credit_card_deduction
+  additionalProperties: false
+canary: KrRubberStamp-canary-95e39f62-53eb-5197-9bfd-aa4edbfd4e3e
+scenario_seed: 3873832723455734133
+scenario_hash: f57821a08e7934e0291436c772ce737e84896cf0736719228daec295a14fe0ab
+authorship:
+  method: individually_written
+  case_id: A069
+  case_sha256: 35c29e5668dcf175fb43b98786e491789379ed4ec80825b590a046f2f6d98ab8
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- child_credit
+- credit_card_deduction

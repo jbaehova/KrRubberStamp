@@ -1,0 +1,56 @@
+task_id: B1_C292_fc92e48c
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상테두리함의 발급 파일과 구매 배송을 대조해 거래 수(unique_transaction_count), 불공제세액(noncreditable_vat),
+  발행 공제(receipt_credit), 납부세액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/판매카드.pdf
+  format: pdf
+- path: inputs/판매전자.xlsx
+  format: xlsx
+- path: inputs/발급연결.hwpx
+  format: hwpx
+- path: inputs/가정카드.pdf
+  format: pdf
+- path: inputs/가정스캔.png
+  format: png
+  duplicate_of: inputs/가정카드.pdf
+- path: inputs/배송인수.hwpx
+  format: hwpx
+- path: inputs/매장사업.pdf
+  format: pdf
+- path: inputs/반기인계.xlsx
+  format: xlsx
+- path: inputs/공제이력.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - noncreditable_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-5c2868f7-402d-5660-ba3b-723f17b5920d
+scenario_seed: 18199860336634762756
+scenario_hash: e9958973c7b665e9ed9a54b8baf4fdc501f22c08f04481c71967a34ba60d24a1
+authorship:
+  method: individually_written
+  case_id: C292
+  case_sha256: fc92e48c96d6160420e38cd5e49af9a10c9845229b193559bbf2dcb66b5eb9a7
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- unique_transaction_count
+- noncreditable_vat
+- receipt_credit
+- payable_vat

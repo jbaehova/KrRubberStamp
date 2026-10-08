@@ -1,0 +1,286 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "service",
+          "activity_id": "판매실점검",
+          "date": "2026-04-02",
+          "description": "판매실 전용 냉방기를 점검했다.",
+          "document_ids": [
+            "점검전자판매"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "문구 판매실"
+          },
+          "operation_id": "문구판매",
+          "participants": [
+            {
+              "name": "가상문교재",
+              "organization": "가상반듯교재",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "판매실냉방"
+        },
+        {
+          "action": "service",
+          "activity_id": "수업실점검",
+          "date": "2026-04-03",
+          "description": "면세 교육실 전용 냉방기를 점검했다.",
+          "document_ids": [
+            "점검전자수업"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "면세 교육 수업실"
+          },
+          "operation_id": "면세교육",
+          "participants": [
+            {
+              "name": "가상문교재",
+              "organization": "가상반듯교재",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "수업실냉방"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 교육용 문구 판매",
+          "operation_id": "문구판매",
+          "output_taxable": true
+        },
+        {
+          "description": "법정 면세 교육 수업",
+          "operation_id": "면세교육",
+          "output_taxable": false
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "판매실점검",
+          "date": "2026-04-02",
+          "document_id": "점검전자판매",
+          "transaction_id": "판매실냉방"
+        },
+        {
+          "activity_id": "수업실점검",
+          "date": "2026-04-03",
+          "document_id": "점검전자수업",
+          "transaction_id": "수업실냉방"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "점검전자판매",
+        "purpose": "business",
+        "transaction_id": "판매실냉방"
+      },
+      {
+        "business_related": true,
+        "document_id": "점검전자수업",
+        "purpose": "exempt_business",
+        "transaction_id": "수업실냉방"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "점검전자수업"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "수업실냉방"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "점검전자판매"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "판매실냉방"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-03",
+      "transaction_id": "수업실냉방"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 528000,
+      "includes_vat": true,
+      "transaction_id": "수업실냉방"
+    },
+    "output": {
+      "gross": 528000,
+      "supply_base": 480000,
+      "vat": 48000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "exempt_business",
+      "supplier_general": true,
+      "transaction_id": "수업실냉방",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 48000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-02",
+      "transaction_id": "판매실냉방"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 341000,
+      "includes_vat": true,
+      "transaction_id": "판매실냉방"
+    },
+    "output": {
+      "gross": 341000,
+      "supply_base": 310000,
+      "vat": 31000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "판매실냉방",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 31000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 197000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -31000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -31000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -31000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 31000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 31000,
+      "input_vat": 79000,
+      "net_vat": -31000,
+      "noncreditable_vat": 48000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 31000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

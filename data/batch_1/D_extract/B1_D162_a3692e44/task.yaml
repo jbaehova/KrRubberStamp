@@ -1,0 +1,43 @@
+task_id: B1_D162_a3692e44
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 자막 모니터 연결 부품을 더 사야 합니다. 기존 구매에서 품목별 공급가액 단가가 낮은 업체를 cheapest_by_item으로
+  남겨 주세요.
+input_files:
+- path: inputs/01_설치연결부품.xlsx
+  format: xlsx
+- path: inputs/02_추가연결선.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-c9fd5f92-dab4-5d5e-aef4-6bbb93a03eeb
+scenario_seed: 11774993573272002630
+scenario_hash: 7645b226ba2e135d4a2b268b85b773d6725e7b530a3aed56a8221523c424899f
+authorship:
+  method: individually_written
+  case_id: D162
+  case_sha256: a3692e44af62a0460ca578ff8ff532c3215a1ed710b29f1c6c635cca8e8f12e6
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item

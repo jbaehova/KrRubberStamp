@@ -1,0 +1,47 @@
+task_id: B1_D175_bdcf1ceb
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 교육 표본 카드의 재구매 표를 만들어 주세요. 원문 품목명 처리 기준을 따른 cheapest_by_item만 answer.json에
+  적습니다.
+input_files:
+- path: inputs/01_A카드기록.pdf
+  format: pdf
+- path: inputs/02_A카드후속.xlsx
+  format: xlsx
+- path: inputs/03_괄호규격.hwpx
+  format: hwpx
+- path: inputs/04_B카드기록.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-eec9da25-50d1-54a4-841e-66cd73d1b573
+scenario_seed: 13677182390695436969
+scenario_hash: 65c1ebfba193c6997b45bc4006873f751f4810d9b82eaf828021208f116664f9
+authorship:
+  method: individually_written
+  case_id: D175
+  case_sha256: bdcf1ceb65a122a9deffdaf0c9a3532a7c0525e7fd1beeaab8506acd4f5f1e9d
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item

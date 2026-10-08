@@ -1,0 +1,269 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-05",
+          "document_id": "RETURN-150-R",
+          "event": "received",
+          "event_id": "e150-r",
+          "location": "반납 창구"
+        },
+        {
+          "date": "2026-05-08",
+          "document_id": "RETURN-150-L",
+          "event": "received",
+          "event_id": "e150-l",
+          "location": "반납 창구"
+        },
+        {
+          "date": "2026-05-10",
+          "document_id": "RETURN-150-P",
+          "event": "received",
+          "event_id": "e150-p",
+          "location": "반납 창구"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-02",
+          "document_id": "RETURN-150-R",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h150-reader",
+          "vendor": "(주)가상반납장치"
+        },
+        {
+          "date": "2026-05-05",
+          "document_id": "RETURN-150-L",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h150-light",
+          "vendor": "가상 반납 장치"
+        },
+        {
+          "date": "2026-05-08",
+          "document_id": "RETURN-150-P",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h150-plate",
+          "vendor": "가상창구철물"
+        },
+        {
+          "date": "2026-05-12",
+          "document_id": "RETURN-150-S",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h150-spare",
+          "vendor": "주식회사 가상반납장치"
+        },
+        {
+          "date": "2026-05-13",
+          "document_id": "RETURN-150-X",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h150-extend",
+          "vendor": "가상창구철물"
+        },
+        {
+          "date": "2026-05-01",
+          "document_id": "RETURN-150-Q",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "h150-quote",
+          "vendor": "가상창구슬롯"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h150-reader",
+          "items": [
+            {
+              "name": "반납읽기장치",
+              "quantity": 2,
+              "unit_price": 286000
+            }
+          ],
+          "sheet_id": "s150-r"
+        },
+        {
+          "header_record_id": "h150-light",
+          "items": [
+            {
+              "name": "반납표시등",
+              "quantity": 2,
+              "unit_price": 43000
+            }
+          ],
+          "sheet_id": "s150-l"
+        },
+        {
+          "header_record_id": "h150-plate",
+          "items": [
+            {
+              "name": "장치거치판",
+              "quantity": 2,
+              "unit_price": 37000
+            }
+          ],
+          "sheet_id": "s150-p"
+        },
+        {
+          "header_record_id": "h150-spare",
+          "items": [
+            {
+              "name": "예비반납읽기장치",
+              "quantity": 1,
+              "unit_price": 279000
+            }
+          ],
+          "sheet_id": "s150-s"
+        },
+        {
+          "header_record_id": "h150-extend",
+          "items": [
+            {
+              "name": "확장거치판",
+              "quantity": 2,
+              "unit_price": 42000
+            }
+          ],
+          "sheet_id": "s150-x"
+        },
+        {
+          "header_record_id": "h150-quote",
+          "items": [
+            {
+              "name": "반납투입슬롯",
+              "quantity": 2,
+              "unit_price": 158000
+            }
+          ],
+          "sheet_id": "s150-q"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 원문 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때 포함하고 quote, 무인수 및 출고 전 취소는 제외한다. 같은 document_id의 같은 내용은 한 번만 계산한다. 별도 공급가액은 품목별 수량 곱하기 단가이며 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체는 NFKC 후 공백 제거 및 영문 소문자화하고 주식회사, (주), ㈜를 제거한 이름 오름차순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "RETURN-150-Q",
+        "RETURN-150-S",
+        "RETURN-150-X"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "RETURN-150-L",
+        "RETURN-150-P",
+        "RETURN-150-R"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "RETURN-150-R",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 286000
+    },
+    "output": {
+      "supply": 572000,
+      "total": 629200,
+      "vat": 57200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "(주)가상반납장치"
+    },
+    "output": "가상반납장치",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "RETURN-150-L",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 43000
+    },
+    "output": {
+      "supply": 86000,
+      "total": 94600,
+      "vat": 8600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상 반납 장치"
+    },
+    "output": "가상반납장치",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "RETURN-150-P",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 37000
+    },
+    "output": {
+      "supply": 74000,
+      "total": 81400,
+      "vat": 7400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상창구철물"
+    },
+    "output": "가상창구철물",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "반납읽기장치",
+          "unit_price": 286000,
+          "vendor": "가상반납장치"
+        },
+        {
+          "item": "반납표시등",
+          "unit_price": 43000,
+          "vendor": "가상반납장치"
+        },
+        {
+          "item": "장치거치판",
+          "unit_price": 37000,
+          "vendor": "가상창구철물"
+        }
+      ],
+      "grand_total": 805200,
+      "supply_total": 732000,
+      "unique_document_count": 3,
+      "vat_total": 73200,
+      "vendor_totals": [
+        {
+          "supply": 658000,
+          "total": 723800,
+          "vat": 65800,
+          "vendor": "가상반납장치"
+        },
+        {
+          "supply": 74000,
+          "total": 81400,
+          "vat": 7400,
+          "vendor": "가상창구철물"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

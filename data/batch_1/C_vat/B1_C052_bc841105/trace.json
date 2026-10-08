@@ -1,0 +1,431 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "ACT-C052-차정비",
+          "date": "2026-01-22",
+          "description": "대표가 매장 이동에 쓰는 승용차를 정비받았다. 차량을 고객에게 임대하거나 승객 운송에 쓰지 않는다.",
+          "document_ids": [
+            "가상-C052-차정비수취"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상돌아가는정비 작업장"
+          },
+          "operation_id": "OPS-C052",
+          "participants": [
+            {
+              "name": "가상 공구대표",
+              "organization": "가상넓은공구",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "가상-C052-차유지"
+        },
+        {
+          "action": "ground_work",
+          "activity_id": "ACT-C052-진입땅",
+          "date": "2026-03-02",
+          "description": "대표가 신규 진입 부지의 성토와 평탄화 작업을 확인했다. 건물이나 기계 설치 비용은 아니다.",
+          "document_ids": [
+            "가상-C052-부지수취"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "가상넓은공구 신규 진입 부지"
+          },
+          "operation_id": "OPS-C052",
+          "participants": [
+            {
+              "name": "가상 공구대표",
+              "organization": "가상넓은공구",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "가상-C052-진입부지"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C052-봉투",
+          "date": "2026-04-13",
+          "description": "직원이 공구 판매 때 쓰는 종이봉투를 받아 계산대에 보관했다.",
+          "document_ids": [
+            "가상-C052-봉투수취"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상넓은공구 계산대"
+          },
+          "operation_id": "OPS-C052",
+          "participants": [
+            {
+              "name": "가상 판매직원",
+              "organization": "가상넓은공구",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C052-판매봉투"
+        }
+      ],
+      "operations": [
+        {
+          "description": "공구 소매 판매",
+          "operation_id": "OPS-C052",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C052-차정비",
+          "date": "2026-01-22",
+          "document_id": "가상-C052-차정비수취",
+          "transaction_id": "가상-C052-차유지"
+        },
+        {
+          "activity_id": "ACT-C052-진입땅",
+          "date": "2026-03-02",
+          "document_id": "가상-C052-부지수취",
+          "transaction_id": "가상-C052-진입부지"
+        },
+        {
+          "activity_id": "ACT-C052-봉투",
+          "date": "2026-04-13",
+          "document_id": "가상-C052-봉투수취",
+          "transaction_id": "가상-C052-판매봉투"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C052-차정비수취",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "가상-C052-차유지"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C052-부지수취",
+        "purpose": "land",
+        "transaction_id": "가상-C052-진입부지"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C052-봉투수취",
+        "purpose": "business",
+        "transaction_id": "가상-C052-판매봉투"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C052-현금판매"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "가상-C052-공구판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C052-부지수취"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C052-진입부지"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C052-차정비수취"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C052-차유지"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C052-봉투수취"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C052-판매봉투"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-25",
+      "transaction_id": "가상-C052-공구판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 55000000,
+      "includes_vat": true,
+      "transaction_id": "가상-C052-공구판매"
+    },
+    "output": {
+      "gross": 55000000,
+      "supply_base": 50000000,
+      "vat": 5000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 50000000
+    },
+    "output": 5000000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "가상-C052-공구판매"
+    },
+    "output": {
+      "eligible_gross": 55000000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-02",
+      "transaction_id": "가상-C052-진입부지"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "가상-C052-진입부지"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "가상-C052-진입부지",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 100000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-01-22",
+      "transaction_id": "가상-C052-차유지"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2200000,
+      "includes_vat": true,
+      "transaction_id": "가상-C052-차유지"
+    },
+    "output": {
+      "gross": 2200000,
+      "supply_base": 2000000,
+      "vat": 200000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "가상-C052-차유지",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 200000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-13",
+      "transaction_id": "가상-C052-판매봉투"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 990000,
+      "includes_vat": true,
+      "transaction_id": "가상-C052-판매봉투"
+    },
+    "output": {
+      "gross": 990000,
+      "supply_base": 900000,
+      "vat": 90000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C052-판매봉투",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 90000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 1420000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 55000000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 4910000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 4910000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 4910000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 90000,
+      "output_vat": 5000000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 90000,
+      "input_vat": 390000,
+      "net_vat": 4910000,
+      "noncreditable_vat": 300000,
+      "output_vat": 5000000,
+      "payable_vat": 4910000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 50000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

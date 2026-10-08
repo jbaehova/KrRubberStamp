@@ -1,0 +1,242 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 79100000,
+      "cards": [
+        {
+          "amount": 23200000,
+          "billed_item": "ordinary_goods_services",
+          "category": "credit",
+          "date": "2025-10-01",
+          "payment_method": "credit",
+          "person_id": "self"
+        },
+        {
+          "amount": 7300000,
+          "billed_item": "ordinary_goods_services",
+          "category": "culture",
+          "date": "2025-11-01",
+          "payment_method": "credit",
+          "person_id": "self"
+        },
+        {
+          "amount": 2100000,
+          "billed_item": "ordinary_goods_services",
+          "category": "transit",
+          "date": "2025-12-01",
+          "payment_method": "debit",
+          "person_id": "self"
+        }
+      ],
+      "employee_age": 44,
+      "employee_name": "가상김새론",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "non_taxable": 2400000,
+      "pension_accounts": {
+        "irp": 1800000,
+        "pension_savings": 4000000
+      },
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자다. 가족 및 특별공제 신청은 없다. 카드 사용은 본인 적격 일반 소비와 문화 사용처 및 대중교통이며 중복이 없다. 문화비에는 결제수단을 별도로 기록했다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "cards.0.excluded": false,
+      "cards.1.excluded": false,
+      "cards.2.excluded": false
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": []
+    },
+    "output": {
+      "additional": 0,
+      "basic": 1500000,
+      "rejected": []
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 79100000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 13585000,
+      "salary_income": 63115000,
+      "total_salary": 76700000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 76700000,
+      "spending": {
+        "credit": 30500000,
+        "transit": 2100000
+      }
+    },
+    "output": 2538750,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {
+        "irp": 1800000,
+        "pension_savings": 4000000
+      },
+      "salary": 76700000
+    },
+    "output": 696000,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76700000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76700000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76700000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76700000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76700000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76700000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76700000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 59076250
+    },
+    "output": 8418300,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 8418300,
+      "salary": 76700000
+    },
+    "output": 500000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "standard",
+      "special_deductions_requested": false
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 130000
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 8418300,
+      "total_tax_credits": 1326000
+    },
+    "output": 7092300,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 7092300
+    },
+    "output": 709230,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 709230,
+      "final_national": 7092300,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 709230,
+      "national": 7092300,
+      "total": 7801530
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

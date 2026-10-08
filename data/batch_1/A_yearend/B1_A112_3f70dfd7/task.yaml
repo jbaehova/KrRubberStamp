@@ -1,0 +1,47 @@
+task_id: B1_A112_3f70dfd7
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상도라지운송의 가상천기준은 처음부터 표준세액공제로 신청했습니다. 급여에서 낸 공적연금과 본인 IRP를 확인해 공적연금 소득공제액
+  및 연금계좌 세액공제액을 적어 주세요. 특별소득공제액과 표준세액공제액 및 과세표준도 함께 구합니다.
+input_files:
+- path: inputs/01_최종신청.hwpx
+  format: hwpx
+- path: inputs/02_급여공제누계.xlsx
+  format: xlsx
+- path: inputs/03_IRP납입.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    pension_deduction:
+      type: integer
+    pension_account_credit:
+      type: integer
+    special_income_deduction:
+      type: integer
+    standard_credit:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - pension_deduction
+  - pension_account_credit
+  - special_income_deduction
+  - standard_credit
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-483119ad-ef6f-5c72-a201-95ea023f7aea
+scenario_seed: 4571399739046244280
+scenario_hash: b5ac2f1a66316174c53b46c8382683d4a80f68bf335eb14af1056fa831790dad
+authorship:
+  method: individually_written
+  case_id: A112
+  case_sha256: 3f70dfd7a42a2fb85ad097abaa059450e127c23835fb5d6b5279d907a3c4e153
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- pension_deduction
+- pension_account_credit
+- special_income_deduction
+- standard_credit
+- tax_base

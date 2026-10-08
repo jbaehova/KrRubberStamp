@@ -1,0 +1,54 @@
+task_id: B1_D286_f0710c83
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 간판 보수에 구입한 고정핀과 캡 및 방수 고무를 업체별로 기록합니다. vendor_totals와 vat_total을 제출해
+  주세요.
+input_files:
+- path: inputs/01_고정핀원본.pdf
+  format: pdf
+- path: inputs/02_고정핀캡.xlsx
+  format: xlsx
+- path: inputs/03_핀재발행.hwpx
+  format: hwpx
+- path: inputs/04_방수고무.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-6006149d-30ab-580b-9ac7-7698b1188ea3
+scenario_seed: 17325643002156621539
+scenario_hash: 1aac83bab50d1a9eefe16972d10e14e0a2e0ff91f22e5d430688cb03b945835a
+authorship:
+  method: individually_written
+  case_id: D286
+  case_sha256: f0710c83e8c71ee377c59b3cfa207a1ac790f518b2cd006dff1bc86bf1350bd7
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals
+- vat_total

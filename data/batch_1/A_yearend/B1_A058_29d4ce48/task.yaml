@@ -1,0 +1,39 @@
+task_id: B1_A058_29d4ce48
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상키큰나무의 가상임세주는 개인형 퇴직연금에만 납입하고 연금저축 계좌는 없습니다. 실제 납입액 중 세액공제 한도에 들어가는
+  금액을 판단해 연금계좌 세액공제액을 구해 주세요. 소득세 산출세액과 결정세액도 함께 작성해 계좌 납입액 자체를 세금에서 빼는 안내를 수정합니다.
+input_files:
+- path: inputs/01_정산기초.hwpx
+  format: hwpx
+- path: inputs/02_급여확인.xlsx
+  format: xlsx
+- path: inputs/03_IRP납입증명.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    pension_account_credit:
+      type: integer
+    computed_tax:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - pension_account_credit
+  - computed_tax
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-92ad6715-36fe-53c7-8ca9-2ae597f552c7
+scenario_seed: 3014260859658365359
+scenario_hash: bd6ce98961b07e1bd2946091d428fc778e930eed55dc02c6822f4eee394d4e26
+authorship:
+  method: individually_written
+  case_id: A058
+  case_sha256: 29d4ce48184ce9af7a67dde26b403eb7d9f0d5ac16d3f5791fffc02f352c3763
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- pension_account_credit
+- computed_tax
+- final_national_tax

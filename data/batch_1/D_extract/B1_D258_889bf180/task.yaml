@@ -1,0 +1,43 @@
+task_id: B1_D258_889bf180
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 동일 규격 여과솜을 두 판매처에서 인수했습니다. 다음 발주 때 참고할 cheapest_by_item을 두 실제 구매 자료에서
+  작성해 주세요.
+input_files:
+- path: inputs/01_첫여과솜.hwpx
+  format: hwpx
+- path: inputs/02_보충여과솜.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-8dd2ab49-aab1-5804-8539-3172bf7ee879
+scenario_seed: 9843726943971110683
+scenario_hash: 8dbbcda0c41a199a5ebcf1a08c35189f95def69b131e33e011fb661f7441df8d
+authorship:
+  method: individually_written
+  case_id: D258
+  case_sha256: 889bf1805156ef1b46efcb841bbb61abc6ae2a9c411af67c8aa291f6b679e4b6
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- cheapest_by_item

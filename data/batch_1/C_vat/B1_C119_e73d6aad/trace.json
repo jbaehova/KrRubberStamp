@@ -1,0 +1,254 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "C119-식사참석",
+          "date": "2026-05-12",
+          "description": "검수 뒤 황설치와 고객 승인 담당자 권승인이 함께 저녁을 먹었다.",
+          "document_ids": [
+            "C119-식당전표"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상검수식당"
+          },
+          "operation_id": "C119-설치",
+          "participants": [
+            {
+              "name": "가상황설치",
+              "organization": "가상출입제작",
+              "role": "employee"
+            },
+            {
+              "name": "가상권승인",
+              "organization": "가상문관리",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "C119-저녁"
+        }
+      ],
+      "operations": [
+        {
+          "description": "출입 장치 유상 제작 설치",
+          "operation_id": "C119-설치",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C119-식사참석",
+          "date": "2026-05-12",
+          "document_id": "C119-식당전표",
+          "transaction_id": "C119-저녁"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C119-식당전표",
+        "purpose": "hospitality",
+        "transaction_id": "C119-저녁"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C119-설치청구"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C119-설치매출"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C119-식당전표"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C119-저녁"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-12",
+      "transaction_id": "C119-설치매출"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 7480000,
+      "includes_vat": true,
+      "transaction_id": "C119-설치매출"
+    },
+    "output": {
+      "gross": 7480000,
+      "supply_base": 6800000,
+      "vat": 680000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 6800000
+    },
+    "output": 680000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "C119-설치매출"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-12",
+      "transaction_id": "C119-저녁"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 198000,
+      "includes_vat": true,
+      "transaction_id": "C119-저녁"
+    },
+    "output": {
+      "gross": 198000,
+      "supply_base": 180000,
+      "vat": 18000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "C119-저녁",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 18000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 342000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 680000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 680000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 680000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 680000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 18000,
+      "net_vat": 680000,
+      "noncreditable_vat": 18000,
+      "output_vat": 680000,
+      "payable_vat": 680000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 6800000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

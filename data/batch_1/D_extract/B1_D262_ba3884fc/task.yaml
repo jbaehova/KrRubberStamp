@@ -1,0 +1,49 @@
+task_id: B1_D262_ba3884fc
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 객석 청소에 인수한 브러시와 쓰레기 봉투의 비용을 정리해 주세요. vendor_totals와 supply_total이 필요합니다.
+input_files:
+- path: inputs/01_브러시명세.pdf
+  format: pdf
+- path: inputs/02_봉투명세.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - vendor_totals
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-c1891296-8ebd-54fd-9840-02d8348d3b66
+scenario_seed: 13418621307936667487
+scenario_hash: c5dbed28b0948a126511b9550ff1e8dc9af8c2c3e87a14abe2d682f1267f8742
+authorship:
+  method: individually_written
+  case_id: D262
+  case_sha256: ba3884fc130d775f00dace717dbffd5bbd611dff4bbb39aaa0ab7eb8cf7a8ce5
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals
+- supply_total

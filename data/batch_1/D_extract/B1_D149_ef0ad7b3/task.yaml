@@ -1,0 +1,61 @@
+task_id: B1_D149_ef0ad7b3
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 순회 점검기 연결선의 실제 구매 기준을 정리해 주세요. 인수에 연결된 cheapest_by_item과 전체 세액 vat_total을
+  확인합니다.
+input_files:
+- path: inputs/01_첫연결선표지.pdf
+  format: pdf
+- path: inputs/02_첫연결선품목.xlsx
+  format: xlsx
+- path: inputs/03_첫연결선수령.hwpx
+  format: hwpx
+- path: inputs/04_둘째표지.hwpx
+  format: hwpx
+- path: inputs/05_둘째품목.pdf
+  format: pdf
+- path: inputs/06_둘째수령.xlsx
+  format: xlsx
+- path: inputs/07_셋째청구.pdf
+  format: pdf
+- path: inputs/08_셋째수령.hwpx
+  format: hwpx
+- path: inputs/09_상담견적.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-2551490a-b8cb-55f7-8b9d-664ea16cdfea
+scenario_seed: 17224816889722613901
+scenario_hash: 5025ce246baffc69ab582b635b28482f1f5df05ec1b9ba8c23d6f452b9360b0e
+authorship:
+  method: individually_written
+  case_id: D149
+  case_sha256: ef0ad7b34110b08d4e95eeeeae41b6c5e56773bd386ba9fda6e2fe4055786413
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- vat_total

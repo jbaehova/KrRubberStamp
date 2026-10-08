@@ -1,0 +1,64 @@
+task_id: B1_C203_a900b173
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상단기대여의 차량 허가, 공급자 상태, 이중 발급 및 구매 자료를 연결하여 거래 수(unique_transaction_count),
+  불공제세액(noncreditable_vat), 공제 매입세액(deductible_input_vat), 발행 공제(receipt_credit),
+  납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/단기신고.hwpx
+  format: hwpx
+- path: inputs/영업허가.xlsx
+  format: xlsx
+- path: inputs/차량허가.pdf
+  format: pdf
+- path: inputs/공급자상태.xlsx
+  format: xlsx
+- path: inputs/대여영수.pdf
+  format: pdf
+- path: inputs/대여계산.pdf
+  format: pdf
+- path: inputs/임차인수.hwpx
+  format: hwpx
+- path: inputs/재료인수.hwpx
+  format: hwpx
+- path: inputs/임차계산.xlsx
+  format: xlsx
+- path: inputs/임차카드.pdf
+  format: pdf
+- path: inputs/재료전표.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-142e1c11-d5a3-57d7-bfd3-5a868cab8494
+scenario_seed: 12177928503293819026
+scenario_hash: dc5a576754d00800c391c3f133e02f0e60c10a84b17e28578327f38c6a1f37d1
+authorship:
+  method: individually_written
+  case_id: C203
+  case_sha256: a900b173caeeb89270c77cf50d8295a7dfb7b815a9a1a6384d938a365fa18429
+  source_file: batch_1/C_vat/cases_154_203.json
+answer_fields:
+- unique_transaction_count
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

@@ -1,0 +1,38 @@
+task_id: B1_D039_e2d49d23
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 공동 퇴비장 소모품비를 마감해 주세요. 주문 접수 뒤 일정이 바뀐 건이 있어 주문 명세만 더하지 말고 출고와 인수 기록을 함께
+  확인해야 합니다. 실제로 받은 물품의 지급 총액과 구매 건수를 answer.json의 grand_total과 unique_document_count로
+  보내 주세요.
+input_files:
+- path: inputs/01_자루_첫주문.pdf
+  format: pdf
+- path: inputs/02_구분표찰_대장.xlsx
+  format: xlsx
+- path: inputs/03_자루_보충.hwpx
+  format: hwpx
+- path: inputs/04_출고인수_기록.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    grand_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - grand_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-e735180b-b07e-5d10-99d0-5afa27cc6fc4
+scenario_seed: 16344861722502366913
+scenario_hash: 6f7b4491539a6b3d32212b65f0eda4523361d5b86e80cc28e3dce297f3434da1
+authorship:
+  method: individually_written
+  case_id: D039
+  case_sha256: e2d49d2348a206c181a8d8afca2d39b3d0073e93f96c9271f4f402668cfc59c4
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- grand_total
+- unique_document_count

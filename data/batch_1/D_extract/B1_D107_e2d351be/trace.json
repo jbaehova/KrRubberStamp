@@ -1,0 +1,120 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-12",
+          "document_id": "EMERGENCY-107",
+          "event": "received",
+          "event_id": "e107",
+          "location": "검수대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-11",
+          "document_id": "EMERGENCY-107",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h107",
+          "vendor": "가상응급표지"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h107",
+          "items": [
+            {
+              "name": "응급안내패널",
+              "quantity": 5,
+              "unit_price": 39800
+            },
+            {
+              "name": "패널설치핀",
+              "quantity": 20,
+              "unit_price": 870
+            }
+          ],
+          "sheet_id": "s107"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있는 경우만 집계한다. quote, 무인수 및 출고 전 취소는 제외한다. 같은 document_id의 동일 내용은 한 번만 센다. 별도 단가의 공급가액은 수량 곱하기 단가이고 품목별 10% 원 미만 버림 세액을 더한다. 포함 단가는 품목 총액의 10/11 원 미만 버림을 공급가액으로 하고 차액을 세액으로 한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "EMERGENCY-107"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "EMERGENCY-107",
+      "includes_vat": false,
+      "quantity": 5,
+      "unit_price": 39800
+    },
+    "output": {
+      "supply": 199000,
+      "total": 218900,
+      "vat": 19900
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "EMERGENCY-107",
+      "includes_vat": false,
+      "quantity": 20,
+      "unit_price": 870
+    },
+    "output": {
+      "supply": 17400,
+      "total": 19140,
+      "vat": 1740
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상응급표지"
+    },
+    "output": "가상응급표지",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "응급안내패널",
+          "unit_price": 39800,
+          "vendor": "가상응급표지"
+        },
+        {
+          "item": "패널설치핀",
+          "unit_price": 870,
+          "vendor": "가상응급표지"
+        }
+      ],
+      "grand_total": 238040,
+      "supply_total": 216400,
+      "unique_document_count": 1,
+      "vat_total": 21640,
+      "vendor_totals": [
+        {
+          "supply": 216400,
+          "total": 238040,
+          "vat": 21640,
+          "vendor": "가상응급표지"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

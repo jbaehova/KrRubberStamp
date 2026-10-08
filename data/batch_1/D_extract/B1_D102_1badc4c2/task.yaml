@@ -1,0 +1,61 @@
+task_id: B1_D102_1badc4c2
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 관수 부품을 재구매합니다. 주문과 현장 인수 기록에서 실구매 가격을 찾아 cheapest_by_item과 unique_document_count를
+  답하세요. 견적 및 세금 표시 처리 기준은 현장 기록에 있습니다.
+input_files:
+- path: inputs/01_동측주문.pdf
+  format: pdf
+- path: inputs/02_동측품목.xlsx
+  format: xlsx
+- path: inputs/03_견적표지.hwpx
+  format: hwpx
+- path: inputs/04_견적품목.pdf
+  format: pdf
+- path: inputs/05_옥상주문.pdf
+  format: pdf
+- path: inputs/06_옥상품목.xlsx
+  format: xlsx
+- path: inputs/07_서측주문.hwpx
+  format: hwpx
+- path: inputs/08_서측품목.pdf
+  format: pdf
+- path: inputs/09_인수기록.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - cheapest_by_item
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-a4b2f163-dc3c-524b-983b-0f78913b9da3
+scenario_seed: 1994466551308249386
+scenario_hash: 48e48a5e54e21724456e64e18b3d03c232f3cc6ed1b1a92b38d1068727d31f0e
+authorship:
+  method: individually_written
+  case_id: D102
+  case_sha256: 1badc4c2e320692ada78b52f72334067676b48edf15e8c6084cac00828067367
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item
+- unique_document_count

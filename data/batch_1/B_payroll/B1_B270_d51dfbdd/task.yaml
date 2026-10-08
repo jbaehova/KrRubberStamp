@@ -1,0 +1,41 @@
+task_id: B1_B270_d51dfbdd
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상둥근표지관은 6월 보험 공제를 7월에 실행한 종료 임금에서 보관합니다. 은행 날짜를 effective_payment_date에
+  YYYY-MM-DD로 적고 고지 부과월에 맞는 연금 기준소득과 국민연금 공제액을 작성해 주세요.
+input_files:
+- path: inputs/01_종료임금.pdf
+  format: pdf
+- path: inputs/02_육월연금.xlsx
+  format: xlsx
+- path: inputs/03_칠월실행.hwpx
+  format: hwpx
+- path: inputs/04_다른기관.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+  required:
+  - effective_payment_date
+  - pension_base_income
+  - national_pension
+  additionalProperties: false
+canary: KrRubberStamp-canary-3eb1a934-b978-5cc4-8f11-733b3d5f0fb9
+scenario_seed: 15356707232278609522
+scenario_hash: 4e94057cc0d17de031b9ab78bf6b0204e8819075a310c4f8771d6e176f8dee0a
+authorship:
+  method: individually_written
+  case_id: B270
+  case_sha256: d51dfbdd4ba37e72b30a1181bf7fc9fc02c248acd94d65ced13573a3ed8c52c9
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- effective_payment_date
+- pension_base_income
+- national_pension

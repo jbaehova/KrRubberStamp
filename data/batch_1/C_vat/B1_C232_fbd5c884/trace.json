@@ -1,0 +1,169 @@
+[
+  {
+    "inputs": {
+      "activities": [],
+      "filing_site_id": "우산손본점",
+      "operations": [],
+      "purchase_links": [],
+      "site_year_records": [
+        {
+          "site_id": "우산손본점",
+          "site_name": "가상우산손",
+          "supply_base": 1000000000,
+          "year": 2025
+        },
+        {
+          "site_id": "우산손본점",
+          "site_name": "가상우산손",
+          "supply_base": 1200000000,
+          "year": 2026
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "filing_site_id": "우산손본점",
+        "prior_year_site_supply_base": 1000000000
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "현금영수증62"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "우산손현금발급"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-18",
+      "transaction_id": "우산손현금발급"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 16500000,
+      "includes_vat": true,
+      "transaction_id": "우산손현금발급"
+    },
+    "output": {
+      "gross": 16500000,
+      "supply_base": 15000000,
+      "vat": 1500000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 15000000
+    },
+    "output": 1500000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "우산손현금발급"
+    },
+    "output": {
+      "eligible_gross": 16500000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 1000000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 16500000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 214500,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 214500
+    },
+    "output": 214500,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 214500,
+      "liability_before_credit": 1500000
+    },
+    "output": 214500,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 1285500,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 1285500,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 1500000,
+      "prepaid_vat": 0,
+      "receipt_credit": 214500
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 0,
+      "net_vat": 1285500,
+      "noncreditable_vat": 0,
+      "output_vat": 1500000,
+      "payable_vat": 1285500,
+      "prepaid_vat": 0,
+      "receipt_credit": 214500,
+      "refund_vat": 0,
+      "tax_base": 15000000,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

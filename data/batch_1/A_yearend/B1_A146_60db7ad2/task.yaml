@@ -1,0 +1,76 @@
+task_id: B1_A146_60db7ad2
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상동백기록의 가상길수안은 여러 기부 영수증을 냈고 아버지 영수증도 같이 넣었습니다. 아버지 영수증의 PDF와 이미지 납부
+  식별기호를 대조하고 공제 배정을 확인해 기본공제액을 구해 주세요. 근로소득금액과 정치자금 및 고향사랑 기부 세액공제액을 먼저 계산하고 남는 소득
+  범위로 특례 및 공익과 종교단체 기부의 일반 기부금 세액공제액을 구합니다. 소득세와 지방소득세 결정세액 및 두 세금 정산 합계도 적어 주세요.
+  환급은 음수입니다.
+input_files:
+- path: inputs/01_정산신청.hwpx
+  format: hwpx
+- path: inputs/02_급여원천징수.xlsx
+  format: xlsx
+- path: inputs/03_아버지배정.pdf
+  format: pdf
+- path: inputs/04_정치자금.pdf
+  format: pdf
+- path: inputs/05_고향사랑.pdf
+  format: pdf
+- path: inputs/06_특례기부.pdf
+  format: pdf
+- path: inputs/07_공익기부.pdf
+  format: pdf
+- path: inputs/08_본인종교기부.pdf
+  format: pdf
+- path: inputs/09_아버지특례기부.pdf
+  format: pdf
+- path: inputs/10_아버지전송영수증.png
+  format: png
+  duplicate_of: inputs/09_아버지특례기부.pdf
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    salary_income:
+      type: integer
+    political_credit:
+      type: integer
+    hometown_credit:
+      type: integer
+    donation_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+    final_local_tax:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - basic_deduction
+  - salary_income
+  - political_credit
+  - hometown_credit
+  - donation_credit
+  - final_national_tax
+  - final_local_tax
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-4d6c5be7-9759-50cc-b44b-f63a81a1d5aa
+scenario_seed: 6979307092520347881
+scenario_hash: 8e4146b9419c5d3a8ee228203cf957a306e5885bf076de48350d01b8ba6591e2
+authorship:
+  method: individually_written
+  case_id: A146
+  case_sha256: 60db7ad29c0a28e9fa0643672766b9a7b1aebb5adb4fcf0726d2409f582bdc53
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- basic_deduction
+- salary_income
+- political_credit
+- hometown_credit
+- donation_credit
+- final_national_tax
+- final_local_tax
+- settlement_total

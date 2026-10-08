@@ -1,0 +1,45 @@
+task_id: B1_A269_70388db3
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상작은돛장비의 가상민채온에게 월세 접수 결과를 회신해 주세요. 계약서와 주민등록 주소를 비교한 뒤 월세 공제액을 적고 별도로
+  제출한 본인 수술비의 의료비 공제 및 최종 국세를 계산해 주세요.
+input_files:
+- path: inputs/01_계약내용.pdf
+  format: pdf
+- path: inputs/02_주민세대.hwpx
+  format: hwpx
+- path: inputs/03_납부치료.xlsx
+  format: xlsx
+- path: inputs/04_정산접수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    rent_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    standard_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - rent_credit
+  - medical_credit
+  - standard_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-b3ed2648-5c68-57e2-81b1-ae45d8f7e2b2
+scenario_seed: 8086368934525437232
+scenario_hash: 355637468e9b0250e4ac4332ad71a3ad942b12c9b36dc631fa5d7eccccb7b15b
+authorship:
+  method: individually_written
+  case_id: A269
+  case_sha256: 70388db3d924853069e1929e18397ad04e64f92c6f26aa8ba51f6ea0c911524c
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- rent_credit
+- medical_credit
+- standard_credit
+- final_national_tax

@@ -1,0 +1,55 @@
+task_id: B1_C151_5b59eb42
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상법인자리의 판매 경로별 원본과 실제 매입 사용 기록을 대조해 매출세액(output_vat), 불공제세액(noncreditable_vat),
+  발행 공제(receipt_credit), 납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_법인인계.hwpx
+  format: hwpx
+- path: inputs/02_가구활동.xlsx
+  format: xlsx
+- path: inputs/03_카드판매.pdf
+  format: pdf
+- path: inputs/04_현금판매.pdf
+  format: pdf
+- path: inputs/05_기관납품.xlsx
+  format: xlsx
+- path: inputs/06_가정가구.pdf
+  format: pdf
+- path: inputs/07_가정수령.hwpx
+  format: hwpx
+- path: inputs/08_매장재고.pdf
+  format: pdf
+- path: inputs/09_매장인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - output_vat
+  - noncreditable_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-f06ee8f1-9ad1-5c28-bc5b-6366c55b7b2e
+scenario_seed: 6582551000122137869
+scenario_hash: e0880c9bdc3200a19287da0187918492572f74dc79b6adc14b740473bca308b9
+authorship:
+  method: individually_written
+  case_id: C151
+  case_sha256: 5b59eb423e2c1d0d41d90714fb5635ffc9fe02f18f537fe2fd0379468c1bb2d3
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- output_vat
+- noncreditable_vat
+- receipt_credit
+- payable_vat

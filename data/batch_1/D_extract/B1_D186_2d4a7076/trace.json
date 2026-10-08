@@ -1,0 +1,196 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-29",
+          "document_id": "COVER-BA-26",
+          "event": "received",
+          "event_id": "COVER-BA-IN",
+          "location": "현장기록보관실"
+        },
+        {
+          "date": "2026-05-29",
+          "document_id": "COVER-BB-27",
+          "event": "received",
+          "event_id": "COVER-BB-IN",
+          "location": "현장기록보관실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-21",
+          "document_id": "COVER-QA-21",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "COVER-QA-C",
+          "vendor": "가상현장덮개"
+        },
+        {
+          "date": "2026-05-22",
+          "document_id": "COVER-QB-22",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "COVER-QB-C",
+          "vendor": "가상투명보호"
+        },
+        {
+          "date": "2026-05-26",
+          "document_id": "COVER-BA-26",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "COVER-BA-C",
+          "vendor": "가상현장덮개"
+        },
+        {
+          "date": "2026-05-27",
+          "document_id": "COVER-BB-27",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "COVER-BB-C",
+          "vendor": "가상투명보호"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "COVER-QA-C",
+          "items": [
+            {
+              "name": "기록판투명덮개",
+              "quantity": 10,
+              "unit_price": 11000
+            }
+          ],
+          "sheet_id": "COVER-QA-L"
+        },
+        {
+          "header_record_id": "COVER-QB-C",
+          "items": [
+            {
+              "name": "기록판투명덮개",
+              "quantity": 10,
+              "unit_price": 10700
+            }
+          ],
+          "sheet_id": "COVER-QB-L"
+        },
+        {
+          "header_record_id": "COVER-BA-C",
+          "items": [
+            {
+              "name": "기록판투명덮개",
+              "quantity": 10,
+              "unit_price": 11600
+            }
+          ],
+          "sheet_id": "COVER-BA-L"
+        },
+        {
+          "header_record_id": "COVER-BB-C",
+          "items": [
+            {
+              "name": "투명덮개받침",
+              "quantity": 10,
+              "unit_price": 4800
+            }
+          ],
+          "sheet_id": "COVER-BB-L"
+        }
+      ],
+      "processing_policy": "품목은 header_record_id로 표지를 연결한다. quote는 실제 구매에서 제외하고 invoice 또는 order에 received 이력이 있는 번호만 합한다. 별도 단가는 수량 곱하기 단가가 공급가액이다. 건수는 실제 인수한 서로 다른 document_id 수다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "COVER-QA-21",
+        "COVER-QB-22"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "COVER-BA-26",
+        "COVER-BB-27"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "COVER-BA-26",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 11600
+    },
+    "output": {
+      "supply": 116000,
+      "total": 127600,
+      "vat": 11600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상현장덮개"
+    },
+    "output": "가상현장덮개",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "COVER-BB-27",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 4800
+    },
+    "output": {
+      "supply": 48000,
+      "total": 52800,
+      "vat": 4800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상투명보호"
+    },
+    "output": "가상투명보호",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "기록판투명덮개",
+          "unit_price": 11600,
+          "vendor": "가상현장덮개"
+        },
+        {
+          "item": "투명덮개받침",
+          "unit_price": 4800,
+          "vendor": "가상투명보호"
+        }
+      ],
+      "grand_total": 180400,
+      "supply_total": 164000,
+      "unique_document_count": 2,
+      "vat_total": 16400,
+      "vendor_totals": [
+        {
+          "supply": 48000,
+          "total": 52800,
+          "vat": 4800,
+          "vendor": "가상투명보호"
+        },
+        {
+          "supply": 116000,
+          "total": 127600,
+          "vat": 11600,
+          "vendor": "가상현장덮개"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

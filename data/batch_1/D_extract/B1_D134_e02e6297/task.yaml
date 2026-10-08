@@ -1,0 +1,54 @@
+task_id: B1_D134_e02e6297
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 수평 측정대 인수 자료가 양식별로 나뉘어 왔습니다. 품목표와 연결해 vendor_totals와 grand_total을 확인해
+  주세요.
+input_files:
+- path: inputs/01_외부표지.pdf
+  format: pdf
+- path: inputs/02_내부표지.hwpx
+  format: hwpx
+- path: inputs/03_품목표보관.xlsx
+  format: xlsx
+- path: inputs/04_실습실수령부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-63f08df9-40b8-5ace-b08e-4aa0f224f892
+scenario_seed: 16153957316193085275
+scenario_hash: 8dcbdebc113c05cbee885919b420bf3b54b58f050dff342b57b0e8fc372e60af
+authorship:
+  method: individually_written
+  case_id: D134
+  case_sha256: e02e62977c82e75b4f41e8af8655c73fbc12b6a87b69604e981c2b38eba6e4d3
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals
+- grand_total

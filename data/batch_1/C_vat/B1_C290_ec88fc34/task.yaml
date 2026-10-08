@@ -1,0 +1,56 @@
+task_id: B1_C290_ec88fc34
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상미니패치의 작은 카드 판매, 제작 인도일, 구매 원본을 함께 봐서 매출세액(output_vat), 불공제세액(noncreditable_vat),
+  발행 공제(receipt_credit), 납부세액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/소액갑.pdf
+  format: pdf
+- path: inputs/소액을.hwpx
+  format: hwpx
+- path: inputs/7월인도.xlsx
+  format: xlsx
+- path: inputs/실원본.pdf
+  format: pdf
+- path: inputs/실스캔.png
+  format: png
+  duplicate_of: inputs/실원본.pdf
+- path: inputs/실사용.hwpx
+  format: hwpx
+- path: inputs/판매업종.pdf
+  format: pdf
+- path: inputs/반기범위.xlsx
+  format: xlsx
+- path: inputs/이전금액.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - output_vat
+  - noncreditable_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-e1b3e2a6-2a09-5205-a249-bd021a834c29
+scenario_seed: 17044150093533553471
+scenario_hash: 576b9f894db83228cb750149307d42f23a49ce3593f3931901ac88c05d3833fa
+authorship:
+  method: individually_written
+  case_id: C290
+  case_sha256: ec88fc34cf82233fc3e0eeff89c5da3cb698c7605ddfe6b4bd86e055e4a85bc9
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- output_vat
+- noncreditable_vat
+- receipt_credit
+- payable_vat

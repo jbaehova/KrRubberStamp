@@ -1,0 +1,155 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-07-16",
+          "document_id": "VISION-S-18",
+          "event": "received",
+          "event_id": "VISION-STAND-IN",
+          "location": "시각안내실"
+        },
+        {
+          "date": "2026-07-16",
+          "document_id": "VISION-M-17",
+          "event": "received",
+          "event_id": "VISION-MAG-IN",
+          "location": "시각안내실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-07-14",
+          "document_id": "VISION-M-17",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "VISION-MAG-C",
+          "vendor": "가상확대도구"
+        },
+        {
+          "date": "2026-07-14",
+          "document_id": "VISION-S-18",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "VISION-STAND-C",
+          "vendor": "가상안내받침"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "VISION-STAND-C",
+          "items": [
+            {
+              "name": "안내자료받침",
+              "quantity": 3,
+              "unit_price": 34500
+            }
+          ],
+          "sheet_id": "VISION-STAND-L"
+        },
+        {
+          "header_record_id": "VISION-MAG-C",
+          "items": [
+            {
+              "name": "탁상확대경",
+              "quantity": 2,
+              "unit_price": 79000
+            }
+          ],
+          "sheet_id": "VISION-MAG-L"
+        }
+      ],
+      "processing_policy": "첨부의 header_record_id로 표지를 연결한다. invoice 또는 order에 received 이력이 있는 거래만 실제 구매로 계산한다. 별도 단가는 수량 곱하기 단가를 공급가액으로 하고 행별 10%에서 원 미만을 버린 세액을 더한다. 업체는 NFKC 후 공백과 법인 표기를 제거하고 영문을 소문자로 바꿔 업체명 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "VISION-M-17",
+        "VISION-S-18"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "VISION-M-17",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 79000
+    },
+    "output": {
+      "supply": 158000,
+      "total": 173800,
+      "vat": 15800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상확대도구"
+    },
+    "output": "가상확대도구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "VISION-S-18",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 34500
+    },
+    "output": {
+      "supply": 103500,
+      "total": 113850,
+      "vat": 10350
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상안내받침"
+    },
+    "output": "가상안내받침",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "안내자료받침",
+          "unit_price": 34500,
+          "vendor": "가상안내받침"
+        },
+        {
+          "item": "탁상확대경",
+          "unit_price": 79000,
+          "vendor": "가상확대도구"
+        }
+      ],
+      "grand_total": 287650,
+      "supply_total": 261500,
+      "unique_document_count": 2,
+      "vat_total": 26150,
+      "vendor_totals": [
+        {
+          "supply": 103500,
+          "total": 113850,
+          "vat": 10350,
+          "vendor": "가상안내받침"
+        },
+        {
+          "supply": 158000,
+          "total": 173800,
+          "vat": 15800,
+          "vendor": "가상확대도구"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,65 @@
+task_id: B1_D152_d6b54464
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 회전 전시 받침 자료로 실제 구매 단가 기준을 만들어 주세요. 상태 기록에 연결한 cheapest_by_item, grand_total,
+  unique_document_count가 필요합니다.
+input_files:
+- path: inputs/01_첫규격주문.pdf
+  format: pdf
+- path: inputs/02_첫규격진행.hwpx
+  format: hwpx
+- path: inputs/03_대체규격주문.xlsx
+  format: xlsx
+- path: inputs/04_대체규격수령.pdf
+  format: pdf
+- path: inputs/05_대체규격견적.pdf
+  format: pdf
+- path: inputs/06_후속받침청구.hwpx
+  format: hwpx
+- path: inputs/07_후속받침수령.xlsx
+  format: xlsx
+- path: inputs/08_고정판청구.pdf
+  format: pdf
+- path: inputs/09_고정판수령.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-fd9b06b7-0034-555e-ac75-1515d428addd
+scenario_seed: 15471347291304172351
+scenario_hash: 8e39c7fc6fa440c1157d3c7d993bc65277accf913b9fa0b60c9e3f43fa1fb722
+authorship:
+  method: individually_written
+  case_id: D152
+  case_sha256: d6b5446406e31b3f4cb8fd60bde5aee82680c7a4058fef1678a1e1080ecbdb30
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- grand_total
+- unique_document_count

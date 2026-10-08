@@ -1,0 +1,60 @@
+task_id: B1_C096_8c90efac
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상정밀손잡이는 같은 공급자의 카드 자료를 금액별로 묶어 한 행씩만 남겼습니다. 공급자 전환 시점, 독립된 발주, 다음 기간
+  실제 입고를 확인하세요. 고유 거래 수(unique_transaction_count), 전체 매입세액(input_vat), 불공제 세액(noncreditable_vat),
+  공제가능 매입세액(deductible_input_vat), 납부액(payable_vat)을 answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_손잡이제작_사업.hwpx
+  format: hwpx
+- path: inputs/02_공급자_상태.pdf
+  format: pdf
+- path: inputs/03_독립발주_인수.xlsx
+  format: xlsx
+- path: inputs/04_완료납품_계산서.pdf
+  format: pdf
+- path: inputs/05_전환전_카드.xlsx
+  format: xlsx
+- path: inputs/06_전환후_카드.pdf
+  format: pdf
+- path: inputs/07_전환후_계산서.xlsx
+  format: xlsx
+- path: inputs/08_예약재료_실제공급.hwpx
+  format: hwpx
+- path: inputs/09_고지납부_확인.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-a49a008f-1ac2-54e9-8ac8-5633363249bf
+scenario_seed: 10128859084596450639
+scenario_hash: 418d0d833632b0d59deaf47d84db073160cd66b0c04a55d9cea5055f1c672712
+authorship:
+  method: individually_written
+  case_id: C096
+  case_sha256: 8c90efac255c154f9d9e7569aa640cba794b80f76d36551bf32293cd03480ecf
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- payable_vat

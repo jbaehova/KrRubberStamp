@@ -1,0 +1,56 @@
+task_id: B1_C145_d889c3f0
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상기다린등의 실제 공급일과 올해 공제 사용 자료를 확인해 주세요. 앞선 예정신고 납부서도 들어 있으니 현재 추가 정산과 구분해
+  주세요. 매출세액(output_vat), 발행 공제(receipt_credit), 정산세액(net_vat), 납부액(payable_vat)을 answer.json에
+  적어 주세요.
+input_files:
+- path: inputs/01_점포인계.hwpx
+  format: hwpx
+- path: inputs/02_이전공제.xlsx
+  format: xlsx
+- path: inputs/03_현재카드.pdf
+  format: pdf
+- path: inputs/04_현재인도.hwpx
+  format: hwpx
+- path: inputs/05_기관계산서.pdf
+  format: pdf
+- path: inputs/06_기관인도.hwpx
+  format: hwpx
+- path: inputs/07_재고계산서.xlsx
+  format: xlsx
+- path: inputs/08_재고인수.hwpx
+  format: hwpx
+- path: inputs/09_이전신고_납부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    net_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - output_vat
+  - receipt_credit
+  - net_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-dc41087e-cff5-5d69-8261-93dbfdbee823
+scenario_seed: 15603217823844768654
+scenario_hash: 2d6ad796b2a92b1b8252f14fef241d4c03a175c2c23031bb308290a73031d89e
+authorship:
+  method: individually_written
+  case_id: C145
+  case_sha256: d889c3f0ff4f9b8ed1b6a5b9a03f24e68d9be316c182ef8075d4f172b1e5fd17
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- output_vat
+- receipt_credit
+- net_vat
+- payable_vat

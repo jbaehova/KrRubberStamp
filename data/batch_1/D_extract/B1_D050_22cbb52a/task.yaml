@@ -1,0 +1,66 @@
+task_id: B1_D050_22cbb52a
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 해안 기록팀의 다음 발주를 준비하며 지역팀 구매 자료를 합치고 있습니다. 품목 이름을 맞춰 최저 공급가액 단가의 업체를 찾고,
+  증빙 보완 자료를 대조해 공급가액 합계와 실제 구매 건수를 확인해 주세요. answer.json에는 cheapest_by_item과 supply_total,
+  unique_document_count를 작성해 주세요.
+input_files:
+- path: inputs/01_방수케이스_명세.pdf
+  format: pdf
+- path: inputs/02_메모리함_대장.xlsx
+  format: xlsx
+- path: inputs/03_기록노트_원본.hwpx
+  format: hwpx
+- path: inputs/04_케이스_추가명세.pdf
+  format: pdf
+- path: inputs/05_메모리함_보충대장.xlsx
+  format: xlsx
+- path: inputs/06_기록자_확인.hwpx
+  format: hwpx
+- path: inputs/07_케이스_마지막명세.pdf
+  format: pdf
+- path: inputs/08_보호주머니_대장.xlsx
+  format: xlsx
+- path: inputs/09_기록노트_재발급.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-4ac786af-d736-5c08-9d2e-18c041b6c80b
+scenario_seed: 2507296811261872682
+scenario_hash: 4995d3e8432c6eb2a7ebcba81b31e99dc3fcb78984f0c287ea8f68e5082dfcc5
+authorship:
+  method: individually_written
+  case_id: D050
+  case_sha256: 22cbb52a65bbca2a17ac6af63bfb54eecd1298f1ea43ffc4a44667f545bf95f8
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item
+- supply_total
+- unique_document_count

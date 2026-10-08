@@ -1,0 +1,265 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "ACT-C028-정비",
+          "date": "2026-03-25",
+          "description": "대표가 간판 운반 화물차의 타이어 교체를 확인하고 차량을 되찾았다. 정비 접수 한 건에 계산서와 카드 결제 두 증빙을 보관했다.",
+          "document_ids": [
+            "가상-C028-정비카드",
+            "가상-C028-정비계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상바퀴정비 작업장"
+          },
+          "operation_id": "OPS-C028",
+          "participants": [
+            {
+              "name": "가상 간판대표",
+              "organization": "가상길찾는간판",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "가상-C028-차량정비"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 간판 제작과 설치",
+          "operation_id": "OPS-C028",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C028-정비",
+          "date": "2026-03-25",
+          "document_id": "가상-C028-정비카드",
+          "transaction_id": "가상-C028-차량정비"
+        },
+        {
+          "activity_id": "ACT-C028-정비",
+          "date": "2026-03-25",
+          "document_id": "가상-C028-정비계산서",
+          "transaction_id": "가상-C028-차량정비"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C028-정비카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "가상-C028-차량정비"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C028-정비계산서",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "가상-C028-차량정비"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C028-간판발급"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C028-간판인도"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C028-정비카드",
+        "가상-C028-정비계산서"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C028-차량정비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-31",
+      "transaction_id": "가상-C028-간판인도"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 9700000,
+      "includes_vat": false,
+      "transaction_id": "가상-C028-간판인도"
+    },
+    "output": {
+      "gross": 10670000,
+      "supply_base": 9700000,
+      "vat": 970000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 9700000
+    },
+    "output": 970000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "가상-C028-간판인도"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-25",
+      "transaction_id": "가상-C028-차량정비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 825000,
+      "includes_vat": true,
+      "transaction_id": "가상-C028-차량정비"
+    },
+    "output": {
+      "gross": 825000,
+      "supply_base": 750000,
+      "vat": 75000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "가상-C028-차량정비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 75000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 136000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 895000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 895000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 895000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 75000,
+      "output_vat": 970000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 75000,
+      "input_vat": 75000,
+      "net_vat": 895000,
+      "noncreditable_vat": 0,
+      "output_vat": 970000,
+      "payable_vat": 895000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 9700000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

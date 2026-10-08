@@ -1,0 +1,365 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 60300000,
+      "cards": [
+        {
+          "amount": 22000000,
+          "billed_item": "ordinary_goods_services",
+          "category": "debit",
+          "date": "2025-12-31",
+          "person_id": "self"
+        },
+        {
+          "amount": 2400000,
+          "billed_item": "apartment_management_fee",
+          "category": "credit",
+          "date": "2025-12-31",
+          "person_id": "self"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 8,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상모하온",
+          "person_id": "older",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 5,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상모보름",
+          "person_id": "younger",
+          "relation": "child",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 2400000,
+          "date": "2025-04-24",
+          "institution_type": "primary_secondary_school",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "older",
+          "scholarship": 0
+        },
+        {
+          "amount": 3600000,
+          "date": "2025-09-24",
+          "institution_type": "private_academy",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "older",
+          "scholarship": 0
+        },
+        {
+          "amount": 2000000,
+          "date": "2025-10-08",
+          "institution_type": "kindergarten_or_childcare",
+          "level": "preschool",
+          "paid_by_self": true,
+          "person_id": "younger",
+          "scholarship": 0
+        }
+      ],
+      "employee_age": 37,
+      "employee_name": "가상모시율",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "marital_status": "married",
+      "non_taxable": 2300000,
+      "reference_year": 2025,
+      "rent": {
+        "area_sqm": 74,
+        "contract_address": "가상시 물빛길 21 601호",
+        "eligible_contract_holder": true,
+        "head_claims_housing": false,
+        "household_head": true,
+        "household_homes_at_year_end": [],
+        "payments": [
+          {
+            "amount": 7560000,
+            "date": "2025-12-25"
+          }
+        ],
+        "resident_registration_address": "가상시 물빛길 12 601호",
+        "standard_value": 270000000
+      },
+      "scenario_id": "닭의장풀정비 세 원자료 관계 마감",
+      "scope_note": "국내 거주 근로소득자다. 두 아이는 소득 없이 실제 부양하고 직원에게 신청을 배정했다. 연말 세대에 보유 주택이 없고 직원은 세대주 및 적격 계약 명의자다. 학교 및 유치원비는 적격 수업료이고 사설학원은 학령기 일반 학원이다. 모든 지출은 직원 부담이며 장학금이 없다. 카드 일반 소비와 관리비는 중복 없이 분리한 실제 청구 항목이다. 다른 공제와 감면 및 이월은 없다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "cards.0.excluded": false,
+      "cards.1.excluded": true,
+      "education.0.excluded": false,
+      "education.1.excluded": true,
+      "education.2.excluded": false,
+      "rent.address_matches": false,
+      "rent.homeless_household": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 8,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상모하온",
+          "person_id": "older",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 5,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상모보름",
+          "person_id": "younger",
+          "relation": "child",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 4500000,
+      "rejected": []
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 60300000,
+      "non_taxable": 2300000
+    },
+    "output": {
+      "salary_deduction": 12650000,
+      "salary_income": 45350000,
+      "total_salary": 58000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 58000000,
+      "spending": {
+        "debit": 22000000
+      }
+    },
+    "output": 2250000,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0,
+        0
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 250000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 2400000,
+          "date": "2025-04-24",
+          "excluded": false,
+          "institution_type": "primary_secondary_school",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "older",
+          "scholarship": 0
+        },
+        {
+          "amount": 3600000,
+          "date": "2025-09-24",
+          "excluded": true,
+          "institution_type": "private_academy",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "older",
+          "scholarship": 0
+        },
+        {
+          "amount": 2000000,
+          "date": "2025-10-08",
+          "excluded": false,
+          "institution_type": "kindergarten_or_childcare",
+          "level": "preschool",
+          "paid_by_self": true,
+          "person_id": "younger",
+          "scholarship": 0
+        }
+      ],
+      "salary": 58000000
+    },
+    "output": 660000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {
+        "address_matches": false,
+        "area_sqm": 74,
+        "contract_address": "가상시 물빛길 21 601호",
+        "eligible_contract_holder": true,
+        "head_claims_housing": false,
+        "homeless_household": true,
+        "household_head": true,
+        "household_homes_at_year_end": [],
+        "payments": [
+          {
+            "amount": 7560000,
+            "date": "2025-12-25"
+          }
+        ],
+        "resident_registration_address": "가상시 물빛길 12 601호",
+        "standard_value": 270000000
+      },
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 38600000
+    },
+    "output": 4530000,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 4530000,
+      "salary": 58000000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 660000,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 4530000,
+      "total_tax_credits": 1570000
+    },
+    "output": 2960000,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 2960000
+    },
+    "output": 296000,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 296000,
+      "final_national": 2960000,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 296000,
+      "national": 2960000,
+      "total": 3256000
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

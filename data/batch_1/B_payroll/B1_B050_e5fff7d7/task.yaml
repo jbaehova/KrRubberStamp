@@ -1,0 +1,68 @@
+task_id: B1_B050_e5fff7d7
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상홍옥계산실의 가상노예온은 정액급여만 보면 과세급여가 1000만원 아래지만 당월 실적수당을 더하면 그 경계를 넘습니다. 실적수당
+  승인과 정액 계약을 나눠 월 통상임금 및 과세급여를 구해 주세요. 고액 급여 산식과 두 자녀 공제를 반영한 소득세 및 지방소득세, 국민연금과 총지급액
+  및 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_계산실정액.pdf
+  format: pdf
+- path: inputs/02_실적승인.hwpx
+  format: hwpx
+- path: inputs/03_식사미제공.pdf
+  format: pdf
+- path: inputs/04_정상근로.xlsx
+  format: xlsx
+- path: inputs/05_연금신고.pdf
+  format: pdf
+- path: inputs/06_보수기준.xlsx
+  format: xlsx
+- path: inputs/07_두자녀확인.hwpx
+  format: hwpx
+- path: inputs/08_12월실행.pdf
+  format: pdf
+- path: inputs/09_구간원문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    national_pension:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - national_pension
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-56c301f9-b74a-557f-ab75-4e963631001d
+scenario_seed: 16573237659926661603
+scenario_hash: f7529618ac6ca7246462c9c25e1be11ad065e9a78d6e0cb9faa1d0a4f12bc1cc
+authorship:
+  method: individually_written
+  case_id: B050
+  case_sha256: e5fff7d7ca0e09e356da5363ef1070d8aab4f51c4f16ddfd1890c941e8e4068c
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- ordinary_monthly_wage
+- taxable_pay
+- income_tax
+- local_income_tax
+- national_pension
+- gross_pay
+- net_pay

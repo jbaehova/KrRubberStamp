@@ -1,0 +1,54 @@
+task_id: B1_D080_c7d941b2
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 관측 케이스의 표지와 품목 부속표를 연결해 정산해 주세요. 각 표지 조건을 해당 품목에 적용한 vendor_totals와 grand_total이
+  필요합니다. 실제 인수와 일반 처리 기준은 첫 품목 대장에 있습니다.
+input_files:
+- path: inputs/01_첫인수표지.pdf
+  format: pdf
+- path: inputs/02_첫품목부속.xlsx
+  format: xlsx
+- path: inputs/03_둘째인수표지.hwpx
+  format: hwpx
+- path: inputs/04_둘째품목부속.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-5c71fdcb-2f7e-5428-b352-d9d4a8600279
+scenario_seed: 14400613517202456304
+scenario_hash: 988c3b699f5f0501093af16af744f046f2ccc41de7c15fd54ae189abb1c20a1c
+authorship:
+  method: individually_written
+  case_id: D080
+  case_sha256: c7d941b2388a7ef0c5f78c65302324a6b1ff2aaa9e54d2ee98ed1ae668fb35b5
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals
+- grand_total

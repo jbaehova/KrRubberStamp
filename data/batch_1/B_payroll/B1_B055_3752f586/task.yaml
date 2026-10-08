@@ -1,0 +1,43 @@
+task_id: B1_B055_3752f586
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상풀빛인쇄의 공단별 통지서는 신고액이 서로 다릅니다. 한 값을 복사하여 네 보험 칸에 사용하지 않도록 국민연금, 건강보험,
+  장기요양보험과 고용보험의 근로자 부담액을 각각 계산해 주세요. 이번 요청은 원천세가 아니라 보험 공제 칸 네 개의 확인입니다.
+input_files:
+- path: inputs/01_임금전제.pdf
+  format: pdf
+- path: inputs/02_기관별통지.hwpx
+  format: hwpx
+- path: inputs/03_보험요율.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    employment_insurance:
+      type: integer
+  required:
+  - national_pension
+  - health_insurance
+  - long_term_care
+  - employment_insurance
+  additionalProperties: false
+canary: KrRubberStamp-canary-b67730c6-c94e-5679-87b2-23df9f5d6d2c
+scenario_seed: 3986518579899317449
+scenario_hash: 871e4554a0948b2a0d5cb716258df8a9f644352c93a5dfead4be88f465515796
+authorship:
+  method: individually_written
+  case_id: B055
+  case_sha256: 3752f586e564bcc980de3aa478046c40f09913c35d8391ed15551eeea3512c75
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- national_pension
+- health_insurance
+- long_term_care
+- employment_insurance

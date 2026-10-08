@@ -1,0 +1,42 @@
+task_id: B1_C017_831fcb91
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상두가지컵의 경리가 현금영수증 판매와 카드 판매를 별도 탭으로 보관했습니다. 서로 다른 두 고객에게 인도한 거래를 합쳐 매출
+  공급가액(tax_base)과 영수증 발행세액공제(receipt_credit)를 구해 주세요. 이번 기간 실제 거래 수(unique_transaction_count)와
+  납부액(payable_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_소매_신고안내.pdf
+  format: pdf
+- path: inputs/02_결제수단별_판매.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    receipt_credit:
+      type: integer
+    unique_transaction_count:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - receipt_credit
+  - unique_transaction_count
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-1bb503b3-81e7-5353-af19-74add60fefc8
+scenario_seed: 9448494368751904647
+scenario_hash: 55238f17d6e0c74fc5a1ddf7c9e1f43d500fd6a4108be5f01f7ec0d20dd4d2ad
+authorship:
+  method: individually_written
+  case_id: C017
+  case_sha256: 831fcb916fbc6787c5cbfd559e1f94ac297059fc981737a6e10db841211b1bf4
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- tax_base
+- receipt_credit
+- unique_transaction_count
+- payable_vat

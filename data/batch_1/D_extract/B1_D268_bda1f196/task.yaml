@@ -1,0 +1,53 @@
+task_id: B1_D268_bda1f196
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 운송용 보냉품의 지급처를 법인별로 정리해 주세요. vendor_totals와 grand_total을 제출해 주세요.
+input_files:
+- path: inputs/01_보냉상자표지.pdf
+  format: pdf
+- path: inputs/02_상자품목.xlsx
+  format: xlsx
+- path: inputs/03_냉매보충.hwpx
+  format: hwpx
+- path: inputs/04_운반벨트.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-55adb8a8-3824-5a89-954c-244a5201b4e6
+scenario_seed: 13664468372345121317
+scenario_hash: bbe93db3ad46586fd986cb809819e576f577f2fabbe4062dd3ddd958dbcbc8b3
+authorship:
+  method: individually_written
+  case_id: D268
+  case_sha256: bda1f1965230ea2598d3994e7284288f0a6498ec5f9050e6e46abc9938d6d421
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals
+- grand_total

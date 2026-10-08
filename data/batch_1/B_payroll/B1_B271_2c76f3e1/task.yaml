@@ -1,0 +1,41 @@
+task_id: B1_B271_2c76f3e1
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상매듭기록실에는 3월 지급 계획과 이미 완료한 2월 은행 실행이 함께 남았습니다. 실제 지급일을 effective_payment_date에
+  YYYY-MM-DD로 적고 두 자녀 등록 직원의 소득세와 지방소득세를 계산해 주세요.
+input_files:
+- path: inputs/01_정액계약.pdf
+  format: pdf
+- path: inputs/02_지급기록.xlsx
+  format: xlsx
+- path: inputs/03_가족인계.hwpx
+  format: hwpx
+- path: inputs/04_기관및표.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+  required:
+  - effective_payment_date
+  - income_tax
+  - local_income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-2b131e16-a272-5d52-8f88-e8db1a31f635
+scenario_seed: 3204016336445149186
+scenario_hash: 95b06199d504602f67ad7a8a4acafe38e3b5e24275317410f32775465a2a6b3b
+authorship:
+  method: individually_written
+  case_id: B271
+  case_sha256: 2c76f3e1e45c9002e9da349fa340b76fd60348238720cba22511f544b11e8994
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- effective_payment_date
+- income_tax
+- local_income_tax

@@ -1,0 +1,382 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "교대식사",
+          "date": "2026-03-06",
+          "description": "기판 조립 직원 교대 식사이다.",
+          "document_ids": [
+            "직원식사카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "기판 조립 작업실"
+          },
+          "operation_id": "기판조립",
+          "participants": [
+            {
+              "name": "가상도기판",
+              "organization": "가상따뜻기판",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "기판직원식사"
+        },
+        {
+          "action": "meal",
+          "activity_id": "고객식사",
+          "date": "2026-03-09",
+          "description": "검수 고객과 함께 식사했다.",
+          "document_ids": [
+            "고객식사카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "기판 작업실 옆 식당"
+          },
+          "operation_id": "기판조립",
+          "participants": [
+            {
+              "name": "가상도기판",
+              "organization": "가상따뜻기판",
+              "role": "employee"
+            },
+            {
+              "name": "가상손검수",
+              "organization": "가상검수고객",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "기판고객식사"
+        },
+        {
+          "action": "service",
+          "activity_id": "가족난방",
+          "date": "2026-03-11",
+          "description": "사업장 전화로 접수했지만 대표 가족 주택 난방기를 수리했다.",
+          "document_ids": [
+            "난방현금"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "대표 가족 거주 주택"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상신기판",
+              "organization": "가상따뜻기판",
+              "role": "proprietor"
+            },
+            {
+              "name": "가상신가족",
+              "organization": "가상신가족주택",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "가족난방24"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 기판 조립 용역",
+          "operation_id": "기판조립",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "교대식사",
+          "date": "2026-03-06",
+          "document_id": "직원식사카드",
+          "transaction_id": "기판직원식사"
+        },
+        {
+          "activity_id": "고객식사",
+          "date": "2026-03-09",
+          "document_id": "고객식사카드",
+          "transaction_id": "기판고객식사"
+        },
+        {
+          "activity_id": "가족난방",
+          "date": "2026-03-11",
+          "document_id": "난방현금",
+          "transaction_id": "가족난방24"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "직원식사카드",
+        "purpose": "business",
+        "transaction_id": "기판직원식사"
+      },
+      {
+        "business_related": true,
+        "document_id": "고객식사카드",
+        "purpose": "hospitality",
+        "transaction_id": "기판고객식사"
+      },
+      {
+        "business_related": false,
+        "document_id": "난방현금",
+        "purpose": "private",
+        "transaction_id": "가족난방24"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "난방현금"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "가족난방24"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "고객식사카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "기판고객식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "직원식사카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "기판직원식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-11",
+      "transaction_id": "가족난방24"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 957000,
+      "includes_vat": true,
+      "transaction_id": "가족난방24"
+    },
+    "output": {
+      "gross": 957000,
+      "supply_base": 870000,
+      "vat": 87000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "가족난방24",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 87000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-09",
+      "transaction_id": "기판고객식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 253000,
+      "includes_vat": true,
+      "transaction_id": "기판고객식사"
+    },
+    "output": {
+      "gross": 253000,
+      "supply_base": 230000,
+      "vat": 23000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "기판고객식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 23000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-06",
+      "transaction_id": "기판직원식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 385000,
+      "includes_vat": true,
+      "transaction_id": "기판직원식사"
+    },
+    "output": {
+      "gross": 385000,
+      "supply_base": 350000,
+      "vat": 35000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "기판직원식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 35000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 372000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -35000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -35000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -35000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 35000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 35000,
+      "input_vat": 145000,
+      "net_vat": -35000,
+      "noncreditable_vat": 110000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 35000,
+      "tax_base": 0,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

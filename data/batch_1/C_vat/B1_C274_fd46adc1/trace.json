@@ -1,0 +1,195 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "강의음료",
+          "date": "2026-06-15",
+          "description": "면세 강의 직원만 준비실에서 소비한 음료",
+          "document_ids": [
+            "음료카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "교구줄 강의 직원 준비실"
+          },
+          "operation_id": "면세강의",
+          "participants": [
+            {
+              "name": "합성미준",
+              "organization": "가상교구줄",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "음료-274"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 교구 판매",
+          "operation_id": "교구판매",
+          "output_taxable": true
+        },
+        {
+          "description": "법정 면세 교육 강의",
+          "operation_id": "면세강의",
+          "output_taxable": false
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "강의음료",
+          "date": "2026-06-15",
+          "document_id": "음료카드",
+          "transaction_id": "음료-274"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "음료카드",
+        "purpose": "exempt_business",
+        "transaction_id": "음료-274"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "음료카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "음료-274"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-15",
+      "transaction_id": "음료-274"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 319000,
+      "includes_vat": true,
+      "transaction_id": "음료-274"
+    },
+    "output": {
+      "gross": 319000,
+      "supply_base": 290000,
+      "vat": 29000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "exempt_business",
+      "supplier_general": true,
+      "transaction_id": "음료-274",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 29000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 302000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 29000,
+      "net_vat": 0,
+      "noncreditable_vat": 29000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

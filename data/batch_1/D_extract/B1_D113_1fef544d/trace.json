@@ -1,0 +1,126 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-10",
+          "document_id": "PLANTKIT-113",
+          "event": "received",
+          "event_id": "e113",
+          "location": "관찰실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-09",
+          "document_id": "PLANTKIT-113",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h113",
+          "vendor": "가상관찰키트"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h113",
+          "items": [
+            {
+              "name": "식물관찰받침",
+              "quantity": 10,
+              "unit_price": 12101
+            }
+          ],
+          "sheet_id": "s113-base"
+        },
+        {
+          "header_record_id": "h113",
+          "items": [
+            {
+              "name": "관찰기록표",
+              "quantity": 60,
+              "unit_price": 221
+            }
+          ],
+          "sheet_id": "s113-card"
+        }
+      ],
+      "processing_policy": "품목표의 header_record_id로 같은 표지의 모든 품목을 연결한다. invoice와 order는 document_id의 received가 있을 때 포함한다. quote, 무인수 자료와 출고 전 취소는 제외하고 동일 document_id의 같은 내용은 한 번만 집계한다. 포함 단가의 품목 총액에서 10/11 원 미만을 버려 공급가액을 구하고 차액을 세액으로 한다. 별도는 수량 곱하기 단가를 공급가액으로 하고 품목별 10% 원 미만 버림 세액을 계산한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "PLANTKIT-113"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "PLANTKIT-113",
+      "includes_vat": true,
+      "quantity": 10,
+      "unit_price": 12101
+    },
+    "output": {
+      "supply": 110009,
+      "total": 121010,
+      "vat": 11001
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "PLANTKIT-113",
+      "includes_vat": true,
+      "quantity": 60,
+      "unit_price": 221
+    },
+    "output": {
+      "supply": 12054,
+      "total": 13260,
+      "vat": 1206
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상관찰키트"
+    },
+    "output": "가상관찰키트",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "관찰기록표",
+          "unit_price": 200,
+          "vendor": "가상관찰키트"
+        },
+        {
+          "item": "식물관찰받침",
+          "unit_price": 11000,
+          "vendor": "가상관찰키트"
+        }
+      ],
+      "grand_total": 134270,
+      "supply_total": 122063,
+      "unique_document_count": 1,
+      "vat_total": 12207,
+      "vendor_totals": [
+        {
+          "supply": 122063,
+          "total": 134270,
+          "vat": 12207,
+          "vendor": "가상관찰키트"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

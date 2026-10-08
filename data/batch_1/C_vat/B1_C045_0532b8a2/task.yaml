@@ -1,0 +1,62 @@
+task_id: B1_C045_0532b8a2
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상곧은방석은 재료 구입 영수증만 있다가 같은 공급의 원본 계산서를 찾아냈습니다. 두 문서를 같은 입고로 연결하고 대표 집에
+  간 커튼의 수령 기록도 확인해 주세요. 이번 기간 실제 거래 수(unique_transaction_count), 매입세액(input_vat),
+  공제불가 세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat), 납부액(payable_vat)을 answer.json에
+  정수로 적어 주세요.
+input_files:
+- path: inputs/01_방석업_의뢰.hwpx
+  format: hwpx
+- path: inputs/02_전년_자료.pdf
+  format: pdf
+- path: inputs/03_선납_대조.xlsx
+  format: xlsx
+- path: inputs/04_방석_납품.pdf
+  format: pdf
+- path: inputs/05_솜_영수증.xlsx
+  format: xlsx
+- path: inputs/06_찾은_계산서.pdf
+  format: pdf
+- path: inputs/07_커튼_카드.pdf
+  format: pdf
+- path: inputs/08_수령_기록.hwpx
+  format: hwpx
+- path: inputs/09_계산서_사진.png
+  format: png
+  duplicate_of: inputs/06_찾은_계산서.pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-b479426c-b5d6-5038-9ab9-0ebeef77de3f
+scenario_seed: 374564726873462441
+scenario_hash: 4618964c103c43619166228ddf352292cf790ad6fc3be43f383aed04efc9a3e4
+authorship:
+  method: individually_written
+  case_id: C045
+  case_sha256: 0532b8a272af16a9f5fb68019cbcf3a2578e3a84c8ea21ceb34b7b700db3b5d6
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- unique_transaction_count
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- payable_vat

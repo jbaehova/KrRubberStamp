@@ -1,0 +1,64 @@
+task_id: B1_D063_30a405f3
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 안내 데스크 비품의 지급 자료와 보충 구매 기준을 함께 만듭니다. vendor_totals와 cheapest_by_item을
+  보내 주세요. 두 배열의 이름 처리 및 계산 기준은 추가 벨 인수서에 있습니다.
+input_files:
+- path: inputs/01_초기비품.pdf
+  format: pdf
+- path: inputs/02_추가벨.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-0b7c17bc-929e-5c15-9749-c301c1b5788e
+scenario_seed: 3504932955274392603
+scenario_hash: 88aee01132ceedacffdbab44d26bc23e8753f8d6a1fbd3e3fb5770af19f41746
+authorship:
+  method: individually_written
+  case_id: D063
+  case_sha256: 30a405f3f0b0b41b3dc19214b1c4e6037df1c6f705ee8e1666603f25b235ef6a
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item

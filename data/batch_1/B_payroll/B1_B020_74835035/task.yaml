@@ -1,0 +1,49 @@
+task_id: B1_B020_74835035
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상소나무작업실은 가상최이든에게 구내 식사를 제공하면서 현금 식대도 지급합니다. 담당자가 현금 식대를 비과세로 올려 두어 마감
+  전에 확인하려고 합니다. 식대 지급액, 비과세급여와 과세급여를 구하고 소득세 및 실지급액을 수정용 값으로 작성해 주세요.
+input_files:
+- path: inputs/01_식대약정.pdf
+  format: pdf
+- path: inputs/02_구내식사확인.hwpx
+  format: hwpx
+- path: inputs/03_과세마감.xlsx
+  format: xlsx
+- path: inputs/04_식대조건원문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    meal_allowance:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - meal_allowance
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-bf8cab01-94b0-5e45-bac7-2379dcd27e6e
+scenario_seed: 8395642321402727327
+scenario_hash: fd4d200bc23addf6e043edf601cae7ebfa7ef4e963935f3944c6a9ea1cb462c7
+authorship:
+  method: individually_written
+  case_id: B020
+  case_sha256: 7483503594720b9f45b3a1ed2ddcb721d4380a8b03820c8be295cd85a21c833c
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- meal_allowance
+- non_taxable_pay
+- taxable_pay
+- income_tax
+- net_pay

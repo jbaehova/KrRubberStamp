@@ -1,0 +1,52 @@
+task_id: B1_D188_6ad3cd01
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 모형 열차 부품의 판매처별 지급 내역을 정리해 주세요. 파일별 가격 조건을 반영한 vendor_totals를 answer.json에
+  담습니다.
+input_files:
+- path: inputs/01_초기레일.pdf
+  format: pdf
+- path: inputs/02_연결핀.xlsx
+  format: xlsx
+- path: inputs/03_보충레일.hwpx
+  format: hwpx
+- path: inputs/04_차량덮개.pdf
+  format: pdf
+- path: inputs/05_배선묶음.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-50fa31c3-1f6b-5a6e-b4ca-ee32c8eefecd
+scenario_seed: 7697721595930994094
+scenario_hash: 4fce7e686b9cc25addacc4a0462087863452c777f0c9808fc999f4a59b84ada5
+authorship:
+  method: individually_written
+  case_id: D188
+  case_sha256: 6ad3cd01d951e5ae09a1be3bca15680a9dc0c04d902c6ba13410b202248f4634
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals

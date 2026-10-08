@@ -1,0 +1,63 @@
+task_id: B1_D296_9dc929a5
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 수리대에 실제 구입한 충전 부품의 지급처와 세액을 결산합니다. vendor_totals와 vat_total을 제출해 주세요.
+input_files:
+- path: inputs/01_허브표지.pdf
+  format: pdf
+- path: inputs/02_케이블표지.hwpx
+  format: hwpx
+- path: inputs/03_무선표지.pdf
+  format: pdf
+- path: inputs/04_허브품목.xlsx
+  format: xlsx
+- path: inputs/05_케이블품목.xlsx
+  format: xlsx
+- path: inputs/06_무선품목.xlsx
+  format: xlsx
+- path: inputs/07_허브인수.pdf
+  format: pdf
+- path: inputs/08_케이블인수.hwpx
+  format: hwpx
+- path: inputs/09_무선취소.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-78f8a9b9-ec74-5d9c-ad37-51091f5b797a
+scenario_seed: 11369664522964674346
+scenario_hash: 7f609e28901a0f6c41003f54c13354853f89a2ac869149845b85b80b3177b94a
+authorship:
+  method: individually_written
+  case_id: D296
+  case_sha256: 9dc929a502aba72a880a7499fc2eff9c71af5fa28e52f525941b5920dd3a5783
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals
+- vat_total

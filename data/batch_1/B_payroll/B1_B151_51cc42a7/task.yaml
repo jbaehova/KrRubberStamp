@@ -1,0 +1,72 @@
+task_id: B1_B151_51cc42a7
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상흐르는글씨사 고령 직원은 신규 고용이 아니라 계속 고용 상태입니다. 기관 자격 통지대로 연금과 고용 공제를 계산해 주세요.
+  배식과 현금 식대를 대조하여 과세급여를 구하고, 평일 야간 카드의 최신 휴게 수정으로 연장 및 야간수당을 계산합니다. 신청된 120퍼센트 세액과
+  최종 실지급액도 필요합니다.
+input_files:
+- path: inputs/01_글씨임금.hwpx
+  format: hwpx
+- path: inputs/02_글씨연금.pdf
+  format: pdf
+- path: inputs/03_글씨고용.xlsx
+  format: xlsx
+- path: inputs/04_글씨건강.hwpx
+  format: hwpx
+- path: inputs/05_야간이전.pdf
+  format: pdf
+- path: inputs/06_야간휴게.xlsx
+  format: xlsx
+- path: inputs/07_글씨배식.hwpx
+  format: hwpx
+- path: inputs/08_글씨일정.pdf
+  format: pdf
+- path: inputs/09_글씨공식.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    national_pension:
+      type: integer
+    employment_insurance:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - national_pension
+  - employment_insurance
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-f8cc625f-c10a-5258-8f13-f2f2e5585125
+scenario_seed: 5894159297428332764
+scenario_hash: 75abd56238781007a041c3a324d34f1739d74b7eaceb5fba14aeced35281421d
+authorship:
+  method: individually_written
+  case_id: B151
+  case_sha256: 51cc42a704c820dc78f7e20f50a11c018fab448eb3b1452d60a6bd7e58c4fe63
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- overtime_pay
+- night_pay
+- national_pension
+- employment_insurance
+- non_taxable_pay
+- taxable_pay
+- income_tax
+- net_pay

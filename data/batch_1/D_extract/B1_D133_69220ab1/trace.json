@@ -1,0 +1,141 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-08",
+          "document_id": "REFLECT-133-O",
+          "event": "received",
+          "event_id": "e133",
+          "location": "표지 보관대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-02",
+          "document_id": "REFLECT-133-Q",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "h133-q",
+          "vendor": "가상반사재료"
+        },
+        {
+          "date": "2026-02-05",
+          "document_id": "REFLECT-133-O",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h133-o",
+          "vendor": "가상반사재료"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h133-q",
+          "items": [
+            {
+              "name": "시험용반사띠",
+              "quantity": 10,
+              "unit_price": 3900
+            }
+          ],
+          "sheet_id": "s133-q"
+        },
+        {
+          "header_record_id": "h133-o",
+          "items": [
+            {
+              "name": "완성반사표지",
+              "quantity": 8,
+              "unit_price": 12300
+            },
+            {
+              "name": "반사표지지지판",
+              "quantity": 8,
+              "unit_price": 5500
+            }
+          ],
+          "sheet_id": "s133-o"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 원문 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있을 때 포함한다. quote, 무인수 및 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 센다. 별도 공급가액은 품목 수량 곱하기 단가이며 그 10% 원 미만 버림을 세액으로 계산한다. 포함 총액은 품목별 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "REFLECT-133-Q"
+      ],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "REFLECT-133-O"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "REFLECT-133-O",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 12300
+    },
+    "output": {
+      "supply": 98400,
+      "total": 108240,
+      "vat": 9840
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "REFLECT-133-O",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 5500
+    },
+    "output": {
+      "supply": 44000,
+      "total": 48400,
+      "vat": 4400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상반사재료"
+    },
+    "output": "가상반사재료",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "반사표지지지판",
+          "unit_price": 5500,
+          "vendor": "가상반사재료"
+        },
+        {
+          "item": "완성반사표지",
+          "unit_price": 12300,
+          "vendor": "가상반사재료"
+        }
+      ],
+      "grand_total": 156640,
+      "supply_total": 142400,
+      "unique_document_count": 1,
+      "vat_total": 14240,
+      "vendor_totals": [
+        {
+          "supply": 142400,
+          "total": 156640,
+          "vat": 14240,
+          "vendor": "가상반사재료"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

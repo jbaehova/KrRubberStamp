@@ -1,0 +1,46 @@
+task_id: B1_C077_c85f70dc
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상돌아온문은 올해 수금한 수리대금 목록을 받았습니다. 은행 입금일 대신 용역을 끝낸 날짜를 증빙에서 확인하세요. 상반기 고유
+  거래 수(unique_transaction_count), 매출 공급가액(tax_base), 매출세액(output_vat), 납부액(payable_vat)을
+  answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_수금장부_인계.hwpx
+  format: hwpx
+- path: inputs/02_올해_입금목록.xlsx
+  format: xlsx
+- path: inputs/03_전년_완료계산서.pdf
+  format: pdf
+- path: inputs/04_올해_완료계산서.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - tax_base
+  - output_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-7a13b645-5a24-50fa-afba-11057ac6663a
+scenario_seed: 14438383023516127563
+scenario_hash: 0c68b637fd803c631b88e48a604767fb48b4232578f590e43b537dc3b4b17f52
+authorship:
+  method: individually_written
+  case_id: C077
+  case_sha256: c85f70dcafb5914bdad9ee06fae1c988e05cbff9298a2e826f79066433ca16c8
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- tax_base
+- output_vat
+- payable_vat

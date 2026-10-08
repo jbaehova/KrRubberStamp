@@ -1,0 +1,228 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-09",
+          "document_id": "BED-COVER-6",
+          "event": "received",
+          "event_id": "BED-FIRST-IN",
+          "location": "숙박업소린넨실"
+        },
+        {
+          "date": "2026-05-13",
+          "document_id": "BED-COVER-10",
+          "event": "received",
+          "event_id": "BED-NEXT-IN",
+          "location": "숙박업소린넨실"
+        },
+        {
+          "date": "2026-05-15",
+          "document_id": "BED-COVER-12",
+          "event": "received",
+          "event_id": "BED-ALT-IN",
+          "location": "숙박업소린넨실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-06",
+          "document_id": "BED-COVER-6",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "BED-FIRST-C",
+          "vendor": "주식회사 가상침구보강"
+        },
+        {
+          "date": "2026-05-10",
+          "document_id": "BED-COVER-10",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "BED-NEXT-C",
+          "vendor": "(주)가상침구보강"
+        },
+        {
+          "date": "2026-05-12",
+          "document_id": "BED-COVER-12",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "BED-ALT-C",
+          "vendor": "가상편안직물"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "BED-FIRST-C",
+          "items": [
+            {
+              "name": "침구커버S",
+              "quantity": 10,
+              "unit_price": 21300
+            }
+          ],
+          "sheet_id": "BED-FIRST-COVER-L"
+        },
+        {
+          "header_record_id": "BED-FIRST-C",
+          "items": [
+            {
+              "name": "베개속50",
+              "quantity": 10,
+              "unit_price": 9200
+            }
+          ],
+          "sheet_id": "BED-FIRST-PILLOW-L"
+        },
+        {
+          "header_record_id": "BED-NEXT-C",
+          "items": [
+            {
+              "name": "침구커버S",
+              "quantity": 4,
+              "unit_price": 20700
+            }
+          ],
+          "sheet_id": "BED-NEXT-L"
+        },
+        {
+          "header_record_id": "BED-ALT-C",
+          "items": [
+            {
+              "name": "침구 커버 S",
+              "quantity": 2,
+              "unit_price": 20400
+            }
+          ],
+          "sheet_id": "BED-ALT-L"
+        }
+      ],
+      "processing_policy": "첨부를 header_record_id로 표지에 연결하며 같은 표지의 품목을 모두 합한다. invoice 또는 order의 document_id에 received가 있는 원문만 구매다. 별도 단가는 공급가액이며 행 세액은 그 10%에서 원 미만을 버린다. 업체는 NFKC 후 공백과 법인 표현을 제거하고 품목은 NFKC 후 공백 제거 및 영문 소문자로 정리해 이름 순으로 배열한다. 가격 동률이면 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "BED-COVER-10",
+        "BED-COVER-12",
+        "BED-COVER-6"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "BED-COVER-6",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 21300
+    },
+    "output": {
+      "supply": 213000,
+      "total": 234300,
+      "vat": 21300
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "BED-COVER-6",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 9200
+    },
+    "output": {
+      "supply": 92000,
+      "total": 101200,
+      "vat": 9200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "주식회사 가상침구보강"
+    },
+    "output": "가상침구보강",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "BED-COVER-10",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 20700
+    },
+    "output": {
+      "supply": 82800,
+      "total": 91080,
+      "vat": 8280
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "(주)가상침구보강"
+    },
+    "output": "가상침구보강",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "BED-COVER-12",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 20400
+    },
+    "output": {
+      "supply": 40800,
+      "total": 44880,
+      "vat": 4080
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상편안직물"
+    },
+    "output": "가상편안직물",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "베개속50",
+          "unit_price": 9200,
+          "vendor": "가상침구보강"
+        },
+        {
+          "item": "침구커버s",
+          "unit_price": 20400,
+          "vendor": "가상편안직물"
+        }
+      ],
+      "grand_total": 471460,
+      "supply_total": 428600,
+      "unique_document_count": 3,
+      "vat_total": 42860,
+      "vendor_totals": [
+        {
+          "supply": 387800,
+          "total": 426580,
+          "vat": 38780,
+          "vendor": "가상침구보강"
+        },
+        {
+          "supply": 40800,
+          "total": 44880,
+          "vat": 4080,
+          "vendor": "가상편안직물"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

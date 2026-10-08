@@ -1,0 +1,372 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 83200000,
+      "cards": [
+        {
+          "amount": 13000000,
+          "category": "credit",
+          "date": "2025-12-31",
+          "person_id": "self"
+        },
+        {
+          "amount": 11000000,
+          "category": "debit",
+          "date": "2025-12-31",
+          "person_id": "older"
+        },
+        {
+          "amount": 2300000,
+          "category": "debit",
+          "date": "2025-12-31",
+          "person_id": "younger"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 27,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 0,
+          "name": "가상도예준",
+          "person_id": "older",
+          "relation": "sibling",
+          "supported": true
+        },
+        {
+          "age": 20,
+          "assigned_claimant": "self",
+          "earned_income_only": false,
+          "income_amount": 1100000,
+          "name": "가상도이든",
+          "person_id": "younger",
+          "relation": "sibling",
+          "supported": true
+        },
+        {
+          "age": 75,
+          "assigned_claimant": "self",
+          "earned_income_only": false,
+          "income_amount": 900000,
+          "name": "가상도세윤",
+          "person_id": "father",
+          "relation": "parent",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 8000000,
+          "date": "2025-03-07",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "older",
+          "scholarship": 0
+        },
+        {
+          "amount": 4000000,
+          "date": "2025-08-27",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "younger",
+          "scholarship": 0
+        }
+      ],
+      "employee_age": 42,
+      "employee_name": "가상도하린",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "housing_mortgage": {
+        "borrowed_date": "2019-02-14",
+        "fixed_rate": true,
+        "household_homes_at_year_end": [
+          {
+            "address": "가상시 들빛길 98 301호",
+            "home_id": "H198-A",
+            "owner_person_id": "self"
+          },
+          {
+            "address": "가상시 산내길 89 102호",
+            "home_id": "H198-B",
+            "owner_person_id": "father"
+          }
+        ],
+        "interest_paid": 8200000,
+        "non_deferred": false,
+        "other_common_requirements_attested": true,
+        "term_years": 15
+      },
+      "marital_status": "married",
+      "non_taxable": 2200000,
+      "public_pension_paid": 2787000,
+      "reference_year": 2025,
+      "scenario_id": "큰개별꽃제어 형제와 세대 주택 확인",
+      "scope_note": "국내 거주 근로소득자다. 세 가족은 같은 세대에서 실제 부양하고 직원에게 신청을 배정했다. 첫 형제의 장애인 증명은 연간 유효하고 다른 형제의 소득은 사업소득금액이다. 학비는 직원 부담이며 장학금이 없다. 카드는 적격 국내 일반 사용이다. 주택대출의 보유 수 이외 취득 및 명의와 가격 등 요건은 확인됐다. 공적연금은 본인 실제 납부액이다. 다른 공제와 감면 및 이월은 없다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "housing_mortgage.requirements_met": false
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 27,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 0,
+          "name": "가상도예준",
+          "person_id": "older",
+          "relation": "sibling",
+          "supported": true
+        },
+        {
+          "age": 20,
+          "assigned_claimant": "self",
+          "earned_income_only": false,
+          "income_amount": 1100000,
+          "name": "가상도이든",
+          "person_id": "younger",
+          "relation": "sibling",
+          "supported": true
+        },
+        {
+          "age": 75,
+          "assigned_claimant": "self",
+          "earned_income_only": false,
+          "income_amount": 900000,
+          "name": "가상도세윤",
+          "person_id": "father",
+          "relation": "parent",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 3000000,
+      "basic": 4500000,
+      "rejected": [
+        "younger"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 83200000,
+      "non_taxable": 2200000
+    },
+    "output": {
+      "salary_deduction": 13800000,
+      "salary_income": 67200000,
+      "total_salary": 81000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 2787000
+    },
+    "output": 2787000,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {
+      "borrowed_date": "2019-02-14",
+      "fixed_rate": true,
+      "household_homes_at_year_end": [
+        {
+          "address": "가상시 들빛길 98 301호",
+          "home_id": "H198-A",
+          "owner_person_id": "self"
+        },
+        {
+          "address": "가상시 산내길 89 102호",
+          "home_id": "H198-B",
+          "owner_person_id": "father"
+        }
+      ],
+      "interest_paid": 8200000,
+      "non_deferred": false,
+      "other_common_requirements_attested": true,
+      "requirements_met": false,
+      "term_years": 15
+    },
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 81000000,
+      "spending": {
+        "credit": 13000000
+      }
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 81000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0,
+        0
+      ],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 81000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 81000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 8000000,
+          "date": "2025-03-07",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "older",
+          "scholarship": 0
+        },
+        {
+          "amount": 4000000,
+          "date": "2025-08-27",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "younger",
+          "scholarship": 0
+        }
+      ],
+      "salary": 81000000
+    },
+    "output": 1200000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 81000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 81000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 81000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 81000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 56913000
+    },
+    "output": 7899120,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 7899120,
+      "salary": 81000000
+    },
+    "output": 500000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 1200000,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 7899120,
+      "total_tax_credits": 1700000
+    },
+    "output": 6199120,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 6199120
+    },
+    "output": 619912,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 619912,
+      "final_national": 6199120,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 619912,
+      "national": 6199120,
+      "total": 6819032
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

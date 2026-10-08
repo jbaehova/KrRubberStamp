@@ -1,0 +1,249 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "장치검수284",
+          "date": "2026-06-28",
+          "description": "활성화 계약과 독립한 장치의 완전 인도와 검수를 완료했다.",
+          "document_ids": [
+            "장치전자284"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "오른 분석 작업실"
+          },
+          "operation_id": "분석업무284",
+          "participants": [
+            {
+              "name": "가상리분석",
+              "organization": "가상오른분석",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "장치반입284"
+        },
+        {
+          "action": "service",
+          "activity_id": "활성화검수284",
+          "date": "2026-07-02",
+          "description": "선불 뒤 실제 활성화 용역을 7월에 별도 완료하여 검수했다.",
+          "document_ids": [
+            "활성화전자284"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "오른 분석 작업실"
+          },
+          "operation_id": "분석업무284",
+          "participants": [
+            {
+              "name": "가상리분석",
+              "organization": "가상오른분석",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "활성화284"
+        }
+      ],
+      "operations": [
+        {
+          "description": "일반과세 장치 분석 용역 수행",
+          "operation_id": "분석업무284",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "장치검수284",
+          "date": "2026-06-28",
+          "document_id": "장치전자284",
+          "transaction_id": "장치반입284"
+        },
+        {
+          "activity_id": "활성화검수284",
+          "date": "2026-07-02",
+          "document_id": "활성화전자284",
+          "transaction_id": "활성화284"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "장치전자284",
+        "purpose": "business",
+        "transaction_id": "장치반입284"
+      },
+      {
+        "business_related": true,
+        "document_id": "활성화전자284",
+        "purpose": "business",
+        "transaction_id": "활성화284"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "장치전자284"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "장치반입284"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "활성화전자284"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "활성화284"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-28",
+      "transaction_id": "장치반입284"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2850000,
+      "includes_vat": false,
+      "transaction_id": "장치반입284"
+    },
+    "output": {
+      "gross": 3135000,
+      "supply_base": 2850000,
+      "vat": 285000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "장치반입284",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 285000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-07-02",
+      "transaction_id": "활성화284"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 174000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -285000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -285000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -285000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 285000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 285000,
+      "input_vat": 285000,
+      "net_vat": -285000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 285000,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

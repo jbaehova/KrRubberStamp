@@ -1,0 +1,54 @@
+task_id: B1_B027_c17ed548
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상온유목공소에서 가상허이솔의 급여 공제 등록을 점검합니다. 국민연금공단은 당월 사업장가입 보험료를 부과하지 않는다고 확인했고
+  건강보험과 고용보험은 정상 통지되었습니다. 국민연금 및 다른 보험별 부담액, 공제 합계와 실지급액을 구해 주세요. 연금 기준소득 표시액이 있다는
+  이유로 연금을 다시 공제하지 않도록 확인해 주세요.
+input_files:
+- path: inputs/01_계속근로계약.hwpx
+  format: hwpx
+- path: inputs/02_연금미부과.pdf
+  format: pdf
+- path: inputs/03_기타보험근태.xlsx
+  format: xlsx
+- path: inputs/04_연령부과기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    employment_insurance:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - national_pension
+  - health_insurance
+  - long_term_care
+  - employment_insurance
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-c9739719-51a7-5930-80a9-b982696ac94e
+scenario_seed: 13942816003641733783
+scenario_hash: 4cd9d8a978ec7e191521cc8c5c5e7c70ea050169ddd85d39a409a4698e305b92
+authorship:
+  method: individually_written
+  case_id: B027
+  case_sha256: c17ed54879b272976b486519c80925a6140f689f6fa5f9504035990c8ba745dd
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- national_pension
+- health_insurance
+- long_term_care
+- employment_insurance
+- total_deductions
+- net_pay

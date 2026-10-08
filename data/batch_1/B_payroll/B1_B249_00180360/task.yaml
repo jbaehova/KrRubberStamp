@@ -1,0 +1,71 @@
+task_id: B1_B249_00180360
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상광역문서실의 당월 실적금은 정액 소정근로 대가와 별도입니다. 월 통상임금과 총지급액을 구하고 식대 비과세 및 과세급여를
+  나눠 주세요. 건강 및 요양 공제와 선택 비율에 따른 소득세, 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_정액계약.pdf
+  format: pdf
+- path: inputs/02_식대변경.hwpx
+  format: hwpx
+- path: inputs/03_당월실적.xlsx
+  format: xlsx
+- path: inputs/04_건강고지.pdf
+  format: pdf
+- path: inputs/05_연금고지.hwpx
+  format: hwpx
+- path: inputs/06_고용고지.xlsx
+  format: xlsx
+- path: inputs/07_실행확인.pdf
+  format: pdf
+- path: inputs/08_선택가족.hwpx
+  format: hwpx
+- path: inputs/09_고액공식.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    gross_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - gross_pay
+  - non_taxable_pay
+  - taxable_pay
+  - health_insurance
+  - long_term_care
+  - income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-feb22e2b-842f-5d29-a5ea-f6846e3c971d
+scenario_seed: 6759113088875587
+scenario_hash: b08319ee45d486e065378ba42473fa3a72cb28882c9831d078d54bd42791fc23
+authorship:
+  method: individually_written
+  case_id: B249
+  case_sha256: 00180360a6a8bc4389ab7b7c79278a359d15840ada5f23b8545ff8975170fe75
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- ordinary_monthly_wage
+- gross_pay
+- non_taxable_pay
+- taxable_pay
+- health_insurance
+- long_term_care
+- income_tax
+- net_pay

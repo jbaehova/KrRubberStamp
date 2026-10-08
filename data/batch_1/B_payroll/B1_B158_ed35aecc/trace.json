@@ -1,0 +1,178 @@
+[
+  {
+    "inputs": {
+      "base_salary": 2740000,
+      "fixed_allowance": 130000,
+      "hourly_rate": 0,
+      "meal_allowance": 190000,
+      "monthly_divisor_hours": 209,
+      "pay_basis": "monthly",
+      "regular_minutes": 0
+    },
+    "output": {
+      "hourly_exact_denominator": 209,
+      "hourly_exact_numerator": 3060000,
+      "ordinary_monthly_wage": 3060000
+    },
+    "rule_id": "B.ORDINARY"
+  },
+  {
+    "inputs": {
+      "overtime_minutes_excluding_holiday": 0,
+      "premium_applies": true
+    },
+    "output": 0,
+    "rule_id": "B.OVERTIME"
+  },
+  {
+    "inputs": {
+      "night_minutes_including_overlap": 0,
+      "premium_applies": true
+    },
+    "output": 0,
+    "rule_id": "B.NIGHT"
+  },
+  {
+    "inputs": {
+      "holiday_shifts": [],
+      "premium_applies": true
+    },
+    "output": 0,
+    "rule_id": "B.HOLIDAY"
+  },
+  {
+    "inputs": {
+      "already_included": true,
+      "qualifying_weeks": 0,
+      "weekly_hours": 40
+    },
+    "output": {
+      "weekly_holiday_entitlement": 0,
+      "weekly_holiday_pay": 0
+    },
+    "rule_id": "B.WEEKLY"
+  },
+  {
+    "inputs": {
+      "employer_provides_meals": false,
+      "meal_allowance": 190000
+    },
+    "output": 190000,
+    "rule_id": "B.MEAL_EXEMPT"
+  },
+  {
+    "inputs": {
+      "base_pay": 2740000,
+      "fixed_allowance": 130000,
+      "holiday_pay": 0,
+      "meal_allowance": 190000,
+      "night_pay": 0,
+      "overtime_pay": 0,
+      "paid_holiday_pay": 0,
+      "variable_allowance": 0,
+      "weekly_holiday_pay": 0
+    },
+    "output": {
+      "gross_pay": 3060000,
+      "taxable_pay": 2870000
+    },
+    "rule_id": "B.GROSS"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.0475",
+      "insurance_assessment_month": "2026-09",
+      "month": 9,
+      "notified_income": 2870000
+    },
+    "output": {
+      "national_pension": 136320,
+      "pension_base_income": 2870000
+    },
+    "rule_id": "B.PENSION"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.03595",
+      "notified_income": 2870000
+    },
+    "output": 103170,
+    "rule_id": "B.HEALTH"
+  },
+  {
+    "inputs": {
+      "health_premium": 103170,
+      "ratio": "0.9448 / 7.19"
+    },
+    "output": 13550,
+    "rule_id": "B.LONG_TERM_CARE"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.009",
+      "notified_income": 2870000
+    },
+    "output": 25830,
+    "rule_id": "B.EMPLOYMENT"
+  },
+  {
+    "inputs": {
+      "family_count": 1,
+      "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+      "table_interval_won": [
+        2870000,
+        2880000
+      ],
+      "taxable_pay": 2870000
+    },
+    "output": 62790,
+    "rule_id": "B.TAX_TABLE"
+  },
+  {
+    "inputs": {
+      "eligible_children": 0,
+      "payment_date": "2026-09-24"
+    },
+    "output": 0,
+    "rule_id": "B.CHILD_CREDIT"
+  },
+  {
+    "inputs": {
+      "before_small_tax_waiver": 62790,
+      "child_credit": 0,
+      "eligible_children": 0,
+      "family_count": 1,
+      "payment_date": "2026-09-24",
+      "small_tax_waiver_below_won": 1000,
+      "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+      "table_interval_won": [
+        2870000,
+        2880000
+      ],
+      "table_tax_before_children_floor_won": 62790,
+      "taxable_pay": 2870000,
+      "withholding_percent": 100
+    },
+    "output": 62790,
+    "rule_id": "B.WITHHOLDING"
+  },
+  {
+    "inputs": {
+      "income_tax": 62790,
+      "rate": "0.1"
+    },
+    "output": 6270,
+    "rule_id": "B.LOCAL_TAX"
+  },
+  {
+    "inputs": {
+      "deductions": 347930,
+      "gross_pay": 3060000
+    },
+    "output": 2712070,
+    "rule_id": "B.NET"
+  }
+]

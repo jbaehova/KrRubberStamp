@@ -1,0 +1,271 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-04",
+          "document_id": "PAINT-143-1",
+          "event": "received",
+          "event_id": "e143-1",
+          "location": "수채 작업실"
+        },
+        {
+          "date": "2026-04-14",
+          "document_id": "PAINT-143-2",
+          "event": "received",
+          "event_id": "e143-2",
+          "location": "수채 작업실"
+        },
+        {
+          "date": "2026-04-17",
+          "document_id": "PAINT-143-3",
+          "event": "received",
+          "event_id": "e143-3",
+          "location": "수채 작업실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-02",
+          "document_id": "PAINT-143-1",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h143-first",
+          "vendor": "주식회사 가상 수채재료"
+        },
+        {
+          "date": "2026-04-12",
+          "document_id": "PAINT-143-2",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h143-next",
+          "vendor": "가상수채재료"
+        },
+        {
+          "date": "2026-04-15",
+          "document_id": "PAINT-143-3",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h143-other",
+          "vendor": "가상종이상점"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h143-first",
+          "items": [
+            {
+              "name": "수채종이200",
+              "quantity": 40,
+              "unit_price": 1450
+            }
+          ],
+          "sheet_id": "s143-a"
+        },
+        {
+          "header_record_id": "h143-first",
+          "items": [
+            {
+              "name": "수채종이200",
+              "quantity": 20,
+              "unit_price": 1380
+            },
+            {
+              "name": "종이고정테이프",
+              "quantity": 4,
+              "unit_price": 7200
+            }
+          ],
+          "sheet_id": "s143-b"
+        },
+        {
+          "header_record_id": "h143-next",
+          "items": [
+            {
+              "name": "수채종이200",
+              "quantity": 30,
+              "unit_price": 1420
+            }
+          ],
+          "sheet_id": "s143-c"
+        },
+        {
+          "header_record_id": "h143-other",
+          "items": [
+            {
+              "name": "수채종이300",
+              "quantity": 40,
+              "unit_price": 1200
+            },
+            {
+              "name": "종이고정테이프",
+              "quantity": 3,
+              "unit_price": 6800
+            }
+          ],
+          "sheet_id": "s143-d"
+        }
+      ],
+      "processing_policy": "header_record_id로 표지에 해당하는 모든 품목표를 연결하고 같은 품목 반복 행의 수량도 모두 보존한다. invoice와 order는 document_id의 received가 있을 때 포함한다. quote, 무인수와 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 계산한다. 별도 공급가액은 품목별 수량 곱하기 단가이고 10% 원 미만 버림 세액을 더한다. 포함 총액은 품목별 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시만 제거한다. 규격 문자는 보존한다. 업체 및 품목 배열은 정규화 이름 오름차순이고 개당 공급가액 최저 단가가 같으면 정규화 업체명 오름차순 첫 업체다. 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "PAINT-143-1",
+        "PAINT-143-2",
+        "PAINT-143-3"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "PAINT-143-1",
+      "includes_vat": false,
+      "quantity": 40,
+      "unit_price": 1450
+    },
+    "output": {
+      "supply": 58000,
+      "total": 63800,
+      "vat": 5800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "PAINT-143-1",
+      "includes_vat": false,
+      "quantity": 20,
+      "unit_price": 1380
+    },
+    "output": {
+      "supply": 27600,
+      "total": 30360,
+      "vat": 2760
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "PAINT-143-1",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 7200
+    },
+    "output": {
+      "supply": 28800,
+      "total": 31680,
+      "vat": 2880
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "주식회사 가상 수채재료"
+    },
+    "output": "가상수채재료",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "PAINT-143-2",
+      "includes_vat": false,
+      "quantity": 30,
+      "unit_price": 1420
+    },
+    "output": {
+      "supply": 42600,
+      "total": 46860,
+      "vat": 4260
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상수채재료"
+    },
+    "output": "가상수채재료",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "PAINT-143-3",
+      "includes_vat": false,
+      "quantity": 40,
+      "unit_price": 1200
+    },
+    "output": {
+      "supply": 48000,
+      "total": 52800,
+      "vat": 4800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "PAINT-143-3",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 6800
+    },
+    "output": {
+      "supply": 20400,
+      "total": 22440,
+      "vat": 2040
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상종이상점"
+    },
+    "output": "가상종이상점",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "수채종이200",
+          "unit_price": 1380,
+          "vendor": "가상수채재료"
+        },
+        {
+          "item": "수채종이300",
+          "unit_price": 1200,
+          "vendor": "가상종이상점"
+        },
+        {
+          "item": "종이고정테이프",
+          "unit_price": 6800,
+          "vendor": "가상종이상점"
+        }
+      ],
+      "grand_total": 247940,
+      "supply_total": 225400,
+      "unique_document_count": 3,
+      "vat_total": 22540,
+      "vendor_totals": [
+        {
+          "supply": 157000,
+          "total": 172700,
+          "vat": 15700,
+          "vendor": "가상수채재료"
+        },
+        {
+          "supply": 68400,
+          "total": 75240,
+          "vat": 6840,
+          "vendor": "가상종이상점"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

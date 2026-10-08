@@ -1,0 +1,42 @@
+task_id: B1_B082_86aef8a3
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상차곡교구실 직원의 가족 승인 자료에는 본인과 배우자 및 7세 자녀가 포함되어 있습니다. 기본공제 가족 열에는 자녀를 포함하되
+  연령 요건 자녀 공제 승인 칸은 별도로 읽어 원천징수 소득세와 지방소득세를 구해 주세요. 이번 요청은 이미 승인된 가족 자료의 급여 반영입니다.
+  공제 후 실지급액도 net_pay에 작성해 주세요.
+input_files:
+- path: inputs/01_교구임금.hwpx
+  format: hwpx
+- path: inputs/02_가족승인구분.pdf
+  format: pdf
+- path: inputs/03_교구보험근태.xlsx
+  format: xlsx
+- path: inputs/04_연령공제참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-fd291cf2-10a7-548e-86ca-3d347e2fba0a
+scenario_seed: 9704967628379964777
+scenario_hash: 5989fd6e0f2e619fc019c935161769d0e5b0e568b9e2182aa05cd028fdd9e29b
+authorship:
+  method: individually_written
+  case_id: B082
+  case_sha256: 86aef8a38e40c5698c8cebc49271973487f7176281ad3162f15d25e9a0dd52f3
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- income_tax
+- local_income_tax
+- net_pay

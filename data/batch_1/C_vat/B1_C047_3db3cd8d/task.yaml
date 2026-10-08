@@ -1,0 +1,65 @@
+task_id: B1_C047_3db3cd8d
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상열린렌트는 고객 임대용 차량과 대표 이동용 차량을 같은 달에 샀습니다. 등록 분류와 차량 배치 기록을 연결해 매입세액(input_vat),
+  공제불가 세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat)을 구분해 주세요. 임대 매출과 납부한
+  예정고지 세액(prepaid_vat)을 반영한 순세액(net_vat) 및 환급액(refund_vat)을 answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_렌트법인_의뢰.hwpx
+  format: hwpx
+- path: inputs/02_전년_신고.pdf
+  format: pdf
+- path: inputs/03_예정고지_납부.xlsx
+  format: xlsx
+- path: inputs/04_임대_용역.pdf
+  format: pdf
+- path: inputs/05_배차용_차량.pdf
+  format: pdf
+- path: inputs/06_대표_차량.xlsx
+  format: xlsx
+- path: inputs/07_배차_정비.pdf
+  format: pdf
+- path: inputs/08_차량배치_기록.hwpx
+  format: hwpx
+- path: inputs/09_배차차량_사진.png
+  format: png
+  duplicate_of: inputs/05_배차용_차량.pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    prepaid_vat:
+      type: integer
+    net_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - prepaid_vat
+  - net_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-78885ab2-dc53-520c-9096-548180278e57
+scenario_seed: 4446123266013497646
+scenario_hash: e7258fb34d6b5946f9a7ee6ce7edcb812a57ec00c18848ab0513a2dcb98ff679
+authorship:
+  method: individually_written
+  case_id: C047
+  case_sha256: 3db3cd8dca55892e60f304ec1aeeee85eeb1bab1a91e7e7b9d0a7fac4a7d6123
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- prepaid_vat
+- net_vat
+- refund_vat

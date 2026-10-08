@@ -1,0 +1,84 @@
+task_id: B1_A145_c31a278d
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상홍매화생태의 가상진이든은 본인과 배우자 및 손자의 정산 자료를 냈습니다. 나이와 장애인 증명, 배우자 소득 종류와 손자
+  소득을 확인해 가족 수와 기본 및 추가공제액을 구해 주세요. 손자 특수교육과 가족 진료 및 보험, 명의별 카드와 기부를 각각 처리한 공제액도 필요합니다.
+  마지막으로 전체 세액공제 합계와 소득세 결정세액을 적어 직원 회신을 마감합니다.
+input_files:
+- path: inputs/01_본인장애연령.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_배우자소득.pdf
+  format: pdf
+- path: inputs/04_손자자격.pdf
+  format: pdf
+- path: inputs/05_손자특수교육.pdf
+  format: pdf
+- path: inputs/06_배우자진료.pdf
+  format: pdf
+- path: inputs/07_손자진료.pdf
+  format: pdf
+- path: inputs/08_가족보험.xlsx
+  format: xlsx
+- path: inputs/09_명의별카드.xlsx
+  format: xlsx
+- path: inputs/10_손자기부.pdf
+  format: pdf
+- path: inputs/11_직원배우자기부.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    education_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    donation_credit:
+      type: integer
+    total_tax_credits:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - additional_deduction
+  - education_credit
+  - medical_credit
+  - insurance_credit
+  - credit_card_deduction
+  - donation_credit
+  - total_tax_credits
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-0560e000-cc40-50d4-bfd0-db86984c4176
+scenario_seed: 14058592674079106959
+scenario_hash: e678ba509898d44d29924962caa53d5d261e631977c6c3bca739cd52cc832e12
+authorship:
+  method: individually_written
+  case_id: A145
+  case_sha256: c31a278d2c64e78fbec0c1c229bf629f361c30cede6030ac703657686790dcaa
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- additional_deduction
+- education_credit
+- medical_credit
+- insurance_credit
+- credit_card_deduction
+- donation_credit
+- total_tax_credits
+- final_national_tax

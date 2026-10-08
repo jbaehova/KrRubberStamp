@@ -1,0 +1,238 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-04",
+          "document_id": "KEEP-051",
+          "event": "received",
+          "event_id": "warehouse153-z",
+          "location": "보존실 입고대"
+        },
+        {
+          "date": "2026-04-04",
+          "document_id": "KEEP-051",
+          "event": "received",
+          "event_id": "workroom153-z",
+          "location": "보존실 입고대"
+        },
+        {
+          "date": "2026-04-06",
+          "document_id": "KEEP-51",
+          "event": "received",
+          "event_id": "warehouse153-s",
+          "location": "보존실 입고대"
+        },
+        {
+          "date": "2026-04-06",
+          "document_id": "KEEP-51",
+          "event": "received",
+          "event_id": "workroom153-s",
+          "location": "보존실 입고대"
+        },
+        {
+          "date": "2026-04-10",
+          "document_id": "KEEP-151",
+          "event": "received",
+          "event_id": "e153-h",
+          "location": "보존실 입고대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-01",
+          "document_id": "KEEP-051",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h153-zero",
+          "vendor": "가상보존용기"
+        },
+        {
+          "date": "2026-04-03",
+          "document_id": "KEEP-51",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h153-short",
+          "vendor": "가상보존용기"
+        },
+        {
+          "date": "2026-04-08",
+          "document_id": "KEEP-151",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h153-hundred",
+          "vendor": "가상보존받침"
+        },
+        {
+          "date": "2026-04-12",
+          "document_id": "KEEP-0151",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h153-next",
+          "vendor": "가상보존받침"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h153-zero",
+          "items": [
+            {
+              "name": "밀봉보존용기",
+              "quantity": 18,
+              "unit_price": 5600
+            }
+          ],
+          "sheet_id": "s153-z"
+        },
+        {
+          "header_record_id": "h153-short",
+          "items": [
+            {
+              "name": "밀봉보존용기",
+              "quantity": 12,
+              "unit_price": 5700
+            }
+          ],
+          "sheet_id": "s153-s"
+        },
+        {
+          "header_record_id": "h153-hundred",
+          "items": [
+            {
+              "name": "보존용기받침",
+              "quantity": 6,
+              "unit_price": 8300
+            }
+          ],
+          "sheet_id": "s153-h"
+        },
+        {
+          "header_record_id": "h153-next",
+          "items": [
+            {
+              "name": "추가보존용기받침",
+              "quantity": 6,
+              "unit_price": 8100
+            }
+          ],
+          "sheet_id": "s153-n"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 표지에 연결하고 document_id의 문자와 앞자리 0을 그대로 보존한다. invoice와 order는 같은 document_id의 received가 있을 때 포함한다. 동일 발생일과 장소의 같은 수령을 증명하는 확인 자료는 별개 구매를 추가하지 않는다. quote, 무인수 및 출고 전 취소는 제외하며 같은 document_id의 동일 원문은 한 번만 센다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "KEEP-0151"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "KEEP-051",
+        "KEEP-151",
+        "KEEP-51"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "KEEP-051",
+      "includes_vat": false,
+      "quantity": 18,
+      "unit_price": 5600
+    },
+    "output": {
+      "supply": 100800,
+      "total": 110880,
+      "vat": 10080
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상보존용기"
+    },
+    "output": "가상보존용기",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "KEEP-51",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 5700
+    },
+    "output": {
+      "supply": 68400,
+      "total": 75240,
+      "vat": 6840
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상보존용기"
+    },
+    "output": "가상보존용기",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "KEEP-151",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 8300
+    },
+    "output": {
+      "supply": 49800,
+      "total": 54780,
+      "vat": 4980
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상보존받침"
+    },
+    "output": "가상보존받침",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "밀봉보존용기",
+          "unit_price": 5600,
+          "vendor": "가상보존용기"
+        },
+        {
+          "item": "보존용기받침",
+          "unit_price": 8300,
+          "vendor": "가상보존받침"
+        }
+      ],
+      "grand_total": 240900,
+      "supply_total": 219000,
+      "unique_document_count": 3,
+      "vat_total": 21900,
+      "vendor_totals": [
+        {
+          "supply": 49800,
+          "total": 54780,
+          "vat": 4980,
+          "vendor": "가상보존받침"
+        },
+        {
+          "supply": 169200,
+          "total": 186120,
+          "vat": 16920,
+          "vendor": "가상보존용기"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,50 @@
+task_id: B1_C033_967d3c39
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상차가운잔의 냉장 장비 교체 자료를 반영해 주세요. 매출세액(output_vat)과 공제가능 매입세액(deductible_input_vat)을
+  비교한 뒤 이번에 적용할 영수증 발행세액공제(receipt_credit)를 판단해 주세요. 순세액(net_vat)과 환급액(refund_vat)을
+  answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_장비교체_보고.hwpx
+  format: hwpx
+- path: inputs/02_신고기초.pdf
+  format: pdf
+- path: inputs/03_음료공급.xlsx
+  format: xlsx
+- path: inputs/04_냉장설치.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    net_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - output_vat
+  - deductible_input_vat
+  - receipt_credit
+  - net_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-52eb2299-24f5-58ac-b06c-1fc012b2a833
+scenario_seed: 10843889697580227310
+scenario_hash: 05a533ab386c419a8cd963520a3d6a617f26b4adbbe69816becfa62cf5c90469
+authorship:
+  method: individually_written
+  case_id: C033
+  case_sha256: 967d3c39ffc99aee489ad7bf78f883015fbed0cd786adffc441bfc8eac28ab9b
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- output_vat
+- deductible_input_vat
+- receipt_credit
+- net_vat
+- refund_vat

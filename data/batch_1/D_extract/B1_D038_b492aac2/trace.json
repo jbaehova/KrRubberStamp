@@ -1,0 +1,201 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-04",
+          "document_id": "COMM-HOLDER-0403",
+          "event": "received",
+          "event_id": "CM-R-HOLDER",
+          "location": "가상봉사통신팀 장비 보관실"
+        },
+        {
+          "date": "2026-04-06",
+          "document_id": "COMM-CLIP-0405",
+          "event": "received",
+          "event_id": "CM-R-CLIP",
+          "location": "가상봉사통신팀 장비 보관실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-01",
+          "document_id": "COMM-BATCH-0401",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "CM-H-FIRST",
+          "vendor": "가상통신비품"
+        },
+        {
+          "date": "2026-04-03",
+          "document_id": "COMM-HOLDER-0403",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "CM-H-HOLDER",
+          "vendor": "가상이동통신"
+        },
+        {
+          "date": "2026-04-05",
+          "document_id": "COMM-CLIP-0405",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "CM-H-CLIP",
+          "vendor": "가상통신비품"
+        },
+        {
+          "date": "2026-04-07",
+          "document_id": "COMM-SPARE-0407",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "CM-H-SPARE",
+          "vendor": "가상이동통신"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "CM-H-FIRST",
+          "items": [
+            {
+              "name": "Battery Holder",
+              "quantity": 16,
+              "unit_price": 4700
+            },
+            {
+              "name": "Belt Clip",
+              "quantity": 20,
+              "unit_price": 2600
+            }
+          ],
+          "sheet_id": "CM-S-FIRST"
+        },
+        {
+          "header_record_id": "CM-H-HOLDER",
+          "items": [
+            {
+              "name": "Battery Holder",
+              "quantity": 16,
+              "unit_price": 4850
+            }
+          ],
+          "sheet_id": "CM-S-HOLDER"
+        },
+        {
+          "header_record_id": "CM-H-CLIP",
+          "items": [
+            {
+              "name": "Belt Clip",
+              "quantity": 20,
+              "unit_price": 2700
+            }
+          ],
+          "sheet_id": "CM-S-CLIP"
+        },
+        {
+          "header_record_id": "CM-H-SPARE",
+          "items": [
+            {
+              "name": "Battery Holder",
+              "quantity": 8,
+              "unit_price": 4750
+            }
+          ],
+          "sheet_id": "CM-S-SPARE"
+        }
+      ],
+      "processing_policy": "첨부 인수 대장은 2026년 4월 말까지 현장에서 물품을 받은 전체 내역이다. 발행 자료의 document_id와 대장의 document_id를 연결해 실제 인수(received)가 확인된 주문 또는 계산서만 지급 자료에 반영한다. 주문 접수만으로 물품 인수를 추정하지 않는다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "COMM-BATCH-0401",
+        "COMM-SPARE-0407"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "COMM-CLIP-0405",
+        "COMM-HOLDER-0403"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "COMM-HOLDER-0403",
+      "includes_vat": false,
+      "quantity": 16,
+      "unit_price": 4850
+    },
+    "output": {
+      "supply": 77600,
+      "total": 85360,
+      "vat": 7760
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상이동통신"
+    },
+    "output": "가상이동통신",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "COMM-CLIP-0405",
+      "includes_vat": false,
+      "quantity": 20,
+      "unit_price": 2700
+    },
+    "output": {
+      "supply": 54000,
+      "total": 59400,
+      "vat": 5400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상통신비품"
+    },
+    "output": "가상통신비품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "batteryholder",
+          "unit_price": 4850,
+          "vendor": "가상이동통신"
+        },
+        {
+          "item": "beltclip",
+          "unit_price": 2700,
+          "vendor": "가상통신비품"
+        }
+      ],
+      "grand_total": 144760,
+      "supply_total": 131600,
+      "unique_document_count": 2,
+      "vat_total": 13160,
+      "vendor_totals": [
+        {
+          "supply": 77600,
+          "total": 85360,
+          "vat": 7760,
+          "vendor": "가상이동통신"
+        },
+        {
+          "supply": 54000,
+          "total": 59400,
+          "vat": 5400,
+          "vendor": "가상통신비품"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

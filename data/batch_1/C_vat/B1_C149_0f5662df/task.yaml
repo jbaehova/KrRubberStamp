@@ -1,0 +1,56 @@
+task_id: B1_C149_0f5662df
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상옆칸공급의 판매 증빙, 각 물품의 실제 수령, 사업자 연결을 대조해 거래 수(unique_transaction_count),
+  불공제세액(noncreditable_vat), 발행 공제(receipt_credit), 정산세액(net_vat)을 answer.json에 적어
+  주세요.
+input_files:
+- path: inputs/01_공구점인계.hwpx
+  format: hwpx
+- path: inputs/02_공구영업.xlsx
+  format: xlsx
+- path: inputs/03_판매점검.xlsx
+  format: xlsx
+- path: inputs/04_판매카드.pdf
+  format: pdf
+- path: inputs/05_가족장비.pdf
+  format: pdf
+- path: inputs/06_가족인도.hwpx
+  format: hwpx
+- path: inputs/07_자기포장.pdf
+  format: pdf
+- path: inputs/08_자기인수.hwpx
+  format: hwpx
+- path: inputs/09_건물점유.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    net_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - noncreditable_vat
+  - receipt_credit
+  - net_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-8db657c5-10f5-5b4b-aaa4-69e07f48a567
+scenario_seed: 1105179469614496599
+scenario_hash: 2fd05f5562103a98a0389d4613fdd99c481b8f41bfca86cae7cdd72b12a7252a
+authorship:
+  method: individually_written
+  case_id: C149
+  case_sha256: 0f5662df436d3b570791f7140caad51ef70184cc4dbd55d0a07bb02ff92d7594
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- unique_transaction_count
+- noncreditable_vat
+- receipt_credit
+- net_vat

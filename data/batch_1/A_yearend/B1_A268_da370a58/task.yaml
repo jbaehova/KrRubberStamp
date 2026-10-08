@@ -1,0 +1,43 @@
+task_id: B1_A268_da370a58
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상수평책방의 가상도은율 주택대출 자료에는 입사 전 납부도 들어 있습니다. 납부 거래표의 날짜를 근로 시작일과 맞춰 주택이자
+  소득공제액을 계산하고 국세 결정세액을 알려 주세요.
+input_files:
+- path: inputs/01_입사등록.hwpx
+  format: hwpx
+- path: inputs/02_급여확정.xlsx
+  format: xlsx
+- path: inputs/03_대출요건.pdf
+  format: pdf
+- path: inputs/04_입사경계납부.xlsx
+  format: xlsx
+- path: inputs/05_연말이자.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    tax_base:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - housing_income_deduction
+  - tax_base
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-44c289c6-4136-5930-a6b1-720b5b57d138
+scenario_seed: 15724047999626169449
+scenario_hash: 02b59d339a09166bac0e9a4a6ae5efb22c6525d467b656f5b71f79816b7ebe5a
+authorship:
+  method: individually_written
+  case_id: A268
+  case_sha256: da370a5898e8cc69ddb7720e0a91b49753a19883279fc0e645f62b5ba5e7521d
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- housing_income_deduction
+- tax_base
+- final_national_tax

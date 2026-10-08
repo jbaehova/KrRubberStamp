@@ -1,0 +1,60 @@
+task_id: B1_C097_3c25b6ef
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상조립방은 고객 방문 계획과 가족 가게의 구매 대금을 한 경리 파일에 넣었습니다. 실제 식사 참석자와 별도 사업자의 장비
+  수령을 확인하세요. 전체 매입세액(input_vat), 불공제 세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat),
+  발행세액공제(receipt_credit), 환급액(refund_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_조립방_사업.hwpx
+  format: hwpx
+- path: inputs/02_영업과_선납.xlsx
+  format: xlsx
+- path: inputs/03_소품판매_카드.pdf
+  format: pdf
+- path: inputs/04_방문예정일_점심.xlsx
+  format: xlsx
+- path: inputs/05_고객방문_취소.hwpx
+  format: hwpx
+- path: inputs/06_실제_직원식사.pdf
+  format: pdf
+- path: inputs/07_가족장비_계산서.xlsx
+  format: xlsx
+- path: inputs/08_가족가게_장비인수.hwpx
+  format: hwpx
+- path: inputs/09_정상판매재고_입고.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-0150a760-90d9-5a41-9987-af8fefbca92d
+scenario_seed: 4334071354507227769
+scenario_hash: 5f5fdc5d491c306c09998447e94dea16f8c2ce487e3960513b0343d61e44a307
+authorship:
+  method: individually_written
+  case_id: C097
+  case_sha256: 3c25b6ef1c997279d1840054cf0b380cd754fc079a6279eaba205f33eaa504d2
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- refund_vat

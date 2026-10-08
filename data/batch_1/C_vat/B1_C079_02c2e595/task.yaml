@@ -1,0 +1,42 @@
+task_id: B1_C079_02c2e595
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상찻상자는 현금으로 판매한 세 주문을 장부에 넣었습니다. 이 중 발급 사실이 확인되는 현금영수증은 한 주문뿐입니다. 모든
+  판매의 공급가액(tax_base), 매출세액(output_vat), 발행세액공제(receipt_credit)를 answer.json에 정수로 작성해
+  주세요.
+input_files:
+- path: inputs/01_현금판매_사업.pdf
+  format: pdf
+- path: inputs/02_현금_수금장부.xlsx
+  format: xlsx
+- path: inputs/03_발급한_현금영수증.pdf
+  format: pdf
+- path: inputs/04_계산대_발급확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+  required:
+  - tax_base
+  - output_vat
+  - receipt_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-974dc149-90b6-5369-b803-59af8e80020d
+scenario_seed: 198973765021115336
+scenario_hash: 1a08aaaa0dd4d3ea8d096f1a23624dcb4fde0ead450093dfed0dcc7761c75ad5
+authorship:
+  method: individually_written
+  case_id: C079
+  case_sha256: 02c2e595c7b4a3c8c4d51aa0f1b97fa0f447cfceada6c8ea234855605342ef57
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- tax_base
+- output_vat
+- receipt_credit

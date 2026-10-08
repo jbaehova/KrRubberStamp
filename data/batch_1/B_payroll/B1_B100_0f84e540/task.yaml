@@ -1,0 +1,66 @@
+task_id: B1_B100_0f84e540
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상자람교정실의2월 근로분에는 급여 지급 계획과 은행 처리 이력이 함께 있습니다. 평일 추가 작업은 휴게가 빠진 이전 승인본과
+  휴게를 추가한 수정본이 있으니 최신 승인본으로 연장수당과 야간 가산을 계산해 주세요. 지급 기록의 상태에서 적용일을 정한 뒤 두 자녀 공제와 기관별
+  기준을 반영한 소득세 및 실지급액을 구합니다.
+input_files:
+- path: inputs/01_교정정액.pdf
+  format: pdf
+- path: inputs/02_교정이전.hwpx
+  format: hwpx
+- path: inputs/03_휴게수정.xlsx
+  format: xlsx
+- path: inputs/04_교정일정.pdf
+  format: pdf
+- path: inputs/05_교정식대.hwpx
+  format: hwpx
+- path: inputs/06_교정연금.pdf
+  format: pdf
+- path: inputs/07_교정보수.xlsx
+  format: xlsx
+- path: inputs/08_교정가족.hwpx
+  format: hwpx
+- path: inputs/09_교정은행.pdf
+  format: pdf
+- path: inputs/10_교정공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - income_tax
+  - local_income_tax
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-6a681dcc-8fb7-5620-b102-646190970cc9
+scenario_seed: 1118270671887993928
+scenario_hash: c8bd9424175840bd275f38c490d15ae3b065a9ff11148cd032115c924176dba4
+authorship:
+  method: individually_written
+  case_id: B100
+  case_sha256: 0f84e540509f0c4882b1904a30ca1277c444c31aacd3bdcb33f119b175b20724
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- overtime_pay
+- night_pay
+- income_tax
+- local_income_tax
+- gross_pay
+- net_pay

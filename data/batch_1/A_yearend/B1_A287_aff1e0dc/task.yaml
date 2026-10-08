@@ -1,0 +1,55 @@
+task_id: B1_A287_aff1e0dc
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상바다유리의 가상박연후는 3월부터 10월까지만 근무했습니다. 대출 이자는 납부일별로 재직 기간을 대조하고 공익기부는 단체
+  지정 자료와 연결해 주세요. 주택이자 소득공제와 기부 및 연금계좌 세액공제를 계산해 국세 정산액을 전표에 적으면 됩니다.
+input_files:
+- path: inputs/01_근로기간.hwpx
+  format: hwpx
+- path: inputs/02_급여마감.xlsx
+  format: xlsx
+- path: inputs/03_원천징수.pdf
+  format: pdf
+- path: inputs/04_대출조건.pdf
+  format: pdf
+- path: inputs/05_입사전후이자.xlsx
+  format: xlsx
+- path: inputs/06_퇴직전후이자.pdf
+  format: pdf
+- path: inputs/07_기관지정.hwpx
+  format: hwpx
+- path: inputs/08_기부거래.xlsx
+  format: xlsx
+- path: inputs/09_개인연금.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    donation_credit:
+      type: integer
+    pension_account_credit:
+      type: integer
+    settlement_national_tax:
+      type: integer
+  required:
+  - housing_income_deduction
+  - donation_credit
+  - pension_account_credit
+  - settlement_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-053148ed-4e1b-517d-ac38-b65f828dd347
+scenario_seed: 12678161662165506259
+scenario_hash: 1934ce8d925e4fdbffbe587595e1f2e228bedb7b7ab79713ebe0e2a76c950fb6
+authorship:
+  method: individually_written
+  case_id: A287
+  case_sha256: aff1e0dc2659d8d367b4b004ddb98aa9dfaf52bfd052d8347d0599f404fbc222
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- housing_income_deduction
+- donation_credit
+- pension_account_credit
+- settlement_national_tax

@@ -1,0 +1,61 @@
+task_id: B1_C092_157902df
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상식탁자리의 소매 경리는 같은 카드의 식사와 작업복 지출을 모두 매장 비용으로 넣었습니다. 실제 참석자와 수령 장소를 확인하고,
+  계산서와 카드가 겹친 판매 및 7월 입고도 함께 정리하세요. 고유 거래 수(unique_transaction_count), 불공제 세액(noncreditable_vat),
+  공제가능 매입세액(deductible_input_vat), 발행세액공제(receipt_credit), 환급액(refund_vat)을 answer.json에
+  정수로 적어 주세요.
+input_files:
+- path: inputs/01_매장_신고인계.hwpx
+  format: hwpx
+- path: inputs/02_영업활동_고지납부.pdf
+  format: pdf
+- path: inputs/03_기업주문_두증빙.xlsx
+  format: xlsx
+- path: inputs/04_직원점심_수령.hwpx
+  format: hwpx
+- path: inputs/05_고객저녁_참석.pdf
+  format: pdf
+- path: inputs/06_가족배달_사용.hwpx
+  format: hwpx
+- path: inputs/07_판매작업복_입고.xlsx
+  format: xlsx
+- path: inputs/08_독립_소비자판매.pdf
+  format: pdf
+- path: inputs/09_7월재고_실제인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-248aed2f-ca7e-5086-bfbf-0e5db139864e
+scenario_seed: 1547271105104190505
+scenario_hash: 83e1bff364f19c7c32bc4211c632f25962c039d29026e7517c964c8e2fa16cfa
+authorship:
+  method: individually_written
+  case_id: C092
+  case_sha256: 157902df4ef61c29521ebb624310a8ecfa843cbb34e3d3608dd5504ad8e609fd
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- refund_vat

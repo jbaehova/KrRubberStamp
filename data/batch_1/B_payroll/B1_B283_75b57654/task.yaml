@@ -1,0 +1,49 @@
+task_id: B1_B283_75b57654
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상칸막이기록실은 두 주의 종료 임금을2월 계획대로 보내지 못했습니다. 소정 집계와 개근 자료를 먼저 읽어 기본 대가 및 별도
+  주휴수당을 구해 주세요. 실제 은행 실행일을 YYYY-MM-DD로 적고 그 날짜의 한 자녀 공제를 반영한 소득세와 지방소득세를 계산합니다.
+input_files:
+- path: inputs/01_종료두주약정.hwpx
+  format: hwpx
+- path: inputs/02_개근소정.xlsx
+  format: xlsx
+- path: inputs/03_계획취소실행.pdf
+  format: pdf
+- path: inputs/04_자녀부과원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    effective_payment_date:
+      type: string
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - effective_payment_date
+  - income_tax
+  - local_income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-e2ff272d-783b-5b5a-a87c-a5272e129e75
+scenario_seed: 8481815577481459448
+scenario_hash: b8233508ba94812b884d296039b4d96094256cd48e1b2ad89914d4de2dc4c760
+authorship:
+  method: individually_written
+  case_id: B283
+  case_sha256: 75b57654422836f80aaf027c54585bada03a7520109afebaf8c1e25018d9aafa
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- effective_payment_date
+- income_tax
+- local_income_tax

@@ -1,0 +1,51 @@
+task_id: B1_C283_98681aec
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상큰방차양은 새 납품 계약 때문에 상반기 매출이 크게 늘었습니다. 카드 발급 두 건과 현금영수증 발급 한 건은 각각 공제율
+  계산액이 연간 한도보다 작지만, 신고에서는 발급액을 함께 처리해야 합니다. 별도 계산서 납품과 재료 구매까지 반영하여 매출세액(output_vat),
+  공제가능 매입세액(deductible_input_vat), 이번 발행 공제(receipt_credit), 납부액(payable_vat)을 answer.json에
+  적어 주세요.
+input_files:
+- path: inputs/대형카드A.pdf
+  format: pdf
+- path: inputs/대형카드B.pdf
+  format: pdf
+- path: inputs/대형현금C.xlsx
+  format: xlsx
+- path: inputs/기관납품.pdf
+  format: pdf
+- path: inputs/재료및인수.hwpx
+  format: hwpx
+- path: inputs/전년및신고.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - output_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-86b6e519-6558-5e78-af99-37f83b73b7d3
+scenario_seed: 10982057296000043786
+scenario_hash: 004b20c49dd462fd5f526be0da9f59ca5add2da554909b55ff79b892d4744f35
+authorship:
+  method: individually_written
+  case_id: C283
+  case_sha256: 98681aecdf11cb0af0caedccc0bbbc043814128ec5b06aee3e3204e6334c276b
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- output_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

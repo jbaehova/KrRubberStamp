@@ -1,0 +1,43 @@
+task_id: B1_B121_c43c905d
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상책갈피수선소의 단시간 직원은 한 소정일에 출근하지 않았습니다. 계약 일정의 무급 결근을 기본급에서 반영하고, 주별 소정
+  출근 확인으로 별도 주휴수당을 계산해 주세요. 기본급 감소와 주휴 감소를 같은 공제 항목으로 한 번 더 빼지 말고 총지급액으로 연결합니다.
+input_files:
+- path: inputs/01_수선계약.pdf
+  format: pdf
+- path: inputs/02_결근일정.xlsx
+  format: xlsx
+- path: inputs/03_수선출근.hwpx
+  format: hwpx
+- path: inputs/04_수선공제.pdf
+  format: pdf
+- path: inputs/05_결근참조.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-f694edbc-19a6-554f-9291-88a9c228cfc1
+scenario_seed: 14140335659307807815
+scenario_hash: 8070c2b41f0f10899fafd044fc69bfdad7a51772e50b2399c2a0dab41cc74bdc
+authorship:
+  method: individually_written
+  case_id: B121
+  case_sha256: c43c905d09d4b44709335f578543de38ec4ed221c7f556eca6a285e088815332
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- gross_pay

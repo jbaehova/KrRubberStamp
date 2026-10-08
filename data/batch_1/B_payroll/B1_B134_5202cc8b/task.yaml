@@ -1,0 +1,43 @@
+task_id: B1_B134_5202cc8b
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상고운줄편집실은 정규 근로 카드 하나에 승인본과 길게 적힌 새 초안이 있습니다. 다른 두 소정일 카드와 함께 실제 지급 대상
+  기록만 골라 기본급을 계산해 주세요. 완료된 소정 출근 주의 주휴수당과 총지급액도 구합니다. 단순히 수정 번호가 가장 높은 시각을 고르지 않습니다.
+input_files:
+- path: inputs/01_편집시급.hwpx
+  format: hwpx
+- path: inputs/02_편집정규.xlsx
+  format: xlsx
+- path: inputs/03_완료주확인.pdf
+  format: pdf
+- path: inputs/04_편집등록.hwpx
+  format: hwpx
+- path: inputs/05_정규참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-3dd1c274-0d85-5f0d-be98-52c77c3286a3
+scenario_seed: 5909510560117275384
+scenario_hash: 7c9b55f69befb851dffedea44eb8e154984dfd9decfe270865de5c862053c602
+authorship:
+  method: individually_written
+  case_id: B134
+  case_sha256: 5202cc8b6435baf82694fb6740bc14068bb70759db960476592e34415fbf9ac3
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- gross_pay

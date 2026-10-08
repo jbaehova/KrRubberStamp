@@ -1,0 +1,80 @@
+task_id: B1_A103_5baaaaee
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상풀꽃재생의 가상비서안은 큰 의료비와 연금 납입 및 어머니 기부 자료로 세금이 음수가 될 것으로 예상했습니다. 자녀의 근로소득
+  확인과 보험 보전 및 연금 한도를 반영해 교육비와 의료비 및 연금계좌 공제액을 계산해 주세요. 산출세액과 근로소득세액공제 및 전체 세액공제 합계를
+  구하고 결정 소득세와 지방소득세를 적습니다. 기납부세액을 대조한 정산 합계를 구하되 환급은 음수로 표시합니다.
+input_files:
+- path: inputs/01_환급질의.hwpx
+  format: hwpx
+- path: inputs/02_급여확정.xlsx
+  format: xlsx
+- path: inputs/03_어머니부양.pdf
+  format: pdf
+- path: inputs/04_자녀근로소득.pdf
+  format: pdf
+- path: inputs/05_자녀학비.pdf
+  format: pdf
+- path: inputs/06_어머니진료.pdf
+  format: pdf
+- path: inputs/07_어머니보전금.xlsx
+  format: xlsx
+- path: inputs/08_연금저축.pdf
+  format: pdf
+- path: inputs/09_IRP.pdf
+  format: pdf
+- path: inputs/10_어머니기부.pdf
+  format: pdf
+- path: inputs/11_원천징수누계.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    education_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    pension_account_credit:
+      type: integer
+    computed_tax:
+      type: integer
+    employment_credit:
+      type: integer
+    total_tax_credits:
+      type: integer
+    final_national_tax:
+      type: integer
+    final_local_tax:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - education_credit
+  - medical_credit
+  - pension_account_credit
+  - computed_tax
+  - employment_credit
+  - total_tax_credits
+  - final_national_tax
+  - final_local_tax
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-c78f46fd-e6e2-5d64-8c27-bb27fb8f757a
+scenario_seed: 6605279742864820580
+scenario_hash: 98db6d9510f57b4b9c5600122daa96f519c7210d7aaaabeeeffcbf7eb4eb2ca7
+authorship:
+  method: individually_written
+  case_id: A103
+  case_sha256: 5baaaaee0b8a89645f22d783bba3f15e8a72087e52e5355e717775330879513f
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- education_credit
+- medical_credit
+- pension_account_credit
+- computed_tax
+- employment_credit
+- total_tax_credits
+- final_national_tax
+- final_local_tax
+- settlement_total

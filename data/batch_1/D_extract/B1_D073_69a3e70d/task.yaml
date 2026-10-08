@@ -1,0 +1,47 @@
+task_id: B1_D073_69a3e70d
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 연습실 바닥 보호품의 재구매 기준을 만들어 주세요. 실제 인수의 cheapest_by_item만 필요합니다. 동일 가격의 후보가
+  나오면 피아노실 대장의 일반 선택 기준을 적용하세요.
+input_files:
+- path: inputs/01_첫연습실.pdf
+  format: pdf
+- path: inputs/02_피아노실.xlsx
+  format: xlsx
+- path: inputs/03_합주실.hwpx
+  format: hwpx
+- path: inputs/04_분반실.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-d5bfcaff-eba9-58ee-bb29-beb8acb9f044
+scenario_seed: 7612181842447233508
+scenario_hash: 66d79cfb889210d28926ec14c48d0a9177caa3911b90364556384b04e1081e04
+authorship:
+  method: individually_written
+  case_id: D073
+  case_sha256: 69a3e70dfcbef1e405c1c6c536825d4c70559f732ebd552a7885336be6ead2df
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item

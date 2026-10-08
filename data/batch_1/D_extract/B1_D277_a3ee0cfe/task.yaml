@@ -1,0 +1,58 @@
+task_id: B1_D277_a3ee0cfe
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 천장 수선에 실제 도착한 부품의 판매처별 지급표를 작성해 주세요. vendor_totals와 grand_total을 제출해
+  주세요.
+input_files:
+- path: inputs/01_레일주문.hwpx
+  format: hwpx
+- path: inputs/02_와이어청구.pdf
+  format: pdf
+- path: inputs/03_와이어품목.xlsx
+  format: xlsx
+- path: inputs/04_연결부속.xlsx
+  format: xlsx
+- path: inputs/05_레일본체.pdf
+  format: pdf
+- path: inputs/06_현장인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-baf3ecef-63f8-5f0d-9f8e-392a14c92862
+scenario_seed: 11812393161303604085
+scenario_hash: 8908265d6b294419227c20a97ff00aea450000a387dd66f6575ba7b759f55754
+authorship:
+  method: individually_written
+  case_id: D277
+  case_sha256: a3ee0cfed6c13b755d9088963b05147c69eb2a430513119df447ba6947e5461e
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals
+- grand_total

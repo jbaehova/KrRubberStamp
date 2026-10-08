@@ -1,0 +1,42 @@
+task_id: B1_C012_c846075e
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상작은기어의 도매 매출 중 한 거래는 계좌가 아닌 현금으로 받았습니다. 첨부 공급완료 장부가 이번 신고 전체입니다. 매출
+  공급가액(tax_base)과 매출세액(output_vat)을 합산하고 이 거래의 발행세액공제(receipt_credit)를 판단해 납부액(payable_vat)과
+  함께 answer.json에 정수로 기록해 주세요.
+input_files:
+- path: inputs/01_현금수금_설명.hwpx
+  format: hwpx
+- path: inputs/02_기어_공급장부.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - output_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-19d024af-fceb-57af-b059-1d80f765530c
+scenario_seed: 14431230156294557006
+scenario_hash: e8d1cf3707666e7226e50933e9caa5b1ef1d27adea3e45913030a7d11a6816e8
+authorship:
+  method: individually_written
+  case_id: C012
+  case_sha256: c846075e01d78d4efb50b8d8abc2d09d01a012c815c02e0f119bcc26626bf3f3
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- tax_base
+- output_vat
+- receipt_credit
+- payable_vat

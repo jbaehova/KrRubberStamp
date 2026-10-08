@@ -1,0 +1,42 @@
+task_id: B1_C007_2027a907
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상칸칸가구의 직원이 세금계산서 총액을 매출표에 옮겼습니다. 총액을 공급가액으로 잘못 입력하지 않도록 이번 주문의 매출 공급가액(tax_base)과
+  매출세액(output_vat)을 계산해 주세요. 세금계산서를 발급한 주문의 발행세액공제(receipt_credit)와 최종 납부액(payable_vat)도
+  answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_주문업_안내.pdf
+  format: pdf
+- path: inputs/02_책장_계산서.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - output_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-9bee60f3-325f-5207-a554-f1ab25c1a554
+scenario_seed: 2317006382802588357
+scenario_hash: a93815db89156658ddff21fb378515e61eeb79855745fd89b6033dabe9a25e2c
+authorship:
+  method: individually_written
+  case_id: C007
+  case_sha256: 2027a9077542d2c5eba5d9b9c4171ee8d735c639ec6a2c40070610016cce19f9
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- tax_base
+- output_vat
+- receipt_credit
+- payable_vat

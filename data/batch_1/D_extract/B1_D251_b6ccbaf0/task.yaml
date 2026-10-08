@@ -1,0 +1,64 @@
+task_id: B1_D251_b6ccbaf0
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 우편 대행점 창구 비품의 업체 계정과 구매 근거를 인계해 주세요. vendor_totals와 unique_document_count를
+  제출해 주세요.
+input_files:
+- path: inputs/01_트레이표지.pdf
+  format: pdf
+- path: inputs/02_트레이품목.xlsx
+  format: xlsx
+- path: inputs/03_서류통표지.hwpx
+  format: hwpx
+- path: inputs/04_서류통품목.xlsx
+  format: xlsx
+- path: inputs/05_스탬프청구.pdf
+  format: pdf
+- path: inputs/06_큰트레이표지.hwpx
+  format: hwpx
+- path: inputs/07_큰트레이명세.xlsx
+  format: xlsx
+- path: inputs/08_창구비품인수.pdf
+  format: pdf
+- path: inputs/09_출고중단.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-80cf4fa9-3da9-5063-a9b8-73be98205351
+scenario_seed: 13172108553230938315
+scenario_hash: 9a287ee6bb2e25f78bcf6c38f1a6ffa78b73319a85c79d3b589c1c9d0d63c762
+authorship:
+  method: individually_written
+  case_id: D251
+  case_sha256: b6ccbaf0ba36f0cb094095d7bf5f560803df1d82458145635a01121d60600839
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals
+- unique_document_count

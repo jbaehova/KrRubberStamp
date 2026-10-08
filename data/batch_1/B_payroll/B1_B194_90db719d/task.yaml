@@ -1,0 +1,63 @@
+task_id: B1_B194_90db719d
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상칸막이기록실은 화요일 작업의 지급 구분을 소정에서 추가로 수정 승인했습니다. 유효 승인 구분으로 기본급과 연장수당을 산정하고,
+  별도 주휴일의 야간 작업 대가 및 주휴수당과 총지급액을 계산해 주세요.
+input_files:
+- path: inputs/01_칸막이계약.hwpx
+  format: hwpx
+- path: inputs/02_소정카드.xlsx
+  format: xlsx
+- path: inputs/03_화요일이전.pdf
+  format: pdf
+- path: inputs/04_화요일수정.hwpx
+  format: hwpx
+- path: inputs/05_일요일밤.xlsx
+  format: xlsx
+- path: inputs/06_칸막이달력.pdf
+  format: pdf
+- path: inputs/07_칸막이개근.hwpx
+  format: hwpx
+- path: inputs/08_칸막이부과.xlsx
+  format: xlsx
+- path: inputs/09_칸막이대상.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - overtime_pay
+  - weekly_holiday_pay
+  - holiday_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-9facdf47-e91c-5ce7-82f7-768fea52c403
+scenario_seed: 10438061481468761123
+scenario_hash: cdcb2940bf75090f6ca3d5b07ee43a29fdf5035de97f1310e34254dad69932ec
+authorship:
+  method: individually_written
+  case_id: B194
+  case_sha256: 90db719d3aa21423e0136b4e5d0359d9e66bc792d807c16572bf2e97c7d8cc82
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- base_pay
+- overtime_pay
+- weekly_holiday_pay
+- holiday_pay
+- night_pay
+- gross_pay

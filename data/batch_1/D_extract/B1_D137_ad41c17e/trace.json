@@ -1,0 +1,147 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-07",
+          "document_id": "VENT-137-G",
+          "event": "received",
+          "event_id": "e137-g",
+          "location": "환풍 부품 검수대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-01",
+          "document_id": "VENT-137-M",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h137-m",
+          "vendor": "가상환풍교체"
+        },
+        {
+          "date": "2026-05-05",
+          "document_id": "VENT-137-G",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h137-g",
+          "vendor": "가상환풍교체"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h137-m",
+          "items": [
+            {
+              "name": "환풍교체모터",
+              "quantity": 1,
+              "unit_price": 231000
+            }
+          ],
+          "sheet_id": "s137-m"
+        },
+        {
+          "header_record_id": "h137-g",
+          "items": [
+            {
+              "name": "교체팬가드",
+              "quantity": 2,
+              "unit_price": 18703
+            }
+          ],
+          "sheet_id": "s137-g"
+        },
+        {
+          "header_record_id": "h137-g",
+          "items": [
+            {
+              "name": "교체흡입망",
+              "quantity": 2,
+              "unit_price": 9351
+            }
+          ],
+          "sheet_id": "s137-n"
+        }
+      ],
+      "processing_policy": "header_record_id로 모든 품목 첨부를 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있어야 포함한다. quote, 무인수와 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 센다. 포함 품목 총액의 10/11 원 미만 버림이 공급가액이며 차액이 세액이다. 별도는 품목 수량 곱하기 단가를 공급가액으로 하고 10% 원 미만 버림 세액을 더한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "VENT-137-M"
+      ],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "VENT-137-G"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "VENT-137-G",
+      "includes_vat": true,
+      "quantity": 2,
+      "unit_price": 18703
+    },
+    "output": {
+      "supply": 34005,
+      "total": 37406,
+      "vat": 3401
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "VENT-137-G",
+      "includes_vat": true,
+      "quantity": 2,
+      "unit_price": 9351
+    },
+    "output": {
+      "supply": 17001,
+      "total": 18702,
+      "vat": 1701
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상환풍교체"
+    },
+    "output": "가상환풍교체",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "교체팬가드",
+          "unit_price": 17002,
+          "vendor": "가상환풍교체"
+        },
+        {
+          "item": "교체흡입망",
+          "unit_price": 8500,
+          "vendor": "가상환풍교체"
+        }
+      ],
+      "grand_total": 56108,
+      "supply_total": 51006,
+      "unique_document_count": 1,
+      "vat_total": 5102,
+      "vendor_totals": [
+        {
+          "supply": 51006,
+          "total": 56108,
+          "vat": 5102,
+          "vendor": "가상환풍교체"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

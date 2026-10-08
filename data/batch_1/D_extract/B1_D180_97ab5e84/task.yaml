@@ -1,0 +1,51 @@
+task_id: B1_D180_97ab5e84
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 시연 장비 전원 부품을 다시 구매할 기준이 필요합니다. 공급가액으로 비교한 cheapest_by_item과 지급액 grand_total을
+  알려 주세요.
+input_files:
+- path: inputs/01_시연전원인수.pdf
+  format: pdf
+- path: inputs/02_어댑터추가.xlsx
+  format: xlsx
+- path: inputs/03_연장선추가.hwpx
+  format: hwpx
+- path: inputs/04_홀더구매.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-1879bb17-0e5b-5448-addc-cf91cf662f79
+scenario_seed: 10928932845652940286
+scenario_hash: 70404e07f9213972d00f16f88117fb1b5992fb0bcc2f158caaad50cdeba1df48
+authorship:
+  method: individually_written
+  case_id: D180
+  case_sha256: 97ab5e84e73e15fe7dfdfc09349a8c68377e55f20cff1047e3b8ed519ec45efb
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item
+- grand_total

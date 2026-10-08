@@ -1,0 +1,43 @@
+task_id: B1_D065_e3c37d57
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 기록 상자를 추가 구매합니다. 거래 물량 대신 개당 공급가액 단가를 비교한 cheapest_by_item만 보내 주세요. 같은
+  규격 및 이름 처리 기준은 신규 기록물 대장에 있습니다.
+input_files:
+- path: inputs/01_초기보관.pdf
+  format: pdf
+- path: inputs/02_신규기록.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-a0d1d284-de7f-5f29-ad17-d3f0eb77dda8
+scenario_seed: 16412099283300914966
+scenario_hash: eb42c3f2c8bb6d91e78e171fdecd58dbb3b87f3373b39ded7e65a2c586288a87
+authorship:
+  method: individually_written
+  case_id: D065
+  case_sha256: e3c37d57d79817163441110ac5778946f085e3e09447b8011f0a85ffb11b6988
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item

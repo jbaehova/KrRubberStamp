@@ -1,0 +1,332 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "봄점검225",
+          "date": "2026-06-09",
+          "description": "허가 대여 차량의 봄 정기 점검을 완료하여 직원이 검수했다.",
+          "document_ids": [
+            "봄정비전자225"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "달린뒤 대여 차고"
+          },
+          "operation_id": "차량대여225",
+          "participants": [
+            {
+              "name": "가상안대여",
+              "organization": "가상달린뒤대여",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "봄정비225",
+          "vehicle_id": "가상-대여225차"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "여름교체225",
+          "date": "2026-07-01",
+          "description": "6월 상담한 허가 대여 차량의 부품 교체는 7월 1일 실제 완료했다.",
+          "document_ids": [
+            "여름정비전자225"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "달린뒤 대여 차고"
+          },
+          "operation_id": "차량대여225",
+          "participants": [
+            {
+              "name": "가상안대여",
+              "organization": "가상달린뒤대여",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "여름정비225",
+          "vehicle_id": "가상-대여225차"
+        }
+      ],
+      "operations": [
+        {
+          "description": "허가받은 국내 과세 자동차 대여",
+          "operation_id": "차량대여225",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "봄점검225",
+          "date": "2026-06-09",
+          "document_id": "봄정비전자225",
+          "transaction_id": "봄정비225"
+        },
+        {
+          "activity_id": "여름교체225",
+          "date": "2026-07-01",
+          "document_id": "여름정비전자225",
+          "transaction_id": "여름정비225"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "vehicle_rental",
+          "permitted_operation_id": "차량대여225",
+          "registration_class": "excise_passenger",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-12-31",
+          "vehicle_id": "가상-대여225차"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "봄정비전자225",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "봄정비225"
+      },
+      {
+        "business_related": true,
+        "document_id": "여름정비전자225",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "여름정비225"
+      },
+      {
+        "transaction_id": "봄정비225",
+        "vehicle_direct_business": true,
+        "vehicle_id": "가상-대여225차",
+        "vehicle_subject_excise": true
+      },
+      {
+        "transaction_id": "여름정비225",
+        "vehicle_direct_business": true,
+        "vehicle_id": "가상-대여225차",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "봄정비전자225"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "봄정비225"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "여름정비전자225"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "여름정비225"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "대여전자225"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "완료대여225"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-09",
+      "transaction_id": "봄정비225"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 550000,
+      "includes_vat": true,
+      "transaction_id": "봄정비225"
+    },
+    "output": {
+      "gross": 550000,
+      "supply_base": 500000,
+      "vat": 50000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "봄정비225",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 50000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-07-01",
+      "transaction_id": "여름정비225"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-30",
+      "transaction_id": "완료대여225"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 7800000,
+      "includes_vat": false,
+      "transaction_id": "완료대여225"
+    },
+    "output": {
+      "gross": 8580000,
+      "supply_base": 7800000,
+      "vat": 780000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 7800000
+    },
+    "output": 780000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "완료대여225"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 232000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 730000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 730000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 730000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 50000,
+      "output_vat": 780000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 50000,
+      "input_vat": 50000,
+      "net_vat": 730000,
+      "noncreditable_vat": 0,
+      "output_vat": 780000,
+      "payable_vat": 730000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 7800000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

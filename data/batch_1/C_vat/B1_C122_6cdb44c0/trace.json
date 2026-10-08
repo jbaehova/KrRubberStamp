@@ -1,0 +1,206 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C122-재료인수",
+          "date": "2026-04-09",
+          "description": "표식 제작용 판재를 받아 제작실 선반에 적재했다. 봉투와 이메일의 증빙번호는 같은 판재 주문을 가리킨다.",
+          "document_ids": [
+            "C122-임시영수",
+            "C122-전자계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상표식 제작실"
+          },
+          "operation_id": "C122-표식",
+          "participants": [
+            {
+              "name": "가상박제작",
+              "organization": "가상하루표식",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C122-재료"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 안내 표식 제작 준비",
+          "operation_id": "C122-표식",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C122-재료인수",
+          "date": "2026-04-09",
+          "document_id": "C122-임시영수",
+          "transaction_id": "C122-재료"
+        },
+        {
+          "activity_id": "C122-재료인수",
+          "date": "2026-04-09",
+          "document_id": "C122-전자계산서",
+          "transaction_id": "C122-재료"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C122-임시영수",
+        "purpose": "business",
+        "transaction_id": "C122-재료"
+      },
+      {
+        "business_related": true,
+        "document_id": "C122-전자계산서",
+        "purpose": "business",
+        "transaction_id": "C122-재료"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C122-임시영수",
+        "C122-전자계산서"
+      ],
+      "evidence": [
+        "receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "C122-재료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-09",
+      "transaction_id": "C122-재료"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 869000,
+      "includes_vat": true,
+      "transaction_id": "C122-재료"
+    },
+    "output": {
+      "gross": 869000,
+      "supply_base": 790000,
+      "vat": 79000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C122-재료",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 79000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 186000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -79000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -79000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -79000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 79000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 79000,
+      "input_vat": 79000,
+      "net_vat": -79000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 79000,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

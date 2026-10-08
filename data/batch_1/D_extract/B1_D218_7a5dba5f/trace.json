@@ -1,0 +1,149 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-06",
+          "document_id": "GO-BOX-17",
+          "event": "received",
+          "event_id": "GO-BOX-IN",
+          "location": "바둑교습준비실"
+        },
+        {
+          "date": "2026-02-06",
+          "document_id": "GO-COVER-18",
+          "event": "received",
+          "event_id": "GO-COVER-IN",
+          "location": "바둑교습준비실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-03",
+          "document_id": "GO-BOX-17",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "GO-BOX-C",
+          "vendor": "가상바둑보관"
+        },
+        {
+          "date": "2026-02-04",
+          "document_id": "GO-COVER-18",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "GO-COVER-C",
+          "vendor": "가상바둑보관"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "GO-BOX-C",
+          "items": [
+            {
+              "name": "말판보관함",
+              "quantity": 5,
+              "unit_price": 21800
+            }
+          ],
+          "sheet_id": "GO-BOX-L"
+        },
+        {
+          "header_record_id": "GO-COVER-C",
+          "items": [
+            {
+              "name": "말판보관덮개",
+              "quantity": 5,
+              "unit_price": 3700
+            }
+          ],
+          "sheet_id": "GO-COVER-L"
+        }
+      ],
+      "processing_policy": "첨부를 header_record_id로 연결하고 invoice 또는 order의 document_id에 received 기록이 있으면 실제 구매다. 별도 단가는 공급가액이며 각 행의 10%에서 원 미만을 버려 세액을 더한다. 업체는 NFKC 후 공백과 법인 표기를 제거하고 이름 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "GO-BOX-17",
+        "GO-COVER-18"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "GO-BOX-17",
+      "includes_vat": false,
+      "quantity": 5,
+      "unit_price": 21800
+    },
+    "output": {
+      "supply": 109000,
+      "total": 119900,
+      "vat": 10900
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상바둑보관"
+    },
+    "output": "가상바둑보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "GO-COVER-18",
+      "includes_vat": false,
+      "quantity": 5,
+      "unit_price": 3700
+    },
+    "output": {
+      "supply": 18500,
+      "total": 20350,
+      "vat": 1850
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상바둑보관"
+    },
+    "output": "가상바둑보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "말판보관덮개",
+          "unit_price": 3700,
+          "vendor": "가상바둑보관"
+        },
+        {
+          "item": "말판보관함",
+          "unit_price": 21800,
+          "vendor": "가상바둑보관"
+        }
+      ],
+      "grand_total": 140250,
+      "supply_total": 127500,
+      "unique_document_count": 2,
+      "vat_total": 12750,
+      "vendor_totals": [
+        {
+          "supply": 127500,
+          "total": 140250,
+          "vat": 12750,
+          "vendor": "가상바둑보관"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

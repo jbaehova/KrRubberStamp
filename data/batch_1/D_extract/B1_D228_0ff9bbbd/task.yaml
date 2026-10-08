@@ -1,0 +1,67 @@
+task_id: B1_D228_0ff9bbbd
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 방충망 수리소의 망 롤 구매를 재주문 담당에게 인계해 주세요. cheapest_by_item과 vendor_totals이 필요합니다.
+input_files:
+- path: inputs/01_망롤주문.hwpx
+  format: hwpx
+- path: inputs/02_이전로트.xlsx
+  format: xlsx
+- path: inputs/03_추가로트.pdf
+  format: pdf
+- path: inputs/04_수리소인수.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-e9f97a78-52a6-5aaa-acd3-79e81fe4fd96
+scenario_seed: 1151157601192450118
+scenario_hash: f2ded6260727e88ce847b1d3387400735532132ca6ed9b7b788ed8a2dd14022e
+authorship:
+  method: individually_written
+  case_id: D228
+  case_sha256: 0ff9bbbd3b911846543a4ab4de6580d1c3f3afacb9ba066cffc0224984c1438b
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- vendor_totals

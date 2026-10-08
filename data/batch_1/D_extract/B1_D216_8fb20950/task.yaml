@@ -1,0 +1,47 @@
+task_id: B1_D216_8fb20950
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 봉인 자재의 세 원본을 업체별 계정으로 합쳐 주세요. vendor_totals와 unique_document_count가 필요합니다.
+input_files:
+- path: inputs/01_봉인품구매합본.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-a5c569e7-e66c-561f-b72d-8941926263e8
+scenario_seed: 10354348732838358264
+scenario_hash: 979a5b3b5a72d4ffbc0be0a9d4ee8194a35f1c08d6c755d162d971014c462925
+authorship:
+  method: individually_written
+  case_id: D216
+  case_sha256: 8fb209501558acf817106af56b22f26158e157b02a541e149d76bd86eea595ac
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals
+- unique_document_count

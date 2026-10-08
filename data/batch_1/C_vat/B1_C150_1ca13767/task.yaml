@@ -1,0 +1,60 @@
+task_id: B1_C150_1ca13767
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상도움설치의 수금표, 실제 완료일, 차량 정비 분류를 확인해 거래 수(unique_transaction_count), 매출세액(output_vat),
+  불공제세액(noncreditable_vat), 발행 공제(receipt_credit), 납부액(payable_vat)을 answer.json으로
+  작성해 주세요.
+input_files:
+- path: inputs/01_설치인계.hwpx
+  format: hwpx
+- path: inputs/02_설치활동.xlsx
+  format: xlsx
+- path: inputs/03_수금점검.xlsx
+  format: xlsx
+- path: inputs/04_첫카드.pdf
+  format: pdf
+- path: inputs/05_뒤계약.pdf
+  format: pdf
+- path: inputs/06_관리정비.pdf
+  format: pdf
+- path: inputs/07_관리사용.hwpx
+  format: hwpx
+- path: inputs/08_부속증빙.pdf
+  format: pdf
+- path: inputs/09_부속인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    output_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - output_vat
+  - noncreditable_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-2591c9a7-e925-5ab8-aa5f-5dbed57d1a72
+scenario_seed: 2062991022646827285
+scenario_hash: 16f47295ca17a0f3b4ae08eadc2218b65d59200f0fa258d602c79cfb38d0e361
+authorship:
+  method: individually_written
+  case_id: C150
+  case_sha256: 1ca13767a7af1915a620ff7b44fbd2205d945c38e96d757a47dfdc31f6bc24bf
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- unique_transaction_count
+- output_vat
+- noncreditable_vat
+- receipt_credit
+- payable_vat

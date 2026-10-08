@@ -1,0 +1,50 @@
+task_id: B1_D229_7ac10c3e
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 편집실 저장 케이스의 실제 품목별 가격표를 작성해 주세요. cheapest_by_item과 grand_total을 제출해 주세요.
+input_files:
+- path: inputs/01_편집저장표지.pdf
+  format: pdf
+- path: inputs/02_케이스규격.xlsx
+  format: xlsx
+- path: inputs/03_미디어보충표지.hwpx
+  format: hwpx
+- path: inputs/04_미디어보충품목.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-b6bb6912-efdb-583c-aa2d-74f7c05bcbf8
+scenario_seed: 8845364607438652042
+scenario_hash: d4fc2c9c3ba4ffb8ec472950819e73b065aebcb5c0926cf5671bc1580b05ea97
+authorship:
+  method: individually_written
+  case_id: D229
+  case_sha256: 7ac10c3ee731828adc54b2110487c2a3bd63ed5f4ea6aa4851a349e9ab31105e
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- grand_total

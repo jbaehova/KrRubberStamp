@@ -1,0 +1,82 @@
+task_id: B1_A151_b5943c52
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상구절초설계의 가상염지안은 자녀 세 명의 대학 및 생활 지출 자료를 제출했습니다. 자녀마다 나이와 소득 조건이 달라 가족
+  수와 자녀세액공제액을 먼저 구해 주세요. 장학금을 뺀 자녀 학비와 본인 대학원 학비를 합산한 교육비 세액공제액을 계산합니다. 가족 카드 및 보험과
+  직원 부담 진료의 기준을 각각 적용한 카드 소득공제와 보험료 및 의료비 세액공제액도 구합니다. 산출세액과 결정 소득세를 적어 최종 마감합니다.
+input_files:
+- path: inputs/01_직원신청.hwpx
+  format: hwpx
+- path: inputs/02_지급누계.xlsx
+  format: xlsx
+- path: inputs/03_첫자녀.pdf
+  format: pdf
+- path: inputs/04_둘째자녀.pdf
+  format: pdf
+- path: inputs/05_셋째소득.pdf
+  format: pdf
+- path: inputs/06_첫자녀학비.xlsx
+  format: xlsx
+- path: inputs/07_둘째학비.pdf
+  format: pdf
+- path: inputs/08_셋째학비.pdf
+  format: pdf
+- path: inputs/09_본인대학원.pdf
+  format: pdf
+- path: inputs/10_자녀보험.xlsx
+  format: xlsx
+- path: inputs/11_직원카드.xlsx
+  format: xlsx
+- path: inputs/12_자녀카드.xlsx
+  format: xlsx
+- path: inputs/13_셋째진료.pdf
+  format: pdf
+- path: inputs/14_직원진료.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    child_credit:
+      type: integer
+    education_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    computed_tax:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - child_credit
+  - education_credit
+  - credit_card_deduction
+  - insurance_credit
+  - medical_credit
+  - computed_tax
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-8936a2a8-b3b1-540d-b969-a80b4057ae0e
+scenario_seed: 13084149141131455909
+scenario_hash: efddfe1f87c43681033e20e13b0b87b7bda18acb93ed81fe751042269bb36131
+authorship:
+  method: individually_written
+  case_id: A151
+  case_sha256: b5943c52315f6da571fec971e5fec9758246ec6a55c11bcce6235c6c080980aa
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- eligible_dependents
+- child_credit
+- education_credit
+- credit_card_deduction
+- insurance_credit
+- medical_credit
+- computed_tax
+- final_national_tax

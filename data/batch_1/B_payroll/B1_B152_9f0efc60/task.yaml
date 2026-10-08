@@ -1,0 +1,68 @@
+task_id: B1_B152_9f0efc60
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상따뜻한문진실은 아직 은행 실행이 없는 급여의 이체 예산을 준비합니다. 취소 상태를 제외한 마지막 승인 계획일을 기준으로
+  한 자녀의 원천세를 계산해 주세요. 현금 식대는 회사 배식 여부를 확인하고, 평일 추가 카드의 무급 휴게를 반영해 연장 및 야간수당을 산정합니다.
+  예상 과세급여와 실지급액을 작성합니다.
+input_files:
+- path: inputs/01_문진정액.pdf
+  format: pdf
+- path: inputs/02_문진계획.xlsx
+  format: xlsx
+- path: inputs/03_문진추가.hwpx
+  format: hwpx
+- path: inputs/04_문진일정.pdf
+  format: pdf
+- path: inputs/05_문진배식.xlsx
+  format: xlsx
+- path: inputs/06_문진가족.hwpx
+  format: hwpx
+- path: inputs/07_문진연금.pdf
+  format: pdf
+- path: inputs/08_문진보수.xlsx
+  format: xlsx
+- path: inputs/09_문진공식.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-36ec6762-93bf-50e5-bf05-45c469046e1f
+scenario_seed: 11461375594338274965
+scenario_hash: dcbba74ca2a2fc4f5ea3f2bedc2fd98ef07a1a4cf2aba3d5b5cc26e2f41cb820
+authorship:
+  method: individually_written
+  case_id: B152
+  case_sha256: 9f0efc60c9dd4e953652ea06fcbbaa74557c0a39bad1ac782dd5f4a2ac162b9d
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- overtime_pay
+- night_pay
+- non_taxable_pay
+- taxable_pay
+- income_tax
+- local_income_tax
+- net_pay

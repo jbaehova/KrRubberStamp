@@ -1,0 +1,281 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "ground_work",
+          "activity_id": "C073-성토활동",
+          "date": "2026-03-04",
+          "description": "토지 자체를 높여 평탄화하는 성토 공사를 완료 검수했다. 건물 수리나 장비 설치는 포함하지 않는다.",
+          "document_ids": [
+            "C073-성토계산서"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "가상보관틀 신설 창고 부지"
+          },
+          "operation_id": "C073-납품",
+          "participants": [
+            {
+              "name": "가상 공사검수직원",
+              "organization": "가상보관틀",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C073-성토"
+        },
+        {
+          "action": "service",
+          "activity_id": "C073-벽수리활동",
+          "date": "2026-03-09",
+          "description": "기존 창고 벽 누수를 수리한 결과를 창고 직원이 확인했다. 토지 형질 변경은 없다.",
+          "document_ids": [
+            "C073-수리계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상보관틀 기존 창고"
+          },
+          "operation_id": "C073-납품",
+          "participants": [
+            {
+              "name": "가상 창고관리직원",
+              "organization": "가상보관틀",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C073-벽수리"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 보관틀 제작 납품",
+          "operation_id": "C073-납품",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C073-성토활동",
+          "date": "2026-03-04",
+          "document_id": "C073-성토계산서",
+          "transaction_id": "C073-성토"
+        },
+        {
+          "activity_id": "C073-벽수리활동",
+          "date": "2026-03-09",
+          "document_id": "C073-수리계산서",
+          "transaction_id": "C073-벽수리"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C073-성토계산서",
+        "purpose": "land",
+        "transaction_id": "C073-성토"
+      },
+      {
+        "business_related": true,
+        "document_id": "C073-수리계산서",
+        "purpose": "business",
+        "transaction_id": "C073-벽수리"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C073-수리계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C073-벽수리"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C073-성토계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C073-성토"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-09",
+      "transaction_id": "C073-벽수리"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2310000,
+      "includes_vat": true,
+      "transaction_id": "C073-벽수리"
+    },
+    "output": {
+      "gross": 2310000,
+      "supply_base": 2100000,
+      "vat": 210000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C073-벽수리",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 210000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-04",
+      "transaction_id": "C073-성토"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 8700000,
+      "includes_vat": false,
+      "transaction_id": "C073-성토"
+    },
+    "output": {
+      "gross": 9570000,
+      "supply_base": 8700000,
+      "vat": 870000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "C073-성토",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 870000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 270000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -210000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -210000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -210000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 210000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 210000,
+      "input_vat": 1080000,
+      "net_vat": -210000,
+      "noncreditable_vat": 870000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 210000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

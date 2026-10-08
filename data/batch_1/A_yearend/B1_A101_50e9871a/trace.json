@@ -1,0 +1,368 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 36600000,
+      "dependents": [
+        {
+          "age": 8,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상은봄솔",
+          "person_id": "child",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 31,
+          "assigned_claimant": "mother",
+          "disabled": true,
+          "income_amount": 0,
+          "name": "가상은지한",
+          "person_id": "sibling",
+          "relation": "sibling",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 2000000,
+          "date": "2025-11-12",
+          "institution_type": "primary_secondary_school",
+          "level": "school",
+          "person_id": "child"
+        },
+        {
+          "amount": 1800000,
+          "date": "2025-12-01",
+          "institution_type": "private_academy",
+          "level": "school",
+          "person_id": "child"
+        },
+        {
+          "amount": 6000000,
+          "date": "2025-03-04",
+          "institution_type": "graduate_school",
+          "level": "graduate",
+          "person_id": "self"
+        }
+      ],
+      "employee_age": 34,
+      "employee_name": "가상은하정",
+      "employee_sex": "female",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "household_head": true,
+      "insurance": [
+        {
+          "amount": 480000,
+          "date": "2025-12-07",
+          "kind": "general",
+          "person_id": "self"
+        },
+        {
+          "amount": 1120000,
+          "date": "2025-12-09",
+          "kind": "disabled",
+          "person_id": "sibling"
+        }
+      ],
+      "marital_status": "divorced",
+      "medical": [
+        {
+          "amount": 1500000,
+          "date": "2025-05-02",
+          "kind": "ordinary",
+          "person_id": "child",
+          "reimbursed": 0
+        },
+        {
+          "amount": 2800000,
+          "date": "2025-07-18",
+          "kind": "ordinary",
+          "person_id": "sibling",
+          "reimbursed": 0
+        }
+      ],
+      "non_taxable": 2400000,
+      "pension_accounts": {
+        "irp": 1300000,
+        "pension_savings": 2100000
+      },
+      "reference_year": 2025,
+      "scenario_id": "가상모래빛조사 한부모 가족 배정 마감",
+      "scope_note": "국내 거주자로 근로소득만 있다. 이혼 후 자녀를 실제 부양하는 세대주다. 장애인 동생도 지원하지만 기본공제는 어머니에게 배정했다. 모든 제출 지출은 직원이 냈고 보험 보전과 장학금은 없다. 연금은 본인 계좌이며 다른 공제와 감면 및 이월은 없다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "education.0.excluded": false,
+      "education.1.excluded": true,
+      "education.2.excluded": false
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 8,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상은봄솔",
+          "person_id": "child",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 31,
+          "assigned_claimant": "mother",
+          "disabled": true,
+          "income_amount": 0,
+          "name": "가상은지한",
+          "person_id": "sibling",
+          "relation": "sibling",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 1000000,
+      "basic": 3000000,
+      "rejected": [
+        "sibling"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 36600000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 10380000,
+      "salary_income": 23820000,
+      "total_salary": 34200000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 34200000,
+      "spending": {}
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {
+        "irp": 1300000,
+        "pension_savings": 2100000
+      },
+      "salary": 34200000
+    },
+    "output": 510000,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 250000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 480000,
+          "date": "2025-12-07",
+          "kind": "general",
+          "person_id": "self"
+        },
+        {
+          "amount": 1120000,
+          "date": "2025-12-09",
+          "kind": "disabled",
+          "person_id": "sibling"
+        }
+      ],
+      "salary": 34200000
+    },
+    "output": 57600,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1500000,
+          "date": "2025-05-02",
+          "kind": "ordinary",
+          "person_id": "child",
+          "reimbursed": 0
+        },
+        {
+          "amount": 2800000,
+          "date": "2025-07-18",
+          "kind": "ordinary",
+          "person_id": "sibling",
+          "reimbursed": 0
+        }
+      ],
+      "salary": 34200000
+    },
+    "output": 71100,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 2000000,
+          "date": "2025-11-12",
+          "excluded": false,
+          "institution_type": "primary_secondary_school",
+          "level": "school",
+          "person_id": "child"
+        },
+        {
+          "amount": 1800000,
+          "date": "2025-12-01",
+          "excluded": true,
+          "institution_type": "private_academy",
+          "level": "school",
+          "person_id": "child"
+        },
+        {
+          "amount": 6000000,
+          "date": "2025-03-04",
+          "excluded": false,
+          "institution_type": "graduate_school",
+          "level": "graduate",
+          "person_id": "self"
+        }
+      ],
+      "salary": 34200000
+    },
+    "output": 1200000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 34200000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 34200000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 34200000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 34200000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 19820000
+    },
+    "output": 1713000,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 1713000,
+      "salary": 34200000
+    },
+    "output": 730400,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 1200000,
+        "hometown_credit": 0,
+        "insurance_credit": 57600,
+        "medical_credit": 71100,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 1713000,
+      "total_tax_credits": 2819100
+    },
+    "output": 0,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 0
+    },
+    "output": 0,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 0,
+      "final_national": 0,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 0,
+      "national": 0,
+      "total": 0
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

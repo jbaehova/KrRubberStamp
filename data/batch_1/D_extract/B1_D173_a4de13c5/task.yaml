@@ -1,0 +1,56 @@
+task_id: B1_D173_a4de13c5
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 풍속계 거치 부품 구매의 지급 계정을 마감해 주세요. 상태 기록에 연결한 vendor_totals와 unique_document_count를
+  답해 주세요.
+input_files:
+- path: inputs/01_기상거치표지.pdf
+  format: pdf
+- path: inputs/02_처음거치봉.hwpx
+  format: hwpx
+- path: inputs/03_고정판인수.xlsx
+  format: xlsx
+- path: inputs/04_대체거치봉.pdf
+  format: pdf
+- path: inputs/05_상태이력.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-c00ca81c-20c3-5306-acbf-246ab74583ce
+scenario_seed: 11879954607503866970
+scenario_hash: 8244520b08373af7677e9124ab18e09d80e99819e978bbe11c0a2412fdb67d66
+authorship:
+  method: individually_written
+  case_id: D173
+  case_sha256: a4de13c5d8087c5a77825bea66b55bd3da0d9eae80a52cb03fc642c23cf611ec
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals
+- unique_document_count

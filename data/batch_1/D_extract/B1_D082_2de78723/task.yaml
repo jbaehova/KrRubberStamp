@@ -1,0 +1,38 @@
+task_id: B1_D082_2de78723
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 급식 운반통 구매의 세액과 실제 인수 수를 확인합니다. 팩스 보관 자료를 문서 번호로 대조해 vat_total과 unique_document_count를
+  답하세요. 집계 기준은 추가 운반통 대장에 있습니다.
+input_files:
+- path: inputs/01_첫운반통.pdf
+  format: pdf
+- path: inputs/02_추가운반통.xlsx
+  format: xlsx
+- path: inputs/03_받침구입.hwpx
+  format: hwpx
+- path: inputs/04_팩스보관.png
+  format: png
+  duplicate_of: inputs/01_첫운반통.pdf
+answer_schema:
+  type: object
+  properties:
+    vat_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - vat_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-4adc1bca-db65-5761-846a-c2a63eb35818
+scenario_seed: 3307761036676097458
+scenario_hash: 8d755ec6859d7f06a700e6a21f0089696202552d31ba8994c734382c3765a52b
+authorship:
+  method: individually_written
+  case_id: D082
+  case_sha256: 2de7872338f4e5b29daecd2a9df578d80dbb26297a4aee31bc78e4e81ce2312a
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vat_total
+- unique_document_count

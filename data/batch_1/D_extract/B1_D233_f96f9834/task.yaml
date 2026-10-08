@@ -1,0 +1,50 @@
+task_id: B1_D233_f96f9834
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 제빵실 팬의 실제 구매 단가와 이번 지급액을 정리해 주세요. cheapest_by_item과 grand_total이 필요합니다.
+input_files:
+- path: inputs/01_팬첫주문.pdf
+  format: pdf
+- path: inputs/02_후속팬표지.hwpx
+  format: hwpx
+- path: inputs/03_후속팬품목.xlsx
+  format: xlsx
+- path: inputs/04_제빵실수령.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-d7a1d4ef-2892-599b-a4e5-123141d94559
+scenario_seed: 17973751987556945310
+scenario_hash: 14141d4827e7dfff83cf695c9ffdec0cf2b238ec3cda0317e492eff62510c555
+authorship:
+  method: individually_written
+  case_id: D233
+  case_sha256: f96f9834234d8d9e0a2c1b6248e5d40ad6cb6e0413b2e5ae7fa176881077623f
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- grand_total

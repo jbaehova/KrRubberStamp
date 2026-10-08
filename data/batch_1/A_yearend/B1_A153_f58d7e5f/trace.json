@@ -1,0 +1,434 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 71400000,
+      "cards": [
+        {
+          "amount": 23000000,
+          "category": "credit",
+          "date": "2025-12-31",
+          "payment_method": "credit",
+          "person_id": "self"
+        },
+        {
+          "amount": 12000000,
+          "category": "debit",
+          "date": "2025-12-31",
+          "payment_method": "debit",
+          "person_id": "self"
+        },
+        {
+          "amount": 5300000,
+          "category": "market",
+          "date": "2025-12-31",
+          "payment_method": "debit",
+          "person_id": "self"
+        },
+        {
+          "amount": 2700000,
+          "category": "transit",
+          "date": "2025-12-31",
+          "payment_method": "debit",
+          "person_id": "self"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 22,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 0,
+          "name": "가상시온율",
+          "person_id": "child",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 73,
+          "assigned_claimant": "brother",
+          "income_amount": 0,
+          "name": "가상시정화",
+          "person_id": "mother",
+          "relation": "parent",
+          "supported": true
+        }
+      ],
+      "donations": [
+        {
+          "amount": 1700000,
+          "date": "2025-10-24",
+          "kind": "public",
+          "person_id": "self"
+        },
+        {
+          "amount": 2100000,
+          "date": "2025-11-12",
+          "kind": "public",
+          "person_id": "mother"
+        }
+      ],
+      "employee_age": 48,
+      "employee_name": "가상시유준",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "housing_mortgage": {
+        "borrowed_date": "2021-06-23",
+        "fixed_rate": true,
+        "interest_paid": 22800000,
+        "non_deferred": true,
+        "requirements_met": true,
+        "term_years": 20
+      },
+      "insurance": [
+        {
+          "amount": 1060000,
+          "date": "2025-12-08",
+          "kind": "general",
+          "paid_by_self": true,
+          "person_id": "child"
+        },
+        {
+          "amount": 680000,
+          "date": "2025-12-09",
+          "kind": "disabled",
+          "paid_by_self": true,
+          "person_id": "child"
+        }
+      ],
+      "marital_status": "married",
+      "non_taxable": 2400000,
+      "pension_accounts": {
+        "irp": 4100000,
+        "pension_savings": 5900000
+      },
+      "reference_year": 2025,
+      "rent": {
+        "address_matches": true,
+        "area_sqm": 47,
+        "eligible_contract_holder": true,
+        "head_claims_housing": false,
+        "household_head": true,
+        "household_homes_at_year_end": [
+          {
+            "address": "가상시 가상면 해송로 28 가상3동 602호",
+            "home_id": "가상소유153",
+            "owner_person_id": "self"
+          }
+        ],
+        "payments": [
+          {
+            "amount": 8280000,
+            "date": "2025-12-31"
+          }
+        ],
+        "standard_value": 249000000
+      },
+      "scenario_id": "해송자동화 주택 카드 종합 제한 마감",
+      "scope_note": "국내 거주 근로자로 배우자가 있고 한 주택을 보유한 세대주다. 주택대출 공통 요건을 충족했고 별도 월세 주택에 실제 거주한다. 자녀와 어머니를 실제 부양하지만 어머니는 형에게 공제를 배정했다. 지출은 재직 중 직원 부담이며 자료 외 공제와 감면 및 이월은 없다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "rent.homeless_household": false
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 22,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 0,
+          "name": "가상시온율",
+          "person_id": "child",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 73,
+          "assigned_claimant": "brother",
+          "income_amount": 0,
+          "name": "가상시정화",
+          "person_id": "mother",
+          "relation": "parent",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 2000000,
+      "basic": 3000000,
+      "rejected": [
+        "mother"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 71400000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 13200000,
+      "salary_income": 55800000,
+      "total_salary": 69000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {
+      "borrowed_date": "2021-06-23",
+      "fixed_rate": true,
+      "interest_paid": 22800000,
+      "non_deferred": true,
+      "requirements_met": true,
+      "term_years": 20
+    },
+    "output": 20000000,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 69000000,
+      "spending": {
+        "credit": 23000000,
+        "debit": 12000000,
+        "market": 5300000,
+        "transit": 2700000
+      }
+    },
+    "output": 6000000,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {
+        "irp": 4100000,
+        "pension_savings": 5900000
+      },
+      "salary": 69000000
+    },
+    "output": 1080000,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 250000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1060000,
+          "date": "2025-12-08",
+          "kind": "general",
+          "paid_by_self": true,
+          "person_id": "child"
+        },
+        {
+          "amount": 680000,
+          "date": "2025-12-09",
+          "kind": "disabled",
+          "paid_by_self": true,
+          "person_id": "child"
+        }
+      ],
+      "salary": 69000000
+    },
+    "output": 222000,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 69000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 69000000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1700000,
+          "date": "2025-10-24",
+          "kind": "public",
+          "person_id": "self"
+        },
+        {
+          "amount": 2100000,
+          "date": "2025-11-12",
+          "kind": "public",
+          "person_id": "mother"
+        }
+      ],
+      "salary": 69000000
+    },
+    "output": 255000,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1700000,
+          "date": "2025-10-24",
+          "kind": "public",
+          "person_id": "self"
+        },
+        {
+          "amount": 2100000,
+          "date": "2025-11-12",
+          "kind": "public",
+          "person_id": "mother"
+        }
+      ],
+      "salary": 69000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1700000,
+          "date": "2025-10-24",
+          "kind": "public",
+          "person_id": "self"
+        },
+        {
+          "amount": 2100000,
+          "date": "2025-11-12",
+          "kind": "public",
+          "person_id": "mother"
+        }
+      ],
+      "salary": 69000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {
+        "address_matches": true,
+        "area_sqm": 47,
+        "eligible_contract_holder": true,
+        "head_claims_housing": false,
+        "homeless_household": false,
+        "household_head": true,
+        "household_homes_at_year_end": [
+          {
+            "address": "가상시 가상면 해송로 28 가상3동 602호",
+            "home_id": "가상소유153",
+            "owner_person_id": "self"
+          }
+        ],
+        "payments": [
+          {
+            "amount": 8280000,
+            "date": "2025-12-31"
+          }
+        ],
+        "standard_value": 249000000
+      },
+      "salary": 69000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 25800000
+    },
+    "output": 2610000,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 2610000,
+      "salary": 69000000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 20000000,
+      "special_credits_applied": {
+        "donation_credit": 255000,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 222000,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 2610000,
+      "total_tax_credits": 2467000
+    },
+    "output": 143000,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 143000
+    },
+    "output": 14300,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 14300,
+      "final_national": 143000,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 14300,
+      "national": 143000,
+      "total": 157300
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

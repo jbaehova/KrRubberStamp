@@ -1,0 +1,37 @@
+task_id: B1_B262_22f9a3e6
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상푸른봉인실은 보험료 네 항목과 국세 및 지방세를 하나의 공제 보관 계정에 모읍니다. 각 통지와 가족 등록을 반영해 소득세,
+  지방소득세와 전체 공제액을 계산해 주세요.
+input_files:
+- path: inputs/01_월급및가족.xlsx
+  format: xlsx
+- path: inputs/02_보험부과와원문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - income_tax
+  - local_income_tax
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-145ce83d-13cf-51f6-9db7-5796607816e3
+scenario_seed: 2520225675022178093
+scenario_hash: e44aa86ff6d68906b189cf4347b91f4c68b546b264dd21507bfa4c090ff9f8c3
+authorship:
+  method: individually_written
+  case_id: B262
+  case_sha256: 22f9a3e61184172d956858f16109b3902f7d7ee22e1f4fda678e963c3f508708
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- income_tax
+- local_income_tax
+- total_deductions

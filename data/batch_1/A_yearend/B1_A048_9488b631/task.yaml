@@ -1,0 +1,59 @@
+task_id: B1_A048_9488b631
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상아침나무의 가상차민준이 본인과 성년 자녀의 기부 영수증을 제출했습니다. 자녀 소득 확인부터 하고 법정 기부와 공익 및 종교
+  기부의 한도를 순서대로 적용해 주세요. 공제 가족 수와 기부금 세액공제액을 적고, 연금계좌와 보험료 공제 및 최종 소득세도 작성해 주세요.
+input_files:
+- path: inputs/01_직원.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_자녀.hwpx
+  format: hwpx
+- path: inputs/04_법정기부.pdf
+  format: pdf
+- path: inputs/05_공익기부.pdf
+  format: pdf
+- path: inputs/06_종교기부.pdf
+  format: pdf
+- path: inputs/07_자녀기부.pdf
+  format: pdf
+- path: inputs/08_연금.pdf
+  format: pdf
+- path: inputs/09_보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    donation_credit:
+      type: integer
+    pension_account_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - donation_credit
+  - pension_account_credit
+  - insurance_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-fed74dd1-ae31-571b-aa4f-a05e84fb8be2
+scenario_seed: 10703004837527262463
+scenario_hash: 01ffc93b4cf6b78d97231344d314e01668b2593684683635474c68b1f7e19a83
+authorship:
+  method: individually_written
+  case_id: A048
+  case_sha256: 9488b6315a1994ff8c9b696c9f6b8db4115513db8679713fcb81fc17c9c9dee6
+  source_file: batch_1/A_yearend/cases_004_053.json
+answer_fields:
+- eligible_dependents
+- donation_credit
+- pension_account_credit
+- insurance_credit
+- final_national_tax

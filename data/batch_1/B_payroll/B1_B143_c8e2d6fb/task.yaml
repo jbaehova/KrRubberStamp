@@ -1,0 +1,64 @@
+task_id: B1_B143_c8e2d6fb
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상작업지도실 단기 직원의 지급에는 완료 주와 결근 주가 같이 있습니다. 실제 소정 카드에서 기본급을 복원하고 주별 출근 사실로
+  주휴수당을 산정해 주세요. 별도 유급휴일 작업은 이전 승인과 수정 승인을 대조하여 휴일수당 및 야간 가산을 계산합니다. 확정 기관 자격으로 실지급액까지
+  구합니다.
+input_files:
+- path: inputs/01_지도시급.hwpx
+  format: hwpx
+- path: inputs/02_지도첫주.xlsx
+  format: xlsx
+- path: inputs/03_지도둘주.pdf
+  format: pdf
+- path: inputs/04_지도주별.hwpx
+  format: hwpx
+- path: inputs/05_휴일이전.pdf
+  format: pdf
+- path: inputs/06_휴일수정.xlsx
+  format: xlsx
+- path: inputs/07_지도은행.hwpx
+  format: hwpx
+- path: inputs/08_지도기관.pdf
+  format: pdf
+- path: inputs/09_지도공식.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - holiday_pay
+  - night_pay
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-f7325517-2e8c-5e99-bc8a-ef9769ef39bc
+scenario_seed: 14475368528622253041
+scenario_hash: daa88e8653dcf06adbe97ae71fc2cf3fcc5274e25b2461871768468f1e3d4131
+authorship:
+  method: individually_written
+  case_id: B143
+  case_sha256: c8e2d6fba565f3f12ecdfc22dc6ab0506f0d945e2a185ae852aa3d65c66c88e5
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- holiday_pay
+- night_pay
+- total_deductions
+- net_pay

@@ -1,0 +1,362 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 78400000,
+      "cards": [
+        {
+          "amount": 20000000,
+          "category": "credit",
+          "date": "2025-12-31",
+          "payment_method": "credit",
+          "person_id": "self"
+        },
+        {
+          "amount": 4000000,
+          "category": "debit",
+          "date": "2025-12-31",
+          "payment_method": "debit",
+          "person_id": "self"
+        },
+        {
+          "amount": 1500000,
+          "category": "debit",
+          "date": "2025-12-31",
+          "payment_method": "debit",
+          "person_id": "child"
+        },
+        {
+          "amount": 2000000,
+          "category": "culture",
+          "date": "2025-12-31",
+          "payment_method": "credit",
+          "person_id": "self"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 20,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상연아람",
+          "person_id": "child",
+          "relation": "child",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 10700000,
+          "date": "2025-08-22",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "child",
+          "scholarship": 2800000
+        }
+      ],
+      "employee_age": 48,
+      "employee_name": "가상연태인",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "housing_mortgage": {
+        "borrowed_date": "2020-05-12",
+        "fixed_rate": false,
+        "interest_paid": 19450000,
+        "non_deferred": true,
+        "requirements_met": true,
+        "term_years": 20
+      },
+      "insurance": [
+        {
+          "amount": 960000,
+          "date": "2025-12-07",
+          "kind": "general",
+          "paid_by_self": true,
+          "person_id": "child"
+        }
+      ],
+      "marital_status": "married",
+      "non_taxable": 2400000,
+      "pension_accounts": {
+        "irp": 4500000,
+        "pension_savings": 6500000
+      },
+      "reference_year": 2025,
+      "rent": {
+        "address_matches": true,
+        "area_sqm": 54,
+        "eligible_contract_holder": true,
+        "head_claims_housing": false,
+        "household_head": true,
+        "household_homes_at_year_end": [
+          {
+            "address": "가상시 가상읍 아카시아로 15 가상1동 501호",
+            "home_id": "가상소유149",
+            "owner_person_id": "self"
+          }
+        ],
+        "payments": [
+          {
+            "amount": 9600000,
+            "date": "2025-12-31"
+          }
+        ],
+        "standard_value": 285000000
+      },
+      "scenario_id": "아카시아유통 보유 주택과 임차 비용",
+      "scope_note": "국내 거주 근로자로 배우자와 함께 한 주택을 보유하며 월세 주택은 실제 거주지다. 주택대출 공통 요건은 확인했고 조건 변경은 없다. 자녀를 실제 부양하며 무소득이고 공제 배정은 직원이다. 지출은 모두 재직 중 직원 부담이며 자료 외 공제와 감면 및 이월은 없다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "rent.homeless_household": false
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 20,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상연아람",
+          "person_id": "child",
+          "relation": "child",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 3000000,
+      "rejected": []
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 78400000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 13550000,
+      "salary_income": 62450000,
+      "total_salary": 76000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {
+      "borrowed_date": "2020-05-12",
+      "fixed_rate": false,
+      "interest_paid": 19450000,
+      "non_deferred": true,
+      "requirements_met": true,
+      "term_years": 20
+    },
+    "output": 18000000,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 76000000,
+      "spending": {
+        "credit": 22000000,
+        "debit": 5500000
+      }
+    },
+    "output": 2100000,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {
+        "irp": 4500000,
+        "pension_savings": 6500000
+      },
+      "salary": 76000000
+    },
+    "output": 1080000,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 250000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 960000,
+          "date": "2025-12-07",
+          "kind": "general",
+          "paid_by_self": true,
+          "person_id": "child"
+        }
+      ],
+      "salary": 76000000
+    },
+    "output": 115200,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 10700000,
+          "date": "2025-08-22",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "child",
+          "scholarship": 2800000
+        }
+      ],
+      "salary": 76000000
+    },
+    "output": 1185000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 76000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {
+        "address_matches": true,
+        "area_sqm": 54,
+        "eligible_contract_holder": true,
+        "head_claims_housing": false,
+        "homeless_household": false,
+        "household_head": true,
+        "household_homes_at_year_end": [
+          {
+            "address": "가상시 가상읍 아카시아로 15 가상1동 501호",
+            "home_id": "가상소유149",
+            "owner_person_id": "self"
+          }
+        ],
+        "payments": [
+          {
+            "amount": 9600000,
+            "date": "2025-12-31"
+          }
+        ],
+        "standard_value": 285000000
+      },
+      "salary": 76000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 39350000
+    },
+    "output": 4642500,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 4642500,
+      "salary": 76000000
+    },
+    "output": 500000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 18000000,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 1185000,
+        "hometown_credit": 0,
+        "insurance_credit": 115200,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 4642500,
+      "total_tax_credits": 3130200
+    },
+    "output": 1512300,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 1512300
+    },
+    "output": 151230,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 151230,
+      "final_national": 1512300,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 151230,
+      "national": 1512300,
+      "total": 1663530
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

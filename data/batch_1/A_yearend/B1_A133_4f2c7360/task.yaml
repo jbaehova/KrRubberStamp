@@ -1,0 +1,47 @@
+task_id: B1_A133_4f2c7360
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상작약관리의 가상빈시우는 주택이자 증명과 직원 본인 대상 보험 영수증을 냈습니다. 보험료는 배우자가 자기 비용으로 냈습니다.
+  대출의 기간과 상환 방식을 확인해 주택자금 소득공제액을 구하고 보험료 세액공제액을 별도로 판단해 주세요. 과세표준과 최종 소득세도 필요합니다.
+input_files:
+- path: inputs/01_부담확인.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_대출계약.pdf
+  format: pdf
+- path: inputs/04_이자납입.pdf
+  format: pdf
+- path: inputs/05_보험납부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    tax_base:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - housing_income_deduction
+  - insurance_credit
+  - tax_base
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-69ac56d9-7579-558d-bbab-b01fdf2d9c69
+scenario_seed: 5705061685822636662
+scenario_hash: 5dae7d41c1b2ebce09a5bbf75ced1ce010b03a6ba275a608e28492e326cf6d5b
+authorship:
+  method: individually_written
+  case_id: A133
+  case_sha256: 4f2c736065264276b8286b6cf24bd1a87732eb3d40ef73e0cd59b848d3ccfd93
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- housing_income_deduction
+- insurance_credit
+- tax_base
+- final_national_tax

@@ -1,0 +1,38 @@
+task_id: B1_D181_4022a742
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 자료 제본 작업의 세액과 실제 구매 건수를 보고해 주세요. 증빙 원문 번호를 대조한 vat_total 및 unique_document_count가
+  필요합니다.
+input_files:
+- path: inputs/01_표지원본.pdf
+  format: pdf
+- path: inputs/02_창구보관스캔.png
+  format: png
+  duplicate_of: inputs/01_표지원본.pdf
+- path: inputs/03_제본링.xlsx
+  format: xlsx
+- path: inputs/04_책등라벨.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vat_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - vat_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-f0b733ff-a216-5a27-a912-90e753084b13
+scenario_seed: 4621440070380095753
+scenario_hash: dc35a6d6cd35faf5a5314161371b201ffe288032c692da6d29262a7da873730f
+authorship:
+  method: individually_written
+  case_id: D181
+  case_sha256: 4022a74231c309091abc8cd08b0a27eadcea6e087248f2dc1a7ba1416324318c
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vat_total
+- unique_document_count

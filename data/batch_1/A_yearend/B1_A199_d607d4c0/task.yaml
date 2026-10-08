@@ -1,0 +1,59 @@
+task_id: B1_A199_d607d4c0
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상얼레지보수의 가상길다빈은 봄에 입사해 가을에 퇴직했습니다. 카드 승인일과 진료 납부일을 재직 기록에 맞춰 구별하고 문화비의
+  실제 결제수단도 확인해 주세요. 신용카드 등 소득공제액과 의료비 세액공제액, 주택자금 소득공제액 및 과세표준을 계산합니다.
+input_files:
+- path: inputs/01_재직확인.hwpx
+  format: hwpx
+- path: inputs/02_급여누계.xlsx
+  format: xlsx
+- path: inputs/03_대출계약.pdf
+  format: pdf
+- path: inputs/04_세대주택.hwpx
+  format: hwpx
+- path: inputs/05_이자납부.pdf
+  format: pdf
+- path: inputs/06_입사전카드.pdf
+  format: pdf
+- path: inputs/07_재직중카드.xlsx
+  format: xlsx
+- path: inputs/08_퇴직후시장.pdf
+  format: pdf
+- path: inputs/09_재직중진료.pdf
+  format: pdf
+- path: inputs/10_실손지급.xlsx
+  format: xlsx
+- path: inputs/11_퇴직후진료.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    credit_card_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+    housing_income_deduction:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - credit_card_deduction
+  - medical_credit
+  - housing_income_deduction
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-942feea4-0f93-5673-b022-16d0980dcb0e
+scenario_seed: 15422529372294761161
+scenario_hash: e3b46c654a7c60e9189cbda03c0429d7b31078b338b0555e4e99f1303def0262
+authorship:
+  method: individually_written
+  case_id: A199
+  case_sha256: d607d4c085a84ac9ff57fa6eb4b8410d1c5826191481b9979ea3a6218fc8f187
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- credit_card_deduction
+- medical_credit
+- housing_income_deduction
+- tax_base

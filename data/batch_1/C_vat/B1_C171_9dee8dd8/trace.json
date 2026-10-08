@@ -1,0 +1,291 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "내부점심",
+          "date": "2026-03-16",
+          "description": "두 직원이 부스 준비 중 점심을 먹었다.",
+          "document_ids": [
+            "식당전표가"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "전시 식당"
+          },
+          "operation_id": "부스설계",
+          "participants": [
+            {
+              "name": "가상류설계",
+              "organization": "가상부스설계",
+              "role": "employee"
+            },
+            {
+              "name": "가상서구조",
+              "organization": "가상부스설계",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C171-준비식사"
+        },
+        {
+          "action": "meal",
+          "activity_id": "검수점심",
+          "date": "2026-03-19",
+          "description": "설계 직원과 발주 담당자가 같이 식사했다.",
+          "document_ids": [
+            "식당전표나"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "전시 식당"
+          },
+          "operation_id": "부스설계",
+          "participants": [
+            {
+              "name": "가상류설계",
+              "organization": "가상부스설계",
+              "role": "employee"
+            },
+            {
+              "name": "가상오발주",
+              "organization": "가상전시주최",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "C171-방문식사"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 전시 부스 설계",
+          "operation_id": "부스설계",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "내부점심",
+          "date": "2026-03-16",
+          "document_id": "식당전표가",
+          "transaction_id": "C171-준비식사"
+        },
+        {
+          "activity_id": "검수점심",
+          "date": "2026-03-19",
+          "document_id": "식당전표나",
+          "transaction_id": "C171-방문식사"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "식당전표가",
+        "purpose": "business",
+        "transaction_id": "C171-준비식사"
+      },
+      {
+        "business_related": true,
+        "document_id": "식당전표나",
+        "purpose": "hospitality",
+        "transaction_id": "C171-방문식사"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "식당전표나"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C171-방문식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "식당전표가"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C171-준비식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-19",
+      "transaction_id": "C171-방문식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 132000,
+      "includes_vat": true,
+      "transaction_id": "C171-방문식사"
+    },
+    "output": {
+      "gross": 132000,
+      "supply_base": 120000,
+      "vat": 12000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "C171-방문식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 12000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-16",
+      "transaction_id": "C171-준비식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 132000,
+      "includes_vat": true,
+      "transaction_id": "C171-준비식사"
+    },
+    "output": {
+      "gross": 132000,
+      "supply_base": 120000,
+      "vat": 12000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C171-준비식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 12000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 364000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -12000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -12000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -12000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 12000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 12000,
+      "input_vat": 24000,
+      "net_vat": -12000,
+      "noncreditable_vat": 12000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 12000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

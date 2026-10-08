@@ -1,0 +1,436 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "C144-고객식사",
+          "date": "2026-04-16",
+          "description": "대표와 구매 고객이 저장장치 사양 협의 뒤 함께 식사했다.",
+          "document_ids": [
+            "C144-식당카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상기억식당"
+          },
+          "operation_id": "C144-제작",
+          "participants": [
+            {
+              "name": "가상민대표",
+              "organization": "가상기억장치",
+              "role": "proprietor"
+            },
+            {
+              "name": "가상서구매",
+              "organization": "가상데이터구매",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "C144-식사"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C144-가정수령",
+          "date": "2026-04-17",
+          "description": "가족이 책상을 받아 공부방에서 사용했다.",
+          "document_ids": [
+            "C144-책상계산서"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "가상대표가족 공부방"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상민가족",
+              "organization": "가상민가구",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "C144-책상"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C144-재료수령",
+          "date": "2026-04-18",
+          "description": "대표가 제작용 기판과 케이스를 작업장에 인수했다.",
+          "document_ids": [
+            "C144-재료계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상저장장치 제작실"
+          },
+          "operation_id": "C144-제작",
+          "participants": [
+            {
+              "name": "가상민대표",
+              "organization": "가상기억장치",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "C144-재료"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 저장장치 제작 영업",
+          "operation_id": "C144-제작",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C144-고객식사",
+          "date": "2026-04-16",
+          "document_id": "C144-식당카드",
+          "transaction_id": "C144-식사"
+        },
+        {
+          "activity_id": "C144-가정수령",
+          "date": "2026-04-17",
+          "document_id": "C144-책상계산서",
+          "transaction_id": "C144-책상"
+        },
+        {
+          "activity_id": "C144-재료수령",
+          "date": "2026-04-18",
+          "document_id": "C144-재료계산서",
+          "transaction_id": "C144-재료"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C144-식당카드",
+        "purpose": "hospitality",
+        "transaction_id": "C144-식사"
+      },
+      {
+        "business_related": false,
+        "document_id": "C144-책상계산서",
+        "purpose": "private",
+        "transaction_id": "C144-책상"
+      },
+      {
+        "business_related": true,
+        "document_id": "C144-재료계산서",
+        "purpose": "business",
+        "transaction_id": "C144-재료"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C144-납품계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C144-납품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C144-식당카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C144-식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C144-재료계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C144-재료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C144-책상계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C144-책상"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-02",
+      "transaction_id": "C144-납품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3520000,
+      "includes_vat": true,
+      "transaction_id": "C144-납품"
+    },
+    "output": {
+      "gross": 3520000,
+      "supply_base": 3200000,
+      "vat": 320000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 3200000
+    },
+    "output": 320000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "C144-납품"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-16",
+      "transaction_id": "C144-식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 242000,
+      "includes_vat": true,
+      "transaction_id": "C144-식사"
+    },
+    "output": {
+      "gross": 242000,
+      "supply_base": 220000,
+      "vat": 22000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "C144-식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 22000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-18",
+      "transaction_id": "C144-재료"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2420000,
+      "includes_vat": true,
+      "transaction_id": "C144-재료"
+    },
+    "output": {
+      "gross": 2420000,
+      "supply_base": 2200000,
+      "vat": 220000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C144-재료",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 220000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-17",
+      "transaction_id": "C144-책상"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 803000,
+      "includes_vat": true,
+      "transaction_id": "C144-책상"
+    },
+    "output": {
+      "gross": 803000,
+      "supply_base": 730000,
+      "vat": 73000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "C144-책상",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 73000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 359000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 100000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 660000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 100000,
+      "prepaid_assessed_vat": 660000
+    },
+    "output": -560000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 220000,
+      "output_vat": 320000,
+      "prepaid_vat": 660000,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 220000,
+      "input_vat": 315000,
+      "net_vat": -560000,
+      "noncreditable_vat": 95000,
+      "output_vat": 320000,
+      "payable_vat": 0,
+      "prepaid_vat": 660000,
+      "receipt_credit": 0,
+      "refund_vat": 560000,
+      "tax_base": 3200000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

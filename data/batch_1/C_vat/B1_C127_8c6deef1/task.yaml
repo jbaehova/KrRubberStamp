@@ -1,0 +1,42 @@
+task_id: B1_C127_8c6deef1
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상봄창틀의 현금영수증과 계산서 발급 내역을 함께 읽고 발행 공제(receipt_credit), 매출세액(output_vat),
+  납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_사업자인계.hwpx
+  format: hwpx
+- path: inputs/02_현금결제.pdf
+  format: pdf
+- path: inputs/03_계산서발급.xlsx
+  format: xlsx
+- path: inputs/04_결제사본.png
+  format: png
+  duplicate_of: inputs/02_현금결제.pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    output_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - output_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-d67588f7-a47e-5b91-8564-8fe4a12dce2f
+scenario_seed: 10119006657443323482
+scenario_hash: 54423b5ba17fc912bb1c5609698576bccce2198d51fa2a10f7d00082a6a5fea0
+authorship:
+  method: individually_written
+  case_id: C127
+  case_sha256: 8c6deef130b8de5a0c71e15f9218b9694ffec30e4690980e8bbd45dfe04117b1
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- receipt_credit
+- output_vat
+- payable_vat

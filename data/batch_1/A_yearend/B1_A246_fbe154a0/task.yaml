@@ -1,0 +1,55 @@
+task_id: B1_A246_fbe154a0
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상먼빛파일 가상목시윤의 기부금 정산을 부탁합니다. 두 특례기부를 먼저 합산한 뒤 공익 및 종교 기부의 한도를 계산합니다.
+  지정 전 납부가 포함됐으니 기관 기간도 확인해 기부금 공제액과 과세표준 및 전체 세액공제액을 적어 주세요.
+input_files:
+- path: inputs/01_첫특례기부.pdf
+  format: pdf
+- path: inputs/02_둘째특례.xlsx
+  format: xlsx
+- path: inputs/03_공익기부.pdf
+  format: pdf
+- path: inputs/04_종교기부.hwpx
+  format: hwpx
+- path: inputs/05_기관기간.xlsx
+  format: xlsx
+- path: inputs/06_적격확인.pdf
+  format: pdf
+- path: inputs/07_급여누계.xlsx
+  format: xlsx
+- path: inputs/08_직원기간.pdf
+  format: pdf
+- path: inputs/09_기부신청.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    donation_credit:
+      type: integer
+    tax_base:
+      type: integer
+    total_tax_credits:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - donation_credit
+  - tax_base
+  - total_tax_credits
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-a0f8e6da-87c1-55fc-bcc0-68e8e50e1fc1
+scenario_seed: 18149881020582564122
+scenario_hash: 59f94d3ffef153dec2a938bc18813eccca35215393e2c50d53158df419c293eb
+authorship:
+  method: individually_written
+  case_id: A246
+  case_sha256: fbe154a0436d911a7bd284ad19584f7ea30c679bd6805478ea6c8bfac25aef1d
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- donation_credit
+- tax_base
+- total_tax_credits
+- final_national_tax

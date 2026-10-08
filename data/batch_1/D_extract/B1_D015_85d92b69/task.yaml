@@ -1,0 +1,48 @@
+task_id: B1_D015_85d92b69
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 공동 번역실 개설비를 지출 결의에 올려야 합니다. 작업석 비품과 자료 보관품의 납품 자료를 판매처별로 모아 세액과 지급액을
+  정리해 주세요. answer.json에는 vendor_totals가 필요합니다.
+input_files:
+- path: inputs/01_입력장치_인수.pdf
+  format: pdf
+- path: inputs/02_발받침_구매대장.xlsx
+  format: xlsx
+- path: inputs/03_자료보관_납품확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-783979cd-2970-5535-b84d-aa393aa73795
+scenario_seed: 9644787810719877728
+scenario_hash: 77b9a0b0d42f745e672dfca9105ae15435bbf7af240caffdb9ace49c081c74c8
+authorship:
+  method: individually_written
+  case_id: D015
+  case_sha256: 85d92b69dff9ca600bfc1b462f4387cf967a962132f9b20e9f57365e5ac7b2e9
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals

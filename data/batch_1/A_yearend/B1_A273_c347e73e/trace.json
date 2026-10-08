@@ -1,0 +1,225 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 41800000,
+      "cards": [
+        {
+          "amount": 11200000,
+          "billed_item": "ordinary_goods_services",
+          "category": "debit",
+          "date": "2025-12-11",
+          "payment_method": "debit",
+          "person_id": "self"
+        },
+        {
+          "amount": 2600000,
+          "billed_item": "apartment_management_fee",
+          "category": "debit",
+          "date": "2025-12-12",
+          "payment_method": "debit",
+          "person_id": "self"
+        }
+      ],
+      "employee_age": 30,
+      "employee_name": "가상권세온",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "non_taxable": 1800000,
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족과 특별공제 신청은 없다. 모든 카드는 본인 사용이고 재직 기간에 결제했다. 일반 소비는 공제 적격이며 관리비는 공동주택 관리비 자체 납부다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "cards.0.excluded": false,
+      "cards.1.excluded": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": []
+    },
+    "output": {
+      "additional": 0,
+      "basic": 1500000,
+      "rejected": []
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 41800000,
+      "non_taxable": 1800000
+    },
+    "output": {
+      "salary_deduction": 11250000,
+      "salary_income": 28750000,
+      "total_salary": 40000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 40000000,
+      "spending": {
+        "debit": 11200000
+      }
+    },
+    "output": 360000,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 40000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 40000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 40000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 40000000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 40000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 40000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 40000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 40000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 26890000
+    },
+    "output": 2773500,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 2773500,
+      "salary": 40000000
+    },
+    "output": 684000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "standard",
+      "special_deductions_requested": false
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 130000
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 2773500,
+      "total_tax_credits": 814000
+    },
+    "output": 1959500,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 1959500
+    },
+    "output": 195950,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 195950,
+      "final_national": 1959500,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 195950,
+      "national": 1959500,
+      "total": 2155450
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

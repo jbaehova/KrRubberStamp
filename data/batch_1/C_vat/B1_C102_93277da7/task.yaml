@@ -1,0 +1,73 @@
+task_id: B1_C102_93277da7
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상끝자리함은 연간 발행 공제를 이미 모두 사용한 상태에서 작은 상반기 정산 차액을 확인하려 합니다. 원 단위 금액, 가족
+  지출, 다음 기간 공급을 구별하세요. 매출 공급가액(tax_base), 매출세액(output_vat), 불공제 세액(noncreditable_vat),
+  공제가능 매입세액(deductible_input_vat), 발행세액공제(receipt_credit), 고유 거래 수(unique_transaction_count),
+  정산액(net_vat)과 환급액(refund_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_수납함_사업.hwpx
+  format: hwpx
+- path: inputs/02_앞선공제_확정.pdf
+  format: pdf
+- path: inputs/03_원단위_카드판매.xlsx
+  format: xlsx
+- path: inputs/04_현금영수증_판매.pdf
+  format: pdf
+- path: inputs/05_장부만_있는판매.xlsx
+  format: xlsx
+- path: inputs/06_7월_실제판매.pdf
+  format: pdf
+- path: inputs/07_정상재료_인수.hwpx
+  format: hwpx
+- path: inputs/08_가족물품_인수.hwpx
+  format: hwpx
+- path: inputs/09_이전신고_납부확인.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    unique_transaction_count:
+      type: integer
+    refund_vat:
+      type: integer
+    net_vat:
+      type: integer
+  required:
+  - tax_base
+  - output_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - unique_transaction_count
+  - refund_vat
+  - net_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-6c7c1673-34ae-51bd-bf94-db57b3a7ffe1
+scenario_seed: 10603582007465976612
+scenario_hash: 5e9baff1de5b838018851e2842a4419e35143aab745da172e6eb3f9e94b22588
+authorship:
+  method: individually_written
+  case_id: C102
+  case_sha256: 93277da7d5bba324955af07b96232bdd9d0e72fe3c7711828c6aa8fb278e1c28
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- tax_base
+- output_vat
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- unique_transaction_count
+- refund_vat
+- net_vat

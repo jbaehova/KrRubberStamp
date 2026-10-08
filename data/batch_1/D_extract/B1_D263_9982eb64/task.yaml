@@ -1,0 +1,47 @@
+task_id: B1_D263_9982eb64
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 두 판매처에서 실제 구입한 유약 붓의 가격 이력을 등록해 주세요. cheapest_by_item과 vat_total을 제출해
+  주세요.
+input_files:
+- path: inputs/01_도예붓구입.hwpx
+  format: hwpx
+- path: inputs/02_붓상회구입.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-3e461748-f2b9-58b2-adb6-055a576891a4
+scenario_seed: 11061662450344747749
+scenario_hash: 8ee5fe03fda5e03e38f7b51c800b24393c1d77d70e5a59cbc2fe97cc9856cb64
+authorship:
+  method: individually_written
+  case_id: D263
+  case_sha256: 9982eb64321362e579cc42babf45975c4746595800a1b01f1cd558586c971f62
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- cheapest_by_item
+- vat_total

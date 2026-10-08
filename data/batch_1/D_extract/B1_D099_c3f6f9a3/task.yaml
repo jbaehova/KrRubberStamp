@@ -1,0 +1,69 @@
+task_id: B1_D099_c3f6f9a3
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 무대 발판비를 정산합니다. 여러 품목표와 재발급 자료를 표지 및 인수 번호로 연결해 vendor_totals, supply_total,
+  vat_total을 답하세요. 연결 및 집계 계약은 현장 대장에 있습니다.
+input_files:
+- path: inputs/01_첫표지.pdf
+  format: pdf
+- path: inputs/02_발판품목.xlsx
+  format: xlsx
+- path: inputs/03_보호판품목.hwpx
+  format: hwpx
+- path: inputs/04_둘째표지.pdf
+  format: pdf
+- path: inputs/05_둘째품목.xlsx
+  format: xlsx
+- path: inputs/06_보호판주문.hwpx
+  format: hwpx
+- path: inputs/07_재발급전체.pdf
+  format: pdf
+- path: inputs/08_현장대장.xlsx
+  format: xlsx
+- path: inputs/09_재발급사본.png
+  format: png
+  duplicate_of: inputs/07_재발급전체.pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - supply_total
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-f7fcd2f0-9a61-582b-9f3d-d447ee6d8e35
+scenario_seed: 14120748162244268966
+scenario_hash: aca483b20bcb9e6e510c6367fc16d458c7aaf51cbb335d5971b96da4ba60cc23
+authorship:
+  method: individually_written
+  case_id: D099
+  case_sha256: c3f6f9a37d51d3a6f7dc655ee1a1f9f91181fc9fe539762a76e6900a03cd5186
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals
+- supply_total
+- vat_total

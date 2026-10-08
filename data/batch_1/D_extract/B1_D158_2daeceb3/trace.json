@@ -1,0 +1,126 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-08-21",
+          "document_id": "BB-0821",
+          "event": "received",
+          "event_id": "BEAD-IN",
+          "location": "교구제작대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-08-20",
+          "document_id": "BB-0821",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "BEAD-BOX-C",
+          "vendor": "가상교구상자"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "BEAD-BOX-C",
+          "items": [
+            {
+              "name": "구슬상자본체",
+              "quantity": 9,
+              "unit_price": 6843
+            }
+          ],
+          "sheet_id": "BEAD-BASE"
+        },
+        {
+          "header_record_id": "BEAD-BOX-C",
+          "items": [
+            {
+              "name": "구슬상자뚜껑",
+              "quantity": 9,
+              "unit_price": 2477
+            }
+          ],
+          "sheet_id": "BEAD-LID"
+        }
+      ],
+      "processing_policy": "부속표는 header_record_id로 같은 표지에 연결하고 모든 품목 행을 합한다. 실제 구매는 invoice 또는 order의 received 기록으로 확인한다. 별도 단가의 각 행 공급가액은 수량 곱하기 단가이고 세액은 그 10%에서 원 미만을 버린다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "BB-0821"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "BB-0821",
+      "includes_vat": false,
+      "quantity": 9,
+      "unit_price": 6843
+    },
+    "output": {
+      "supply": 61587,
+      "total": 67745,
+      "vat": 6158
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "BB-0821",
+      "includes_vat": false,
+      "quantity": 9,
+      "unit_price": 2477
+    },
+    "output": {
+      "supply": 22293,
+      "total": 24522,
+      "vat": 2229
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상교구상자"
+    },
+    "output": "가상교구상자",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "구슬상자뚜껑",
+          "unit_price": 2477,
+          "vendor": "가상교구상자"
+        },
+        {
+          "item": "구슬상자본체",
+          "unit_price": 6843,
+          "vendor": "가상교구상자"
+        }
+      ],
+      "grand_total": 92267,
+      "supply_total": 83880,
+      "unique_document_count": 1,
+      "vat_total": 8387,
+      "vendor_totals": [
+        {
+          "supply": 83880,
+          "total": 92267,
+          "vat": 8387,
+          "vendor": "가상교구상자"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

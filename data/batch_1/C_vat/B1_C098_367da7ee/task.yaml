@@ -1,0 +1,65 @@
+task_id: B1_C098_367da7ee
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상맞춘축은 자동 수집 카드 파일과 종이 증빙을 함께 보내 왔습니다. 고객 식사, 보완된 수리 영수증, 토지 성토, 세액 표시
+  없는 전표를 구분하고 계산서를 발급한 판매도 연결하세요. 고유 거래 수(unique_transaction_count), 전체 매입세액(input_vat),
+  불공제 세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat), 발행세액공제(receipt_credit),
+  납부액(payable_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_정비사업_인계.hwpx
+  format: hwpx
+- path: inputs/02_고객식사_카드.pdf
+  format: pdf
+- path: inputs/03_처음_수리영수증.xlsx
+  format: xlsx
+- path: inputs/04_보완_현금영수증.pdf
+  format: pdf
+- path: inputs/05_토지성토_계산서.xlsx
+  format: xlsx
+- path: inputs/06_작업등_카드.pdf
+  format: pdf
+- path: inputs/07_판매_카드.xlsx
+  format: xlsx
+- path: inputs/08_판매_계산서.pdf
+  format: pdf
+- path: inputs/09_실제활동_납부인계.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-50ecffe2-a2e4-5553-95b0-18b5dc5cd4ab
+scenario_seed: 3926479091019122270
+scenario_hash: 6666354408d95c093d83b9467173a80ba81978b60764ddb873680a8d84e8fa48
+authorship:
+  method: individually_written
+  case_id: C098
+  case_sha256: 367da7ee0e31865e2ae931e05d051dc985c53d01bb9d27b50f0ff3a369e175da
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

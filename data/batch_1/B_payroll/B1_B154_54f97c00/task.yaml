@@ -1,0 +1,39 @@
+task_id: B1_B154_54f97c00
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상접지자료실은 매주 화요일과 금요일에만 보조 직원을 씁니다. 6월 2일부터 26일까지 승인된 출퇴근 기록을 읽고 기본 시급
+  대가와 별도 주휴수당 및 직원 계좌에 보낼 실지급액을 정리해 주세요. 이번 지급은 이 기간의 근로만 포함합니다.
+input_files:
+- path: inputs/01_접지보조계약.pdf
+  format: pdf
+- path: inputs/02_네주승인근태.xlsx
+  format: xlsx
+- path: inputs/03_적용제외확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-17c6571f-9ea8-5362-b991-96e5e086d5f0
+scenario_seed: 6123061509035963951
+scenario_hash: 02cb38cb87a6153bd873dc3929531bb575941ac5ab787a6779e90639e49a6c80
+authorship:
+  method: individually_written
+  case_id: B154
+  case_sha256: 54f97c0047f4b62f25f12f39ff8eac72b8746d3fbfc7e08792a1874e6ffb1914
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- net_pay

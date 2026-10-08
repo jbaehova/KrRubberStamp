@@ -1,0 +1,49 @@
+task_id: B1_D267_d759d07a
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 이번 식물 라벨 구입 자료를 가격 장부에 등록해 주세요. cheapest_by_item과 unique_document_count를
+  제출해 주세요.
+input_files:
+- path: inputs/01_작은라벨.xlsx
+  format: xlsx
+- path: inputs/02_작은라벨보충.hwpx
+  format: hwpx
+- path: inputs/03_큰라벨.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - cheapest_by_item
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-52ea8e1f-f21f-5d58-bd89-75239bbf620b
+scenario_seed: 15517663216435669028
+scenario_hash: 5a14ec45a83ddd4d4a6f8b630d699f0b7a28fd4d22f0470ce26e797dca6047ed
+authorship:
+  method: individually_written
+  case_id: D267
+  case_sha256: d759d07aafcb2824b9207c94b435d97ad720781dc8145a6b9889d19d4818207d
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- cheapest_by_item
+- unique_document_count

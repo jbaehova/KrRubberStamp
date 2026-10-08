@@ -1,0 +1,43 @@
+task_id: B1_A108_24e39ce1
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상대숲보수의 가상길나온에게 주거비와 치료비 정산 결과를 안내합니다. 월세 이체 내역과 본인 진료 영수증을 반영해 월세 및
+  의료비 세액공제액을 각각 구해 주세요. 산출세액과 소득세 결정세액도 적어 실제 납부한 비용을 환급액으로 오해하지 않게 안내하려 합니다.
+input_files:
+- path: inputs/01_급여와신청.hwpx
+  format: hwpx
+- path: inputs/02_임차주택과이체.xlsx
+  format: xlsx
+- path: inputs/03_본인진료영수증.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    rent_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    computed_tax:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - rent_credit
+  - medical_credit
+  - computed_tax
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-16cf6aed-880c-58c6-8619-1416e4657002
+scenario_seed: 2658140696699779902
+scenario_hash: ac1fed3555a4c9f3a27b82cacd346887d3a714bc3ff899e9df3e00aafafac60e
+authorship:
+  method: individually_written
+  case_id: A108
+  case_sha256: 24e39ce155ccbb3e54d2cadb8ab22ad55fdc362e69bf2f914a74f951da092beb
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- rent_credit
+- medical_credit
+- computed_tax
+- final_national_tax

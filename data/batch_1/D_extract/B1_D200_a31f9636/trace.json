@@ -1,0 +1,271 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-09-07",
+          "document_id": "CONSERVE-A-11",
+          "event": "received",
+          "event_id": "CONSERVE-A-IN",
+          "location": "문서보존작업실"
+        },
+        {
+          "date": "2026-09-07",
+          "document_id": "CONSERVE-B-12",
+          "event": "received",
+          "event_id": "CONSERVE-B-IN",
+          "location": "문서보존작업실"
+        },
+        {
+          "date": "2026-09-08",
+          "document_id": "CONSERVE-COVER-13",
+          "event": "received",
+          "event_id": "CONSERVE-COVER-IN",
+          "location": "문서보존작업실"
+        },
+        {
+          "date": "2026-09-05",
+          "document_id": "CONSERVE-BIG-14",
+          "event": "cancelled_before_dispatch",
+          "event_id": "CONSERVE-BIG-STOP",
+          "location": "전등발송대기"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-09-01",
+          "document_id": "CONSERVE-A-11",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "CONSERVE-A-C",
+          "vendor": "가상보존조명"
+        },
+        {
+          "date": "2026-09-02",
+          "document_id": "CONSERVE-B-12",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "CONSERVE-B-C",
+          "vendor": "가상문서등"
+        },
+        {
+          "date": "2026-09-03",
+          "document_id": "CONSERVE-COVER-13",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "CONSERVE-COVER-C",
+          "vendor": "가상보존조명"
+        },
+        {
+          "date": "2026-08-27",
+          "document_id": "CONSERVE-QA-27",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "CONSERVE-QA-C",
+          "vendor": "가상문서등"
+        },
+        {
+          "date": "2026-08-28",
+          "document_id": "CONSERVE-QB-28",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "CONSERVE-QB-C",
+          "vendor": "가상보존조명"
+        },
+        {
+          "date": "2026-09-04",
+          "document_id": "CONSERVE-BIG-14",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "CONSERVE-BIG-C",
+          "vendor": "가상문서등"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "CONSERVE-A-C",
+          "items": [
+            {
+              "name": "보존작업등20W",
+              "quantity": 4,
+              "unit_price": 52800
+            }
+          ],
+          "sheet_id": "CONSERVE-A-L"
+        },
+        {
+          "header_record_id": "CONSERVE-B-C",
+          "items": [
+            {
+              "name": "보존작업등20W",
+              "quantity": 2,
+              "unit_price": 49200
+            }
+          ],
+          "sheet_id": "CONSERVE-B-L"
+        },
+        {
+          "header_record_id": "CONSERVE-COVER-C",
+          "items": [
+            {
+              "name": "보존등보호커버",
+              "quantity": 6,
+              "unit_price": 9790
+            }
+          ],
+          "sheet_id": "CONSERVE-COVER-L"
+        },
+        {
+          "header_record_id": "CONSERVE-QA-C",
+          "items": [
+            {
+              "name": "보존작업등20W",
+              "quantity": 6,
+              "unit_price": 43500
+            }
+          ],
+          "sheet_id": "CONSERVE-QA-L"
+        },
+        {
+          "header_record_id": "CONSERVE-QB-C",
+          "items": [
+            {
+              "name": "보존작업등20W",
+              "quantity": 6,
+              "unit_price": 44700
+            }
+          ],
+          "sheet_id": "CONSERVE-QB-L"
+        },
+        {
+          "header_record_id": "CONSERVE-BIG-C",
+          "items": [
+            {
+              "name": "보존작업등30W",
+              "quantity": 2,
+              "unit_price": 46500
+            }
+          ],
+          "sheet_id": "CONSERVE-BIG-L"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 연결한다. invoice 또는 order에 received가 있는 번호만 실제 구매다. quote와 cancelled_before_dispatch 및 수령 없는 자료는 제외한다. 포함 개당 비교 공급가액은 단가의 10/11에서 원 미만을 버린 값이다. 포함 행의 총액은 수량 곱하기 단가이고 별도 행은 그 공급가액에 10%의 원 미만을 버린 세액을 더한다. 이름은 NFKC 후 공백 제거 및 영문 소문자, 업체 법인 표기 제거를 적용하되 규격 숫자는 보존한다. 품목별 최저를 품목명 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "CONSERVE-BIG-14",
+        "CONSERVE-QA-27",
+        "CONSERVE-QB-28"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "CONSERVE-A-11",
+        "CONSERVE-B-12",
+        "CONSERVE-COVER-13"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "CONSERVE-A-11",
+      "includes_vat": true,
+      "quantity": 4,
+      "unit_price": 52800
+    },
+    "output": {
+      "supply": 192000,
+      "total": 211200,
+      "vat": 19200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상보존조명"
+    },
+    "output": "가상보존조명",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CONSERVE-B-12",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 49200
+    },
+    "output": {
+      "supply": 98400,
+      "total": 108240,
+      "vat": 9840
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상문서등"
+    },
+    "output": "가상문서등",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CONSERVE-COVER-13",
+      "includes_vat": true,
+      "quantity": 6,
+      "unit_price": 9790
+    },
+    "output": {
+      "supply": 53400,
+      "total": 58740,
+      "vat": 5340
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상보존조명"
+    },
+    "output": "가상보존조명",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "보존등보호커버",
+          "unit_price": 8900,
+          "vendor": "가상보존조명"
+        },
+        {
+          "item": "보존작업등20w",
+          "unit_price": 48000,
+          "vendor": "가상보존조명"
+        }
+      ],
+      "grand_total": 378180,
+      "supply_total": 343800,
+      "unique_document_count": 3,
+      "vat_total": 34380,
+      "vendor_totals": [
+        {
+          "supply": 98400,
+          "total": 108240,
+          "vat": 9840,
+          "vendor": "가상문서등"
+        },
+        {
+          "supply": 245400,
+          "total": 269940,
+          "vat": 24540,
+          "vendor": "가상보존조명"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

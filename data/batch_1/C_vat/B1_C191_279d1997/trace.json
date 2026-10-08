@@ -1,0 +1,204 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "재료실수령",
+          "date": "2026-05-27",
+          "description": "한 번 반입한 접착 재료를 창고와 본사가 각 승인했다.",
+          "document_ids": [
+            "창고승인",
+            "본사승인"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "접착 재료 창고"
+          },
+          "operation_id": "접착가공",
+          "participants": [
+            {
+              "name": "가상유접착",
+              "organization": "가상접착제작",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C191-재료공급"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 접착 가공",
+          "operation_id": "접착가공",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "재료실수령",
+          "date": "2026-05-27",
+          "document_id": "창고승인",
+          "transaction_id": "C191-재료공급"
+        },
+        {
+          "activity_id": "재료실수령",
+          "date": "2026-05-27",
+          "document_id": "본사승인",
+          "transaction_id": "C191-재료공급"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "창고승인",
+        "purpose": "business",
+        "transaction_id": "C191-재료공급"
+      },
+      {
+        "business_related": true,
+        "document_id": "본사승인",
+        "purpose": "business",
+        "transaction_id": "C191-재료공급"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "창고승인",
+        "본사승인"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C191-재료공급"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-27",
+      "transaction_id": "C191-재료공급"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1848000,
+      "includes_vat": true,
+      "transaction_id": "C191-재료공급"
+    },
+    "output": {
+      "gross": 1848000,
+      "supply_base": 1680000,
+      "vat": 168000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C191-재료공급",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 168000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 265000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -168000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -168000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -168000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 168000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 168000,
+      "input_vat": 168000,
+      "net_vat": -168000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 168000,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,176 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-04",
+          "document_id": "HIVE-BASE-17",
+          "event": "received",
+          "event_id": "HIVE-BASE-IN",
+          "location": "양봉자재창고"
+        },
+        {
+          "date": "2026-04-04",
+          "document_id": "HIVE-FRAME-18",
+          "event": "received",
+          "event_id": "HIVE-FRAME-IN",
+          "location": "양봉자재창고"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-01",
+          "document_id": "HIVE-BASE-17",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "HIVE-BASE-H",
+          "vendor": "가상양봉자재"
+        },
+        {
+          "date": "2026-04-01",
+          "document_id": "HIVE-FRAME-18",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "HIVE-FRAME-H",
+          "vendor": "가상벌통목재"
+        },
+        {
+          "date": "2026-04-03",
+          "document_id": "HIVE-FRAME-19",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "HIVE-PLUS-H",
+          "vendor": "가상벌통목재"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "HIVE-BASE-H",
+          "items": [
+            {
+              "name": "밀랍기초장",
+              "quantity": 50,
+              "unit_price": 1980
+            }
+          ],
+          "sheet_id": "HIVE-BASE-L"
+        },
+        {
+          "header_record_id": "HIVE-FRAME-H",
+          "items": [
+            {
+              "name": "벌통프레임표준",
+              "quantity": 30,
+              "unit_price": 2420
+            }
+          ],
+          "sheet_id": "HIVE-FRAME-L"
+        },
+        {
+          "header_record_id": "HIVE-PLUS-H",
+          "items": [
+            {
+              "name": "벌통프레임표준",
+              "quantity": 20,
+              "unit_price": 2310
+            }
+          ],
+          "sheet_id": "HIVE-PLUS-L"
+        }
+      ],
+      "processing_policy": "품목은 header_record_id로 표지에 연결하고 invoice 또는 order의 document_id에 received가 확인된 원문만 현재 구매다. 확인되지 않은 주문은 지급표에 넣지 않는다. 포함 행 금액의 10/11에서 원 미만을 버린 공급가액과 차액 세액을 사용한다. 업체는 NFKC 후 공백과 법인 표현을 없애고 영문을 소문자로 정리하여 이름 순으로 기록한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "HIVE-FRAME-19"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "HIVE-BASE-17",
+        "HIVE-FRAME-18"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "HIVE-BASE-17",
+      "includes_vat": true,
+      "quantity": 50,
+      "unit_price": 1980
+    },
+    "output": {
+      "supply": 90000,
+      "total": 99000,
+      "vat": 9000
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상양봉자재"
+    },
+    "output": "가상양봉자재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "HIVE-FRAME-18",
+      "includes_vat": true,
+      "quantity": 30,
+      "unit_price": 2420
+    },
+    "output": {
+      "supply": 66000,
+      "total": 72600,
+      "vat": 6600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상벌통목재"
+    },
+    "output": "가상벌통목재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "밀랍기초장",
+          "unit_price": 1800,
+          "vendor": "가상양봉자재"
+        },
+        {
+          "item": "벌통프레임표준",
+          "unit_price": 2200,
+          "vendor": "가상벌통목재"
+        }
+      ],
+      "grand_total": 171600,
+      "supply_total": 156000,
+      "unique_document_count": 2,
+      "vat_total": 15600,
+      "vendor_totals": [
+        {
+          "supply": 66000,
+          "total": 72600,
+          "vat": 6600,
+          "vendor": "가상벌통목재"
+        },
+        {
+          "supply": 90000,
+          "total": 99000,
+          "vat": 9000,
+          "vendor": "가상양봉자재"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

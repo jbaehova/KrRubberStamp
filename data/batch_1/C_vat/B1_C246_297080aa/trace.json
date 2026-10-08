@@ -1,0 +1,400 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "운반밴정비",
+          "date": "2026-04-10",
+          "description": "계기 운반용 밴의 정비를 완료했다.",
+          "document_ids": [
+            "밴전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "계기 운반 차고"
+          },
+          "operation_id": "계기운반설치",
+          "participants": [
+            {
+              "name": "가상류운반",
+              "organization": "가상게이지운반",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "운반밴오일",
+          "vehicle_id": "가상-운반밴46"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "관리차정비",
+          "date": "2026-04-11",
+          "description": "관리팀 이동용 승용차 정비를 완료했다.",
+          "document_ids": [
+            "관리전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "계기 운반 차고"
+          },
+          "operation_id": "계기운반설치",
+          "participants": [
+            {
+              "name": "가상류운반",
+              "organization": "가상게이지운반",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "관리차오일",
+          "vehicle_id": "가상-관리차46"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "공구수령",
+          "date": "2026-04-12",
+          "description": "과세 설치에 쓸 공구를 인수했다.",
+          "document_ids": [
+            "공구카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "계기 설치 공구실"
+          },
+          "operation_id": "계기운반설치",
+          "participants": [
+            {
+              "name": "가상류운반",
+              "organization": "가상게이지운반",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "계기공구구매"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 계기 운반 설치 용역",
+          "operation_id": "계기운반설치",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "운반밴정비",
+          "date": "2026-04-10",
+          "document_id": "밴전자",
+          "transaction_id": "운반밴오일"
+        },
+        {
+          "activity_id": "관리차정비",
+          "date": "2026-04-11",
+          "document_id": "관리전자",
+          "transaction_id": "관리차오일"
+        },
+        {
+          "activity_id": "공구수령",
+          "date": "2026-04-12",
+          "document_id": "공구카드",
+          "transaction_id": "계기공구구매"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "non_excise_vehicle",
+          "vehicle_id": "가상-운반밴46"
+        },
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-관리차46"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "밴전자",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "운반밴오일"
+      },
+      {
+        "business_related": true,
+        "document_id": "관리전자",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "관리차오일"
+      },
+      {
+        "business_related": true,
+        "document_id": "공구카드",
+        "purpose": "business",
+        "transaction_id": "계기공구구매"
+      },
+      {
+        "transaction_id": "운반밴오일",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-운반밴46",
+        "vehicle_subject_excise": false
+      },
+      {
+        "transaction_id": "관리차오일",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-관리차46",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "공구카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "계기공구구매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "관리전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "관리차오일"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "밴전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "운반밴오일"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-12",
+      "transaction_id": "계기공구구매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1320000,
+      "includes_vat": true,
+      "transaction_id": "계기공구구매"
+    },
+    "output": {
+      "gross": 1320000,
+      "supply_base": 1200000,
+      "vat": 120000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "계기공구구매",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 120000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-11",
+      "transaction_id": "관리차오일"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 407000,
+      "includes_vat": true,
+      "transaction_id": "관리차오일"
+    },
+    "output": {
+      "gross": 407000,
+      "supply_base": 370000,
+      "vat": 37000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "관리차오일",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 37000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-10",
+      "transaction_id": "운반밴오일"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 495000,
+      "includes_vat": true,
+      "transaction_id": "운반밴오일"
+    },
+    "output": {
+      "gross": 495000,
+      "supply_base": 450000,
+      "vat": 45000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "운반밴오일",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 45000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 658000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -45000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -45000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -45000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 45000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 45000,
+      "input_vat": 202000,
+      "net_vat": -45000,
+      "noncreditable_vat": 157000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 45000,
+      "tax_base": 0,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

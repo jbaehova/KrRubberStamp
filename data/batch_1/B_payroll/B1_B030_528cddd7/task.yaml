@@ -1,0 +1,45 @@
+task_id: B1_B030_528cddd7
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상별자리정밀의 가상유태린 국민연금 신고액이 기준소득월액 상한보다 높습니다. 6월 보험 부과분에 적용되는 상한을 반영한 기준소득월액과
+  국민연금 근로자 부담액을 구해 주세요. 건강보험과 고용보험에 같은 연금 상한을 옮기지 않도록 두 보험 부담액도 함께 작성해 주세요.
+input_files:
+- path: inputs/01_정밀직급여.pdf
+  format: pdf
+- path: inputs/02_연금신고원액.hwpx
+  format: hwpx
+- path: inputs/03_별도보험마감.xlsx
+  format: xlsx
+- path: inputs/04_상반기상한.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    employment_insurance:
+      type: integer
+  required:
+  - pension_base_income
+  - national_pension
+  - health_insurance
+  - employment_insurance
+  additionalProperties: false
+canary: KrRubberStamp-canary-6aee052e-ed0b-54f0-88d1-391a2d97abb2
+scenario_seed: 5948373126623918089
+scenario_hash: b1741d9c613134834eeb60bbd26807613219b591dc144e873af51e77f43ba792
+authorship:
+  method: individually_written
+  case_id: B030
+  case_sha256: 528cddd7c3e5f8098f7c0cd27cc58776c2e45d37ac88679bc2cda2138de83344
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- pension_base_income
+- national_pension
+- health_insurance
+- employment_insurance

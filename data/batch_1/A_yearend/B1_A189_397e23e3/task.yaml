@@ -1,0 +1,45 @@
+task_id: B1_A189_397e23e3
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상범부채부품의 가상심루온은 총지급액으로 공제율을 안내받았습니다. 급여대장의 비과세액을 분리한 총급여를 확인해 월세와 개인
+  연금계좌의 세액공제액을 다시 계산해 주세요. 총급여와 결정 국세도 적습니다.
+input_files:
+- path: inputs/01_급여비과세.xlsx
+  format: xlsx
+- path: inputs/02_월세계약.pdf
+  format: pdf
+- path: inputs/03_세대연금.hwpx
+  format: hwpx
+- path: inputs/04_신청확인.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    total_salary:
+      type: integer
+    rent_credit:
+      type: integer
+    pension_account_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - total_salary
+  - rent_credit
+  - pension_account_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-26db5d80-5b81-5ef5-840e-209d195ee7ae
+scenario_seed: 4142788167500920162
+scenario_hash: 45713e022f8feb18d665eace01873a863410ff5c3d7afef30eb77b54b91e7862
+authorship:
+  method: individually_written
+  case_id: A189
+  case_sha256: 397e23e38f95756247378fab805c541fe04482d8803a194401d67bbb81407619
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- total_salary
+- rent_credit
+- pension_account_credit
+- final_national_tax

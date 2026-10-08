@@ -1,0 +1,64 @@
+task_id: B1_D043_7a0904e7
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 마을 방송 축제의 지급 대장을 마감해 주세요. 방송 부스와 청취석, 출연 대기 공간에서 받은 납품 자료를 거래처 이름 기준으로
+  모아 업체별 지급액과 전체 부가세를 확인해 주세요. answer.json에는 vendor_totals와 vat_total을 적어 주세요.
+input_files:
+- path: inputs/01_연장케이블_명세.pdf
+  format: pdf
+- path: inputs/02_안내판_대장.xlsx
+  format: xlsx
+- path: inputs/03_바람막이_확인.hwpx
+  format: hwpx
+- path: inputs/04_헤드폰걸이_명세.pdf
+  format: pdf
+- path: inputs/05_식별라벨_구매.xlsx
+  format: xlsx
+- path: inputs/06_순서표홀더_확인.hwpx
+  format: hwpx
+- path: inputs/07_어댑터_명세.pdf
+  format: pdf
+- path: inputs/08_청취석패드_대장.xlsx
+  format: xlsx
+- path: inputs/09_자료트레이_확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-ac17a95d-66ba-5d04-836b-06aead3c9ea7
+scenario_seed: 8793565137808964224
+scenario_hash: 5172e66134b9760f9239ec4b780dfb413aeb6169f29983130300b391cf8f4c9d
+authorship:
+  method: individually_written
+  case_id: D043
+  case_sha256: 7a0904e70c5cba80d43c64e95a8046cd30fd8ae20ddd9558398c6ad810962f11
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- vat_total

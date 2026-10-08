@@ -1,0 +1,42 @@
+task_id: B1_D213_175ede63
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 대관실 소모 전구를 다시 주문할 때 쓸 가격표를 만들어 주세요. cheapest_by_item만 필요합니다.
+input_files:
+- path: inputs/01_소빛전구명세.pdf
+  format: pdf
+- path: inputs/02_보충전구명세.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-5cbcc026-86a7-56f1-920b-17bda1934c8b
+scenario_seed: 1684027829495382946
+scenario_hash: 882a1ea50fd971a6f1744ca417044a1cf948d096507108f5f2ee5769de3f182a
+authorship:
+  method: individually_written
+  case_id: D213
+  case_sha256: 175ede6378f1c3a28aeb0bb146f6ed502bce9f8f6eca658c58b610acb8a77a36
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item

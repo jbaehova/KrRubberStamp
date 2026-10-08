@@ -1,0 +1,45 @@
+task_id: B1_B221_b64a33be
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상리본회람실의 건강보험 통지는 이번 부과가 없다고 적혀 있습니다. 건강보험과 장기요양보험 칸을 작성하고 다른 기관 및 세금을
+  포함한 총공제와 실지급액을 확인해 주세요.
+input_files:
+- path: inputs/01_정액지급.pdf
+  format: pdf
+- path: inputs/02_건강확인.hwpx
+  format: hwpx
+- path: inputs/03_다른기관.xlsx
+  format: xlsx
+- path: inputs/04_공제규정.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - health_insurance
+  - long_term_care
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-54e85cd3-d275-5f39-9b2d-70872167b525
+scenario_seed: 13135368155501964774
+scenario_hash: d4be08eef04aa096681ab095ea7f5cc85bf76d2503348c740fc8c448aae5dc23
+authorship:
+  method: individually_written
+  case_id: B221
+  case_sha256: b64a33be46ac2de6b9454fe6f58d94826d851f35e0f3ba25fe4c668258460f61
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- health_insurance
+- long_term_care
+- total_deductions
+- net_pay

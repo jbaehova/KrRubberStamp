@@ -1,0 +1,45 @@
+task_id: B1_B038_cecdd144
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상가을보관실의 가상연지후는 단시간 월급제 직원이며 원천징수 80%를 신청했습니다. 표의 기본 세액이 표시되어 있어도 선택
+  비율 반영 후 한 번의 지급에 대한 소액 부징수 요건을 확인해 소득세와 지방소득세를 구해 주세요. 총 공제액 및 실지급액도 알려 주세요.
+input_files:
+- path: inputs/01_단시간월급.pdf
+  format: pdf
+- path: inputs/02_80비율승인.hwpx
+  format: hwpx
+- path: inputs/03_저액급여마감.xlsx
+  format: xlsx
+- path: inputs/04_소액징수기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - income_tax
+  - local_income_tax
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-2ad7c9f2-3b8a-52fc-8651-6395a2030c0a
+scenario_seed: 14901796833963626948
+scenario_hash: 3c2c41d66823dbec4277606b685a866a79eb35fd075ced597f3da4906b24713d
+authorship:
+  method: individually_written
+  case_id: B038
+  case_sha256: cecdd144737151c4df934a398b2012f2b8f0471b7dc6533e8f1f63095f8cd941
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- income_tax
+- local_income_tax
+- total_deductions
+- net_pay

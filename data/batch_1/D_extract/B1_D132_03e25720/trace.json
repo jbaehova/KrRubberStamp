@@ -1,0 +1,151 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-15",
+          "document_id": "SPECIMEN-132",
+          "event": "received",
+          "event_id": "e132",
+          "location": "표본 보관대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-14",
+          "document_id": "SPECIMEN-132",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h132",
+          "vendor": "가상표본병"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h132",
+          "items": [
+            {
+              "name": "표본병250",
+              "quantity": 24,
+              "unit_price": 3400
+            }
+          ],
+          "sheet_id": "lot132-a"
+        },
+        {
+          "header_record_id": "h132",
+          "items": [
+            {
+              "name": "표본병250",
+              "quantity": 16,
+              "unit_price": 3200
+            }
+          ],
+          "sheet_id": "lot132-b"
+        },
+        {
+          "header_record_id": "h132",
+          "items": [
+            {
+              "name": "표본병마개250",
+              "quantity": 40,
+              "unit_price": 650
+            }
+          ],
+          "sheet_id": "lot132-cap"
+        }
+      ],
+      "processing_policy": "header_record_id로 같은 표지의 모든 품목 첨부 행을 연결한다. 반복 품목명도 각 행의 실제 수량과 단가를 보존한다. invoice와 order는 document_id의 received가 있을 때 포함한다. quote, 무인수와 출고 전 취소는 제외하며 같은 document_id의 같은 내용은 한 번만 센다. 별도는 품목 수량 곱하기 단가에 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 개당 공급가액 단가를 비교하고 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 품목 순서는 정규화 이름 오름차순이며 동률은 정규화 업체명 오름차순 첫 업체다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "SPECIMEN-132"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SPECIMEN-132",
+      "includes_vat": false,
+      "quantity": 24,
+      "unit_price": 3400
+    },
+    "output": {
+      "supply": 81600,
+      "total": 89760,
+      "vat": 8160
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "SPECIMEN-132",
+      "includes_vat": false,
+      "quantity": 16,
+      "unit_price": 3200
+    },
+    "output": {
+      "supply": 51200,
+      "total": 56320,
+      "vat": 5120
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "SPECIMEN-132",
+      "includes_vat": false,
+      "quantity": 40,
+      "unit_price": 650
+    },
+    "output": {
+      "supply": 26000,
+      "total": 28600,
+      "vat": 2600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상표본병"
+    },
+    "output": "가상표본병",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "표본병250",
+          "unit_price": 3200,
+          "vendor": "가상표본병"
+        },
+        {
+          "item": "표본병마개250",
+          "unit_price": 650,
+          "vendor": "가상표본병"
+        }
+      ],
+      "grand_total": 174680,
+      "supply_total": 158800,
+      "unique_document_count": 1,
+      "vat_total": 15880,
+      "vendor_totals": [
+        {
+          "supply": 158800,
+          "total": 174680,
+          "vat": 15880,
+          "vendor": "가상표본병"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

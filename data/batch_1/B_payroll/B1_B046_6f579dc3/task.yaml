@@ -1,0 +1,64 @@
+task_id: B1_B046_6f579dc3
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상루비계측의 가상류온서 급여는 식대 비과세를 제외하면 과세급여가 정확히 1000만원입니다. 승인 가족은 본인을 포함한 12명이며
+  별도 연령 대상 자녀 공제는 없습니다. 원문 표의 1000만원 행과 11명 초과 가족 계산 규칙을 확인하고 120% 신청을 반영한 소득세 및 지방소득세를
+  구해 주세요. 과세급여, 국민연금과 총 공제액 및 실지급액도 작성해 주세요.
+input_files:
+- path: inputs/01_계측직급여.pdf
+  format: pdf
+- path: inputs/02_식대비과세확인.hwpx
+  format: hwpx
+- path: inputs/03_정상근무월.xlsx
+  format: xlsx
+- path: inputs/04_가족12명.pdf
+  format: pdf
+- path: inputs/05_120비율.hwpx
+  format: hwpx
+- path: inputs/06_연금상한전.pdf
+  format: pdf
+- path: inputs/07_보수보험.xlsx
+  format: xlsx
+- path: inputs/08_은행실행.pdf
+  format: pdf
+- path: inputs/09_천만원공식표.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    national_pension:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - national_pension
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-b1d63e88-01bc-51d0-91ed-3c272dd6fcb4
+scenario_seed: 8023054724661902074
+scenario_hash: 77ac7ddc76bb83c830cb0c0a6700029bd9b8aaf804318e15e31eed28dc37c1f3
+authorship:
+  method: individually_written
+  case_id: B046
+  case_sha256: 6f579dc39cfdfafa62cdabf41a0cecfc2180516c8552d765c97bc06db1333afc
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- taxable_pay
+- income_tax
+- local_income_tax
+- national_pension
+- total_deductions
+- net_pay

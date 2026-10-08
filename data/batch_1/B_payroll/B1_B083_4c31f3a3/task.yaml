@@ -1,0 +1,41 @@
+task_id: B1_B083_4c31f3a3
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상온새검사실의 분 단위 추가 작업 세 건을 합쳐 연장수당을 마감하려 합니다. 표시 시급을 버린 값이나 각 작업을 먼저 올린
+  값을 누적하지 말고 계약의 월합계 단수 처리로 연장수당을 구해 주세요. 표시 통상시급과 총지급액도 남겨 주세요.
+input_files:
+- path: inputs/01_검사단수약정.pdf
+  format: pdf
+- path: inputs/02_분단위승인.xlsx
+  format: xlsx
+- path: inputs/03_검사공제.hwpx
+  format: hwpx
+- path: inputs/04_검사수당참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_hourly_wage_floor:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - ordinary_hourly_wage_floor
+  - overtime_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-0d4188cd-26a4-506a-8336-9a6bf819f65b
+scenario_seed: 5490437302296422475
+scenario_hash: 0527510182e2b1b6df835cf332a02a8c4d4899c81a7e2cdf38d98f56eacbfba1
+authorship:
+  method: individually_written
+  case_id: B083
+  case_sha256: 4c31f3a308eea84b849ff8805b0be858bc295c51471536b9c3b9be4ba19f6b1d
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- ordinary_hourly_wage_floor
+- overtime_pay
+- gross_pay

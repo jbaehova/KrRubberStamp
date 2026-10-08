@@ -1,0 +1,46 @@
+task_id: B1_B031_77c19303
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상담빛보존실의 가상최모은은 근로시간을 늘렸지만 국민연금공단이 당월 적용할 신고액은 별도로 확정해 통지했습니다. 이 신고액에
+  7월 이후 하한을 적용하여 기준소득월액과 국민연금 근로자 부담액을 구해 주세요. 당월 급여를 신고액으로 대신 쓰지 말고 공제 합계와 실지급액까지
+  계산해 주세요.
+input_files:
+- path: inputs/01_시간변경월급.hwpx
+  format: hwpx
+- path: inputs/02_낮은신고액통지.pdf
+  format: pdf
+- path: inputs/03_단시간급여마감.xlsx
+  format: xlsx
+- path: inputs/04_하반기하한.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - pension_base_income
+  - national_pension
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-79d90edb-8b78-5828-898f-6a5f06e28b82
+scenario_seed: 8629340003836331578
+scenario_hash: ec2d7618f473533fee03c739a1acced85184db6a51d0d9256070d30b6c07fff1
+authorship:
+  method: individually_written
+  case_id: B031
+  case_sha256: 77c1930366bb863ae1f6307c25ec2615f1ead50446e8d131e8bec737e646d512
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- pension_base_income
+- national_pension
+- total_deductions
+- net_pay

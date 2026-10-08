@@ -1,0 +1,47 @@
+task_id: B1_B006_d8aa4c36
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상들꽃연구실은 가상류해솔의 급여대장에 과세와 비과세 지급액을 별도 칸으로 입력합니다. 6월 지급 약정에서 총지급액, 과세급여와
+  비과세급여를 구해 주세요. 지급명세서 대조를 위해 소득세와 지방소득세도 작성해 주세요.
+input_files:
+- path: inputs/01_과세구분의뢰.pdf
+  format: pdf
+- path: inputs/02_원천세기초.xlsx
+  format: xlsx
+- path: inputs/03_비과세표.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    gross_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+  required:
+  - gross_pay
+  - taxable_pay
+  - non_taxable_pay
+  - income_tax
+  - local_income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-1407599c-4b8f-5dee-b09b-3a71d583d4e3
+scenario_seed: 15612374854888005215
+scenario_hash: 08c18ce3b44b1456e38100cb31dc89903678031ffec6574082ffd0ef2fa6d32d
+authorship:
+  method: individually_written
+  case_id: B006
+  case_sha256: d8aa4c366dd71e5f3742a455cd5f252211fbf76c0aad7f761f4c663bad2aa886
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- gross_pay
+- taxable_pay
+- non_taxable_pay
+- income_tax
+- local_income_tax

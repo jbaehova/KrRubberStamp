@@ -1,0 +1,60 @@
+task_id: B1_A050_9f394465
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상다울엔지니어링의 가상표윤재 정산을 검토합니다. 장기대출이 고정금리이지만 거치식이므로 상환 방식에 맞는 한도를 확인해 주세요.
+  문화비는 올해 급여 구간과 결제수단으로 분류하고 두 연금계좌도 합산해 주세요. 주택과 카드 공제액 및 연금계좌 세액공제액, 과세표준과 소득세 결정세액을
+  작성해 주세요.
+input_files:
+- path: inputs/01_직원.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_대출약정.pdf
+  format: pdf
+- path: inputs/04_이자납부.pdf
+  format: pdf
+- path: inputs/05_일반카드.xlsx
+  format: xlsx
+- path: inputs/06_문화신용.xlsx
+  format: xlsx
+- path: inputs/07_문화체크.xlsx
+  format: xlsx
+- path: inputs/08_연금저축.pdf
+  format: pdf
+- path: inputs/09_IRP.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    pension_account_credit:
+      type: integer
+    tax_base:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - housing_income_deduction
+  - credit_card_deduction
+  - pension_account_credit
+  - tax_base
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-dc809153-0783-5da4-a95a-f722ea3a573d
+scenario_seed: 11473276729158664958
+scenario_hash: cf68101c10a86915477acae8ecdfdc814de4597a268afc82f68b3e2c1809d9f1
+authorship:
+  method: individually_written
+  case_id: A050
+  case_sha256: 9f394465ab4202fe1af8d024e795294fdf44a2c1f1121dc350ab99522f13d8d1
+  source_file: batch_1/A_yearend/cases_004_053.json
+answer_fields:
+- housing_income_deduction
+- credit_card_deduction
+- pension_account_credit
+- tax_base
+- final_national_tax

@@ -1,0 +1,82 @@
+task_id: B1_D143_d0293b59
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 수채 작업실의 재료 구매를 지급 표로 옮기고 다음 단가 기준도 남겨 주세요. vendor_totals, cheapest_by_item,
+  supply_total이 필요합니다.
+input_files:
+- path: inputs/01_첫인수표지.pdf
+  format: pdf
+- path: inputs/02_첫로트.xlsx
+  format: xlsx
+- path: inputs/03_둘째로트.hwpx
+  format: hwpx
+- path: inputs/04_첫수령.pdf
+  format: pdf
+- path: inputs/05_후속표지.hwpx
+  format: hwpx
+- path: inputs/06_후속품목.xlsx
+  format: xlsx
+- path: inputs/07_후속수령.pdf
+  format: pdf
+- path: inputs/08_다른규격청구.hwpx
+  format: hwpx
+- path: inputs/09_다른규격수령.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-38bd4b7f-1760-59d6-87af-e3f80defd043
+scenario_seed: 14999585291118177150
+scenario_hash: c5eb9373c1846dd9f7f679a9f30bf0f817899986bb0723c51aebece676542ab0
+authorship:
+  method: individually_written
+  case_id: D143
+  case_sha256: d0293b59df45eb7e9d1ba187381172f7d96c6de26c9204d4613707a87abf66ed
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item
+- supply_total

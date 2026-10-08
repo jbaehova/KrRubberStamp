@@ -1,0 +1,120 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-09",
+          "document_id": "CURTAIN-130",
+          "event": "received",
+          "event_id": "e130",
+          "location": "투영실 창가"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-07",
+          "document_id": "CURTAIN-130",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h130",
+          "vendor": "가상차광시설"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h130",
+          "items": [
+            {
+              "name": "차광커튼폭90",
+              "quantity": 5,
+              "unit_price": 38000
+            },
+            {
+              "name": "커튼레일폭90",
+              "quantity": 5,
+              "unit_price": 15400
+            }
+          ],
+          "sheet_id": "s130"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 표지에 연결한다. invoice와 order는 document_id의 received가 있는 경우만 포함한다. quote, 무인수와 출고 전 취소는 제외한다. 원문 번호가 같은 동일 내용은 한 번만 센다. 별도 공급가액은 품목 수량 곱하기 단가다. 포함 단가의 품목 총액은 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "CURTAIN-130"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "CURTAIN-130",
+      "includes_vat": false,
+      "quantity": 5,
+      "unit_price": 38000
+    },
+    "output": {
+      "supply": 190000,
+      "total": 209000,
+      "vat": 19000
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "CURTAIN-130",
+      "includes_vat": false,
+      "quantity": 5,
+      "unit_price": 15400
+    },
+    "output": {
+      "supply": 77000,
+      "total": 84700,
+      "vat": 7700
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상차광시설"
+    },
+    "output": "가상차광시설",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "차광커튼폭90",
+          "unit_price": 38000,
+          "vendor": "가상차광시설"
+        },
+        {
+          "item": "커튼레일폭90",
+          "unit_price": 15400,
+          "vendor": "가상차광시설"
+        }
+      ],
+      "grand_total": 293700,
+      "supply_total": 267000,
+      "unique_document_count": 1,
+      "vat_total": 26700,
+      "vendor_totals": [
+        {
+          "supply": 267000,
+          "total": 293700,
+          "vat": 26700,
+          "vendor": "가상차광시설"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

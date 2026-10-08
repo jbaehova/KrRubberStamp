@@ -1,0 +1,48 @@
+task_id: B1_B224_db4a60e7
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상라벨보관실은 정규 교대 카드와 그 뒤의 추가 작업 카드를 각각 승인했습니다. 주간과 저녁 정규 카드의 무급 휴게를 빼고
+  기본급 지급액과 연장수당을 먼저 작성해 주세요. 저녁 정규 및 추가 카드의 야간 구간을 합친 야간 가산과 총지급액도 필요합니다. 월급에 들어 있는
+  정규 교대 대가를 다시 추가하지 않습니다.
+input_files:
+- path: inputs/01_교대약정.pdf
+  format: pdf
+- path: inputs/02_정규출퇴근.hwpx
+  format: hwpx
+- path: inputs/03_추가작업.xlsx
+  format: xlsx
+- path: inputs/04_은행및기관.pdf
+  format: pdf
+- path: inputs/05_정산과원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - overtime_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-fb5a1353-90ab-5195-af6e-fc744b258301
+scenario_seed: 15801548790921760406
+scenario_hash: 093a40e47d39d1967472b4ef8610cdb70f5938570973ce8b2e86f352e3a81cc0
+authorship:
+  method: individually_written
+  case_id: B224
+  case_sha256: db4a60e7b7e50e96775094c58f4202026695cc27a9c3c9de3226a89cc91143eb
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- base_pay
+- overtime_pay
+- night_pay
+- gross_pay

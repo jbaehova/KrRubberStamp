@@ -1,0 +1,47 @@
+task_id: B1_D023_3945a8f6
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 음악 자료실의 악보함과 음반 속지를 보충하려 합니다. 담당자마다 다르게 적은 품목 이름을 맞춰 구매 이력을 비교해 주세요.
+  품목별 최저 공급가액 단가와 업체를 answer.json의 cheapest_by_item으로 정리해 주세요.
+input_files:
+- path: inputs/01_악보함_인수.pdf
+  format: pdf
+- path: inputs/02_음반속지_구매대장.xlsx
+  format: xlsx
+- path: inputs/03_혼합보관품_납품.hwpx
+  format: hwpx
+- path: inputs/04_분기말_보충명세.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-d17a7f7d-743a-580a-ad5a-c2aef7b7c7ba
+scenario_seed: 4126890408876668641
+scenario_hash: d4701d8ea5fcc82e4a3c6200c0370f41e99890732e4c9538354f1c94e341609e
+authorship:
+  method: individually_written
+  case_id: D023
+  case_sha256: 3945a8f6300f76e171ccbdf8b888e8565600ac41a067b88cd8b821acdd82fb66
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item

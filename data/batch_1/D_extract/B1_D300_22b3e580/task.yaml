@@ -1,0 +1,82 @@
+task_id: B1_D300_22b3e580
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 과수 선별장 재사용 상자와 라벨 및 받침의 실제 구매를 마감합니다. vendor_totals와 cheapest_by_item
+  및 vat_total을 제출해 주세요.
+input_files:
+- path: inputs/01_상자법인표지.hwpx
+  format: hwpx
+- path: inputs/02_협력업체표지.pdf
+  format: pdf
+- path: inputs/03_첫상자.xlsx
+  format: xlsx
+- path: inputs/04_첫라벨.hwpx
+  format: hwpx
+- path: inputs/05_후속상자.xlsx
+  format: xlsx
+- path: inputs/06_보충라벨.xlsx
+  format: xlsx
+- path: inputs/07_협력업체품목.hwpx
+  format: hwpx
+- path: inputs/08_법인물품인수.pdf
+  format: pdf
+- path: inputs/09_협력업체인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-bc0b7665-b720-5cff-a215-9a5051fe3a1b
+scenario_seed: 2500594559296120527
+scenario_hash: 02243ad4a6e79162fe6aeb75df863a039594d0ed33bd65ec54086bdf52a1ab0c
+authorship:
+  method: individually_written
+  case_id: D300
+  case_sha256: 22b3e580c21ea6cf3a72b02622596506fc9fa907cbd3a86c51b02875e5db4b9c
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item
+- vat_total

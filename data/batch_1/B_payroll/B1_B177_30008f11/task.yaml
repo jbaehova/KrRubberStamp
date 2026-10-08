@@ -1,0 +1,45 @@
+task_id: B1_B177_30008f11
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상아치연구실은 높은 건강 보수 통지를 받았습니다. 건강보험과 장기요양보험 부담액을 계산하고 전체 공제와 실지급액까지 확인해
+  지급 승인을 마쳐 주세요. 건강 부과 상한을 납부 파일에 반영해야 합니다.
+input_files:
+- path: inputs/01_아치지급.pdf
+  format: pdf
+- path: inputs/02_아치건강.xlsx
+  format: xlsx
+- path: inputs/03_아치타기관.hwpx
+  format: hwpx
+- path: inputs/04_아치원천.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - health_insurance
+  - long_term_care
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-44245d77-0d9f-56ec-8f87-598d5534d0f4
+scenario_seed: 3458921821182563591
+scenario_hash: 4cabb9dcac8ca72d940eccdf0bac09dcb29562ab09d5b697535e0efb6f28f9da
+authorship:
+  method: individually_written
+  case_id: B177
+  case_sha256: 30008f11f96f1507b79feae9b41639ff7c8b52999345150a6a01bb4d083d2366
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- health_insurance
+- long_term_care
+- total_deductions
+- net_pay

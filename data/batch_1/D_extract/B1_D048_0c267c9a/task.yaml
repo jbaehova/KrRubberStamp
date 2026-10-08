@@ -1,0 +1,80 @@
+task_id: B1_D048_0c267c9a
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 소리 산책 장비 대여실의 지급 대장과 보충 주문표를 함께 정리해 주세요. 원본과 보관 자료를 대조하고 판매처 이름과 세금 표기를
+  맞춰 업체별 지급액과 품목별 최저 공급가액 단가를 구해야 합니다. answer.json에는 vendor_totals와 cheapest_by_item을
+  담아 주세요.
+input_files:
+- path: inputs/01_헤드폰_명세.pdf
+  format: pdf
+- path: inputs/02_배터리홀더_대장.xlsx
+  format: xlsx
+- path: inputs/03_장비주머니_확인.hwpx
+  format: hwpx
+- path: inputs/04_헤드폰_보충명세.pdf
+  format: pdf
+- path: inputs/05_방풍덮개_원본.pdf
+  format: pdf
+- path: inputs/06_홀더_추가대장.xlsx
+  format: xlsx
+- path: inputs/07_주머니_보충확인.hwpx
+  format: hwpx
+- path: inputs/08_식별표_명세.pdf
+  format: pdf
+- path: inputs/09_방풍덮개_스캔.png
+  format: png
+  duplicate_of: inputs/05_방풍덮개_원본.pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-8f234430-99de-58bf-964f-948be3e49caa
+scenario_seed: 875524181640791107
+scenario_hash: adf5391901d44f7cb432e8c63e8ef7862b9dbba7e066c56906d77c32707198d8
+authorship:
+  method: individually_written
+  case_id: D048
+  case_sha256: 0c267c9abef6c443ca91a652e8a3b2763047d53517101728c1e0faebf8ab85e6
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item

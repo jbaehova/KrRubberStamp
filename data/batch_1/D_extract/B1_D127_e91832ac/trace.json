@@ -1,0 +1,115 @@
+[
+  {
+    "inputs": {
+      "document_id": "FIX-127-P",
+      "includes_vat": false,
+      "quantity": 20,
+      "unit_price": 1250
+    },
+    "output": {
+      "supply": 25000,
+      "total": 27500,
+      "vat": 2500
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상출장부품"
+    },
+    "output": "가상출장부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "FIX-127-T",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 3100
+    },
+    "output": {
+      "supply": 37200,
+      "total": 40920,
+      "vat": 3720
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상출장부품"
+    },
+    "output": "가상출장부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "FIX-127-B",
+      "includes_vat": false,
+      "quantity": 30,
+      "unit_price": 430
+    },
+    "output": {
+      "supply": 12900,
+      "total": 14190,
+      "vat": 1290
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상방문공구"
+    },
+    "output": "가상방문공구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "FIX-127-P"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "연결핀",
+          "unit_price": 1250,
+          "vendor": "가상출장부품"
+        },
+        {
+          "item": "예비체결볼트",
+          "unit_price": 430,
+          "vendor": "가상방문공구"
+        },
+        {
+          "item": "체결띠",
+          "unit_price": 3100,
+          "vendor": "가상출장부품"
+        }
+      ],
+      "grand_total": 82610,
+      "supply_total": 75100,
+      "unique_document_count": 3,
+      "vat_total": 7510,
+      "vendor_totals": [
+        {
+          "supply": 12900,
+          "total": 14190,
+          "vat": 1290,
+          "vendor": "가상방문공구"
+        },
+        {
+          "supply": 62200,
+          "total": 68420,
+          "vat": 6220,
+          "vendor": "가상출장부품"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

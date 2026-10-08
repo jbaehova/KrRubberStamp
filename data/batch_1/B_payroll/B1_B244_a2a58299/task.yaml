@@ -1,0 +1,66 @@
+task_id: B1_B244_a2a58299
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상제목회람실의 현금 식대 지급에는 배식 기록이 함께 있습니다. 야간 작업의 최종 승인 휴게를 적용해 연장수당과 야간 가산을
+  구해 주세요. 비과세 지급액, 과세급여 및 승인 비율에 따른 소득세와 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_정액지급.pdf
+  format: pdf
+- path: inputs/02_배식등록.hwpx
+  format: hwpx
+- path: inputs/03_초기근태.xlsx
+  format: xlsx
+- path: inputs/04_수정근태.pdf
+  format: pdf
+- path: inputs/05_주휴달력.hwpx
+  format: hwpx
+- path: inputs/06_은행실행.xlsx
+  format: xlsx
+- path: inputs/07_기관고지.pdf
+  format: pdf
+- path: inputs/08_선택승인.hwpx
+  format: hwpx
+- path: inputs/09_공식기준.xlsx
+  format: xlsx
+- path: inputs/10_휴게수정스캔.png
+  format: png
+  duplicate_of: inputs/04_수정근태.pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-4b3c6494-cef6-54d0-9966-d0a20da10143
+scenario_seed: 11719917200851957317
+scenario_hash: 55e339ae6363bf89b2c8bf754d26fa3bbf49b88ad8800dad51c09f492b90eb60
+authorship:
+  method: individually_written
+  case_id: B244
+  case_sha256: a2a5829971c576458d5e28042054915c4e8db62a95482255ff94c0aa3c605787
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- overtime_pay
+- night_pay
+- non_taxable_pay
+- taxable_pay
+- income_tax
+- net_pay

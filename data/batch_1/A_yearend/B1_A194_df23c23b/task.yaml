@@ -1,0 +1,57 @@
+task_id: B1_A194_df23c23b
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상깽깽이풀지원의 가상최예림은 기관 지정 기록과 가족 배정 확인을 늦게 제출했습니다. 납부일에 유효한 기관 지정을 연결하고
+  아버지 신청 배정을 지출에 적용해 주세요. 공제대상 가족 수와 기부금 및 의료비 세액공제액을 적고 원천징수 누계에서 총 정산액을 계산합니다.
+input_files:
+- path: inputs/01_직원범위.hwpx
+  format: hwpx
+- path: inputs/02_지급원천.xlsx
+  format: xlsx
+- path: inputs/03_아버지배정.pdf
+  format: pdf
+- path: inputs/04_기관지정.xlsx
+  format: xlsx
+- path: inputs/05_본인봄기부.pdf
+  format: pdf
+- path: inputs/06_본인가을기부.pdf
+  format: pdf
+- path: inputs/07_아버지기부.hwpx
+  format: hwpx
+- path: inputs/08_본인진료.pdf
+  format: pdf
+- path: inputs/09_아버지진료.pdf
+  format: pdf
+- path: inputs/10_개인연금.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    donation_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - eligible_dependents
+  - donation_credit
+  - medical_credit
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-26d1de54-1e63-537f-936e-6ebfc48351a5
+scenario_seed: 16078908653874269835
+scenario_hash: a8e96a3517a1dd8bb0d0568cd3ed9c967bb37bbb0f53d68828afad085a5ce82f
+authorship:
+  method: individually_written
+  case_id: A194
+  case_sha256: df23c23b22214e8b34c5ff92dbe24445d7d5f430b2d19a3bc22a67c64a97f664
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- eligible_dependents
+- donation_credit
+- medical_credit
+- settlement_total

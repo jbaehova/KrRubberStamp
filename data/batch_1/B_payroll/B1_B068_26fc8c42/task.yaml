@@ -1,0 +1,43 @@
+task_id: B1_B068_26fc8c42
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상넓은분류실의 월말 급여는 은행 실행 자료 한 건으로 지급일을 확인할 수 있습니다. 실행 기록의 지급일 기준으로 두 자녀
+  공제를 반영한 소득세와 지방소득세를 구해 주세요. 총지급액과 실지급액도 함께 적어 은행 결과표와 맞춰 봅니다.
+input_files:
+- path: inputs/01_분류직약정.hwpx
+  format: hwpx
+- path: inputs/02_은행근로마감.xlsx
+  format: xlsx
+- path: inputs/03_월말지급세액.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    gross_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - gross_pay
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-aebd9498-6a5e-5d81-b0ab-22259b0ebad3
+scenario_seed: 2809274483892840478
+scenario_hash: cc4b886f40e89eeb1db208234e921cc5659d4fce5f7ac46991e1b035817fc2eb
+authorship:
+  method: individually_written
+  case_id: B068
+  case_sha256: 26fc8c424900681e82f29aa7dfc9c9ddb3929405b35136be0a0d5499c21fe16d
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- gross_pay
+- income_tax
+- local_income_tax
+- net_pay

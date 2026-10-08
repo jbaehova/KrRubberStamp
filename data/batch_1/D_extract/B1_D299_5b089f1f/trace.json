@@ -1,0 +1,292 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-06",
+          "document_id": "SIDE-BOX-11",
+          "event": "received",
+          "event_id": "SIDE-O-IN",
+          "location": "반찬포장작업대"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "SIDE-BOX-12",
+          "event": "received",
+          "event_id": "SIDE-PLUS-IN",
+          "location": "반찬포장작업대"
+        },
+        {
+          "date": "2026-06-05",
+          "document_id": "SIDE-BAND-14",
+          "event": "cancelled_before_dispatch",
+          "event_id": "SIDE-BAND-STOP",
+          "location": "반찬포장출고실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-02",
+          "document_id": "SIDE-BOX-11",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "SIDE-BOX-O",
+          "vendor": "가상반찬포장"
+        },
+        {
+          "date": "2026-06-02",
+          "document_id": "SIDE-BOX-11",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "SIDE-BOX-R",
+          "vendor": "가상반찬포장"
+        },
+        {
+          "date": "2026-06-03",
+          "document_id": "SIDE-BOX-12",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SIDE-PLUS-H",
+          "vendor": "가상식품용기"
+        },
+        {
+          "date": "2026-06-03",
+          "document_id": "SIDE-OFFER-13",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "SIDE-QUOTE-H",
+          "vendor": "가상포장제안"
+        },
+        {
+          "date": "2026-06-04",
+          "document_id": "SIDE-BAND-14",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "SIDE-BAND-H",
+          "vendor": "가상반찬포장"
+        },
+        {
+          "date": "2026-06-04",
+          "document_id": "SIDE-BAG-15",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "SIDE-BAG-H",
+          "vendor": "가상손잡이봉투"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "SIDE-BOX-O",
+          "items": [
+            {
+              "name": "반찬용기750",
+              "quantity": 90,
+              "unit_price": 550
+            },
+            {
+              "name": "반찬뚜껑750",
+              "quantity": 90,
+              "unit_price": 165
+            }
+          ],
+          "sheet_id": "SIDE-O-L"
+        },
+        {
+          "header_record_id": "SIDE-BOX-R",
+          "items": [
+            {
+              "name": "반찬용기750",
+              "quantity": 90,
+              "unit_price": 550
+            },
+            {
+              "name": "반찬뚜껑750",
+              "quantity": 90,
+              "unit_price": 165
+            }
+          ],
+          "sheet_id": "SIDE-R-L"
+        },
+        {
+          "header_record_id": "SIDE-PLUS-H",
+          "items": [
+            {
+              "name": "반찬용기750",
+              "quantity": 30,
+              "unit_price": 480
+            },
+            {
+              "name": "반찬뚜껑750",
+              "quantity": 30,
+              "unit_price": 160
+            }
+          ],
+          "sheet_id": "SIDE-PLUS-L"
+        },
+        {
+          "header_record_id": "SIDE-QUOTE-H",
+          "items": [
+            {
+              "name": "반찬용기750",
+              "quantity": 120,
+              "unit_price": 430
+            }
+          ],
+          "sheet_id": "SIDE-QUOTE-L"
+        },
+        {
+          "header_record_id": "SIDE-BAND-H",
+          "items": [
+            {
+              "name": "포장띠S2",
+              "quantity": 120,
+              "unit_price": 77
+            }
+          ],
+          "sheet_id": "SIDE-BAND-L"
+        },
+        {
+          "header_record_id": "SIDE-BAG-H",
+          "items": [
+            {
+              "name": "손잡이봉투B2",
+              "quantity": 120,
+              "unit_price": 242
+            }
+          ],
+          "sheet_id": "SIDE-BAG-L"
+        }
+      ],
+      "processing_policy": "품목 header_record_id를 표지 record_id에 연결한다. invoice 또는 order의 document_id에 received가 있는 원문만 실제 구매다. quote와 cancelled_before_dispatch 및 미수령 주문은 제외한다. 같은 document_id와 연결한 최종 내용이 동일한 재발급은 한 번 계산한다. 포함 행 금액의 10/11에서 원 미만을 버린 공급가액과 차액 세액을 사용하며 포함 단가도 10/11의 원 미만을 버려 비교한다. 별도 행 세액은 공급가액 10%의 원 미만을 버린 값이다. 품목 및 업체는 NFKC 후 공백 제거와 영문 소문자 변환을 적용하고 업체 법인 표현을 제거한다. 결과는 이름 순이며 단가 동률은 업체 이름 순으로 고른다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "SIDE-BAG-15",
+        "SIDE-BAND-14",
+        "SIDE-OFFER-13"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "SIDE-BOX-11",
+        "SIDE-BOX-12"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SIDE-BOX-11",
+      "includes_vat": true,
+      "quantity": 90,
+      "unit_price": 550
+    },
+    "output": {
+      "supply": 45000,
+      "total": 49500,
+      "vat": 4500
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "SIDE-BOX-11",
+      "includes_vat": true,
+      "quantity": 90,
+      "unit_price": 165
+    },
+    "output": {
+      "supply": 13500,
+      "total": 14850,
+      "vat": 1350
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상반찬포장"
+    },
+    "output": "가상반찬포장",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SIDE-BOX-11"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "SIDE-BOX-12",
+      "includes_vat": false,
+      "quantity": 30,
+      "unit_price": 480
+    },
+    "output": {
+      "supply": 14400,
+      "total": 15840,
+      "vat": 1440
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "SIDE-BOX-12",
+      "includes_vat": false,
+      "quantity": 30,
+      "unit_price": 160
+    },
+    "output": {
+      "supply": 4800,
+      "total": 5280,
+      "vat": 480
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상식품용기"
+    },
+    "output": "가상식품용기",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "반찬뚜껑750",
+          "unit_price": 150,
+          "vendor": "가상반찬포장"
+        },
+        {
+          "item": "반찬용기750",
+          "unit_price": 480,
+          "vendor": "가상식품용기"
+        }
+      ],
+      "grand_total": 85470,
+      "supply_total": 77700,
+      "unique_document_count": 2,
+      "vat_total": 7770,
+      "vendor_totals": [
+        {
+          "supply": 58500,
+          "total": 64350,
+          "vat": 5850,
+          "vendor": "가상반찬포장"
+        },
+        {
+          "supply": 19200,
+          "total": 21120,
+          "vat": 1920,
+          "vendor": "가상식품용기"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

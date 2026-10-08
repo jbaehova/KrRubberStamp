@@ -1,0 +1,48 @@
+task_id: B1_B129_15697526
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상세모소재실에는 은행 실행 기록과 그 뒤에 작성한 높은 번호의 계획이 함께 있습니다. 실제 지급일을 effective_payment_date에
+  YYYY-MM-DD로 작성하고 공단의 별도 보험 부과월로 연금 기준소득월액과 근로자 부담액을 계산해 주세요. 건강과 고용의 독립 통지 기준을 사용한
+  총공제액도 구합니다.
+input_files:
+- path: inputs/01_소재정액.pdf
+  format: pdf
+- path: inputs/02_소재은행.xlsx
+  format: xlsx
+- path: inputs/03_소재연금.hwpx
+  format: hwpx
+- path: inputs/04_소재범위.pdf
+  format: pdf
+- path: inputs/05_반기참조.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - effective_payment_date
+  - pension_base_income
+  - national_pension
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-1525fe92-784b-5795-b270-4d80a727d7de
+scenario_seed: 1542893156326426823
+scenario_hash: abc600432cf9fce6144041cfaab3968288569fa8068a31d09779e3705052a162
+authorship:
+  method: individually_written
+  case_id: B129
+  case_sha256: 15697526ad37c8c7783a4a5b89d68424c50ae1f499ad744382df00b588498c45
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- effective_payment_date
+- pension_base_income
+- national_pension
+- total_deductions

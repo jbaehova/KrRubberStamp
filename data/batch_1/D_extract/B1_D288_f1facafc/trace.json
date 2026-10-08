@@ -1,0 +1,195 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-01-20",
+          "document_id": "BRASS-VALVE-61",
+          "event": "received",
+          "event_id": "BRASS-A-IN",
+          "location": "금관수리함"
+        },
+        {
+          "date": "2026-01-21",
+          "document_id": "BRASS-VALVE-62",
+          "event": "received",
+          "event_id": "BRASS-B-IN",
+          "location": "금관수리함"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-01-15",
+          "document_id": "BRASS-VALVE-61",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "BRASS-A-H",
+          "vendor": "가상관악부속"
+        },
+        {
+          "date": "2026-01-17",
+          "document_id": "BRASS-VALVE-62",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "BRASS-B-H",
+          "vendor": "가상악기수선재"
+        },
+        {
+          "date": "2026-01-17",
+          "document_id": "BRASS-OFFER-63",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "BRASS-Q-H",
+          "vendor": "가상밸브도구"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "BRASS-A-H",
+          "items": [
+            {
+              "name": "밸브스프링V2",
+              "quantity": 6,
+              "unit_price": 3400
+            },
+            {
+              "name": "밸브코르크C2",
+              "quantity": 6,
+              "unit_price": 900
+            }
+          ],
+          "sheet_id": "BRASS-A-L"
+        },
+        {
+          "header_record_id": "BRASS-B-H",
+          "items": [
+            {
+              "name": "밸브 스프링 v2",
+              "quantity": 3,
+              "unit_price": 3150
+            }
+          ],
+          "sheet_id": "BRASS-B-L"
+        },
+        {
+          "header_record_id": "BRASS-Q-H",
+          "items": [
+            {
+              "name": "밸브스프링V2",
+              "quantity": 9,
+              "unit_price": 2700
+            }
+          ],
+          "sheet_id": "BRASS-Q-L"
+        }
+      ],
+      "processing_policy": "표지와 품목을 record_id 및 header_record_id로 연결한다. invoice 또는 order의 document_id에 received가 있는 자료만 실제 구매이며 quote는 제외한다. 모든 단가는 공급가액이다. 품목 및 업체를 NFKC 후 공백 제거와 영문 소문자 변환으로 정리하고 업체의 법인 표현을 없앤다. 결과는 품목명 순이며 같은 최저 단가면 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "BRASS-OFFER-63"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "BRASS-VALVE-61",
+        "BRASS-VALVE-62"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "BRASS-VALVE-61",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 3400
+    },
+    "output": {
+      "supply": 20400,
+      "total": 22440,
+      "vat": 2040
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "BRASS-VALVE-61",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 900
+    },
+    "output": {
+      "supply": 5400,
+      "total": 5940,
+      "vat": 540
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상관악부속"
+    },
+    "output": "가상관악부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "BRASS-VALVE-62",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 3150
+    },
+    "output": {
+      "supply": 9450,
+      "total": 10395,
+      "vat": 945
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상악기수선재"
+    },
+    "output": "가상악기수선재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "밸브스프링v2",
+          "unit_price": 3150,
+          "vendor": "가상악기수선재"
+        },
+        {
+          "item": "밸브코르크c2",
+          "unit_price": 900,
+          "vendor": "가상관악부속"
+        }
+      ],
+      "grand_total": 38775,
+      "supply_total": 35250,
+      "unique_document_count": 2,
+      "vat_total": 3525,
+      "vendor_totals": [
+        {
+          "supply": 25800,
+          "total": 28380,
+          "vat": 2580,
+          "vendor": "가상관악부속"
+        },
+        {
+          "supply": 9450,
+          "total": 10395,
+          "vat": 945,
+          "vendor": "가상악기수선재"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

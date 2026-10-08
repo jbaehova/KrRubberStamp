@@ -1,0 +1,46 @@
+task_id: B1_D005_4af6e8b3
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 나눔 냉장고 보관용품을 산 비용을 판매처별로 정리해 주세요. 식품비 장부와 구분해 보관통과 표찰 구매의 공급가액, 부가세,
+  지급액이 필요합니다. answer.json의 vendor_totals로 보내 주세요.
+input_files:
+- path: inputs/01_보관통_인수확인.pdf
+  format: pdf
+- path: inputs/02_날짜표찰_구매대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-7cc83f1c-d82d-504d-a79a-5362274de090
+scenario_seed: 5401760660625796181
+scenario_hash: d444df4c7d103301683814ad3762f76f80c9ba3d619d2e0dd25e6260d2527785
+authorship:
+  method: individually_written
+  case_id: D005
+  case_sha256: 4af6e8b37a47ac557b3a3d11ceec8e0b4b7a51deb021698c183e770003d7ec70
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals

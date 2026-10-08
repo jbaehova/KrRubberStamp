@@ -1,0 +1,58 @@
+task_id: B1_D031_832848a8
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 이동 공연 준비까지 마친 합주단의 장비 보관비를 정산해 주세요. 연습실 보관품과 이동 보호품의 납품 자료를 업체별로 묶고 전체
+  부가세를 구해 주세요. answer.json에는 vendor_totals와 vat_total이 필요합니다.
+input_files:
+- path: inputs/01_현악기덮개_인수.pdf
+  format: pdf
+- path: inputs/02_관악기받침_구매.xlsx
+  format: xlsx
+- path: inputs/03_악보대주머니_확인.hwpx
+  format: hwpx
+- path: inputs/04_이동패드_명세.pdf
+  format: pdf
+- path: inputs/05_정리튜브_대장.xlsx
+  format: xlsx
+- path: inputs/06_번호표_납품.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-fc912a55-8a88-52bb-b7b8-383af3088beb
+scenario_seed: 9450883707757723714
+scenario_hash: 5d34468697ce2ecadff533c39d6d5a39091c90a0413120be2d20832f08813a85
+authorship:
+  method: individually_written
+  case_id: D031
+  case_sha256: 832848a8c66d004275714ff95869e5be3b9588b3fb2f47a9047463640815cdd8
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- vat_total

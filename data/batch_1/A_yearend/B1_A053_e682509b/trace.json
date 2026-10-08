@@ -1,0 +1,348 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 75400000,
+      "cards": [
+        {
+          "amount": 19600000,
+          "category": "debit",
+          "date": "2025-12-31",
+          "payment_method": "debit",
+          "person_id": "가상아버지"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 69,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 1800000,
+          "name": "가상손상호",
+          "person_id": "가상아버지",
+          "relation": "parent",
+          "supported": true
+        },
+        {
+          "age": 41,
+          "assigned_claimant": "self",
+          "earned_income_only": true,
+          "gross_salary": 5010000,
+          "income_amount": 1506000,
+          "name": "가상손윤슬",
+          "person_id": "가상배우자",
+          "relation": "spouse",
+          "supported": true
+        },
+        {
+          "age": 12,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상손다인",
+          "person_id": "가상자녀",
+          "relation": "child",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 11200000,
+          "date": "2025-12-10",
+          "institution_type": "qualified_special_education",
+          "level": "special_disabled",
+          "person_id": "가상아버지"
+        },
+        {
+          "amount": 2100000,
+          "date": "2025-11-30",
+          "institution_type": "primary_secondary_school",
+          "level": "school",
+          "person_id": "가상자녀"
+        },
+        {
+          "amount": 3400000,
+          "date": "2025-12-01",
+          "institution_type": "private_academy",
+          "level": "school",
+          "person_id": "가상자녀"
+        }
+      ],
+      "employee_age": 43,
+      "employee_name": "가상손주연",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "insurance": [
+        {
+          "amount": 890000,
+          "date": "2025-12-08",
+          "kind": "general",
+          "person_id": "self"
+        }
+      ],
+      "marital_status": "married",
+      "non_taxable": 2400000,
+      "reference_year": 2025,
+      "scenario_id": "가상우림기획 가족 교육 마감",
+      "scope_note": "국내 거주자로 이 회사 근로소득만 있다. 별도 기재가 없는 공적연금과 사회보험 및 지출 항목은 공제를 신청하지 않았다. 다른 공제는 없다. 가족을 실제 부양하며 교육비와 보험료는 직원이 직접 부담했다. 아버지 교육기관은 공제 가능한 장애인 특수교육기관이다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "education.0.excluded": false,
+      "education.1.excluded": false,
+      "education.2.excluded": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 69,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 1800000,
+          "name": "가상손상호",
+          "person_id": "가상아버지",
+          "relation": "parent",
+          "supported": true
+        },
+        {
+          "age": 41,
+          "assigned_claimant": "self",
+          "earned_income_only": true,
+          "gross_salary": 5010000,
+          "income_amount": 1506000,
+          "name": "가상손윤슬",
+          "person_id": "가상배우자",
+          "relation": "spouse",
+          "supported": true
+        },
+        {
+          "age": 12,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상손다인",
+          "person_id": "가상자녀",
+          "relation": "child",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 3000000,
+      "rejected": [
+        "가상아버지",
+        "가상배우자"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 75400000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 13400000,
+      "salary_income": 59600000,
+      "total_salary": 73000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 73000000,
+      "spending": {}
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 73000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 250000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 890000,
+          "date": "2025-12-08",
+          "kind": "general",
+          "person_id": "self"
+        }
+      ],
+      "salary": 73000000
+    },
+    "output": 106800,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 73000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 11200000,
+          "date": "2025-12-10",
+          "excluded": false,
+          "institution_type": "qualified_special_education",
+          "level": "special_disabled",
+          "person_id": "가상아버지"
+        },
+        {
+          "amount": 2100000,
+          "date": "2025-11-30",
+          "excluded": false,
+          "institution_type": "primary_secondary_school",
+          "level": "school",
+          "person_id": "가상자녀"
+        },
+        {
+          "amount": 3400000,
+          "date": "2025-12-01",
+          "excluded": true,
+          "institution_type": "private_academy",
+          "level": "school",
+          "person_id": "가상자녀"
+        }
+      ],
+      "salary": 73000000
+    },
+    "output": 1995000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 73000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 73000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 73000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 73000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 56600000
+    },
+    "output": 7824000,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 7824000,
+      "salary": 73000000
+    },
+    "output": 500000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 1995000,
+        "hometown_credit": 0,
+        "insurance_credit": 106800,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 7824000,
+      "total_tax_credits": 2851800
+    },
+    "output": 4972200,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 4972200
+    },
+    "output": 497220,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 497220,
+      "final_national": 4972200,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 497220,
+      "national": 4972200,
+      "total": 5469420
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

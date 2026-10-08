@@ -1,0 +1,335 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-15",
+          "document_id": "ORCHARD-CRATE-81",
+          "event": "received",
+          "event_id": "ORCHARD-A-IN",
+          "location": "과수선별장자재실"
+        },
+        {
+          "date": "2026-05-16",
+          "document_id": "ORCHARD-CRATE-82",
+          "event": "received",
+          "event_id": "ORCHARD-B-IN",
+          "location": "과수선별장자재실"
+        },
+        {
+          "date": "2026-05-16",
+          "document_id": "ORCHARD-LABEL-83",
+          "event": "received",
+          "event_id": "ORCHARD-C-IN",
+          "location": "과수선별장자재실"
+        },
+        {
+          "date": "2026-05-17",
+          "document_id": "ORCHARD-CRATE-84",
+          "event": "received",
+          "event_id": "ORCHARD-D-IN",
+          "location": "과수선별장자재실"
+        },
+        {
+          "date": "2026-05-17",
+          "document_id": "ORCHARD-PAD-85",
+          "event": "received",
+          "event_id": "ORCHARD-E-IN",
+          "location": "과수선별장자재실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-10",
+          "document_id": "ORCHARD-CRATE-81",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "ORCHARD-A-H",
+          "vendor": "주식회사 가상 ＯＲＣＨＡＲＤ ＢＯＸ"
+        },
+        {
+          "date": "2026-05-12",
+          "document_id": "ORCHARD-CRATE-82",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "ORCHARD-B-H",
+          "vendor": "(주)가상orchardbox"
+        },
+        {
+          "date": "2026-05-13",
+          "document_id": "ORCHARD-LABEL-83",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "ORCHARD-C-H",
+          "vendor": "㈜ 가상 Orchard Box"
+        },
+        {
+          "date": "2026-05-13",
+          "document_id": "ORCHARD-CRATE-84",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "ORCHARD-D-H",
+          "vendor": "가상선별상자"
+        },
+        {
+          "date": "2026-05-14",
+          "document_id": "ORCHARD-PAD-85",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "ORCHARD-E-H",
+          "vendor": "가상과수받침"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "ORCHARD-A-H",
+          "items": [
+            {
+              "name": "선별상자C12",
+              "quantity": 13,
+              "unit_price": 1589
+            }
+          ],
+          "sheet_id": "ORCHARD-A-CRATE"
+        },
+        {
+          "header_record_id": "ORCHARD-A-H",
+          "items": [
+            {
+              "name": "상자라벨L12",
+              "quantity": 13,
+              "unit_price": 97
+            }
+          ],
+          "sheet_id": "ORCHARD-A-LABEL"
+        },
+        {
+          "header_record_id": "ORCHARD-B-H",
+          "items": [
+            {
+              "name": "선별상자C12",
+              "quantity": 20,
+              "unit_price": 1450
+            }
+          ],
+          "sheet_id": "ORCHARD-B-CRATE"
+        },
+        {
+          "header_record_id": "ORCHARD-C-H",
+          "items": [
+            {
+              "name": "상자라벨L12",
+              "quantity": 30,
+              "unit_price": 88
+            }
+          ],
+          "sheet_id": "ORCHARD-C-LABEL"
+        },
+        {
+          "header_record_id": "ORCHARD-D-H",
+          "items": [
+            {
+              "name": "선별 상자 c12",
+              "quantity": 7,
+              "unit_price": 1430
+            }
+          ],
+          "sheet_id": "ORCHARD-D-CRATE"
+        },
+        {
+          "header_record_id": "ORCHARD-E-H",
+          "items": [
+            {
+              "name": "과수받침패드12",
+              "quantity": 40,
+              "unit_price": 319
+            }
+          ],
+          "sheet_id": "ORCHARD-E-PAD"
+        }
+      ],
+      "processing_policy": "품목 header_record_id를 표지 record_id에 연결하며 같은 표지의 여러 별첨을 모두 모은다. invoice 또는 order의 document_id에 received가 있는 원문만 실제 구매다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자 변환을 적용하고 업체 법인 표현을 제거한다. 포함 행 금액 10/11의 원 미만을 버린 공급가액과 차액 세액을 기록한다. 가격표는 포함 단가 자체의 10/11에서 원 미만을 버린 공급가액 단가로 비교하며 별도 단가는 그대로 쓴다. 별도 행 세액은 공급가액 10%의 원 미만을 버린 값이다. 결과는 이름 순이며 최저 단가 동률은 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 5,
+      "received_document_ids": [
+        "ORCHARD-CRATE-81",
+        "ORCHARD-CRATE-82",
+        "ORCHARD-CRATE-84",
+        "ORCHARD-LABEL-83",
+        "ORCHARD-PAD-85"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "ORCHARD-CRATE-81",
+      "includes_vat": true,
+      "quantity": 13,
+      "unit_price": 1589
+    },
+    "output": {
+      "supply": 18779,
+      "total": 20657,
+      "vat": 1878
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "ORCHARD-CRATE-81",
+      "includes_vat": true,
+      "quantity": 13,
+      "unit_price": 97
+    },
+    "output": {
+      "supply": 1146,
+      "total": 1261,
+      "vat": 115
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "주식회사 가상 ＯＲＣＨＡＲＤ ＢＯＸ"
+    },
+    "output": "가상orchardbox",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "ORCHARD-CRATE-82",
+      "includes_vat": false,
+      "quantity": 20,
+      "unit_price": 1450
+    },
+    "output": {
+      "supply": 29000,
+      "total": 31900,
+      "vat": 2900
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "(주)가상orchardbox"
+    },
+    "output": "가상orchardbox",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "ORCHARD-LABEL-83",
+      "includes_vat": true,
+      "quantity": 30,
+      "unit_price": 88
+    },
+    "output": {
+      "supply": 2400,
+      "total": 2640,
+      "vat": 240
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "㈜ 가상 Orchard Box"
+    },
+    "output": "가상orchardbox",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "ORCHARD-CRATE-84",
+      "includes_vat": false,
+      "quantity": 7,
+      "unit_price": 1430
+    },
+    "output": {
+      "supply": 10010,
+      "total": 11011,
+      "vat": 1001
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상선별상자"
+    },
+    "output": "가상선별상자",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "ORCHARD-PAD-85",
+      "includes_vat": true,
+      "quantity": 40,
+      "unit_price": 319
+    },
+    "output": {
+      "supply": 11600,
+      "total": 12760,
+      "vat": 1160
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상과수받침"
+    },
+    "output": "가상과수받침",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 5
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "과수받침패드12",
+          "unit_price": 290,
+          "vendor": "가상과수받침"
+        },
+        {
+          "item": "상자라벨l12",
+          "unit_price": 80,
+          "vendor": "가상orchardbox"
+        },
+        {
+          "item": "선별상자c12",
+          "unit_price": 1430,
+          "vendor": "가상선별상자"
+        }
+      ],
+      "grand_total": 80229,
+      "supply_total": 72935,
+      "unique_document_count": 5,
+      "vat_total": 7294,
+      "vendor_totals": [
+        {
+          "supply": 51325,
+          "total": 56458,
+          "vat": 5133,
+          "vendor": "가상orchardbox"
+        },
+        {
+          "supply": 11600,
+          "total": 12760,
+          "vat": 1160,
+          "vendor": "가상과수받침"
+        },
+        {
+          "supply": 10010,
+          "total": 11011,
+          "vat": 1001,
+          "vendor": "가상선별상자"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

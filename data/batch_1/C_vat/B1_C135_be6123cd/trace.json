@@ -1,0 +1,249 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "service",
+          "activity_id": "C135-단말완료",
+          "date": "2026-04-08",
+          "description": "직원이 계산대 단말기 점검 완료를 현장에서 확인했다.",
+          "document_ids": [
+            "C135-점검카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상작은소매 계산대"
+          },
+          "operation_id": "C135-소매",
+          "participants": [
+            {
+              "name": "가상한판매",
+              "organization": "가상작은소매",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C135-단말점검"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 비품 소매점 운영",
+          "operation_id": "C135-소매",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C135-단말완료",
+          "date": "2026-04-08",
+          "document_id": "C135-점검카드",
+          "transaction_id": "C135-단말점검"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C135-점검카드",
+        "purpose": "business",
+        "transaction_id": "C135-단말점검"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C135-점검카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C135-단말점검"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C135-카드결제"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C135-사무실비품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-08",
+      "transaction_id": "C135-단말점검"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 385000,
+      "includes_vat": true,
+      "transaction_id": "C135-단말점검"
+    },
+    "output": {
+      "gross": 385000,
+      "supply_base": 350000,
+      "vat": 35000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C135-단말점검",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 35000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-07",
+      "transaction_id": "C135-사무실비품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 814000,
+      "includes_vat": true,
+      "transaction_id": "C135-사무실비품"
+    },
+    "output": {
+      "gross": 814000,
+      "supply_base": 740000,
+      "vat": 74000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 740000
+    },
+    "output": 74000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C135-사무실비품"
+    },
+    "output": {
+      "eligible_gross": 814000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 219000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 814000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 10582,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 10582
+    },
+    "output": 10582,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 10582,
+      "liability_before_credit": 74000
+    },
+    "output": 10582,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 63418,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 63418,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 74000,
+      "prepaid_vat": 0,
+      "receipt_credit": 10582
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 35000,
+      "net_vat": 63418,
+      "noncreditable_vat": 35000,
+      "output_vat": 74000,
+      "payable_vat": 63418,
+      "prepaid_vat": 0,
+      "receipt_credit": 10582,
+      "refund_vat": 0,
+      "tax_base": 740000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

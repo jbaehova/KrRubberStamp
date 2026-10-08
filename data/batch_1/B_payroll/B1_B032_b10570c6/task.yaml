@@ -1,0 +1,45 @@
+task_id: B1_B032_b10570c6
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상흰구름설계의 급여 공제 파일이 6월 상한으로 고정되어 있습니다. 이번 공단 통지는 7월 부과분이고 지급 예정일은 7월 24일입니다.
+  부과월에 맞는 연금 상한을 반영하여 기준소득월액과 국민연금 부담액을 작성하고 공제 합계 및 실지급액을 알려 주세요.
+input_files:
+- path: inputs/01_설계직약정.pdf
+  format: pdf
+- path: inputs/02_7월지급승인.hwpx
+  format: hwpx
+- path: inputs/03_공제파일기초.xlsx
+  format: xlsx
+- path: inputs/04_상한변경원문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - pension_base_income
+  - national_pension
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-3184b2e9-e112-5e3c-9c15-1898c4113bf1
+scenario_seed: 12755725517995189049
+scenario_hash: e04616c9af2f8b6d7a01fd7123cc54af35662c36c830a961ecaa8cadb7239e40
+authorship:
+  method: individually_written
+  case_id: B032
+  case_sha256: b10570c6a07d23395165cacc46409ab3c5a1d34e0f7b89e08d02a2375975c00d
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- pension_base_income
+- national_pension
+- total_deductions
+- net_pay

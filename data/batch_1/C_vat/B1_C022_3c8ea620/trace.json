@@ -1,0 +1,254 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C022-선반",
+          "date": "2026-03-19",
+          "description": "배우자가 집 거실에 설치할 선반을 받았다. 사무실에 옮기거나 판매할 계획은 없다.",
+          "document_ids": [
+            "가상-C022-선반카드"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "가상 대표 개인 주택 거실"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상 대표배우자",
+              "organization": "가상 대표가족",
+              "role": "household_member"
+            },
+            {
+              "name": "가상 정비대표",
+              "organization": "가상책상정비",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "가상-C022-집선반"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 사무용 책상 정비",
+          "operation_id": "OPS-C022",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C022-선반",
+          "date": "2026-03-19",
+          "document_id": "가상-C022-선반카드",
+          "transaction_id": "가상-C022-집선반"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": false,
+        "document_id": "가상-C022-선반카드",
+        "purpose": "private",
+        "transaction_id": "가상-C022-집선반"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C022-정비발급"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C022-정비납품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C022-선반카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C022-집선반"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-08",
+      "transaction_id": "가상-C022-정비납품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 7400000,
+      "includes_vat": false,
+      "transaction_id": "가상-C022-정비납품"
+    },
+    "output": {
+      "gross": 8140000,
+      "supply_base": 7400000,
+      "vat": 740000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 7400000
+    },
+    "output": 740000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "가상-C022-정비납품"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-19",
+      "transaction_id": "가상-C022-집선반"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1540000,
+      "includes_vat": true,
+      "transaction_id": "가상-C022-집선반"
+    },
+    "output": {
+      "gross": 1540000,
+      "supply_base": 1400000,
+      "vat": 140000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "가상-C022-집선반",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 140000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 165000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 740000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 740000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 740000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 740000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 140000,
+      "net_vat": 740000,
+      "noncreditable_vat": 140000,
+      "output_vat": 740000,
+      "payable_vat": 740000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 7400000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,61 @@
+task_id: B1_C049_8f60ab55
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상넘김책받침의 창고 장부와 경리 계산서는 같은 입고를 서로 다른 금액 기준으로 적었습니다. 거래 식별자를 연결하고 작년 원본
+  계산서도 공급일로 구분해 주세요. 매입세액(input_vat), 공제가능 매입세액(deductible_input_vat), 실제 거래 수(unique_transaction_count),
+  매출 공급가액(tax_base), 납부액(payable_vat)을 answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_도매업_의뢰.hwpx
+  format: hwpx
+- path: inputs/02_전년_기초.pdf
+  format: pdf
+- path: inputs/03_선납_확인.xlsx
+  format: xlsx
+- path: inputs/04_책받침_납품.pdf
+  format: pdf
+- path: inputs/05_창고_장부.xlsx
+  format: xlsx
+- path: inputs/06_경리_계산서.pdf
+  format: pdf
+- path: inputs/07_작년_원본.pdf
+  format: pdf
+- path: inputs/08_입고_증언.hwpx
+  format: hwpx
+- path: inputs/09_원본_사진.png
+  format: png
+  duplicate_of: inputs/06_경리_계산서.pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+    tax_base:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - input_vat
+  - deductible_input_vat
+  - unique_transaction_count
+  - tax_base
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-f98317ce-38a7-52d6-acf0-198b0ea058ad
+scenario_seed: 10331445931019467699
+scenario_hash: af8d6da9c62f611faf941299ec59efab725bce7ea9062f058de9ccf0871c0fd8
+authorship:
+  method: individually_written
+  case_id: C049
+  case_sha256: 8f60ab55fe91fbb3828c650a29b200789e46af436a4c64358bc57ab4f8265a89
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- input_vat
+- deductible_input_vat
+- unique_transaction_count
+- tax_base
+- payable_vat

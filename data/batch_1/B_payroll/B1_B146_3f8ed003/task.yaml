@@ -1,0 +1,64 @@
+task_id: B1_B146_3f8ed003
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상구름통신실은 건강 보수 통지가 매우 높고 지급 자료에는 실제 실행 뒤에 작성된 새 승인 계획이 있습니다. 실제 실행 상태를
+  우선하여 네 자녀의 적용 공제를 정하고 120퍼센트 신청 세액을 계산해 주세요. 건강보험 상한과 장기요양 연결액을 적용한 후 공제 합계와 실지급액을
+  구합니다.
+input_files:
+- path: inputs/01_구름정액.pdf
+  format: pdf
+- path: inputs/02_구름은행.xlsx
+  format: xlsx
+- path: inputs/03_구름가족.hwpx
+  format: hwpx
+- path: inputs/04_구름선택.pdf
+  format: pdf
+- path: inputs/05_구름건강.xlsx
+  format: xlsx
+- path: inputs/06_구름연금.hwpx
+  format: hwpx
+- path: inputs/07_구름고용.pdf
+  format: pdf
+- path: inputs/08_구름범위.xlsx
+  format: xlsx
+- path: inputs/09_구름공식.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - health_insurance
+  - long_term_care
+  - income_tax
+  - local_income_tax
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-f3c5c8b2-db53-555a-9ada-9ccb75d8c158
+scenario_seed: 4579826584103800980
+scenario_hash: 6d30978eaa20f9129541450f3cace115312c9553d0a4eeb3cbc5bf76288faed7
+authorship:
+  method: individually_written
+  case_id: B146
+  case_sha256: 3f8ed0036665d0942686c16d50ff8345cf94466b01d72c1902721b877b2607b1
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- health_insurance
+- long_term_care
+- income_tax
+- local_income_tax
+- total_deductions
+- net_pay

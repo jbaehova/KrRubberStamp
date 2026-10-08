@@ -1,0 +1,66 @@
+task_id: B1_B102_adb7923c
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상고른음향분석실의 신규 시급제 직원에게 첨부 다섯 근무일분을 지급합니다. 금요일 정규 카드에는 휴게 길이가 다른 이전 승인본과
+  수정본이 있으니 실제 기본급은 최신 승인 원시 시각으로 계산해 주세요. 주별 개근 확인의 주휴와80% 선택 원천세, 첫 달 보험 통지까지 반영한
+  실지급액을 작성합니다.
+input_files:
+- path: inputs/01_음향계약.pdf
+  format: pdf
+- path: inputs/02_월화카드.xlsx
+  format: xlsx
+- path: inputs/03_수목카드.hwpx
+  format: hwpx
+- path: inputs/04_금이전.pdf
+  format: pdf
+- path: inputs/05_금수정.xlsx
+  format: xlsx
+- path: inputs/06_음향개근.hwpx
+  format: hwpx
+- path: inputs/07_음향첫보험.pdf
+  format: pdf
+- path: inputs/08_음향선택.hwpx
+  format: hwpx
+- path: inputs/09_음향은행.pdf
+  format: pdf
+- path: inputs/10_음향지급공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    employment_insurance:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - income_tax
+  - local_income_tax
+  - employment_insurance
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-40133387-7e28-59a3-80f4-45a77dd3581b
+scenario_seed: 12517634477041944154
+scenario_hash: 693d06d45d5afa00234e097c8448eee858e701f68e05417628f78943eb26785b
+authorship:
+  method: individually_written
+  case_id: B102
+  case_sha256: adb7923c5044865ad763ff890553ada4cd0f026e5701324f46c498c92307e73d
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- income_tax
+- local_income_tax
+- employment_insurance
+- net_pay

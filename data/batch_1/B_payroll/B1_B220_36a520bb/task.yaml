@@ -1,0 +1,45 @@
+task_id: B1_B220_36a520bb
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상공문색인소의 2월 지급 계획은 취소되고 3월 은행 실행 기록이 도착했습니다. 유효 지급일을 확인하고 과세급여의 소득세와
+  지방소득세를 구해 주세요. 연금은 별도 보험 고지월로 계산해 주세요.
+input_files:
+- path: inputs/01_급여등록.hwpx
+  format: hwpx
+- path: inputs/02_취소와실행.xlsx
+  format: xlsx
+- path: inputs/03_2월보험.pdf
+  format: pdf
+- path: inputs/04_적용원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    national_pension:
+      type: integer
+  required:
+  - effective_payment_date
+  - income_tax
+  - local_income_tax
+  - national_pension
+  additionalProperties: false
+canary: KrRubberStamp-canary-cbb874ed-f5eb-56c7-939a-946e3b80395a
+scenario_seed: 3937589438420404215
+scenario_hash: 393247d7876db2fcdf3f728376a6958db8df8981b46c16419bc2c7249f32ed2d
+authorship:
+  method: individually_written
+  case_id: B220
+  case_sha256: 36a520bb6460c7f7458b34dc91ce3f56a19fe537eb19be386231ee51dfc4acfc
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- effective_payment_date
+- income_tax
+- local_income_tax
+- national_pension

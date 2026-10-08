@@ -1,0 +1,249 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "전년인수",
+          "date": "2025-12-29",
+          "description": "무전기 전년 반입 완료",
+          "document_ids": [
+            "무전전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "통신 장비 창고"
+          },
+          "operation_id": "무전장비",
+          "participants": [
+            {
+              "name": "가상유통신",
+              "organization": "가상무전준비",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C179-무전기"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "올해인수",
+          "date": "2026-01-03",
+          "description": "부속 케이블 올해 인수",
+          "document_ids": [
+            "부속전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "통신 장비 창고"
+          },
+          "operation_id": "무전장비",
+          "participants": [
+            {
+              "name": "가상유통신",
+              "organization": "가상무전준비",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C179-부속"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 통신 장비 공급",
+          "operation_id": "무전장비",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "전년인수",
+          "date": "2025-12-29",
+          "document_id": "무전전자",
+          "transaction_id": "C179-무전기"
+        },
+        {
+          "activity_id": "올해인수",
+          "date": "2026-01-03",
+          "document_id": "부속전자",
+          "transaction_id": "C179-부속"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "무전전자",
+        "purpose": "business",
+        "transaction_id": "C179-무전기"
+      },
+      {
+        "business_related": true,
+        "document_id": "부속전자",
+        "purpose": "business",
+        "transaction_id": "C179-부속"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "무전전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C179-무전기"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "부속전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C179-부속"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2025-12-29",
+      "transaction_id": "C179-무전기"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "date": "2026-01-03",
+      "transaction_id": "C179-부속"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 143000,
+      "includes_vat": true,
+      "transaction_id": "C179-부속"
+    },
+    "output": {
+      "gross": 143000,
+      "supply_base": 130000,
+      "vat": 13000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C179-부속",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 13000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 142000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -13000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -13000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -13000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 13000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 13000,
+      "input_vat": 13000,
+      "net_vat": -13000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 13000,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

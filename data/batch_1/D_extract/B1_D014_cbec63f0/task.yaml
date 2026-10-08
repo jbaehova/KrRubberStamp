@@ -1,0 +1,47 @@
+task_id: B1_D014_cbec63f0
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 새 돌봄 교실에 매트를 놓으려 합니다. 기존 교실 구매 자료에서 품목마다 공급가액 단가가 낮은 판매처를 찾아 주세요. 기존
+  주문의 지출 총액도 함께 확인해 answer.json에 cheapest_by_item과 grand_total로 보내 주세요.
+input_files:
+- path: inputs/01_첫교실_매트검수.pdf
+  format: pdf
+- path: inputs/02_둘째교실_구매대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-7f47db05-1c84-5f83-bd5a-c83b9d9fb5e6
+scenario_seed: 14694229567939241106
+scenario_hash: 2667251055b966ce4657706860ecb4999f2d13f352c1ba06f1e63b2c43e78b04
+authorship:
+  method: individually_written
+  case_id: D014
+  case_sha256: cbec63f04d0f6492edaecb41772997b185e386ce8980ee6f3e82e9e9920440fc
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item
+- grand_total

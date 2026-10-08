@@ -1,0 +1,49 @@
+task_id: B1_D169_154c6516
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 교육 실물 모형의 실제 구매 단가표를 남겨 주세요. 인수 자료에 연결한 cheapest_by_item을 answer.json에
+  작성합니다.
+input_files:
+- path: inputs/01_모형표지목록.pdf
+  format: pdf
+- path: inputs/02_제안품목.xlsx
+  format: xlsx
+- path: inputs/03_모형납품품목.hwpx
+  format: hwpx
+- path: inputs/04_받침주문품목.xlsx
+  format: xlsx
+- path: inputs/05_교육실수령부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-0677d17b-c9e7-51e9-b4cb-4d652e333ed6
+scenario_seed: 1534712721346230922
+scenario_hash: d9b794eb4b650c3e910c87047da05e6ef625e65e7a2ea1165450f0e3281bd8f4
+authorship:
+  method: individually_written
+  case_id: D169
+  case_sha256: 154c6516bc1d7a8ad35a1cdb1036b4a65206e35869cd253dc37f0ccc0f0ac4ac
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item

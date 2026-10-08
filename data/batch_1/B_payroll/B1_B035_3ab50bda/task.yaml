@@ -1,0 +1,41 @@
+task_id: B1_B035_3ab50bda
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상누리설계실은 가상안서율의 급여를 3월 2일로 예정했으나 실제 이체를 2월 28일에 실행했습니다. 승인된 지급 계획과 은행
+  실행 기록을 대조하여 이 지급 건의 소득세 및 지방소득세와 실지급액을 구해 주세요. 가족 네 명 중 두 명은 기본공제 대상인 10세와 15세 자녀입니다.
+input_files:
+- path: inputs/01_설계실급여.hwpx
+  format: hwpx
+- path: inputs/02_계획실행대조.pdf
+  format: pdf
+- path: inputs/03_정상월정보.xlsx
+  format: xlsx
+- path: inputs/04_지급시점공제.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-8ca8c724-935b-5dfc-8acd-1f4f0ca1e0bc
+scenario_seed: 4230300458062534161
+scenario_hash: a57fa5f254727fe498f8bcf17ed233e382d789086d6e264e296b78e8e09bc878
+authorship:
+  method: individually_written
+  case_id: B035
+  case_sha256: 3ab50bda7ffd561173c2943ebec2401d95b4cc9bea5e096519dd12806095b450
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- income_tax
+- local_income_tax
+- net_pay

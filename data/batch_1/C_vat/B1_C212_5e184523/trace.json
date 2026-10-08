@@ -1,0 +1,190 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "철제인수",
+          "date": "2026-06-02",
+          "description": "철제 막대를 제작 작업대에 반입했다.",
+          "document_ids": [
+            "재료현금45"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "옷걸이 제작방"
+          },
+          "operation_id": "옷걸이제작",
+          "participants": [
+            {
+              "name": "가상마제작",
+              "organization": "가상옷걸이방",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "철제막대45"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 옷걸이 제작 판매",
+          "operation_id": "옷걸이제작",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "철제인수",
+          "date": "2026-06-02",
+          "document_id": "재료현금45",
+          "transaction_id": "철제막대45"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "재료현금45",
+        "purpose": "business",
+        "transaction_id": "철제막대45"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "재료현금45"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "철제막대45"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-02",
+      "transaction_id": "철제막대45"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 687500,
+      "includes_vat": true,
+      "transaction_id": "철제막대45"
+    },
+    "output": {
+      "gross": 687500,
+      "supply_base": 625000,
+      "vat": 62500
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "철제막대45",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 62500,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 86000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -62500
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -62500,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -62500,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 62500,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 62500,
+      "input_vat": 62500,
+      "net_vat": -62500,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 62500,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,51 @@
+task_id: B1_D132_03e25720
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 표본병 납품은 한 인수 아래 로트별 품목표로 나뉘었습니다. 모든 첨부를 연결해 cheapest_by_item과 grand_total을
+  확인해 주세요.
+input_files:
+- path: inputs/01_표본병표지.pdf
+  format: pdf
+- path: inputs/02_첫로트.xlsx
+  format: xlsx
+- path: inputs/03_둘째로트.hwpx
+  format: hwpx
+- path: inputs/04_마개부속.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8f34c826-d4a4-510c-898a-e3ef67989cbe
+scenario_seed: 279881925086785432
+scenario_hash: c8f11aad95ce1541521805da013cd0a3fc3fbfc407bfbac616ad528a9c2bffb9
+authorship:
+  method: individually_written
+  case_id: D132
+  case_sha256: 03e25720c3d9af98a4538da817c6ca40f8b8d77903ad2455ce510887ea245bf1
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- grand_total

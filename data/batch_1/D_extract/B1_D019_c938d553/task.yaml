@@ -1,0 +1,47 @@
+task_id: B1_D019_c938d553
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 공동 작업장의 다음 분기 입주자에게 출입 용품을 지급해야 합니다. 기존 구매 이력에서 케이스와 목걸이줄의 공급가액 단가를 비교해
+  보충 주문할 업체를 골라 주세요. answer.json에는 cheapest_by_item을 담아 주세요.
+input_files:
+- path: inputs/01_1분기_첫입주자.pdf
+  format: pdf
+- path: inputs/02_1분기_추가입주자.xlsx
+  format: xlsx
+- path: inputs/03_2분기_정규보충.hwpx
+  format: hwpx
+- path: inputs/04_2분기_줄추가구매.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-86bb67ca-7b83-5bf7-86c1-62ed6c3ab4eb
+scenario_seed: 14499573556451518089
+scenario_hash: a5bde832bbd67f025b93f87c36692fd2c9be913d6c7d3bebfd9668349b5ea085
+authorship:
+  method: individually_written
+  case_id: D019
+  case_sha256: c938d553daf0a6890804709e0c4c6f8a31a2cb697b570d320b4cbbac474c6e5b
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item

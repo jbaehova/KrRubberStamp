@@ -1,0 +1,231 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-05",
+          "document_id": "GLASS-41",
+          "event": "received",
+          "event_id": "GLASS-FIRST-IN",
+          "location": "자료촬영실"
+        },
+        {
+          "date": "2026-04-06",
+          "document_id": "GLASS-PAD-43",
+          "event": "received",
+          "event_id": "GLASS-PAD-IN",
+          "location": "자료촬영실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-01",
+          "document_id": "GLASS-41",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "GLASS-EXT-C",
+          "vendor": "가상촬영유리"
+        },
+        {
+          "date": "2026-04-01",
+          "document_id": "GLASS-41",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "GLASS-BOOK-C",
+          "vendor": "가상촬영유리"
+        },
+        {
+          "date": "2026-04-03",
+          "document_id": "GLASS-PAD-43",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "GLASS-PAD-C",
+          "vendor": "가상촬영유리"
+        },
+        {
+          "date": "2026-04-07",
+          "document_id": "GLASS-LARGE-47",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "GLASS-LARGE-C",
+          "vendor": "가상대형판재"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "GLASS-EXT-C",
+          "items": [
+            {
+              "name": "촬영유리판30",
+              "quantity": 4,
+              "unit_price": 41800
+            }
+          ],
+          "sheet_id": "GLASS-PLATE-L"
+        },
+        {
+          "header_record_id": "GLASS-EXT-C",
+          "items": [
+            {
+              "name": "유리판고정손잡이",
+              "quantity": 8,
+              "unit_price": 5390
+            }
+          ],
+          "sheet_id": "GLASS-GRIP-L"
+        },
+        {
+          "header_record_id": "GLASS-BOOK-C",
+          "items": [
+            {
+              "name": "촬영유리판30",
+              "quantity": 4,
+              "unit_price": 41800
+            },
+            {
+              "name": "유리판고정손잡이",
+              "quantity": 8,
+              "unit_price": 5390
+            }
+          ],
+          "sheet_id": "GLASS-BOOK-L"
+        },
+        {
+          "header_record_id": "GLASS-PAD-C",
+          "items": [
+            {
+              "name": "유리판완충패드",
+              "quantity": 12,
+              "unit_price": 1777
+            }
+          ],
+          "sheet_id": "GLASS-PAD-L"
+        },
+        {
+          "header_record_id": "GLASS-LARGE-C",
+          "items": [
+            {
+              "name": "촬영유리판50",
+              "quantity": 2,
+              "unit_price": 72400
+            }
+          ],
+          "sheet_id": "GLASS-LARGE-L"
+        }
+      ],
+      "processing_policy": "첨부는 header_record_id로 표지를 연결하고 같은 표지의 행을 순서대로 합한다. invoice 또는 order에 received가 있는 자료만 실제 구매다. 다른 record_id여도 document_id와 최종 원문 내용이 같으면 한 번만 계산한다. 포함 행은 수량 곱하기 단가가 총액이며 공급가액은 총액의 10/11에서 원 미만을 버리고 차액이 세액이다. 별도 행은 수량 곱하기 단가가 공급가액이며 그 10%에서 원 미만을 버린 세액을 더한다. 업체는 NFKC 후 공백과 법인 표기를 제거하고 영문을 소문자로 바꿔 업체명 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "GLASS-LARGE-47"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "GLASS-41",
+        "GLASS-PAD-43"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "GLASS-41",
+      "includes_vat": true,
+      "quantity": 4,
+      "unit_price": 41800
+    },
+    "output": {
+      "supply": 152000,
+      "total": 167200,
+      "vat": 15200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "GLASS-41",
+      "includes_vat": true,
+      "quantity": 8,
+      "unit_price": 5390
+    },
+    "output": {
+      "supply": 39200,
+      "total": 43120,
+      "vat": 3920
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상촬영유리"
+    },
+    "output": "가상촬영유리",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "GLASS-41"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "GLASS-PAD-43",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 1777
+    },
+    "output": {
+      "supply": 21324,
+      "total": 23456,
+      "vat": 2132
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상촬영유리"
+    },
+    "output": "가상촬영유리",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "유리판고정손잡이",
+          "unit_price": 4900,
+          "vendor": "가상촬영유리"
+        },
+        {
+          "item": "유리판완충패드",
+          "unit_price": 1777,
+          "vendor": "가상촬영유리"
+        },
+        {
+          "item": "촬영유리판30",
+          "unit_price": 38000,
+          "vendor": "가상촬영유리"
+        }
+      ],
+      "grand_total": 233776,
+      "supply_total": 212524,
+      "unique_document_count": 2,
+      "vat_total": 21252,
+      "vendor_totals": [
+        {
+          "supply": 212524,
+          "total": 233776,
+          "vat": 21252,
+          "vendor": "가상촬영유리"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,127 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-06",
+          "document_id": "STORE-120",
+          "event": "received",
+          "event_id": "warehouse120",
+          "location": "중앙 보관실"
+        },
+        {
+          "date": "2026-05-06",
+          "document_id": "STORE-120",
+          "event": "received",
+          "event_id": "security120",
+          "location": "중앙 보관실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-04",
+          "document_id": "STORE-120",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h120",
+          "vendor": "가상보관장비"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h120",
+          "items": [
+            {
+              "name": "이동보관선반",
+              "quantity": 2,
+              "unit_price": 184000
+            },
+            {
+              "name": "선반고정벨트",
+              "quantity": 6,
+              "unit_price": 4500
+            }
+          ],
+          "sheet_id": "s120"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있을 때 집계하며 같은 수령을 증명하는 동일 날짜와 장소의 기록은 거래를 추가하지 않는다. quote, 무인수 및 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 센다. 별도 공급가액은 품목별 수량 곱하기 단가다. 포함 가격은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 계산한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "STORE-120"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "STORE-120",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 184000
+    },
+    "output": {
+      "supply": 368000,
+      "total": 404800,
+      "vat": 36800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "STORE-120",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 4500
+    },
+    "output": {
+      "supply": 27000,
+      "total": 29700,
+      "vat": 2700
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상보관장비"
+    },
+    "output": "가상보관장비",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "선반고정벨트",
+          "unit_price": 4500,
+          "vendor": "가상보관장비"
+        },
+        {
+          "item": "이동보관선반",
+          "unit_price": 184000,
+          "vendor": "가상보관장비"
+        }
+      ],
+      "grand_total": 434500,
+      "supply_total": 395000,
+      "unique_document_count": 1,
+      "vat_total": 39500,
+      "vendor_totals": [
+        {
+          "supply": 395000,
+          "total": 434500,
+          "vat": 39500,
+          "vendor": "가상보관장비"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

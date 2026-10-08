@@ -1,0 +1,74 @@
+task_id: B1_A096_48cf935d
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상청솔기록의 가상두예원은 4월 첫 취업 뒤 10월에 퇴사했습니다. 은행 월세와 보험료 및 카드의 입사 전과 재직 중 및 퇴사
+  후 자료를 구분해 각 공제액을 계산해 주세요. 자녀 학교비는 실제 납부자 확인을 반영해 교육비 세액공제액을 구합니다. 소득세 및 지방소득세 결정세액과
+  두 세금 정산 합계까지 퇴사자 명세에 적으며 환급은 음수로 표시합니다.
+input_files:
+- path: inputs/01_퇴사자확인.hwpx
+  format: hwpx
+- path: inputs/02_퇴사급여.xlsx
+  format: xlsx
+- path: inputs/03_의무보험.pdf
+  format: pdf
+- path: inputs/04_임대차확인.hwpx
+  format: hwpx
+- path: inputs/05_입사전월세.xlsx
+  format: xlsx
+- path: inputs/06_재직중월세.xlsx
+  format: xlsx
+- path: inputs/07_퇴사후월세.pdf
+  format: pdf
+- path: inputs/08_보험납입일.pdf
+  format: pdf
+- path: inputs/09_기간별카드.xlsx
+  format: xlsx
+- path: inputs/10_자녀가족확인.pdf
+  format: pdf
+- path: inputs/11_학교비납부자.xlsx
+  format: xlsx
+- path: inputs/12_원천징수.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    rent_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    education_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+    final_local_tax:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - rent_credit
+  - insurance_credit
+  - credit_card_deduction
+  - education_credit
+  - final_national_tax
+  - final_local_tax
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-687ec01e-7f26-5a90-9aa8-4f2ba10fdd5d
+scenario_seed: 5246574121276078417
+scenario_hash: f308d8faeb0828e2b9b18aeaebdf803572b47e63c92bcd5c8325eeaddbed166a
+authorship:
+  method: individually_written
+  case_id: A096
+  case_sha256: 48cf935da26af9512c833153d7b3fc647a98f18099e749468c88a9e8f620465f
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- rent_credit
+- insurance_credit
+- credit_card_deduction
+- education_credit
+- final_national_tax
+- final_local_tax
+- settlement_total

@@ -1,0 +1,42 @@
+task_id: B1_C084_a17075be
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상압인실은 프레스 부품 구매의 종이 간이 영수증만 정리했다가 같은 거래의 적법한 현금영수증을 찾아냈습니다. 거래 번호와 물품
+  수령 자료를 연결하세요. 고유 거래 수(unique_transaction_count), 공제가능 매입세액(deductible_input_vat),
+  환급액(refund_vat)을 answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_압인작업_사업.hwpx
+  format: hwpx
+- path: inputs/02_처음_종이영수증.pdf
+  format: pdf
+- path: inputs/03_찾아낸_현금영수증.xlsx
+  format: xlsx
+- path: inputs/04_프레스_인수기록.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - deductible_input_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-c005c338-0b5a-5b7d-8314-21b6a26bfde3
+scenario_seed: 11632927300332783324
+scenario_hash: d11db2f7017015b318171ec35863e836840b1339a542039166b9befb9aa7a1dd
+authorship:
+  method: individually_written
+  case_id: C084
+  case_sha256: a17075beea4786dc6a949d1ba6aa4f87946171713cc1de39ec175569efdb1236
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- deductible_input_vat
+- refund_vat

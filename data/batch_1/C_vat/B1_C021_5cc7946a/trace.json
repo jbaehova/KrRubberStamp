@@ -1,0 +1,254 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "ACT-C021-식사",
+          "date": "2026-04-17",
+          "description": "인쇄물을 주문한 구매 담당자와 대표가 계약 이후 함께 저녁을 먹었고 대표가 대금을 결제했다.",
+          "document_ids": [
+            "가상-C021-식당카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상한상식당"
+          },
+          "operation_id": "OPS-C021",
+          "participants": [
+            {
+              "name": "가상 인쇄대표",
+              "organization": "가상여백인쇄",
+              "role": "proprietor"
+            },
+            {
+              "name": "가상 구매담당",
+              "organization": "가상안내기획",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "가상-C021-초청식사"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 안내서 인쇄 납품",
+          "operation_id": "OPS-C021",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C021-식사",
+          "date": "2026-04-17",
+          "document_id": "가상-C021-식당카드",
+          "transaction_id": "가상-C021-초청식사"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C021-식당카드",
+        "purpose": "hospitality",
+        "transaction_id": "가상-C021-초청식사"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C021-인쇄계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C021-인쇄납품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C021-식당카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C021-초청식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-16",
+      "transaction_id": "가상-C021-인쇄납품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 11200000,
+      "includes_vat": false,
+      "transaction_id": "가상-C021-인쇄납품"
+    },
+    "output": {
+      "gross": 12320000,
+      "supply_base": 11200000,
+      "vat": 1120000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 11200000
+    },
+    "output": 1120000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "가상-C021-인쇄납품"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-17",
+      "transaction_id": "가상-C021-초청식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 385000,
+      "includes_vat": true,
+      "transaction_id": "가상-C021-초청식사"
+    },
+    "output": {
+      "gross": 385000,
+      "supply_base": 350000,
+      "vat": 35000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "가상-C021-초청식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 35000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 220000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 1120000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 1120000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 1120000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 1120000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 35000,
+      "net_vat": 1120000,
+      "noncreditable_vat": 35000,
+      "output_vat": 1120000,
+      "payable_vat": 1120000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 11200000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

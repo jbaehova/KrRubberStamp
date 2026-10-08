@@ -1,0 +1,340 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "봄정비",
+          "date": "2026-03-25",
+          "description": "유효 대여 등록 차를 실제 대여 업무에 투입한 정비",
+          "document_ids": [
+            "봄전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "슬림 대여 차고"
+          },
+          "operation_id": "슬림대여",
+          "participants": [
+            {
+              "name": "합성리촌",
+              "organization": "가상슬림차대여",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "봄수리-289",
+          "vehicle_id": "슬림차-289"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "말소정비",
+          "date": "2026-06-10",
+          "description": "등록 말소 후 관리팀 이동에 쓰인 차를 정비",
+          "document_ids": [
+            "말소카드",
+            "말소전자"
+          ],
+          "location": {
+            "kind": "road",
+            "name": "슬림 관리 운행 도로"
+          },
+          "operation_id": "대여관리",
+          "participants": [
+            {
+              "name": "합성리촌",
+              "organization": "가상슬림차대여",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "말소수리-289",
+          "vehicle_id": "슬림차-289"
+        }
+      ],
+      "operations": [
+        {
+          "description": "허가 과세 승용차 대여",
+          "operation_id": "슬림대여",
+          "output_taxable": true
+        },
+        {
+          "description": "대여사업 관리 직원 이동",
+          "operation_id": "대여관리",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "봄정비",
+          "date": "2026-03-25",
+          "document_id": "봄전자",
+          "transaction_id": "봄수리-289"
+        },
+        {
+          "activity_id": "말소정비",
+          "date": "2026-06-10",
+          "document_id": "말소카드",
+          "transaction_id": "말소수리-289"
+        },
+        {
+          "activity_id": "말소정비",
+          "date": "2026-06-10",
+          "document_id": "말소전자",
+          "transaction_id": "말소수리-289"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "vehicle_rental",
+          "permitted_operation_id": "슬림대여",
+          "registration_class": "excise_passenger",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-04-30",
+          "vehicle_id": "슬림차-289"
+        },
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "valid_from": "2026-05-01",
+          "valid_to": "2026-12-31",
+          "vehicle_id": "슬림차-289"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "봄전자",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "봄수리-289"
+      },
+      {
+        "business_related": true,
+        "document_id": "말소카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "말소수리-289"
+      },
+      {
+        "business_related": true,
+        "document_id": "말소전자",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "말소수리-289"
+      },
+      {
+        "transaction_id": "봄수리-289",
+        "vehicle_direct_business": true,
+        "vehicle_id": "슬림차-289",
+        "vehicle_subject_excise": true
+      },
+      {
+        "transaction_id": "말소수리-289",
+        "vehicle_direct_business": false,
+        "vehicle_id": "슬림차-289",
+        "vehicle_subject_excise": true
+      },
+      {
+        "transaction_id": "말소수리-289",
+        "vehicle_direct_business": false,
+        "vehicle_id": "슬림차-289",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "말소카드",
+        "말소전자"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "말소수리-289"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "봄전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "봄수리-289"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-10",
+      "transaction_id": "말소수리-289"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1243000,
+      "includes_vat": true,
+      "transaction_id": "말소수리-289"
+    },
+    "output": {
+      "gross": 1243000,
+      "supply_base": 1130000,
+      "vat": 113000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "말소수리-289",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 113000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-25",
+      "transaction_id": "봄수리-289"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 858000,
+      "includes_vat": true,
+      "transaction_id": "봄수리-289"
+    },
+    "output": {
+      "gross": 858000,
+      "supply_base": 780000,
+      "vat": 78000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "봄수리-289",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 78000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 506000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -78000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -78000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -78000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 78000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 78000,
+      "input_vat": 191000,
+      "net_vat": -78000,
+      "noncreditable_vat": 113000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 78000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

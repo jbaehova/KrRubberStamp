@@ -1,0 +1,387 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "관리승용정비",
+          "date": "2026-05-25",
+          "description": "큰점 관리 이동용 승용차를 정비했다.",
+          "document_ids": [
+            "관리카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "거치대 큰점 차고"
+          },
+          "operation_id": "거치대소매",
+          "participants": [
+            {
+              "name": "가상정거치",
+              "organization": "가상수직거치대",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "거치관리수리",
+          "vehicle_id": "가상-거치관리48"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "배송화물정비",
+          "date": "2026-05-26",
+          "description": "거치대 배송 전용 화물차를 정비했다.",
+          "document_ids": [
+            "화물카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "거치대 큰점 차고"
+          },
+          "operation_id": "거치대소매",
+          "participants": [
+            {
+              "name": "가상정거치",
+              "organization": "가상수직거치대",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "거치화물수리",
+          "vehicle_id": "가상-거치화물48"
+        }
+      ],
+      "filing_site_id": "거치대큰점",
+      "operations": [
+        {
+          "description": "과세 거치대 판매 및 배송",
+          "operation_id": "거치대소매",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "관리승용정비",
+          "date": "2026-05-25",
+          "document_id": "관리카드",
+          "transaction_id": "거치관리수리"
+        },
+        {
+          "activity_id": "배송화물정비",
+          "date": "2026-05-26",
+          "document_id": "화물카드",
+          "transaction_id": "거치화물수리"
+        }
+      ],
+      "site_year_records": [
+        {
+          "site_id": "거치대큰점",
+          "site_name": "가상수직거치대",
+          "supply_base": 1021000000,
+          "year": 2025
+        },
+        {
+          "site_id": "거치대작은점",
+          "site_name": "가상수평거치대",
+          "supply_base": 249000000,
+          "year": 2025
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-거치관리48"
+        },
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "non_excise_vehicle",
+          "vehicle_id": "가상-거치화물48"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "관리카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "거치관리수리"
+      },
+      {
+        "business_related": true,
+        "document_id": "화물카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "거치화물수리"
+      },
+      {
+        "filing_site_id": "거치대큰점",
+        "prior_year_site_supply_base": 1021000000
+      },
+      {
+        "transaction_id": "거치관리수리",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-거치관리48",
+        "vehicle_subject_excise": true
+      },
+      {
+        "transaction_id": "거치화물수리",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-거치화물48",
+        "vehicle_subject_excise": false
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "관리카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "거치관리수리"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "큰점단말기"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "거치대소매판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "화물카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "거치화물수리"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-25",
+      "transaction_id": "거치관리수리"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 660000,
+      "includes_vat": true,
+      "transaction_id": "거치관리수리"
+    },
+    "output": {
+      "gross": 660000,
+      "supply_base": 600000,
+      "vat": 60000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "거치관리수리",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 60000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-22",
+      "transaction_id": "거치대소매판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 15400000,
+      "includes_vat": true,
+      "transaction_id": "거치대소매판매"
+    },
+    "output": {
+      "gross": 15400000,
+      "supply_base": 14000000,
+      "vat": 1400000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 14000000
+    },
+    "output": 1400000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "거치대소매판매"
+    },
+    "output": {
+      "eligible_gross": 15400000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-26",
+      "transaction_id": "거치화물수리"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 913000,
+      "includes_vat": true,
+      "transaction_id": "거치화물수리"
+    },
+    "output": {
+      "gross": 913000,
+      "supply_base": 830000,
+      "vat": 83000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "거치화물수리",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 83000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 1021000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 15400000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 1317000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 1317000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 1317000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 83000,
+      "output_vat": 1400000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 83000,
+      "input_vat": 143000,
+      "net_vat": 1317000,
+      "noncreditable_vat": 60000,
+      "output_vat": 1400000,
+      "payable_vat": 1317000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 14000000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

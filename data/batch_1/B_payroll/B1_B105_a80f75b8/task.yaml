@@ -1,0 +1,44 @@
+task_id: B1_B105_a80f75b8
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상연결검수센터는 직원의 고정 역할수당과 당월 검수 실적금을 서로 다른 항목으로 등록했습니다. 다음 근로 승인에 사용할 월
+  통상임금과 표시 통상시급을 구하고, 현재 급여의 총지급액과 과세급여도 알려 주세요. 실적금이 통상시급 기준에 들어가는지 계약의 지급 조건으로 확인해야
+  합니다.
+input_files:
+- path: inputs/01_검수지급.hwpx
+  format: hwpx
+- path: inputs/02_검수공제.pdf
+  format: pdf
+- path: inputs/03_검수참조.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    ordinary_hourly_wage_floor:
+      type: integer
+    gross_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - ordinary_hourly_wage_floor
+  - gross_pay
+  - taxable_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-e44fde33-826e-57d5-92a0-2b648a937ead
+scenario_seed: 12110027356318645762
+scenario_hash: c493b3e89cdda971ec9b0614fb78946ceebaaa7eb07a5d76a87efaac5d0de8e1
+authorship:
+  method: individually_written
+  case_id: B105
+  case_sha256: a80f75b809a2be02e27a3df54f73eb6da2d227c0b2177892751d589b63f4db82
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- ordinary_monthly_wage
+- ordinary_hourly_wage_floor
+- gross_pay
+- taxable_pay

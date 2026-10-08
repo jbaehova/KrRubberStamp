@@ -1,0 +1,63 @@
+task_id: B1_B201_c1f025ae
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상비탈평가실은 큰 당월 성과금과 수정된 추가 작업을 함께 지급합니다. 최신 승인 근로로 연장 및 야간 가산을 산정하고 정액
+  통상임금과 과세급여를 구한 뒤 고액 산식의 소득세와 실지급액을 계산해 주세요.
+input_files:
+- path: inputs/01_비탈정액.pdf
+  format: pdf
+- path: inputs/02_평가성과.hwpx
+  format: hwpx
+- path: inputs/03_비탈이전.xlsx
+  format: xlsx
+- path: inputs/04_비탈수정.pdf
+  format: pdf
+- path: inputs/05_비탈일정.hwpx
+  format: hwpx
+- path: inputs/06_비탈연금.xlsx
+  format: xlsx
+- path: inputs/07_비탈건강.pdf
+  format: pdf
+- path: inputs/08_비탈원천.hwpx
+  format: hwpx
+- path: inputs/09_비탈대상.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - overtime_pay
+  - night_pay
+  - taxable_pay
+  - income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-042d8278-8e1f-52c9-b81f-b82bbc91396f
+scenario_seed: 13974711074357225775
+scenario_hash: 0a6591eb097bd3fbb139519d39f7f6f4640bd2e89955eef1015bd4e6a0544896
+authorship:
+  method: individually_written
+  case_id: B201
+  case_sha256: c1f025ae51c7a92f40d71bfe4c71e34bef262c9c85f56b78befac820500b3779
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- ordinary_monthly_wage
+- overtime_pay
+- night_pay
+- taxable_pay
+- income_tax
+- net_pay

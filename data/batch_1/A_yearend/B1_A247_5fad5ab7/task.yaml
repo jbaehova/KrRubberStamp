@@ -1,0 +1,55 @@
+task_id: B1_A247_5fad5ab7
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상아침고리 가상라지율의 병원 자료를 정리해 주세요. 본인 난임 치료와 신생아 조산 치료 및 성년 자녀의 일반 진료를 구분합니다.
+  미용 시술과 자녀 보험도 함께 제출됐으니 의료비 및 보험 공제액과 출생 공제를 적어 주세요.
+input_files:
+- path: inputs/01_성년가족.hwpx
+  format: hwpx
+- path: inputs/02_출생기록.pdf
+  format: pdf
+- path: inputs/03_성년진료.xlsx
+  format: xlsx
+- path: inputs/04_난임치료.pdf
+  format: pdf
+- path: inputs/05_조산진료.hwpx
+  format: hwpx
+- path: inputs/06_미용시술.xlsx
+  format: xlsx
+- path: inputs/07_자녀보험.pdf
+  format: pdf
+- path: inputs/08_급여확정.xlsx
+  format: xlsx
+- path: inputs/09_신청접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    medical_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    child_credit:
+      type: integer
+    basic_deduction:
+      type: integer
+  required:
+  - medical_credit
+  - insurance_credit
+  - child_credit
+  - basic_deduction
+  additionalProperties: false
+canary: KrRubberStamp-canary-7beb586c-0661-5714-9290-2430b663d597
+scenario_seed: 6894266350314864658
+scenario_hash: 0aad3427f60a7f9046e77c1707e9f916eaaf2d1684d5907c6ffbbab55672d36d
+authorship:
+  method: individually_written
+  case_id: A247
+  case_sha256: 5fad5ab7dd7240125588b180f6e06cdfdd4164181d92c77ccb97529b6b3a4e9b
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- medical_credit
+- insurance_credit
+- child_credit
+- basic_deduction

@@ -1,0 +1,61 @@
+task_id: B1_C052_bc841105
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상넓은공구의 매장장은 모든 사업 지출의 세액을 공제한 초안을 보냈습니다. 차량 사용과 부지 작업의 실제 내용을 확인하고 전년
+  사업장 규모도 확인해 주세요. 매입세액(input_vat), 공제불가 세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat),
+  영수증 발행세액공제(receipt_credit), 납부액(payable_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_공구점_신고.hwpx
+  format: hwpx
+- path: inputs/02_전년_규모.pdf
+  format: pdf
+- path: inputs/03_선납_기록.xlsx
+  format: xlsx
+- path: inputs/04_공구_영수증.pdf
+  format: pdf
+- path: inputs/05_차량_유지.xlsx
+  format: xlsx
+- path: inputs/06_진입_조성.pdf
+  format: pdf
+- path: inputs/07_봉투_구입.pdf
+  format: pdf
+- path: inputs/08_사용_기록.hwpx
+  format: hwpx
+- path: inputs/09_봉투원본_사진.png
+  format: png
+  duplicate_of: inputs/07_봉투_구입.pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-9fccbc72-b942-50d7-8c35-e90985ee37ae
+scenario_seed: 13584001092824118403
+scenario_hash: b2bf76ce1e666de91c943ed5b9dde44240600532cb2adb75ebe02f9ee8ffa513
+authorship:
+  method: individually_written
+  case_id: C052
+  case_sha256: bc841105d64cb48385f053c52ff03fa043be05155b0e58b42cd88abcafb2575b
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

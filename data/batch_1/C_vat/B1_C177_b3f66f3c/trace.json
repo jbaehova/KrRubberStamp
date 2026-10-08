@@ -1,0 +1,308 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "재고수령",
+          "date": "2026-04-10",
+          "description": "판매용 계측기 재고를 인수했다.",
+          "document_ids": [
+            "재고전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "계측 소매 창고"
+          },
+          "operation_id": "계측판매",
+          "participants": [
+            {
+              "name": "가상손계측",
+              "organization": "가상계측소매",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "C177-재고"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 계측기 판매",
+          "operation_id": "계측판매",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "재고수령",
+          "date": "2026-04-10",
+          "document_id": "재고전자",
+          "transaction_id": "C177-재고"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "재고전자",
+        "purpose": "business",
+        "transaction_id": "C177-재고"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "재고전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C177-재고"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "카드가"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C177-카드가"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "카드나"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C177-카드나"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-10",
+      "transaction_id": "C177-재고"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5170000,
+      "includes_vat": true,
+      "transaction_id": "C177-재고"
+    },
+    "output": {
+      "gross": 5170000,
+      "supply_base": 4700000,
+      "vat": 470000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C177-재고",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 470000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-12",
+      "transaction_id": "C177-카드가"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2200000,
+      "includes_vat": true,
+      "transaction_id": "C177-카드가"
+    },
+    "output": {
+      "gross": 2200000,
+      "supply_base": 2000000,
+      "vat": 200000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 2000000
+    },
+    "output": 200000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C177-카드가"
+    },
+    "output": {
+      "eligible_gross": 2200000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-04",
+      "transaction_id": "C177-카드나"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3300000,
+      "includes_vat": true,
+      "transaction_id": "C177-카드나"
+    },
+    "output": {
+      "gross": 3300000,
+      "supply_base": 3000000,
+      "vat": 300000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 3000000
+    },
+    "output": 300000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C177-카드나"
+    },
+    "output": {
+      "eligible_gross": 3300000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 217000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 5500000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 71500,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 71500
+    },
+    "output": 71500,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 71500,
+      "liability_before_credit": 30000
+    },
+    "output": 30000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 470000,
+      "output_vat": 500000,
+      "prepaid_vat": 0,
+      "receipt_credit": 30000
+    },
+    "output": {
+      "deductible_input_vat": 470000,
+      "input_vat": 470000,
+      "net_vat": 0,
+      "noncreditable_vat": 0,
+      "output_vat": 500000,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 30000,
+      "refund_vat": 0,
+      "tax_base": 5000000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

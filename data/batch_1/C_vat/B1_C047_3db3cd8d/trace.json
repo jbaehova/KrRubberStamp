@@ -1,0 +1,431 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_delivery",
+          "activity_id": "ACT-C047-영업차",
+          "date": "2026-04-04",
+          "description": "직원이 차량을 인수해 고객 임대용 배차 목록에 올렸다.",
+          "document_ids": [
+            "가상-C047-임대차수취"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상열린렌트 임대 배차장"
+          },
+          "operation_id": "OPS-C047",
+          "participants": [
+            {
+              "name": "가상 배차직원",
+              "organization": "가상열린렌트",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C047-임대차구입"
+        },
+        {
+          "action": "vehicle_delivery",
+          "activity_id": "ACT-C047-대표차",
+          "date": "2026-04-09",
+          "description": "대표가 차량을 인수해 자신의 업무 이동에 사용했다. 고객 임대 목록에는 이 차량을 넣지 않았다.",
+          "document_ids": [
+            "가상-C047-이동차수취"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상열린렌트 사무실 주차장"
+          },
+          "operation_id": "OPS-C047",
+          "participants": [
+            {
+              "name": "가상 렌트대표",
+              "organization": "가상열린렌트",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "가상-C047-이동차구입"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "ACT-C047-점검",
+          "date": "2026-05-02",
+          "description": "직원이 임대 배차 차량을 정비받아 다시 고객 임대에 배치했다.",
+          "document_ids": [
+            "가상-C047-점검수취"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상배차정비 작업장"
+          },
+          "operation_id": "OPS-C047",
+          "participants": [
+            {
+              "name": "가상 배차직원",
+              "organization": "가상열린렌트",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C047-임대차점검"
+        }
+      ],
+      "operations": [
+        {
+          "description": "고객 자동차 임대 용역",
+          "operation_id": "OPS-C047",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C047-영업차",
+          "date": "2026-04-04",
+          "document_id": "가상-C047-임대차수취",
+          "transaction_id": "가상-C047-임대차구입"
+        },
+        {
+          "activity_id": "ACT-C047-대표차",
+          "date": "2026-04-09",
+          "document_id": "가상-C047-이동차수취",
+          "transaction_id": "가상-C047-이동차구입"
+        },
+        {
+          "activity_id": "ACT-C047-점검",
+          "date": "2026-05-02",
+          "document_id": "가상-C047-점검수취",
+          "transaction_id": "가상-C047-임대차점검"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C047-임대차수취",
+        "purpose": "passenger_car_purchase",
+        "transaction_id": "가상-C047-임대차구입"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C047-이동차수취",
+        "purpose": "passenger_car_purchase",
+        "transaction_id": "가상-C047-이동차구입"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C047-점검수취",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "가상-C047-임대차점검"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C047-이동차수취"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C047-이동차구입"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C047-임대발급"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C047-임대완료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C047-임대차수취"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C047-임대차구입"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C047-점검수취"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C047-임대차점검"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-09",
+      "transaction_id": "가상-C047-이동차구입"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 22000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C047-이동차구입"
+    },
+    "output": {
+      "gross": 24200000,
+      "supply_base": 22000000,
+      "vat": 2200000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_purchase",
+      "supplier_general": true,
+      "transaction_id": "가상-C047-이동차구입",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 2200000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-13",
+      "transaction_id": "가상-C047-임대완료"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 14300000,
+      "includes_vat": true,
+      "transaction_id": "가상-C047-임대완료"
+    },
+    "output": {
+      "gross": 14300000,
+      "supply_base": 13000000,
+      "vat": 1300000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 13000000
+    },
+    "output": 1300000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "가상-C047-임대완료"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-04",
+      "transaction_id": "가상-C047-임대차구입"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 30000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C047-임대차구입"
+    },
+    "output": {
+      "gross": 33000000,
+      "supply_base": 30000000,
+      "vat": 3000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_purchase",
+      "supplier_general": true,
+      "transaction_id": "가상-C047-임대차구입",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 3000000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-02",
+      "transaction_id": "가상-C047-임대차점검"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 990000,
+      "includes_vat": true,
+      "transaction_id": "가상-C047-임대차점검"
+    },
+    "output": {
+      "gross": 990000,
+      "supply_base": 900000,
+      "vat": 90000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "가상-C047-임대차점검",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 90000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 740000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -1790000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 740000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -1790000,
+      "prepaid_assessed_vat": 740000
+    },
+    "output": -2530000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 3090000,
+      "output_vat": 1300000,
+      "prepaid_vat": 740000,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 3090000,
+      "input_vat": 5290000,
+      "net_vat": -2530000,
+      "noncreditable_vat": 2200000,
+      "output_vat": 1300000,
+      "payable_vat": 0,
+      "prepaid_vat": 740000,
+      "receipt_credit": 0,
+      "refund_vat": 2530000,
+      "tax_base": 13000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

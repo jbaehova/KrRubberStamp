@@ -1,0 +1,68 @@
+task_id: B1_B145_d66c7f61
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상밤결제본실은 상시 네 명 사업장이고 시급 직원에게 소정 야간 작업과 별도 휴일 작업이 있습니다. 승인 카드와 출근 확인을
+  보고 기본급 및 주휴수당을 구하고, 휴일 실제 근로 대가와 야간 가산액을 적용 범위에 따라 계산해 주세요. 은행 기록과 별도 보험 부과 통지를
+  읽고 부과월에 맞는 낮은 연금 신고액의 하한을 적용합니다. 최종 실지급액까지 필요합니다.
+input_files:
+- path: inputs/01_밤결시급.hwpx
+  format: hwpx
+- path: inputs/02_밤결소정.xlsx
+  format: xlsx
+- path: inputs/03_밤결주휴.pdf
+  format: pdf
+- path: inputs/04_밤결휴일.hwpx
+  format: hwpx
+- path: inputs/05_밤결은행.pdf
+  format: pdf
+- path: inputs/06_낮은연금.xlsx
+  format: xlsx
+- path: inputs/07_밤결건강.hwpx
+  format: hwpx
+- path: inputs/08_밤결등록.pdf
+  format: pdf
+- path: inputs/09_밤결공식.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - holiday_pay
+  - night_pay
+  - pension_base_income
+  - national_pension
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-ea6346ee-5fb3-52e0-affd-305e35b3a03f
+scenario_seed: 15450864480446302878
+scenario_hash: 5c68366900555b473e51f7ac696ada73a32650613580f2dea32eb1ca5cb27246
+authorship:
+  method: individually_written
+  case_id: B145
+  case_sha256: d66c7f61fdb3ca9e737d6c076e4d86192a427e9626b4a2cc8a7c65fcf0312b91
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- holiday_pay
+- night_pay
+- pension_base_income
+- national_pension
+- net_pay

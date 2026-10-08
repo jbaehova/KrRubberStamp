@@ -1,0 +1,60 @@
+task_id: B1_D040_a29bb889
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 판화 캠프의 재료비 장부를 마감해 주세요. 실습판 구매부터 작품을 돌려줄 보관품 구매까지 날짜별로 흩어진 자료를 거래처별로
+  합쳐야 합니다. answer.json에는 vendor_totals와 전체 집행액 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_실습판_명세.pdf
+  format: pdf
+- path: inputs/02_롤러_대장.xlsx
+  format: xlsx
+- path: inputs/03_용지_인수.hwpx
+  format: hwpx
+- path: inputs/04_트레이_명세.pdf
+  format: pdf
+- path: inputs/05_건조집게_대장.xlsx
+  format: xlsx
+- path: inputs/06_보관폴더_확인.hwpx
+  format: hwpx
+- path: inputs/07_작품명라벨_명세.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-eff5ed07-5f01-593a-a546-b3959f7350f1
+scenario_seed: 11717161756520226307
+scenario_hash: ac80f093b0b68d00ffbb5ec4ae73225a5c62c42773e1327d0f065dfb7887fe5f
+authorship:
+  method: individually_written
+  case_id: D040
+  case_sha256: a29bb889912e1e036ad7c38cf6d6d45eb293bd506d2dd148a6af678ff5d7d327
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- grand_total

@@ -1,0 +1,274 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C078-재료활동",
+          "date": "2026-06-01",
+          "description": "바구니 제작 재료를 직원이 작업실에 받았다.",
+          "document_ids": [
+            "C078-재료계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상접은바구니 작업실"
+          },
+          "operation_id": "C078-바구니",
+          "participants": [
+            {
+              "name": "가상 제작직원",
+              "organization": "가상접은바구니",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C078-재료"
+        }
+      ],
+      "operations": [
+        {
+          "description": "소비자 바구니 제작 판매",
+          "operation_id": "C078-바구니",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C078-재료활동",
+          "date": "2026-06-01",
+          "document_id": "C078-재료계산서",
+          "transaction_id": "C078-재료"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C078-재료계산서",
+        "purpose": "business",
+        "transaction_id": "C078-재료"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C078-작은카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C078-작은주문"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C078-재료계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C078-재료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C078-큰카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C078-큰주문"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-09",
+      "transaction_id": "C078-작은주문"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "C078-작은주문"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1000000
+    },
+    "output": 100000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C078-작은주문"
+    },
+    "output": {
+      "eligible_gross": 1100000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-01",
+      "transaction_id": "C078-재료"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 990000,
+      "includes_vat": false,
+      "transaction_id": "C078-재료"
+    },
+    "output": {
+      "gross": 1089000,
+      "supply_base": 990000,
+      "vat": 99000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C078-재료",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 99000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-07-03",
+      "transaction_id": "C078-큰주문"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 61000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 1100000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 14300,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 14300
+    },
+    "output": 14300,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 14300,
+      "liability_before_credit": 1000
+    },
+    "output": 1000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 99000,
+      "output_vat": 100000,
+      "prepaid_vat": 0,
+      "receipt_credit": 1000
+    },
+    "output": {
+      "deductible_input_vat": 99000,
+      "input_vat": 99000,
+      "net_vat": 0,
+      "noncreditable_vat": 0,
+      "output_vat": 100000,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 1000,
+      "refund_vat": 0,
+      "tax_base": 1000000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,195 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-19",
+          "document_id": "RADIO-CABLE-51",
+          "event": "received",
+          "event_id": "RADIO-A-IN",
+          "location": "라디오부품함"
+        },
+        {
+          "date": "2026-03-20",
+          "document_id": "RADIO-CABLE-52",
+          "event": "received",
+          "event_id": "RADIO-B-IN",
+          "location": "라디오부품함"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-16",
+          "document_id": "RADIO-CABLE-51",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "RADIO-A",
+          "vendor": "가상음향선재"
+        },
+        {
+          "date": "2026-03-17",
+          "document_id": "RADIO-CABLE-52",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "RADIO-B",
+          "vendor": "가상방송케이블"
+        },
+        {
+          "date": "2026-03-17",
+          "document_id": "RADIO-QUOTE-53",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "RADIO-Q",
+          "vendor": "가상선재견적"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "RADIO-A",
+          "items": [
+            {
+              "name": "마이크케이블5M",
+              "quantity": 4,
+              "unit_price": 12600
+            }
+          ],
+          "sheet_id": "RADIO-A-L"
+        },
+        {
+          "header_record_id": "RADIO-B",
+          "items": [
+            {
+              "name": "마이크케이블5M",
+              "quantity": 2,
+              "unit_price": 13200
+            },
+            {
+              "name": "케이블고정띠",
+              "quantity": 10,
+              "unit_price": 450
+            }
+          ],
+          "sheet_id": "RADIO-B-L"
+        },
+        {
+          "header_record_id": "RADIO-Q",
+          "items": [
+            {
+              "name": "마이크케이블5M",
+              "quantity": 6,
+              "unit_price": 11000
+            }
+          ],
+          "sheet_id": "RADIO-Q-L"
+        }
+      ],
+      "processing_policy": "표지 record_id를 품목의 header_record_id와 연결한다. invoice 또는 order 중 원문 번호 document_id에 received가 있는 자료만 실제 구매다. quote는 가격 이력과 비용에서 제외한다. 세금 별도 단가를 비교하며 품목과 업체는 NFKC 후 공백 제거와 영문 소문자 변환을 적용하고 법인 표현을 제거한다. 결과를 이름 순으로 놓고 단가 동률은 업체 이름 순으로 고른다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "RADIO-QUOTE-53"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "RADIO-CABLE-51",
+        "RADIO-CABLE-52"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "RADIO-CABLE-51",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 12600
+    },
+    "output": {
+      "supply": 50400,
+      "total": 55440,
+      "vat": 5040
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상음향선재"
+    },
+    "output": "가상음향선재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "RADIO-CABLE-52",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 13200
+    },
+    "output": {
+      "supply": 26400,
+      "total": 29040,
+      "vat": 2640
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "RADIO-CABLE-52",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 450
+    },
+    "output": {
+      "supply": 4500,
+      "total": 4950,
+      "vat": 450
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상방송케이블"
+    },
+    "output": "가상방송케이블",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "마이크케이블5m",
+          "unit_price": 12600,
+          "vendor": "가상음향선재"
+        },
+        {
+          "item": "케이블고정띠",
+          "unit_price": 450,
+          "vendor": "가상방송케이블"
+        }
+      ],
+      "grand_total": 89430,
+      "supply_total": 81300,
+      "unique_document_count": 2,
+      "vat_total": 8130,
+      "vendor_totals": [
+        {
+          "supply": 30900,
+          "total": 33990,
+          "vat": 3090,
+          "vendor": "가상방송케이블"
+        },
+        {
+          "supply": 50400,
+          "total": 55440,
+          "vat": 5040,
+          "vendor": "가상음향선재"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

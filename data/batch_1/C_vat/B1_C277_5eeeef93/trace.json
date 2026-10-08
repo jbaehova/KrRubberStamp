@@ -1,0 +1,297 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "첫인수277",
+          "date": "2026-06-09",
+          "description": "발주 A 물품을 인수 번호 A로 첫 창고에 별도 반입했다.",
+          "document_ids": [
+            "첫카드277",
+            "첫전자277"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "끈고정 첫 창고"
+          },
+          "operation_id": "고정끈277",
+          "participants": [
+            {
+              "name": "가상세인수",
+              "organization": "가상끈고정",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "첫반입277"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "둘째인수277",
+          "date": "2026-06-09",
+          "description": "발주 B의 별도 물품을 인수 번호 B로 둘째 창고에 반입했다.",
+          "document_ids": [
+            "둘째카드277"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "끈고정 둘째 창고"
+          },
+          "operation_id": "고정끈277",
+          "participants": [
+            {
+              "name": "가상세인수",
+              "organization": "가상끈고정",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "둘째반입277"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 고정끈 제품 제조",
+          "operation_id": "고정끈277",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "첫인수277",
+          "date": "2026-06-09",
+          "document_id": "첫카드277",
+          "transaction_id": "첫반입277"
+        },
+        {
+          "activity_id": "둘째인수277",
+          "date": "2026-06-09",
+          "document_id": "둘째카드277",
+          "transaction_id": "둘째반입277"
+        },
+        {
+          "activity_id": "첫인수277",
+          "date": "2026-06-09",
+          "document_id": "첫전자277",
+          "transaction_id": "첫반입277"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "첫카드277",
+        "purpose": "business",
+        "transaction_id": "첫반입277"
+      },
+      {
+        "business_related": true,
+        "document_id": "둘째카드277",
+        "purpose": "business",
+        "transaction_id": "둘째반입277"
+      },
+      {
+        "business_related": true,
+        "document_id": "첫전자277",
+        "purpose": "business",
+        "transaction_id": "첫반입277"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "둘째카드277"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "둘째반입277"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "첫카드277",
+        "첫전자277"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "첫반입277"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-09",
+      "transaction_id": "둘째반입277"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2420000,
+      "includes_vat": true,
+      "transaction_id": "둘째반입277"
+    },
+    "output": {
+      "gross": 2420000,
+      "supply_base": 2200000,
+      "vat": 220000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "둘째반입277",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 220000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-09",
+      "transaction_id": "첫반입277"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2420000,
+      "includes_vat": true,
+      "transaction_id": "첫반입277"
+    },
+    "output": {
+      "gross": 2420000,
+      "supply_base": 2200000,
+      "vat": 220000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "첫반입277",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 220000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 209000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -440000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -440000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -440000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 440000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 440000,
+      "input_vat": 440000,
+      "net_vat": -440000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 440000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

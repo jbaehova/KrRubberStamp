@@ -1,0 +1,41 @@
+task_id: B1_B080_bb256e01
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상가지공유실의 건강보험 통지 보수월액이 매우 낮게 적혀 있습니다. 이를 그대로 요율에 곱한 값으로 끝내지 말고 근로자 건강보험
+  부담액과 그 금액에서 계산한 장기요양 부담액을 구해 주세요. 이 두 칸과 국민연금 부담액을 함께 대조합니다.
+input_files:
+- path: inputs/01_공유직급여.hwpx
+  format: hwpx
+- path: inputs/02_낮은보수통지.pdf
+  format: pdf
+- path: inputs/03_나머지등록.xlsx
+  format: xlsx
+- path: inputs/04_건강하한참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    national_pension:
+      type: integer
+  required:
+  - health_insurance
+  - long_term_care
+  - national_pension
+  additionalProperties: false
+canary: KrRubberStamp-canary-a2f762f5-ab0a-584a-9502-9f614ec5a96e
+scenario_seed: 13485305611366978913
+scenario_hash: 0ec33e8a78348029bda27a2897d43a9f2d8bd86f7cad1d1348f8f7d672ab4a60
+authorship:
+  method: individually_written
+  case_id: B080
+  case_sha256: bb256e015d1c556122fd3ad31419ad9ad96e61a97e6ad130bed6911f133b0555
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- health_insurance
+- long_term_care
+- national_pension

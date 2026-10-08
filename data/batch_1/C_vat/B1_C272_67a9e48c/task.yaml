@@ -1,0 +1,50 @@
+task_id: B1_C272_67a9e48c
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상다음차판매는 대여하던 한 대를 공식 판매 영업 재고로 전환했습니다. 대여업 등록 기간의 타이어 정비와 판매업 등록 뒤의
+  상품화 정비를 날짜별 허가 업무에 연결해 주세요. 전체 매입세액(input_vat), 불공제세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat),
+  환급액(refund_vat)을 answer.json에 남겨 주세요. 등록의 현재 상태만 모든 정비에 적용하지 마세요.
+input_files:
+- path: inputs/차량전환.hwpx
+  format: hwpx
+- path: inputs/기간별허가.xlsx
+  format: xlsx
+- path: inputs/정비실적.hwpx
+  format: hwpx
+- path: inputs/타이어카드.pdf
+  format: pdf
+- path: inputs/상품화발급.pdf
+  format: pdf
+- path: inputs/매입검토.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-41e558a6-a5d4-535a-b626-788aaa57b36d
+scenario_seed: 7469752747601603015
+scenario_hash: 37a991c39e43a06b0d14e2b599341329c736509a0a6f434c8158b8eab991a49f
+authorship:
+  method: individually_written
+  case_id: C272
+  case_sha256: 67a9e48c28caa9c783945131addbdcc57b9622c3ce122bf94b5731bec82a3645
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- refund_vat

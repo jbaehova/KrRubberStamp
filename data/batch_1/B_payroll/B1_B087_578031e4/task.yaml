@@ -1,0 +1,46 @@
+task_id: B1_B087_578031e4
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상잔솔출고실은 상시 근로자가 네 명인 사업장입니다. 새벽까지 이어진 승인 추가 작업의 실제 근로 대가를 정산하되 적용 범위
+  밖의 법정 가산을 별도 지급하지 않도록 연장수당과 야간 가산 칸을 작성해 주세요. 이번 계약에는 별도 약정 가산이 없습니다. 총지급액은 gross_pay에,
+  공제 후 실지급액은 net_pay에 작성해 주세요.
+input_files:
+- path: inputs/01_출고지급약정.hwpx
+  format: hwpx
+- path: inputs/02_새벽카드.pdf
+  format: pdf
+- path: inputs/03_출고보험일정.xlsx
+  format: xlsx
+- path: inputs/04_출고가산기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-dc154116-47ca-5dbc-a5c9-27ad5f7859d5
+scenario_seed: 6305094336267339686
+scenario_hash: 3b77bd11fac2557a716b3284e0d148979c043fff36ae57903de3dd6a0342ef1e
+authorship:
+  method: individually_written
+  case_id: B087
+  case_sha256: 578031e49c8ac7a6a2401db4446e310cbf7ffb2375cfed791411c947a37ab540
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- overtime_pay
+- night_pay
+- gross_pay
+- net_pay

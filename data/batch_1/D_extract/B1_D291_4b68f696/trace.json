@@ -1,0 +1,187 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-10",
+          "document_id": "POOL-FLOAT-15",
+          "event": "received",
+          "event_id": "POOL-PHYSICAL-IN",
+          "location": "수영강습창고"
+        },
+        {
+          "date": "2026-03-10",
+          "document_id": "POOL-FLOAT-15",
+          "event": "received",
+          "event_id": "POOL-BOOK-IN",
+          "location": "수영강습창고"
+        },
+        {
+          "date": "2026-03-11",
+          "document_id": "POOL-FLOAT-16",
+          "event": "received",
+          "event_id": "POOL-PLUS-IN",
+          "location": "수영강습창고"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-06",
+          "document_id": "POOL-FLOAT-15",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "POOL-FLOAT-H",
+          "vendor": "가상강습수영"
+        },
+        {
+          "date": "2026-03-07",
+          "document_id": "POOL-FLOAT-16",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "POOL-PLUS-H",
+          "vendor": "가상수영부자재"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "POOL-FLOAT-H",
+          "items": [
+            {
+              "name": "부표연결끈2M",
+              "quantity": 10,
+              "unit_price": 1500
+            }
+          ],
+          "sheet_id": "POOL-ROPE-L"
+        },
+        {
+          "header_record_id": "POOL-FLOAT-H",
+          "items": [
+            {
+              "name": "강습부표F3",
+              "quantity": 10,
+              "unit_price": 8700
+            }
+          ],
+          "sheet_id": "POOL-FLOAT-L"
+        },
+        {
+          "header_record_id": "POOL-PLUS-H",
+          "items": [
+            {
+              "name": "강습 부표 Ｆ３",
+              "quantity": 4,
+              "unit_price": 8200
+            }
+          ],
+          "sheet_id": "POOL-PLUS-L"
+        }
+      ],
+      "processing_policy": "품목 header_record_id를 표지 record_id와 연결하고 같은 표지의 여러 별첨을 모두 합한다. invoice 또는 order의 document_id에 received가 있는 원문만 실제 구매다. 동일 원문 번호와 날짜 및 장소의 수령 기록이 여러 개여도 한 번 구매한 것이다. 단가는 공급가액이며 행 세액은 10%의 원 미만을 버린 값이다. 품목과 업체는 NFKC 후 공백 제거와 영문 소문자 변환으로 정리하며 법인 표현을 제거한다. 결과는 이름 순이며 가격 동률이면 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "POOL-FLOAT-15",
+        "POOL-FLOAT-16"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "POOL-FLOAT-15",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 1500
+    },
+    "output": {
+      "supply": 15000,
+      "total": 16500,
+      "vat": 1500
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "POOL-FLOAT-15",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 8700
+    },
+    "output": {
+      "supply": 87000,
+      "total": 95700,
+      "vat": 8700
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상강습수영"
+    },
+    "output": "가상강습수영",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "POOL-FLOAT-16",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 8200
+    },
+    "output": {
+      "supply": 32800,
+      "total": 36080,
+      "vat": 3280
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상수영부자재"
+    },
+    "output": "가상수영부자재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "강습부표f3",
+          "unit_price": 8200,
+          "vendor": "가상수영부자재"
+        },
+        {
+          "item": "부표연결끈2m",
+          "unit_price": 1500,
+          "vendor": "가상강습수영"
+        }
+      ],
+      "grand_total": 148280,
+      "supply_total": 134800,
+      "unique_document_count": 2,
+      "vat_total": 13480,
+      "vendor_totals": [
+        {
+          "supply": 102000,
+          "total": 112200,
+          "vat": 10200,
+          "vendor": "가상강습수영"
+        },
+        {
+          "supply": 32800,
+          "total": 36080,
+          "vat": 3280,
+          "vendor": "가상수영부자재"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

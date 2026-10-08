@@ -1,0 +1,43 @@
+task_id: B1_B254_4546ccca
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상회색기록관의 이번 이체는 주18시간 직원의 한 주 지급입니다. 세 소정 카드와 금요일의 별도 지원 카드를 읽어 기본 근로
+  대가와 연장수당을 나눠 주세요. 개근한 주의 별도 주휴수당을 반영한 뒤 기관 공제까지 차감한 실지급액을 작성합니다.
+input_files:
+- path: inputs/01_한주지원약정.pdf
+  format: pdf
+- path: inputs/02_소정과지원카드.xlsx
+  format: xlsx
+- path: inputs/03_월부과원문.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - overtime_pay
+  - weekly_holiday_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-c72b4547-5a94-566f-ab5b-f321a5235357
+scenario_seed: 4991902408685939841
+scenario_hash: c61efc64a1bbbf4ca36caf8b24fb41bbaf2e809193d4788b6b6071a51dd76cbc
+authorship:
+  method: individually_written
+  case_id: B254
+  case_sha256: 4546cccadf246c8174ab7211e24516fc320693fae6797521e747a8a2710493f4
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- base_pay
+- overtime_pay
+- weekly_holiday_pay
+- net_pay

@@ -1,0 +1,145 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-04",
+          "document_id": "MESH-ROLL-31",
+          "event": "received",
+          "event_id": "MESH-ROLL-IN",
+          "location": "수리소재료선반"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-02",
+          "document_id": "MESH-ROLL-31",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "MESH-COVER",
+          "vendor": "가상망제작"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "MESH-COVER",
+          "items": [
+            {
+              "name": "방충망롤30",
+              "quantity": 2,
+              "unit_price": 62800
+            }
+          ],
+          "sheet_id": "MESH-LOT-OLD"
+        },
+        {
+          "header_record_id": "MESH-COVER",
+          "items": [
+            {
+              "name": "방충망롤30",
+              "quantity": 1,
+              "unit_price": 64600
+            },
+            {
+              "name": "망고정고무롤",
+              "quantity": 3,
+              "unit_price": 11900
+            }
+          ],
+          "sheet_id": "MESH-LOT-NEW"
+        }
+      ],
+      "processing_policy": "첨부를 header_record_id로 표지에 연결하고 같은 표지의 모든 품목 행을 합한다. invoice 또는 order에 received 기록이 있으면 구매다. 별도 단가는 공급가액이며 행 세액은 그 10%에서 원 미만을 버린다. 품목과 업체는 NFKC 후 공백 제거 및 영문 소문자로 정리하고 업체 법인 표기를 제거해 이름 순으로 배열한다. 가격 동률이면 정리한 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "MESH-ROLL-31"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "MESH-ROLL-31",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 62800
+    },
+    "output": {
+      "supply": 125600,
+      "total": 138160,
+      "vat": 12560
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "MESH-ROLL-31",
+      "includes_vat": false,
+      "quantity": 1,
+      "unit_price": 64600
+    },
+    "output": {
+      "supply": 64600,
+      "total": 71060,
+      "vat": 6460
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "MESH-ROLL-31",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 11900
+    },
+    "output": {
+      "supply": 35700,
+      "total": 39270,
+      "vat": 3570
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상망제작"
+    },
+    "output": "가상망제작",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "망고정고무롤",
+          "unit_price": 11900,
+          "vendor": "가상망제작"
+        },
+        {
+          "item": "방충망롤30",
+          "unit_price": 62800,
+          "vendor": "가상망제작"
+        }
+      ],
+      "grand_total": 248490,
+      "supply_total": 225900,
+      "unique_document_count": 1,
+      "vat_total": 22590,
+      "vendor_totals": [
+        {
+          "supply": 225900,
+          "total": 248490,
+          "vat": 22590,
+          "vendor": "가상망제작"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

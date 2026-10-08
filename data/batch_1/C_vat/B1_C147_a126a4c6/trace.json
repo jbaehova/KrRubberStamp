@@ -1,0 +1,340 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C147-이전인수",
+          "date": "2025-12-23",
+          "description": "직원이 전년 말 공구를 실제로 받았다.",
+          "document_ids": [
+            "C147-이전계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상분해 작업장"
+          },
+          "operation_id": "C147-분해",
+          "participants": [
+            {
+              "name": "가상구분해",
+              "organization": "가상분해작업",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C147-이전공구"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C147-올해인수",
+          "date": "2026-02-12",
+          "description": "직원이 올해 별도 공구를 받아 분해 작업 준비에 사용했다.",
+          "document_ids": [
+            "C147-올해계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상분해 작업장"
+          },
+          "operation_id": "C147-분해",
+          "participants": [
+            {
+              "name": "가상구분해",
+              "organization": "가상분해작업",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C147-올해공구"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C147-다른인수",
+          "date": "2026-04-09",
+          "description": "직원이 다른 공급자의 공구를 별도로 받았다.",
+          "document_ids": [
+            "C147-다른카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상분해 작업장"
+          },
+          "operation_id": "C147-분해",
+          "participants": [
+            {
+              "name": "가상구분해",
+              "organization": "가상분해작업",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C147-다른공구"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 장비 분해 용역 준비",
+          "operation_id": "C147-분해",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C147-이전인수",
+          "date": "2025-12-23",
+          "document_id": "C147-이전계산서",
+          "transaction_id": "C147-이전공구"
+        },
+        {
+          "activity_id": "C147-올해인수",
+          "date": "2026-02-12",
+          "document_id": "C147-올해계산서",
+          "transaction_id": "C147-올해공구"
+        },
+        {
+          "activity_id": "C147-다른인수",
+          "date": "2026-04-09",
+          "document_id": "C147-다른카드",
+          "transaction_id": "C147-다른공구"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C147-이전계산서",
+        "purpose": "business",
+        "transaction_id": "C147-이전공구"
+      },
+      {
+        "business_related": true,
+        "document_id": "C147-올해계산서",
+        "purpose": "business",
+        "transaction_id": "C147-올해공구"
+      },
+      {
+        "business_related": true,
+        "document_id": "C147-다른카드",
+        "purpose": "business",
+        "transaction_id": "C147-다른공구"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C147-다른카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C147-다른공구"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C147-올해계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C147-올해공구"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C147-이전계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C147-이전공구"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-09",
+      "transaction_id": "C147-다른공구"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 814000,
+      "includes_vat": true,
+      "transaction_id": "C147-다른공구"
+    },
+    "output": {
+      "gross": 814000,
+      "supply_base": 740000,
+      "vat": 74000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "C147-다른공구",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 74000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-12",
+      "transaction_id": "C147-올해공구"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1320000,
+      "includes_vat": true,
+      "transaction_id": "C147-올해공구"
+    },
+    "output": {
+      "gross": 1320000,
+      "supply_base": 1200000,
+      "vat": 120000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C147-올해공구",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 120000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2025-12-23",
+      "transaction_id": "C147-이전공구"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 299000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -120000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -120000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -120000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 120000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 120000,
+      "input_vat": 194000,
+      "net_vat": -120000,
+      "noncreditable_vat": 74000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 120000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

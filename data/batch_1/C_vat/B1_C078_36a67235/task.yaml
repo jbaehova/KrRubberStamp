@@ -1,0 +1,46 @@
+task_id: B1_C078_36a67235
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상접은바구니는 카드 승인 월을 기준으로 주문 합계를 냈습니다. 완성 바구니의 배송 완료 자료와 재료 입고를 보고 상반기 신고를
+  다시 만들려 합니다. 고유 거래 수(unique_transaction_count), 매출세액(output_vat), 발행세액공제(receipt_credit),
+  환급액(refund_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_예약판매_사업.hwpx
+  format: hwpx
+- path: inputs/02_카드승인_배송.xlsx
+  format: xlsx
+- path: inputs/03_재료_계산서.pdf
+  format: pdf
+- path: inputs/04_작업실_입고.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - output_vat
+  - receipt_credit
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-6c064f47-46f1-5dc3-97ef-e8c7bb92328e
+scenario_seed: 3937960499402777902
+scenario_hash: c93c7b068602ce248dd95a7b9be7fc00ca3ae1941eb428b9c8213a0ed43af19c
+authorship:
+  method: individually_written
+  case_id: C078
+  case_sha256: 36a67235c26c252eb6c1f36e91a47d2be1af5bcf679db823ffebbd27801ebbf6
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- output_vat
+- receipt_credit
+- refund_vat

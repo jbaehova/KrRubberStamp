@@ -1,0 +1,74 @@
+task_id: B1_A099_a21276a0
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상별하위생의 가상연지수에게 주택 이자와 가족 지출 자료가 제출됐습니다. 대출 약정과 연말 세대원 주택 목록, 학비 장학금
+  및 병원비 납부자를 각각 대조해 주세요. 공제대상 가족 수와 기본공제액, 주택자금 소득공제액 및 교육비와 의료비와 보험료 세액공제액을 구합니다.
+  최종 과세표준과 소득세 결정세액도 필요합니다.
+input_files:
+- path: inputs/01_신청범위.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_대출요건.hwpx
+  format: hwpx
+- path: inputs/04_이자납부.pdf
+  format: pdf
+- path: inputs/05_자녀가족.pdf
+  format: pdf
+- path: inputs/06_전액장학.xlsx
+  format: xlsx
+- path: inputs/07_아버지가족.pdf
+  format: pdf
+- path: inputs/08_아버지보험.pdf
+  format: pdf
+- path: inputs/09_배우자가족.pdf
+  format: pdf
+- path: inputs/10_배우자병원비.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    housing_income_deduction:
+      type: integer
+    education_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    tax_base:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - housing_income_deduction
+  - education_credit
+  - medical_credit
+  - insurance_credit
+  - tax_base
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-b62d8725-7ef0-5b49-91cb-b4ea5a81bb7e
+scenario_seed: 11678527214015953974
+scenario_hash: b166b079ae50ae8107d5dd9b13bf9948f0b0bae895f9aa9ac3085160437235f2
+authorship:
+  method: individually_written
+  case_id: A099
+  case_sha256: a21276a02b273c36cc3166342bc2c249c471c84ccab6cc930fe7d1b1c0c90cbd
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- housing_income_deduction
+- education_credit
+- medical_credit
+- insurance_credit
+- tax_base
+- final_national_tax

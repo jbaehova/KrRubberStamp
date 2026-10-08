@@ -1,0 +1,57 @@
+task_id: B1_A195_4e99bb2f
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상비수리전산의 가상진하람은 네 가족의 자료를 냈습니다. 각 가족의 관계와 소득 및 나이를 확인해 기본공제액과 보험료 세액공제액을
+  적어 주세요. 사람별 카드 사용을 구별한 신용카드 등 소득공제액과 배우자 의료비 세액공제액도 계산합니다.
+input_files:
+- path: inputs/01_신청확인.hwpx
+  format: hwpx
+- path: inputs/02_급여누계.xlsx
+  format: xlsx
+- path: inputs/03_어머니등록.pdf
+  format: pdf
+- path: inputs/04_자녀소득.xlsx
+  format: xlsx
+- path: inputs/05_동생등록.hwpx
+  format: hwpx
+- path: inputs/06_배우자소득.pdf
+  format: pdf
+- path: inputs/07_본인카드.pdf
+  format: pdf
+- path: inputs/08_가족카드.xlsx
+  format: xlsx
+- path: inputs/09_보험증명.pdf
+  format: pdf
+- path: inputs/10_배우자진료.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+  required:
+  - basic_deduction
+  - insurance_credit
+  - credit_card_deduction
+  - medical_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-a842621a-b35c-567c-ad2e-27d8b3f37e6f
+scenario_seed: 5663763817159728925
+scenario_hash: fbdb1d507aa1e8941ee1af44dbe36954d26bbc6937757a5a93326357658bba27
+authorship:
+  method: individually_written
+  case_id: A195
+  case_sha256: 4e99bb2f0d841f1d5519e3a7d3571c21241d2316c96772159ea0021eb64aa328
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- basic_deduction
+- insurance_credit
+- credit_card_deduction
+- medical_credit

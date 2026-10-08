@@ -1,0 +1,44 @@
+task_id: B1_C205_0823aa3a
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상다시맞춘수선이 접수대 수입과 사용하던 작업대 처분대금을 한 통장으로 받았습니다. 완료 수선의 카드 결제와 영수증 없는 현금
+  수입을 모두 매출에 넣고, 별도 계산서를 발급한 작업대 매각도 확인해 주세요. 매출 공급가액(tax_base), 매출세액(output_vat),
+  영수증 발행세액공제(receipt_credit), 납부액(payable_vat)을 원 단위로 answer.json에 적어 주세요.
+input_files:
+- path: inputs/접수대마감.xlsx
+  format: xlsx
+- path: inputs/작업대처분.pdf
+  format: pdf
+- path: inputs/수선업신고.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - output_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-52287d3b-0eaf-559a-9ad9-a2e71b772336
+scenario_seed: 586499545679416668
+scenario_hash: a083e7d64841b86ea6b28b50b0cca74790fa5dd6ce91a0ada821bdfb9bc2a74e
+authorship:
+  method: individually_written
+  case_id: C205
+  case_sha256: 0823aa3ab9264d5cf7f2cdbaeb3e2bf9fb5b7211ef2e315bc0cb04493fa798cb
+  source_file: batch_1/C_vat/cases_204_253.json
+answer_fields:
+- tax_base
+- output_vat
+- receipt_credit
+- payable_vat

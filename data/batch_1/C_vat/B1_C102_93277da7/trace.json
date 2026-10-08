@@ -1,0 +1,483 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C102-재료활동",
+          "date": "2026-04-03",
+          "description": "판매 수납함 제작에 쓸 재료를 직원이 받았다.",
+          "document_ids": [
+            "C102-재료계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상끝자리함 제작실"
+          },
+          "operation_id": "C102-수납",
+          "participants": [
+            {
+              "name": "가상 제작직원",
+              "organization": "가상끝자리함",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C102-제작재료"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C102-가족활동",
+          "date": "2026-04-06",
+          "description": "가족이 쓸 생활 용품을 가족 주거지에서 받았다.",
+          "document_ids": [
+            "C102-가족카드"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "가상대표 가족 주거지"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상 가족수령인",
+              "organization": "가상대표가정",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "C102-가족용품"
+        }
+      ],
+      "operations": [
+        {
+          "description": "소비자 수납함 판매",
+          "operation_id": "C102-수납",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C102-재료활동",
+          "date": "2026-04-03",
+          "document_id": "C102-재료계산서",
+          "transaction_id": "C102-제작재료"
+        },
+        {
+          "activity_id": "C102-가족활동",
+          "date": "2026-04-06",
+          "document_id": "C102-가족카드",
+          "transaction_id": "C102-가족용품"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C102-재료계산서",
+        "purpose": "business",
+        "transaction_id": "C102-제작재료"
+      },
+      {
+        "business_related": false,
+        "document_id": "C102-가족카드",
+        "purpose": "private",
+        "transaction_id": "C102-가족용품"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C102-가족카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C102-가족용품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C102-다음카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C102-다음판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C102-현금장부"
+      ],
+      "evidence": [
+        "cash_ledger"
+      ],
+      "transaction_id": "C102-장부판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C102-재료계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C102-제작재료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C102-판매카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C102-카드판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C102-판매현금영수증"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "C102-현금영수증판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-06",
+      "transaction_id": "C102-가족용품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 129470,
+      "includes_vat": true,
+      "transaction_id": "C102-가족용품"
+    },
+    "output": {
+      "gross": 129470,
+      "supply_base": 117700,
+      "vat": 11770
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "C102-가족용품",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 11770
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "date": "2026-07-01",
+      "transaction_id": "C102-다음판매"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-07",
+      "transaction_id": "C102-장부판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 340120,
+      "includes_vat": false,
+      "transaction_id": "C102-장부판매"
+    },
+    "output": {
+      "gross": 374132,
+      "supply_base": 340120,
+      "vat": 34012
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 340120
+    },
+    "output": 34012,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_ledger"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C102-장부판매"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-03",
+      "transaction_id": "C102-제작재료"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 987650,
+      "includes_vat": false,
+      "transaction_id": "C102-제작재료"
+    },
+    "output": {
+      "gross": 1086415,
+      "supply_base": 987650,
+      "vat": 98765
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C102-제작재료",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 98765,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-14",
+      "transaction_id": "C102-카드판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2033647,
+      "includes_vat": true,
+      "transaction_id": "C102-카드판매"
+    },
+    "output": {
+      "gross": 2033647,
+      "supply_base": 1848770,
+      "vat": 184877
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1848770
+    },
+    "output": 184877,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C102-카드판매"
+    },
+    "output": {
+      "eligible_gross": 2033647
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-18",
+      "transaction_id": "C102-현금영수증판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 550000,
+      "includes_vat": true,
+      "transaction_id": "C102-현금영수증판매"
+    },
+    "output": {
+      "gross": 550000,
+      "supply_base": 500000,
+      "vat": 50000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 500000
+    },
+    "output": 50000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C102-현금영수증판매"
+    },
+    "output": {
+      "eligible_gross": 550000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 386000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 2583647,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 33587,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 10000000,
+      "annual_limit": 10000000,
+      "raw_credit": 33587
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 170124
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 180000
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 170124,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 170124,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 98765,
+      "output_vat": 268889,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 98765,
+      "input_vat": 110535,
+      "net_vat": 170124,
+      "noncreditable_vat": 11770,
+      "output_vat": 268889,
+      "payable_vat": 170124,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 2688890,
+      "unique_transaction_count": 5
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

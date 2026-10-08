@@ -1,0 +1,124 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-04",
+          "document_id": "DIVIDE-119-W",
+          "event": "cancelled_before_dispatch",
+          "event_id": "e119-w",
+          "location": "발주 담당석"
+        },
+        {
+          "date": "2026-04-08",
+          "document_id": "DIVIDE-119-F",
+          "event": "received",
+          "event_id": "e119-f",
+          "location": "재사용 가림막 창고"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-03",
+          "document_id": "DIVIDE-119-W",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h119-wall",
+          "vendor": "가상공간분리"
+        },
+        {
+          "date": "2026-04-05",
+          "document_id": "DIVIDE-119-F",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h119-foot",
+          "vendor": "가상공간분리"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h119-wall",
+          "items": [
+            {
+              "name": "이동가림막",
+              "quantity": 6,
+              "unit_price": 68000
+            }
+          ],
+          "sheet_id": "s119-w"
+        },
+        {
+          "header_record_id": "h119-foot",
+          "items": [
+            {
+              "name": "가림막고정발",
+              "quantity": 12,
+              "unit_price": 8500
+            }
+          ],
+          "sheet_id": "s119-f"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 원문 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있을 때만 집계한다. quote, 무인수 자료와 출고 전 취소는 제외하고 같은 document_id의 동일 내용은 한 번만 계산한다. 별도 단가는 품목 수량을 곱한 공급가액과 그 10% 원 미만 버림 세액을 합한다. 포함 가격은 품목 총액의 10/11 원 미만 버림을 공급가액으로 하고 차액을 세액으로 한다. 업체 이름은 NFKC 후 공백 제거와 영문 소문자화 및 법인 표시 제거를 거쳐 그 이름 오름차순으로 정렬한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "DIVIDE-119-W"
+      ],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "DIVIDE-119-F"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "DIVIDE-119-F",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 8500
+    },
+    "output": {
+      "supply": 102000,
+      "total": 112200,
+      "vat": 10200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상공간분리"
+    },
+    "output": "가상공간분리",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "가림막고정발",
+          "unit_price": 8500,
+          "vendor": "가상공간분리"
+        }
+      ],
+      "grand_total": 112200,
+      "supply_total": 102000,
+      "unique_document_count": 1,
+      "vat_total": 10200,
+      "vendor_totals": [
+        {
+          "supply": 102000,
+          "total": 112200,
+          "vat": 10200,
+          "vendor": "가상공간분리"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

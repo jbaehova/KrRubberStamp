@@ -1,0 +1,63 @@
+task_id: B1_D290_c6c5f819
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 치즈 판매대 보강품 다섯 실제 구매의 지급 계정을 정리합니다. vendor_totals와 supply_total을 제출해 주세요.
+input_files:
+- path: inputs/01_판매대표지대장.hwpx
+  format: hwpx
+- path: inputs/02_냉장선반.xlsx
+  format: xlsx
+- path: inputs/03_진열트레이.xlsx
+  format: xlsx
+- path: inputs/04_가격표홀더.pdf
+  format: pdf
+- path: inputs/05_치즈칼.xlsx
+  format: xlsx
+- path: inputs/06_위생도마.hwpx
+  format: hwpx
+- path: inputs/07_선반수령.pdf
+  format: pdf
+- path: inputs/08_진열부속수령.hwpx
+  format: hwpx
+- path: inputs/09_조리도구수령.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - vendor_totals
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-c6c37796-a595-5ec0-9b8e-5c9985bc084e
+scenario_seed: 14323126980041818015
+scenario_hash: 98929a83ee3264bfeead4794d04d6244297523c244bcc4e0d8fb364224733f63
+authorship:
+  method: individually_written
+  case_id: D290
+  case_sha256: c6c5f819e634bf9f94ccae21b2ce83bef81aed6ccf016e6a3e786cc1207ea1d9
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals
+- supply_total

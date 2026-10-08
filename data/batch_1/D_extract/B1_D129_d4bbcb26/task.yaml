@@ -1,0 +1,51 @@
+task_id: B1_D129_d4bbcb26
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 오디오 기록용 메모리의 재구매 후보를 확정하려 합니다. cheapest_by_item과 기존 결제 grand_total을 확인해
+  주세요.
+input_files:
+- path: inputs/01_저장매체명세.pdf
+  format: pdf
+- path: inputs/02_보관메모리명세.xlsx
+  format: xlsx
+- path: inputs/03_기록카드명세.hwpx
+  format: hwpx
+- path: inputs/04_휴대저장명세.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-f314204b-63bd-5143-99cc-8e3fdd5cf649
+scenario_seed: 15329069123621708679
+scenario_hash: 81ee6c2c3513a5b14815387770486f98514e81ed5574b3c7bdd61578183e4aba
+authorship:
+  method: individually_written
+  case_id: D129
+  case_sha256: d4bbcb26aae163873c924018c0f479c505c7792bd83b8e62bec42b14a33151c0
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- grand_total

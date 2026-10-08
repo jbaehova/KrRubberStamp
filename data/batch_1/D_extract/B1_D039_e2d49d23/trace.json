@@ -1,0 +1,183 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-03",
+          "document_id": "COMPOST-SACK-0202",
+          "event": "cancelled_before_dispatch",
+          "event_id": "CP-E-FIRST",
+          "location": "가상흙보관 주문 접수실"
+        },
+        {
+          "date": "2026-02-05",
+          "document_id": "COMPOST-TAG-0204",
+          "event": "received",
+          "event_id": "CP-E-TAG",
+          "location": "가상공동퇴비장 표찰 보관대"
+        },
+        {
+          "date": "2026-02-08",
+          "document_id": "COMPOST-SACK-0206",
+          "event": "received",
+          "event_id": "CP-E-REPLACE",
+          "location": "가상공동퇴비장 입고장"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-02",
+          "document_id": "COMPOST-SACK-0202",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "CP-H-FIRST",
+          "vendor": "가상흙보관"
+        },
+        {
+          "date": "2026-02-04",
+          "document_id": "COMPOST-TAG-0204",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "CP-H-TAG",
+          "vendor": "가상흙보관"
+        },
+        {
+          "date": "2026-02-06",
+          "document_id": "COMPOST-SACK-0206",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "CP-H-REPLACE",
+          "vendor": "가상순환용품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "CP-H-FIRST",
+          "items": [
+            {
+              "name": "퇴비보관자루",
+              "quantity": 120,
+              "unit_price": 1150
+            }
+          ],
+          "sheet_id": "CP-S-FIRST"
+        },
+        {
+          "header_record_id": "CP-H-TAG",
+          "items": [
+            {
+              "name": "퇴비구분표찰",
+              "quantity": 40,
+              "unit_price": 850
+            }
+          ],
+          "sheet_id": "CP-S-TAG"
+        },
+        {
+          "header_record_id": "CP-H-REPLACE",
+          "items": [
+            {
+              "name": "퇴비보관자루",
+              "quantity": 120,
+              "unit_price": 1180
+            }
+          ],
+          "sheet_id": "CP-S-REPLACE"
+        }
+      ],
+      "processing_policy": "주문 또는 계산서의 document_id를 현장 기록의 document_id와 연결한다. 실제 인수(received) 기록이 있는 거래만 지급액과 구매 건수에 반영한다. 출고 전 취소(cancelled_before_dispatch)는 지급 대상이 아니다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "COMPOST-SACK-0202"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "COMPOST-SACK-0206",
+        "COMPOST-TAG-0204"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "COMPOST-TAG-0204",
+      "includes_vat": false,
+      "quantity": 40,
+      "unit_price": 850
+    },
+    "output": {
+      "supply": 34000,
+      "total": 37400,
+      "vat": 3400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상흙보관"
+    },
+    "output": "가상흙보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "COMPOST-SACK-0206",
+      "includes_vat": false,
+      "quantity": 120,
+      "unit_price": 1180
+    },
+    "output": {
+      "supply": 141600,
+      "total": 155760,
+      "vat": 14160
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상순환용품"
+    },
+    "output": "가상순환용품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "퇴비구분표찰",
+          "unit_price": 850,
+          "vendor": "가상흙보관"
+        },
+        {
+          "item": "퇴비보관자루",
+          "unit_price": 1180,
+          "vendor": "가상순환용품"
+        }
+      ],
+      "grand_total": 193160,
+      "supply_total": 175600,
+      "unique_document_count": 2,
+      "vat_total": 17560,
+      "vendor_totals": [
+        {
+          "supply": 141600,
+          "total": 155760,
+          "vat": 14160,
+          "vendor": "가상순환용품"
+        },
+        {
+          "supply": 34000,
+          "total": 37400,
+          "vat": 3400,
+          "vendor": "가상흙보관"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

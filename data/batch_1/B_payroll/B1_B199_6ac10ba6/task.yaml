@@ -1,0 +1,59 @@
+task_id: B1_B199_6ac10ba6
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상사선안내소는 계약 전 소정일 0일 행을 출근 자료에 포함했고 첫 소정 카드에는 늦은 종료 초안이 있습니다. 유효 승인 카드와
+  실제 소정일이 있는 주만 사용하여 기본급과 주휴, 야간 가산 및 실지급액을 산정해 주세요. 총지급액도 함께 제시해 주세요.
+input_files:
+- path: inputs/01_사선계약.hwpx
+  format: hwpx
+- path: inputs/02_첫날승인.xlsx
+  format: xlsx
+- path: inputs/03_첫날초안.pdf
+  format: pdf
+- path: inputs/04_수요일카드.hwpx
+  format: hwpx
+- path: inputs/05_금요일카드.xlsx
+  format: xlsx
+- path: inputs/06_빈주개근.pdf
+  format: pdf
+- path: inputs/07_사선실행.hwpx
+  format: hwpx
+- path: inputs/08_사선기관.xlsx
+  format: xlsx
+- path: inputs/09_사선등록.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - night_pay
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-70e1b3f0-1667-5280-937e-fd90d4178b7e
+scenario_seed: 7692442448019012553
+scenario_hash: 43498ef7de2b4fa84213b8428f76cf3bc7b09e517abb7910ea3e75da02fc9e11
+authorship:
+  method: individually_written
+  case_id: B199
+  case_sha256: 6ac10ba6714f3bc92c2cff4f187d273c98e3e9e56d7f0fa6dd6bea0b57f5ebb0
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- night_pay
+- gross_pay
+- net_pay

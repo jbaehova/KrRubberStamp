@@ -1,0 +1,176 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-07-06",
+          "document_id": "BRACKET-72",
+          "event": "received",
+          "event_id": "BRACKET-IN",
+          "location": "야외안내설치점"
+        },
+        {
+          "date": "2026-07-06",
+          "document_id": "POST-74",
+          "event": "received",
+          "event_id": "POST-IN",
+          "location": "야외안내설치점"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-07-01",
+          "document_id": "RAIL-71",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "RAIL-C",
+          "vendor": "가상안내레일"
+        },
+        {
+          "date": "2026-07-02",
+          "document_id": "BRACKET-72",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "BRACKET-C",
+          "vendor": "가상안내레일"
+        },
+        {
+          "date": "2026-07-04",
+          "document_id": "POST-74",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "POST-C",
+          "vendor": "가상야외지주"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "RAIL-C",
+          "items": [
+            {
+              "name": "야외안내레일2m",
+              "quantity": 5,
+              "unit_price": 39000
+            }
+          ],
+          "sheet_id": "RAIL-L"
+        },
+        {
+          "header_record_id": "BRACKET-C",
+          "items": [
+            {
+              "name": "레일연결브래킷",
+              "quantity": 10,
+              "unit_price": 5300
+            }
+          ],
+          "sheet_id": "BRACKET-L"
+        },
+        {
+          "header_record_id": "POST-C",
+          "items": [
+            {
+              "name": "야외보조지주",
+              "quantity": 4,
+              "unit_price": 27500
+            }
+          ],
+          "sheet_id": "POST-L"
+        }
+      ],
+      "processing_policy": "표지와 품목은 header_record_id로 연결한다. invoice 또는 order 번호에 received 이력이 있는 원자료만 구매로 합한다. 청구서 발행만으로 실제 인수를 추정하지 않는다. 별도 가격은 행별 수량 곱하기 단가를 공급가액으로 하며 그 10%에서 원 미만을 버린 세액을 더한다. 업체는 NFKC 후 공백과 법인 표기를 제거하고 영문을 소문자로 바꿔 업체명 순으로 집계한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "RAIL-71"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "BRACKET-72",
+        "POST-74"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "BRACKET-72",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 5300
+    },
+    "output": {
+      "supply": 53000,
+      "total": 58300,
+      "vat": 5300
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상안내레일"
+    },
+    "output": "가상안내레일",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "POST-74",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 27500
+    },
+    "output": {
+      "supply": 110000,
+      "total": 121000,
+      "vat": 11000
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상야외지주"
+    },
+    "output": "가상야외지주",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "레일연결브래킷",
+          "unit_price": 5300,
+          "vendor": "가상안내레일"
+        },
+        {
+          "item": "야외보조지주",
+          "unit_price": 27500,
+          "vendor": "가상야외지주"
+        }
+      ],
+      "grand_total": 179300,
+      "supply_total": 163000,
+      "unique_document_count": 2,
+      "vat_total": 16300,
+      "vendor_totals": [
+        {
+          "supply": 53000,
+          "total": 58300,
+          "vat": 5300,
+          "vendor": "가상안내레일"
+        },
+        {
+          "supply": 110000,
+          "total": 121000,
+          "vat": 11000,
+          "vendor": "가상야외지주"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

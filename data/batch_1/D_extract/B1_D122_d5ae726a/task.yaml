@@ -1,0 +1,54 @@
+task_id: B1_D122_d5ae726a
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 제본 작업 발주 자료를 실제 구매 장부로 옮겨 주세요. 현장 기록과 연결한 vendor_totals와 unique_document_count가
+  필요합니다.
+input_files:
+- path: inputs/01_제본공구발주표지.xlsx
+  format: xlsx
+- path: inputs/02_클램프청구표지.pdf
+  format: pdf
+- path: inputs/03_제본품목첨부.hwpx
+  format: hwpx
+- path: inputs/04_작업대수령부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-9f43d3e0-811c-56bc-9560-7f06ee80c27f
+scenario_seed: 15397369978922720860
+scenario_hash: 3bc9c8851a9d9212cc410e377da7aa520a44ab5104dc59c2fc676c5ed834d8a9
+authorship:
+  method: individually_written
+  case_id: D122
+  case_sha256: d5ae726ac4f3de5c9540cbcbed5e1adbd312172e049401babee0652b662b06ff
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals
+- unique_document_count

@@ -1,0 +1,54 @@
+task_id: B1_D071_b152e73f
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 제본 도구 회사의 이름이 카드 기록과 인수서에서 달라 보입니다. 첨부 기준으로 같은 회사를 묶어 vendor_totals와
+  grand_total을 답하세요. 번호가 다른 인수는 별도로 확인합니다.
+input_files:
+- path: inputs/01_초기주문.pdf
+  format: pdf
+- path: inputs/02_카드대장.xlsx
+  format: xlsx
+- path: inputs/03_서면인수.hwpx
+  format: hwpx
+- path: inputs/04_실구매.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8c48a03e-d9d7-5b31-9019-7d4f18ac2105
+scenario_seed: 12777529354204482280
+scenario_hash: 4f2104630ad747c9b95acdb680cc1e315de12466c4596eda039b4f82e8559607
+authorship:
+  method: individually_written
+  case_id: D071
+  case_sha256: b152e73fd87c0ae8c4402f31cd66363d511e83e90a6fd435aa3e64f05230baaa
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals
+- grand_total

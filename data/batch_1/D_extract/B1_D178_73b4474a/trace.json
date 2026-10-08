@@ -1,0 +1,162 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-15",
+          "document_id": "SHOT-CASE-12",
+          "event": "received",
+          "event_id": "SHOT-FIELD-SIGN",
+          "location": "촬영장비창고"
+        },
+        {
+          "date": "2026-05-15",
+          "document_id": "SHOT-CASE-12",
+          "event": "received",
+          "event_id": "SHOT-EQUIP-SIGN",
+          "location": "촬영장비창고"
+        },
+        {
+          "date": "2026-05-15",
+          "document_id": "SHOT-FOAM-13",
+          "event": "received",
+          "event_id": "SHOT-FOAM-IN",
+          "location": "촬영장비창고"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-12",
+          "document_id": "SHOT-CASE-12",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "SHOT-CASE-C",
+          "vendor": "가상이동촬영함"
+        },
+        {
+          "date": "2026-05-13",
+          "document_id": "SHOT-FOAM-13",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "SHOT-FOAM-C",
+          "vendor": "가상촬영완충"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "SHOT-CASE-C",
+          "items": [
+            {
+              "name": "이동촬영함",
+              "quantity": 3,
+              "unit_price": 92000
+            }
+          ],
+          "sheet_id": "SHOT-CASE-L"
+        },
+        {
+          "header_record_id": "SHOT-FOAM-C",
+          "items": [
+            {
+              "name": "촬영함완충판",
+              "quantity": 6,
+              "unit_price": 13800
+            }
+          ],
+          "sheet_id": "SHOT-FOAM-L"
+        }
+      ],
+      "processing_policy": "품목표의 header_record_id로 표지를 연결한다. 실제 구매는 invoice 또는 order에 received 기록이 있는 서로 다른 document_id로 센다. 같은 번호의 동일 수령 사실이 여러 확인서에 있더라도 구매를 추가하지 않는다. 같은 번호의 동일 원자료는 한 번만 합한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "SHOT-CASE-12",
+        "SHOT-FOAM-13"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SHOT-CASE-12",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 92000
+    },
+    "output": {
+      "supply": 276000,
+      "total": 303600,
+      "vat": 27600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상이동촬영함"
+    },
+    "output": "가상이동촬영함",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SHOT-FOAM-13",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 13800
+    },
+    "output": {
+      "supply": 82800,
+      "total": 91080,
+      "vat": 8280
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상촬영완충"
+    },
+    "output": "가상촬영완충",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "이동촬영함",
+          "unit_price": 92000,
+          "vendor": "가상이동촬영함"
+        },
+        {
+          "item": "촬영함완충판",
+          "unit_price": 13800,
+          "vendor": "가상촬영완충"
+        }
+      ],
+      "grand_total": 394680,
+      "supply_total": 358800,
+      "unique_document_count": 2,
+      "vat_total": 35880,
+      "vendor_totals": [
+        {
+          "supply": 276000,
+          "total": 303600,
+          "vat": 27600,
+          "vendor": "가상이동촬영함"
+        },
+        {
+          "supply": 82800,
+          "total": 91080,
+          "vat": 8280,
+          "vendor": "가상촬영완충"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

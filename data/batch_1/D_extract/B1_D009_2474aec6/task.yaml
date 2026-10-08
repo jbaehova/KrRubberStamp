@@ -1,0 +1,49 @@
+task_id: B1_D009_2474aec6
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 마을 방송의 비상 전원 부품을 교체할 때 참고할 표가 필요합니다. 설치 장소별 구매 자료를 모아 부품마다 가장 낮은 공급가액
+  단가의 업체를 찾고, 이번 물품비도 합산해 주세요. answer.json에는 cheapest_by_item과 grand_total을 담아 주세요.
+input_files:
+- path: inputs/01_회관방송_부품명세.pdf
+  format: pdf
+- path: inputs/02_시장방송_구매내역.xlsx
+  format: xlsx
+- path: inputs/03_강변방송_인수확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-5b3638f8-a780-517f-8aeb-6ca46e4b7815
+scenario_seed: 2626916650361217830
+scenario_hash: 7647ef8d99cbb7b065c226d60b5c2c9021459b32439b2e0c8d0fa58ceeedca76
+authorship:
+  method: individually_written
+  case_id: D009
+  case_sha256: 2474aec68756e326cd9dd2cc0852f354a543d05c718ffb0bd7e5b2b50d70a36d
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item
+- grand_total

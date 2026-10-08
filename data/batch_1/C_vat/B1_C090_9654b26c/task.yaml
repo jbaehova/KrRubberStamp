@@ -1,0 +1,46 @@
+task_id: B1_C090_9654b26c
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상낮은접시는 카드사 입금액을 그대로 매출로 기록했습니다. 카드 영수증의 고객 결제액과 수수료 차감 정산 자료를 대조하세요.
+  매출 공급가액(tax_base), 매출세액(output_vat), 발행세액공제(receipt_credit), 납부액(payable_vat)을 answer.json에
+  정수로 적어 주세요.
+input_files:
+- path: inputs/01_접시소매_사업.hwpx
+  format: hwpx
+- path: inputs/02_고객_카드전표.pdf
+  format: pdf
+- path: inputs/03_카드사_입금정산.xlsx
+  format: xlsx
+- path: inputs/04_기존장부_메모.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - output_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-0b842c1a-3775-5324-8084-7d33a54df748
+scenario_seed: 10832479183531133851
+scenario_hash: 85d7032f9adc07980fa0ead366ab4a997415e464048956241a96d9698202b8dc
+authorship:
+  method: individually_written
+  case_id: C090
+  case_sha256: 9654b26cab2fcb9b6af454e0c1633160cb1f51f89a44e816738a17d505b94c96
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- tax_base
+- output_vat
+- receipt_credit
+- payable_vat

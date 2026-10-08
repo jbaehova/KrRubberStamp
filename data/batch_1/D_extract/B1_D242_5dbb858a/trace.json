@@ -1,0 +1,286 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-13",
+          "document_id": "HARD-HOOK-7",
+          "event": "received",
+          "event_id": "HARD-HOOK-IN",
+          "location": "철물수리점진열대"
+        },
+        {
+          "date": "2026-04-13",
+          "document_id": "HARD-GLUE-8",
+          "event": "received",
+          "event_id": "HARD-GLUE-IN",
+          "location": "철물수리점진열대"
+        },
+        {
+          "date": "2026-04-14",
+          "document_id": "HARD-CAP-9",
+          "event": "received",
+          "event_id": "HARD-CAP-IN",
+          "location": "철물수리점진열대"
+        },
+        {
+          "date": "2026-04-11",
+          "document_id": "HARD-SHELF-10",
+          "event": "cancelled_before_dispatch",
+          "event_id": "HARD-SHELF-STOP",
+          "location": "진열품출고대기"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-07",
+          "document_id": "HARD-HOOK-7",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "HARD-HOOK-C",
+          "vendor": "가상도구진열"
+        },
+        {
+          "date": "2026-04-08",
+          "document_id": "HARD-GLUE-8",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "HARD-GLUE-C",
+          "vendor": "가상접착판매"
+        },
+        {
+          "date": "2026-04-09",
+          "document_id": "HARD-CAP-9",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "HARD-CAP-C",
+          "vendor": "가상보호부속"
+        },
+        {
+          "date": "2026-04-02",
+          "document_id": "HARD-HOOK-Q",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "HARD-Q-C",
+          "vendor": "가상도구진열"
+        },
+        {
+          "date": "2026-04-10",
+          "document_id": "HARD-SHELF-10",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "HARD-SHELF-C",
+          "vendor": "가상도구진열"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "HARD-HOOK-C",
+          "items": [
+            {
+              "name": "공구걸이단형",
+              "quantity": 24,
+              "unit_price": 1850
+            },
+            {
+              "name": "공구걸이고정나사",
+              "quantity": 48,
+              "unit_price": 160
+            }
+          ],
+          "sheet_id": "HARD-HOOK-L"
+        },
+        {
+          "header_record_id": "HARD-GLUE-C",
+          "items": [
+            {
+              "name": "진열접착테이프",
+              "quantity": 4,
+              "unit_price": 5600
+            }
+          ],
+          "sheet_id": "HARD-GLUE-L"
+        },
+        {
+          "header_record_id": "HARD-CAP-C",
+          "items": [
+            {
+              "name": "걸이보호캡",
+              "quantity": 24,
+              "unit_price": 390
+            }
+          ],
+          "sheet_id": "HARD-CAP-L"
+        },
+        {
+          "header_record_id": "HARD-Q-C",
+          "items": [
+            {
+              "name": "공구걸이장형",
+              "quantity": 24,
+              "unit_price": 2100
+            }
+          ],
+          "sheet_id": "HARD-Q-L"
+        },
+        {
+          "header_record_id": "HARD-SHELF-C",
+          "items": [
+            {
+              "name": "추가진열선반",
+              "quantity": 2,
+              "unit_price": 79000
+            }
+          ],
+          "sheet_id": "HARD-SHELF-L"
+        }
+      ],
+      "processing_policy": "첨부는 header_record_id로 표지에 연결한다. invoice 또는 order의 document_id에 received가 있어야 구매다. quote와 cancelled_before_dispatch는 구매 합계에 넣지 않는다. 별도 단가는 공급가액이고 행 세액은 그 10%에서 원 미만을 버린다. 업체명은 NFKC 후 공백과 법인 표기를 제거하고 이름 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "HARD-HOOK-Q",
+        "HARD-SHELF-10"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "HARD-CAP-9",
+        "HARD-GLUE-8",
+        "HARD-HOOK-7"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "HARD-HOOK-7",
+      "includes_vat": false,
+      "quantity": 24,
+      "unit_price": 1850
+    },
+    "output": {
+      "supply": 44400,
+      "total": 48840,
+      "vat": 4440
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "HARD-HOOK-7",
+      "includes_vat": false,
+      "quantity": 48,
+      "unit_price": 160
+    },
+    "output": {
+      "supply": 7680,
+      "total": 8448,
+      "vat": 768
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상도구진열"
+    },
+    "output": "가상도구진열",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "HARD-GLUE-8",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 5600
+    },
+    "output": {
+      "supply": 22400,
+      "total": 24640,
+      "vat": 2240
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상접착판매"
+    },
+    "output": "가상접착판매",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "HARD-CAP-9",
+      "includes_vat": false,
+      "quantity": 24,
+      "unit_price": 390
+    },
+    "output": {
+      "supply": 9360,
+      "total": 10296,
+      "vat": 936
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상보호부속"
+    },
+    "output": "가상보호부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "걸이보호캡",
+          "unit_price": 390,
+          "vendor": "가상보호부속"
+        },
+        {
+          "item": "공구걸이고정나사",
+          "unit_price": 160,
+          "vendor": "가상도구진열"
+        },
+        {
+          "item": "공구걸이단형",
+          "unit_price": 1850,
+          "vendor": "가상도구진열"
+        },
+        {
+          "item": "진열접착테이프",
+          "unit_price": 5600,
+          "vendor": "가상접착판매"
+        }
+      ],
+      "grand_total": 92224,
+      "supply_total": 83840,
+      "unique_document_count": 3,
+      "vat_total": 8384,
+      "vendor_totals": [
+        {
+          "supply": 52080,
+          "total": 57288,
+          "vat": 5208,
+          "vendor": "가상도구진열"
+        },
+        {
+          "supply": 9360,
+          "total": 10296,
+          "vat": 936,
+          "vendor": "가상보호부속"
+        },
+        {
+          "supply": 22400,
+          "total": 24640,
+          "vat": 2240,
+          "vendor": "가상접착판매"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

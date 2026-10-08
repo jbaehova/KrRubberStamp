@@ -1,0 +1,45 @@
+task_id: B1_B081_6e14824b
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상정밀결정연구실의 고액 급여 자료에서 건강보험 보수월액과 국민연금 기준소득 신고액은 각각 별도 통지입니다. 건강보험 근로자
+  부담 상한을 반영한 금액과 장기요양 부담액을 구해 주세요. 국민연금 기준소득월액과 부담액도 함께 산출하여 두 기관의 상한이 서로 다름을 확인합니다.
+input_files:
+- path: inputs/01_연구직정액.pdf
+  format: pdf
+- path: inputs/02_고액기관통지.hwpx
+  format: hwpx
+- path: inputs/03_고액정상등록.xlsx
+  format: xlsx
+- path: inputs/04_기관상한.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+  required:
+  - pension_base_income
+  - national_pension
+  - health_insurance
+  - long_term_care
+  additionalProperties: false
+canary: KrRubberStamp-canary-fe9abe02-9e14-5e69-bd22-be8e971a774d
+scenario_seed: 7932108105615515355
+scenario_hash: bb799a6f3d6fed771bebca2fd7efd359d348b66cef0a6b92f6a06d82e0a7ec95
+authorship:
+  method: individually_written
+  case_id: B081
+  case_sha256: 6e14824bc3359edbad026386d8ab5151b074b1c77af166fe301df656dbc6bfd5
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- pension_base_income
+- national_pension
+- health_insurance
+- long_term_care

@@ -1,0 +1,176 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-05",
+          "document_id": "BIND-122-F",
+          "event": "received",
+          "event_id": "e122-f",
+          "location": "제본 작업대"
+        },
+        {
+          "date": "2026-03-06",
+          "document_id": "BIND-122-K",
+          "event": "received",
+          "event_id": "e122-k",
+          "location": "제본 작업대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-02",
+          "document_id": "BIND-122-F",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h122-frame",
+          "vendor": "가상제본공구"
+        },
+        {
+          "date": "2026-03-02",
+          "document_id": "BIND-122-C",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h122-cut",
+          "vendor": "가상제본공구"
+        },
+        {
+          "date": "2026-03-04",
+          "document_id": "BIND-122-K",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h122-clamp",
+          "vendor": "가상압착부품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h122-frame",
+          "items": [
+            {
+              "name": "제본받침틀",
+              "quantity": 2,
+              "unit_price": 74000
+            }
+          ],
+          "sheet_id": "s122-f"
+        },
+        {
+          "header_record_id": "h122-cut",
+          "items": [
+            {
+              "name": "절단받침",
+              "quantity": 2,
+              "unit_price": 52000
+            }
+          ],
+          "sheet_id": "s122-c"
+        },
+        {
+          "header_record_id": "h122-clamp",
+          "items": [
+            {
+              "name": "압착클램프",
+              "quantity": 8,
+              "unit_price": 5900
+            }
+          ],
+          "sheet_id": "s122-k"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목을 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때만 집계한다. quote, 무인수 자료와 출고 전 취소는 제외하며 동일 document_id의 같은 내용은 한 번만 센다. 별도는 품목별 수량 곱하기 단가의 공급가액에 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 계산한다. 업체는 NFKC 후 공백 제거와 영문 소문자화 및 법인 표시 제거를 하여 정규화 이름 오름차순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "BIND-122-C"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "BIND-122-F",
+        "BIND-122-K"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "BIND-122-F",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 74000
+    },
+    "output": {
+      "supply": 148000,
+      "total": 162800,
+      "vat": 14800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상제본공구"
+    },
+    "output": "가상제본공구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "BIND-122-K",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 5900
+    },
+    "output": {
+      "supply": 47200,
+      "total": 51920,
+      "vat": 4720
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상압착부품"
+    },
+    "output": "가상압착부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "압착클램프",
+          "unit_price": 5900,
+          "vendor": "가상압착부품"
+        },
+        {
+          "item": "제본받침틀",
+          "unit_price": 74000,
+          "vendor": "가상제본공구"
+        }
+      ],
+      "grand_total": 214720,
+      "supply_total": 195200,
+      "unique_document_count": 2,
+      "vat_total": 19520,
+      "vendor_totals": [
+        {
+          "supply": 47200,
+          "total": 51920,
+          "vat": 4720,
+          "vendor": "가상압착부품"
+        },
+        {
+          "supply": 148000,
+          "total": 162800,
+          "vat": 14800,
+          "vendor": "가상제본공구"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

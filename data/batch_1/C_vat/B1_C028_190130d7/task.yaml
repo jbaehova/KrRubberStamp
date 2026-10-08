@@ -1,0 +1,48 @@
+task_id: B1_C028_190130d7
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상길찾는간판 정비소 파일에 계산서와 카드 전표가 함께 있습니다. 같은 정비 작업인지 증빙번호와 차량 인수 기록을 연결해 주세요.
+  고유 거래 수(unique_transaction_count), 매입세액(input_vat), 공제가능 매입세액(deductible_input_vat),
+  간판 공급을 반영한 납부액(payable_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_간판업_확인.pdf
+  format: pdf
+- path: inputs/02_세무기초.hwpx
+  format: hwpx
+- path: inputs/03_간판_설치.xlsx
+  format: xlsx
+- path: inputs/04_정비_카드와인수.pdf
+  format: pdf
+- path: inputs/05_정비_전자계산서.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    input_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - input_vat
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-93db158d-c133-5424-af48-e6615af554b1
+scenario_seed: 1801775028722253922
+scenario_hash: 6612d2196feb4ca2383dd5e11fc913eb97760f7f8e6e7aa2059793c9143b58c6
+authorship:
+  method: individually_written
+  case_id: C028
+  case_sha256: 190130d7a828c062cdedaab09c92101c4b359a68c81e182768617ec23da4ff8d
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- unique_transaction_count
+- input_vat
+- deductible_input_vat
+- payable_vat

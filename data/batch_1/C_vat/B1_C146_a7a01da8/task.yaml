@@ -1,0 +1,51 @@
+task_id: B1_C146_a7a01da8
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상배차나눔의 차량별 공식 분류, 정비 완료, 원본 전표를 연결해 불공제세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat),
+  납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_운송법인.hwpx
+  format: hwpx
+- path: inputs/02_운송매출.pdf
+  format: pdf
+- path: inputs/03_택시증빙.pdf
+  format: pdf
+- path: inputs/04_택시완료.hwpx
+  format: hwpx
+- path: inputs/05_관리차증빙.xlsx
+  format: xlsx
+- path: inputs/06_관리차완료.hwpx
+  format: hwpx
+- path: inputs/07_승합전표.pdf
+  format: pdf
+- path: inputs/08_승합완료.xlsx
+  format: xlsx
+- path: inputs/09_차량배정대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-4da462a1-9f41-5216-bf3b-560c046c6441
+scenario_seed: 12078686808695584414
+scenario_hash: 693b30896d9227bcc7d0bdb80996f839862fc2f4b25e31dac8259e283a65e491
+authorship:
+  method: individually_written
+  case_id: C146
+  case_sha256: a7a01da8297f369ea9c5608f0ff7f978660d42ca7f420ca316960ea9024dabd5
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- noncreditable_vat
+- deductible_input_vat
+- payable_vat

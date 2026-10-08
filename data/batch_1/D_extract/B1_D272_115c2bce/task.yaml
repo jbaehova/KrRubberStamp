@@ -1,0 +1,46 @@
+task_id: B1_D272_115c2bce
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 교체용 온도 센서와 브래킷의 실제 구입 가격 이력을 작성해 주세요. cheapest_by_item을 제출해 주세요.
+input_files:
+- path: inputs/01_전각센서.hwpx
+  format: hwpx
+- path: inputs/02_공백센서.xlsx
+  format: xlsx
+- path: inputs/03_보충센서.pdf
+  format: pdf
+- path: inputs/04_장착브래킷.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-aec8487e-d48c-5b8e-bec4-edb9513b1d6c
+scenario_seed: 1250922964409066625
+scenario_hash: 14e56ef86d36fe8921327762f51eef6ed7da5129a48fb1b35d51f803bd3096a0
+authorship:
+  method: individually_written
+  case_id: D272
+  case_sha256: 115c2bcef6fb2481be1ac64cb759cfe75937fafde2bd7649f47170c462124ea3
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- cheapest_by_item

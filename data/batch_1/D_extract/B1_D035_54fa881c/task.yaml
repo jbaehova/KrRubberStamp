@@ -1,0 +1,56 @@
+task_id: B1_D035_54fa881c
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 시민 온실의 운영용품 지급 기록을 확인해 주세요. 봄철 분갈이부터 여름 관수 준비까지의 명세에서 거래처 이름을 맞춰 업체별
+  세액과 지급액을 모아 주세요. answer.json에는 vendor_totals와 grand_total을 적어 주세요.
+input_files:
+- path: inputs/01_화분받침_명세.pdf
+  format: pdf
+- path: inputs/02_관수호스_대장.xlsx
+  format: xlsx
+- path: inputs/03_작업삽_확인.hwpx
+  format: hwpx
+- path: inputs/04_지지고리_명세.pdf
+  format: pdf
+- path: inputs/05_분사노즐_구매.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-c968049e-d27c-50b7-865e-ccecf51fce60
+scenario_seed: 6123356300124392501
+scenario_hash: 7a7df35e8fc9f9805c975d44f0c1984ea34737d91d66aa551084fe20c51a4cf7
+authorship:
+  method: individually_written
+  case_id: D035
+  case_sha256: 54fa881cae108c35a60df645f2f1636682fedc9f9e08e26fbd15f011d982f0a4
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- grand_total

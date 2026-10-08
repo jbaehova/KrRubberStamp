@@ -1,0 +1,43 @@
+task_id: B1_D008_6c100c82
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 야간 자전거 교실의 다음 기수를 준비합니다. 지난 구매에서 반사 용품마다 가장 낮았던 공급가액 단가와 판매처를 찾아 재주문
+  기준을 남겨 주세요. answer.json에는 cheapest_by_item을 작성해 주세요.
+input_files:
+- path: inputs/01_반사판과팔띠_인수.pdf
+  format: pdf
+- path: inputs/02_반사덮개_추가구매.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-e0e07e70-3891-5b62-82eb-a47047ab0392
+scenario_seed: 7786737511423516032
+scenario_hash: c26756188e0ac59d058f0347cf1ed8a6256daa51e8d65452c02fa65266973adf
+authorship:
+  method: individually_written
+  case_id: D008
+  case_sha256: 6c100c82bf9b9d803d1450f0714eb2e4871ed92b7aecd173ee1929b3a427ed4f
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item

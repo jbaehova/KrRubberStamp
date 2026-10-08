@@ -1,0 +1,45 @@
+task_id: B1_A277_e9f21bfc
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상비둘기측기의 가상노유안이 자동 수집된 아버지 보험과 병원 자료를 가져왔습니다. 실제 부양 확인서를 읽어 가족 공제 인원과
+  두 지출의 공제액을 계산하고 직원 본인 카드 공제는 별도로 유지해 주세요.
+input_files:
+- path: inputs/01_실제부양확인.hwpx
+  format: hwpx
+- path: inputs/02_자동수집부모자료.pdf
+  format: pdf
+- path: inputs/03_본인카드.xlsx
+  format: xlsx
+- path: inputs/04_연간직원자료.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+  required:
+  - eligible_dependents
+  - insurance_credit
+  - medical_credit
+  - credit_card_deduction
+  additionalProperties: false
+canary: KrRubberStamp-canary-873d5f95-afe9-5c1c-bc75-1d644d49b0c2
+scenario_seed: 16857567127766397852
+scenario_hash: ba050bd20db19126cdbe811497b34026137ad15176b1b4e88cfc773c22d63bcd
+authorship:
+  method: individually_written
+  case_id: A277
+  case_sha256: e9f21bfccbd1739c75eccf0736c7525c40885d69095f4b11093e5c98222d2276
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- eligible_dependents
+- insurance_credit
+- medical_credit
+- credit_card_deduction

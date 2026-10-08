@@ -1,0 +1,45 @@
+task_id: B1_B086_1b2a0f14
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상담은분류센터의 직원은 현재 67세이지만 65세 이전부터 같은 고용보험 자격을 계속 유지했습니다. 첨부 기관 통지의 부과
+  상태를 읽어 고용보험 부담액을 구해 주세요. 국민연금과 건강보험 및 장기요양 부담액도 함께 적어 연령만 보고 전체 공제를 지우지 않도록 확인합니다.
+input_files:
+- path: inputs/01_계속직급여.pdf
+  format: pdf
+- path: inputs/02_계속자격.hwpx
+  format: hwpx
+- path: inputs/03_계속월등록.xlsx
+  format: xlsx
+- path: inputs/04_계속공제참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    employment_insurance:
+      type: integer
+  required:
+  - national_pension
+  - health_insurance
+  - long_term_care
+  - employment_insurance
+  additionalProperties: false
+canary: KrRubberStamp-canary-c8074142-78d2-544d-af9a-313aaec5e6dd
+scenario_seed: 1957393568875977295
+scenario_hash: a9bba6aeb1ab7ff715209a729adfdf490ea1d52df53ee8df532a734dd47b579b
+authorship:
+  method: individually_written
+  case_id: B086
+  case_sha256: 1b2a0f14867c9a4f7902e520a1fd38e1678fef5d5b59ae5b9e745ac5008ac5e6
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- national_pension
+- health_insurance
+- long_term_care
+- employment_insurance

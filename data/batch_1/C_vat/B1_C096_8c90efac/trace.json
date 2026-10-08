@@ -1,0 +1,449 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C096-전활동",
+          "date": "2026-03-10",
+          "description": "먼저 발주한 공구 한 묶음을 받아 제작 장비에 투입했다.",
+          "document_ids": [
+            "C096-전카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상정밀손잡이 장비실"
+          },
+          "operation_id": "C096-제작",
+          "participants": [
+            {
+              "name": "가상 장비담당",
+              "organization": "가상정밀손잡이",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C096-전환전"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C096-후활동",
+          "date": "2026-04-17",
+          "description": "별도로 나중 발주한 공구를 받아 두 증빙을 한 구매에 보관했다.",
+          "document_ids": [
+            "C096-후카드",
+            "C096-후계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상정밀손잡이 장비실"
+          },
+          "operation_id": "C096-제작",
+          "participants": [
+            {
+              "name": "가상 장비담당",
+              "organization": "가상정밀손잡이",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C096-전환후"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C096-예약활동",
+          "date": "2026-07-06",
+          "description": "6월 예약 재료가 실제로 7월에 도착해 직원이 받았다.",
+          "document_ids": [
+            "C096-예약계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상정밀손잡이 재료실"
+          },
+          "operation_id": "C096-제작",
+          "participants": [
+            {
+              "name": "가상 재료직원",
+              "organization": "가상정밀손잡이",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C096-예약재료"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 정밀 손잡이 제작",
+          "operation_id": "C096-제작",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C096-전활동",
+          "date": "2026-03-10",
+          "document_id": "C096-전카드",
+          "transaction_id": "C096-전환전"
+        },
+        {
+          "activity_id": "C096-후활동",
+          "date": "2026-04-17",
+          "document_id": "C096-후카드",
+          "transaction_id": "C096-전환후"
+        },
+        {
+          "activity_id": "C096-후활동",
+          "date": "2026-04-17",
+          "document_id": "C096-후계산서",
+          "transaction_id": "C096-전환후"
+        },
+        {
+          "activity_id": "C096-예약활동",
+          "date": "2026-07-06",
+          "document_id": "C096-예약계산서",
+          "transaction_id": "C096-예약재료"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "supplier_status_records": [
+        {
+          "status": "simplified_no_invoice_duty",
+          "supplier_id": "가상날부품",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-03-31"
+        },
+        {
+          "status": "general",
+          "supplier_id": "가상날부품",
+          "valid_from": "2026-04-01",
+          "valid_to": "2026-12-31"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C096-전카드",
+        "purpose": "business",
+        "transaction_id": "C096-전환전"
+      },
+      {
+        "business_related": true,
+        "document_id": "C096-후카드",
+        "purpose": "business",
+        "transaction_id": "C096-전환후"
+      },
+      {
+        "business_related": true,
+        "document_id": "C096-후계산서",
+        "purpose": "business",
+        "transaction_id": "C096-전환후"
+      },
+      {
+        "business_related": true,
+        "document_id": "C096-예약계산서",
+        "purpose": "business",
+        "transaction_id": "C096-예약재료"
+      },
+      {
+        "supplier_general": false,
+        "supplier_id": "가상날부품",
+        "transaction_id": "C096-전환전"
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "가상날부품",
+        "transaction_id": "C096-전환후"
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "가상날부품",
+        "transaction_id": "C096-전환후"
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "가상날부품",
+        "transaction_id": "C096-예약재료"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C096-판매계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C096-손잡이납품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C096-예약계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C096-예약재료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C096-전카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C096-전환전"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C096-후카드",
+        "C096-후계산서"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "C096-전환후"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-14",
+      "transaction_id": "C096-손잡이납품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5200000,
+      "includes_vat": false,
+      "transaction_id": "C096-손잡이납품"
+    },
+    "output": {
+      "gross": 5720000,
+      "supply_base": 5200000,
+      "vat": 520000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 5200000
+    },
+    "output": 520000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "C096-손잡이납품"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-07-06",
+      "transaction_id": "C096-예약재료"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-10",
+      "transaction_id": "C096-전환전"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "C096-전환전"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "C096-전환전",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 100000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-17",
+      "transaction_id": "C096-전환후"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "C096-전환후"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C096-전환후",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 100000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 174000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 420000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 580000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 420000,
+      "prepaid_assessed_vat": 580000
+    },
+    "output": -160000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 100000,
+      "output_vat": 520000,
+      "prepaid_vat": 580000,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 100000,
+      "input_vat": 200000,
+      "net_vat": -160000,
+      "noncreditable_vat": 100000,
+      "output_vat": 520000,
+      "payable_vat": 0,
+      "prepaid_vat": 580000,
+      "receipt_credit": 0,
+      "refund_vat": 160000,
+      "tax_base": 5200000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,43 @@
+task_id: B1_A057_892cf910
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상느티물류는 가상문태은의 사회보험 납부 확인서를 회계 프로그램에 입력합니다. 공적연금 소득공제액과 특별소득공제에 들어갈 보험료
+  합계를 각각 구해 주세요. 보험료를 보장성보험 세액공제 칸으로 옮기는 오류가 없는지 보험료 세액공제액도 확인합니다. 반영 후 과세표준을 적어 주세요.
+input_files:
+- path: inputs/01_급여명세기초.xlsx
+  format: xlsx
+- path: inputs/02_사회보험납부확인.pdf
+  format: pdf
+- path: inputs/03_공제신청범위.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    pension_deduction:
+      type: integer
+    special_income_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - pension_deduction
+  - special_income_deduction
+  - insurance_credit
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-994444f3-8a3d-5536-ab72-e79cd833e96c
+scenario_seed: 9884549130895589353
+scenario_hash: 1b71aea94f8ab280dbf7b9362bc452e592ae61a4ebabeff18a597bf74c15414f
+authorship:
+  method: individually_written
+  case_id: A057
+  case_sha256: 892cf9105fed7fe968e833c78f2151f08e0259ac71ccbaa2d7b80d9a2764964a
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- pension_deduction
+- special_income_deduction
+- insurance_credit
+- tax_base

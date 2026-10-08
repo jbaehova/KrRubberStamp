@@ -1,0 +1,55 @@
+task_id: B1_D024_4b51526b
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 구술 영상 보관 사업의 지급 대장을 확인해 주세요. 보관함 자료는 증빙 보완 과정에서 다시 받은 파일도 있으니 거래 번호와
+  내용을 대조해 업체별 지급액과 실제 구매 건수를 정리해야 합니다. answer.json에는 vendor_totals와 unique_document_count를
+  담아 주세요.
+input_files:
+- path: inputs/01_저장장치_인수.pdf
+  format: pdf
+- path: inputs/02_보관함_원본.xlsx
+  format: xlsx
+- path: inputs/03_식별라벨_인수.hwpx
+  format: hwpx
+- path: inputs/04_보관함_재발급.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-3c8fa4b0-1ec0-581a-810e-976078ce79c7
+scenario_seed: 5427209649483804353
+scenario_hash: c118a3fa22f383d3d69e36e64e376fb46cdc19c344f19048c791473bc6c8204e
+authorship:
+  method: individually_written
+  case_id: D024
+  case_sha256: 4b51526bef0deec151b248caeebc4fb95c0054dab61038ec8826f221c723e5fb
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- unique_document_count

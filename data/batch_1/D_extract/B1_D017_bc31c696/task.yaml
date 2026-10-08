@@ -1,0 +1,43 @@
+task_id: B1_D017_bc31c696
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 다음 환경 봉사자 모집 때 조끼와 모자를 더 주문하려 합니다. 첫 모집과 추가 모집 때의 구매 단가를 품목별로 비교해 주세요.
+  공급가액 단가가 낮았던 업체를 answer.json의 cheapest_by_item에 정리해 주세요.
+input_files:
+- path: inputs/01_첫모집_복장인수.pdf
+  format: pdf
+- path: inputs/02_추가모집_결제대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-5fcb9a2c-e36a-5824-865a-1e5ebf6197db
+scenario_seed: 13560838301604725741
+scenario_hash: a1088876269c5a7c90dfbb9744e97b076957220a007089b7b31e8287a548b0eb
+authorship:
+  method: individually_written
+  case_id: D017
+  case_sha256: bc31c6963fa943edcd4e7abdfe9ba46cc41db5d29346a15fadb8570d22c56f53
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item

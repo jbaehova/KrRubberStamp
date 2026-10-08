@@ -1,0 +1,211 @@
+[
+  {
+    "inputs": {
+      "activities": [],
+      "operations": [],
+      "purchase_links": [],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C071-가정현금영수증"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "C071-가정주문"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C071-기업카드",
+        "C071-기업계산서"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "C071-기업주문"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-09",
+      "transaction_id": "C071-가정주문"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1210000,
+      "includes_vat": true,
+      "transaction_id": "C071-가정주문"
+    },
+    "output": {
+      "gross": 1210000,
+      "supply_base": 1100000,
+      "vat": 110000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1100000
+    },
+    "output": 110000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C071-가정주문"
+    },
+    "output": {
+      "eligible_gross": 1210000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-16",
+      "transaction_id": "C071-기업주문"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5940000,
+      "includes_vat": true,
+      "transaction_id": "C071-기업주문"
+    },
+    "output": {
+      "gross": 5940000,
+      "supply_base": 5400000,
+      "vat": 540000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 5400000
+    },
+    "output": 540000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "C071-기업주문"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 66000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 1210000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 15730,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 15730
+    },
+    "output": 15730,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 15730,
+      "liability_before_credit": 650000
+    },
+    "output": 15730,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 634270,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 634270,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 650000,
+      "prepaid_vat": 0,
+      "receipt_credit": 15730
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 0,
+      "net_vat": 634270,
+      "noncreditable_vat": 0,
+      "output_vat": 650000,
+      "payable_vat": 634270,
+      "prepaid_vat": 0,
+      "receipt_credit": 15730,
+      "refund_vat": 0,
+      "tax_base": 6500000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,65 @@
+task_id: B1_B096_9b7162a8
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상바람색보관실 직원의 월 근로와 주별 출근은 정상 개근입니다. 다만 계약은 주14시간이므로 주휴 칸을 따로 확인해 주세요.
+  취소 계획일 대신 실제 지급 기록을 읽어 국민연금의 적용 기준소득월액과 부담액을 계산하고 기본급 및 실지급액을 작성합니다. 실행 상태로 확정한
+  실제 지급일을 effective_payment_date에 YYYY-MM-DD로 작성해 주세요. 국민연금 상하한은 은행 지급일 대신 공단 통지의
+  보험 부과월을 기준으로 적용합니다.
+input_files:
+- path: inputs/01_14시간계약.pdf
+  format: pdf
+- path: inputs/02_보관일정.xlsx
+  format: xlsx
+- path: inputs/03_보관개근.hwpx
+  format: hwpx
+- path: inputs/04_보관연금.pdf
+  format: pdf
+- path: inputs/05_보관건강.hwpx
+  format: hwpx
+- path: inputs/06_보관고용.xlsx
+  format: xlsx
+- path: inputs/07_보관가족.pdf
+  format: pdf
+- path: inputs/08_보관지급.xlsx
+  format: xlsx
+- path: inputs/09_보관주휴참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - effective_payment_date
+  - base_pay
+  - weekly_holiday_pay
+  - pension_base_income
+  - national_pension
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-fde138ce-4b9d-571a-a5f8-0c49a345b91d
+scenario_seed: 11200842222158192621
+scenario_hash: eb0c352edbdd1daacc8e8ea2af696c9fd7128ea6ba1486f6698fc4b7193d1164
+authorship:
+  method: individually_written
+  case_id: B096
+  case_sha256: 9b7162a80cef9feda25787064975ea230c58e4cea1a43412f808b66c9531d621
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- effective_payment_date
+- base_pay
+- weekly_holiday_pay
+- pension_base_income
+- national_pension
+- net_pay

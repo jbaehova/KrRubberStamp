@@ -1,0 +1,56 @@
+task_id: B1_C202_40bf7ef1
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상바퀴소매의 예정신고 공제 접수, 현재 판매, 두 수령 자료를 대조하여 불공제세액(noncreditable_vat), 공제
+  매입세액(deductible_input_vat), 발행 공제(receipt_credit), 납부액(payable_vat)을 answer.json에
+  적어 주세요.
+input_files:
+- path: inputs/바퀴신고.hwpx
+  format: hwpx
+- path: inputs/소매업무.xlsx
+  format: xlsx
+- path: inputs/분기공제.pdf
+  format: pdf
+- path: inputs/대량판매.pdf
+  format: pdf
+- path: inputs/현금판매.xlsx
+  format: xlsx
+- path: inputs/재고수령.hwpx
+  format: hwpx
+- path: inputs/가구수령.hwpx
+  format: hwpx
+- path: inputs/재고영수.pdf
+  format: pdf
+- path: inputs/가구전표.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-ad6be368-fe01-57e1-a692-38fefa668207
+scenario_seed: 4665587316804936228
+scenario_hash: bfd6849988b1804a403061452a70e80de7a2ae0a75805e3a831fc233c0f54ca0
+authorship:
+  method: individually_written
+  case_id: C202
+  case_sha256: 40bf7ef1feb9e224ad307daf41a15c0805966b3febe994627ca850cd257ef6af
+  source_file: batch_1/C_vat/cases_154_203.json
+answer_fields:
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

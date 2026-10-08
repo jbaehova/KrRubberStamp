@@ -1,0 +1,50 @@
+task_id: B1_D075_d19adcc6
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 건물별 도료 구매를 판매처 계정으로 합쳐 주세요. vendor_totals만 답하며 전각 영문과 법인 표기는 인수 대장의 정규화
+  기준으로 처리합니다.
+input_files:
+- path: inputs/01_동관.pdf
+  format: pdf
+- path: inputs/02_서관.xlsx
+  format: xlsx
+- path: inputs/03_별동.hwpx
+  format: hwpx
+- path: inputs/04_공용부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-41192a38-47f2-5509-a92f-81e73918d4a5
+scenario_seed: 15103627046699363687
+scenario_hash: b98cb56998cd42468585c673e17bfbc1b9b62dba3bb6da954aec819a7e5ce930
+authorship:
+  method: individually_written
+  case_id: D075
+  case_sha256: d19adcc6ca7f6d672339dd9aa8ee9964730b4fcf7b9c24b431d93532bf36d281
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals

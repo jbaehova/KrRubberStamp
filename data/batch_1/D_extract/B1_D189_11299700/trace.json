@@ -1,0 +1,218 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-08",
+          "document_id": "DRAWER-51",
+          "event": "received",
+          "event_id": "DRAWER-IN",
+          "location": "표본정리실"
+        },
+        {
+          "date": "2026-05-08",
+          "document_id": "DRAWER-BASE-53",
+          "event": "received",
+          "event_id": "DRAWER-BASE-IN",
+          "location": "표본정리실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-01",
+          "document_id": "DRAWER-51",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "DRAWER-C",
+          "vendor": "가상표본가구"
+        },
+        {
+          "date": "2026-05-03",
+          "document_id": "DRAWER-BASE-53",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "DRAWER-BASE-C",
+          "vendor": "가상표본가구"
+        },
+        {
+          "date": "2026-05-07",
+          "document_id": "DRAWER-HANDLE-57",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "DRAWER-HANDLE-C",
+          "vendor": "가상보관철물"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "DRAWER-C",
+          "items": [
+            {
+              "name": "표본서랍본체",
+              "quantity": 2,
+              "unit_price": 139000
+            },
+            {
+              "name": "서랍분리판",
+              "quantity": 8,
+              "unit_price": 3200
+            },
+            {
+              "name": "서랍식별판",
+              "quantity": 2,
+              "unit_price": 4500
+            }
+          ],
+          "sheet_id": "DRAWER-L"
+        },
+        {
+          "header_record_id": "DRAWER-BASE-C",
+          "items": [
+            {
+              "name": "표본서랍받침",
+              "quantity": 2,
+              "unit_price": 27300
+            }
+          ],
+          "sheet_id": "DRAWER-BASE-L"
+        },
+        {
+          "header_record_id": "DRAWER-HANDLE-C",
+          "items": [
+            {
+              "name": "추가서랍손잡이",
+              "quantity": 4,
+              "unit_price": 5800
+            }
+          ],
+          "sheet_id": "DRAWER-HANDLE-L"
+        }
+      ],
+      "processing_policy": "첨부는 header_record_id로 표지에 연결한다. 실제 구매 수는 invoice 또는 order 번호에 received가 있는 서로 다른 document_id 수다. 첨부 행 수나 품목 수량과 같지 않다. 발행됐지만 수령 없는 자료는 실제 구매 수에서 제외한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "DRAWER-HANDLE-57"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "DRAWER-51",
+        "DRAWER-BASE-53"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "DRAWER-51",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 139000
+    },
+    "output": {
+      "supply": 278000,
+      "total": 305800,
+      "vat": 27800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "DRAWER-51",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 3200
+    },
+    "output": {
+      "supply": 25600,
+      "total": 28160,
+      "vat": 2560
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "DRAWER-51",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 4500
+    },
+    "output": {
+      "supply": 9000,
+      "total": 9900,
+      "vat": 900
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상표본가구"
+    },
+    "output": "가상표본가구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "DRAWER-BASE-53",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 27300
+    },
+    "output": {
+      "supply": 54600,
+      "total": 60060,
+      "vat": 5460
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상표본가구"
+    },
+    "output": "가상표본가구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "서랍분리판",
+          "unit_price": 3200,
+          "vendor": "가상표본가구"
+        },
+        {
+          "item": "서랍식별판",
+          "unit_price": 4500,
+          "vendor": "가상표본가구"
+        },
+        {
+          "item": "표본서랍받침",
+          "unit_price": 27300,
+          "vendor": "가상표본가구"
+        },
+        {
+          "item": "표본서랍본체",
+          "unit_price": 139000,
+          "vendor": "가상표본가구"
+        }
+      ],
+      "grand_total": 403920,
+      "supply_total": 367200,
+      "unique_document_count": 2,
+      "vat_total": 36720,
+      "vendor_totals": [
+        {
+          "supply": 367200,
+          "total": 403920,
+          "vat": 36720,
+          "vendor": "가상표본가구"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

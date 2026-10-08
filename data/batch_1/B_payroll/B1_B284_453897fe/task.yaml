@@ -1,0 +1,53 @@
+task_id: B1_B284_453897fe
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상두꺼운표본관은 시급 직원에게 두 주 임금과 이번 달 판매 실적금을 한 번에 지급합니다. 소정 근로와 개근 자료로 기본 대가
+  및 별도 주휴수당을 구해 주세요. 승인된 당월 성과금과 시급제의 월 통상임금 출력값도 적고 합산 과세급여가 들어가는 공식 구간에서 소득세를 계산합니다.
+input_files:
+- path: inputs/01_실근로시급약정.pdf
+  format: pdf
+- path: inputs/02_열흘소정.xlsx
+  format: xlsx
+- path: inputs/03_성과확정.hwpx
+  format: hwpx
+- path: inputs/04_고액표원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    variable_allowance:
+      type: integer
+    ordinary_monthly_wage:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - variable_allowance
+  - ordinary_monthly_wage
+  - taxable_pay
+  - income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-9e78b9ff-a428-5355-97d1-b023d3695d23
+scenario_seed: 4987903707276973334
+scenario_hash: 05407050f0eae46aece52d72c7f0cad83c2c6dd2e292a96e44e45d3f1114b8ef
+authorship:
+  method: individually_written
+  case_id: B284
+  case_sha256: 453897fea619151661f78d60d38c63e9abd77837f3106fc874c82ecddfe77c86
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- variable_allowance
+- ordinary_monthly_wage
+- taxable_pay
+- income_tax

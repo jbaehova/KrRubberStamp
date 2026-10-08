@@ -1,0 +1,46 @@
+task_id: B1_C069_120305ea
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상문손잡이는 매장을 쉬기로 하면서 상반기 세금 통장의 정산을 요청했습니다. 영수증 발행 공제와 예정고지 납부를 어떤 순서로
+  반영해야 하는지 자료를 보고 판단하세요. 발행세액공제(receipt_credit), 반영 선납세액(prepaid_vat), 정산액(net_vat),
+  환급액(refund_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_통장정리_인계.hwpx
+  format: hwpx
+- path: inputs/02_손잡이_판매.pdf
+  format: pdf
+- path: inputs/03_재고_인수.xlsx
+  format: xlsx
+- path: inputs/04_예정고지_은행납부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    prepaid_vat:
+      type: integer
+    net_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - prepaid_vat
+  - net_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-34b79a5f-b7d6-5266-a236-93cc8cd3427f
+scenario_seed: 1297887623520190648
+scenario_hash: cf3271f0ce1d3a4ed4693e83ff4eff3ba22d13b2e37c323f0a6f9daea0c81d65
+authorship:
+  method: individually_written
+  case_id: C069
+  case_sha256: 120305eac64c00b8deee12ffcdd0facb14b16b69f04def0f46b5a7025e184d34
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- receipt_credit
+- prepaid_vat
+- net_vat
+- refund_vat

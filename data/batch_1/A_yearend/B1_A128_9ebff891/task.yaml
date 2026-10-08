@@ -1,0 +1,45 @@
+task_id: B1_A128_9ebff891
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상패랭이서점의 가상도예준은 대학에 다니는 두 동생을 부양합니다. 같은 학비를 냈다는 이유로 기본공제 등록까지 같게 처리하지
+  않도록 가족 수와 기본공제액을 구해 주세요. 동생별 등록금의 교육비 세액공제액과 소득세 결정세액도 적습니다.
+input_files:
+- path: inputs/01_부양신청.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_첫동생학비.pdf
+  format: pdf
+- path: inputs/04_둘째동생학비.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    education_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - education_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-21deb731-8d09-5412-9a88-924f4e45c99b
+scenario_seed: 11439134884172251901
+scenario_hash: 2aae9bd391edd8962a014895a6f55fe50fd44ee37817b8da1ba8b3133e4cef48
+authorship:
+  method: individually_written
+  case_id: A128
+  case_sha256: 9ebff891ecddc2fd1dc3f66a795f715d2e292f5a7317576a59b61cfb3bc05563
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- education_credit
+- final_national_tax

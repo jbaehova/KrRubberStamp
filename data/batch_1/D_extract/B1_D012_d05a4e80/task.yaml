@@ -1,0 +1,44 @@
+task_id: B1_D012_d05a4e80
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 야영장 시설 보수 보고서를 마감하려고 합니다. 데크와 수도관, 통행 안내 작업의 구매 자료를 모두 반영해 공급가액과 부가세,
+  지급 총액을 구해 주세요. 구매 건수도 필요합니다. answer.json에는 supply_total과 vat_total, grand_total과
+  unique_document_count를 적어 주세요.
+input_files:
+- path: inputs/01_데크보수_철물명세.pdf
+  format: pdf
+- path: inputs/02_수도보수_인수확인.hwpx
+  format: hwpx
+- path: inputs/03_통행안내_구매대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+    grand_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - supply_total
+  - vat_total
+  - grand_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-af04fb77-f76a-5dcf-923c-438e4288f736
+scenario_seed: 15013398621396154585
+scenario_hash: 914fca448f986823fa90b9960550fb7f96e1c6415147ff2fa2effa59bede7949
+authorship:
+  method: individually_written
+  case_id: D012
+  case_sha256: d05a4e8073a838d9cdff8172fc9e872f5290f20733424639bb73a914c49a5e27
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- supply_total
+- vat_total
+- grand_total
+- unique_document_count

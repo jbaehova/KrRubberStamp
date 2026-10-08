@@ -1,0 +1,85 @@
+task_id: B1_B153_e131cf1f
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상한낮배움터의 시급 마감은 결근 주와 한 휴일의 두 작업을 함께 다룹니다. 소정 일정에서 결근을 반영한 기본급과 실제 개근
+  주휴를 구해 주세요. 수정 승인 카드와 같은 휴일의 야간 카드를 하루로 묶어 휴일수당 및 야간 가산을 계산합니다. 은행 실행일과 별도 보험 부과월을
+  각각 확인하고 신청된 80퍼센트 세액 및 최종 실지급액까지 작성합니다. 실행 상태로 확정한 실제 지급일을 effective_payment_date에
+  YYYY-MM-DD로 작성해 주세요. 국민연금 상하한은 은행 지급일 대신 공단 통지의 보험 부과월을 기준으로 적용합니다.
+input_files:
+- path: inputs/01_배움시급.hwpx
+  format: hwpx
+- path: inputs/02_배움결근.xlsx
+  format: xlsx
+- path: inputs/03_배움개근.pdf
+  format: pdf
+- path: inputs/04_휴일오전.hwpx
+  format: hwpx
+- path: inputs/05_휴일밤.xlsx
+  format: xlsx
+- path: inputs/06_배움은행.pdf
+  format: pdf
+- path: inputs/07_배움연금.hwpx
+  format: hwpx
+- path: inputs/08_배움등록.xlsx
+  format: xlsx
+- path: inputs/09_배움공식.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - effective_payment_date
+  - base_pay
+  - weekly_holiday_pay
+  - holiday_pay
+  - night_pay
+  - pension_base_income
+  - national_pension
+  - income_tax
+  - local_income_tax
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-2f730cee-5595-5898-8495-46e4f8536e3b
+scenario_seed: 16226978668701246389
+scenario_hash: 5019dbb52154f01c99855a8f6403bf507d797a77877cba38d2eeb6b846e96303
+authorship:
+  method: individually_written
+  case_id: B153
+  case_sha256: e131cf1ffdc763b5404cc82bd319aa28686e619438f4e86360dda7835bb2b342
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- effective_payment_date
+- base_pay
+- weekly_holiday_pay
+- holiday_pay
+- night_pay
+- pension_base_income
+- national_pension
+- income_tax
+- local_income_tax
+- gross_pay
+- net_pay

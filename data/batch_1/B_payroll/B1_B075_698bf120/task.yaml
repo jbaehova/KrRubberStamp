@@ -1,0 +1,49 @@
+task_id: B1_B075_698bf120
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상온길제본실의 계속근로 직원에게 국민연금 부과 종료 통지가 도착했습니다. 연금 공제는 해당 통지 상태로 처리하되 건강보험과
+  장기요양 및 고용보험까지 모두 없애지 않도록 각 부담액을 구해 주세요. 전체 공제 합계도 함께 확인합니다.
+input_files:
+- path: inputs/01_제본정액.pdf
+  format: pdf
+- path: inputs/02_연금종료.hwpx
+  format: hwpx
+- path: inputs/03_유지공제.xlsx
+  format: xlsx
+- path: inputs/04_종료후참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    employment_insurance:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - national_pension
+  - health_insurance
+  - long_term_care
+  - employment_insurance
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-6cbb3a5a-5659-5c95-b749-337bf20891d6
+scenario_seed: 7605437519536278646
+scenario_hash: 513a4af26741d17a38361df00e6d381aadcf349c03cf598743a1e0677b8a146f
+authorship:
+  method: individually_written
+  case_id: B075
+  case_sha256: 698bf120f1634c762eca559e9b5c604746aa8ae7690f04096878cf939469b4e1
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- national_pension
+- health_insurance
+- long_term_care
+- employment_insurance
+- total_deductions

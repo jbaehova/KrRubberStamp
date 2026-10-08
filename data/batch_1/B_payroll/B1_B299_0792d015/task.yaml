@@ -1,0 +1,59 @@
+task_id: B1_B299_0792d015
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상오목한분류실은 근로자의 날 밤 실제 작업을 최종 승인했습니다. 소정 기본 대가와 근로자의 날 별도 유급액을 구해 주세요.
+  상시 세 명 사업장의 실제 휴일 대가와 야간 가산을 계산하고 실행일은 effective_payment_date에 YYYY-MM-DD로 적어 주세요.
+input_files:
+- path: inputs/01_오목한계약.pdf
+  format: pdf
+- path: inputs/02_낮소정집계.xlsx
+  format: xlsx
+- path: inputs/03_노동절유급.hwpx
+  format: hwpx
+- path: inputs/04_높은초안.pdf
+  format: pdf
+- path: inputs/05_유효밤승인.xlsx
+  format: xlsx
+- path: inputs/06_취소계획.hwpx
+  format: hwpx
+- path: inputs/07_실제은행.pdf
+  format: pdf
+- path: inputs/08_기관가족.xlsx
+  format: xlsx
+- path: inputs/09_노동절가산.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    effective_payment_date:
+      type: string
+  required:
+  - base_pay
+  - paid_holiday_pay
+  - holiday_pay
+  - night_pay
+  - effective_payment_date
+  additionalProperties: false
+canary: KrRubberStamp-canary-c710fbbe-84ee-565c-884c-b95cf7d6ff55
+scenario_seed: 545727295684266135
+scenario_hash: 0187e7f776697bac7839d2fc111890bda8e59de708db2d13b031e7151f607b74
+authorship:
+  method: individually_written
+  case_id: B299
+  case_sha256: 0792d015837ec8976974f86187a0b31be3586d6fc912e7ec2d7a2ff970274973
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- base_pay
+- paid_holiday_pay
+- holiday_pay
+- night_pay
+- effective_payment_date

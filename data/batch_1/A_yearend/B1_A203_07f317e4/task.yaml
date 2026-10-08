@@ -1,0 +1,63 @@
+task_id: B1_A203_07f317e4
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상봄맞이부속의 가상복하은 가족 자료를 승인해 주세요. 직원 소득과 가족의 관계 및 나이, 장애인 증명 및 최종 신청자를 확인합니다.
+  공제대상 가족 수와 추가공제액, 교육비 및 의료비 세액공제액과 개인 연금계좌 세액공제액을 적고 원천징수 누계로 총 정산액을 계산해 주세요.
+input_files:
+- path: inputs/01_직원신청.hwpx
+  format: hwpx
+- path: inputs/02_지급원천.xlsx
+  format: xlsx
+- path: inputs/03_부모취업.pdf
+  format: pdf
+- path: inputs/04_손자등록.hwpx
+  format: hwpx
+- path: inputs/05_동생배정.pdf
+  format: pdf
+- path: inputs/06_부모특수교육.pdf
+  format: pdf
+- path: inputs/07_손자대학원.pdf
+  format: pdf
+- path: inputs/08_동생진료.hwpx
+  format: hwpx
+- path: inputs/09_개인연금.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    additional_deduction:
+      type: integer
+    education_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    pension_account_credit:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - eligible_dependents
+  - additional_deduction
+  - education_credit
+  - medical_credit
+  - pension_account_credit
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-a0bda332-d79d-524b-a962-bace6733f2ff
+scenario_seed: 572827847986008601
+scenario_hash: 4ce754d696cb1fb8bc07c5b83ebeb10f517994acb23c7ed3637eeada2f26e127
+authorship:
+  method: individually_written
+  case_id: A203
+  case_sha256: 07f317e48ca852195559b5b0cce64f08810d5ea2b27aaca41ae4d18b5f231ef2
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- eligible_dependents
+- additional_deduction
+- education_credit
+- medical_credit
+- pension_account_credit
+- settlement_total

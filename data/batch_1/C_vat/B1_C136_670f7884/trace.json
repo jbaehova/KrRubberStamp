@@ -1,0 +1,286 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "C136-간식사용",
+          "date": "2026-03-06",
+          "description": "포장 직원 둘이 야간 준비 작업 중 간식을 먹었다.",
+          "document_ids": [
+            "C136-일반영수"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상포장 직원 휴게실"
+          },
+          "operation_id": "C136-포장",
+          "participants": [
+            {
+              "name": "가상정포장",
+              "organization": "가상밤샘포장",
+              "role": "employee"
+            },
+            {
+              "name": "가상주포장",
+              "organization": "가상밤샘포장",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C136-간식"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C136-테이프인수",
+          "date": "2026-03-07",
+          "description": "직원이 포장 용역 준비용 테이프를 작업대에서 받았다.",
+          "document_ids": [
+            "C136-테이프계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상포장 작업대"
+          },
+          "operation_id": "C136-포장",
+          "participants": [
+            {
+              "name": "가상정포장",
+              "organization": "가상밤샘포장",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C136-테이프"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 포장 용역 준비",
+          "operation_id": "C136-포장",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C136-간식사용",
+          "date": "2026-03-06",
+          "document_id": "C136-일반영수",
+          "transaction_id": "C136-간식"
+        },
+        {
+          "activity_id": "C136-테이프인수",
+          "date": "2026-03-07",
+          "document_id": "C136-테이프계산서",
+          "transaction_id": "C136-테이프"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C136-일반영수",
+        "purpose": "business",
+        "transaction_id": "C136-간식"
+      },
+      {
+        "business_related": true,
+        "document_id": "C136-테이프계산서",
+        "purpose": "business",
+        "transaction_id": "C136-테이프"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C136-일반영수"
+      ],
+      "evidence": [
+        "receipt"
+      ],
+      "transaction_id": "C136-간식"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C136-테이프계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C136-테이프"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-06",
+      "transaction_id": "C136-간식"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 99000,
+      "includes_vat": true,
+      "transaction_id": "C136-간식"
+    },
+    "output": {
+      "gross": 99000,
+      "supply_base": 90000,
+      "vat": 9000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C136-간식",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 9000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-07",
+      "transaction_id": "C136-테이프"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 363000,
+      "includes_vat": true,
+      "transaction_id": "C136-테이프"
+    },
+    "output": {
+      "gross": 363000,
+      "supply_base": 330000,
+      "vat": 33000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C136-테이프",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 33000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 492000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -33000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -33000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -33000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 33000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 33000,
+      "input_vat": 42000,
+      "net_vat": -33000,
+      "noncreditable_vat": 9000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 33000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

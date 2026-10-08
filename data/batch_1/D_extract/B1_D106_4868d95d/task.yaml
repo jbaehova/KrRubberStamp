@@ -1,0 +1,43 @@
+task_id: B1_D106_4868d95d
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 음향실 물품 지급을 승인하려고 합니다. 여러 물품을 납품한 판매처도 한 줄로 모아 vendor_totals를 작성해 주세요.
+input_files:
+- path: inputs/01_음향실인수목록.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-8dbe9f45-c82e-5c30-9ff7-2374df1e0a95
+scenario_seed: 5217659165503212449
+scenario_hash: 80a44980eb21791260d0f9fe870f4ce0f8ff121984c4ebbd4f34066c9b76f724
+authorship:
+  method: individually_written
+  case_id: D106
+  case_sha256: 4868d95ddee14ba146bdf004eb01389cbbe52fa5a8b862d905ef90c9f0abc4fa
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals

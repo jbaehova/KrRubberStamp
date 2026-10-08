@@ -1,0 +1,69 @@
+task_id: B1_B043_bad9d671
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상진주전시실의 가상채가람은 주 25시간 시급제입니다. 한 주의 무급 결근과 나머지 주 출근을 확인해 기본급 및 추가 주휴수당을
+  구해 주세요. 광복절과 대체공휴일의 서로 다른 승인 근로 기록은 일별 8시간 기준으로 나누고 야간 부분도 반영하여 휴일수당과 야간수당을 계산해
+  주세요. 총지급액과 실지급액까지 작성해 주세요. 대체공휴일에 별도로 지급할 기본 유급휴일 임금은 paid_holiday_pay에 작성하고 총지급액에
+  합산해 주세요.
+input_files:
+- path: inputs/01_전시시급약정.pdf
+  format: pdf
+- path: inputs/02_무급결근.xlsx
+  format: xlsx
+- path: inputs/03_주별출근.hwpx
+  format: hwpx
+- path: inputs/04_첫휴일카드.pdf
+  format: pdf
+- path: inputs/05_두번째휴일.xlsx
+  format: xlsx
+- path: inputs/06_휴일인원확인.hwpx
+  format: hwpx
+- path: inputs/07_공단기준.xlsx
+  format: xlsx
+- path: inputs/08_은행가족.pdf
+  format: pdf
+- path: inputs/09_휴일주휴기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - holiday_pay
+  - night_pay
+  - gross_pay
+  - net_pay
+  - paid_holiday_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-ca2c41c1-a3c1-534d-96c1-d007c8d5dd0c
+scenario_seed: 13464028342939126877
+scenario_hash: 20a51ca521789c8c8533af4db51052dd9bfea8a2629c5d2341e28573b7c1bda7
+authorship:
+  method: individually_written
+  case_id: B043
+  case_sha256: bad9d67142ad8c5d5192a6384fe4b396e460729dd4819e864ac3a82391588866
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- holiday_pay
+- night_pay
+- gross_pay
+- net_pay
+- paid_holiday_pay

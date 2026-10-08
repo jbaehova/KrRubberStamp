@@ -1,0 +1,55 @@
+task_id: B1_A242_83d54d00
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상은솔제본 가상변하온의 마감 전표를 정리해 주세요. 입사 전 카드 결제와 형제에게 배정한 부모 자료를 확인하고, 공익단체
+  지정 시작 전후의 기부를 나눕니다. 카드 공제와 부모 의료비 및 기부금 공제액을 계산한 뒤 전체 차감징수액을 적어 주세요.
+input_files:
+- path: inputs/01_입사기록.hwpx
+  format: hwpx
+- path: inputs/02_가족합의.pdf
+  format: pdf
+- path: inputs/03_입사전카드.xlsx
+  format: xlsx
+- path: inputs/04_재직카드.pdf
+  format: pdf
+- path: inputs/05_부모진료.hwpx
+  format: hwpx
+- path: inputs/06_지정공고.pdf
+  format: pdf
+- path: inputs/07_기부지급.xlsx
+  format: xlsx
+- path: inputs/08_원천누계.pdf
+  format: pdf
+- path: inputs/09_직원접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    credit_card_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+    donation_credit:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - credit_card_deduction
+  - medical_credit
+  - donation_credit
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-83e0ab1c-6c65-567a-b047-fbe9fb6c8881
+scenario_seed: 9499583653938698287
+scenario_hash: 8c46e410fd82f3d8dbe1d322611924b0b6ebb62529af727ad89b9e3fc78ca590
+authorship:
+  method: individually_written
+  case_id: A242
+  case_sha256: 83d54d00971f982fd27ca0c8c8ddc8d2d41e35ea630a3017adf0b1a34ee559f5
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- credit_card_deduction
+- medical_credit
+- donation_credit
+- settlement_total

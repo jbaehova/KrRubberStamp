@@ -1,0 +1,441 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "ACT-C048-직원식사",
+          "date": "2026-05-04",
+          "description": "현장 수리 직원들이 작업 중 점심을 먹었다. 거래처 손님이나 대표 가족은 참석하지 않았다.",
+          "document_ids": [
+            "가상-C048-직원카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상따뜻한식당"
+          },
+          "operation_id": "OPS-C048",
+          "participants": [
+            {
+              "name": "가상 수리직원하나",
+              "organization": "가상꼼꼼수리",
+              "role": "employee"
+            },
+            {
+              "name": "가상 수리직원둘",
+              "organization": "가상꼼꼼수리",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C048-작업식사"
+        },
+        {
+          "action": "meal",
+          "activity_id": "ACT-C048-상담식사",
+          "date": "2026-05-11",
+          "description": "다음 작업대 주문을 상담한 뒤 대표와 거래처 담당자가 저녁을 함께 먹었고 대표가 결제했다.",
+          "document_ids": [
+            "가상-C048-상담카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상따뜻한식당"
+          },
+          "operation_id": "OPS-C048",
+          "participants": [
+            {
+              "name": "가상 수리대표",
+              "organization": "가상꼼꼼수리",
+              "role": "proprietor"
+            },
+            {
+              "name": "가상 주문담당",
+              "organization": "가상직각회사",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "가상-C048-상담식사"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C048-공구",
+          "date": "2026-03-21",
+          "description": "직원이 작업대 수리에 쓸 공구를 받아 보관했다.",
+          "document_ids": [
+            "가상-C048-공구카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상꼼꼼수리 공구실"
+          },
+          "operation_id": "OPS-C048",
+          "participants": [
+            {
+              "name": "가상 공구직원",
+              "organization": "가상꼼꼼수리",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C048-공구입고"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 작업대 수리 용역",
+          "operation_id": "OPS-C048",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C048-직원식사",
+          "date": "2026-05-04",
+          "document_id": "가상-C048-직원카드",
+          "transaction_id": "가상-C048-작업식사"
+        },
+        {
+          "activity_id": "ACT-C048-상담식사",
+          "date": "2026-05-11",
+          "document_id": "가상-C048-상담카드",
+          "transaction_id": "가상-C048-상담식사"
+        },
+        {
+          "activity_id": "ACT-C048-공구",
+          "date": "2026-03-21",
+          "document_id": "가상-C048-공구카드",
+          "transaction_id": "가상-C048-공구입고"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C048-직원카드",
+        "purpose": "business",
+        "transaction_id": "가상-C048-작업식사"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C048-상담카드",
+        "purpose": "hospitality",
+        "transaction_id": "가상-C048-상담식사"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C048-공구카드",
+        "purpose": "business",
+        "transaction_id": "가상-C048-공구입고"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C048-공구카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C048-공구입고"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C048-상담카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C048-상담식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C048-수리계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C048-수리납품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C048-직원카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C048-작업식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-21",
+      "transaction_id": "가상-C048-공구입고"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "가상-C048-공구입고"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "가상-C048-공구입고",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 100000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-11",
+      "transaction_id": "가상-C048-상담식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 770000,
+      "includes_vat": true,
+      "transaction_id": "가상-C048-상담식사"
+    },
+    "output": {
+      "gross": 770000,
+      "supply_base": 700000,
+      "vat": 70000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "가상-C048-상담식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 70000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-09",
+      "transaction_id": "가상-C048-수리납품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 23000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C048-수리납품"
+    },
+    "output": {
+      "gross": 25300000,
+      "supply_base": 23000000,
+      "vat": 2300000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 23000000
+    },
+    "output": 2300000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "가상-C048-수리납품"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-04",
+      "transaction_id": "가상-C048-작업식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 550000,
+      "includes_vat": true,
+      "transaction_id": "가상-C048-작업식사"
+    },
+    "output": {
+      "gross": 550000,
+      "supply_base": 500000,
+      "vat": 50000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C048-작업식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 50000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 194000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 2250000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 2250000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 2250000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 50000,
+      "output_vat": 2300000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 50000,
+      "input_vat": 220000,
+      "net_vat": 2250000,
+      "noncreditable_vat": 170000,
+      "output_vat": 2300000,
+      "payable_vat": 2250000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 23000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

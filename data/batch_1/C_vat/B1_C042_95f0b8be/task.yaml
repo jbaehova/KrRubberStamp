@@ -1,0 +1,62 @@
+task_id: B1_C042_95f0b8be
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상낮잠침구 법인은 매장 카드 판매와 기업 주문 계산서를 따로 관리합니다. 카드 담당자가 기업 주문 대금도 다시 매출로 올린
+  자료가 있으니 주문 식별자를 대조해 주세요. 이번 기간 실제 거래 수(unique_transaction_count), 매출 공급가액(tax_base),
+  매출세액(output_vat)을 구하고 매입 공제와 사업자 형태를 반영한 영수증 발행세액공제(receipt_credit) 및 납부액(payable_vat)을
+  answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_법인매장_인계.hwpx
+  format: hwpx
+- path: inputs/02_전년_신고.pdf
+  format: pdf
+- path: inputs/03_납부계좌_확인.xlsx
+  format: xlsx
+- path: inputs/04_가정용_침구.pdf
+  format: pdf
+- path: inputs/05_숙소_계산서.pdf
+  format: pdf
+- path: inputs/06_숙소_결제.xlsx
+  format: xlsx
+- path: inputs/07_이불_입고.pdf
+  format: pdf
+- path: inputs/08_창고_수령.hwpx
+  format: hwpx
+- path: inputs/09_숙소계산서_스캔.png
+  format: png
+  duplicate_of: inputs/05_숙소_계산서.pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - tax_base
+  - output_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-ff97accc-07b4-5303-8dec-53b29314efe3
+scenario_seed: 10804338634341286239
+scenario_hash: d1d767857dae80db7fe628b4e5417708d16e4942a6919ea1f216147f5b35ddd2
+authorship:
+  method: individually_written
+  case_id: C042
+  case_sha256: 95f0b8be7cf1015f249119cfe38abc9b71904f8da8dda2e15f2f1f629074b133
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- unique_transaction_count
+- tax_base
+- output_vat
+- receipt_credit
+- payable_vat

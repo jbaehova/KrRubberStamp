@@ -1,0 +1,42 @@
+task_id: B1_A071_25903a5b
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상나루출판은 가상권다인에게 아버지의 의료비 자료가 자동 수집된 이유를 확인했습니다. 아버지는 직원이 부양하는 가족이 아니며
+  진료비도 직접 결제했습니다. 공제대상 가족 수와 기본공제액을 확정하고 의료비 세액공제액을 적어 주세요. 자동 수집됐다는 사실만으로 부양을 인정하지
+  마세요.
+input_files:
+- path: inputs/01_확인회신.hwpx
+  format: hwpx
+- path: inputs/02_급여마감.xlsx
+  format: xlsx
+- path: inputs/03_가족생계확인.pdf
+  format: pdf
+- path: inputs/04_진료비결제확인.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - medical_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-d446d719-1330-59cd-ab76-caa327684993
+scenario_seed: 2706727539220769403
+scenario_hash: 4dd535c096905e2f2e0db5d5b9fc9a6b9820b17aaed978e9254f8e246d85f216
+authorship:
+  method: individually_written
+  case_id: A071
+  case_sha256: 25903a5b27056a7bea5b4197b6ba3381ebef5d04d7baa960b1a28a1ecfaec441
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- medical_credit

@@ -1,0 +1,56 @@
+task_id: B1_C297_120f5cde
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상버튼간식의 현재 재고와 다음 달 반입 자료를 확인해 거래 수(unique_transaction_count), 공제 매입세액(deductible_input_vat),
+  발행 공제(receipt_credit), 환급세액(refund_vat)을 answer.json에 써 주세요.
+input_files:
+- path: inputs/판매카드.pdf
+  format: pdf
+- path: inputs/현재계산서.hwpx
+  format: hwpx
+- path: inputs/다음계산서.pdf
+  format: pdf
+- path: inputs/다음스캔.png
+  format: png
+  duplicate_of: inputs/다음계산서.pdf
+- path: inputs/현재인수.xlsx
+  format: xlsx
+- path: inputs/다음인수.hwpx
+  format: hwpx
+- path: inputs/자동판매업.pdf
+  format: pdf
+- path: inputs/공제이력.xlsx
+  format: xlsx
+- path: inputs/마감조건.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - deductible_input_vat
+  - receipt_credit
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-c41db7ed-9a3d-5c9a-8836-02eb8245e777
+scenario_seed: 1301360928928683163
+scenario_hash: 70d413a1e7c0ea7d50ef966219d22dde043fbc45a540b51faa1f8f357d8c65f1
+authorship:
+  method: individually_written
+  case_id: C297
+  case_sha256: 120f5cdeb55dd49b38f5d2316cfc5a8d9d63485794ce1ed73c4b43b69a98ba3d
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- unique_transaction_count
+- deductible_input_vat
+- receipt_credit
+- refund_vat

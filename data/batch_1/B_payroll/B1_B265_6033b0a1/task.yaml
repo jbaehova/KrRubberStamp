@@ -1,0 +1,39 @@
+task_id: B1_B265_6033b0a1
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상소리보관국의 지급대장은 날짜와 금액을 동시에 저장합니다. 유효한 은행 실행 기록의 날짜를 effective_payment_date에
+  YYYY-MM-DD로 적고 총지급액과 실지급액도 계산해 주세요.
+input_files:
+- path: inputs/01_팔월약정.hwpx
+  format: hwpx
+- path: inputs/02_은행실행.pdf
+  format: pdf
+- path: inputs/03_공제등록.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - effective_payment_date
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-b6591abb-f6e6-52ce-9f34-90912e3c61f1
+scenario_seed: 6932078460374688371
+scenario_hash: abaa1b77e931affe9d22bd240f6878139cd1e2542ebdf68da595a49cfc40f663
+authorship:
+  method: individually_written
+  case_id: B265
+  case_sha256: 6033b0a1c9c522739c4873677606634d34351c09289e3aaa3228136742acd632
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- effective_payment_date
+- gross_pay
+- net_pay

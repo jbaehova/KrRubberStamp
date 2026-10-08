@@ -1,0 +1,45 @@
+task_id: B1_D117_0be9bbc2
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 사진 복구 작업에서 사용한 같은 규격 종이의 실제 단가를 확인해 주세요. cheapest_by_item과 전체 결제 grand_total이
+  필요합니다.
+input_files:
+- path: inputs/01_사진용지구매대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-80130f5f-6e56-5c26-8675-3b29c5aa0ea2
+scenario_seed: 858423648435850976
+scenario_hash: e38ce081effcf54696f5f172265372baa740c3a3b75360d8249b40c751524cd0
+authorship:
+  method: individually_written
+  case_id: D117
+  case_sha256: 0be9bbc297d04ee0a6c1e9a89768ff94883f51d102eb094cc7670e2aa58e8534
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- grand_total

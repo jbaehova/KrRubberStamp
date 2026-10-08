@@ -1,0 +1,72 @@
+task_id: B1_B048_eb0edc09
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상연못실험실에 10월 19일 입사한 가상민해준의 첫 시급 급여입니다. 소정 일정에서 무급 결근을 빼 기본급을 구하고 주별
+  예정일과 출근일로 주휴수당을 판단해 주세요. 평일 추가 근로 승인 시각의 휴게와 야간을 반영한 연장수당 및 야간수당도 필요합니다. 공단 확인의
+  첫 달 부과 상태를 사용하여 국민연금과 건강보험 및 고용보험 공제액과 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_입사시급.pdf
+  format: pdf
+- path: inputs/02_무급결근.hwpx
+  format: hwpx
+- path: inputs/03_주별개근.xlsx
+  format: xlsx
+- path: inputs/04_추가야간카드.pdf
+  format: pdf
+- path: inputs/05_사업장일정.hwpx
+  format: hwpx
+- path: inputs/06_첫달연금건강.pdf
+  format: pdf
+- path: inputs/07_고용통지.xlsx
+  format: xlsx
+- path: inputs/08_가족은행확인.pdf
+  format: pdf
+- path: inputs/09_첫급여계산기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    employment_insurance:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - overtime_pay
+  - night_pay
+  - national_pension
+  - health_insurance
+  - employment_insurance
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-885ac708-7af7-5014-bcce-11e2590af328
+scenario_seed: 16937717179895058795
+scenario_hash: c191008a16ba2cc20b6d24f15d9ac1d534d1a46e7660d54fa2f747d3ded8d030
+authorship:
+  method: individually_written
+  case_id: B048
+  case_sha256: eb0edc0905ad116b1bc21a1c14c08cbf25989e75f34aff876ffff0a7532b1320
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- overtime_pay
+- night_pay
+- national_pension
+- health_insurance
+- employment_insurance
+- net_pay

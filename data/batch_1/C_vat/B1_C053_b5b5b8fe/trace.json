@@ -1,0 +1,404 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C053-포장",
+          "date": "2026-02-26",
+          "description": "직원이 주문 펜을 넣을 종이 포장 상자를 받아 포장대에서 사용했다.",
+          "document_ids": [
+            "가상-C053-포장카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상오래쓰는펜 포장대"
+          },
+          "operation_id": "OPS-C053",
+          "participants": [
+            {
+              "name": "가상 포장직원",
+              "organization": "가상오래쓰는펜",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C053-포장재"
+        },
+        {
+          "action": "meal",
+          "activity_id": "ACT-C053-식사",
+          "date": "2026-04-08",
+          "description": "기업 주문 담당자와 대표가 주문 상담 뒤 점심을 함께 먹었고 대표가 비용을 냈다.",
+          "document_ids": [
+            "가상-C053-식당카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상국수집"
+          },
+          "operation_id": "OPS-C053",
+          "participants": [
+            {
+              "name": "가상 펜대표",
+              "organization": "가상오래쓰는펜",
+              "role": "proprietor"
+            },
+            {
+              "name": "가상 문구담당",
+              "organization": "가상배움회사",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "가상-C053-담당자식사"
+        }
+      ],
+      "operations": [
+        {
+          "description": "필기구 소매와 기업 주문 판매",
+          "operation_id": "OPS-C053",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C053-포장",
+          "date": "2026-02-26",
+          "document_id": "가상-C053-포장카드",
+          "transaction_id": "가상-C053-포장재"
+        },
+        {
+          "activity_id": "ACT-C053-식사",
+          "date": "2026-04-08",
+          "document_id": "가상-C053-식당카드",
+          "transaction_id": "가상-C053-담당자식사"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C053-포장카드",
+        "purpose": "business",
+        "transaction_id": "가상-C053-포장재"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C053-식당카드",
+        "purpose": "hospitality",
+        "transaction_id": "가상-C053-담당자식사"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C053-현금영수증"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "가상-C053-개인펜주문"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C053-기업계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C053-기업펜주문"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C053-식당카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C053-담당자식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C053-포장카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C053-포장재"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-12",
+      "transaction_id": "가상-C053-개인펜주문"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100330,
+      "includes_vat": true,
+      "transaction_id": "가상-C053-개인펜주문"
+    },
+    "output": {
+      "gross": 1100330,
+      "supply_base": 1000300,
+      "vat": 100030
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1000300
+    },
+    "output": 100030,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "가상-C053-개인펜주문"
+    },
+    "output": {
+      "eligible_gross": 1100330
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-07",
+      "transaction_id": "가상-C053-기업펜주문"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1650000,
+      "includes_vat": true,
+      "transaction_id": "가상-C053-기업펜주문"
+    },
+    "output": {
+      "gross": 1650000,
+      "supply_base": 1500000,
+      "vat": 150000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1500000
+    },
+    "output": 150000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "가상-C053-기업펜주문"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-08",
+      "transaction_id": "가상-C053-담당자식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 110000,
+      "includes_vat": true,
+      "transaction_id": "가상-C053-담당자식사"
+    },
+    "output": {
+      "gross": 110000,
+      "supply_base": 100000,
+      "vat": 10000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "가상-C053-담당자식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 10000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-26",
+      "transaction_id": "가상-C053-포장재"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 484000,
+      "includes_vat": true,
+      "transaction_id": "가상-C053-포장재"
+    },
+    "output": {
+      "gross": 484000,
+      "supply_base": 440000,
+      "vat": 44000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C053-포장재",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 44000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 47000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 1100330,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 14304,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 14304
+    },
+    "output": 14304,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 14304,
+      "liability_before_credit": 250030
+    },
+    "output": 14304,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 235726,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 235726,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 250030,
+      "prepaid_vat": 0,
+      "receipt_credit": 14304
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 54000,
+      "net_vat": 235726,
+      "noncreditable_vat": 54000,
+      "output_vat": 250030,
+      "payable_vat": 235726,
+      "prepaid_vat": 0,
+      "receipt_credit": 14304,
+      "refund_vat": 0,
+      "tax_base": 2500300,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,45 @@
+task_id: B1_B037_a7b353d0
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상민들레채색실은 가상성하린의 통상시급을 화면에 원 단위로 표시합니다. 연장 95분은 승인된 합계입니다. 표시용으로 버린 시급을
+  계산식에 넣지 말고 원래 월 통상임금과 산정 시간의 비율을 유지해 연장수당을 구해 주세요. 표시 시급과 월 통상임금 및 총지급액도 함께 적어 주세요.
+input_files:
+- path: inputs/01_분수시급약정.hwpx
+  format: hwpx
+- path: inputs/02_95분승인.pdf
+  format: pdf
+- path: inputs/03_지급공제마감.xlsx
+  format: xlsx
+- path: inputs/04_단수원문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    ordinary_hourly_wage_floor:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - ordinary_hourly_wage_floor
+  - overtime_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-9350671d-84a0-5198-841d-77dd3c33449f
+scenario_seed: 12084094380538011367
+scenario_hash: 96ad562d84f044b1eca887827e7490c7e389a1202138d6ccff8d1d8b9b877082
+authorship:
+  method: individually_written
+  case_id: B037
+  case_sha256: a7b353d098431ee7a155200e2fb468a6dbad4e7b55539077c67213ed200a8678
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- ordinary_monthly_wage
+- ordinary_hourly_wage_floor
+- overtime_pay
+- gross_pay

@@ -1,0 +1,43 @@
+task_id: B1_B005_ef457089
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상초록필름에서 다음 달 근태 시스템의 통상시급을 등록하려고 합니다. 가상문재온의 계약서를 읽고 월 통상임금과 화면 표시용
+  통상시급을 구해 주세요. 정액 직무수당과 현금 식대는 매달 같은 조건으로 지급됩니다. 등록 확인용으로 과세급여와 비과세급여도 함께 알려 주세요.
+input_files:
+- path: inputs/01_통상임금약정.hwpx
+  format: hwpx
+- path: inputs/02_등록근거.xlsx
+  format: xlsx
+- path: inputs/03_참조기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    ordinary_hourly_wage_floor:
+      type: integer
+    taxable_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - ordinary_hourly_wage_floor
+  - taxable_pay
+  - non_taxable_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-17ed9765-8b8c-5852-9c86-4c75e2ead39c
+scenario_seed: 17241310484922699210
+scenario_hash: fb4e1bb53117ad10b50b6475c3b69971729a3bf43f4c63ce8c80264ec6ef11d2
+authorship:
+  method: individually_written
+  case_id: B005
+  case_sha256: ef457089a4090dca82e45eda0958bc620546d195c7ffeada5a004712f0986af8
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- ordinary_monthly_wage
+- ordinary_hourly_wage_floor
+- taxable_pay
+- non_taxable_pay

@@ -1,0 +1,44 @@
+task_id: B1_C230_20fd115f
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상접은철물의 구매팀은 가맹점 간판명으로 공급자 세무 자격을 저장했습니다. 중앙 주문창구와 직영 물류점은 같은 청구 사업자이고,
+  가까운 가맹점은 별도 사업자입니다. 각 원증빙의 공급자 ID를 등록 이력과 연결해 매입세액(input_vat), 불공제세액(noncreditable_vat),
+  공제가능 매입세액(deductible_input_vat)을 answer.json에 써 주세요.
+input_files:
+- path: inputs/청구주체.xlsx
+  format: xlsx
+- path: inputs/공장인수.hwpx
+  format: hwpx
+- path: inputs/중앙발급.pdf
+  format: pdf
+- path: inputs/지점결제.xlsx
+  format: xlsx
+- path: inputs/구매검토.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-d4da99f3-8881-54d0-b48f-30518cbf6214
+scenario_seed: 2377075278960947453
+scenario_hash: c13dbd7f955f6d6a9c0eafc28b0df2ee853e4f2105807bafa8aaf51d0e65d11d
+authorship:
+  method: individually_written
+  case_id: C230
+  case_sha256: 20fd115f36d470fd1027a5be50b911ed8d4d266c5a0b8ef069b11f75a7f0309c
+  source_file: batch_1/C_vat/cases_204_253.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- deductible_input_vat

@@ -1,0 +1,51 @@
+task_id: B1_D274_ba4c0701
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 벌통 프레임 보충 주문에서 현재 실제 도착한 비용만 계정에 넣습니다. vendor_totals를 제출해 주세요.
+input_files:
+- path: inputs/01_양봉주문표지.hwpx
+  format: hwpx
+- path: inputs/02_밀랍기초.xlsx
+  format: xlsx
+- path: inputs/03_기존프레임.pdf
+  format: pdf
+- path: inputs/04_추가프레임.xlsx
+  format: xlsx
+- path: inputs/05_양봉창고수령.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-293f6c4e-17e2-5caa-86a2-deba1c343049
+scenario_seed: 13424112291551495471
+scenario_hash: fe9f8fe323bd8d653fa067f6c6ec7f2c3c29d7aadaa150336348fc8275799468
+authorship:
+  method: individually_written
+  case_id: D274
+  case_sha256: ba4c070152e1c52f169598e24ea4417230556e67291892c1af627a371e3e646a
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals

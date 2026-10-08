@@ -1,0 +1,315 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 81400000,
+      "cards": [
+        {
+          "amount": 18100000,
+          "category": "credit",
+          "date": "2025-12-01",
+          "payment_method": "credit",
+          "person_id": "self"
+        },
+        {
+          "amount": 5700000,
+          "category": "culture",
+          "date": "2025-12-02",
+          "payment_method": "credit",
+          "person_id": "self"
+        },
+        {
+          "amount": 4300000,
+          "category": "debit",
+          "date": "2025-12-03",
+          "payment_method": "debit",
+          "person_id": "mother"
+        },
+        {
+          "amount": 6100000,
+          "category": "debit",
+          "date": "2025-12-04",
+          "payment_method": "debit",
+          "person_id": "self"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 70,
+          "assigned_claimant": "other",
+          "income_amount": 0,
+          "person_id": "mother",
+          "relation": "parent",
+          "supported": true
+        },
+        {
+          "age": 12,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "child",
+          "relation": "child",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 2200000,
+          "date": "2025-05-10",
+          "institution_type": "primary_secondary_school",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "child"
+        },
+        {
+          "amount": 1700000,
+          "date": "2025-09-10",
+          "institution_type": "private_academy",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "child"
+        }
+      ],
+      "employee_age": 44,
+      "employee_name": "가상배라원",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "marital_status": "married",
+      "non_taxable": 2400000,
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 어머니와 자녀를 실제 지원했다. 어머니 공제를 직원의 누나에게 최종 배정했고 무소득 자녀 공제는 본인이다. 문화 소비는 적격 업체 결제이나 급여 기준을 확인해야 한다. 학교 수업료는 적격이고 학원은 취학 후 사설학원이다. 학비는 직원 부담이며 특별공제를 신청했다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "education.0.excluded": false,
+      "education.1.excluded": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 70,
+          "assigned_claimant": "other",
+          "income_amount": 0,
+          "person_id": "mother",
+          "relation": "parent",
+          "supported": true
+        },
+        {
+          "age": 12,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "child",
+          "relation": "child",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 3000000,
+      "rejected": [
+        "mother"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 81400000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 13700000,
+      "salary_income": 65300000,
+      "total_salary": 79000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 79000000,
+      "spending": {
+        "credit": 23800000,
+        "debit": 6100000
+      }
+    },
+    "output": 2437500,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 79000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 250000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 79000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 79000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 2200000,
+          "date": "2025-05-10",
+          "excluded": false,
+          "institution_type": "primary_secondary_school",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "child"
+        },
+        {
+          "amount": 1700000,
+          "date": "2025-09-10",
+          "excluded": true,
+          "institution_type": "private_academy",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "child"
+        }
+      ],
+      "salary": 79000000
+    },
+    "output": 330000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 79000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 79000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 79000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 79000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 59862500
+    },
+    "output": 8607000,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 8607000,
+      "salary": 79000000
+    },
+    "output": 500000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 330000,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 8607000,
+      "total_tax_credits": 1080000
+    },
+    "output": 7527000,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 7527000
+    },
+    "output": 752700,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 752700,
+      "final_national": 7527000,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 752700,
+      "national": 7527000,
+      "total": 8279700
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

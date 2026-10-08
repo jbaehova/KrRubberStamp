@@ -1,0 +1,249 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C013-왁스",
+          "date": "2026-02-17",
+          "description": "대표가 왁스와 심지를 받아 고객 주문 향초를 제작했다.",
+          "document_ids": [
+            "가상-C013-왁스계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상저녁향 제작 작업실"
+          },
+          "operation_id": "OPS-C013",
+          "participants": [
+            {
+              "name": "가상 향초대표",
+              "organization": "가상저녁향",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "가상-C013-왁스매입"
+        }
+      ],
+      "operations": [
+        {
+          "description": "향초 제작과 소매 판매",
+          "operation_id": "OPS-C013",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C013-왁스",
+          "date": "2026-02-17",
+          "document_id": "가상-C013-왁스계산서",
+          "transaction_id": "가상-C013-왁스매입"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C013-왁스계산서",
+        "purpose": "business",
+        "transaction_id": "가상-C013-왁스매입"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C013-왁스계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C013-왁스매입"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C013-현금영수증공급칸"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "가상-C013-향초인도"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-17",
+      "transaction_id": "가상-C013-왁스매입"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1200000,
+      "includes_vat": false,
+      "transaction_id": "가상-C013-왁스매입"
+    },
+    "output": {
+      "gross": 1320000,
+      "supply_base": 1200000,
+      "vat": 120000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C013-왁스매입",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 120000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-03",
+      "transaction_id": "가상-C013-향초인도"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3400000,
+      "includes_vat": false,
+      "transaction_id": "가상-C013-향초인도"
+    },
+    "output": {
+      "gross": 3740000,
+      "supply_base": 3400000,
+      "vat": 340000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 3400000
+    },
+    "output": 340000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "가상-C013-향초인도"
+    },
+    "output": {
+      "eligible_gross": 3740000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 57000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 3740000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 48620,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 48620
+    },
+    "output": 48620,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 48620,
+      "liability_before_credit": 220000
+    },
+    "output": 48620,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 171380,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 171380,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 120000,
+      "output_vat": 340000,
+      "prepaid_vat": 0,
+      "receipt_credit": 48620
+    },
+    "output": {
+      "deductible_input_vat": 120000,
+      "input_vat": 120000,
+      "net_vat": 171380,
+      "noncreditable_vat": 0,
+      "output_vat": 340000,
+      "payable_vat": 171380,
+      "prepaid_vat": 0,
+      "receipt_credit": 48620,
+      "refund_vat": 0,
+      "tax_base": 3400000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

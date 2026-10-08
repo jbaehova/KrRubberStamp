@@ -1,0 +1,183 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-04",
+          "document_id": "SCALE-OLD-6",
+          "event": "cancelled_before_dispatch",
+          "event_id": "SCALE-STOP",
+          "location": "판매처발송대기"
+        },
+        {
+          "date": "2026-06-09",
+          "document_id": "SCALE-NEW-8",
+          "event": "received",
+          "event_id": "SCALE-NEW-IN",
+          "location": "도면교육실"
+        },
+        {
+          "date": "2026-06-09",
+          "document_id": "SCALE-TUBE-9",
+          "event": "received",
+          "event_id": "SCALE-TUBE-IN",
+          "location": "도면교육실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-03",
+          "document_id": "SCALE-OLD-6",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SCALE-OLD-C",
+          "vendor": "가상도면도구"
+        },
+        {
+          "date": "2026-06-06",
+          "document_id": "SCALE-NEW-8",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SCALE-NEW-C",
+          "vendor": "가상도면도구"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "SCALE-TUBE-9",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "SCALE-TUBE-C",
+          "vendor": "가상도면보관"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "SCALE-OLD-C",
+          "items": [
+            {
+              "name": "축척자30",
+              "quantity": 16,
+              "unit_price": 7400
+            }
+          ],
+          "sheet_id": "SCALE-OLD-L"
+        },
+        {
+          "header_record_id": "SCALE-NEW-C",
+          "items": [
+            {
+              "name": "축척자15",
+              "quantity": 16,
+              "unit_price": 6100
+            }
+          ],
+          "sheet_id": "SCALE-NEW-L"
+        },
+        {
+          "header_record_id": "SCALE-TUBE-C",
+          "items": [
+            {
+              "name": "축척자보관통",
+              "quantity": 4,
+              "unit_price": 8230
+            }
+          ],
+          "sheet_id": "SCALE-TUBE-L"
+        }
+      ],
+      "processing_policy": "첨부는 header_record_id로 표지에 연결한다. invoice 또는 order의 received 기록만 실제 구매다. cancelled_before_dispatch는 실제 지급 합계에 넣지 않는다. 모든 단가는 별도 가격이며 각 행의 수량 곱하기 단가를 공급가액으로 하고 그 10%에서 원 미만을 버려 세액을 합한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "SCALE-OLD-6"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "SCALE-NEW-8",
+        "SCALE-TUBE-9"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SCALE-NEW-8",
+      "includes_vat": false,
+      "quantity": 16,
+      "unit_price": 6100
+    },
+    "output": {
+      "supply": 97600,
+      "total": 107360,
+      "vat": 9760
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상도면도구"
+    },
+    "output": "가상도면도구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SCALE-TUBE-9",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 8230
+    },
+    "output": {
+      "supply": 32920,
+      "total": 36212,
+      "vat": 3292
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상도면보관"
+    },
+    "output": "가상도면보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "축척자15",
+          "unit_price": 6100,
+          "vendor": "가상도면도구"
+        },
+        {
+          "item": "축척자보관통",
+          "unit_price": 8230,
+          "vendor": "가상도면보관"
+        }
+      ],
+      "grand_total": 143572,
+      "supply_total": 130520,
+      "unique_document_count": 2,
+      "vat_total": 13052,
+      "vendor_totals": [
+        {
+          "supply": 97600,
+          "total": 107360,
+          "vat": 9760,
+          "vendor": "가상도면도구"
+        },
+        {
+          "supply": 32920,
+          "total": 36212,
+          "vat": 3292,
+          "vendor": "가상도면보관"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

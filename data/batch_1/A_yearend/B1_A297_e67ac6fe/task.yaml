@@ -1,0 +1,55 @@
+task_id: B1_A297_e67ac6fe
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상들녘나사산의 가상길윤서 퇴직 정산을 처리해 주세요. 취업한 자녀와 손자의 소득 및 나이를 확인하고 보험과 주택이자의 실제
+  납부 날짜를 재직 기록에 맞춰 주세요. 가족 기본공제 및 추가공제와 보험 및 주택이자 공제액을 적어 주세요.
+input_files:
+- path: inputs/01_사별가족.hwpx
+  format: hwpx
+- path: inputs/02_자녀소득.xlsx
+  format: xlsx
+- path: inputs/03_퇴직일보험.pdf
+  format: pdf
+- path: inputs/04_퇴직후보험.xlsx
+  format: xlsx
+- path: inputs/05_대출요건.pdf
+  format: pdf
+- path: inputs/06_퇴직일이자.xlsx
+  format: xlsx
+- path: inputs/07_퇴직후이자.pdf
+  format: pdf
+- path: inputs/08_급여확정.xlsx
+  format: xlsx
+- path: inputs/09_재직등록.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    additional_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    housing_income_deduction:
+      type: integer
+  required:
+  - eligible_dependents
+  - additional_deduction
+  - insurance_credit
+  - housing_income_deduction
+  additionalProperties: false
+canary: KrRubberStamp-canary-fb00adb2-111f-57c3-9b61-8c5b249eba53
+scenario_seed: 16607805373990677466
+scenario_hash: d9561e6285aa9e77c64ee4bf25c806813b1c4a4a4e4d99eb33e8fc59020dd2e4
+authorship:
+  method: individually_written
+  case_id: A297
+  case_sha256: e67ac6fee789abda80778e0293dc23e1f442ba2526e7738e86759180d63a0736
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- eligible_dependents
+- additional_deduction
+- insurance_credit
+- housing_income_deduction

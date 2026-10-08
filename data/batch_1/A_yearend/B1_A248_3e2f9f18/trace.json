@@ -1,0 +1,334 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 84700000,
+      "cards": [
+        {
+          "amount": 21200000,
+          "billed_item": "ordinary_goods_services",
+          "category": "credit",
+          "date": "2025-10-20",
+          "payment_method": "credit",
+          "person_id": "self"
+        },
+        {
+          "amount": 3100000,
+          "billed_item": "ordinary_goods_services",
+          "category": "culture",
+          "date": "2025-11-20",
+          "payment_method": "credit",
+          "person_id": "self"
+        },
+        {
+          "amount": 3800000,
+          "billed_item": "apartment_management_fee",
+          "category": "debit",
+          "date": "2025-12-20",
+          "payment_method": "debit",
+          "person_id": "self"
+        },
+        {
+          "amount": 7200000,
+          "billed_item": "ordinary_goods_services",
+          "category": "debit",
+          "date": "2025-12-21",
+          "payment_method": "debit",
+          "person_id": "sp"
+        },
+        {
+          "amount": 2400000,
+          "billed_item": "ordinary_goods_services",
+          "category": "debit",
+          "date": "2025-12-22",
+          "payment_method": "debit",
+          "person_id": "elder"
+        },
+        {
+          "amount": 8600000,
+          "billed_item": "ordinary_goods_services",
+          "category": "debit",
+          "date": "2025-12-23",
+          "payment_method": "debit",
+          "person_id": "sib"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 46,
+          "assigned_claimant": "self",
+          "income_amount": 2400000,
+          "name": "가상홍예솔",
+          "person_id": "sp",
+          "relation": "spouse",
+          "supported": true
+        },
+        {
+          "age": 72,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상홍이울",
+          "person_id": "elder",
+          "relation": "parent",
+          "supported": true
+        },
+        {
+          "age": 38,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 0,
+          "name": "가상홍하빛",
+          "person_id": "sib",
+          "relation": "sibling",
+          "supported": true
+        }
+      ],
+      "employee_age": 47,
+      "employee_name": "가상홍라움",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "marital_status": "married",
+      "non_taxable": 2400000,
+      "pension_accounts": {
+        "irp": 2100000,
+        "pension_savings": 4500000
+      },
+      "reference_year": 2025,
+      "scope_note": "근로소득만 있는 국내 거주자다. 세 가족을 실제 부양하고 신청은 직원에게 배정했다. 장애인 동생은 직원과 주민등록 및 실제 생활상 같은 세대에서 동거한다. 배우자 소득은 사업소득금액이며 부모와 장애인 동생은 무소득이다. 카드 결제는 서로 중복되지 않는다. 특별공제 신청은 없다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "cards.0.excluded": false,
+      "cards.1.excluded": false,
+      "cards.2.excluded": true,
+      "cards.3.excluded": false,
+      "cards.4.excluded": false,
+      "cards.5.excluded": false
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 46,
+          "assigned_claimant": "self",
+          "income_amount": 2400000,
+          "name": "가상홍예솔",
+          "person_id": "sp",
+          "relation": "spouse",
+          "supported": true
+        },
+        {
+          "age": 72,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상홍이울",
+          "person_id": "elder",
+          "relation": "parent",
+          "supported": true
+        },
+        {
+          "age": 38,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 0,
+          "name": "가상홍하빛",
+          "person_id": "sib",
+          "relation": "sibling",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 3000000,
+      "basic": 4500000,
+      "rejected": [
+        "sp"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 84700000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 13865000,
+      "salary_income": 68435000,
+      "total_salary": 82300000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 82300000,
+      "spending": {
+        "credit": 24300000,
+        "debit": 2400000
+      }
+    },
+    "output": 1278750,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {
+        "irp": 2100000,
+        "pension_savings": 4500000
+      },
+      "salary": 82300000
+    },
+    "output": 792000,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0,
+        0
+      ],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 82300000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 82300000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 82300000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 82300000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 82300000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 82300000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 82300000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 59656250
+    },
+    "output": 8557500,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 8557500,
+      "salary": 82300000
+    },
+    "output": 500000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "standard",
+      "special_deductions_requested": false
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 130000
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 8557500,
+      "total_tax_credits": 1422000
+    },
+    "output": 7135500,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 7135500
+    },
+    "output": 713550,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 713550,
+      "final_national": 7135500,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 713550,
+      "national": 7135500,
+      "total": 7849050
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

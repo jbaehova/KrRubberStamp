@@ -1,0 +1,362 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "제작장재료",
+          "date": "2026-04-20",
+          "description": "사업 제작장에 칸막이 원료를 받았다.",
+          "document_ids": [
+            "칸막이카드",
+            "칸막이전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "칸막이 제작 작업장"
+          },
+          "operation_id": "칸막이제작",
+          "participants": [
+            {
+              "name": "가상문칸막이",
+              "organization": "가상칸나눔포장",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "칸막이재료입고"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "가족재료배송",
+          "date": "2026-04-21",
+          "description": "대표가 가족의 별도 작업실에 사적으로 재료를 보내 주었다.",
+          "document_ids": [
+            "가족재료카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가족 개인 재단 작업실",
+            "organization": "가상가족재단실"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상문칸막이",
+              "organization": "가상칸나눔포장",
+              "role": "proprietor"
+            },
+            {
+              "name": "가상문가족",
+              "organization": "가상가족재단실",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "가족작업실배송"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 포장 칸막이 제작",
+          "operation_id": "칸막이제작",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "제작장재료",
+          "date": "2026-04-20",
+          "document_id": "칸막이카드",
+          "transaction_id": "칸막이재료입고"
+        },
+        {
+          "activity_id": "제작장재료",
+          "date": "2026-04-20",
+          "document_id": "칸막이전자",
+          "transaction_id": "칸막이재료입고"
+        },
+        {
+          "activity_id": "가족재료배송",
+          "date": "2026-04-21",
+          "document_id": "가족재료카드",
+          "transaction_id": "가족작업실배송"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "칸막이카드",
+        "purpose": "business",
+        "transaction_id": "칸막이재료입고"
+      },
+      {
+        "business_related": true,
+        "document_id": "칸막이전자",
+        "purpose": "business",
+        "transaction_id": "칸막이재료입고"
+      },
+      {
+        "business_related": false,
+        "document_id": "가족재료카드",
+        "purpose": "private",
+        "transaction_id": "가족작업실배송"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가족재료카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가족작업실배송"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "납품전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "칸막이납품완료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "칸막이카드",
+        "칸막이전자"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "칸막이재료입고"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-21",
+      "transaction_id": "가족작업실배송"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2200000,
+      "includes_vat": true,
+      "transaction_id": "가족작업실배송"
+    },
+    "output": {
+      "gross": 2200000,
+      "supply_base": 2000000,
+      "vat": 200000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "가족작업실배송",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 200000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-08",
+      "transaction_id": "칸막이납품완료"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 8800000,
+      "includes_vat": true,
+      "transaction_id": "칸막이납품완료"
+    },
+    "output": {
+      "gross": 8800000,
+      "supply_base": 8000000,
+      "vat": 800000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 8000000
+    },
+    "output": 800000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "칸막이납품완료"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-20",
+      "transaction_id": "칸막이재료입고"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3300000,
+      "includes_vat": true,
+      "transaction_id": "칸막이재료입고"
+    },
+    "output": {
+      "gross": 3300000,
+      "supply_base": 3000000,
+      "vat": 300000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "칸막이재료입고",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 300000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 465000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 500000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 500000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 500000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 300000,
+      "output_vat": 800000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 300000,
+      "input_vat": 500000,
+      "net_vat": 500000,
+      "noncreditable_vat": 200000,
+      "output_vat": 800000,
+      "payable_vat": 500000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 8000000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

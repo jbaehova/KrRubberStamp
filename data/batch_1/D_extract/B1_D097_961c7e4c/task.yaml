@@ -1,0 +1,62 @@
+task_id: B1_D097_961c7e4c
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 공기 측정함의 교체품을 구입하려고 합니다. 같은 품목의 문자 표기와 거래별 세금 표시를 확인해 cheapest_by_item,
+  vat_total을 보내 주세요. 기준은 겨울 필터 명세에 있습니다.
+input_files:
+- path: inputs/01_겨울필터.pdf
+  format: pdf
+- path: inputs/02_추가필터.xlsx
+  format: xlsx
+- path: inputs/03_봄가드.hwpx
+  format: hwpx
+- path: inputs/04_추가가드.pdf
+  format: pdf
+- path: inputs/05_초여름필터.xlsx
+  format: xlsx
+- path: inputs/06_여름가드.hwpx
+  format: hwpx
+- path: inputs/07_늦여름필터.pdf
+  format: pdf
+- path: inputs/08_마지막가드.xlsx
+  format: xlsx
+- path: inputs/09_겨울보관.png
+  format: png
+  duplicate_of: inputs/01_겨울필터.pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-675b1f3c-d278-526b-b0c3-2e2505d0a97c
+scenario_seed: 10816659271619876031
+scenario_hash: 181fb29e743d31f1e6eb712e81dc9a990757edaee3c6c792cdcc62dd86f78094
+authorship:
+  method: individually_written
+  case_id: D097
+  case_sha256: 961c7e4c655694bf1f68db08a828253cb0a6e90d5ab65bc644e35e550f31fb47
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item
+- vat_total

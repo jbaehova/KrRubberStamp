@@ -1,0 +1,49 @@
+task_id: B1_B069_235fdad5
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상너른검품소의 검품 성과수당이 이번 달 크게 늘었지만 공단 통지는 기존 확정액으로 도착했습니다. 당월 지급액으로 보험 기준을
+  덮어쓰지 말고 각 기관 통지에 따른 국민연금, 건강보험과 고용보험을 계산해 주세요. 과세급여와 전체 공제 합계도 확인합니다.
+input_files:
+- path: inputs/01_검품보상.hwpx
+  format: hwpx
+- path: inputs/02_기관통지.pdf
+  format: pdf
+- path: inputs/03_검품정상월.xlsx
+  format: xlsx
+- path: inputs/04_공제참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    taxable_pay:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    employment_insurance:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - taxable_pay
+  - national_pension
+  - health_insurance
+  - employment_insurance
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-3bb4173d-18b0-5b7f-be59-70a3ef3b4064
+scenario_seed: 2548996526142004365
+scenario_hash: 49539e6b49f6d92afc523d0e5b0e2adbdcecdc4266d4d75a962362713ab8b85e
+authorship:
+  method: individually_written
+  case_id: B069
+  case_sha256: 235fdad5da661c8d527dd2cd007e98a9f9b861d07bd8ffddd29e036090c110e2
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- taxable_pay
+- national_pension
+- health_insurance
+- employment_insurance
+- total_deductions

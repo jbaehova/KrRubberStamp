@@ -1,0 +1,74 @@
+task_id: B1_A144_6449a07c
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상목련장비의 가상판서우 정산을 대조합니다. 주택대출의 계약 기간과 비거치 조건을 확인해 주택자금 소득공제액을 구해 주세요.
+  확정 총급여로 문화비의 처리와 연금저축 및 IRP 한도를 판단해 카드 소득공제와 연금계좌 세액공제를 계산합니다. 소득 있는 아버지의 진료비는 실제
+  보전액을 뺀 의료비 세액공제로 검토하고 교육비 및 보험료 세액공제와 최종 소득세도 적습니다.
+input_files:
+- path: inputs/01_신청확인.hwpx
+  format: hwpx
+- path: inputs/02_확정급여.xlsx
+  format: xlsx
+- path: inputs/03_대출조건.pdf
+  format: pdf
+- path: inputs/04_이자납입.pdf
+  format: pdf
+- path: inputs/05_일반카드.xlsx
+  format: xlsx
+- path: inputs/06_문화비신용.pdf
+  format: pdf
+- path: inputs/07_문화비체크.pdf
+  format: pdf
+- path: inputs/08_연금계좌.xlsx
+  format: xlsx
+- path: inputs/09_아버지소득.pdf
+  format: pdf
+- path: inputs/10_진료보전.pdf
+  format: pdf
+- path: inputs/11_본인학비.pdf
+  format: pdf
+- path: inputs/12_일반보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    pension_account_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    education_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - housing_income_deduction
+  - credit_card_deduction
+  - pension_account_credit
+  - medical_credit
+  - education_credit
+  - insurance_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-6246b3f6-e9da-5bf6-a281-065982b0b35c
+scenario_seed: 7226483532586969319
+scenario_hash: 11ea823313d531ef0a0239d3f0b78dc4f9f0f6a241a1106e6c88c9235b70190a
+authorship:
+  method: individually_written
+  case_id: A144
+  case_sha256: 6449a07c3f0e68e70fd78ed2eaa52cc54e42d59eef9db2aa61182c6b2dc2a8bd
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- housing_income_deduction
+- credit_card_deduction
+- pension_account_credit
+- medical_credit
+- education_credit
+- insurance_credit
+- final_national_tax

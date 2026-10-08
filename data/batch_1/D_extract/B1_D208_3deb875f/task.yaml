@@ -1,0 +1,42 @@
+task_id: B1_D208_3deb875f
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 미용실에서 구매한 타월의 다음 주문처를 정해 주세요. 실제 구매 자료를 이용한 cheapest_by_item을 제출해 주세요.
+input_files:
+- path: inputs/01_타월대량명세.hwpx
+  format: hwpx
+- path: inputs/02_타월보충명세.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-882185ab-c082-5b68-ba21-1139dd35308e
+scenario_seed: 4461808699077601918
+scenario_hash: f330dc095994fd38d48533d8c2872d39dd7928d23c3ef945aa364a838cea50cb
+authorship:
+  method: individually_written
+  case_id: D208
+  case_sha256: 3deb875f4444aa7ed461f492605f69ba2a82906de0aae35d1282e318bfd31bfb
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item

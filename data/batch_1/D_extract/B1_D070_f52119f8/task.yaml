@@ -1,0 +1,41 @@
+task_id: B1_D070_f52119f8
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 온라인 주문과 현장 구매로 받은 보행 표식비를 정산해 주세요. 각 명세의 가격 방식을 적용한 supply_total, vat_total,
+  grand_total이 필요합니다. 품목별 계산 기준은 통로 구입 대장에 있습니다.
+input_files:
+- path: inputs/01_입구주문.pdf
+  format: pdf
+- path: inputs/02_통로구입.xlsx
+  format: xlsx
+- path: inputs/03_대기실주문.hwpx
+  format: hwpx
+- path: inputs/04_출구구입.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+    grand_total:
+      type: integer
+  required:
+  - supply_total
+  - vat_total
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-d5149590-4714-52d5-9365-8213099b9d94
+scenario_seed: 17663427767208302998
+scenario_hash: f4be1e431cfb8e91d163deb7e479b36845ae498ef583c611fa0430ff1eb34e91
+authorship:
+  method: individually_written
+  case_id: D070
+  case_sha256: f52119f82c38d996c922d00f42c26d26256e7089ccd8aaf2a90fc7b8fbc75404
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- supply_total
+- vat_total
+- grand_total

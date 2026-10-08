@@ -1,0 +1,216 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-02",
+          "document_id": "TRUCK-SHELF-28",
+          "event": "received",
+          "event_id": "TRUCK-SHELF-IN",
+          "location": "푸드트럭정비대"
+        },
+        {
+          "date": "2026-05-02",
+          "document_id": "TRUCK-WHEEL-29",
+          "event": "received",
+          "event_id": "TRUCK-WHEEL-IN",
+          "location": "푸드트럭정비대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-28",
+          "document_id": "TRUCK-SHELF-28",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "TRUCK-SHELF-EXT",
+          "vendor": "가상이동주방"
+        },
+        {
+          "date": "2026-04-28",
+          "document_id": "TRUCK-SHELF-28",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "TRUCK-SHELF-BOOK",
+          "vendor": "가상이동주방"
+        },
+        {
+          "date": "2026-04-29",
+          "document_id": "TRUCK-WHEEL-29",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "TRUCK-WHEEL-C",
+          "vendor": "가상회전부속"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "TRUCK-SHELF-EXT",
+          "items": [
+            {
+              "name": "트럭선반본체",
+              "quantity": 1,
+              "unit_price": 184000
+            }
+          ],
+          "sheet_id": "TRUCK-BODY-L"
+        },
+        {
+          "header_record_id": "TRUCK-SHELF-EXT",
+          "items": [
+            {
+              "name": "트럭선반다리",
+              "quantity": 4,
+              "unit_price": 11800
+            }
+          ],
+          "sheet_id": "TRUCK-LEG-L"
+        },
+        {
+          "header_record_id": "TRUCK-SHELF-BOOK",
+          "items": [
+            {
+              "name": "트럭선반본체",
+              "quantity": 1,
+              "unit_price": 184000
+            },
+            {
+              "name": "트럭선반다리",
+              "quantity": 4,
+              "unit_price": 11800
+            }
+          ],
+          "sheet_id": "TRUCK-BOOK-L"
+        },
+        {
+          "header_record_id": "TRUCK-WHEEL-C",
+          "items": [
+            {
+              "name": "선반바퀴잠금형",
+              "quantity": 4,
+              "unit_price": 7300
+            }
+          ],
+          "sheet_id": "TRUCK-WHEEL-L"
+        }
+      ],
+      "processing_policy": "header_record_id로 첨부를 연결하고 같은 표지의 행을 순서대로 합한다. invoice 또는 order 번호에 received가 있으면 구매다. record_id가 달라도 document_id와 최종 원문 내용이 같으면 한 번 합한다. 별도 단가는 공급가액이며 행 세액은 그 10%에서 원 미만을 버린다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "TRUCK-SHELF-28",
+        "TRUCK-WHEEL-29"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "TRUCK-SHELF-28",
+      "includes_vat": false,
+      "quantity": 1,
+      "unit_price": 184000
+    },
+    "output": {
+      "supply": 184000,
+      "total": 202400,
+      "vat": 18400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "TRUCK-SHELF-28",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 11800
+    },
+    "output": {
+      "supply": 47200,
+      "total": 51920,
+      "vat": 4720
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상이동주방"
+    },
+    "output": "가상이동주방",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TRUCK-SHELF-28"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "TRUCK-WHEEL-29",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 7300
+    },
+    "output": {
+      "supply": 29200,
+      "total": 32120,
+      "vat": 2920
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상회전부속"
+    },
+    "output": "가상회전부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "선반바퀴잠금형",
+          "unit_price": 7300,
+          "vendor": "가상회전부속"
+        },
+        {
+          "item": "트럭선반다리",
+          "unit_price": 11800,
+          "vendor": "가상이동주방"
+        },
+        {
+          "item": "트럭선반본체",
+          "unit_price": 184000,
+          "vendor": "가상이동주방"
+        }
+      ],
+      "grand_total": 286440,
+      "supply_total": 260400,
+      "unique_document_count": 2,
+      "vat_total": 26040,
+      "vendor_totals": [
+        {
+          "supply": 231200,
+          "total": 254320,
+          "vat": 23120,
+          "vendor": "가상이동주방"
+        },
+        {
+          "supply": 29200,
+          "total": 32120,
+          "vat": 2920,
+          "vendor": "가상회전부속"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

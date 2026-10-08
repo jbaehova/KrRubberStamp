@@ -1,0 +1,49 @@
+task_id: B1_A127_2def5375
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상매발톱센터의 가상성하온은 장애인 손자의 보험료를 냈고 손자가 잠깐 일한 소득 확인도 제출했습니다. 나이와 소득 종류 및
+  총급여를 함께 확인해 가족 수와 기본 및 추가공제액을 구해 주세요. 자녀세액공제액과 일반 보장성보험료 세액공제액도 입력합니다.
+input_files:
+- path: inputs/01_직원확인.hwpx
+  format: hwpx
+- path: inputs/02_급여누계.xlsx
+  format: xlsx
+- path: inputs/03_손자소득장애.pdf
+  format: pdf
+- path: inputs/04_손자일반보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    child_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - additional_deduction
+  - child_credit
+  - insurance_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-b10ab6f0-b044-5cb3-8628-9a1849153722
+scenario_seed: 3309956014561098378
+scenario_hash: 8e332fb4dd4fb8d9e57a0649331ed6d5acf9c4b6047e55f3adca84a219c13c2d
+authorship:
+  method: individually_written
+  case_id: A127
+  case_sha256: 2def53755614fa8aba246e7cfb881b898729771651f36fd0a67b47a3124a8051
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- additional_deduction
+- child_credit
+- insurance_credit

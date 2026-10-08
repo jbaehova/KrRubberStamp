@@ -1,0 +1,70 @@
+task_id: B1_A142_8adb126e
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상모란설계의 가상채은준은 가족 자료를 한꺼번에 제출했습니다. 배우자의 근로소득과 성년 자녀의 나이, 어머니 공제 배정을 먼저
+  확인해 기본공제액을 구해 주세요. 가족별 카드와 자녀 등록금 및 본인 대학원 학비를 연결해 카드 소득공제와 교육비 세액공제를 계산합니다. 어머니
+  진료와 배우자 보험 및 직원 진료를 항목별로 판단해 의료비와 보험료 세액공제액을 적고 소득세 결정세액도 마감해 주세요.
+input_files:
+- path: inputs/01_정산신청.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_배우자소득.pdf
+  format: pdf
+- path: inputs/04_성년학생.pdf
+  format: pdf
+- path: inputs/05_부모배정.hwpx
+  format: hwpx
+- path: inputs/06_직원배우자카드.xlsx
+  format: xlsx
+- path: inputs/07_학생부모카드.xlsx
+  format: xlsx
+- path: inputs/08_학생등록금.xlsx
+  format: xlsx
+- path: inputs/09_본인대학원.pdf
+  format: pdf
+- path: inputs/10_배우자보험.pdf
+  format: pdf
+- path: inputs/11_어머니진료.pdf
+  format: pdf
+- path: inputs/12_직원진료.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    education_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - basic_deduction
+  - credit_card_deduction
+  - education_credit
+  - medical_credit
+  - insurance_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-b28f6b06-e5f4-528f-85b5-491594f49365
+scenario_seed: 10005611264653125260
+scenario_hash: b66877b0ab28d9d0e273d1e8b67492c3ba5a139866c7a9dd2b51066ed6bb7b3f
+authorship:
+  method: individually_written
+  case_id: A142
+  case_sha256: 8adb126ee64be68c45b73a88f99d5efe926cfcc8e30a44f3015ce74ee10ab823
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- basic_deduction
+- credit_card_deduction
+- education_credit
+- medical_credit
+- insurance_credit
+- final_national_tax

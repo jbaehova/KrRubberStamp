@@ -1,0 +1,82 @@
+task_id: B1_D203_6ab13bff
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 현장 기호판 설치의 지급 자료와 단가 기준을 마감해 주세요. vendor_totals와 cheapest_by_item 및 grand_total이
+  필요합니다.
+input_files:
+- path: inputs/01_기호판외부표지.pdf
+  format: pdf
+- path: inputs/02_외부품목묶음.xlsx
+  format: xlsx
+- path: inputs/03_내부보관합본.hwpx
+  format: hwpx
+- path: inputs/04_다른판매처기호판.pdf
+  format: pdf
+- path: inputs/05_지지봉청구.xlsx
+  format: xlsx
+- path: inputs/06_기호판제안.hwpx
+  format: hwpx
+- path: inputs/07_확장판주문.pdf
+  format: pdf
+- path: inputs/08_안내설치인수.xlsx
+  format: xlsx
+- path: inputs/09_확장주문상태.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-79c2a211-7732-548b-95cc-6e5a610637e7
+scenario_seed: 7687992009103527407
+scenario_hash: 927d13536a5e9708441cae1e29f65da5c38fe0fd9f1710c813332ca935c62de2
+authorship:
+  method: individually_written
+  case_id: D203
+  case_sha256: 6ab13bffe2a84defb567eb81ab8bfeec9c3d72e3dd54304b17af75b4d460aa73
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item
+- grand_total

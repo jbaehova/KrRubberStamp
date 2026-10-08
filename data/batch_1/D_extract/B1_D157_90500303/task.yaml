@@ -1,0 +1,41 @@
+task_id: B1_D157_90500303
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 복원용 붓 담당자에게 구매처와 단가를 인계하려 합니다. 각 품목의 공급가액 단가와 업체를 cheapest_by_item으로
+  정리해 answer.json에 담아 주세요.
+input_files:
+- path: inputs/01_붓구매기록.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-778438cf-0982-5bb1-97a8-67e16b11841a
+scenario_seed: 10398814853320914451
+scenario_hash: 8bb9bf2ef7a135df177d8c108f591b851838aab5495d386e64b7821c93ce1485
+authorship:
+  method: individually_written
+  case_id: D157
+  case_sha256: 90500303893fb613619981e4cdd498b79e5b3d8f634686fc8f82d4b1a0b79e77
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item

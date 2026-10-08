@@ -1,0 +1,52 @@
+task_id: B1_D219_2fe8fb81
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 약국 진열 보조품의 실제 구매 단가표와 세액을 마감해 주세요. cheapest_by_item과 vat_total을 제출해 주세요.
+input_files:
+- path: inputs/01_진열청구표지.pdf
+  format: pdf
+- path: inputs/02_받침부속.xlsx
+  format: xlsx
+- path: inputs/03_가격꽂이부속.hwpx
+  format: hwpx
+- path: inputs/04_진열제안.pdf
+  format: pdf
+- path: inputs/05_약국인수.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-a83bf942-8087-5a3d-9621-46bb75269cac
+scenario_seed: 3452285650021917051
+scenario_hash: d012209e450c4a72ddcf46af26a4101f618d28137be5da909a70a4d82dc0691f
+authorship:
+  method: individually_written
+  case_id: D219
+  case_sha256: 2fe8fb81f8bc217bdd8838e132e7dd884fe29cda522018e21ac59a2c81131d34
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- vat_total

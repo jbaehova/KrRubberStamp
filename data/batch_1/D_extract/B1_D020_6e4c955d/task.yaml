@@ -1,0 +1,54 @@
+task_id: B1_D020_6e4c955d
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 마을 텃밭 장부를 판매처별로 합치고 있습니다. 계절마다 따로 산 화분과 표찰, 받침 자료를 대조해 업체 이름 표기에 맞춰 지급액을
+  모아 주세요. answer.json에는 vendor_totals와 grand_total이 필요합니다.
+input_files:
+- path: inputs/01_봄화분_인수명세.pdf
+  format: pdf
+- path: inputs/02_작물표찰_구매대장.xlsx
+  format: xlsx
+- path: inputs/03_추가화분_인수.hwpx
+  format: hwpx
+- path: inputs/04_받침_결제명세.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-341488dc-4ce2-5f21-9a15-2f92cfdbc546
+scenario_seed: 7947891669191591672
+scenario_hash: 60e813bf082fda6030d5b3e3f3e3f3b4d51171d27d195dec9be2f8e9791cfb17
+authorship:
+  method: individually_written
+  case_id: D020
+  case_sha256: 6e4c955d077386f84bfb6e55ce3e1a12ef01cfa2b8d2623f6201c1186485c92b
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- grand_total

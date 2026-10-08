@@ -1,0 +1,55 @@
+task_id: B1_C147_a126a4c6
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상분해작업의 실제 입고 기록과 구매 증빙을 통합해 매입세액(input_vat), 불공제세액(noncreditable_vat),
+  거래 수(unique_transaction_count), 환급액(refund_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_작업장범위.hwpx
+  format: hwpx
+- path: inputs/02_은행대조.xlsx
+  format: xlsx
+- path: inputs/03_이전공구.pdf
+  format: pdf
+- path: inputs/04_이전인수.hwpx
+  format: hwpx
+- path: inputs/05_올해공구.pdf
+  format: pdf
+- path: inputs/06_올해인수.xlsx
+  format: xlsx
+- path: inputs/07_다른공구.pdf
+  format: pdf
+- path: inputs/08_다른인수.hwpx
+  format: hwpx
+- path: inputs/09_발주원본.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - unique_transaction_count
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-d2dd0fcb-d1e6-53d6-8855-76d9a51c75fe
+scenario_seed: 11612149861787631499
+scenario_hash: e20d3838b3f1eb1f3dce10f2c91d756081178e36c399b3074b3a433876de0b54
+authorship:
+  method: individually_written
+  case_id: C147
+  case_sha256: a126a4c68673ff8b52e26a19b2e13d6a0b3d522226486d684fa884443d9e6a92
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- unique_transaction_count
+- refund_vat

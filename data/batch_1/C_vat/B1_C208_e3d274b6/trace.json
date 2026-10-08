@@ -1,0 +1,342 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "표면판반입208",
+          "date": "2026-04-21",
+          "description": "설치할 안내판 표면판을 직원이 공장에 반입하여 가공했다.",
+          "document_ids": [
+            "표면판전자208"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "한자리 표면판 가공실",
+            "organization": "가상한자리표식"
+          },
+          "operation_id": "안내판설치208",
+          "participants": [
+            {
+              "name": "가상조반입",
+              "organization": "가상한자리표식",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "표면판구매208"
+        },
+        {
+          "action": "service",
+          "activity_id": "현장조립208",
+          "date": "2026-05-08",
+          "description": "당사 직원이 고객 현장에서 외주 작업자의 안내판 조립 서비스를 검수했다.",
+          "document_ids": [
+            "조립현금208"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상푸른기록관 설치 현장",
+            "organization": "가상푸른기록관"
+          },
+          "operation_id": "안내판설치208",
+          "participants": [
+            {
+              "name": "가상조현장",
+              "organization": "가상한자리표식",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "외주조립208"
+        }
+      ],
+      "operations": [
+        {
+          "description": "고객 현장에 안내판을 제작 설치하는 국내 과세 용역",
+          "operation_id": "안내판설치208",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "표면판반입208",
+          "date": "2026-04-21",
+          "document_id": "표면판전자208",
+          "transaction_id": "표면판구매208"
+        },
+        {
+          "activity_id": "현장조립208",
+          "date": "2026-05-08",
+          "document_id": "조립현금208",
+          "transaction_id": "외주조립208"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "표면판전자208",
+        "purpose": "business",
+        "transaction_id": "표면판구매208"
+      },
+      {
+        "business_related": true,
+        "document_id": "조립현금208",
+        "purpose": "business",
+        "transaction_id": "외주조립208"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "설치전자208"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "완료설치208"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "조립현금208"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "외주조립208"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "표면판전자208"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "표면판구매208"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-09",
+      "transaction_id": "완료설치208"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 8800000,
+      "includes_vat": true,
+      "transaction_id": "완료설치208"
+    },
+    "output": {
+      "gross": 8800000,
+      "supply_base": 8000000,
+      "vat": 800000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 8000000
+    },
+    "output": 800000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "완료설치208"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-08",
+      "transaction_id": "외주조립208"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1210000,
+      "includes_vat": true,
+      "transaction_id": "외주조립208"
+    },
+    "output": {
+      "gross": 1210000,
+      "supply_base": 1100000,
+      "vat": 110000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "외주조립208",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 110000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-21",
+      "transaction_id": "표면판구매208"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3600000,
+      "includes_vat": false,
+      "transaction_id": "표면판구매208"
+    },
+    "output": {
+      "gross": 3960000,
+      "supply_base": 3600000,
+      "vat": 360000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "표면판구매208",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 360000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 186000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 330000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 330000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 330000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 470000,
+      "output_vat": 800000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 470000,
+      "input_vat": 470000,
+      "net_vat": 330000,
+      "noncreditable_vat": 0,
+      "output_vat": 800000,
+      "payable_vat": 330000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 8000000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,441 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "C143-강의식품",
+          "date": "2026-05-08",
+          "description": "면세 강의만 담당하는 두 직원이 강의 준비 중 간식을 먹었다.",
+          "document_ids": [
+            "C143-강의카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상강의 직원실"
+          },
+          "operation_id": "C143-강의",
+          "participants": [
+            {
+              "name": "가상노강의",
+              "organization": "가상두배움",
+              "role": "employee"
+            },
+            {
+              "name": "가상박강의",
+              "organization": "가상두배움",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C143-강의간식"
+        },
+        {
+          "action": "meal",
+          "activity_id": "C143-판매식품",
+          "date": "2026-05-09",
+          "description": "교구 판매팀 직원이 판매 준비 휴식 시간에 식품을 먹었다.",
+          "document_ids": [
+            "C143-판매카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상교구 판매직원실"
+          },
+          "operation_id": "C143-교구",
+          "participants": [
+            {
+              "name": "가상손판매",
+              "organization": "가상두배움",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C143-판매간식"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C143-포장인수",
+          "date": "2026-05-10",
+          "description": "직원이 교구 판매 전용 포장 물품을 포장실에 인수했다.",
+          "document_ids": [
+            "C143-포장카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상교구 포장실"
+          },
+          "operation_id": "C143-교구",
+          "participants": [
+            {
+              "name": "가상손판매",
+              "organization": "가상두배움",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C143-포장물품"
+        }
+      ],
+      "operations": [
+        {
+          "description": "자료에 명시된 면세 교육 강의",
+          "operation_id": "C143-강의",
+          "output_taxable": false
+        },
+        {
+          "description": "과세 교구 판매 영업",
+          "operation_id": "C143-교구",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C143-강의식품",
+          "date": "2026-05-08",
+          "document_id": "C143-강의카드",
+          "transaction_id": "C143-강의간식"
+        },
+        {
+          "activity_id": "C143-판매식품",
+          "date": "2026-05-09",
+          "document_id": "C143-판매카드",
+          "transaction_id": "C143-판매간식"
+        },
+        {
+          "activity_id": "C143-포장인수",
+          "date": "2026-05-10",
+          "document_id": "C143-포장카드",
+          "transaction_id": "C143-포장물품"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C143-강의카드",
+        "purpose": "exempt_business",
+        "transaction_id": "C143-강의간식"
+      },
+      {
+        "business_related": true,
+        "document_id": "C143-판매카드",
+        "purpose": "business",
+        "transaction_id": "C143-판매간식"
+      },
+      {
+        "business_related": true,
+        "document_id": "C143-포장카드",
+        "purpose": "business",
+        "transaction_id": "C143-포장물품"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C143-강의카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C143-강의간식"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C143-교구계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C143-교구공급"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C143-판매카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C143-판매간식"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C143-포장카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C143-포장물품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-08",
+      "transaction_id": "C143-강의간식"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 143000,
+      "includes_vat": true,
+      "transaction_id": "C143-강의간식"
+    },
+    "output": {
+      "gross": 143000,
+      "supply_base": 130000,
+      "vat": 13000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "exempt_business",
+      "supplier_general": true,
+      "transaction_id": "C143-강의간식",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 13000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-24",
+      "transaction_id": "C143-교구공급"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 10230000,
+      "includes_vat": true,
+      "transaction_id": "C143-교구공급"
+    },
+    "output": {
+      "gross": 10230000,
+      "supply_base": 9300000,
+      "vat": 930000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 9300000
+    },
+    "output": 930000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "C143-교구공급"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-09",
+      "transaction_id": "C143-판매간식"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 88000,
+      "includes_vat": true,
+      "transaction_id": "C143-판매간식"
+    },
+    "output": {
+      "gross": 88000,
+      "supply_base": 80000,
+      "vat": 8000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C143-판매간식",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 8000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-10",
+      "transaction_id": "C143-포장물품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 297000,
+      "includes_vat": true,
+      "transaction_id": "C143-포장물품"
+    },
+    "output": {
+      "gross": 297000,
+      "supply_base": 270000,
+      "vat": 27000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C143-포장물품",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 27000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 619000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 922000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 922000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 922000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 8000,
+      "output_vat": 930000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 8000,
+      "input_vat": 48000,
+      "net_vat": 922000,
+      "noncreditable_vat": 40000,
+      "output_vat": 930000,
+      "payable_vat": 922000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 9300000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

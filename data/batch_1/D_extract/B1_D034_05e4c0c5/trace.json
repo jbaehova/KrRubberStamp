@@ -1,0 +1,209 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-25",
+          "document_id": "ACCESSMEET-BOARD-0522",
+          "event": "received",
+          "event_id": "AM-R-BOARD",
+          "location": "가상접근성센터 간담회실"
+        },
+        {
+          "date": "2026-05-25",
+          "document_id": "ACCESSMEET-BACK-0521",
+          "event": "received",
+          "event_id": "AM-R-BACK",
+          "location": "가상접근성센터 간담회실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-21",
+          "document_id": "ACCESSMEET-BACK-0521",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "AM-H-BACK",
+          "vendor": "가상편한모임"
+        },
+        {
+          "date": "2026-05-22",
+          "document_id": "ACCESSMEET-BOARD-0522",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "AM-H-BOARD",
+          "vendor": "가상읽기모임"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "AM-H-BOARD",
+          "items": [
+            {
+              "name": "큰글씨메모판",
+              "quantity": 12,
+              "unit_price": 9800
+            },
+            {
+              "name": "메모판거치대",
+              "quantity": 12,
+              "unit_price": 4500
+            }
+          ],
+          "sheet_id": "AM-S-BOARD"
+        },
+        {
+          "header_record_id": "AM-H-BACK",
+          "items": [
+            {
+              "name": "휴대접이식등받이",
+              "quantity": 8,
+              "unit_price": 24000
+            }
+          ],
+          "sheet_id": "AM-S-BACK-A"
+        },
+        {
+          "header_record_id": "AM-H-BACK",
+          "items": [
+            {
+              "name": "자리구분표찰",
+              "quantity": 16,
+              "unit_price": 1200
+            }
+          ],
+          "sheet_id": "AM-S-BACK-B"
+        }
+      ],
+      "processing_policy": "품목 부속표의 header_record_id를 납품 표지의 record_id와 연결한다. 인수 대장의 document_id가 해당 표지의 거래 번호와 일치하는 주문 또는 계산서만 집계한다. 부속표가 여러 장이면 같은 표지에 연결되는 품목을 함께 합산한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "ACCESSMEET-BACK-0521",
+        "ACCESSMEET-BOARD-0522"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "ACCESSMEET-BACK-0521",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 24000
+    },
+    "output": {
+      "supply": 192000,
+      "total": 211200,
+      "vat": 19200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "ACCESSMEET-BACK-0521",
+      "includes_vat": false,
+      "quantity": 16,
+      "unit_price": 1200
+    },
+    "output": {
+      "supply": 19200,
+      "total": 21120,
+      "vat": 1920
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상편한모임"
+    },
+    "output": "가상편한모임",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "ACCESSMEET-BOARD-0522",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 9800
+    },
+    "output": {
+      "supply": 117600,
+      "total": 129360,
+      "vat": 11760
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "ACCESSMEET-BOARD-0522",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 4500
+    },
+    "output": {
+      "supply": 54000,
+      "total": 59400,
+      "vat": 5400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상읽기모임"
+    },
+    "output": "가상읽기모임",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "메모판거치대",
+          "unit_price": 4500,
+          "vendor": "가상읽기모임"
+        },
+        {
+          "item": "자리구분표찰",
+          "unit_price": 1200,
+          "vendor": "가상편한모임"
+        },
+        {
+          "item": "큰글씨메모판",
+          "unit_price": 9800,
+          "vendor": "가상읽기모임"
+        },
+        {
+          "item": "휴대접이식등받이",
+          "unit_price": 24000,
+          "vendor": "가상편한모임"
+        }
+      ],
+      "grand_total": 421080,
+      "supply_total": 382800,
+      "unique_document_count": 2,
+      "vat_total": 38280,
+      "vendor_totals": [
+        {
+          "supply": 171600,
+          "total": 188760,
+          "vat": 17160,
+          "vendor": "가상읽기모임"
+        },
+        {
+          "supply": 211200,
+          "total": 232320,
+          "vat": 21120,
+          "vendor": "가상편한모임"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

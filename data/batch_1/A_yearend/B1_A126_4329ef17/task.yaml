@@ -1,0 +1,42 @@
+task_id: B1_A126_4329ef17
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상공작초가구의 가상옥서율에게 교육 납부증명 두 건이 도착했습니다. 회사가 직접 부담하고 회수하지 않은 수업료와 직원이 낸
+  별도 학부 등록금을 구분해 교육비 세액공제액을 계산해 주세요. 과세표준과 소득세 결정세액도 작성합니다. 학생 이름이 같다고 두 비용을 모두 개인
+  부담으로 보지 마세요.
+input_files:
+- path: inputs/01_비용부담회신.hwpx
+  format: hwpx
+- path: inputs/02_확정급여.xlsx
+  format: xlsx
+- path: inputs/03_회사납부교육.pdf
+  format: pdf
+- path: inputs/04_개인납부학부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    education_credit:
+      type: integer
+    tax_base:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - education_credit
+  - tax_base
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-624bdaf9-0475-5f72-aa73-c8a0bcda62d5
+scenario_seed: 4839662158066164113
+scenario_hash: 8d4c244b09dffef3f6914643aa862134d7532c5d2f554251b530d73052774455
+authorship:
+  method: individually_written
+  case_id: A126
+  case_sha256: 4329ef17546f21910861f840456326f71fae061067cf306c5a39ae999a2f63fe
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- education_credit
+- tax_base
+- final_national_tax

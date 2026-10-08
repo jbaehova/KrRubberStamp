@@ -1,0 +1,54 @@
+task_id: B1_D027_57c9c34d
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 흔적 조사팀이 나눠 산 보관 용품을 한 정산서로 모으고 있습니다. 명세마다 달라 보이는 법인 이름을 장부 기준에 맞춰 업체별
+  지급 내역으로 묶고 전체 부가세도 확인해 주세요. answer.json에는 vendor_totals와 vat_total을 적어 주세요.
+input_files:
+- path: inputs/01_표본봉투_구매.pdf
+  format: pdf
+- path: inputs/02_기록판_인수.xlsx
+  format: xlsx
+- path: inputs/03_추가봉투_확인.hwpx
+  format: hwpx
+- path: inputs/04_보관케이스_납품.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-83db334b-3e21-565a-9c47-9f40b2a3d228
+scenario_seed: 6325801888394530714
+scenario_hash: 2636b2793c714d5642c1fb8c1db86e7ba708046826859b8d2f5aaaee6dff56ef
+authorship:
+  method: individually_written
+  case_id: D027
+  case_sha256: 57c9c34d4d404f9a36b7f21856052f9b8519d4d170903df285c1db9e02470cfa
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- vat_total

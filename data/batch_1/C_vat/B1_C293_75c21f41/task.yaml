@@ -1,0 +1,52 @@
+task_id: B1_C293_75c21f41
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상온차소품의 신고 지점 전년 자료와 실제 차량 사용을 연결해 발행 공제(receipt_credit), 불공제세액(noncreditable_vat),
+  납부세액(payable_vat)을 answer.json에 써 주세요.
+input_files:
+- path: inputs/지점기준.hwpx
+  format: hwpx
+- path: inputs/연도매출.xlsx
+  format: xlsx
+- path: inputs/차량허가.pdf
+  format: pdf
+- path: inputs/업무표.hwpx
+  format: hwpx
+- path: inputs/실제운행.xlsx
+  format: xlsx
+- path: inputs/소품카드.pdf
+  format: pdf
+- path: inputs/정비전자.pdf
+  format: pdf
+- path: inputs/정비스캔.png
+  format: png
+  duplicate_of: inputs/정비전자.pdf
+- path: inputs/신고총괄.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - noncreditable_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-36bcbcb4-6f16-56b3-8fd4-97793005a25e
+scenario_seed: 8485379013663608270
+scenario_hash: 6c317264778bc60a198944ffec475cebfcbdb85ff3bb96cc4de836ae0b5358a3
+authorship:
+  method: individually_written
+  case_id: C293
+  case_sha256: 75c21f4165f94dcec4f1c82e19301b6dafcaf3847f14dc11fdca52d439035526
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- receipt_credit
+- noncreditable_vat
+- payable_vat

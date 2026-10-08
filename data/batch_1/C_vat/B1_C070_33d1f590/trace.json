@@ -1,0 +1,281 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "service",
+          "activity_id": "C070-수리활동",
+          "date": "2026-01-19",
+          "description": "직원이 출력실 프린터의 수리 완료를 확인하고 개인 카드로 결제했다.",
+          "document_ids": [
+            "C070-수리카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상작업종이 출력실"
+          },
+          "operation_id": "C070-출력",
+          "participants": [
+            {
+              "name": "가상 출력직원",
+              "organization": "가상작업종이",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C070-수리"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C070-토너활동",
+          "date": "2026-02-02",
+          "description": "직원이 출력용 토너를 별도로 받았다.",
+          "document_ids": [
+            "C070-토너계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상작업종이 출력실"
+          },
+          "operation_id": "C070-출력",
+          "participants": [
+            {
+              "name": "가상 출력직원",
+              "organization": "가상작업종이",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C070-토너"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 문서 출력 작업",
+          "operation_id": "C070-출력",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C070-수리활동",
+          "date": "2026-01-19",
+          "document_id": "C070-수리카드",
+          "transaction_id": "C070-수리"
+        },
+        {
+          "activity_id": "C070-토너활동",
+          "date": "2026-02-02",
+          "document_id": "C070-토너계산서",
+          "transaction_id": "C070-토너"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C070-수리카드",
+        "purpose": "business",
+        "transaction_id": "C070-수리"
+      },
+      {
+        "business_related": true,
+        "document_id": "C070-토너계산서",
+        "purpose": "business",
+        "transaction_id": "C070-토너"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C070-수리카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C070-수리"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C070-토너계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C070-토너"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-01-19",
+      "transaction_id": "C070-수리"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 462000,
+      "includes_vat": true,
+      "transaction_id": "C070-수리"
+    },
+    "output": {
+      "gross": 462000,
+      "supply_base": 420000,
+      "vat": 42000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C070-수리",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 42000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-02",
+      "transaction_id": "C070-토너"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 380000,
+      "includes_vat": false,
+      "transaction_id": "C070-토너"
+    },
+    "output": {
+      "gross": 418000,
+      "supply_base": 380000,
+      "vat": 38000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C070-토너",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 38000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 93000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -38000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -38000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -38000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 38000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 38000,
+      "input_vat": 80000,
+      "net_vat": -38000,
+      "noncreditable_vat": 42000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 38000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

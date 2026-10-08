@@ -1,0 +1,281 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "ground_work",
+          "activity_id": "C131-지반완료",
+          "date": "2026-04-27",
+          "description": "토지 필지의 지반을 굴착해 배수로를 조성하고 직원이 완료를 확인했다.",
+          "document_ids": [
+            "C131-배수로계산서"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "가상토지 131번 필지"
+          },
+          "operation_id": "C131-제작",
+          "participants": [
+            {
+              "name": "가상한시설",
+              "organization": "가상빗물관리",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C131-배수로"
+        },
+        {
+          "action": "service",
+          "activity_id": "C131-펌프교체",
+          "date": "2026-04-28",
+          "description": "기존 건물 내부 배수 펌프를 교체했다. 지반 조성은 포함하지 않았다.",
+          "document_ids": [
+            "C131-펌프계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상기존 제작장 내부"
+          },
+          "operation_id": "C131-제작",
+          "participants": [
+            {
+              "name": "가상한시설",
+              "organization": "가상빗물관리",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C131-펌프"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 펌프 제작 작업장 운영",
+          "operation_id": "C131-제작",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C131-지반완료",
+          "date": "2026-04-27",
+          "document_id": "C131-배수로계산서",
+          "transaction_id": "C131-배수로"
+        },
+        {
+          "activity_id": "C131-펌프교체",
+          "date": "2026-04-28",
+          "document_id": "C131-펌프계산서",
+          "transaction_id": "C131-펌프"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C131-배수로계산서",
+        "purpose": "land",
+        "transaction_id": "C131-배수로"
+      },
+      {
+        "business_related": true,
+        "document_id": "C131-펌프계산서",
+        "purpose": "business",
+        "transaction_id": "C131-펌프"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C131-배수로계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C131-배수로"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C131-펌프계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C131-펌프"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-27",
+      "transaction_id": "C131-배수로"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 7480000,
+      "includes_vat": true,
+      "transaction_id": "C131-배수로"
+    },
+    "output": {
+      "gross": 7480000,
+      "supply_base": 6800000,
+      "vat": 680000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "C131-배수로",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 680000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-28",
+      "transaction_id": "C131-펌프"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1870000,
+      "includes_vat": true,
+      "transaction_id": "C131-펌프"
+    },
+    "output": {
+      "gross": 1870000,
+      "supply_base": 1700000,
+      "vat": 170000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C131-펌프",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 170000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 383000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -170000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -170000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -170000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 170000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 170000,
+      "input_vat": 850000,
+      "net_vat": -170000,
+      "noncreditable_vat": 680000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 170000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

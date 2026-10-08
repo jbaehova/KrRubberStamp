@@ -1,0 +1,82 @@
+task_id: B1_D248_8f9727e2
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 안경 가공실 소모품을 업체 계정과 품목 단가표로 인계해 주세요. vendor_totals와 cheapest_by_item 및
+  grand_total을 제출해 주세요.
+input_files:
+- path: inputs/01_첫패드표지.pdf
+  format: pdf
+- path: inputs/02_첫패드내역.xlsx
+  format: xlsx
+- path: inputs/03_동봉천내역.hwpx
+  format: hwpx
+- path: inputs/04_광학매대표지.pdf
+  format: pdf
+- path: inputs/05_유상닦음천.xlsx
+  format: xlsx
+- path: inputs/06_보관통품목.hwpx
+  format: hwpx
+- path: inputs/07_후속패드표지.pdf
+  format: pdf
+- path: inputs/08_후속패드내역.xlsx
+  format: xlsx
+- path: inputs/09_고정링내역.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-e5f13a4d-2b5c-5d72-b9ae-8b66e48a25b7
+scenario_seed: 10346782524267874909
+scenario_hash: fe06dcae08fe8859b1cb15d623e42f10db7fc452af0e4ed9e4fb6d0e3af1ec69
+authorship:
+  method: individually_written
+  case_id: D248
+  case_sha256: 8f9727e2df34ca5d8910d0d27611b3dda9e1a4bd55a54a6dc628b0e2ea5c75be
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item
+- grand_total

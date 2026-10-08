@@ -1,0 +1,210 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "설치이동정비",
+          "date": "2026-05-11",
+          "description": "직원은 현장 설치팀 이동에 이 차량을 계속 사용했다. 대여 고객 운행은 없었다.",
+          "document_ids": [
+            "정비카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "설치 장치 차고"
+          },
+          "operation_id": "장치설치",
+          "participants": [
+            {
+              "name": "가상이장치",
+              "organization": "가상겸업이동",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C182-정비",
+          "vehicle_id": "가상-R182"
+        }
+      ],
+      "operations": [
+        {
+          "description": "허가받은 자동차 대여",
+          "operation_id": "등록대여",
+          "output_taxable": true
+        },
+        {
+          "description": "과세 현장 장치 설치",
+          "operation_id": "장치설치",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "설치이동정비",
+          "date": "2026-05-11",
+          "document_id": "정비카드",
+          "transaction_id": "C182-정비"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "vehicle_rental",
+          "permitted_operation_id": "등록대여",
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-R182"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "정비카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C182-정비"
+      },
+      {
+        "transaction_id": "C182-정비",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-R182",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "정비카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C182-정비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-11",
+      "transaction_id": "C182-정비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 836000,
+      "includes_vat": true,
+      "transaction_id": "C182-정비"
+    },
+    "output": {
+      "gross": 836000,
+      "supply_base": 760000,
+      "vat": 76000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C182-정비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 76000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 630000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 76000,
+      "net_vat": 0,
+      "noncreditable_vat": 76000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,312 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-07-07",
+          "document_id": "SYMBOL-A-11",
+          "event": "received",
+          "event_id": "SYMBOL-A-IN",
+          "location": "현장안내설치소"
+        },
+        {
+          "date": "2026-07-07",
+          "document_id": "SYMBOL-B-12",
+          "event": "received",
+          "event_id": "SYMBOL-B-IN",
+          "location": "현장안내설치소"
+        },
+        {
+          "date": "2026-07-08",
+          "document_id": "SYMBOL-POST-13",
+          "event": "received",
+          "event_id": "SYMBOL-POST-IN",
+          "location": "현장안내설치소"
+        },
+        {
+          "date": "2026-07-05",
+          "document_id": "SYMBOL-EXPAND-14",
+          "event": "cancelled_before_dispatch",
+          "event_id": "SYMBOL-EXPAND-STOP",
+          "location": "기호판출고대기"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-07-01",
+          "document_id": "SYMBOL-A-11",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "SYMBOL-EXT-C",
+          "vendor": "가상현장기호"
+        },
+        {
+          "date": "2026-07-01",
+          "document_id": "SYMBOL-A-11",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "SYMBOL-BOOK-C",
+          "vendor": "가상현장기호"
+        },
+        {
+          "date": "2026-07-02",
+          "document_id": "SYMBOL-B-12",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SYMBOL-ALT-C",
+          "vendor": "가상안내도구"
+        },
+        {
+          "date": "2026-07-03",
+          "document_id": "SYMBOL-POST-13",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "SYMBOL-POST-C",
+          "vendor": "가상현장기호"
+        },
+        {
+          "date": "2026-06-25",
+          "document_id": "SYMBOL-Q-25",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "SYMBOL-Q-C",
+          "vendor": "가상안내도구"
+        },
+        {
+          "date": "2026-07-04",
+          "document_id": "SYMBOL-EXPAND-14",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SYMBOL-EXPAND-C",
+          "vendor": "가상현장기호"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "SYMBOL-EXT-C",
+          "items": [
+            {
+              "name": "현장기호판30",
+              "quantity": 5,
+              "unit_price": 34100
+            }
+          ],
+          "sheet_id": "SYMBOL-A-MAIN"
+        },
+        {
+          "header_record_id": "SYMBOL-EXT-C",
+          "items": [
+            {
+              "name": "기호판고정볼트",
+              "quantity": 20,
+              "unit_price": 605
+            }
+          ],
+          "sheet_id": "SYMBOL-A-BOLT"
+        },
+        {
+          "header_record_id": "SYMBOL-BOOK-C",
+          "items": [
+            {
+              "name": "현장기호판30",
+              "quantity": 5,
+              "unit_price": 34100
+            },
+            {
+              "name": "기호판고정볼트",
+              "quantity": 20,
+              "unit_price": 605
+            }
+          ],
+          "sheet_id": "SYMBOL-A-BOOK"
+        },
+        {
+          "header_record_id": "SYMBOL-ALT-C",
+          "items": [
+            {
+              "name": "현장기호판30",
+              "quantity": 3,
+              "unit_price": 31800
+            }
+          ],
+          "sheet_id": "SYMBOL-B-L"
+        },
+        {
+          "header_record_id": "SYMBOL-POST-C",
+          "items": [
+            {
+              "name": "기호판지지봉",
+              "quantity": 8,
+              "unit_price": 13600
+            }
+          ],
+          "sheet_id": "SYMBOL-POST-L"
+        },
+        {
+          "header_record_id": "SYMBOL-Q-C",
+          "items": [
+            {
+              "name": "현장기호판30",
+              "quantity": 8,
+              "unit_price": 27400
+            }
+          ],
+          "sheet_id": "SYMBOL-Q-L"
+        },
+        {
+          "header_record_id": "SYMBOL-EXPAND-C",
+          "items": [
+            {
+              "name": "현장기호판50",
+              "quantity": 2,
+              "unit_price": 46300
+            }
+          ],
+          "sheet_id": "SYMBOL-EXPAND-L"
+        }
+      ],
+      "processing_policy": "첨부는 header_record_id로 연결하며 같은 표지의 행을 순서대로 합한다. invoice 또는 order에 received가 있는 원문 번호만 구매다. quote와 cancelled_before_dispatch는 제외한다. 다른 record_id라도 document_id와 최종 원문 내용이 같으면 한 번 계산한다. 포함 행의 공급가액은 행 총액의 10/11에서 원 미만을 버리고 차액이 세액이다. 포함 개당 비교 단가는 단가의 10/11에서 원 미만을 버린다. 별도 행은 수량 곱하기 단가가 공급가액이고 그 10%의 원 미만을 버린 세액을 더한다. 이름은 NFKC 후 공백 제거 및 영문 소문자, 업체 법인 표기 제거를 적용하며 업체 및 품목명 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "SYMBOL-EXPAND-14",
+        "SYMBOL-Q-25"
+      ],
+      "joined_document_records_before_deduplication": 4,
+      "received_document_ids": [
+        "SYMBOL-A-11",
+        "SYMBOL-B-12",
+        "SYMBOL-POST-13"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SYMBOL-A-11",
+      "includes_vat": true,
+      "quantity": 5,
+      "unit_price": 34100
+    },
+    "output": {
+      "supply": 155000,
+      "total": 170500,
+      "vat": 15500
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "SYMBOL-A-11",
+      "includes_vat": true,
+      "quantity": 20,
+      "unit_price": 605
+    },
+    "output": {
+      "supply": 11000,
+      "total": 12100,
+      "vat": 1100
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상현장기호"
+    },
+    "output": "가상현장기호",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SYMBOL-A-11"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "SYMBOL-B-12",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 31800
+    },
+    "output": {
+      "supply": 95400,
+      "total": 104940,
+      "vat": 9540
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상안내도구"
+    },
+    "output": "가상안내도구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SYMBOL-POST-13",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 13600
+    },
+    "output": {
+      "supply": 108800,
+      "total": 119680,
+      "vat": 10880
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상현장기호"
+    },
+    "output": "가상현장기호",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "기호판고정볼트",
+          "unit_price": 550,
+          "vendor": "가상현장기호"
+        },
+        {
+          "item": "기호판지지봉",
+          "unit_price": 13600,
+          "vendor": "가상현장기호"
+        },
+        {
+          "item": "현장기호판30",
+          "unit_price": 31000,
+          "vendor": "가상현장기호"
+        }
+      ],
+      "grand_total": 407220,
+      "supply_total": 370200,
+      "unique_document_count": 3,
+      "vat_total": 37020,
+      "vendor_totals": [
+        {
+          "supply": 95400,
+          "total": 104940,
+          "vat": 9540,
+          "vendor": "가상안내도구"
+        },
+        {
+          "supply": 274800,
+          "total": 302280,
+          "vat": 27480,
+          "vendor": "가상현장기호"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

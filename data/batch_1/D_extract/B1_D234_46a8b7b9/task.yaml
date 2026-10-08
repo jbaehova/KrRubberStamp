@@ -1,0 +1,51 @@
+task_id: B1_D234_46a8b7b9
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 카페 유리잔 받침의 공급가액 기준 재주문 표와 실제 세액을 정리해 주세요. cheapest_by_item과 vat_total을
+  제출해 주세요.
+input_files:
+- path: inputs/01_잔받침표지.pdf
+  format: pdf
+- path: inputs/02_잔받침수량.xlsx
+  format: xlsx
+- path: inputs/03_소품받침표지.hwpx
+  format: hwpx
+- path: inputs/04_소품받침수량.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-144ec735-6024-5a53-9d2c-49707b209736
+scenario_seed: 5091521383972223474
+scenario_hash: ff28d172037fcbfd87b536055fc1745f858a45cb430862e5bde1a20e5bff1c5c
+authorship:
+  method: individually_written
+  case_id: D234
+  case_sha256: 46a8b7b901f839f2afbdbccc2a371fe835d5c4995bc5f2a2f646e67a4c106fbc
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- vat_total

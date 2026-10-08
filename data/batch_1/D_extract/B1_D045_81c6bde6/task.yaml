@@ -1,0 +1,62 @@
+task_id: B1_D045_81c6bde6
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 이동 수선 카페의 다음 순회용 소모품을 발주하려 합니다. 판매처 이름과 세금 표기가 다른 납품 자료를 맞춰 품목별 최저 공급가액
+  단가의 업체를 골라 주세요. 근거가 된 구매 건수도 answer.json의 cheapest_by_item과 unique_document_count로
+  정리해 주세요.
+input_files:
+- path: inputs/01_바늘케이스_명세.pdf
+  format: pdf
+- path: inputs/02_지퍼손잡이_대장.xlsx
+  format: xlsx
+- path: inputs/03_단추함_확인.hwpx
+  format: hwpx
+- path: inputs/04_손잡이_추가명세.pdf
+  format: pdf
+- path: inputs/05_케이스_보충대장.xlsx
+  format: xlsx
+- path: inputs/06_보강테이프_확인.hwpx
+  format: hwpx
+- path: inputs/07_단추함_추가명세.pdf
+  format: pdf
+- path: inputs/08_고정집게_구매.xlsx
+  format: xlsx
+- path: inputs/09_보강패치_납품.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - cheapest_by_item
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-95d7153a-5c7d-51d1-a991-47c01d24eb67
+scenario_seed: 9351370475583009028
+scenario_hash: 1c2f2115642e898c6892e66316b53dc4801e6606c68223838821d14a8ddb4a1b
+authorship:
+  method: individually_written
+  case_id: D045
+  case_sha256: 81c6bde6e033710424b4bcd9e65939b9997f1dba2b621d23bd702459feeada49
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item
+- unique_document_count

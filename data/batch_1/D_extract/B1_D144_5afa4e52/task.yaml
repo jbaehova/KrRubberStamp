@@ -1,0 +1,65 @@
+task_id: B1_D144_5afa4e52
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 휴대 번역 단말 받침과 충전선을 재구매할 기준이 필요합니다. 자료를 정리해 cheapest_by_item, supply_total,
+  vat_total을 확인해 주세요.
+input_files:
+- path: inputs/01_받침표지.pdf
+  format: pdf
+- path: inputs/02_받침품목.xlsx
+  format: xlsx
+- path: inputs/03_받침수령.hwpx
+  format: hwpx
+- path: inputs/04_충전선표지.hwpx
+  format: hwpx
+- path: inputs/05_충전선품목.pdf
+  format: pdf
+- path: inputs/06_충전선수령.xlsx
+  format: xlsx
+- path: inputs/07_세트표지.pdf
+  format: pdf
+- path: inputs/08_세트품목.hwpx
+  format: hwpx
+- path: inputs/09_세트수령.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-1b6deb92-fa22-5144-bd5b-f34effd42a52
+scenario_seed: 6555638325510193398
+scenario_hash: 95f2fe2a3592a68551d244f0b54fec324f68e1fd392e06004a90302ffcfc1b9f
+authorship:
+  method: individually_written
+  case_id: D144
+  case_sha256: 5afa4e52e3f8c0f6e098b684e22b2a0a6a61c0abcc372c30831af409a0c02d97
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- supply_total
+- vat_total

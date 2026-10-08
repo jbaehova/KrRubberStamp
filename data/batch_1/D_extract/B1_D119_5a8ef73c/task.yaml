@@ -1,0 +1,54 @@
+task_id: B1_D119_5a8ef73c
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 공간 분리 공사에서 가림막 주문과 실제 받은 부품이 함께 인계됐습니다. 인수 이력을 연결해 vendor_totals와 grand_total을
+  확인해 주세요.
+input_files:
+- path: inputs/01_가림막주문표지.pdf
+  format: pdf
+- path: inputs/02_고정발주문표지.hwpx
+  format: hwpx
+- path: inputs/03_주문품목첨부.xlsx
+  format: xlsx
+- path: inputs/04_진행기록.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-3c95488a-ed77-5fdb-8116-76b76ed774c6
+scenario_seed: 6525424749752146458
+scenario_hash: b3e3dd8876371cc6066b3fbe503f39e3984d13c1326d5c85789ebfb4380c156d
+authorship:
+  method: individually_written
+  case_id: D119
+  case_sha256: 5a8ef73c9984da1a9be05b5119ec9e1cb77e3c475afe4246445161bd3d22a17c
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals
+- grand_total

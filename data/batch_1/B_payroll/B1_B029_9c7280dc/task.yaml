@@ -1,0 +1,49 @@
+task_id: B1_B029_9c7280dc
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상강변표본실은 가상김여준을 만 66세에 새로 채용했습니다. 이전 사업장에서 65세 전부터 이어진 고용보험 가입 이력은 없습니다.
+  공단이 확인한 부과 상태대로 국민연금과 고용보험 공제를 등록하고 건강보험 및 장기요양보험은 정상 계산해 주세요. 실지급액까지 적어 주세요.
+input_files:
+- path: inputs/01_신규채용약정.hwpx
+  format: hwpx
+- path: inputs/02_고령신규보험.pdf
+  format: pdf
+- path: inputs/03_첫정상월마감.xlsx
+  format: xlsx
+- path: inputs/04_가입공제원문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    national_pension:
+      type: integer
+    employment_insurance:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - national_pension
+  - employment_insurance
+  - health_insurance
+  - long_term_care
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-3130782f-4d00-5756-88a3-4b84e835377d
+scenario_seed: 11273214503752180560
+scenario_hash: df208a70cc39d0d933120fde887664d840d684904d0de92957fc9502e342d3bf
+authorship:
+  method: individually_written
+  case_id: B029
+  case_sha256: 9c7280dcf4ee235008ea938be3e2c2255a75ae56df062dd0ef45ed3e532c5250
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- national_pension
+- employment_insurance
+- health_insurance
+- long_term_care
+- net_pay

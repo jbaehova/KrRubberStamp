@@ -1,0 +1,45 @@
+task_id: B1_B185_25fb02e3
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상씨앗정리소는 당월 분류 실적금을 추가 지급합니다. 정액 소정근로 대가와 실적금을 구별하여 통상임금과 승인된 평일 연장수당을
+  계산하고 과세급여 및 실지급액을 구해 주세요.
+input_files:
+- path: inputs/01_씨앗정액.hwpx
+  format: hwpx
+- path: inputs/02_분류성과.xlsx
+  format: xlsx
+- path: inputs/03_분류연장.pdf
+  format: pdf
+- path: inputs/04_씨앗등록.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    overtime_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - overtime_pay
+  - taxable_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-557b19be-ec4c-5d5e-9ac0-fc02469f8eef
+scenario_seed: 2736784374518798475
+scenario_hash: 6636b1a1d00feda38c7bf4656767e31126e446df00980bc92b19ea120babd8cd
+authorship:
+  method: individually_written
+  case_id: B185
+  case_sha256: 25fb02e37608588b656136a61f1df65f313e5f49363645de37f15545dab888f3
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- ordinary_monthly_wage
+- overtime_pay
+- taxable_pay
+- net_pay

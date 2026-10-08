@@ -1,0 +1,43 @@
+task_id: B1_B119_96287bc3
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상작은창고는 반출 작업 중 대기 시간을 무급 휴게로 승인했습니다. 추가 작업의 출퇴근과 휴게 시각을 읽고 연장수당과 야간
+  가산액을 계산해 주세요. 특히 휴게가 22시 경계를 가로지릅니다. 두 수당을 포함한 총지급액도 필요합니다.
+input_files:
+- path: inputs/01_창고계약.pdf
+  format: pdf
+- path: inputs/02_반출휴게.xlsx
+  format: xlsx
+- path: inputs/03_창고일정.hwpx
+  format: hwpx
+- path: inputs/04_창고공제.xlsx
+  format: xlsx
+- path: inputs/05_야간공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-bccc7ac0-2592-51fc-9754-6b0df0d1068a
+scenario_seed: 10820034182991395637
+scenario_hash: acab302d90cfc66d6ceaeadbd6b187f4038a5239a50287a2a6ccf680c219eb12
+authorship:
+  method: individually_written
+  case_id: B119
+  case_sha256: 96287bc32ec93b35dd8dc889c5b68d2b24c8f342eb4dc49dd79a57a425de81b8
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- overtime_pay
+- night_pay
+- gross_pay

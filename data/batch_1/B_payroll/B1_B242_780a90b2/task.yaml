@@ -1,0 +1,66 @@
+task_id: B1_B242_780a90b2
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상흰색문서실은 어린이날 야간 작업의 휴게와 종료를 수정 승인했습니다. 소정일 출근과 최종 승인 카드를 대조하여 기본 근로
+  대가, 유급휴일 대가와 주휴수당을 따로 구해 주세요. 실제 휴일근로 수당과 야간 가산을 더한 총지급액도 작성해 주세요.
+input_files:
+- path: inputs/01_종료약정.pdf
+  format: pdf
+- path: inputs/02_소정출근.xlsx
+  format: xlsx
+- path: inputs/03_유급기초.hwpx
+  format: hwpx
+- path: inputs/04_초기출동.pdf
+  format: pdf
+- path: inputs/05_수정출동.xlsx
+  format: xlsx
+- path: inputs/06_은행실행.hwpx
+  format: hwpx
+- path: inputs/07_연금통지.pdf
+  format: pdf
+- path: inputs/08_다른공제.xlsx
+  format: xlsx
+- path: inputs/09_원문기준.xlsx
+  format: xlsx
+- path: inputs/10_초기출동스캔.png
+  format: png
+  duplicate_of: inputs/04_초기출동.pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - paid_holiday_pay
+  - weekly_holiday_pay
+  - holiday_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-9ca4b24c-8806-569a-abb7-4d10bfec510d
+scenario_seed: 8649885130535595104
+scenario_hash: feabb445fed0397c06f126c44304b5c4f28308eed31f278174b42763c8c367e4
+authorship:
+  method: individually_written
+  case_id: B242
+  case_sha256: 780a90b27981ec60209434800cf5926a426fd147527e54e746ac4bf25a38c897
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- base_pay
+- paid_holiday_pay
+- weekly_holiday_pay
+- holiday_pay
+- night_pay
+- gross_pay

@@ -1,0 +1,59 @@
+task_id: B1_A253_61f45d20
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상달오름철 가상공서윤의 퇴직 연도 정산을 마감해 주세요. 주택이자와 퇴직 뒤 월세 및 병원비를 각각 판단하고 공익기관의 지정
+  종류가 바뀐 뒤 낸 기부도 확인합니다. 주택 소득공제와 월세 및 의료비 및 기부금 공제액을 적고 전체 차감징수액을 계산해 주세요.
+input_files:
+- path: inputs/01_퇴직확정.hwpx
+  format: hwpx
+- path: inputs/02_주택이자.pdf
+  format: pdf
+- path: inputs/03_연말보유.xlsx
+  format: xlsx
+- path: inputs/04_전입계약.hwpx
+  format: hwpx
+- path: inputs/05_퇴직지급.pdf
+  format: pdf
+- path: inputs/06_기관변경.xlsx
+  format: xlsx
+- path: inputs/07_기부납부.pdf
+  format: pdf
+- path: inputs/08_원천누계.xlsx
+  format: xlsx
+- path: inputs/09_정산범위.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    rent_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    donation_credit:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - housing_income_deduction
+  - rent_credit
+  - medical_credit
+  - donation_credit
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-4aab9f8f-7b89-5e70-b375-5c0e77e71583
+scenario_seed: 7058368911588093288
+scenario_hash: 80762dc8c8a27689dc4e40edddde2e2a4ce11a42841dff0268b34f4e911cdd4a
+authorship:
+  method: individually_written
+  case_id: A253
+  case_sha256: 61f45d20d4de6d68596cbad613d0e47529e2574511eed8404c1663d59ff66798
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- housing_income_deduction
+- rent_credit
+- medical_credit
+- donation_credit
+- settlement_total

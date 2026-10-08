@@ -1,0 +1,61 @@
+task_id: B1_C093_d8eb39a0
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상시선두칸 법인은 면세 진료실과 과세 안경 판매대를 분리 운영합니다. 이번 요청은 국내 10% 과세 매입과 안경 판매만 다룹니다.
+  실제 전용 사용 기록, 중복 증빙, 포장재 전표 요건을 확인하여 고유 거래 수(unique_transaction_count), 불공제 세액(noncreditable_vat),
+  공제가능 매입세액(deductible_input_vat), 발행세액공제(receipt_credit), 납부액(payable_vat)을 answer.json에
+  정수로 적어 주세요.
+input_files:
+- path: inputs/01_법인_신고범위.hwpx
+  format: hwpx
+- path: inputs/02_영업공간_자격.pdf
+  format: pdf
+- path: inputs/03_안경판매_카드.xlsx
+  format: xlsx
+- path: inputs/04_진료의자_계산서.pdf
+  format: pdf
+- path: inputs/05_판매시설_계산서.xlsx
+  format: xlsx
+- path: inputs/06_판매시설_카드.pdf
+  format: pdf
+- path: inputs/07_포장재_카드.xlsx
+  format: xlsx
+- path: inputs/08_실별_전용사용.hwpx
+  format: hwpx
+- path: inputs/09_예정고지_실제납부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-77a88339-f916-52c3-aaab-66158d1a8bb4
+scenario_seed: 15630650291491513598
+scenario_hash: 7606e1ab62db57c7e5a2726b7349015b51822d0d098d83f345fce49c634d8c16
+authorship:
+  method: individually_written
+  case_id: C093
+  case_sha256: d8eb39a018b524fe7ff5e2146636724da9867535b02f36958aca909fdeff7a34
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

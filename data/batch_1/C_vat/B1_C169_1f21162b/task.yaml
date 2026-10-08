@@ -1,0 +1,41 @@
+task_id: B1_C169_1f21162b
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상조립취미의 단말기, 현금 장부, 발급 대장을 통합해 공급가액(tax_base), 발행 공제(receipt_credit),
+  거래 수(unique_transaction_count)를 answer.json에 적어 주세요.
+input_files:
+- path: inputs/법인인계.hwpx
+  format: hwpx
+- path: inputs/카드판매.xlsx
+  format: xlsx
+- path: inputs/현금발급.pdf
+  format: pdf
+- path: inputs/현금장부.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    receipt_credit:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - tax_base
+  - receipt_credit
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-9c631307-3d7b-5e9e-88fb-ccca14cee0c3
+scenario_seed: 2243098463949629882
+scenario_hash: 739f0342de3d2a534712c75010db331245f3331b431bd0de1d4f3d6494249074
+authorship:
+  method: individually_written
+  case_id: C169
+  case_sha256: 1f21162b23f129ba9eb90741aadbcfb05dd6ee3004e49203f45ddc1f01581420
+  source_file: batch_1/C_vat/cases_154_203.json
+answer_fields:
+- tax_base
+- receipt_credit
+- unique_transaction_count

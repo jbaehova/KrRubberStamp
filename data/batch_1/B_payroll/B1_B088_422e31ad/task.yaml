@@ -1,0 +1,41 @@
+task_id: B1_B088_422e31ad
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상모은수선실의 개천절 작업은 오전 수선과 오후 검수의 두 카드로 승인되었습니다. 카드별로 여덟 시간을 적용하지 말고 같은
+  날 실제 근로를 합쳐 휴일수당을 구해 주세요. 별도 평일 연장수당 칸과 총지급액도 확인합니다.
+input_files:
+- path: inputs/01_수선직약정.pdf
+  format: pdf
+- path: inputs/02_수선검수카드.xlsx
+  format: xlsx
+- path: inputs/03_수선공제.hwpx
+  format: hwpx
+- path: inputs/04_하루휴일참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - holiday_pay
+  - overtime_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-faa2930b-275b-5404-ab24-7b9e6639c966
+scenario_seed: 4768803678822597216
+scenario_hash: fdb2f8a25951497aad147c7ce42c91c301b1f9964861c3f81833cd280de36bfb
+authorship:
+  method: individually_written
+  case_id: B088
+  case_sha256: 422e31adffcc026079d9741c483c5d6deb8c124211263eeaefa75ad4d0ec5d1e
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- holiday_pay
+- overtime_pay
+- gross_pay

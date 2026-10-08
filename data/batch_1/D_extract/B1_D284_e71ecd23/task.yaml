@@ -1,0 +1,53 @@
+task_id: B1_D284_e71ecd23
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 빙상장 대여 스케이트용 보호대의 실제 구입 단가와 지출을 등록합니다. cheapest_by_item과 grand_total을
+  제출해 주세요.
+input_files:
+- path: inputs/01_보호대표지.pdf
+  format: pdf
+- path: inputs/02_스케이트부속.xlsx
+  format: xlsx
+- path: inputs/03_추가주문.hwpx
+  format: hwpx
+- path: inputs/04_첫구입.xlsx
+  format: xlsx
+- path: inputs/05_빙상창고인수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-471624d2-0b4c-50c0-8a63-20cdfdc1439a
+scenario_seed: 16653974025392950505
+scenario_hash: ecf164a77c12845201df9a7fb2c8f174c9253d8dac6cc9966079eb3c747c3622
+authorship:
+  method: individually_written
+  case_id: D284
+  case_sha256: e71ecd23ba210ce9a46ee4fa2c933d4b9673e4ba2bf8dc8b86cacfd7acd9f355
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- cheapest_by_item
+- grand_total

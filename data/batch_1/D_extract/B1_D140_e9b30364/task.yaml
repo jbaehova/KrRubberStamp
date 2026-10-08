@@ -1,0 +1,54 @@
+task_id: B1_D140_e9b30364
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 스탬프 작업실 구매비의 vendor_totals와 vat_total을 확인해 주세요. 원문마다 다른 가격 조건을 각 인수에
+  적용합니다.
+input_files:
+- path: inputs/01_스탬프패드명세.pdf
+  format: pdf
+- path: inputs/02_다른패드명세.xlsx
+  format: xlsx
+- path: inputs/03_잉크인수.hwpx
+  format: hwpx
+- path: inputs/04_청소포인수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-a652d668-6989-59a4-a30b-6e0866106a8f
+scenario_seed: 16839807162410859628
+scenario_hash: 5a8e18bffebde7e2347bf44f33c4260a98699e4633d9674639b8f79305851d50
+authorship:
+  method: individually_written
+  case_id: D140
+  case_sha256: e9b30364a193fc6c6330ee4a9bd1642eaa6b57ad8ad2962e0a2a76ce1f744268
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals
+- vat_total

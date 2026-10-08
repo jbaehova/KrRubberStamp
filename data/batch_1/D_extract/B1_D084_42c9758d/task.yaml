@@ -1,0 +1,54 @@
+task_id: B1_D084_42c9758d
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 대관실 비품의 실제 지급액을 마감합니다. 취소 주문을 포함한 조달 자료와 인수 기록을 연결해 vendor_totals와 grand_total을
+  답하세요. 집계 계약은 보호패드 대장에 있습니다.
+input_files:
+- path: inputs/01_거울.pdf
+  format: pdf
+- path: inputs/02_보호패드.xlsx
+  format: xlsx
+- path: inputs/03_신발선반.hwpx
+  format: hwpx
+- path: inputs/04_취소주문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-81edaf9c-b5d1-5a48-8b1c-223e826b01f8
+scenario_seed: 4812506926394067159
+scenario_hash: 48caccd79254066478e9b2180e41248d7cabd8a3c4515713779319a5954d8c40
+authorship:
+  method: individually_written
+  case_id: D084
+  case_sha256: 42c9758d42d348d78a79a2328c778cf6b20434097369dbc6f3e9d625ba7f3edb
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals
+- grand_total

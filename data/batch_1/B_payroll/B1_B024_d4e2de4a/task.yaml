@@ -1,0 +1,41 @@
+task_id: B1_B024_d4e2de4a
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상종이별상점의 가상이가빈은 4주 평균 주 14시간으로 계약하고 모두 출근했습니다. 명세서 양식의 주휴수당 칸에 금액을 넣어도
+  되는지 근로시간 기준으로 확인하여 기본급 지급액, 추가 주휴수당과 총지급액을 적어 주세요. 공단이 확인한 부과 상태는 첨부 그대로 적용합니다.
+input_files:
+- path: inputs/01_주14시간계약.pdf
+  format: pdf
+- path: inputs/02_4주개근표.xlsx
+  format: xlsx
+- path: inputs/03_가입확인.hwpx
+  format: hwpx
+- path: inputs/04_주휴시간요건.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-3a5941cc-f115-5137-898f-d0be216bb559
+scenario_seed: 15340067694175309701
+scenario_hash: 4b7e60908742e3c49d310312759fb14501bf96ca37dac8187e41cb045da21342
+authorship:
+  method: individually_written
+  case_id: B024
+  case_sha256: d4e2de4aedc3cf85b5e9275dc6c2e0340b381ba5206ee9cbbffabbcd5055ffae
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- gross_pay

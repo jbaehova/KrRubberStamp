@@ -1,0 +1,64 @@
+task_id: B1_B292_2d736188
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상모서리인수실의 종료 구간에는 근로자의 날과 어린이날 휴무가 함께 있습니다. 기본 대가와 별도 유급휴일 대가 및 주휴수당을
+  구해 주세요. 연금 신고 하한과 건강 미부과를 반영한 국민연금 및 요양보험을 작성하고 유효 승인 지급일을 effective_payment_date에
+  YYYY-MM-DD로 적어 주세요.
+input_files:
+- path: inputs/01_모서리계약.pdf
+  format: pdf
+- path: inputs/02_두주출근.xlsx
+  format: xlsx
+- path: inputs/03_휴무구분.hwpx
+  format: hwpx
+- path: inputs/04_유급분량.pdf
+  format: pdf
+- path: inputs/05_유효계획.xlsx
+  format: xlsx
+- path: inputs/06_취소계획.hwpx
+  format: hwpx
+- path: inputs/07_연금건강.pdf
+  format: pdf
+- path: inputs/08_고용가족.xlsx
+  format: xlsx
+- path: inputs/09_휴무기관원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    national_pension:
+      type: integer
+    long_term_care:
+      type: integer
+    effective_payment_date:
+      type: string
+  required:
+  - base_pay
+  - paid_holiday_pay
+  - weekly_holiday_pay
+  - national_pension
+  - long_term_care
+  - effective_payment_date
+  additionalProperties: false
+canary: KrRubberStamp-canary-204a95af-eb32-5b1d-871d-a9f69c89cbea
+scenario_seed: 3275068594602479719
+scenario_hash: f1e9ffb9984cf20d9276638a643996004410babf12a9d6b28dbba7affb7d41ed
+authorship:
+  method: individually_written
+  case_id: B292
+  case_sha256: 2d736188e45190679f8ef3e031827986d3d4c48c66a51c1deed232d9b43758f4
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- base_pay
+- paid_holiday_pay
+- weekly_holiday_pay
+- national_pension
+- long_term_care
+- effective_payment_date

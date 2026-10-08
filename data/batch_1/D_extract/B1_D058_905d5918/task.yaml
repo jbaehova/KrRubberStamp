@@ -1,0 +1,49 @@
+task_id: B1_D058_905d5918
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 스캐너의 다음 교체를 준비합니다. 부품별 재구매 후보 cheapest_by_item과 기존 인수의 grand_total을 확인해
+  주세요. 동일 규격의 가격 비교 및 세액 기준은 봄 인수서에 있습니다.
+input_files:
+- path: inputs/01_봄교체.pdf
+  format: pdf
+- path: inputs/02_여름교체.hwpx
+  format: hwpx
+- path: inputs/03_가을교체.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-b825e142-2455-5ef6-a71c-4f3676aea152
+scenario_seed: 10402568677303220279
+scenario_hash: 83fa6468d4ea0a31fcbceea590c27d5207d20b55502af59e70becfaa5f8959ee
+authorship:
+  method: individually_written
+  case_id: D058
+  case_sha256: 905d5918ca43783761dfa35fa0b125fdce65b76e3e4876359bdca6bc7c123a4a
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item
+- grand_total

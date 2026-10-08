@@ -1,0 +1,313 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 70400000,
+      "cards": [
+        {
+          "amount": 36000000,
+          "category": "credit",
+          "date": "2025-09-30",
+          "payment_method": "credit",
+          "person_id": "self"
+        },
+        {
+          "amount": 4000000,
+          "category": "market",
+          "date": "2025-10-10",
+          "payment_method": "debit",
+          "person_id": "self"
+        },
+        {
+          "amount": 3000000,
+          "category": "transit",
+          "date": "2025-10-20",
+          "payment_method": "debit",
+          "person_id": "self"
+        },
+        {
+          "amount": 4200000,
+          "category": "debit",
+          "date": "2025-12-15",
+          "payment_method": "debit",
+          "person_id": "self"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 12,
+          "assigned_claimant": "spouse",
+          "income_amount": 0,
+          "name": "가상주해솔",
+          "person_id": "child",
+          "relation": "child",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 920000,
+          "date": "2025-03-20",
+          "institution_type": "primary_secondary_school",
+          "level": "school",
+          "person_id": "child",
+          "scholarship": 0
+        }
+      ],
+      "employee_age": 46,
+      "employee_name": "가상주온율",
+      "employment_end": "2025-10-31",
+      "employment_start": "2025-01-01",
+      "housing_mortgage": {
+        "borrowed_date": "2018-03-14",
+        "fixed_rate": true,
+        "household_homes_at_year_end": [
+          {
+            "address": "가상시 노을길 18 701호",
+            "home_id": "H-JU",
+            "owner_person_id": "self"
+          }
+        ],
+        "interest_paid": 23100000,
+        "non_deferred": true,
+        "other_common_requirements_attested": true,
+        "term_years": 25
+      },
+      "marital_status": "married",
+      "non_taxable": 2400000,
+      "reference_year": 2025,
+      "scope_note": "국내 거주자로 근로소득만 있다. 자녀를 실제 부양하지만 최종 공제 배정은 배우자다. 연말 한 주택 보유와 대출 다른 공통 요건이 확인됐다. 이자와 학교 납부는 직원 부담이다. 주택과 교육 특별공제를 신청했다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "education.0.excluded": false,
+      "housing_mortgage.requirements_met": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 12,
+          "assigned_claimant": "spouse",
+          "income_amount": 0,
+          "name": "가상주해솔",
+          "person_id": "child",
+          "relation": "child",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 1500000,
+      "rejected": [
+        "child"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 70400000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 13150000,
+      "salary_income": 54850000,
+      "total_salary": 68000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {
+      "borrowed_date": "2018-03-14",
+      "fixed_rate": true,
+      "household_homes_at_year_end": [
+        {
+          "address": "가상시 노을길 18 701호",
+          "home_id": "H-JU",
+          "owner_person_id": "self"
+        }
+      ],
+      "interest_paid": 23100000,
+      "non_deferred": true,
+      "other_common_requirements_attested": true,
+      "requirements_met": true,
+      "term_years": 25
+    },
+    "output": 20000000,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 68000000,
+      "spending": {
+        "credit": 36000000,
+        "market": 4000000,
+        "transit": 3000000
+      }
+    },
+    "output": 5650000,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 68000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 68000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 68000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 920000,
+          "date": "2025-03-20",
+          "excluded": false,
+          "institution_type": "primary_secondary_school",
+          "level": "school",
+          "person_id": "child",
+          "scholarship": 0
+        }
+      ],
+      "salary": 68000000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 68000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 68000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 68000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 68000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 28350000
+    },
+    "output": 2992500,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 2992500,
+      "salary": 68000000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 20000000,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 2992500,
+      "total_tax_credits": 660000
+    },
+    "output": 2332500,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 2332500
+    },
+    "output": 233250,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 233250,
+      "final_national": 2332500,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 233250,
+      "national": 2332500,
+      "total": 2565750
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

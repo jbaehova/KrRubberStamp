@@ -1,0 +1,59 @@
+task_id: B1_B192_3233d3d3
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상세모열람실은 종료한 시급 계약의 첫날 소정 카드 수정본을 받았습니다. 유효 승인 휴게로 기본급을 산정하고, 둘째 주의 개근
+  여부와 별도 유급휴일 작업을 연결하여 주휴, 휴일수당 및 실지급액을 계산해 주세요. 총지급액도 함께 제시해 주세요.
+input_files:
+- path: inputs/01_세모계약.pdf
+  format: pdf
+- path: inputs/02_첫날이전.hwpx
+  format: hwpx
+- path: inputs/03_첫날수정.xlsx
+  format: xlsx
+- path: inputs/04_나머지소정.pdf
+  format: pdf
+- path: inputs/05_두주개근.hwpx
+  format: hwpx
+- path: inputs/06_세모휴일.xlsx
+  format: xlsx
+- path: inputs/07_세모달력.pdf
+  format: pdf
+- path: inputs/08_세모실행.hwpx
+  format: hwpx
+- path: inputs/09_세모부과.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - holiday_pay
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-823305d7-1668-5b14-875c-4f21c31e4094
+scenario_seed: 3617467830502382389
+scenario_hash: f1ead746132360e66e2da1611f64231c7d4aff4e21012f09fef73ce14568ff55
+authorship:
+  method: individually_written
+  case_id: B192
+  case_sha256: 3233d3d35f7f5b350b5c092a1dfda83b9c11a4d1721b93e7c83fe7a10411ef29
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- holiday_pay
+- gross_pay
+- net_pay

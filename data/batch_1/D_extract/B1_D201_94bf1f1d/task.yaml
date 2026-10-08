@@ -1,0 +1,56 @@
+task_id: B1_D201_94bf1f1d
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 표본 촬영 판 인계 자료로 실제 기재 단가표를 남겨 주세요. 품목별 공급가액 단가의 cheapest_by_item만 필요합니다.
+input_files:
+- path: inputs/01_촬영판과표시품표지.pdf
+  format: pdf
+- path: inputs/02_넓은촬영판표지.hwpx
+  format: hwpx
+- path: inputs/03_촬영판본체.xlsx
+  format: xlsx
+- path: inputs/04_동봉표시품.pdf
+  format: pdf
+- path: inputs/05_표시품추가.hwpx
+  format: hwpx
+- path: inputs/06_넓은촬영판품목.xlsx
+  format: xlsx
+- path: inputs/07_첫촬영판수령.pdf
+  format: pdf
+- path: inputs/08_표시품수령.hwpx
+  format: hwpx
+- path: inputs/09_넓은판수령.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-571959df-c89e-5bfe-b320-ba3d5405b712
+scenario_seed: 10718319851074052477
+scenario_hash: 671fcdacf911ef4c65a6cb1e09538bb4e1ff3c8428841d02963c9bbd5982ad6a
+authorship:
+  method: individually_written
+  case_id: D201
+  case_sha256: 94bf1f1dd049617d6b11fc6ae8bae8cf57799642e4a0eb5f2e98aa32c5f7013e
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item

@@ -1,0 +1,60 @@
+task_id: B1_D283_df397a3e
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 수선실 지퍼 구매의 품목이 여러 별첨으로 왔습니다. 별첨을 표지에 연결하고 전체 비용과 업체별 지급을 정리해 주세요. supply_total과
+  vendor_totals 및 unique_document_count를 제출합니다.
+input_files:
+- path: inputs/01_수선재료표지.hwpx
+  format: hwpx
+- path: inputs/02_지퍼손잡이.xlsx
+  format: xlsx
+- path: inputs/03_재봉바늘.pdf
+  format: pdf
+- path: inputs/04_지퍼본체.xlsx
+  format: xlsx
+- path: inputs/05_수선실인수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    supply_total:
+      type: integer
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - supply_total
+  - vendor_totals
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-f8202df2-e1ce-5e9c-92de-aa14b9a19ce2
+scenario_seed: 16085021953347076824
+scenario_hash: 7736b3731b261f0e27d3dfe8b5299fdf9f7be3828cf46d39a9d3931a0481f419
+authorship:
+  method: individually_written
+  case_id: D283
+  case_sha256: df397a3e959cc2d800fa1d901fa25a008a095c78c9fa63f87f97d0c1760b6e6a
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- supply_total
+- vendor_totals
+- unique_document_count

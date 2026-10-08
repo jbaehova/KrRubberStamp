@@ -1,0 +1,49 @@
+task_id: B1_B278_418e64db
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상바늘기록관의7월20일 입사자는 취득월부터 국민연금을 내겠다고 신청했습니다. 기관별7월 확정 통지와 첫 시급 지급 범위를
+  읽어 국민연금, 건강보험과 장기요양보험을 계산해 주세요. 고용보험까지 합친 전체 공제액과 직원에게 실제 이체할 실지급액도 작성합니다.
+input_files:
+- path: inputs/01_입사시급약정.hwpx
+  format: hwpx
+- path: inputs/02_취득월선택.pdf
+  format: pdf
+- path: inputs/03_첫지급원장.xlsx
+  format: xlsx
+- path: inputs/04_취득월공제원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - national_pension
+  - health_insurance
+  - long_term_care
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-67a0a334-3bf5-580a-940d-4d3fae83b5da
+scenario_seed: 4723823952523472744
+scenario_hash: d682d9f8589ee8e3b0381327557d940ab8d9c110a56391c623672a9ee44af6bb
+authorship:
+  method: individually_written
+  case_id: B278
+  case_sha256: 418e64db5fa4af6809918c7bb2835bdd7e37a0fc51268336ea4c574c5b42beab
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- national_pension
+- health_insurance
+- long_term_care
+- total_deductions
+- net_pay

@@ -1,0 +1,263 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-06",
+          "document_id": "FILM-61",
+          "event": "received",
+          "event_id": "FILM-IN",
+          "location": "필름기록작업실"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "FILM-CUT-63",
+          "event": "received",
+          "event_id": "FILM-CUT-IN",
+          "location": "필름기록작업실"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "FILM-TUBE-64",
+          "event": "received",
+          "event_id": "FILM-TUBE-IN",
+          "location": "필름기록작업실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-01",
+          "document_id": "FILM-61",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "FILM-ORIGINAL-C",
+          "vendor": "가상기록필름"
+        },
+        {
+          "date": "2026-06-01",
+          "document_id": "FILM-61",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "FILM-REISSUE-C",
+          "vendor": "가상기록필름"
+        },
+        {
+          "date": "2026-06-03",
+          "document_id": "FILM-CUT-63",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "FILM-CUT-C",
+          "vendor": "가상필름도구"
+        },
+        {
+          "date": "2026-06-04",
+          "document_id": "FILM-TUBE-64",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "FILM-TUBE-C",
+          "vendor": "가상필름도구"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "FILM-ORIGINAL-C",
+          "items": [
+            {
+              "name": "기록필름10m",
+              "quantity": 9,
+              "unit_price": 17281
+            },
+            {
+              "name": "필름표시띠",
+              "quantity": 18,
+              "unit_price": 649
+            }
+          ],
+          "sheet_id": "FILM-ORIGINAL-L"
+        },
+        {
+          "header_record_id": "FILM-REISSUE-C",
+          "items": [
+            {
+              "name": "기록필름10m",
+              "quantity": 9,
+              "unit_price": 17281
+            },
+            {
+              "name": "필름표시띠",
+              "quantity": 18,
+              "unit_price": 649
+            }
+          ],
+          "sheet_id": "FILM-REISSUE-L"
+        },
+        {
+          "header_record_id": "FILM-CUT-C",
+          "items": [
+            {
+              "name": "필름커터",
+              "quantity": 2,
+              "unit_price": 24637
+            }
+          ],
+          "sheet_id": "FILM-CUT-L"
+        },
+        {
+          "header_record_id": "FILM-TUBE-C",
+          "items": [
+            {
+              "name": "필름보관통",
+              "quantity": 3,
+              "unit_price": 11891
+            }
+          ],
+          "sheet_id": "FILM-TUBE-L"
+        }
+      ],
+      "processing_policy": "품목은 header_record_id로 표지를 연결한다. invoice 또는 order에 received 이력이 있는 번호만 구매다. 다른 record_id여도 document_id와 최종 원문 내용이 같으면 한 번만 계산한다. 포함 행의 수량 곱하기 단가를 총액으로 보고 그 10/11의 원 미만을 버려 공급가액을 구한 뒤 차액을 세액으로 쓴다. 별도 행의 공급가액은 수량 곱하기 단가이며 세액은 그 10%의 원 미만을 버린다. 행별 세액을 합한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 4,
+      "received_document_ids": [
+        "FILM-61",
+        "FILM-CUT-63",
+        "FILM-TUBE-64"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "FILM-61",
+      "includes_vat": true,
+      "quantity": 9,
+      "unit_price": 17281
+    },
+    "output": {
+      "supply": 141390,
+      "total": 155529,
+      "vat": 14139
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "FILM-61",
+      "includes_vat": true,
+      "quantity": 18,
+      "unit_price": 649
+    },
+    "output": {
+      "supply": 10620,
+      "total": 11682,
+      "vat": 1062
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상기록필름"
+    },
+    "output": "가상기록필름",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "FILM-61"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "FILM-CUT-63",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 24637
+    },
+    "output": {
+      "supply": 49274,
+      "total": 54201,
+      "vat": 4927
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상필름도구"
+    },
+    "output": "가상필름도구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "FILM-TUBE-64",
+      "includes_vat": true,
+      "quantity": 3,
+      "unit_price": 11891
+    },
+    "output": {
+      "supply": 32430,
+      "total": 35673,
+      "vat": 3243
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상필름도구"
+    },
+    "output": "가상필름도구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "기록필름10m",
+          "unit_price": 15710,
+          "vendor": "가상기록필름"
+        },
+        {
+          "item": "필름보관통",
+          "unit_price": 10810,
+          "vendor": "가상필름도구"
+        },
+        {
+          "item": "필름커터",
+          "unit_price": 24637,
+          "vendor": "가상필름도구"
+        },
+        {
+          "item": "필름표시띠",
+          "unit_price": 590,
+          "vendor": "가상기록필름"
+        }
+      ],
+      "grand_total": 257085,
+      "supply_total": 233714,
+      "unique_document_count": 3,
+      "vat_total": 23371,
+      "vendor_totals": [
+        {
+          "supply": 152010,
+          "total": 167211,
+          "vat": 15201,
+          "vendor": "가상기록필름"
+        },
+        {
+          "supply": 81704,
+          "total": 89874,
+          "vat": 8170,
+          "vendor": "가상필름도구"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,45 @@
+task_id: B1_B219_b52f5a90
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상색종이회람소는 현금 식대를 인상했습니다. 변경 약정과 음식물 제공 기록을 읽고 월 통상임금, 비과세 지급액과 과세급여를
+  계산해 주세요. 원천징수 소득세도 함께 등록해 주세요.
+input_files:
+- path: inputs/01_변경약정.pdf
+  format: pdf
+- path: inputs/02_제공및지급.xlsx
+  format: xlsx
+- path: inputs/03_10월부과.hwpx
+  format: hwpx
+- path: inputs/04_원문기준.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-31e2bf6e-cbbb-562f-9de5-a9f20a1a070e
+scenario_seed: 13055753423226482897
+scenario_hash: d03ab45cdfa216abd89105d2f308280b14b91a357c06ecd6cd5896eccdfba45a
+authorship:
+  method: individually_written
+  case_id: B219
+  case_sha256: b52f5a90ea8130d18488940ce01d63e373c4ba6216e8b47e6461eb9d1c0873f6
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- ordinary_monthly_wage
+- non_taxable_pay
+- taxable_pay
+- income_tax

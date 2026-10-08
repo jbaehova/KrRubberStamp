@@ -1,0 +1,61 @@
+task_id: B1_D052_0c0a7bd8
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 어린이 과학 장터의 다음 행사에 쓸 교구를 보충하려 합니다. 체험 부스별 구매 자료에서 세금을 뺀 단가를 비교해 품목별 주문
+  업체를 골라 주세요. 이번 교구비의 지급 총액도 answer.json의 cheapest_by_item과 grand_total로 보내 주세요.
+input_files:
+- path: inputs/01_미니모터_명세.pdf
+  format: pdf
+- path: inputs/02_발광판_대장.xlsx
+  format: xlsx
+- path: inputs/03_전선판_확인.hwpx
+  format: hwpx
+- path: inputs/04_모터_추가명세.pdf
+  format: pdf
+- path: inputs/05_발광판_보충대장.xlsx
+  format: xlsx
+- path: inputs/06_전선판_추가확인.hwpx
+  format: hwpx
+- path: inputs/07_자석받침_명세.pdf
+  format: pdf
+- path: inputs/08_관찰부스_대장.xlsx
+  format: xlsx
+- path: inputs/09_보관상자_확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-66eb0772-b8b1-51a2-a93a-1ea0323507ac
+scenario_seed: 867642047466590859
+scenario_hash: 6063ca037b2648f705a3578629b67292311107223bb226d8e11b21b7c2a57f6b
+authorship:
+  method: individually_written
+  case_id: D052
+  case_sha256: 0c0a7bd85f70528b49a4a6a05f631db3b0d650a964101bae0ee586cbed474d05
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item
+- grand_total

@@ -1,0 +1,45 @@
+task_id: B1_A139_28295518
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상자귀나무조사의 가상남예주는 어머니와 오빠를 부양하지만 어머니 공제는 언니에게 배정했습니다. 가족별 신청자를 확인해 본인을
+  제외한 가족 수와 기본공제액을 구해 주세요. 직원의 근로소득금액과 혼인 및 세대주 조건을 반영한 추가공제액도 계산합니다.
+input_files:
+- path: inputs/01_혼인세대확인.hwpx
+  format: hwpx
+- path: inputs/02_급여누계.xlsx
+  format: xlsx
+- path: inputs/03_어머니배정.pdf
+  format: pdf
+- path: inputs/04_오빠확인.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    salary_income:
+      type: integer
+    additional_deduction:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - salary_income
+  - additional_deduction
+  additionalProperties: false
+canary: KrRubberStamp-canary-679f0ab3-f3dc-5522-85a6-991649eee6e0
+scenario_seed: 2893937800761601165
+scenario_hash: c8fc7f0bdae70087afa1683073d9f501aaeb54df750f234a08e98c82b8f0f3f3
+authorship:
+  method: individually_written
+  case_id: A139
+  case_sha256: 28295518d8786c8d795038e16762653f35b08cb1e013b7d822a827cd56a01659
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- salary_income
+- additional_deduction

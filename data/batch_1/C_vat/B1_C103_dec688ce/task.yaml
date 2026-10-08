@@ -1,0 +1,65 @@
+task_id: B1_C103_dec688ce
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상세칸수업은 과세 도구 판매, 면세 자격 교육실, 대표 가족의 세 공간에 물품을 받았습니다. 모두 같은 가격이지만 수령 조직과
+  사용 활동은 다릅니다. 같은 거래의 추가 증빙과 앞선 발행 공제 사용액도 확인하세요. 고유 거래 수(unique_transaction_count),
+  전체 매입세액(input_vat), 불공제 세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat),
+  발행세액공제(receipt_credit), 납부액(payable_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_도구와교육_사업.hwpx
+  format: hwpx
+- path: inputs/02_두영업_자격.pdf
+  format: pdf
+- path: inputs/03_계산서요청_판매.xlsx
+  format: xlsx
+- path: inputs/04_독립판매_현금영수증.pdf
+  format: pdf
+- path: inputs/05_판매물품_카드.xlsx
+  format: xlsx
+- path: inputs/06_판매물품_계산서.pdf
+  format: pdf
+- path: inputs/07_교육물품_계산서.xlsx
+  format: xlsx
+- path: inputs/08_가족물품_카드.pdf
+  format: pdf
+- path: inputs/09_세공간_수령과세무인계.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-94c606aa-ce49-5666-8b6a-9438304b15bf
+scenario_seed: 16052668344360407765
+scenario_hash: 0909b3c56c35b6625dc58d059f4fbcb13da53493101efd58c3f5550fbdb24863
+authorship:
+  method: individually_written
+  case_id: C103
+  case_sha256: dec688cefac292d565031e32bc9d521ac8fa01078d4e56f990596b7239602fe9
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

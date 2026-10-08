@@ -1,0 +1,179 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-08-21",
+          "document_id": "TRANSPORT-0821-A",
+          "event": "received",
+          "event_id": "e86a",
+          "location": "순회 검사 창고"
+        },
+        {
+          "date": "2026-08-24",
+          "document_id": "TRANSPORT-0824-B",
+          "event": "received",
+          "event_id": "e86b",
+          "location": "순회 검사 대차"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-08-21",
+          "document_id": "TRANSPORT-0821-A",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h86a",
+          "vendor": "가상운송완충"
+        },
+        {
+          "date": "2026-08-24",
+          "document_id": "TRANSPORT-0824-B",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h86b",
+          "vendor": "가상장비바퀴"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h86a",
+          "items": [
+            {
+              "name": "장비완충패드",
+              "quantity": 12,
+              "unit_price": 7100
+            },
+            {
+              "name": "운송고정띠",
+              "quantity": 6,
+              "unit_price": 13400
+            }
+          ],
+          "sheet_id": "s86a"
+        },
+        {
+          "header_record_id": "h86b",
+          "items": [
+            {
+              "name": "운송대차바퀴",
+              "quantity": 4,
+              "unit_price": 22100
+            }
+          ],
+          "sheet_id": "s86b"
+        }
+      ],
+      "processing_policy": "모든 원자료 표지에 header_record_id로 품목표를 연결한다. invoice나 order는 document_id의 received 기록이 있어야 실제 인수에 포함한다. quote, 인수 기록 없는 자료 및 출고 전 취소 기록은 제외한다. 같은 document_id의 동일 내용은 한 번만 집계한다. 포함 품목 총액의 10/11 원 미만 버림이 공급가액이고 차액이 부가세다. 별도 공급가액은 단가 곱하기 수량이고 품목별 그 10% 원 미만 버림이 부가세다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하며 업체의 주식회사, (주), ㈜를 제거한다. 업체 배열 및 품목 배열은 해당 정규화 이름 오름차순이다. 동일 규격 개당 공급가액 단가를 비교하고 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 최저 단가가 같으면 정규화 업체명 오름차순 첫 업체를 고른다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "TRANSPORT-0821-A",
+        "TRANSPORT-0824-B"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "TRANSPORT-0821-A",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 7100
+    },
+    "output": {
+      "supply": 85200,
+      "total": 93720,
+      "vat": 8520
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "TRANSPORT-0821-A",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 13400
+    },
+    "output": {
+      "supply": 80400,
+      "total": 88440,
+      "vat": 8040
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상운송완충"
+    },
+    "output": "가상운송완충",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TRANSPORT-0824-B",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 22100
+    },
+    "output": {
+      "supply": 88400,
+      "total": 97240,
+      "vat": 8840
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상장비바퀴"
+    },
+    "output": "가상장비바퀴",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "운송고정띠",
+          "unit_price": 13400,
+          "vendor": "가상운송완충"
+        },
+        {
+          "item": "운송대차바퀴",
+          "unit_price": 22100,
+          "vendor": "가상장비바퀴"
+        },
+        {
+          "item": "장비완충패드",
+          "unit_price": 7100,
+          "vendor": "가상운송완충"
+        }
+      ],
+      "grand_total": 279400,
+      "supply_total": 254000,
+      "unique_document_count": 2,
+      "vat_total": 25400,
+      "vendor_totals": [
+        {
+          "supply": 165600,
+          "total": 182160,
+          "vat": 16560,
+          "vendor": "가상운송완충"
+        },
+        {
+          "supply": 88400,
+          "total": 97240,
+          "vat": 8840,
+          "vendor": "가상장비바퀴"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

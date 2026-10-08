@@ -1,0 +1,64 @@
+task_id: B1_A053_e682509b
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상우림기획의 가상손주연 가족 정산을 확인합니다. 장애인 아버지는 소득요건을 넘고 배우자는 근로소득만 있지만 오백만원을 조금
+  넘습니다. 가족 수와 기본공제액을 구해 주세요. 아버지의 특수교육과 카드, 자녀의 학교비와 학원비 및 본인 보험료를 각각 판단해 교육비와 보험료
+  공제 및 카드 소득공제액을 적어 주세요. 최종 소득세도 필요합니다.
+input_files:
+- path: inputs/01_직원.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_아버지.pdf
+  format: pdf
+- path: inputs/04_배우자.pdf
+  format: pdf
+- path: inputs/05_자녀.hwpx
+  format: hwpx
+- path: inputs/06_특수교육.pdf
+  format: pdf
+- path: inputs/07_자녀교육.xlsx
+  format: xlsx
+- path: inputs/08_아버지카드.xlsx
+  format: xlsx
+- path: inputs/09_본인보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    education_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - education_credit
+  - insurance_credit
+  - credit_card_deduction
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-65efe6cc-fd89-5097-ac3f-ad87f8fda78d
+scenario_seed: 16609927003121498722
+scenario_hash: 3a367b6692623a84e7eb5cb8e37058b39d162bbac6bad0d8443153d612e21e05
+authorship:
+  method: individually_written
+  case_id: A053
+  case_sha256: e682509b2e39ba62d60acf12d57d1c9d1226cfd1d3a85565fe58a61719f4f9d7
+  source_file: batch_1/A_yearend/cases_004_053.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- education_credit
+- insurance_credit
+- credit_card_deduction
+- final_national_tax

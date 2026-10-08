@@ -1,0 +1,49 @@
+task_id: B1_D182_3c3fe51e
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 야외 안내 레일 사업비를 업체별로 정산해 주세요. 청구와 실제 도착 자료를 연결한 vendor_totals만 답합니다.
+input_files:
+- path: inputs/01_레일청구.hwpx
+  format: hwpx
+- path: inputs/02_브래킷청구.pdf
+  format: pdf
+- path: inputs/03_지주주문.xlsx
+  format: xlsx
+- path: inputs/04_설치점수령부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-5869a992-f266-5014-b3cd-843dd66ad2d4
+scenario_seed: 4341440483525429504
+scenario_hash: 39d16e234f65d373365367134a75dcb0f727528305bac7a3832aa91763f344a0
+authorship:
+  method: individually_written
+  case_id: D182
+  case_sha256: 3c3fe51e2a0889004b9390c60e3942ee25b53d40e2c4e1422863b48e4db63056
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals

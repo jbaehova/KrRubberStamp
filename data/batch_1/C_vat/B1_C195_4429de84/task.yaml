@@ -1,0 +1,55 @@
+task_id: B1_C195_4429de84
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상돌림가공의 공급자 상태 및 세 입고 기록을 연결해 거래 수(unique_transaction_count), 불공제세액(noncreditable_vat),
+  공제 매입세액(deductible_input_vat), 환급액(refund_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/가공신고.hwpx
+  format: hwpx
+- path: inputs/공급자기간.xlsx
+  format: xlsx
+- path: inputs/첫수령.pdf
+  format: pdf
+- path: inputs/둘째수령.hwpx
+  format: hwpx
+- path: inputs/셋째수령.hwpx
+  format: hwpx
+- path: inputs/첫결제.pdf
+  format: pdf
+- path: inputs/둘째결제.pdf
+  format: pdf
+- path: inputs/셋째결제.xlsx
+  format: xlsx
+- path: inputs/예약수정.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - noncreditable_vat
+  - deductible_input_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-9aa30e85-9c43-529d-9bd1-8a1ee05d9fe5
+scenario_seed: 4911701527352321087
+scenario_hash: a056af62ceb3b68697d42e8e1f6b3310f650f0e1db8a6144f7172a28a88711f1
+authorship:
+  method: individually_written
+  case_id: C195
+  case_sha256: 4429de840c94243ff20fe5260f00966c6c8a110d7493152c76ff1c42240a39cb
+  source_file: batch_1/C_vat/cases_154_203.json
+answer_fields:
+- unique_transaction_count
+- noncreditable_vat
+- deductible_input_vat
+- refund_vat

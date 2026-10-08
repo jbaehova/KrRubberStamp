@@ -1,0 +1,49 @@
+task_id: B1_B019_5f05c29a
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상유리기획의 가상심라온에게 6월 매출 달성 수당이 지급됩니다. 실적에 따라 한 번 결정된 금액이므로 통상임금에 섞지 말고
+  과세급여에는 반영해 주세요. 통상시급 표시액과 연장수당, 실적수당, 과세급여 및 실지급액을 구해 급여 담당자에게 전달할 값을 작성해 주세요.
+input_files:
+- path: inputs/01_정액계약.hwpx
+  format: hwpx
+- path: inputs/02_매출수당승인.pdf
+  format: pdf
+- path: inputs/03_평일근태보험.xlsx
+  format: xlsx
+- path: inputs/04_계산참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_hourly_wage_floor:
+      type: integer
+    overtime_pay:
+      type: integer
+    variable_allowance:
+      type: integer
+    taxable_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_hourly_wage_floor
+  - overtime_pay
+  - variable_allowance
+  - taxable_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-44c5b2fb-3e6c-59ab-8112-68a2bdfcd33d
+scenario_seed: 6847092779426014475
+scenario_hash: 9fa42c2ed60ef8dd3f344f6284acbff19bbf60a31486ed14b41e86e698ad884b
+authorship:
+  method: individually_written
+  case_id: B019
+  case_sha256: 5f05c29afdd4650bba05c97c7fe4fa2832dd12fe9c6739ebabf2ebd106362eb5
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- ordinary_hourly_wage_floor
+- overtime_pay
+- variable_allowance
+- taxable_pay
+- net_pay

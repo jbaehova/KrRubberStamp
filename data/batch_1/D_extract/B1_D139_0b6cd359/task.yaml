@@ -1,0 +1,54 @@
+task_id: B1_D139_0b6cd359
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 배송지별로 보관된 수학 교구 자료를 업체 지급 표로 옮겨 주세요. vendor_totals와 unique_document_count를
+  확인합니다.
+input_files:
+- path: inputs/01_분수교실인수.pdf
+  format: pdf
+- path: inputs/02_입체교실인수.xlsx
+  format: xlsx
+- path: inputs/03_좌표교실인수.hwpx
+  format: hwpx
+- path: inputs/04_도형교실인수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-d61e722d-2905-5b1f-9f40-bc4802f72ad9
+scenario_seed: 823265213073298889
+scenario_hash: aa3f89caabfdd22277d069d87012c98dd1afbd3105f8c1ad191a7b55d82c34ca
+authorship:
+  method: individually_written
+  case_id: D139
+  case_sha256: 0b6cd359752b95c9e0b1ea4bbb807483c35cb611d20765a429d5d1f1a33d0dd0
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals
+- unique_document_count

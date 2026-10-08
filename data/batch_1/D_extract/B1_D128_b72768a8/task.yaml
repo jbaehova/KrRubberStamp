@@ -1,0 +1,46 @@
+task_id: B1_D128_b72768a8
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 배선 작업실이 재구매 단가표를 요청했습니다. 같은 품목 표기를 정리해 cheapest_by_item을 작성해 주세요.
+input_files:
+- path: inputs/01_첫배선고정품.pdf
+  format: pdf
+- path: inputs/02_클립10추가.xlsx
+  format: xlsx
+- path: inputs/03_클립12추가.hwpx
+  format: hwpx
+- path: inputs/04_클립12보충.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-79f97429-6b7c-50fd-bc7d-16dfea7e6c3a
+scenario_seed: 13197632306711340647
+scenario_hash: a3b01261b02cd15fa61c3d54b247abb9682a9d8f6822edea9dbebee842ee1f6d
+authorship:
+  method: individually_written
+  case_id: D128
+  case_sha256: b72768a8adbfa667b6a7cb8c799e2610ac74c042cd15b513bcc46d9137b37829
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item

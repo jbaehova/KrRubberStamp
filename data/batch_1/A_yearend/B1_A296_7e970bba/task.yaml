@@ -1,0 +1,55 @@
+task_id: B1_A296_7e970bba
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상수달합판의 가상배라원 카드와 자녀 학비를 마감해 주세요. 총급여에 따라 문화 소비의 결제수단을 적용하고 어머니 최종 배정과
+  학교 및 학원 기관 유형을 각각 확인해 주세요. 카드와 교육비 공제 및 가족 기본공제 인원을 회신해 주세요.
+input_files:
+- path: inputs/01_가족최종배정.hwpx
+  format: hwpx
+- path: inputs/02_일반신용.xlsx
+  format: xlsx
+- path: inputs/03_문화신용.pdf
+  format: pdf
+- path: inputs/04_어머니카드.xlsx
+  format: xlsx
+- path: inputs/05_본인직불.pdf
+  format: pdf
+- path: inputs/06_학교수업료.hwpx
+  format: hwpx
+- path: inputs/07_사설학원.xlsx
+  format: xlsx
+- path: inputs/08_급여확정.pdf
+  format: pdf
+- path: inputs/09_직원등록.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    education_credit:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - eligible_dependents
+  - credit_card_deduction
+  - education_credit
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-e26fa03a-edec-5924-9fb5-b054953ea2ff
+scenario_seed: 9121772465736720496
+scenario_hash: 0ec5498533d36007952a5c83c451317caaa0403f8acbf1bf1e5751e5fb0692b7
+authorship:
+  method: individually_written
+  case_id: A296
+  case_sha256: 7e970bba762d207080c0e5bf7a7fbe75d33c309608e603612abf25abec0bc74b
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- eligible_dependents
+- credit_card_deduction
+- education_credit
+- tax_base

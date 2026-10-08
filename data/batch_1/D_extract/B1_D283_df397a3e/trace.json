@@ -1,0 +1,185 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-10",
+          "document_id": "TAILOR-ZIP-21",
+          "event": "received",
+          "event_id": "ZIP-IN",
+          "location": "의류수선재료함"
+        },
+        {
+          "date": "2026-02-10",
+          "document_id": "TAILOR-NEEDLE-22",
+          "event": "received",
+          "event_id": "NEEDLE-IN",
+          "location": "의류수선재료함"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-06",
+          "document_id": "TAILOR-ZIP-21",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "ZIP-H",
+          "vendor": "가상지퍼부속"
+        },
+        {
+          "date": "2026-02-07",
+          "document_id": "TAILOR-NEEDLE-22",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "NEEDLE-H",
+          "vendor": "가상재봉소모품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "ZIP-H",
+          "items": [
+            {
+              "name": "지퍼손잡이Z3",
+              "quantity": 24,
+              "unit_price": 180
+            }
+          ],
+          "sheet_id": "ZIP-PULL-L"
+        },
+        {
+          "header_record_id": "NEEDLE-H",
+          "items": [
+            {
+              "name": "재봉바늘14묶음",
+              "quantity": 5,
+              "unit_price": 2600
+            }
+          ],
+          "sheet_id": "NEEDLE-L"
+        },
+        {
+          "header_record_id": "ZIP-H",
+          "items": [
+            {
+              "name": "지퍼본체40CM",
+              "quantity": 24,
+              "unit_price": 1450
+            }
+          ],
+          "sheet_id": "ZIP-BODY-L"
+        }
+      ],
+      "processing_policy": "line_sheets의 header_record_id를 headers의 record_id로 연결한다. 같은 표지의 모든 별첨을 합하고 document_id에 received가 있는 invoice 또는 order만 구매다. 단가는 공급가액이며 원문 번호를 구매 근거 수로 센다. 별도 가격 행의 세액은 공급가액 10%에서 원 미만을 버리고 이를 더한 값이 지급액이다. 업체명은 NFKC 후 공백 제거와 영문 소문자 변환 및 법인 표현 제거로 정리한다. 업체별 지급액 결과는 정규화한 업체명 순으로 정렬한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "TAILOR-NEEDLE-22",
+        "TAILOR-ZIP-21"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "TAILOR-ZIP-21",
+      "includes_vat": false,
+      "quantity": 24,
+      "unit_price": 180
+    },
+    "output": {
+      "supply": 4320,
+      "total": 4752,
+      "vat": 432
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "TAILOR-ZIP-21",
+      "includes_vat": false,
+      "quantity": 24,
+      "unit_price": 1450
+    },
+    "output": {
+      "supply": 34800,
+      "total": 38280,
+      "vat": 3480
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상지퍼부속"
+    },
+    "output": "가상지퍼부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TAILOR-NEEDLE-22",
+      "includes_vat": false,
+      "quantity": 5,
+      "unit_price": 2600
+    },
+    "output": {
+      "supply": 13000,
+      "total": 14300,
+      "vat": 1300
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상재봉소모품"
+    },
+    "output": "가상재봉소모품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "재봉바늘14묶음",
+          "unit_price": 2600,
+          "vendor": "가상재봉소모품"
+        },
+        {
+          "item": "지퍼본체40cm",
+          "unit_price": 1450,
+          "vendor": "가상지퍼부속"
+        },
+        {
+          "item": "지퍼손잡이z3",
+          "unit_price": 180,
+          "vendor": "가상지퍼부속"
+        }
+      ],
+      "grand_total": 57332,
+      "supply_total": 52120,
+      "unique_document_count": 2,
+      "vat_total": 5212,
+      "vendor_totals": [
+        {
+          "supply": 13000,
+          "total": 14300,
+          "vat": 1300,
+          "vendor": "가상재봉소모품"
+        },
+        {
+          "supply": 39120,
+          "total": 43032,
+          "vat": 3912,
+          "vendor": "가상지퍼부속"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

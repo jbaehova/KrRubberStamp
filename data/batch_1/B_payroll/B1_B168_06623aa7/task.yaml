@@ -1,0 +1,43 @@
+task_id: B1_B168_06623aa7
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상고리접수실은 월급 직원의 승인된 소정 근무 중 밤 시간만 별도 가산합니다. 제시된 정규 카드에서 야간 시간을 확인하여 야간
+  가산과 총지급액을 계산해 주세요. 추가 연장수당 칸도 함께 확인합니다. 기본급 지급액도 따로 제시해 주세요.
+input_files:
+- path: inputs/01_고리약정.hwpx
+  format: hwpx
+- path: inputs/02_접수밤.xlsx
+  format: xlsx
+- path: inputs/03_고리부과.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    night_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - night_pay
+  - overtime_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-f7d82a9d-8b61-59d0-becf-c78acb3e2530
+scenario_seed: 459994604052258716
+scenario_hash: 2a02409aaf4a971b8086b4619eb05659173a13ef2fc8e08180d2b0d3db2a28b6
+authorship:
+  method: individually_written
+  case_id: B168
+  case_sha256: 06623aa7bd219f9c38f5bb8d4a6d87bc8c9563c8fd675e9f0c4df52394e4ea3d
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- base_pay
+- night_pay
+- overtime_pay
+- gross_pay

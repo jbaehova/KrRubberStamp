@@ -1,0 +1,340 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "육월검수",
+          "date": "2026-06-30",
+          "description": "6월 마지막 날 부품 검수를 마쳤다.",
+          "document_ids": [
+            "육월전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "시계함 제작실"
+          },
+          "operation_id": "시계함제작",
+          "participants": [
+            {
+              "name": "가상배검수",
+              "organization": "가상정시시계함",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "시계함부품육월"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "칠월검수",
+          "date": "2026-07-01",
+          "description": "7월 첫날 다른 부품 검수를 마쳤다.",
+          "document_ids": [
+            "칠월전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "시계함 제작실"
+          },
+          "operation_id": "시계함제작",
+          "participants": [
+            {
+              "name": "가상배검수",
+              "organization": "가상정시시계함",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "시계함부품칠월"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "도구입고",
+          "date": "2026-06-29",
+          "description": "시계함 시험에 사용할 도구를 받았다.",
+          "document_ids": [
+            "도구카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "시계함 시험 작업대"
+          },
+          "operation_id": "시계함제작",
+          "participants": [
+            {
+              "name": "가상배검수",
+              "organization": "가상정시시계함",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "시계시험도구"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 시계함 제작",
+          "operation_id": "시계함제작",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "육월검수",
+          "date": "2026-06-30",
+          "document_id": "육월전자",
+          "transaction_id": "시계함부품육월"
+        },
+        {
+          "activity_id": "칠월검수",
+          "date": "2026-07-01",
+          "document_id": "칠월전자",
+          "transaction_id": "시계함부품칠월"
+        },
+        {
+          "activity_id": "도구입고",
+          "date": "2026-06-29",
+          "document_id": "도구카드",
+          "transaction_id": "시계시험도구"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "육월전자",
+        "purpose": "business",
+        "transaction_id": "시계함부품육월"
+      },
+      {
+        "business_related": true,
+        "document_id": "칠월전자",
+        "purpose": "business",
+        "transaction_id": "시계함부품칠월"
+      },
+      {
+        "business_related": true,
+        "document_id": "도구카드",
+        "purpose": "business",
+        "transaction_id": "시계시험도구"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "도구카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "시계시험도구"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "육월전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "시계함부품육월"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "칠월전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "시계함부품칠월"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-29",
+      "transaction_id": "시계시험도구"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 726000,
+      "includes_vat": true,
+      "transaction_id": "시계시험도구"
+    },
+    "output": {
+      "gross": 726000,
+      "supply_base": 660000,
+      "vat": 66000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "시계시험도구",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 66000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-30",
+      "transaction_id": "시계함부품육월"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 561000,
+      "includes_vat": true,
+      "transaction_id": "시계함부품육월"
+    },
+    "output": {
+      "gross": 561000,
+      "supply_base": 510000,
+      "vat": 51000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "시계함부품육월",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 51000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-07-01",
+      "transaction_id": "시계함부품칠월"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 381000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -51000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -51000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -51000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 51000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 51000,
+      "input_vat": 117000,
+      "net_vat": -51000,
+      "noncreditable_vat": 66000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 51000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,37 @@
+task_id: B1_A217_13a80b8c
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상수국클립의 가상윤새결 의료비 자료를 처리해 주세요. 영유아 일반 입원비와 조산 관련 진료비를 각각 확인한 뒤 합산 의료비
+  공제액과 자녀 출생 공제를 적어 주세요.
+input_files:
+- path: inputs/01_병원분류.pdf
+  format: pdf
+- path: inputs/02_출생접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    medical_credit:
+      type: integer
+    child_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - medical_credit
+  - child_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-ae95b45e-77bb-594a-a5f4-88a3a18a5f78
+scenario_seed: 1416394781504005236
+scenario_hash: c9036464c2360f2176a7772bbd2858bb5c3e16dadacb322be9fea5202bcf1f38
+authorship:
+  method: individually_written
+  case_id: A217
+  case_sha256: 13a80b8ca543647444bb542abe66a4eb3c0ec79d4436ead3de2c7ac6594fb2f6
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- medical_credit
+- child_credit
+- final_national_tax

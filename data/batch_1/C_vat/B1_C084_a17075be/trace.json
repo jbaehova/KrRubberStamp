@@ -1,0 +1,206 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C084-부품활동",
+          "date": "2026-02-20",
+          "description": "압인 장비에 넣을 부품을 한 번 받아 작업대에 설치했다.",
+          "document_ids": [
+            "C084-종이영수증",
+            "C084-현금영수증"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상압인실 프레스 작업대"
+          },
+          "operation_id": "C084-압인",
+          "participants": [
+            {
+              "name": "가상 프레스직원",
+              "organization": "가상압인실",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C084-부품구입"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 부품 압인 제작",
+          "operation_id": "C084-압인",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C084-부품활동",
+          "date": "2026-02-20",
+          "document_id": "C084-종이영수증",
+          "transaction_id": "C084-부품구입"
+        },
+        {
+          "activity_id": "C084-부품활동",
+          "date": "2026-02-20",
+          "document_id": "C084-현금영수증",
+          "transaction_id": "C084-부품구입"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C084-종이영수증",
+        "purpose": "business",
+        "transaction_id": "C084-부품구입"
+      },
+      {
+        "business_related": true,
+        "document_id": "C084-현금영수증",
+        "purpose": "business",
+        "transaction_id": "C084-부품구입"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C084-종이영수증",
+        "C084-현금영수증"
+      ],
+      "evidence": [
+        "cash_receipt",
+        "receipt"
+      ],
+      "transaction_id": "C084-부품구입"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-20",
+      "transaction_id": "C084-부품구입"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1540000,
+      "includes_vat": true,
+      "transaction_id": "C084-부품구입"
+    },
+    "output": {
+      "gross": 1540000,
+      "supply_base": 1400000,
+      "vat": 140000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "cash_receipt",
+        "receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C084-부품구입",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 140000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 31000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -140000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -140000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -140000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 140000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 140000,
+      "input_vat": 140000,
+      "net_vat": -140000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 140000,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

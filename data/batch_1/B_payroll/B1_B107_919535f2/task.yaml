@@ -1,0 +1,39 @@
+task_id: B1_B107_919535f2
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상다락목록실의 단기 직원이 인수인계를 끝냈습니다. 이번 계약에는 마지막 두 정규 근로 카드와 완료된 한 주 출근 확인만 있습니다.
+  퇴직금이나 보험 정산을 더하지 말고 정규근로 기본급, 별도 주휴수당, 두 금액을 포함한 총지급액을 산정해 주세요.
+input_files:
+- path: inputs/01_인수계약.hwpx
+  format: hwpx
+- path: inputs/02_마지막근로.xlsx
+  format: xlsx
+- path: inputs/03_인수공제.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-8dfdd976-b78a-5513-a242-6e5b17448f10
+scenario_seed: 10490350221428857338
+scenario_hash: 3c0b9c82bf858466b02734f4ea7a887a123bc8b6877f0e571aa82a17e3b49242
+authorship:
+  method: individually_written
+  case_id: B107
+  case_sha256: 919535f235b519faac91f38c86effea743cfb5d9cba032cfd46e6ab067283f1b
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- gross_pay

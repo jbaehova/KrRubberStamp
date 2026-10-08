@@ -1,0 +1,41 @@
+task_id: B1_C122_6cdb44c0
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상하루표식의 결제 봉투와 이메일 증빙을 통합해 거래 수(unique_transaction_count), 공제가능 매입세액(deductible_input_vat),
+  환급액(refund_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_봉투인계.hwpx
+  format: hwpx
+- path: inputs/02_임시수금.pdf
+  format: pdf
+- path: inputs/03_전자계산서.xlsx
+  format: xlsx
+- path: inputs/04_주문인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - deductible_input_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-5b336805-72e9-5be3-82cb-f7b377464e1a
+scenario_seed: 7843938768001067790
+scenario_hash: 56c1bea25eb33bc4fa499c7008d3980cbbd32cd1c6b58485847c0274c8ed4639
+authorship:
+  method: individually_written
+  case_id: C122
+  case_sha256: 6cdb44c0229e6b0ebe355fc45789528b39d05ccad67703191b8f9b3ba237cf69
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- unique_transaction_count
+- deductible_input_vat
+- refund_vat

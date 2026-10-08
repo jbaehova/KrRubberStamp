@@ -1,0 +1,88 @@
+task_id: B1_A153_f58d7e5f
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상해송자동화의 가상시유준 정산을 마감합니다. 주택대출의 실제 상환 조건과 카드 종류별 사용액으로 주택자금 및 카드 소득공제액을
+  구하고 소득공제 종합한도 초과액을 계산해 주세요. 보유 주택과 별도 월세 신청을 대조해 월세 세액공제액도 적습니다. 장애인 성년 자녀와 다른 형제에게
+  배정한 어머니 자료를 확인해 기본공제액 및 보험료와 기부금 세액공제액을 구합니다. 연금계좌 세액공제와 최종 과세표준 및 결정 소득세도 필요합니다.
+input_files:
+- path: inputs/01_정산신청.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_자녀장애.pdf
+  format: pdf
+- path: inputs/04_어머니배정.pdf
+  format: pdf
+- path: inputs/05_주택대출.pdf
+  format: pdf
+- path: inputs/06_이자납입.pdf
+  format: pdf
+- path: inputs/07_일반카드.xlsx
+  format: xlsx
+- path: inputs/08_시장교통.xlsx
+  format: xlsx
+- path: inputs/09_임차주택.pdf
+  format: pdf
+- path: inputs/10_월세이체.xlsx
+  format: xlsx
+- path: inputs/11_연금계좌.pdf
+  format: pdf
+- path: inputs/12_자녀보험.xlsx
+  format: xlsx
+- path: inputs/13_명의별기부.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    income_deduction_limit_excess:
+      type: integer
+    rent_credit:
+      type: integer
+    basic_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    donation_credit:
+      type: integer
+    pension_account_credit:
+      type: integer
+    tax_base:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - housing_income_deduction
+  - credit_card_deduction
+  - income_deduction_limit_excess
+  - rent_credit
+  - basic_deduction
+  - insurance_credit
+  - donation_credit
+  - pension_account_credit
+  - tax_base
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-6f8201cf-3e01-5725-9f97-c7064307059f
+scenario_seed: 17693937461712172183
+scenario_hash: d08082885d99d81d9800ab7c3c3a98cc183d6381fd726abf1ee588bd9ed94833
+authorship:
+  method: individually_written
+  case_id: A153
+  case_sha256: f58d7e5ffb54b497fdf3800a253830dde2d400c1a5153eecad9b331df76e9ae4
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- housing_income_deduction
+- credit_card_deduction
+- income_deduction_limit_excess
+- rent_credit
+- basic_deduction
+- insurance_credit
+- donation_credit
+- pension_account_credit
+- tax_base
+- final_national_tax

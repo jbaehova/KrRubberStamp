@@ -1,0 +1,65 @@
+task_id: B1_D250_c38aad4b
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 악기 수리점 튜닝 부품의 실제 단가표와 전체 공급가액 및 세액을 마감해 주세요. cheapest_by_item과 supply_total
+  및 vat_total을 제출해 주세요.
+input_files:
+- path: inputs/01_튜닝첫표지.pdf
+  format: pdf
+- path: inputs/02_첫튜닝키.xlsx
+  format: xlsx
+- path: inputs/03_다른튜닝키.hwpx
+  format: hwpx
+- path: inputs/04_첫고정핀.pdf
+  format: pdf
+- path: inputs/05_수선보충표지.xlsx
+  format: xlsx
+- path: inputs/06_보충튜닝키.hwpx
+  format: hwpx
+- path: inputs/07_보충고정핀.pdf
+  format: pdf
+- path: inputs/08_와셔구매표지.xlsx
+  format: xlsx
+- path: inputs/09_와셔품목.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-5bb2daa9-9793-5ffd-abd3-de873440eb52
+scenario_seed: 14090264924481823782
+scenario_hash: 66020779e97f3dbc02146f0ccb37e39aa6a93787a92f437834ac3a002d99274d
+authorship:
+  method: individually_written
+  case_id: D250
+  case_sha256: c38aad4b9ee2a42692f4dbe1a2445353925d50bfc177a59932dbeac7f5876b83
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- supply_total
+- vat_total

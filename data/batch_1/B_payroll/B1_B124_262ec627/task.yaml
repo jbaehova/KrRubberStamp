@@ -1,0 +1,47 @@
+task_id: B1_B124_262ec627
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상새벽줄검사실의 정규 근로 카드가 야간 종료 경계를 지나갑니다. 중간 휴게를 반영해 정규 기본급과 야간 가산액을 계산해 주세요.
+  정규 작업에는 연장수당이 발생하지 않는다는 점을 유지하면서 이번 총지급액도 구합니다.
+input_files:
+- path: inputs/01_검사시급.hwpx
+  format: hwpx
+- path: inputs/02_경계카드.xlsx
+  format: xlsx
+- path: inputs/03_검사지급.pdf
+  format: pdf
+- path: inputs/04_검사부과.hwpx
+  format: hwpx
+- path: inputs/05_경계공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    night_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - night_pay
+  - overtime_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-4bb79838-acb4-518b-8097-541b95387b70
+scenario_seed: 2751354296233130005
+scenario_hash: 9082b47d11c2de87fb1b64bacb4692902099816f31b9af96ea2c2b12ab3770e0
+authorship:
+  method: individually_written
+  case_id: B124
+  case_sha256: 262ec627b63878151020a5b43f00a6a2e50232b3b24388530cf9c4123eb70fb5
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- base_pay
+- night_pay
+- overtime_pay
+- gross_pay

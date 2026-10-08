@@ -1,0 +1,171 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-06",
+          "document_id": "SKATE-GUARD-41",
+          "event": "received",
+          "event_id": "SKATE-A-IN",
+          "location": "빙상대여창고"
+        },
+        {
+          "date": "2026-05-06",
+          "document_id": "SKATE-GUARD-42",
+          "event": "received",
+          "event_id": "SKATE-B-IN",
+          "location": "빙상대여창고"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-01",
+          "document_id": "SKATE-GUARD-41",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "SKATE-A",
+          "vendor": "가상빙상소모품"
+        },
+        {
+          "date": "2026-05-02",
+          "document_id": "SKATE-GUARD-42",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "SKATE-B",
+          "vendor": "가상스케이트부속"
+        },
+        {
+          "date": "2026-05-04",
+          "document_id": "SKATE-GUARD-43",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "SKATE-C",
+          "vendor": "가상빙상소모품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "SKATE-B",
+          "items": [
+            {
+              "name": "칼날보호대성인",
+              "quantity": 6,
+              "unit_price": 9900
+            }
+          ],
+          "sheet_id": "SKATE-B-L"
+        },
+        {
+          "header_record_id": "SKATE-C",
+          "items": [
+            {
+              "name": "칼날보호대성인",
+              "quantity": 12,
+              "unit_price": 8800
+            }
+          ],
+          "sheet_id": "SKATE-C-L"
+        },
+        {
+          "header_record_id": "SKATE-A",
+          "items": [
+            {
+              "name": "칼날보호대성인",
+              "quantity": 10,
+              "unit_price": 9350
+            }
+          ],
+          "sheet_id": "SKATE-A-L"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목과 표지를 연결하며 invoice 또는 order의 document_id에 received가 있는 원문만 실제 구매다. 미수령 주문은 가격표와 비용에서 제외한다. 포함 단가의 10/11에서 원 미만을 버린 값을 공급가액 단가로 비교한다. 행 공급가액도 포함 행 금액 10/11의 원 미만을 버린 값이다. 품목과 업체는 NFKC 후 공백 제거와 영문 소문자 변환을 적용하고 법인 표현을 제거한다. 품목 이름 순으로 기록하며 가격 동률은 업체 이름 순이다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "SKATE-GUARD-43"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "SKATE-GUARD-41",
+        "SKATE-GUARD-42"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SKATE-GUARD-41",
+      "includes_vat": true,
+      "quantity": 10,
+      "unit_price": 9350
+    },
+    "output": {
+      "supply": 85000,
+      "total": 93500,
+      "vat": 8500
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상빙상소모품"
+    },
+    "output": "가상빙상소모품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SKATE-GUARD-42",
+      "includes_vat": true,
+      "quantity": 6,
+      "unit_price": 9900
+    },
+    "output": {
+      "supply": 54000,
+      "total": 59400,
+      "vat": 5400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상스케이트부속"
+    },
+    "output": "가상스케이트부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "칼날보호대성인",
+          "unit_price": 8500,
+          "vendor": "가상빙상소모품"
+        }
+      ],
+      "grand_total": 152900,
+      "supply_total": 139000,
+      "unique_document_count": 2,
+      "vat_total": 13900,
+      "vendor_totals": [
+        {
+          "supply": 85000,
+          "total": 93500,
+          "vat": 8500,
+          "vendor": "가상빙상소모품"
+        },
+        {
+          "supply": 54000,
+          "total": 59400,
+          "vat": 5400,
+          "vendor": "가상스케이트부속"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

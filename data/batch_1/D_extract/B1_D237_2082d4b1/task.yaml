@@ -1,0 +1,53 @@
+task_id: B1_D237_2082d4b1
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 외국어 교실 헤드셋 구매의 업체별 지급액과 세액을 정리해 주세요. vendor_totals와 vat_total을 제출해 주세요.
+input_files:
+- path: inputs/01_전각업체결제.pdf
+  format: pdf
+- path: inputs/02_반각업체결제.xlsx
+  format: xlsx
+- path: inputs/03_교체패드표지.hwpx
+  format: hwpx
+- path: inputs/04_교체패드품목.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-578cdaa1-cce9-563e-9d91-8b326f622fd8
+scenario_seed: 2342668613895857717
+scenario_hash: 29316a5afcbfc35c488ef866e156ccccc911008d65462f7c9a6f29221f40a39e
+authorship:
+  method: individually_written
+  case_id: D237
+  case_sha256: 2082d4b13db826355a30e979deba4f5a1334ca0b67dd4b0fbae9e4a15d004344
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals
+- vat_total

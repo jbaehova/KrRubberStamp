@@ -1,0 +1,281 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "ground_work",
+          "activity_id": "지번평탄",
+          "date": "2026-01-28",
+          "description": "토지 자체를 평탄화했다. 건물이나 기계 설치 공사는 없다.",
+          "document_ids": [
+            "평탄전자"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "가상 포장동 토지 31번지"
+          },
+          "operation_id": "포장용역",
+          "participants": [
+            {
+              "name": "가상백포장",
+              "organization": "가상단단포장",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "토지평탄3"
+        },
+        {
+          "action": "service",
+          "activity_id": "기계수리",
+          "date": "2026-02-02",
+          "description": "포장 설비 구동부를 수리했다.",
+          "document_ids": [
+            "설비전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "포장동 내부 설비실"
+          },
+          "operation_id": "포장용역",
+          "participants": [
+            {
+              "name": "가상백포장",
+              "organization": "가상단단포장",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "포장설비수리"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 농산물 포장 용역",
+          "operation_id": "포장용역",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "지번평탄",
+          "date": "2026-01-28",
+          "document_id": "평탄전자",
+          "transaction_id": "토지평탄3"
+        },
+        {
+          "activity_id": "기계수리",
+          "date": "2026-02-02",
+          "document_id": "설비전자",
+          "transaction_id": "포장설비수리"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "평탄전자",
+        "purpose": "land",
+        "transaction_id": "토지평탄3"
+      },
+      {
+        "business_related": true,
+        "document_id": "설비전자",
+        "purpose": "business",
+        "transaction_id": "포장설비수리"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "평탄전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "토지평탄3"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "설비전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "포장설비수리"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-01-28",
+      "transaction_id": "토지평탄3"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 6380000,
+      "includes_vat": true,
+      "transaction_id": "토지평탄3"
+    },
+    "output": {
+      "gross": 6380000,
+      "supply_base": 5800000,
+      "vat": 580000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "토지평탄3",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 580000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-02",
+      "transaction_id": "포장설비수리"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1287000,
+      "includes_vat": true,
+      "transaction_id": "포장설비수리"
+    },
+    "output": {
+      "gross": 1287000,
+      "supply_base": 1170000,
+      "vat": 117000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "포장설비수리",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 117000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 721000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -117000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -117000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -117000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 117000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 117000,
+      "input_vat": 697000,
+      "net_vat": -117000,
+      "noncreditable_vat": 580000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 117000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

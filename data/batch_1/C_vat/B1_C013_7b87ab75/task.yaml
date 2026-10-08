@@ -1,0 +1,38 @@
+task_id: B1_C013_7b87ab75
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상저녁향의 현금영수증 자료는 총액 대신 공급가액을 옮겨 적었습니다. 이 점을 반영해 매출 공급가액(tax_base)과 영수증
+  발행세액공제(receipt_credit)를 계산해 주세요. 원재료 계산서 매입을 반영한 납부액(payable_vat)을 answer.json에
+  원 단위 정수로 적어 주세요.
+input_files:
+- path: inputs/01_향초점_신고메모.pdf
+  format: pdf
+- path: inputs/02_향초와_원재료.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-ed6e19fd-3372-5b52-8f93-e5ef00a032b7
+scenario_seed: 8901271709369066029
+scenario_hash: b038f82e38596a315a10e53ae958f98673186703ad7928b3f77b0ff0285d0c31
+authorship:
+  method: individually_written
+  case_id: C013
+  case_sha256: 7b87ab756e2d622d73c7f5ef3d40dc5709c3f6e3e2fbed41760d8064f607676d
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- tax_base
+- receipt_credit
+- payable_vat

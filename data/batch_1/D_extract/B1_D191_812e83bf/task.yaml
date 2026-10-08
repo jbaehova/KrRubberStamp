@@ -1,0 +1,45 @@
+task_id: B1_D191_812e83bf
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 재료 혼합통 구매의 부가세와 실제 구매 실적을 보고해 주세요. 첨부를 모두 연결한 vat_total 및 unique_document_count가
+  필요합니다.
+input_files:
+- path: inputs/01_혼합통표지.pdf
+  format: pdf
+- path: inputs/02_본체첫로트.xlsx
+  format: xlsx
+- path: inputs/03_본체다음로트.hwpx
+  format: hwpx
+- path: inputs/04_마개첨부.pdf
+  format: pdf
+- path: inputs/05_도구주문표지.hwpx
+  format: hwpx
+- path: inputs/06_교반봉첨부.xlsx
+  format: xlsx
+- path: inputs/07_세척솔첨부.pdf
+  format: pdf
+- path: inputs/08_혼합실수령.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vat_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - vat_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-c86d326d-e9df-554e-9a68-cf440385f626
+scenario_seed: 9308522340393142121
+scenario_hash: c7acc4db948a4b5bfe26f1b8f205112189d328dbe83841c0b097fc32337cf992
+authorship:
+  method: individually_written
+  case_id: D191
+  case_sha256: 812e83bffaebc769ed640d33d9f63f7fa1836beb37bea014fc50b385528d54e0
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vat_total
+- unique_document_count

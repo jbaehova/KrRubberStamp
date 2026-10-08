@@ -1,0 +1,46 @@
+task_id: B1_D183_6716e8f9
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 현장 보관 망의 규격별 최저 구매 단가를 정리해 주세요. 원문 이름 처리 기준을 적용한 cheapest_by_item을 답합니다.
+input_files:
+- path: inputs/01_전각망명세.xlsx
+  format: xlsx
+- path: inputs/02_반각망명세.pdf
+  format: pdf
+- path: inputs/03_큰규격.hwpx
+  format: hwpx
+- path: inputs/04_망집게.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-295e14a2-b982-5fa7-bf19-05e3fc3641e8
+scenario_seed: 7428380792532966223
+scenario_hash: d8baf7d3d950d9c05697d7df92445a57740ed1767957c73a8270fbafe1b5b41a
+authorship:
+  method: individually_written
+  case_id: D183
+  case_sha256: 6716e8f93b431b4fd8ac61936be14f53362fd4f7afa07413dff3de79b3f254ce
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item

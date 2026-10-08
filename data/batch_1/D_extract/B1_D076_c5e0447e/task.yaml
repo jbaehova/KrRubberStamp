@@ -1,0 +1,51 @@
+task_id: B1_D076_c5e0447e
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 학생 작품 운반 재료를 추가 구입합니다. 세금 표시를 맞춘 cheapest_by_item과 기존 supply_total을 보내
+  주세요. 개당 비교와 실제 금액 분리 기준은 운반품 대장에 있습니다.
+input_files:
+- path: inputs/01_보호대.pdf
+  format: pdf
+- path: inputs/02_운반품.xlsx
+  format: xlsx
+- path: inputs/03_고정끈.hwpx
+  format: hwpx
+- path: inputs/04_추가보호대.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-fd869dd1-a419-5622-9577-bbdda963ba96
+scenario_seed: 14258471731951754359
+scenario_hash: f895fcf77a821910334c4a2d3872873f49698fb9e19786d6716c0f38eabceea3
+authorship:
+  method: individually_written
+  case_id: D076
+  case_sha256: c5e0447edeeedc778f4d3f7a6a0e3d857f7f8ae8d7e454ea82f5831bf41f084b
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item
+- supply_total

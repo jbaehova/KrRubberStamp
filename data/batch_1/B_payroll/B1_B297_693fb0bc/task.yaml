@@ -1,0 +1,59 @@
+task_id: B1_B297_693fb0bc
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상반듯한기록국은 일요일 두 작업과 다음 대체공휴일 밤 작업을 승인했습니다. 날짜별 실제 근로로 휴일수당과 야간 가산을 구해
+  주세요. 이미 월급에 포함된 대체공휴일 유급액과 배식 및80퍼센트 선택을 반영한 과세급여와 소득세도 작성해 주세요.
+input_files:
+- path: inputs/01_반듯한월급.pdf
+  format: pdf
+- path: inputs/02_유급및배식.hwpx
+  format: hwpx
+- path: inputs/03_일요오전.xlsx
+  format: xlsx
+- path: inputs/04_일요오후.pdf
+  format: pdf
+- path: inputs/05_대체밤.hwpx
+  format: hwpx
+- path: inputs/06_은행실행.xlsx
+  format: xlsx
+- path: inputs/07_연금기초.pdf
+  format: pdf
+- path: inputs/08_다른기관선택.xlsx
+  format: xlsx
+- path: inputs/09_날짜세무원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+  required:
+  - holiday_pay
+  - night_pay
+  - paid_holiday_pay
+  - taxable_pay
+  - income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-cfc4710a-aa57-5a2f-a0d6-a8832d7065c8
+scenario_seed: 7583974621294682434
+scenario_hash: 4c3bfac9bb7fdcbb018a15c989d76690702416031d77e14257d56dc5e7646cea
+authorship:
+  method: individually_written
+  case_id: B297
+  case_sha256: 693fb0bc87d8e1422ee80b86d5842b6b9222435946aa0782892f1880a5488a3b
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- holiday_pay
+- night_pay
+- paid_holiday_pay
+- taxable_pay
+- income_tax

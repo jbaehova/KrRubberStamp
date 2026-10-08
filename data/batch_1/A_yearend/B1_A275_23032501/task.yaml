@@ -1,0 +1,46 @@
+task_id: B1_A275_23032501
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상달맞이건재의 가상이채온은 3월 1일 처음 취업했고 아들의 봄학기 등록금을 입사 전 선납과 입사 후 추가 납부로 나눠 냈습니다.
+  학기 이름 대신 실제 지급일을 재직 기간과 맞춰 교육비 세액공제액을 계산해 주세요. 가을학기 납부도 반영하고 국세 결정세액과 이미 원천징수한 국세의
+  정산 차액을 회신해 주세요. 환급은 음수로 적습니다.
+input_files:
+- path: inputs/01_첫취업확인.hwpx
+  format: hwpx
+- path: inputs/02_봄학기선납.pdf
+  format: pdf
+- path: inputs/03_봄학기추가청구.xlsx
+  format: xlsx
+- path: inputs/04_가을학기.pdf
+  format: pdf
+- path: inputs/05_학생배정.hwpx
+  format: hwpx
+- path: inputs/06_급여원천징수.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    education_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+    settlement_national_tax:
+      type: integer
+  required:
+  - education_credit
+  - final_national_tax
+  - settlement_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-bc1760cf-95a9-5774-8c82-c9da258c24e8
+scenario_seed: 2522900904594167900
+scenario_hash: 1b6d6eb706da970827ebc020638f6eb8ae660f9412d82a02bbb9ae5b0e1736ef
+authorship:
+  method: individually_written
+  case_id: A275
+  case_sha256: 230325017dd8d85cfd0b2a1bb7b4c906948079b48ba90dea20f5d662c6b15fda
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- education_credit
+- final_national_tax
+- settlement_national_tax

@@ -1,0 +1,47 @@
+task_id: B1_B120_90a04891
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상물결색인실은 한 카드의 근로 구분을 정규에서 추가로 수정 승인했습니다. 같은 식별자의 승인 번호를 대조하여 정규 기본급과
+  평일 연장수당을 각각 산정해 주세요. 완료된 소정 출근 주의 주휴수당과 총지급액도 구합니다. 한 일을 두 지급 항목에 동시에 넣지 않습니다.
+input_files:
+- path: inputs/01_색인조건.hwpx
+  format: hwpx
+- path: inputs/02_색인정규.xlsx
+  format: xlsx
+- path: inputs/03_구분이력.pdf
+  format: pdf
+- path: inputs/04_색인부과.hwpx
+  format: hwpx
+- path: inputs/05_구분공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - overtime_pay
+  - weekly_holiday_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-891af5e6-2b47-5eeb-a02d-f1da9a9e6931
+scenario_seed: 10421409329031753213
+scenario_hash: 79981acdbd91ffb32f7985711473d0b319076140230a27bf6b96ad333f0c10fc
+authorship:
+  method: individually_written
+  case_id: B120
+  case_sha256: 90a04891dbe12dfd4cd470ea7ab1198d5cdd984bb970523e083f017c3b15ce48
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- base_pay
+- overtime_pay
+- weekly_holiday_pay
+- gross_pay

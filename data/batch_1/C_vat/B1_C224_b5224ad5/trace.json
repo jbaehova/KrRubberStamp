@@ -1,0 +1,205 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "측량차정비",
+          "date": "2026-05-15",
+          "description": "직원 현장 이동 차량의 타이어를 교체했다.",
+          "document_ids": [
+            "타이어전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "측량 장비 차고"
+          },
+          "operation_id": "현장측량",
+          "participants": [
+            {
+              "name": "가상강측량",
+              "organization": "가상선측량",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "측량차타이어",
+          "vehicle_id": "가상-측량44"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 현장 측량 용역",
+          "operation_id": "현장측량",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "측량차정비",
+          "date": "2026-05-15",
+          "document_id": "타이어전자",
+          "transaction_id": "측량차타이어"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-측량44"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "타이어전자",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "측량차타이어"
+      },
+      {
+        "transaction_id": "측량차타이어",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-측량44",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "타이어전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "측량차타이어"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-15",
+      "transaction_id": "측량차타이어"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 946000,
+      "includes_vat": true,
+      "transaction_id": "측량차타이어"
+    },
+    "output": {
+      "gross": 946000,
+      "supply_base": 860000,
+      "vat": 86000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "측량차타이어",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 86000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 287000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 86000,
+      "net_vat": 0,
+      "noncreditable_vat": 86000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

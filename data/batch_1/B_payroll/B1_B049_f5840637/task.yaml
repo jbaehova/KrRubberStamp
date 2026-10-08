@@ -1,0 +1,64 @@
+task_id: B1_B049_f5840637
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상하얀설비의 가상서예린 급여에는 개천절 근무의 대체된 기록과 최신 승인본, 대체공휴일의 다른 근로 기록이 함께 있습니다.
+  각 기록의 상태와 휴게를 확인해 날짜별 휴일수당을 계산해 주세요. 정액 식대는 25만원이며 회사 식사 제공은 없습니다. 월 통상임금과 표시 시급,
+  비과세급여와 과세급여 및 휴일수당과 총지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_설비월급계약.hwpx
+  format: hwpx
+- path: inputs/02_식사제공확인.pdf
+  format: pdf
+- path: inputs/03_대체된카드.pdf
+  format: pdf
+- path: inputs/04_수정승인카드.xlsx
+  format: xlsx
+- path: inputs/05_다른휴일근로.pdf
+  format: pdf
+- path: inputs/06_휴일달력.hwpx
+  format: hwpx
+- path: inputs/07_보험확정.xlsx
+  format: xlsx
+- path: inputs/08_가족은행.hwpx
+  format: hwpx
+- path: inputs/09_휴일식대원문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    ordinary_hourly_wage_floor:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - ordinary_hourly_wage_floor
+  - non_taxable_pay
+  - taxable_pay
+  - holiday_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-cf39f415-84c2-55e4-aab7-5407c0f7ade5
+scenario_seed: 17691272073363087823
+scenario_hash: 339615d281c9493fe01d483a72ab017a048618b336bdafe8537ba800661d62e6
+authorship:
+  method: individually_written
+  case_id: B049
+  case_sha256: f5840637e59861cffc0ab7ba86798f31a61ba93201a35cdbdeed03a6e7d89575
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- ordinary_monthly_wage
+- ordinary_hourly_wage_floor
+- non_taxable_pay
+- taxable_pay
+- holiday_pay
+- gross_pay

@@ -1,0 +1,37 @@
+task_id: B1_D137_ad41c17e
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 환풍 부품 선청구 자료도 포함한 인계가 왔습니다. 실제 수령에 연결되는 자료의 vat_total과 grand_total을 확인해
+  주세요.
+input_files:
+- path: inputs/01_모터선청구.pdf
+  format: pdf
+- path: inputs/02_팬가드표지.hwpx
+  format: hwpx
+- path: inputs/03_팬가드품목.xlsx
+  format: xlsx
+- path: inputs/04_흡입망품목.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vat_total:
+      type: integer
+    grand_total:
+      type: integer
+  required:
+  - vat_total
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-ea694901-2736-583e-986b-ca3aabf118fd
+scenario_seed: 12484472393019457959
+scenario_hash: 8462cec042f6036db0a470f94914996c852be4bde01b52d8fcb669b54bf3fe67
+authorship:
+  method: individually_written
+  case_id: D137
+  case_sha256: ad41c17ef21881a76bc5bf0f1979ea3cdad5ebf29a3f7ce08eff96bc2a38e80e
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vat_total
+- grand_total

@@ -1,0 +1,61 @@
+task_id: B1_C050_095e8bde
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상네모수납 대표는 다른 사업장의 전년 공급가액도 함께 보냈습니다. 이번 신고 사업장의 기준 금액을 찾아 영수증 발행세액공제(receipt_credit)를
+  판단해 주세요. 수령 기록에서 집으로 간 물품을 구분하여 공제불가 세액(noncreditable_vat)과 공제가능 매입세액(deductible_input_vat)을
+  계산해 주세요. 예정고지 세액(prepaid_vat)을 차감한 환급액(refund_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_사업장_의뢰.hwpx
+  format: hwpx
+- path: inputs/02_사업장별_전년.pdf
+  format: pdf
+- path: inputs/03_선납_영수증.xlsx
+  format: xlsx
+- path: inputs/04_수납함_판매.pdf
+  format: pdf
+- path: inputs/05_판매용_재고.pdf
+  format: pdf
+- path: inputs/06_집_보관함.xlsx
+  format: xlsx
+- path: inputs/07_진열표지.pdf
+  format: pdf
+- path: inputs/08_수령_장소.hwpx
+  format: hwpx
+- path: inputs/09_재고원본_스캔.png
+  format: png
+  duplicate_of: inputs/05_판매용_재고.pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    prepaid_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - noncreditable_vat
+  - deductible_input_vat
+  - prepaid_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-70842bae-a52f-52f6-b890-d34b656c6dc6
+scenario_seed: 675130780868087653
+scenario_hash: e818ff9442754ccc803fb9caae0214d3d9c6bed17fb2a0a9878540f89f28aef8
+authorship:
+  method: individually_written
+  case_id: C050
+  case_sha256: 095e8bde42930f650570755468f6d6af053a43d1518fc0e7d5868b5e0867ad13
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- receipt_credit
+- noncreditable_vat
+- deductible_input_vat
+- prepaid_vat
+- refund_vat

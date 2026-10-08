@@ -1,0 +1,205 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_lease",
+          "activity_id": "C140-임차인수",
+          "date": "2026-05-08",
+          "description": "대표가 사업 현장 이동에 사용할 11인승 승합차를 임차해 인수했다.",
+          "document_ids": [
+            "C140-임차계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상법인 차량 인수장"
+          },
+          "operation_id": "C140-해설",
+          "participants": [
+            {
+              "name": "가상하대표",
+              "organization": "가상해설이동",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "C140-승합임차",
+          "vehicle_id": "가상-V140-승합"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 전시 해설장치 제작 운영",
+          "operation_id": "C140-해설",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C140-임차인수",
+          "date": "2026-05-08",
+          "document_id": "C140-임차계산서",
+          "transaction_id": "C140-승합임차"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "non_excise_vehicle",
+          "vehicle_id": "가상-V140-승합"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C140-임차계산서",
+        "purpose": "passenger_car_rental",
+        "transaction_id": "C140-승합임차"
+      },
+      {
+        "transaction_id": "C140-승합임차",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-V140-승합",
+        "vehicle_subject_excise": false
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C140-임차계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C140-승합임차"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-08",
+      "transaction_id": "C140-승합임차"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1012000,
+      "includes_vat": true,
+      "transaction_id": "C140-승합임차"
+    },
+    "output": {
+      "gross": 1012000,
+      "supply_base": 920000,
+      "vat": 92000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_rental",
+      "supplier_general": true,
+      "transaction_id": "C140-승합임차",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 92000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 187000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -92000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -92000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -92000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 92000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 92000,
+      "input_vat": 92000,
+      "net_vat": -92000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 92000,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

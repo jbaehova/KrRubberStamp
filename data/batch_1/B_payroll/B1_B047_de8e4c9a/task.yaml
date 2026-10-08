@@ -1,0 +1,68 @@
+task_id: B1_B047_de8e4c9a
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상남빛공정의 가상고재린은 과세급여가 1400만원을 넘는 기술직 직원입니다. 급여 계약과 원문 고액 급여 산식으로 소득세 및
+  지방소득세를 구해 주세요. 세 공단의 기준액은 서로 다르므로 당월 급여 하나로 통일하지 말고 각각 국민연금, 건강보험과 고용보험 부담액을 계산해
+  공제 합계 및 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_기술직계약.hwpx
+  format: hwpx
+- path: inputs/02_식대확인.pdf
+  format: pdf
+- path: inputs/03_소정일정.xlsx
+  format: xlsx
+- path: inputs/04_연금통지원액.pdf
+  format: pdf
+- path: inputs/05_건강보수.hwpx
+  format: hwpx
+- path: inputs/06_고용평균보수.xlsx
+  format: xlsx
+- path: inputs/07_가족등록.pdf
+  format: pdf
+- path: inputs/08_지급실행.xlsx
+  format: xlsx
+- path: inputs/09_고액산식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    employment_insurance:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - income_tax
+  - local_income_tax
+  - national_pension
+  - health_insurance
+  - employment_insurance
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-7288e027-9ba7-55b9-aee3-8477ffa62db6
+scenario_seed: 16036839550039963513
+scenario_hash: 04634702211e61979007521f3830d98365e67a9dcf66aed836d82ef833a04c33
+authorship:
+  method: individually_written
+  case_id: B047
+  case_sha256: de8e4c9a9c1137791dffb1cfca7d230ad7406185f17681be550bfe2fc6a1a8d4
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- income_tax
+- local_income_tax
+- national_pension
+- health_insurance
+- employment_insurance
+- total_deductions
+- net_pay

@@ -1,0 +1,46 @@
+task_id: B1_C030_5d21f120
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상넓은러그의 올해 카드 판매액과 지난해 사업장 공급가액 자료를 함께 확인해 주세요. 영수증 발행세액공제(receipt_credit)
+  적용 가능 여부를 판단한 뒤 매출세액(output_vat)과 공제가능 매입세액(deductible_input_vat)을 반영한 납부액(payable_vat)을
+  answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_전시장_요청.pdf
+  format: pdf
+- path: inputs/02_전년_사업장매출.hwpx
+  format: hwpx
+- path: inputs/03_러그_카드.xlsx
+  format: xlsx
+- path: inputs/04_전시장_재고.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    output_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - output_vat
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-f66dfaac-d3f1-5655-97c7-13a972715cd8
+scenario_seed: 6710910040961055795
+scenario_hash: fb08a1a9faad8868be62e4fc28032f7b425e52642a5b152e3816039e2fe32f8e
+authorship:
+  method: individually_written
+  case_id: C030
+  case_sha256: 5d21f1205715fc338a0ac7ed5ad134584a719d055e8181b34c6aeadb34c2ceef
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- receipt_credit
+- output_vat
+- deductible_input_vat
+- payable_vat

@@ -1,0 +1,64 @@
+task_id: B1_A150_2bbedf6b
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상무궁화검사의 가상호시연에게 부모 진료와 보험 및 기부 자료가 왔습니다. 어머니의 소득 종류와 부모 나이를 확인해 기본공제액을
+  구해 주세요. 수술별 보전금과 사람별 의료비 한도를 반영한 의료비 세액공제액을 계산합니다. 아버지 보험의 실제 납부자와 어머니 소득이 카드 및
+  기부에 미치는 영향을 따로 판단해 보험료 세액공제와 카드 소득공제 및 기부금 세액공제도 작성해 주세요.
+input_files:
+- path: inputs/01_직원신청.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_아버지자격.pdf
+  format: pdf
+- path: inputs/04_어머니소득.pdf
+  format: pdf
+- path: inputs/05_아버지진료.pdf
+  format: pdf
+- path: inputs/06_어머니진료.pdf
+  format: pdf
+- path: inputs/07_부모보험.xlsx
+  format: xlsx
+- path: inputs/08_직원보험.pdf
+  format: pdf
+- path: inputs/09_본인카드.xlsx
+  format: xlsx
+- path: inputs/10_어머니카드.xlsx
+  format: xlsx
+- path: inputs/11_부모기부.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    donation_credit:
+      type: integer
+  required:
+  - basic_deduction
+  - medical_credit
+  - insurance_credit
+  - credit_card_deduction
+  - donation_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-7577bda0-e98f-5754-98bc-85293f471c29
+scenario_seed: 3152202440730641382
+scenario_hash: 5fd48d30b089a2ed4c27e74d59859029979d6e9b7270b93a430470629887b941
+authorship:
+  method: individually_written
+  case_id: A150
+  case_sha256: 2bbedf6b33de83e6b84cbfc1324537c32c6aa19a5386ffe7fa703e33a279c597
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- basic_deduction
+- medical_credit
+- insurance_credit
+- credit_card_deduction
+- donation_credit

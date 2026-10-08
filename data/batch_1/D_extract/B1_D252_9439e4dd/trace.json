@@ -1,0 +1,237 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-16",
+          "document_id": "BIND-PRESS-12",
+          "event": "received",
+          "event_id": "BIND-PRESS-IN",
+          "location": "제본소장치보관대"
+        },
+        {
+          "date": "2026-06-17",
+          "document_id": "BIND-HANDLE-13",
+          "event": "received",
+          "event_id": "BIND-HANDLE-IN",
+          "location": "제본소장치보관대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-12",
+          "document_id": "BIND-PRESS-12",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "BIND-PRESS-EXT",
+          "vendor": "가상제본장치"
+        },
+        {
+          "date": "2026-06-12",
+          "document_id": "BIND-PRESS-12",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "BIND-PRESS-BOOK",
+          "vendor": "가상제본장치"
+        },
+        {
+          "date": "2026-06-13",
+          "document_id": "BIND-HANDLE-13",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "BIND-HANDLE-C",
+          "vendor": "가상제본부속"
+        },
+        {
+          "date": "2026-06-01",
+          "document_id": "BIND-PRESS-Q",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "BIND-Q-C",
+          "vendor": "가상제본장치"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "BIND-PRESS-EXT",
+          "items": [
+            {
+              "name": "제본압착판40",
+              "quantity": 2,
+              "unit_price": 73500
+            }
+          ],
+          "sheet_id": "BIND-BODY-L"
+        },
+        {
+          "header_record_id": "BIND-PRESS-EXT",
+          "items": [
+            {
+              "name": "압착판교체패드40",
+              "quantity": 4,
+              "unit_price": 7600
+            }
+          ],
+          "sheet_id": "BIND-PAD-L"
+        },
+        {
+          "header_record_id": "BIND-PRESS-BOOK",
+          "items": [
+            {
+              "name": "제본압착판40",
+              "quantity": 2,
+              "unit_price": 73500
+            },
+            {
+              "name": "압착판교체패드40",
+              "quantity": 4,
+              "unit_price": 7600
+            }
+          ],
+          "sheet_id": "BIND-BOOK-L"
+        },
+        {
+          "header_record_id": "BIND-HANDLE-C",
+          "items": [
+            {
+              "name": "압착장치손잡이",
+              "quantity": 4,
+              "unit_price": 12650
+            }
+          ],
+          "sheet_id": "BIND-HANDLE-L"
+        },
+        {
+          "header_record_id": "BIND-Q-C",
+          "items": [
+            {
+              "name": "제본압착판60",
+              "quantity": 2,
+              "unit_price": 104000
+            }
+          ],
+          "sheet_id": "BIND-Q-L"
+        }
+      ],
+      "processing_policy": "첨부를 header_record_id로 연결하고 같은 표지의 행을 순서대로 합한다. invoice 또는 order의 document_id에 received가 있는 원문만 구매이며 quote는 구매가 아니다. 다른 record_id라도 document_id와 최종 원문 내용이 같으면 한 번 계산한다. 포함 행 공급가액은 행 총액의 10/11에서 원 미만을 버리고 차액은 세액이다. 별도 행은 수량 곱하기 단가가 공급가액이며 그 10%에서 원 미만을 버린 세액을 더한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "BIND-PRESS-Q"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "BIND-HANDLE-13",
+        "BIND-PRESS-12"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "BIND-PRESS-12",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 73500
+    },
+    "output": {
+      "supply": 147000,
+      "total": 161700,
+      "vat": 14700
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "BIND-PRESS-12",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 7600
+    },
+    "output": {
+      "supply": 30400,
+      "total": 33440,
+      "vat": 3040
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상제본장치"
+    },
+    "output": "가상제본장치",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "BIND-PRESS-12"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "BIND-HANDLE-13",
+      "includes_vat": true,
+      "quantity": 4,
+      "unit_price": 12650
+    },
+    "output": {
+      "supply": 46000,
+      "total": 50600,
+      "vat": 4600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상제본부속"
+    },
+    "output": "가상제본부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "압착장치손잡이",
+          "unit_price": 11500,
+          "vendor": "가상제본부속"
+        },
+        {
+          "item": "압착판교체패드40",
+          "unit_price": 7600,
+          "vendor": "가상제본장치"
+        },
+        {
+          "item": "제본압착판40",
+          "unit_price": 73500,
+          "vendor": "가상제본장치"
+        }
+      ],
+      "grand_total": 245740,
+      "supply_total": 223400,
+      "unique_document_count": 2,
+      "vat_total": 22340,
+      "vendor_totals": [
+        {
+          "supply": 46000,
+          "total": 50600,
+          "vat": 4600,
+          "vendor": "가상제본부속"
+        },
+        {
+          "supply": 177400,
+          "total": 195140,
+          "vat": 17740,
+          "vendor": "가상제본장치"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

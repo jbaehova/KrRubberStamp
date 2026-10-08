@@ -1,0 +1,209 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-19",
+          "document_id": "CEIL-RAIL-66",
+          "event": "received",
+          "event_id": "CEIL-RAIL-IN",
+          "location": "천장수선현장"
+        },
+        {
+          "date": "2026-02-19",
+          "document_id": "CEIL-WIRE-67",
+          "event": "received",
+          "event_id": "CEIL-WIRE-IN",
+          "location": "천장수선현장"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-16",
+          "document_id": "CEIL-RAIL-66",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "CEIL-RAIL-H",
+          "vendor": "가상천장부속"
+        },
+        {
+          "date": "2026-02-16",
+          "document_id": "CEIL-WIRE-67",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "CEIL-WIRE-H",
+          "vendor": "가상안전와이어"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "CEIL-WIRE-H",
+          "items": [
+            {
+              "name": "안전와이어1M",
+              "quantity": 8,
+              "unit_price": 3900
+            }
+          ],
+          "sheet_id": "CEIL-WIRE-L"
+        },
+        {
+          "header_record_id": "CEIL-RAIL-H",
+          "items": [
+            {
+              "name": "레일연결부속C",
+              "quantity": 6,
+              "unit_price": 1800
+            },
+            {
+              "name": "레일끝마개",
+              "quantity": 4,
+              "unit_price": 650
+            }
+          ],
+          "sheet_id": "CEIL-CONNECT-L"
+        },
+        {
+          "header_record_id": "CEIL-RAIL-H",
+          "items": [
+            {
+              "name": "천장레일2M",
+              "quantity": 6,
+              "unit_price": 15200
+            }
+          ],
+          "sheet_id": "CEIL-RAIL-L"
+        }
+      ],
+      "processing_policy": "각 품목표를 header_record_id와 같은 표지 record_id에 연결하고 여러 별첨이면 모두 연결한다. invoice 또는 order 중 document_id에 received가 있는 원문만 실제 구매다. 단가는 공급가액이며 각 행 공급가액 10%의 원 미만을 버려 세액을 계산한다. 업체는 NFKC 후 공백과 법인 표현 제거 및 영문 소문자 변환을 적용해 이름 순으로 기록한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "CEIL-RAIL-66",
+        "CEIL-WIRE-67"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "CEIL-RAIL-66",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 1800
+    },
+    "output": {
+      "supply": 10800,
+      "total": 11880,
+      "vat": 1080
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "CEIL-RAIL-66",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 650
+    },
+    "output": {
+      "supply": 2600,
+      "total": 2860,
+      "vat": 260
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "CEIL-RAIL-66",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 15200
+    },
+    "output": {
+      "supply": 91200,
+      "total": 100320,
+      "vat": 9120
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상천장부속"
+    },
+    "output": "가상천장부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CEIL-WIRE-67",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 3900
+    },
+    "output": {
+      "supply": 31200,
+      "total": 34320,
+      "vat": 3120
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상안전와이어"
+    },
+    "output": "가상안전와이어",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "레일끝마개",
+          "unit_price": 650,
+          "vendor": "가상천장부속"
+        },
+        {
+          "item": "레일연결부속c",
+          "unit_price": 1800,
+          "vendor": "가상천장부속"
+        },
+        {
+          "item": "안전와이어1m",
+          "unit_price": 3900,
+          "vendor": "가상안전와이어"
+        },
+        {
+          "item": "천장레일2m",
+          "unit_price": 15200,
+          "vendor": "가상천장부속"
+        }
+      ],
+      "grand_total": 149380,
+      "supply_total": 135800,
+      "unique_document_count": 2,
+      "vat_total": 13580,
+      "vendor_totals": [
+        {
+          "supply": 31200,
+          "total": 34320,
+          "vat": 3120,
+          "vendor": "가상안전와이어"
+        },
+        {
+          "supply": 104600,
+          "total": 115060,
+          "vat": 10460,
+          "vendor": "가상천장부속"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

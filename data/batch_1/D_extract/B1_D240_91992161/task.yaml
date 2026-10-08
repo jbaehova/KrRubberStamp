@@ -1,0 +1,55 @@
+task_id: B1_D240_91992161
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 접수실 서식 꽂이의 업체별 계정과 세액을 정리해 주세요. vendor_totals와 vat_total이 필요합니다.
+input_files:
+- path: inputs/01_접수물품표지.hwpx
+  format: hwpx
+- path: inputs/02_접수물품내역.xlsx
+  format: xlsx
+- path: inputs/03_꽂이첫검수.pdf
+  format: pdf
+- path: inputs/04_꽂이추가검수.hwpx
+  format: hwpx
+- path: inputs/05_라벨인수.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-09850665-12db-5c1e-975c-30b1484ee359
+scenario_seed: 10491453510746205701
+scenario_hash: 71a55e3f1cf7cf053dbf110b770e42f67327de2a11d17888a7770c4ba4d8426d
+authorship:
+  method: individually_written
+  case_id: D240
+  case_sha256: 91992161c58d6e05c366cd5e14231b12cee042f822003ebd7e9b2643c9f82990
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals
+- vat_total

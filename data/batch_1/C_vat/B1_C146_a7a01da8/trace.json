@@ -1,0 +1,472 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "C146-택시정비",
+          "date": "2026-03-02",
+          "description": "영업에 직접 투입된 택시를 정비하고 배차 직원이 인수했다.",
+          "document_ids": [
+            "C146-택시계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상같은정비장"
+          },
+          "operation_id": "C146-운송",
+          "participants": [
+            {
+              "name": "가상원배차",
+              "organization": "가상배차나눔",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C146-택시",
+          "vehicle_id": "가상146-택시"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "C146-관리정비",
+          "date": "2026-03-03",
+          "description": "사무 관리 이동용 승용차를 정비하고 인수했다.",
+          "document_ids": [
+            "C146-관리계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상같은정비장"
+          },
+          "operation_id": "C146-운송",
+          "participants": [
+            {
+              "name": "가상원배차",
+              "organization": "가상배차나눔",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C146-관리차",
+          "vehicle_id": "가상146-관리차"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "C146-승합정비",
+          "date": "2026-03-04",
+          "description": "직원 이동용 11인승 승합차를 정비하고 인수했다.",
+          "document_ids": [
+            "C146-승합카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상같은정비장"
+          },
+          "operation_id": "C146-운송",
+          "participants": [
+            {
+              "name": "가상원배차",
+              "organization": "가상배차나눔",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C146-승합차",
+          "vehicle_id": "가상146-승합차"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 운송 사업 운영",
+          "operation_id": "C146-운송",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C146-택시정비",
+          "date": "2026-03-02",
+          "document_id": "C146-택시계산서",
+          "transaction_id": "C146-택시"
+        },
+        {
+          "activity_id": "C146-관리정비",
+          "date": "2026-03-03",
+          "document_id": "C146-관리계산서",
+          "transaction_id": "C146-관리차"
+        },
+        {
+          "activity_id": "C146-승합정비",
+          "date": "2026-03-04",
+          "document_id": "C146-승합카드",
+          "transaction_id": "C146-승합차"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "taxi_transport",
+          "permitted_operation_id": "C146-운송",
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상146-택시"
+        },
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상146-관리차"
+        },
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "non_excise_vehicle",
+          "vehicle_id": "가상146-승합차"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C146-택시계산서",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C146-택시"
+      },
+      {
+        "business_related": true,
+        "document_id": "C146-관리계산서",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C146-관리차"
+      },
+      {
+        "business_related": true,
+        "document_id": "C146-승합카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C146-승합차"
+      },
+      {
+        "transaction_id": "C146-택시",
+        "vehicle_direct_business": true,
+        "vehicle_id": "가상146-택시",
+        "vehicle_subject_excise": true
+      },
+      {
+        "transaction_id": "C146-관리차",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상146-관리차",
+        "vehicle_subject_excise": true
+      },
+      {
+        "transaction_id": "C146-승합차",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상146-승합차",
+        "vehicle_subject_excise": false
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C146-관리계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C146-관리차"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C146-승합카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C146-승합차"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C146-운송계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C146-운송공급"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C146-택시계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C146-택시"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-03",
+      "transaction_id": "C146-관리차"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1078000,
+      "includes_vat": true,
+      "transaction_id": "C146-관리차"
+    },
+    "output": {
+      "gross": 1078000,
+      "supply_base": 980000,
+      "vat": 98000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C146-관리차",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 98000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-04",
+      "transaction_id": "C146-승합차"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 693000,
+      "includes_vat": true,
+      "transaction_id": "C146-승합차"
+    },
+    "output": {
+      "gross": 693000,
+      "supply_base": 630000,
+      "vat": 63000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C146-승합차",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 63000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-31",
+      "transaction_id": "C146-운송공급"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 17600000,
+      "includes_vat": true,
+      "transaction_id": "C146-운송공급"
+    },
+    "output": {
+      "gross": 17600000,
+      "supply_base": 16000000,
+      "vat": 1600000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 16000000
+    },
+    "output": 1600000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "C146-운송공급"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-02",
+      "transaction_id": "C146-택시"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1540000,
+      "includes_vat": true,
+      "transaction_id": "C146-택시"
+    },
+    "output": {
+      "gross": 1540000,
+      "supply_base": 1400000,
+      "vat": 140000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C146-택시",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 140000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 712000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 1460000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 1460000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 1460000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 140000,
+      "output_vat": 1600000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 140000,
+      "input_vat": 301000,
+      "net_vat": 1460000,
+      "noncreditable_vat": 161000,
+      "output_vat": 1600000,
+      "payable_vat": 1460000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 16000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

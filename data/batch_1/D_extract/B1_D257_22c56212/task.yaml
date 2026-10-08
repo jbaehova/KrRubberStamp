@@ -1,0 +1,45 @@
+task_id: B1_D257_22c56212
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 대여품 보강에 구입한 보호 슬리브와 주사위를 각 업체에 송금합니다. vendor_totals를 작성해 주세요.
+input_files:
+- path: inputs/01_슬리브결제.pdf
+  format: pdf
+- path: inputs/02_주사위결제.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-e5bed619-43e7-5827-bae2-bef8a748bf27
+scenario_seed: 2505516597184351111
+scenario_hash: 52b616f4508b7b8a38d60bb5c7e73d4d98cc16c96b25a92e52692b6c6e1ce8a5
+authorship:
+  method: individually_written
+  case_id: D257
+  case_sha256: 22c562120204cb878521728665d65196c5f4636efc74340d130efb3182babad5
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals

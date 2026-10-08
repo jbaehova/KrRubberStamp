@@ -1,0 +1,306 @@
+[
+  {
+    "inputs": {
+      "holiday_dates": [
+        "2026-06-21"
+      ],
+      "meal_service": "none",
+      "paid_holiday_records": [],
+      "payment_records": [
+        {
+          "date": "2026-06-30",
+          "revision": 1,
+          "status": "executed"
+        },
+        {
+          "date": "2026-07-02",
+          "revision": 2,
+          "status": "approved"
+        }
+      ],
+      "regular_schedule": {
+        "minutes_per_day": 480,
+        "unpaid_absences": [
+          {
+            "date": "2026-06-11",
+            "minutes": 480,
+            "record_id": "배움결근"
+          }
+        ],
+        "working_days": 16
+      },
+      "source_contract": "payroll_evidence_v1",
+      "week_attendance": [
+        {
+          "attended_days": 4,
+          "scheduled_days": 4,
+          "week_id": "배움첫주"
+        },
+        {
+          "attended_days": 3,
+          "scheduled_days": 4,
+          "week_id": "배움둘째주"
+        },
+        {
+          "attended_days": 4,
+          "scheduled_days": 4,
+          "week_id": "배움셋째주"
+        },
+        {
+          "attended_days": 4,
+          "scheduled_days": 4,
+          "week_id": "배움넷째주"
+        }
+      ],
+      "work_records": [
+        {
+          "breaks": [
+            {
+              "end": "2026-06-21 13:00",
+              "start": "2026-06-21 12:00"
+            }
+          ],
+          "category": "additional",
+          "end": "2026-06-21 14:00",
+          "record_id": "배움휴일오전",
+          "revision": 1,
+          "start": "2026-06-21 08:00",
+          "status": "approved"
+        },
+        {
+          "breaks": [
+            {
+              "end": "2026-06-21 13:00",
+              "start": "2026-06-21 12:00"
+            }
+          ],
+          "category": "additional",
+          "end": "2026-06-21 15:00",
+          "record_id": "배움휴일오전",
+          "revision": 2,
+          "start": "2026-06-21 08:00",
+          "status": "approved"
+        },
+        {
+          "breaks": [
+            {
+              "end": "2026-06-21 21:20",
+              "start": "2026-06-21 21:00"
+            }
+          ],
+          "category": "additional",
+          "end": "2026-06-21 23:00",
+          "record_id": "배움휴일밤",
+          "revision": 1,
+          "start": "2026-06-21 19:00",
+          "status": "approved"
+        }
+      ]
+    },
+    "output": {
+      "employer_provides_meals": false,
+      "holiday_shifts": [
+        {
+          "holiday_night_minutes": 60,
+          "minutes": 580
+        }
+      ],
+      "night_minutes": 60,
+      "overtime_minutes": 0,
+      "paid_holiday_minutes": 0,
+      "payment_date": "2026-06-30",
+      "qualifying_weeks": 3,
+      "regular_minutes": 7200
+    },
+    "rule_id": "B.EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "base_salary": 0,
+      "fixed_allowance": 0,
+      "hourly_rate": 29200,
+      "meal_allowance": 0,
+      "monthly_divisor_hours": 209,
+      "pay_basis": "hourly",
+      "regular_minutes": 7200
+    },
+    "output": {
+      "hourly_exact_denominator": 1,
+      "hourly_exact_numerator": 29200,
+      "ordinary_monthly_wage": 0
+    },
+    "rule_id": "B.ORDINARY"
+  },
+  {
+    "inputs": {
+      "paid_holiday_minutes": 0,
+      "pay_basis": "hourly"
+    },
+    "output": 0,
+    "rule_id": "B.PAID_HOLIDAY"
+  },
+  {
+    "inputs": {
+      "overtime_minutes_excluding_holiday": 0,
+      "premium_applies": true
+    },
+    "output": 0,
+    "rule_id": "B.OVERTIME"
+  },
+  {
+    "inputs": {
+      "night_minutes_including_overlap": 60,
+      "premium_applies": true
+    },
+    "output": 14600,
+    "rule_id": "B.NIGHT"
+  },
+  {
+    "inputs": {
+      "holiday_shifts": [
+        {
+          "holiday_night_minutes": 60,
+          "minutes": 580
+        }
+      ],
+      "premium_applies": true
+    },
+    "output": 447734,
+    "rule_id": "B.HOLIDAY"
+  },
+  {
+    "inputs": {
+      "already_included": false,
+      "qualifying_weeks": 3,
+      "weekly_hours": 32
+    },
+    "output": {
+      "weekly_holiday_entitlement": 560640,
+      "weekly_holiday_pay": 560640
+    },
+    "rule_id": "B.WEEKLY"
+  },
+  {
+    "inputs": {
+      "employer_provides_meals": false,
+      "meal_allowance": 0
+    },
+    "output": 0,
+    "rule_id": "B.MEAL_EXEMPT"
+  },
+  {
+    "inputs": {
+      "base_pay": 3504000,
+      "fixed_allowance": 0,
+      "holiday_pay": 447734,
+      "meal_allowance": 0,
+      "night_pay": 14600,
+      "overtime_pay": 0,
+      "paid_holiday_pay": 0,
+      "variable_allowance": 0,
+      "weekly_holiday_pay": 560640
+    },
+    "output": {
+      "gross_pay": 4526974,
+      "taxable_pay": 4526974
+    },
+    "rule_id": "B.GROSS"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.0475",
+      "insurance_assessment_month": "2026-06",
+      "month": 6,
+      "notified_income": 6800000
+    },
+    "output": {
+      "national_pension": 302570,
+      "pension_base_income": 6370000
+    },
+    "rule_id": "B.PENSION"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.03595",
+      "notified_income": 4200000
+    },
+    "output": 150990,
+    "rule_id": "B.HEALTH"
+  },
+  {
+    "inputs": {
+      "health_premium": 150990,
+      "ratio": "0.9448 / 7.19"
+    },
+    "output": 19840,
+    "rule_id": "B.LONG_TERM_CARE"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.009",
+      "notified_income": 4250000
+    },
+    "output": 38250,
+    "rule_id": "B.EMPLOYMENT"
+  },
+  {
+    "inputs": {
+      "family_count": 1,
+      "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+      "table_interval_won": [
+        4520000,
+        4540000
+      ],
+      "taxable_pay": 4526974
+    },
+    "output": 265650,
+    "rule_id": "B.TAX_TABLE"
+  },
+  {
+    "inputs": {
+      "eligible_children": 0,
+      "payment_date": "2026-06-30"
+    },
+    "output": 0,
+    "rule_id": "B.CHILD_CREDIT"
+  },
+  {
+    "inputs": {
+      "before_small_tax_waiver": 212520,
+      "child_credit": 0,
+      "eligible_children": 0,
+      "family_count": 1,
+      "payment_date": "2026-06-30",
+      "small_tax_waiver_below_won": 1000,
+      "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+      "table_interval_won": [
+        4520000,
+        4540000
+      ],
+      "table_tax_before_children_floor_won": 265650,
+      "taxable_pay": 4526974,
+      "withholding_percent": 80
+    },
+    "output": 212520,
+    "rule_id": "B.WITHHOLDING"
+  },
+  {
+    "inputs": {
+      "income_tax": 212520,
+      "rate": "0.1"
+    },
+    "output": 21250,
+    "rule_id": "B.LOCAL_TAX"
+  },
+  {
+    "inputs": {
+      "deductions": 745420,
+      "gross_pay": 4526974
+    },
+    "output": 3781554,
+    "rule_id": "B.NET"
+  }
+]

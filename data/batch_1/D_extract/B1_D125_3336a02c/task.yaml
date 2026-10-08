@@ -1,0 +1,51 @@
+task_id: B1_D125_3336a02c
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 라벨 프린터 부품 자료에서 실제 구입 기준표를 만들어 주세요. 견적도 섞여 있으므로 인수 기록에 따른 cheapest_by_item과
+  grand_total을 확인합니다.
+input_files:
+- path: inputs/01_헤드청구표지.pdf
+  format: pdf
+- path: inputs/02_헤드품목부속.xlsx
+  format: xlsx
+- path: inputs/03_롤러청구.hwpx
+  format: hwpx
+- path: inputs/04_개정견적.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-9a8b3093-7c2f-5713-8d8f-85bc95d01dd9
+scenario_seed: 3690313057840672916
+scenario_hash: 274a4e5bc135737096b9272174c045b8c4af24deb377f12a881cc4a2ae03d14c
+authorship:
+  method: individually_written
+  case_id: D125
+  case_sha256: 3336a02c8a9430948be3960cb6bcba8eaef862c964891fe321f440efa5402573
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- grand_total

@@ -1,0 +1,56 @@
+task_id: B1_B137_764dee4c
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상바른영상사의 근로자 임원은 이달 정액 과세급여가 고액 산식의 한 경계에 해당합니다. 급여에서 비과세 식대를 구분하고 원문
+  산식의 이하와 초과 표현을 확인하여 소득세와 지방소득세를 산정해 주세요. 건강보험 및 장기요양보험과 최종 실지급액도 구합니다. 사업자 배당이나
+  연간 성과금은 없습니다.
+input_files:
+- path: inputs/01_영상정액.pdf
+  format: pdf
+- path: inputs/02_영상기관.xlsx
+  format: xlsx
+- path: inputs/03_영상가족.hwpx
+  format: hwpx
+- path: inputs/04_영상범위.pdf
+  format: pdf
+- path: inputs/05_고액공식.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - health_insurance
+  - long_term_care
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-3b7f1944-7840-5c46-90e3-ed88a5004bc8
+scenario_seed: 8524731680950633370
+scenario_hash: bccfdd6bee3f34a5e8b334e4b3a3f6d27c2ef058acf87868c2866126fdc90ea2
+authorship:
+  method: individually_written
+  case_id: B137
+  case_sha256: 764dee4c4094c39a2ce03ea0fa52302e839b26482e59e6310bb85d75a3ce2c5c
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- taxable_pay
+- income_tax
+- local_income_tax
+- health_insurance
+- long_term_care
+- net_pay

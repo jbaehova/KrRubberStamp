@@ -1,0 +1,78 @@
+task_id: B1_D291_4b68f696
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 강습 부표와 연결끈의 실제 구매를 판매처 계정과 가격표에 등록합니다. vendor_totals와 cheapest_by_item을
+  제출해 주세요.
+input_files:
+- path: inputs/01_강습구매기준.hwpx
+  format: hwpx
+- path: inputs/02_첫부표표지.pdf
+  format: pdf
+- path: inputs/03_보충부표표지.hwpx
+  format: hwpx
+- path: inputs/04_연결끈별첨.xlsx
+  format: xlsx
+- path: inputs/05_첫부표별첨.xlsx
+  format: xlsx
+- path: inputs/06_보충부표별첨.xlsx
+  format: xlsx
+- path: inputs/07_창고수령.pdf
+  format: pdf
+- path: inputs/08_회계수령.hwpx
+  format: hwpx
+- path: inputs/09_보충수령.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-181d11e4-04ae-564e-8e87-7bb8dd7a96ad
+scenario_seed: 5433864077723708549
+scenario_hash: b3399ce4ffe165ea9f06c0600b62d26f356383c478d864d34c49254f54a64ef6
+authorship:
+  method: individually_written
+  case_id: D291
+  case_sha256: 4b68f696be7a2c85b218e03addd904342c08e196ed239f2a7032b31ce2351836
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item

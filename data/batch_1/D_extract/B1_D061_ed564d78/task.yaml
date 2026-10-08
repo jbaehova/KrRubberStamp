@@ -1,0 +1,45 @@
+task_id: B1_D061_ed564d78
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 해설 가방을 추가로 구입합니다. 대량 구매가 더 싸다고 가정하지 말고 실제 인수한 개당 단가를 비교해 cheapest_by_item만
+  보내 주세요. 규격과 비교 기준은 체험분 대장에 있습니다.
+input_files:
+- path: inputs/01_전원지급.pdf
+  format: pdf
+- path: inputs/02_체험분.xlsx
+  format: xlsx
+- path: inputs/03_신규해설사.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-b33d7788-c52b-58ef-b45b-0225679af783
+scenario_seed: 17101941813295474290
+scenario_hash: cf02675beaeb33ad3e3d57c6e239e4c710038a0b9c3185f4ff367d97522aeb91
+authorship:
+  method: individually_written
+  case_id: D061
+  case_sha256: ed564d781ee06672db7e762f7d981444cebd1b366d8341bcb5a091f7ba3a35d4
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item

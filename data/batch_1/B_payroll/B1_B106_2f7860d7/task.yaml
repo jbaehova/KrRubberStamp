@@ -1,0 +1,39 @@
+task_id: B1_B106_2f7860d7
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상빈터번역실의 납부 파일은 건강보험과 장기요양보험을 서로 다른 칸으로 받습니다. 보수월액 통지서를 보고 직원 부담 건강보험료와
+  장기요양보험료를 각각 산정해 주세요. 같은 파일에서 필요한 고용보험료도 계산하되, 월 급여 계약 금액을 고지 기준 대신 넣지 않도록 해 주세요.
+input_files:
+- path: inputs/01_번역계약.pdf
+  format: pdf
+- path: inputs/02_기관별통지.xlsx
+  format: xlsx
+- path: inputs/03_공제참조.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    employment_insurance:
+      type: integer
+  required:
+  - health_insurance
+  - long_term_care
+  - employment_insurance
+  additionalProperties: false
+canary: KrRubberStamp-canary-631034d5-b1bb-52e8-b857-6c5650c98821
+scenario_seed: 3420590396684895412
+scenario_hash: b84606b9a249d2c46869658d016e281a766f11d063125da71eaedfd59e8038e8
+authorship:
+  method: individually_written
+  case_id: B106
+  case_sha256: 2f7860d7bc8404b4d788fe32fc0ae0fb224bf17bfa26479a5b6e391e32745338
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- health_insurance
+- long_term_care
+- employment_insurance

@@ -1,0 +1,44 @@
+task_id: B1_A125_c4e9cc38
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상금잔화측량의 가상국하윤은 어머니 장애인 증명과 소득 확인을 함께 냈습니다. 기본공제액과 보험료 세액공제액을 판단해 주세요.
+  직원이 실제 낸 어머니 수술비는 별도로 검토해 의료비 세액공제액을 구합니다. 어머니가 예순 살 전이라는 이유로 의료비 한도를 일반 진료와 같게
+  처리하지 마세요.
+input_files:
+- path: inputs/01_정산기초.hwpx
+  format: hwpx
+- path: inputs/02_급여기초.xlsx
+  format: xlsx
+- path: inputs/03_어머니자격.pdf
+  format: pdf
+- path: inputs/04_수술납부.pdf
+  format: pdf
+- path: inputs/05_전용보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+  required:
+  - basic_deduction
+  - insurance_credit
+  - medical_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-60090084-d5b5-55a4-96aa-22969e7eb980
+scenario_seed: 14189096643650082811
+scenario_hash: 4a2e194b3d2ee13df9053be2a6374646397104b5b462a0304b8176440189da1e
+authorship:
+  method: individually_written
+  case_id: A125
+  case_sha256: c4e9cc38687357fb06d5c97e89c5b180a280f859af5e4879708c6d519a9f027a
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- basic_deduction
+- insurance_credit
+- medical_credit

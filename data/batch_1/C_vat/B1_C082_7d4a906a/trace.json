@@ -1,0 +1,286 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "service",
+          "activity_id": "C082-집도장활동",
+          "date": "2026-05-09",
+          "description": "가족이 생활하는 아이 방 벽만 도장했다. 주머니 제작이나 포장에는 사용하지 않는다.",
+          "document_ids": [
+            "C082-도장카드"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "가상대표 주거지 아이 방"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상 아이방사용자",
+              "organization": "가상대표가정",
+              "role": "household_member"
+            },
+            {
+              "name": "가상 주머니대표",
+              "organization": "가상그림주머니",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "C082-집도장"
+        },
+        {
+          "action": "service",
+          "activity_id": "C082-선반활동",
+          "date": "2026-05-11",
+          "description": "직원이 판매 포장 자재를 놓을 포장실 선반 설치를 확인했다.",
+          "document_ids": [
+            "C082-선반계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상그림주머니 포장실"
+          },
+          "operation_id": "C082-포장",
+          "participants": [
+            {
+              "name": "가상 포장직원",
+              "organization": "가상그림주머니",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C082-선반설치"
+        }
+      ],
+      "operations": [
+        {
+          "description": "소비자 판매용 그림 주머니 포장",
+          "operation_id": "C082-포장",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C082-집도장활동",
+          "date": "2026-05-09",
+          "document_id": "C082-도장카드",
+          "transaction_id": "C082-집도장"
+        },
+        {
+          "activity_id": "C082-선반활동",
+          "date": "2026-05-11",
+          "document_id": "C082-선반계산서",
+          "transaction_id": "C082-선반설치"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": false,
+        "document_id": "C082-도장카드",
+        "purpose": "private",
+        "transaction_id": "C082-집도장"
+      },
+      {
+        "business_related": true,
+        "document_id": "C082-선반계산서",
+        "purpose": "business",
+        "transaction_id": "C082-선반설치"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C082-선반계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C082-선반설치"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C082-도장카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C082-집도장"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-11",
+      "transaction_id": "C082-선반설치"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 780000,
+      "includes_vat": false,
+      "transaction_id": "C082-선반설치"
+    },
+    "output": {
+      "gross": 858000,
+      "supply_base": 780000,
+      "vat": 78000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C082-선반설치",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 78000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-09",
+      "transaction_id": "C082-집도장"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 990000,
+      "includes_vat": true,
+      "transaction_id": "C082-집도장"
+    },
+    "output": {
+      "gross": 990000,
+      "supply_base": 900000,
+      "vat": 90000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "C082-집도장",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 90000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 46000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -78000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -78000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -78000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 78000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 78000,
+      "input_vat": 168000,
+      "net_vat": -78000,
+      "noncreditable_vat": 90000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 78000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

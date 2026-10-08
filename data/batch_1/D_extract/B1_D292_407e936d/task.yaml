@@ -1,0 +1,68 @@
+task_id: B1_D292_407e936d
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 사진관에서 월중 실제 구입한 배경지와 고정구 자료를 결산합니다. supply_total과 vat_total 및 vendor_totals를
+  제출해 주세요.
+input_files:
+- path: inputs/01_흰배경지.pdf
+  format: pdf
+- path: inputs/02_회색배경지.xlsx
+  format: xlsx
+- path: inputs/03_베이지배경지.hwpx
+  format: hwpx
+- path: inputs/04_첫클램프.pdf
+  format: pdf
+- path: inputs/05_보충클램프.xlsx
+  format: xlsx
+- path: inputs/06_심봉.hwpx
+  format: hwpx
+- path: inputs/07_거치브래킷.pdf
+  format: pdf
+- path: inputs/08_구동체인.xlsx
+  format: xlsx
+- path: inputs/09_하단추.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - supply_total
+  - vat_total
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-829c100e-6773-5933-901c-dda6ecf135cf
+scenario_seed: 4647313965364077303
+scenario_hash: 0f2907c4d8f86d19bd8b3afae05c9a30dd6f35c02960381b2ed0549d4689159d
+authorship:
+  method: individually_written
+  case_id: D292
+  case_sha256: 407e936dd13ce2f7a21b56d3cd22aa021bd754e0145408c89e966fcad368a13b
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- supply_total
+- vat_total
+- vendor_totals

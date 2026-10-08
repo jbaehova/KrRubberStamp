@@ -1,0 +1,236 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-06",
+          "document_id": "UMB-O-0402",
+          "event": "cancelled_before_dispatch",
+          "event_id": "e100old1",
+          "location": "규격 변경 접수"
+        },
+        {
+          "date": "2026-04-15",
+          "document_id": "UMB-O-0408",
+          "event": "received",
+          "event_id": "e100new1",
+          "location": "입구 우산 보관석"
+        },
+        {
+          "date": "2026-04-07",
+          "document_id": "UMB-P-0404",
+          "event": "cancelled_before_dispatch",
+          "event_id": "e100old2",
+          "location": "받침 크기 변경 접수"
+        },
+        {
+          "date": "2026-04-16",
+          "document_id": "UMB-P-0410",
+          "event": "received",
+          "event_id": "e100new2",
+          "location": "입구 우산 보관석"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-02",
+          "document_id": "UMB-O-0402",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h100old1",
+          "vendor": "가상우산보관"
+        },
+        {
+          "date": "2026-04-08",
+          "document_id": "UMB-O-0408",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h100new1",
+          "vendor": "가상우산보관"
+        },
+        {
+          "date": "2026-04-04",
+          "document_id": "UMB-P-0404",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h100old2",
+          "vendor": "가상물받이판"
+        },
+        {
+          "date": "2026-04-10",
+          "document_id": "UMB-P-0410",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h100new2",
+          "vendor": "가상물받이판"
+        },
+        {
+          "date": "2026-04-10",
+          "document_id": "UMB-P-0410",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h100re",
+          "vendor": "가상물받이판"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h100old1",
+          "items": [
+            {
+              "name": "12칸우산꽂이",
+              "quantity": 3,
+              "unit_price": 94000
+            }
+          ],
+          "sheet_id": "s100old1"
+        },
+        {
+          "header_record_id": "h100new1",
+          "items": [
+            {
+              "name": "18칸우산꽂이",
+              "quantity": 3,
+              "unit_price": 119000
+            }
+          ],
+          "sheet_id": "s100new1"
+        },
+        {
+          "header_record_id": "h100old2",
+          "items": [
+            {
+              "name": "소형물받이판",
+              "quantity": 3,
+              "unit_price": 22600
+            }
+          ],
+          "sheet_id": "s100old2"
+        },
+        {
+          "header_record_id": "h100new2",
+          "items": [
+            {
+              "name": "대형물받이판",
+              "quantity": 3,
+              "unit_price": 28700
+            }
+          ],
+          "sheet_id": "s100new2"
+        },
+        {
+          "header_record_id": "h100re",
+          "items": [
+            {
+              "name": "대형물받이판",
+              "quantity": 3,
+              "unit_price": 28700
+            }
+          ],
+          "sheet_id": "s100re"
+        }
+      ],
+      "processing_policy": "모든 표지에 header_record_id로 품목표를 연결한다. invoice/order는 document_id의 received 기록이 있는 실제 구매만 집계한다. 인수 없는 자료와 출고 전 취소 및 quote는 제외한다. 같은 번호의 같은 내용은 한 번만 집계한다. 별도 단가 곱하기 수량이 공급가액이며 품목 공급가액의 10% 원 미만 버린 세액을 더한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "UMB-O-0402",
+        "UMB-P-0404"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "UMB-O-0408",
+        "UMB-P-0410"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "UMB-O-0408",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 119000
+    },
+    "output": {
+      "supply": 357000,
+      "total": 392700,
+      "vat": 35700
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상우산보관"
+    },
+    "output": "가상우산보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "UMB-P-0410",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 28700
+    },
+    "output": {
+      "supply": 86100,
+      "total": 94710,
+      "vat": 8610
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상물받이판"
+    },
+    "output": "가상물받이판",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "UMB-P-0410"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "18칸우산꽂이",
+          "unit_price": 119000,
+          "vendor": "가상우산보관"
+        },
+        {
+          "item": "대형물받이판",
+          "unit_price": 28700,
+          "vendor": "가상물받이판"
+        }
+      ],
+      "grand_total": 487410,
+      "supply_total": 443100,
+      "unique_document_count": 2,
+      "vat_total": 44310,
+      "vendor_totals": [
+        {
+          "supply": 86100,
+          "total": 94710,
+          "vat": 8610,
+          "vendor": "가상물받이판"
+        },
+        {
+          "supply": 357000,
+          "total": 392700,
+          "vat": 35700,
+          "vendor": "가상우산보관"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

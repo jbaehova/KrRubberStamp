@@ -1,0 +1,49 @@
+task_id: B1_B183_1a28276f
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상주름복원실은 현금 식대를 증액했습니다. 급여 총지급액에서 비과세 칸과 과세급여를 분리하고 월 통상임금 및 소득세를 계산해
+  새 명세서 등록을 마쳐 주세요.
+input_files:
+- path: inputs/01_주름약정.hwpx
+  format: hwpx
+- path: inputs/02_식대증액.pdf
+  format: pdf
+- path: inputs/03_주름근로.xlsx
+  format: xlsx
+- path: inputs/04_주름원천.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    gross_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - gross_pay
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-fe994be0-436b-5ef9-acbb-c3a47fb5fb8d
+scenario_seed: 1884799805639512413
+scenario_hash: f3659c165055c8759d7c7b40bece60155ecd09ff325e695336181e917cf4146e
+authorship:
+  method: individually_written
+  case_id: B183
+  case_sha256: 1a28276fe7de515d31a14776e5d81d985f5fd66e845b0855c1e396620a1e7801
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- ordinary_monthly_wage
+- gross_pay
+- non_taxable_pay
+- taxable_pay
+- income_tax

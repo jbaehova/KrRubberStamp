@@ -1,0 +1,64 @@
+task_id: B1_B045_bbf58e8e
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상금빛표본실에 만 66세로 신규 채용된 가상남세린의 급여입니다. 공단 확인서의 가입 상태를 반영하고, 상시 인원 확인 및
+  평일 추가 근로 승인 기록으로 연장수당과 야간 가산을 구해 주세요. 지급 계획은 3월이지만 은행은 2월에 실행했습니다. 등록된 14세 자녀 공제를
+  지급일에 맞춰 적용하여 국민연금과 고용보험, 소득세 및 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_신규표본직계약.pdf
+  format: pdf
+- path: inputs/02_상시다섯명.hwpx
+  format: hwpx
+- path: inputs/03_평일추가승인.xlsx
+  format: xlsx
+- path: inputs/04_식대확인.pdf
+  format: pdf
+- path: inputs/05_신규연금고용.hwpx
+  format: hwpx
+- path: inputs/06_건강보험통지.xlsx
+  format: xlsx
+- path: inputs/07_입양가족확인.pdf
+  format: pdf
+- path: inputs/08_계획은행대조.xlsx
+  format: xlsx
+- path: inputs/09_적용범위원문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    national_pension:
+      type: integer
+    employment_insurance:
+      type: integer
+    income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - national_pension
+  - employment_insurance
+  - income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-24299d01-13f8-50fe-a2b8-faf1221b12ba
+scenario_seed: 13543888199024483228
+scenario_hash: 4f69cca29a9a8bcfb3f7997d8e81e865bc19cfc715b563f4b668faa5e5d2ddaf
+authorship:
+  method: individually_written
+  case_id: B045
+  case_sha256: bbf58e8ef4759b9c07c481e91317e0d4190b439f743319e568a446d144f44feb
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- overtime_pay
+- night_pay
+- national_pension
+- employment_insurance
+- income_tax
+- net_pay

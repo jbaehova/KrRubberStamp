@@ -1,0 +1,46 @@
+task_id: B1_D067_55d087a8
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 계량소 설치비를 판매처별로 기록합니다. 전자저울과 고정 부품을 각각 확인해 vendor_totals만 보내 주세요. 명칭과
+  금액 처리 기준은 고정 부품 대장에 있습니다.
+input_files:
+- path: inputs/01_전자저울.pdf
+  format: pdf
+- path: inputs/02_고정부품.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-156fe662-a6f9-5722-8205-ea036e4e21bc
+scenario_seed: 6183591447483185499
+scenario_hash: 6a1fbb3dfaa4823cd367dcd63724b4ab951561821f83fa243f8c026cf9ef1ac9
+authorship:
+  method: individually_written
+  case_id: D067
+  case_sha256: 55d087a8cf60f95b4fbbedc36e3ab8a8769ec8fd6497aca7a8549749b3231791
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals

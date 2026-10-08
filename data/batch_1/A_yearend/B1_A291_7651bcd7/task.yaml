@@ -1,0 +1,59 @@
+task_id: B1_A291_7651bcd7
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상물수리도금의 가상윤하겸이 여러 일반 기부 종류를 한꺼번에 신청했습니다. 배우자의 최종 공제 배정을 확인하고 기관 지정 유효기간을
+  영수증 날짜와 맞춰 주세요. 일반 기부 세액공제와 가족 공제 인원 및 공적연금 공제를 계산한 뒤 국세 정산액을 회신해 주세요.
+input_files:
+- path: inputs/01_명의배정.hwpx
+  format: hwpx
+- path: inputs/02_공적연금.pdf
+  format: pdf
+- path: inputs/03_국세원천징수.xlsx
+  format: xlsx
+- path: inputs/04_개인연금.pdf
+  format: pdf
+- path: inputs/05_기관지정.hwpx
+  format: hwpx
+- path: inputs/06_구호특례.xlsx
+  format: xlsx
+- path: inputs/07_공익경계기부.pdf
+  format: pdf
+- path: inputs/08_종교기부.xlsx
+  format: xlsx
+- path: inputs/09_급여접수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    pension_deduction:
+      type: integer
+    donation_credit:
+      type: integer
+    pension_account_credit:
+      type: integer
+    settlement_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - pension_deduction
+  - donation_credit
+  - pension_account_credit
+  - settlement_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-a9a6ebca-2a6b-591b-aeb6-c5296008c5bd
+scenario_seed: 8525803205486668324
+scenario_hash: 0d97352cbd15737574add8b4c97c32a0f47f7fd1fc7060faa1ebcdb0cfcb104c
+authorship:
+  method: individually_written
+  case_id: A291
+  case_sha256: 7651bcd7ffeb6a2416d9a2dd8dcaeffc39d4160fdf795945fba1ccb3bf324070
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- eligible_dependents
+- pension_deduction
+- donation_credit
+- pension_account_credit
+- settlement_national_tax

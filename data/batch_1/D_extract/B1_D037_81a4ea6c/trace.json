@@ -1,0 +1,216 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-01-06",
+          "document_id": "WINTERSTAGE-EQUIP-0104",
+          "event": "received",
+          "event_id": "WS-R-EQUIP",
+          "location": "가상거리공연장 통행 구역"
+        },
+        {
+          "date": "2026-01-09",
+          "document_id": "WINTERSTAGE-TIE-0108",
+          "event": "received",
+          "event_id": "WS-R-TIE",
+          "location": "가상거리공연장 설치 구역"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-01-04",
+          "document_id": "WINTERSTAGE-EQUIP-0104",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "WS-H-OPS",
+          "vendor": "가상거리부속"
+        },
+        {
+          "date": "2026-01-04",
+          "document_id": "WINTERSTAGE-EQUIP-0104",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "WS-H-STAGE",
+          "vendor": "가상거리부속"
+        },
+        {
+          "date": "2026-01-08",
+          "document_id": "WINTERSTAGE-TIE-0108",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "WS-H-TIE",
+          "vendor": "가상야외고정"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "WS-H-OPS",
+          "items": [
+            {
+              "name": "케이블보호덮개",
+              "quantity": 8,
+              "unit_price": 16400
+            }
+          ],
+          "sheet_id": "WS-S-OPS-PATH"
+        },
+        {
+          "header_record_id": "WS-H-OPS",
+          "items": [
+            {
+              "name": "공연부속보관함",
+              "quantity": 4,
+              "unit_price": 21500
+            }
+          ],
+          "sheet_id": "WS-S-OPS-STORE"
+        },
+        {
+          "header_record_id": "WS-H-STAGE",
+          "items": [
+            {
+              "name": "케이블보호덮개",
+              "quantity": 8,
+              "unit_price": 16400
+            },
+            {
+              "name": "공연부속보관함",
+              "quantity": 4,
+              "unit_price": 21500
+            }
+          ],
+          "sheet_id": "WS-S-STAGE-ALL"
+        },
+        {
+          "header_record_id": "WS-H-TIE",
+          "items": [
+            {
+              "name": "방풍고정끈",
+              "quantity": 20,
+              "unit_price": 3900
+            }
+          ],
+          "sheet_id": "WS-S-TIE"
+        }
+      ],
+      "processing_policy": "품목 부속표의 header_record_id를 제출 표지의 record_id와 연결해 발행 건의 전체 품목을 구성한다. 실제 인수 기록이 연결되는 발행 건만 집계한다. 제출 표지가 달라도 document_id와 연결된 거래 내용이 같으면 한 번만 지급하고 서로 다른 실제 발행 건은 별도로 집계한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "WINTERSTAGE-EQUIP-0104",
+        "WINTERSTAGE-TIE-0108"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "WINTERSTAGE-EQUIP-0104",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 16400
+    },
+    "output": {
+      "supply": 131200,
+      "total": 144320,
+      "vat": 13120
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "WINTERSTAGE-EQUIP-0104",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 21500
+    },
+    "output": {
+      "supply": 86000,
+      "total": 94600,
+      "vat": 8600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상거리부속"
+    },
+    "output": "가상거리부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "WINTERSTAGE-EQUIP-0104"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "WINTERSTAGE-TIE-0108",
+      "includes_vat": false,
+      "quantity": 20,
+      "unit_price": 3900
+    },
+    "output": {
+      "supply": 78000,
+      "total": 85800,
+      "vat": 7800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상야외고정"
+    },
+    "output": "가상야외고정",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "공연부속보관함",
+          "unit_price": 21500,
+          "vendor": "가상거리부속"
+        },
+        {
+          "item": "방풍고정끈",
+          "unit_price": 3900,
+          "vendor": "가상야외고정"
+        },
+        {
+          "item": "케이블보호덮개",
+          "unit_price": 16400,
+          "vendor": "가상거리부속"
+        }
+      ],
+      "grand_total": 324720,
+      "supply_total": 295200,
+      "unique_document_count": 2,
+      "vat_total": 29520,
+      "vendor_totals": [
+        {
+          "supply": 217200,
+          "total": 238920,
+          "vat": 21720,
+          "vendor": "가상거리부속"
+        },
+        {
+          "supply": 78000,
+          "total": 85800,
+          "vat": 7800,
+          "vendor": "가상야외고정"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

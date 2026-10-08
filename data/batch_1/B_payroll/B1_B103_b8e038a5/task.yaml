@@ -1,0 +1,93 @@
+task_id: B1_B103_b8e038a5
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상촘촘계측제작실의6월 근로분에 지급 계획과 은행 처리 이력이 함께 남아 있습니다. 현충일 오전과 저녁의 서로 다른 승인 작업을
+  하루 합계로 계산하고 별도 평일 추가 기록과 야간 가산을 구해 주세요. 지급 기록의 상태로 적용일을 정한 뒤 회사 음식물 제공과120% 신청 및
+  세 자녀, 공단 통지의 6월 부과분 국민연금 상한을 반영하여 과세급여와 원천세 및 실지급액을 작성합니다. 실행 상태로 확정한 실제 지급일을 effective_payment_date에
+  YYYY-MM-DD로 작성해 주세요. 국민연금 상하한은 은행 지급일 대신 공단 통지의 보험 부과월을 기준으로 적용합니다.
+input_files:
+- path: inputs/01_계측약정.hwpx
+  format: hwpx
+- path: inputs/02_현충일오전.pdf
+  format: pdf
+- path: inputs/03_현충일저녁.xlsx
+  format: xlsx
+- path: inputs/04_계측평일.pdf
+  format: pdf
+- path: inputs/05_계측달력.xlsx
+  format: xlsx
+- path: inputs/06_계측급식.hwpx
+  format: hwpx
+- path: inputs/07_계측연금.pdf
+  format: pdf
+- path: inputs/08_계측보수.hwpx
+  format: hwpx
+- path: inputs/09_계측가족.pdf
+  format: pdf
+- path: inputs/10_계측지급.xlsx
+  format: xlsx
+- path: inputs/11_계측공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    ordinary_hourly_wage_floor:
+      type: integer
+    holiday_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - effective_payment_date
+  - ordinary_hourly_wage_floor
+  - holiday_pay
+  - overtime_pay
+  - night_pay
+  - non_taxable_pay
+  - taxable_pay
+  - pension_base_income
+  - national_pension
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-527c818d-f377-5e87-b04d-538f02523604
+scenario_seed: 13321709982968785977
+scenario_hash: a5d2f437227431feafd4d82f8def6f09b07b49607214f93826ac3a2692b1ca1a
+authorship:
+  method: individually_written
+  case_id: B103
+  case_sha256: b8e038a5e7a12c39e526cd98edb32b09dc39d32e11e0d550672a0d7229eac264
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- effective_payment_date
+- ordinary_hourly_wage_floor
+- holiday_pay
+- overtime_pay
+- night_pay
+- non_taxable_pay
+- taxable_pay
+- pension_base_income
+- national_pension
+- income_tax
+- local_income_tax
+- net_pay

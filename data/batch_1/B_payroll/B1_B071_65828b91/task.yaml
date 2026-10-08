@@ -1,0 +1,41 @@
+task_id: B1_B071_65828b91
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상고운조립소의 같은 추가 작업에 신청 초안과 승인 기록이 함께 보관되어 있습니다. 수정 번호뿐 아니라 승인 상태와 휴게 시각을
+  읽어 지급할 평일 연장수당을 정해 주세요. 표시 통상시급과 총지급액도 함께 작성합니다.
+input_files:
+- path: inputs/01_조립약정.pdf
+  format: pdf
+- path: inputs/02_승인원장.xlsx
+  format: xlsx
+- path: inputs/03_조립공제.hwpx
+  format: hwpx
+- path: inputs/04_승인후산식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_hourly_wage_floor:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - ordinary_hourly_wage_floor
+  - overtime_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-06ea262c-3d61-5cdd-9cee-fa10eaeefc75
+scenario_seed: 7314562200594719834
+scenario_hash: 1b4b815a8b7ad24a945c1e4ba126a8abe5a94bcc7116d706b7edba303afdefc9
+authorship:
+  method: individually_written
+  case_id: B071
+  case_sha256: 65828b9135f2a45a21afefe512b41adf0254d28f494ce24191dcc52ef811b77a
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- ordinary_hourly_wage_floor
+- overtime_pay
+- gross_pay

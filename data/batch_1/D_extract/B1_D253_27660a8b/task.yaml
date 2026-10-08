@@ -1,0 +1,95 @@
+task_id: B1_D253_27660a8b
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 구두 수선실 조달 자료를 후임에게 인계할 정산표를 만들어 주세요. vendor_totals와 cheapest_by_item을
+  작성해 주세요. supply_total과 vat_total 및 grand_total도 필요합니다. unique_document_count까지 answer.json에
+  담아 주세요.
+input_files:
+- path: inputs/01_수선굽외부표지.pdf
+  format: pdf
+- path: inputs/02_수선굽부속.xlsx
+  format: xlsx
+- path: inputs/03_수선굽보관.hwpx
+  format: hwpx
+- path: inputs/04_다른굽주문.pdf
+  format: pdf
+- path: inputs/05_저가굽견적.xlsx
+  format: xlsx
+- path: inputs/06_밑창주문.hwpx
+  format: hwpx
+- path: inputs/07_첫굽인수.pdf
+  format: pdf
+- path: inputs/08_다른굽인수.xlsx
+  format: xlsx
+- path: inputs/09_밑창출고상태.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+    grand_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  - supply_total
+  - vat_total
+  - grand_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-23900b3e-c30c-5bc5-bd57-a77b7b63b6e3
+scenario_seed: 2838968207551755383
+scenario_hash: c70a4df609ec1099f842e9bf151859ecc2089ee36d43602517f828772015e55a
+authorship:
+  method: individually_written
+  case_id: D253
+  case_sha256: 27660a8b13bff47744971e5388cf7915521e687280338cb0500c500513d41130
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item
+- supply_total
+- vat_total
+- grand_total
+- unique_document_count

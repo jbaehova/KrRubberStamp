@@ -1,0 +1,41 @@
+task_id: B1_D013_fa86704c
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 순회 인형극 소품을 맡을 운영자에게 재주문 표를 넘겨야 합니다. 이번에 인수한 소품마다 개당 공급가액 단가와 구매 업체를 정리해
+  주세요. answer.json에는 cheapest_by_item을 담아 주세요.
+input_files:
+- path: inputs/01_인형극소품_인수명세.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-b5657092-49a0-50a1-b8fb-1b0cf4cc124e
+scenario_seed: 18052239628356300342
+scenario_hash: 950ae735605eb4816b47a295993d2fc1898610acab467a8aff7b8618b97e3df9
+authorship:
+  method: individually_written
+  case_id: D013
+  case_sha256: fa86704c10682e36241fcd2aed05471aad02290ed91251a27b15f78b426c1c1e
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item

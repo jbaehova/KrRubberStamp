@@ -1,0 +1,70 @@
+task_id: B1_B092_7c49adb1
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상포근제작소의 설 연휴 급여 자료를 다시 마감해 주세요. 같은 휴일 작업의 승인 이력이 둘 있고 별도 평일 추가 작업도 있습니다.
+  기록별 최신 승인 시각에서 휴게를 빼고 휴일수당, 연장수당과 야간 가산분을 계산합니다. 은행의 실제 실행일에 따른 두 자녀 원천세와 총지급액 및
+  실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_제작직급여.hwpx
+  format: hwpx
+- path: inputs/02_설최초카드.pdf
+  format: pdf
+- path: inputs/03_설수정카드.xlsx
+  format: xlsx
+- path: inputs/04_평일제작.pdf
+  format: pdf
+- path: inputs/05_제작달력.xlsx
+  format: xlsx
+- path: inputs/06_제작식대.hwpx
+  format: hwpx
+- path: inputs/07_제작보험.pdf
+  format: pdf
+- path: inputs/08_제작가족.hwpx
+  format: hwpx
+- path: inputs/09_지급우선.xlsx
+  format: xlsx
+- path: inputs/10_설급여참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - holiday_pay
+  - overtime_pay
+  - night_pay
+  - income_tax
+  - local_income_tax
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-ae90d874-a867-5c97-8179-d0be67f39b83
+scenario_seed: 8955880313513016034
+scenario_hash: 09f0e6745dc4fa21882544ec89d8d7ba4dec8ebcb72e896c350f15fae5e03063
+authorship:
+  method: individually_written
+  case_id: B092
+  case_sha256: 7c49adb1e1db7ae2fe95c6229ba3d29d25211643351537f3cbf89e25ace9db37
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- holiday_pay
+- overtime_pay
+- night_pay
+- income_tax
+- local_income_tax
+- gross_pay
+- net_pay

@@ -1,0 +1,56 @@
+task_id: B1_D032_07cefae0
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 책 축제 물품비의 판매처별 지급 내역을 작성해 주세요. 지원금 정산에는 세금을 뺀 사업비도 필요하니 모든 인수 자료의 공급가액을
+  따로 합산해 주세요. answer.json에는 vendor_totals와 supply_total을 적어 주세요.
+input_files:
+- path: inputs/01_책받침_명세.pdf
+  format: pdf
+- path: inputs/02_책갈피_구매.xlsx
+  format: xlsx
+- path: inputs/03_안내홀더_인수.hwpx
+  format: hwpx
+- path: inputs/04_참가스티커_명세.pdf
+  format: pdf
+- path: inputs/05_엽서트레이_대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - vendor_totals
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-bc0b8a5a-733a-5f9a-9cc2-cee128df7bde
+scenario_seed: 562662847364304957
+scenario_hash: ed9b20e4a3b8589e4fbb28f8de26014909a505583952ddfd8f3e5f57b77764a0
+authorship:
+  method: individually_written
+  case_id: D032
+  case_sha256: 07cefae0e975903db05fec0c26a3acb2e227cdf88af3f87907b19f911d28269b
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- supply_total

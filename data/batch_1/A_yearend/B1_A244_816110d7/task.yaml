@@ -1,0 +1,63 @@
+task_id: B1_A244_816110d7
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상초승제본 가상구해솔의 세 가족 지출을 정리해 주세요. 가족별 소득과 관계 및 장애 여부를 확인해 인적공제를 계산합니다.
+  자녀 보험과 배우자 치료비 및 장애인 동생 학비도 각각 처리해 주세요.
+input_files:
+- path: inputs/01_자녀소득.pdf
+  format: pdf
+- path: inputs/02_배우자소득.xlsx
+  format: xlsx
+- path: inputs/03_동생자격.hwpx
+  format: hwpx
+- path: inputs/04_자녀보험.pdf
+  format: pdf
+- path: inputs/05_배우자병원.pdf
+  format: pdf
+- path: inputs/06_동생교육.xlsx
+  format: xlsx
+- path: inputs/07_급여누계.xlsx
+  format: xlsx
+- path: inputs/08_재직확인.pdf
+  format: pdf
+- path: inputs/09_신청범위.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    education_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - additional_deduction
+  - insurance_credit
+  - medical_credit
+  - education_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-c9eec1d8-4950-5634-9c2f-d0d0b72e1279
+scenario_seed: 9322751222788991629
+scenario_hash: 5056cbc2f5411fecdeaf768be191a1d6e316185828d22b521b34fa3de4458edf
+authorship:
+  method: individually_written
+  case_id: A244
+  case_sha256: 816110d7d3ad2a8d09e0d99b5c967259481dcaca958a01b703a47e5c0c176120
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- additional_deduction
+- insurance_credit
+- medical_credit
+- education_credit

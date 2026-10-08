@@ -1,0 +1,68 @@
+task_id: B1_D231_2a302749
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 식물 판매점 화분 구매의 업체 계정과 품목별 단가표를 작성해 주세요. vendor_totals와 cheapest_by_item을
+  제출해 주세요.
+input_files:
+- path: inputs/01_첫화분결제.pdf
+  format: pdf
+- path: inputs/02_보충화분.hwpx
+  format: hwpx
+- path: inputs/03_큰화분표지.xlsx
+  format: xlsx
+- path: inputs/04_큰화분내역.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-a64b4510-2416-56d3-88be-5948cbc178e2
+scenario_seed: 3039972946950833427
+scenario_hash: 02bfcc69ac7f96179cc1b42064094eebb17628542d9d12d6afc814c00b372df8
+authorship:
+  method: individually_written
+  case_id: D231
+  case_sha256: 2a302749edcd4513c5e1a79f19e0166054be8d935e4061f3d1d77889c7b31596
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item

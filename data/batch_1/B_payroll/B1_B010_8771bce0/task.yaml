@@ -1,0 +1,43 @@
+task_id: B1_B010_8771bce0
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상도담인쇄실에서 가상배이안의 승인된 평일 연장근로를 급여에 반영해 주세요. 연장 합계는 360분이며 야간과 휴일 근로를 포함하지
+  않습니다. 통상시급 표시액, 연장수당과 총지급액을 구한 뒤 직원에게 안내할 실지급액을 적어 주세요.
+input_files:
+- path: inputs/01_정액임금확인.hwpx
+  format: hwpx
+- path: inputs/02_승인근태마감.xlsx
+  format: xlsx
+- path: inputs/03_연장요율.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_hourly_wage_floor:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_hourly_wage_floor
+  - overtime_pay
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-2e0f3315-110e-5584-bcf6-ac18d38c5d8b
+scenario_seed: 9759789541301019003
+scenario_hash: a3f4537e901dcb691811dc0de8248abfbd6f6463982a7ca49cf82493433c4c96
+authorship:
+  method: individually_written
+  case_id: B010
+  case_sha256: 8771bce0d3d1e17bdb7c86c876c2d9590e8d7172d3e4c9e5672e611dbe787723
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- ordinary_hourly_wage_floor
+- overtime_pay
+- gross_pay
+- net_pay

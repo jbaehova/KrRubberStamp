@@ -1,0 +1,46 @@
+task_id: B1_D266_3848891f
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 두 차례 구입한 같은 마우스패드의 단가를 비교합니다. cheapest_by_item과 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_입주좌석패드.xlsx
+  format: xlsx
+- path: inputs/02_추가좌석패드.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-0fb40628-13d9-5778-ba65-b52e22d7ac42
+scenario_seed: 4055642231274269216
+scenario_hash: efca375cd70412487155613c00612d8a9f2e326b00b3c58798088a68867076d0
+authorship:
+  method: individually_written
+  case_id: D266
+  case_sha256: 3848891f232cea2002054730cbc5ddd145bcdc528b0ef760ae0aab82b5691a1e
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- cheapest_by_item
+- grand_total

@@ -1,0 +1,287 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "받침재고",
+          "date": "2026-04-30",
+          "description": "판매할 유리 받침 재고 수령",
+          "document_ids": [
+            "유리현금"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "유리받침 진열 준비실"
+          },
+          "operation_id": "받침판매",
+          "participants": [
+            {
+              "name": "합성하옴",
+              "organization": "가상유리받침",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "재고-299"
+        }
+      ],
+      "filing_site_id": "받침점-299",
+      "operations": [
+        {
+          "description": "과세 유리 받침 소매 판매",
+          "operation_id": "받침판매",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "받침재고",
+          "date": "2026-04-30",
+          "document_id": "유리현금",
+          "transaction_id": "재고-299"
+        }
+      ],
+      "site_year_records": [
+        {
+          "site_id": "옛점-299",
+          "site_name": "가상옛유리점",
+          "supply_base": 1210000000,
+          "year": 2025
+        },
+        {
+          "site_id": "받침점-299",
+          "site_name": "가상유리받침",
+          "supply_base": 992000000,
+          "year": 2025
+        },
+        {
+          "site_id": "받침점-299",
+          "site_name": "가상유리받침",
+          "supply_base": 1310000000,
+          "year": 2024
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "supplier_status_records": [
+        {
+          "status": "simplified_no_invoice_duty",
+          "supplier_id": "유리상-299",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-12-31"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "유리현금",
+        "purpose": "business",
+        "transaction_id": "재고-299"
+      },
+      {
+        "filing_site_id": "받침점-299",
+        "prior_year_site_supply_base": 992000000
+      },
+      {
+        "supplier_general": false,
+        "supplier_id": "유리상-299",
+        "transaction_id": "재고-299"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "받침카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "받침판매-299"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "유리현금"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "재고-299"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-02",
+      "transaction_id": "받침판매-299"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5720000,
+      "includes_vat": true,
+      "transaction_id": "받침판매-299"
+    },
+    "output": {
+      "gross": 5720000,
+      "supply_base": 5200000,
+      "vat": 520000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 5200000
+    },
+    "output": 520000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "받침판매-299"
+    },
+    "output": {
+      "eligible_gross": 5720000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-30",
+      "transaction_id": "재고-299"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2530000,
+      "includes_vat": true,
+      "transaction_id": "재고-299"
+    },
+    "output": {
+      "gross": 2530000,
+      "supply_base": 2300000,
+      "vat": 230000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "재고-299",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 230000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 992000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 5720000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 74360,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 74360
+    },
+    "output": 74360,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 74360,
+      "liability_before_credit": 520000
+    },
+    "output": 74360,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 811000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 445640,
+      "prepaid_assessed_vat": 811000
+    },
+    "output": -365360,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 520000,
+      "prepaid_vat": 811000,
+      "receipt_credit": 74360
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 230000,
+      "net_vat": -365360,
+      "noncreditable_vat": 230000,
+      "output_vat": 520000,
+      "payable_vat": 0,
+      "prepaid_vat": 811000,
+      "receipt_credit": 74360,
+      "refund_vat": 365360,
+      "tax_base": 5200000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

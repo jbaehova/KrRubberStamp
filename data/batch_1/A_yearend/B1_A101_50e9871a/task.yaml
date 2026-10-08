@@ -1,0 +1,80 @@
+task_id: B1_A101_50e9871a
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상모래빛조사의 가상은하정은 이혼 후 자녀를 부양하며 장애인 동생의 자료도 제출했습니다. 동생의 공제는 어머니에게 배정되어
+  있습니다. 가족 수와 기본 및 추가공제액 및 자녀세액공제액을 구하고 학교 교육비와 사설 학원비 및 본인 대학원 수업료를 구분해 교육비 공제액을
+  계산해 주세요. 본인과 동생 보험 및 자녀와 동생 의료비와 연금계좌 공제도 각각 확인해 소득세 결정세액을 적습니다.
+input_files:
+- path: inputs/01_혼인및세대.hwpx
+  format: hwpx
+- path: inputs/02_급여대장.xlsx
+  format: xlsx
+- path: inputs/03_자녀가족.pdf
+  format: pdf
+- path: inputs/04_동생배정.hwpx
+  format: hwpx
+- path: inputs/05_학교교육비.pdf
+  format: pdf
+- path: inputs/06_학원교육비.pdf
+  format: pdf
+- path: inputs/07_본인대학원.pdf
+  format: pdf
+- path: inputs/08_본인보험.pdf
+  format: pdf
+- path: inputs/09_동생보험.pdf
+  format: pdf
+- path: inputs/10_가족진료.xlsx
+  format: xlsx
+- path: inputs/11_연금계좌.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    child_credit:
+      type: integer
+    education_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    pension_account_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - additional_deduction
+  - child_credit
+  - education_credit
+  - insurance_credit
+  - medical_credit
+  - pension_account_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-28b68efd-0d1b-589c-998a-99a5c909630f
+scenario_seed: 5830339740473400571
+scenario_hash: 0a07e0a24748807bcd9e18c1318341f6b67a91ada31c8955c2f5c739eb8a0d4f
+authorship:
+  method: individually_written
+  case_id: A101
+  case_sha256: 50e9871a7ec29cfb107b3b62f3b37064eaeb701775623d0412b01cb7efc5ddb9
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- additional_deduction
+- child_credit
+- education_credit
+- insurance_credit
+- medical_credit
+- pension_account_credit
+- final_national_tax

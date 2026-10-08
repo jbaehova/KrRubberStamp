@@ -1,0 +1,67 @@
+task_id: B1_B246_378402a4
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상매듭색인실의 두 주 시급 급여는 7월 초에 실행됐지만 기관 고지는 6월분입니다. 무급 결근과 주별 출근을 반영해 기본 대가와
+  주휴수당을 구해 주세요. 실제 지급일, 연금 기준소득월액과 연금 부담 및 건강과 요양 공제를 작성해 주세요.
+input_files:
+- path: inputs/01_종료범위.pdf
+  format: pdf
+- path: inputs/02_결근기록.xlsx
+  format: xlsx
+- path: inputs/03_첫주출근.hwpx
+  format: hwpx
+- path: inputs/04_둘째주출근.pdf
+  format: pdf
+- path: inputs/05_7월은행.xlsx
+  format: xlsx
+- path: inputs/06_6월연금.hwpx
+  format: hwpx
+- path: inputs/07_건강통지.pdf
+  format: pdf
+- path: inputs/08_고용과세무.xlsx
+  format: xlsx
+- path: inputs/09_공식계산.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+  required:
+  - effective_payment_date
+  - base_pay
+  - weekly_holiday_pay
+  - pension_base_income
+  - national_pension
+  - health_insurance
+  - long_term_care
+  additionalProperties: false
+canary: KrRubberStamp-canary-db289640-ec79-587d-9aca-dc5dfc628558
+scenario_seed: 4000325276603103629
+scenario_hash: 70f48dcacf72a8b58dd87495a613a045f1bbfa8d757ca53d038ad20b3f1544bd
+authorship:
+  method: individually_written
+  case_id: B246
+  case_sha256: 378402a4f9f1b98d0f23a9ceec0194aca6564147b596a031c437c22098436dda
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- effective_payment_date
+- base_pay
+- weekly_holiday_pay
+- pension_base_income
+- national_pension
+- health_insurance
+- long_term_care

@@ -1,0 +1,63 @@
+task_id: B1_B243_8f304660
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상문서조립실은 2월 지급을 취소한 뒤 3월에 실행했고 당월 조립 실적금도 확정했습니다. 실제 지급일을 확인하고 월 통상임금과
+  연장수당을 구해 주세요. 실적금을 반영한 과세급여, 소득세와 이번 실지급액도 작성해 주세요.
+input_files:
+- path: inputs/01_정액계약.pdf
+  format: pdf
+- path: inputs/02_실적전표.xlsx
+  format: xlsx
+- path: inputs/03_추가승인.hwpx
+  format: hwpx
+- path: inputs/04_지급취소.pdf
+  format: pdf
+- path: inputs/05_지급실행.xlsx
+  format: xlsx
+- path: inputs/06_연금고지.hwpx
+  format: hwpx
+- path: inputs/07_건강고용.xlsx
+  format: xlsx
+- path: inputs/08_가족승인.pdf
+  format: pdf
+- path: inputs/09_세무원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    ordinary_monthly_wage:
+      type: integer
+    overtime_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - effective_payment_date
+  - ordinary_monthly_wage
+  - overtime_pay
+  - taxable_pay
+  - income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-bd319f0f-93a6-57af-906a-18e24273e8d1
+scenario_seed: 10317824125831523119
+scenario_hash: a8de0035a8168deff3e5b92371b506098019fd9b1132719fee38c09dd4317705
+authorship:
+  method: individually_written
+  case_id: B243
+  case_sha256: 8f3046605324ab2f9ce55b34e223d3c52a0fd55371c426cd266475d0b303c056
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- effective_payment_date
+- ordinary_monthly_wage
+- overtime_pay
+- taxable_pay
+- income_tax
+- net_pay

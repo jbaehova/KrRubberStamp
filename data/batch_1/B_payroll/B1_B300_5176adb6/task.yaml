@@ -1,0 +1,66 @@
+task_id: B1_B300_5176adb6
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상마지막보관실의 선거 주 종료 임금은7월에 실제 지급됐습니다. 결근과 선거일 유급을 구분해 기본 대가, 공휴일 유급액과 주휴수당을
+  작성해 주세요. 유효 밤 승인으로 연장수당을 구하고6월 부과 국민연금 및 실제 지급일 effective_payment_date를 YYYY-MM-DD로
+  적어 주세요.
+input_files:
+- path: inputs/01_종료주계약.pdf
+  format: pdf
+- path: inputs/02_결근집계.xlsx
+  format: xlsx
+- path: inputs/03_주별출근.hwpx
+  format: hwpx
+- path: inputs/04_선거유급.pdf
+  format: pdf
+- path: inputs/05_밤종료초안.xlsx
+  format: xlsx
+- path: inputs/06_밤유효승인.hwpx
+  format: hwpx
+- path: inputs/07_칠월실행.pdf
+  format: pdf
+- path: inputs/08_후속취소.xlsx
+  format: xlsx
+- path: inputs/09_육월공제.pdf
+  format: pdf
+- path: inputs/10_종료주원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    national_pension:
+      type: integer
+    effective_payment_date:
+      type: string
+  required:
+  - base_pay
+  - paid_holiday_pay
+  - weekly_holiday_pay
+  - overtime_pay
+  - national_pension
+  - effective_payment_date
+  additionalProperties: false
+canary: KrRubberStamp-canary-35ca7c0a-d919-58c8-9937-77c655c35391
+scenario_seed: 5870070163705481732
+scenario_hash: eceef16142f8cf377985de88a630ce6f314d6799cd1b5c08f41ee095974f9a99
+authorship:
+  method: individually_written
+  case_id: B300
+  case_sha256: 5176adb68248ca04ff53dbce6dfd03d63e62cdc6c014f1414c266330cef987a0
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- base_pay
+- paid_holiday_pay
+- weekly_holiday_pay
+- overtime_pay
+- national_pension
+- effective_payment_date

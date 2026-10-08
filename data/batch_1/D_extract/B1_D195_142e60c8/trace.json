@@ -1,0 +1,311 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-16",
+          "document_id": "TACTILE-LINE-1",
+          "event": "received",
+          "event_id": "TACTILE-LINE-IN",
+          "location": "촉각지도작업대"
+        },
+        {
+          "date": "2026-03-16",
+          "document_id": "TACTILE-LINE-2",
+          "event": "received",
+          "event_id": "TACTILE-ALT-IN",
+          "location": "촉각지도작업대"
+        },
+        {
+          "date": "2026-03-17",
+          "document_id": "TACTILE-LABEL-3",
+          "event": "received",
+          "event_id": "TACTILE-LABEL-IN",
+          "location": "촉각지도작업대"
+        },
+        {
+          "date": "2026-03-17",
+          "document_id": "TACTILE-PLATE-4",
+          "event": "received",
+          "event_id": "TACTILE-PLATE-IN",
+          "location": "촉각지도작업대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-11",
+          "document_id": "TACTILE-LINE-1",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "TACTILE-LINE-C",
+          "vendor": "가상촉각재료"
+        },
+        {
+          "date": "2026-03-12",
+          "document_id": "TACTILE-LINE-2",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "TACTILE-ALT-C",
+          "vendor": "가상지도제작"
+        },
+        {
+          "date": "2026-03-13",
+          "document_id": "TACTILE-LABEL-3",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "TACTILE-LABEL-C",
+          "vendor": "가상표지제작"
+        },
+        {
+          "date": "2026-03-14",
+          "document_id": "TACTILE-PLATE-4",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "TACTILE-PLATE-C",
+          "vendor": "가상촉각재료"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "TACTILE-LINE-C",
+          "items": [
+            {
+              "name": "촉각선 2mm",
+              "quantity": 28,
+              "unit_price": 1430
+            }
+          ],
+          "sheet_id": "TACTILE-LINE-LOT1"
+        },
+        {
+          "header_record_id": "TACTILE-LINE-C",
+          "items": [
+            {
+              "name": "촉각선 2mm",
+              "quantity": 9,
+              "unit_price": 1375
+            }
+          ],
+          "sheet_id": "TACTILE-LINE-LOT2"
+        },
+        {
+          "header_record_id": "TACTILE-ALT-C",
+          "items": [
+            {
+              "name": "촉각선2mm",
+              "quantity": 12,
+              "unit_price": 1290
+            },
+            {
+              "name": "촉각선3mm",
+              "quantity": 8,
+              "unit_price": 1180
+            }
+          ],
+          "sheet_id": "TACTILE-ALT-L"
+        },
+        {
+          "header_record_id": "TACTILE-LABEL-C",
+          "items": [
+            {
+              "name": "점자위치표지",
+              "quantity": 16,
+              "unit_price": 3191
+            }
+          ],
+          "sheet_id": "TACTILE-LABEL-L"
+        },
+        {
+          "header_record_id": "TACTILE-PLATE-C",
+          "items": [
+            {
+              "name": "지도접착판",
+              "quantity": 6,
+              "unit_price": 5379
+            }
+          ],
+          "sheet_id": "TACTILE-PLATE-L"
+        }
+      ],
+      "processing_policy": "첨부는 header_record_id로 연결하며 같은 표지의 모든 로트 행을 합한다. invoice 또는 order에 received가 있는 원자료만 실제 구매다. 이름은 NFKC 후 공백 제거 및 영문 소문자로 처리하고 업체 법인 표기는 제거한다. 숫자와 규격은 보존한다. 포함 개당 비교 단가는 단가의 10/11에서 원 미만을 버린 값이다. 포함 행의 공급가액은 행 총액의 10/11에서 원 미만을 버리고 차액이 세액이다. 별도 행의 세액은 수량 곱하기 단가의 10%에서 원 미만을 버린 값이다. 품목별 최저를 품목명 순으로 정리한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 4,
+      "received_document_ids": [
+        "TACTILE-LABEL-3",
+        "TACTILE-LINE-1",
+        "TACTILE-LINE-2",
+        "TACTILE-PLATE-4"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "TACTILE-LINE-1",
+      "includes_vat": true,
+      "quantity": 28,
+      "unit_price": 1430
+    },
+    "output": {
+      "supply": 36400,
+      "total": 40040,
+      "vat": 3640
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "TACTILE-LINE-1",
+      "includes_vat": true,
+      "quantity": 9,
+      "unit_price": 1375
+    },
+    "output": {
+      "supply": 11250,
+      "total": 12375,
+      "vat": 1125
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상촉각재료"
+    },
+    "output": "가상촉각재료",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TACTILE-LINE-2",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 1290
+    },
+    "output": {
+      "supply": 15480,
+      "total": 17028,
+      "vat": 1548
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "TACTILE-LINE-2",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 1180
+    },
+    "output": {
+      "supply": 9440,
+      "total": 10384,
+      "vat": 944
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상지도제작"
+    },
+    "output": "가상지도제작",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TACTILE-LABEL-3",
+      "includes_vat": true,
+      "quantity": 16,
+      "unit_price": 3191
+    },
+    "output": {
+      "supply": 46414,
+      "total": 51056,
+      "vat": 4642
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상표지제작"
+    },
+    "output": "가상표지제작",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TACTILE-PLATE-4",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 5379
+    },
+    "output": {
+      "supply": 32274,
+      "total": 35501,
+      "vat": 3227
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상촉각재료"
+    },
+    "output": "가상촉각재료",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 4
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "점자위치표지",
+          "unit_price": 2900,
+          "vendor": "가상표지제작"
+        },
+        {
+          "item": "지도접착판",
+          "unit_price": 5379,
+          "vendor": "가상촉각재료"
+        },
+        {
+          "item": "촉각선2mm",
+          "unit_price": 1250,
+          "vendor": "가상촉각재료"
+        },
+        {
+          "item": "촉각선3mm",
+          "unit_price": 1180,
+          "vendor": "가상지도제작"
+        }
+      ],
+      "grand_total": 166384,
+      "supply_total": 151258,
+      "unique_document_count": 4,
+      "vat_total": 15126,
+      "vendor_totals": [
+        {
+          "supply": 24920,
+          "total": 27412,
+          "vat": 2492,
+          "vendor": "가상지도제작"
+        },
+        {
+          "supply": 79924,
+          "total": 87916,
+          "vat": 7992,
+          "vendor": "가상촉각재료"
+        },
+        {
+          "supply": 46414,
+          "total": 51056,
+          "vat": 4642,
+          "vendor": "가상표지제작"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

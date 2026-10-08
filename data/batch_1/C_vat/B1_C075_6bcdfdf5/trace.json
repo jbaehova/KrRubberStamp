@@ -1,0 +1,264 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "C075-정비활동",
+          "date": "2026-04-14",
+          "description": "등록 택시 가상-T075의 고객 운송에 필요한 정비를 완료하고 대표가 인수했다.",
+          "document_ids": [
+            "C075-수리계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상오전택시 차량 정비 인수 장소"
+          },
+          "operation_id": "C075-택시",
+          "participants": [
+            {
+              "name": "가상 택시대표",
+              "organization": "가상오전택시",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "C075-택시수리",
+          "vehicle_id": "가상-T075"
+        }
+      ],
+      "operations": [
+        {
+          "description": "허가된 택시로 고객 운송",
+          "operation_id": "C075-택시",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C075-정비활동",
+          "date": "2026-04-14",
+          "document_id": "C075-수리계산서",
+          "transaction_id": "C075-택시수리"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "taxi_transport",
+          "permitted_operation_id": "C075-택시",
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-T075"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C075-수리계산서",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C075-택시수리"
+      },
+      {
+        "transaction_id": "C075-택시수리",
+        "vehicle_direct_business": true,
+        "vehicle_id": "가상-T075",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C075-운송카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C075-운송완료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C075-수리계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C075-택시수리"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-02",
+      "transaction_id": "C075-운송완료"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 9900000,
+      "includes_vat": true,
+      "transaction_id": "C075-운송완료"
+    },
+    "output": {
+      "gross": 9900000,
+      "supply_base": 9000000,
+      "vat": 900000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 9000000
+    },
+    "output": 900000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C075-운송완료"
+    },
+    "output": {
+      "eligible_gross": 9900000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-14",
+      "transaction_id": "C075-택시수리"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1640000,
+      "includes_vat": false,
+      "transaction_id": "C075-택시수리"
+    },
+    "output": {
+      "gross": 1804000,
+      "supply_base": 1640000,
+      "vat": 164000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C075-택시수리",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 164000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 78000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 9900000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 128700,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 128700
+    },
+    "output": 128700,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 128700,
+      "liability_before_credit": 736000
+    },
+    "output": 128700,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 607300,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 607300,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 164000,
+      "output_vat": 900000,
+      "prepaid_vat": 0,
+      "receipt_credit": 128700
+    },
+    "output": {
+      "deductible_input_vat": 164000,
+      "input_vat": 164000,
+      "net_vat": 607300,
+      "noncreditable_vat": 0,
+      "output_vat": 900000,
+      "payable_vat": 607300,
+      "prepaid_vat": 0,
+      "receipt_credit": 128700,
+      "refund_vat": 0,
+      "tax_base": 9000000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

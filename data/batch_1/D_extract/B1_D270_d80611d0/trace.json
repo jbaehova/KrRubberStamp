@@ -1,0 +1,177 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-05",
+          "document_id": "WHEEL-RIM-8",
+          "event": "received",
+          "event_id": "RIM-IN",
+          "location": "휠수리대"
+        },
+        {
+          "date": "2026-03-05",
+          "document_id": "WHEEL-SPOKE-9",
+          "event": "received",
+          "event_id": "SPOKE-IN",
+          "location": "휠수리대"
+        },
+        {
+          "date": "2026-03-04",
+          "document_id": "WHEEL-HUB-10",
+          "event": "cancelled_before_dispatch",
+          "event_id": "HUB-CANCEL",
+          "location": "허브판매처출고실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-02",
+          "document_id": "WHEEL-RIM-8",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "RIM-H",
+          "vendor": "가상휠자재"
+        },
+        {
+          "date": "2026-03-03",
+          "document_id": "WHEEL-SPOKE-9",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SPOKE-H",
+          "vendor": "가상휠자재"
+        },
+        {
+          "date": "2026-03-03",
+          "document_id": "WHEEL-HUB-10",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "HUB-H",
+          "vendor": "가상허브판매"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "RIM-H",
+          "items": [
+            {
+              "name": "알루미늄림700",
+              "quantity": 2,
+              "unit_price": 46800
+            }
+          ],
+          "sheet_id": "RIM-L"
+        },
+        {
+          "header_record_id": "SPOKE-H",
+          "items": [
+            {
+              "name": "스포크280",
+              "quantity": 64,
+              "unit_price": 850
+            }
+          ],
+          "sheet_id": "SPOKE-L"
+        },
+        {
+          "header_record_id": "HUB-H",
+          "items": [
+            {
+              "name": "후륜허브H4",
+              "quantity": 1,
+              "unit_price": 89500
+            }
+          ],
+          "sheet_id": "HUB-L"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 표지에 연결하고 document_id에 received가 있는 invoice 또는 order만 실제 구매로 합한다. cancelled_before_dispatch와 미수령 원문은 제외한다. 별도 단가 행의 공급가액은 수량 곱하기 단가이며 세액은 10%의 원 미만을 버린다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "WHEEL-HUB-10"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "WHEEL-RIM-8",
+        "WHEEL-SPOKE-9"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "WHEEL-RIM-8",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 46800
+    },
+    "output": {
+      "supply": 93600,
+      "total": 102960,
+      "vat": 9360
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상휠자재"
+    },
+    "output": "가상휠자재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "WHEEL-SPOKE-9",
+      "includes_vat": false,
+      "quantity": 64,
+      "unit_price": 850
+    },
+    "output": {
+      "supply": 54400,
+      "total": 59840,
+      "vat": 5440
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상휠자재"
+    },
+    "output": "가상휠자재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "스포크280",
+          "unit_price": 850,
+          "vendor": "가상휠자재"
+        },
+        {
+          "item": "알루미늄림700",
+          "unit_price": 46800,
+          "vendor": "가상휠자재"
+        }
+      ],
+      "grand_total": 162800,
+      "supply_total": 148000,
+      "unique_document_count": 2,
+      "vat_total": 14800,
+      "vendor_totals": [
+        {
+          "supply": 148000,
+          "total": 162800,
+          "vat": 14800,
+          "vendor": "가상휠자재"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,147 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-11",
+          "document_id": "PHARM-STAND-09",
+          "event": "received",
+          "event_id": "PHARM-IN",
+          "location": "약국진열대뒤"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-09",
+          "document_id": "PHARM-STAND-09",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "PHARM-BUY-C",
+          "vendor": "가상진열판매"
+        },
+        {
+          "date": "2026-03-02",
+          "document_id": "PHARM-Q-02",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "PHARM-Q-C",
+          "vendor": "가상가판설계"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "PHARM-BUY-C",
+          "items": [
+            {
+              "name": "아크릴받침15",
+              "quantity": 7,
+              "unit_price": 6800
+            }
+          ],
+          "sheet_id": "PHARM-STAND-L"
+        },
+        {
+          "header_record_id": "PHARM-BUY-C",
+          "items": [
+            {
+              "name": "진열가격꽂이",
+              "quantity": 14,
+              "unit_price": 850
+            }
+          ],
+          "sheet_id": "PHARM-LABEL-L"
+        },
+        {
+          "header_record_id": "PHARM-Q-C",
+          "items": [
+            {
+              "name": "아크릴받침15",
+              "quantity": 7,
+              "unit_price": 5600
+            }
+          ],
+          "sheet_id": "PHARM-Q-L"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 표지에 연결한다. invoice 또는 order 번호에 received가 있는 원문만 실제 구매이며 quote는 구매가 아니다. 별도 단가는 공급가액이며 각 행의 10%에서 원 미만을 버려 세액을 계산한다. 품목과 업체를 NFKC 후 공백 제거 및 영문 소문자로 정리하고 업체 법인 표기를 제거한다. 품목명 순으로 배열하며 가격 동률이면 정리한 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "PHARM-Q-02"
+      ],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "PHARM-STAND-09"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "PHARM-STAND-09",
+      "includes_vat": false,
+      "quantity": 7,
+      "unit_price": 6800
+    },
+    "output": {
+      "supply": 47600,
+      "total": 52360,
+      "vat": 4760
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "PHARM-STAND-09",
+      "includes_vat": false,
+      "quantity": 14,
+      "unit_price": 850
+    },
+    "output": {
+      "supply": 11900,
+      "total": 13090,
+      "vat": 1190
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상진열판매"
+    },
+    "output": "가상진열판매",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "아크릴받침15",
+          "unit_price": 6800,
+          "vendor": "가상진열판매"
+        },
+        {
+          "item": "진열가격꽂이",
+          "unit_price": 850,
+          "vendor": "가상진열판매"
+        }
+      ],
+      "grand_total": 65450,
+      "supply_total": 59500,
+      "unique_document_count": 1,
+      "vat_total": 5950,
+      "vendor_totals": [
+        {
+          "supply": 59500,
+          "total": 65450,
+          "vat": 5950,
+          "vendor": "가상진열판매"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

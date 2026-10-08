@@ -1,0 +1,355 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "방문차수리",
+          "date": "2026-05-11",
+          "description": "현장 방문 전용 승용차를 수리",
+          "document_ids": [
+            "방문전자"
+          ],
+          "location": {
+            "kind": "road",
+            "name": "빛 측정 방문 도로"
+          },
+          "operation_id": "빛측정",
+          "participants": [
+            {
+              "name": "합성하든",
+              "organization": "가상빛측정",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "차수리-295",
+          "vehicle_id": "방문차-295"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "측정비품",
+          "date": "2026-05-10",
+          "description": "과세 현장 측정에 쓸 비품 반입",
+          "document_ids": [
+            "비품전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "빛측정 비품실"
+          },
+          "operation_id": "빛측정",
+          "participants": [
+            {
+              "name": "합성하든",
+              "organization": "가상빛측정",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "비품-295"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 현장 빛 측정",
+          "operation_id": "빛측정",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "방문차수리",
+          "date": "2026-05-11",
+          "document_id": "방문전자",
+          "transaction_id": "차수리-295"
+        },
+        {
+          "activity_id": "측정비품",
+          "date": "2026-05-10",
+          "document_id": "비품전자",
+          "transaction_id": "비품-295"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "방문차-295"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "방문전자",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "차수리-295"
+      },
+      {
+        "business_related": true,
+        "document_id": "비품전자",
+        "purpose": "business",
+        "transaction_id": "비품-295"
+      },
+      {
+        "transaction_id": "차수리-295",
+        "vehicle_direct_business": false,
+        "vehicle_id": "방문차-295",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "비품전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "비품-295"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "방문전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "차수리-295"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "측정전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "측정완료-295"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-10",
+      "transaction_id": "비품-295"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1320000,
+      "includes_vat": true,
+      "transaction_id": "비품-295"
+    },
+    "output": {
+      "gross": 1320000,
+      "supply_base": 1200000,
+      "vat": 120000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "비품-295",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 120000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-11",
+      "transaction_id": "차수리-295"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1045000,
+      "includes_vat": true,
+      "transaction_id": "차수리-295"
+    },
+    "output": {
+      "gross": 1045000,
+      "supply_base": 950000,
+      "vat": 95000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "차수리-295",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 95000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-15",
+      "transaction_id": "측정완료-295"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5500000,
+      "includes_vat": true,
+      "transaction_id": "측정완료-295"
+    },
+    "output": {
+      "gross": 5500000,
+      "supply_base": 5000000,
+      "vat": 500000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 5000000
+    },
+    "output": 500000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "측정완료-295"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 216000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 380000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 924000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 380000,
+      "prepaid_assessed_vat": 924000
+    },
+    "output": -544000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 120000,
+      "output_vat": 500000,
+      "prepaid_vat": 924000,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 120000,
+      "input_vat": 215000,
+      "net_vat": -544000,
+      "noncreditable_vat": 95000,
+      "output_vat": 500000,
+      "payable_vat": 0,
+      "prepaid_vat": 924000,
+      "receipt_credit": 0,
+      "refund_vat": 544000,
+      "tax_base": 5000000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

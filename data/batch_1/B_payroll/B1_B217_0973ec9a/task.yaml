@@ -1,0 +1,43 @@
+task_id: B1_B217_0973ec9a
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상배경정리소는 은행 실행 전날 급여 예산을 작성합니다. 자료에 있는 승인 계획 한 건을 기준으로 적용 지급일을 YYYY-MM-DD로
+  적어 주세요. 승인된 한 자녀를 반영한 소득세와 지방소득세, 예상 실지급액도 계산해 이체 준비표를 완성합니다.
+input_files:
+- path: inputs/01_2월약정.hwpx
+  format: hwpx
+- path: inputs/02_은행승인계획.pdf
+  format: pdf
+- path: inputs/03_기관가족과원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - effective_payment_date
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-c540cde1-3358-5467-b8f2-a1b09d2a69c1
+scenario_seed: 681148118254681570
+scenario_hash: e6460d12e3b74f2ee4ec4752611516b5b363f4e2c20647d7edfa8896597ae2a8
+authorship:
+  method: individually_written
+  case_id: B217
+  case_sha256: 0973ec9acbfefde2c8283070afeaca2174879e9f9eddd88bb2e0d241035c9620
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- effective_payment_date
+- income_tax
+- local_income_tax
+- net_pay

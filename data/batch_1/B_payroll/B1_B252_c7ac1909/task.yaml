@@ -1,0 +1,63 @@
+task_id: B1_B252_c7ac1909
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상보라검인소는 8월 일요일 밤 카드의 휴게를 수정 승인했습니다. 최종 승인으로 휴일수당과 야간 가산을 계산하고 실제 지급일을
+  확인해 주세요. 이번 급여에서 공제할 7월 연금 고지의 기준소득월액과 근로자 부담 및 실지급액도 작성해 주세요.
+input_files:
+- path: inputs/01_정액약정.pdf
+  format: pdf
+- path: inputs/02_휴일초기.xlsx
+  format: xlsx
+- path: inputs/03_휴게수정.hwpx
+  format: hwpx
+- path: inputs/04_은행실행.pdf
+  format: pdf
+- path: inputs/05_후속계획.xlsx
+  format: xlsx
+- path: inputs/06_7월연금.hwpx
+  format: hwpx
+- path: inputs/07_건강고용.pdf
+  format: pdf
+- path: inputs/08_가족승인.xlsx
+  format: xlsx
+- path: inputs/09_계산원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - effective_payment_date
+  - holiday_pay
+  - night_pay
+  - pension_base_income
+  - national_pension
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-72ea216a-e9fe-5553-8388-4d44e09e50b9
+scenario_seed: 14387902436659107713
+scenario_hash: f76b2bd935438460c4c454e4861c1c9f7e3d6b75d77501466fbc39adfc2581fe
+authorship:
+  method: individually_written
+  case_id: B252
+  case_sha256: c7ac1909280b17814e863fced218633dec8dd518e35eb83200d33745b535a3c0
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- effective_payment_date
+- holiday_pay
+- night_pay
+- pension_base_income
+- national_pension
+- net_pay

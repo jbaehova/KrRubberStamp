@@ -1,0 +1,43 @@
+task_id: B1_B016_7726d145
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상비취디자인에서 가상진하루의 12월 원천세 전표를 작성합니다. 직원의 과세급여에 해당하는 간이세액표 소득세와 특별징수 지방소득세를
+  각각 구해 주세요. 전표를 급여명세서와 대조할 수 있도록 과세급여 및 총 공제액도 함께 적어 주세요.
+input_files:
+- path: inputs/01_전표지급기초.pdf
+  format: pdf
+- path: inputs/02_전표공제기초.xlsx
+  format: xlsx
+- path: inputs/03_특별징수기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-1fe2d961-d9ee-5d3d-a35b-7a5306b0897e
+scenario_seed: 8585779836951854557
+scenario_hash: 753452400cc3d19a104c597b2493f78052e975ef33d1092ba8b9e0239295fce3
+authorship:
+  method: individually_written
+  case_id: B016
+  case_sha256: 7726d145b539fdddf930b124a284b6fab4a116e140fedb36b9acb6f876573c9f
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- taxable_pay
+- income_tax
+- local_income_tax
+- total_deductions

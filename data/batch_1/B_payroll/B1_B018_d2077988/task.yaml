@@ -1,0 +1,51 @@
+task_id: B1_B018_d2077988
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상새벽로봇의 가상장온유 명세서를 외주 급여 담당자에게 넘기기 전에 합계를 검산합니다. 기본급과 직무수당 및 식대가 각 칸에
+  들어가도록 항목 금액을 확인하고 총지급액을 구해 주세요. 외주사 대조 값으로 통상임금과 실지급액도 함께 작성해 주세요.
+input_files:
+- path: inputs/01_외주전달급여.hwpx
+  format: hwpx
+- path: inputs/02_외주전달마감.xlsx
+  format: xlsx
+- path: inputs/03_외주검산기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    fixed_allowance:
+      type: integer
+    meal_allowance:
+      type: integer
+    gross_pay:
+      type: integer
+    ordinary_monthly_wage:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - fixed_allowance
+  - meal_allowance
+  - gross_pay
+  - ordinary_monthly_wage
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-a7d4ce3f-f5be-52dc-831a-b2d62b7e7210
+scenario_seed: 15134198700003153102
+scenario_hash: d9c803973e43568f2208aa9ff963f6729738d5faf1991d05da823b19f1a8bc0b
+authorship:
+  method: individually_written
+  case_id: B018
+  case_sha256: d207798881ddd4ce4b9faa15025a7d24cb1c40b4b12c942befd7c22696e1b659
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- base_pay
+- fixed_allowance
+- meal_allowance
+- gross_pay
+- ordinary_monthly_wage
+- net_pay

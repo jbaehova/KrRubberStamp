@@ -1,0 +1,61 @@
+task_id: B1_D295_6a745933
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 재봉기 보수에 실제 구입한 부품의 원가와 가격표를 정리합니다. supply_total과 cheapest_by_item을 제출해
+  주세요.
+input_files:
+- path: inputs/01_첫발판표지.pdf
+  format: pdf
+- path: inputs/02_보충발판표지.hwpx
+  format: hwpx
+- path: inputs/03_제안발판표지.pdf
+  format: pdf
+- path: inputs/04_연결케이블.xlsx
+  format: xlsx
+- path: inputs/05_보충발판.xlsx
+  format: xlsx
+- path: inputs/06_견적발판.xlsx
+  format: xlsx
+- path: inputs/07_첫발판별첨.xlsx
+  format: xlsx
+- path: inputs/08_첫인수.pdf
+  format: pdf
+- path: inputs/09_보충인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    supply_total:
+      type: integer
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - supply_total
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-8121a06d-8c92-5c39-8869-0ad16dc16eb2
+scenario_seed: 7670854141481273093
+scenario_hash: d274f877e3b34c56c1bf88f950a2d9c9bee920d689218a77ced2fd5b3b419bbd
+authorship:
+  method: individually_written
+  case_id: D295
+  case_sha256: 6a74593322d34705f2ced35c3fca02d87d93983b455c59d6d3914b614f8441b5
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- supply_total
+- cheapest_by_item

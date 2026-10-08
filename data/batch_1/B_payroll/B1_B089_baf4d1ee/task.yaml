@@ -1,0 +1,50 @@
+task_id: B1_B089_baf4d1ee
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상나란설비실의 6월 급여 지급 계획과 은행 실행 기록은 월이 다르게 남아 있습니다. 실제 지급일과 공단 통지의 보험 부과월을
+  구분하여 국민연금 기준소득월액과 근로자 부담액을 구해 주세요. 건강보험과 전체 공제 합계도 작성합니다. 실제 지급일은 effective_payment_date에
+  YYYY-MM-DD로 작성해 주세요.
+input_files:
+- path: inputs/01_설비정액.hwpx
+  format: hwpx
+- path: inputs/02_취소실행.pdf
+  format: pdf
+- path: inputs/03_반기신고.xlsx
+  format: xlsx
+- path: inputs/04_반기기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - effective_payment_date
+  - pension_base_income
+  - national_pension
+  - health_insurance
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-d0f2b779-eeb7-5012-a92d-56d97215a92c
+scenario_seed: 13471623207652702079
+scenario_hash: 57ce3a234ec854ebeab1e22f384db0d521dbdadf2b41da4126a7ec5b4bcf5214
+authorship:
+  method: individually_written
+  case_id: B089
+  case_sha256: baf4d1ee800c377fd79812ee109b63add9d46afeb39b9a9c222817e97fea4bb1
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- effective_payment_date
+- pension_base_income
+- national_pension
+- health_insurance
+- total_deductions

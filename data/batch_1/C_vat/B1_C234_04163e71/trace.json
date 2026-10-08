@@ -1,0 +1,249 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "포장재인수",
+          "date": "2026-06-11",
+          "description": "판매용 정리함 포장재를 창고에 받았다.",
+          "document_ids": [
+            "포장전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "탁상 정리함 매장 창고"
+          },
+          "operation_id": "정리함소매",
+          "participants": [
+            {
+              "name": "가상홍정돈",
+              "organization": "가상탁상정돈",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "포장재대량"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 탁상 정리함 소매",
+          "operation_id": "정리함소매",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "포장재인수",
+          "date": "2026-06-11",
+          "document_id": "포장전자",
+          "transaction_id": "포장재대량"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "포장전자",
+        "purpose": "business",
+        "transaction_id": "포장재대량"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "정리카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "정리함카드매출"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "포장전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "포장재대량"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-10",
+      "transaction_id": "정리함카드매출"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 11000000,
+      "includes_vat": true,
+      "transaction_id": "정리함카드매출"
+    },
+    "output": {
+      "gross": 11000000,
+      "supply_base": 10000000,
+      "vat": 1000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 10000000
+    },
+    "output": 1000000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "정리함카드매출"
+    },
+    "output": {
+      "eligible_gross": 11000000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-11",
+      "transaction_id": "포장재대량"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 10560000,
+      "includes_vat": true,
+      "transaction_id": "포장재대량"
+    },
+    "output": {
+      "gross": 10560000,
+      "supply_base": 9600000,
+      "vat": 960000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "포장재대량",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 960000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 326000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 11000000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 143000,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 143000
+    },
+    "output": 143000,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 143000,
+      "liability_before_credit": 40000
+    },
+    "output": 40000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 960000,
+      "output_vat": 1000000,
+      "prepaid_vat": 0,
+      "receipt_credit": 40000
+    },
+    "output": {
+      "deductible_input_vat": 960000,
+      "input_vat": 960000,
+      "net_vat": 0,
+      "noncreditable_vat": 0,
+      "output_vat": 1000000,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 40000,
+      "refund_vat": 0,
+      "tax_base": 10000000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,42 @@
+task_id: B1_B040_a0b10330
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상풀빛검수소의 가상송은율은 법정 유급휴일인 5월 5일에 근무했습니다. 출퇴근 시각과 중간 휴게 기록을 보고 실제 근로시간을
+  구분하여 휴일수당을 계산해 주세요. 휴일근로가 8시간을 넘는 부분은 별도 비율을 적용하고 평일 연장수당에 다시 넣지 마세요. 휴일수당과 연장수당
+  및 총지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_검수직약정.pdf
+  format: pdf
+- path: inputs/02_휴일타임카드.xlsx
+  format: xlsx
+- path: inputs/03_정상월등록.hwpx
+  format: hwpx
+- path: inputs/04_휴일초과기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - holiday_pay
+  - overtime_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-df8f9aa3-2958-5440-a9f5-8b26cd05a616
+scenario_seed: 11579039625713491023
+scenario_hash: 2484187ce3b7b9fc060440a2e50a5b4aabb2250c1897921f1a0cbcef5e0e2d41
+authorship:
+  method: individually_written
+  case_id: B040
+  case_sha256: a0b10330f2d31c4f436f49753ded9220fe71a152cc33afa2d8e133b3bc9c5e41
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- holiday_pay
+- overtime_pay
+- gross_pay

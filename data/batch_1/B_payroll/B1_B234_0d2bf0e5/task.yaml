@@ -1,0 +1,45 @@
+task_id: B1_B234_0d2bf0e5
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상핀분류소 직원의 본인과 배우자 및 두 자녀가 기본공제 가족으로 승인되었습니다. 표의 가족 칸을 고른 뒤 연령 요건을 충족한
+  두 자녀 공제를 반영해 소득세와 지방소득세를 계산해 주세요. 보험까지 합친 전체 공제액과 직원 실지급액도 알려 주세요.
+input_files:
+- path: inputs/01_4월현금계약.pdf
+  format: pdf
+- path: inputs/02_가족승인.hwpx
+  format: hwpx
+- path: inputs/03_기관보험.xlsx
+  format: xlsx
+- path: inputs/04_자녀세액원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - income_tax
+  - local_income_tax
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-47cc28a3-7fec-5c6c-9bc0-cc804bc1a13c
+scenario_seed: 949117015806443558
+scenario_hash: 7a34daea70af1c2f66bb206695bb17b90dc44bc3d8efb7491a811d9117609cb9
+authorship:
+  method: individually_written
+  case_id: B234
+  case_sha256: 0d2bf0e5b16c0026a145e88aedc2f7753b884904b308df291ad6aad246c6b35a
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- income_tax
+- local_income_tax
+- total_deductions
+- net_pay

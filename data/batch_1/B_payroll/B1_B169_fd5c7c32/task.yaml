@@ -1,0 +1,45 @@
+task_id: B1_B169_fd5c7c32
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상축목수선실은 계속 근로 직원의 공제 원장을 다시 열었습니다. 기관별 통지에서 부과 여부를 확인하여 연금 적용 기준과 실제
+  연금 공제, 건강보험 및 고용보험 부담액을 각각 계산해 주세요.
+input_files:
+- path: inputs/01_축목계약.pdf
+  format: pdf
+- path: inputs/02_연금종료.hwpx
+  format: hwpx
+- path: inputs/03_계속보험.xlsx
+  format: xlsx
+- path: inputs/04_축목등록.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    employment_insurance:
+      type: integer
+  required:
+  - pension_base_income
+  - national_pension
+  - health_insurance
+  - employment_insurance
+  additionalProperties: false
+canary: KrRubberStamp-canary-86564d81-1b2d-5eda-b583-62aea8bd37dd
+scenario_seed: 18256603546719998723
+scenario_hash: 29fef0d19f586fbbf52f630e6543fb3d56e070ac742aad7857332e4e349d4383
+authorship:
+  method: individually_written
+  case_id: B169
+  case_sha256: fd5c7c32b761d303526da0f0a89b6a675378647beaa3b3dfcff7561a9c967412
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- pension_base_income
+- national_pension
+- health_insurance
+- employment_insurance

@@ -1,0 +1,41 @@
+task_id: B1_A281_173bcb46
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상물결센서의 가상공시후 카드 자료를 마감해 주세요. 문화비 제공업체 결제라도 총급여 기준을 확인해 신용 결제와 직불 결제를
+  각각 재분류하고 교통 사용액과 함께 카드 공제 및 과세표준을 계산해 주세요.
+input_files:
+- path: inputs/01_일반교통소비.xlsx
+  format: xlsx
+- path: inputs/02_문화신용.pdf
+  format: pdf
+- path: inputs/03_문화직불.hwpx
+  format: hwpx
+- path: inputs/04_급여사용자.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    total_salary:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - total_salary
+  - credit_card_deduction
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-a60869e7-b3f2-5ad4-aeed-3476a960264e
+scenario_seed: 1674155189901442046
+scenario_hash: 16f6a532c80ae748fbd8d60045584e4d66d75ed6393563c3498707be26eeb23c
+authorship:
+  method: individually_written
+  case_id: A281
+  case_sha256: 173bcb4670f3bbfea80ef24e036484d015920e1a9a34e6ec029fa79a6ff10d62
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- total_salary
+- credit_card_deduction
+- tax_base

@@ -1,0 +1,45 @@
+task_id: B1_B090_4b180654
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상반올분류실의 현금 식대 지급액은 비과세 한도를 조금 넘습니다. 한도까지와 초과분을 구분해 비과세액 및 과세급여를 구해 주세요.
+  그 과세급여가 속한 표 구간에서 소득세와 지방소득세를 작성합니다.
+input_files:
+- path: inputs/01_식대원본.pdf
+  format: pdf
+- path: inputs/02_분류기관통지.hwpx
+  format: hwpx
+- path: inputs/03_경계월등록.xlsx
+  format: xlsx
+- path: inputs/04_318만원구간.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+  required:
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-d52d9787-4d1c-5389-b471-70488252d3e6
+scenario_seed: 5411081912777417627
+scenario_hash: ab864d265b9696d318225f87c1f149ee6ede189176f146451532ef6dd745fdfd
+authorship:
+  method: individually_written
+  case_id: B090
+  case_sha256: 4b1806549da3a39bc09cd0e19522bd7311ff6da045c870b8c82739d3b1f19370
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- non_taxable_pay
+- taxable_pay
+- income_tax
+- local_income_tax

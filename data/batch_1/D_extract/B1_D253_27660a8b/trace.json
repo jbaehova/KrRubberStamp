@@ -1,0 +1,283 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-13",
+          "document_id": "SHOE-HEEL-08",
+          "event": "received",
+          "event_id": "SHOE-HEEL-IN",
+          "location": "구두수선실부품대"
+        },
+        {
+          "date": "2026-05-14",
+          "document_id": "SHOE-HEEL-10",
+          "event": "received",
+          "event_id": "SHOE-ALT-IN",
+          "location": "구두수선실부품대"
+        },
+        {
+          "date": "2026-05-12",
+          "document_id": "SHOE-SOLE-11",
+          "event": "cancelled_before_dispatch",
+          "event_id": "SHOE-SOLE-STOP",
+          "location": "수선부품출고대기"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-08",
+          "document_id": "SHOE-HEEL-08",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "SHOE-HEEL-EXT",
+          "vendor": "가상수선굽"
+        },
+        {
+          "date": "2026-05-08",
+          "document_id": "SHOE-HEEL-08",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "SHOE-HEEL-BOOK",
+          "vendor": "가상수선굽"
+        },
+        {
+          "date": "2026-05-10",
+          "document_id": "SHOE-HEEL-10",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SHOE-ALT-C",
+          "vendor": "가상구두부속"
+        },
+        {
+          "date": "2026-05-02",
+          "document_id": "SHOE-HEEL-Q",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "SHOE-Q-C",
+          "vendor": "가상구두부속"
+        },
+        {
+          "date": "2026-05-11",
+          "document_id": "SHOE-SOLE-11",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SHOE-SOLE-C",
+          "vendor": "가상수선굽"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "SHOE-HEEL-EXT",
+          "items": [
+            {
+              "name": "수선굽30",
+              "quantity": 20,
+              "unit_price": 2420
+            }
+          ],
+          "sheet_id": "SHOE-HEEL-L"
+        },
+        {
+          "header_record_id": "SHOE-HEEL-EXT",
+          "items": [
+            {
+              "name": "굽고정핀묶음",
+              "quantity": 2,
+              "unit_price": 3850
+            }
+          ],
+          "sheet_id": "SHOE-PIN-L"
+        },
+        {
+          "header_record_id": "SHOE-HEEL-BOOK",
+          "items": [
+            {
+              "name": "수선굽30",
+              "quantity": 20,
+              "unit_price": 2420
+            },
+            {
+              "name": "굽고정핀묶음",
+              "quantity": 2,
+              "unit_price": 3850
+            }
+          ],
+          "sheet_id": "SHOE-BOOK-L"
+        },
+        {
+          "header_record_id": "SHOE-ALT-C",
+          "items": [
+            {
+              "name": "수선굽30",
+              "quantity": 6,
+              "unit_price": 2150
+            },
+            {
+              "name": "수선접착제소",
+              "quantity": 3,
+              "unit_price": 4600
+            }
+          ],
+          "sheet_id": "SHOE-ALT-L"
+        },
+        {
+          "header_record_id": "SHOE-Q-C",
+          "items": [
+            {
+              "name": "수선굽30",
+              "quantity": 20,
+              "unit_price": 1700
+            }
+          ],
+          "sheet_id": "SHOE-Q-L"
+        },
+        {
+          "header_record_id": "SHOE-SOLE-C",
+          "items": [
+            {
+              "name": "구두수선밑창M",
+              "quantity": 8,
+              "unit_price": 9200
+            }
+          ],
+          "sheet_id": "SHOE-SOLE-L"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 연결하며 같은 표지의 행을 순서대로 합한다. invoice 또는 order의 document_id에 received가 있어야 구매다. quote와 cancelled_before_dispatch는 구매가 아니다. 다른 record_id라도 document_id와 최종 원문 내용이 같으면 한 번 계산한다. 포함 행 공급가액은 행 총액의 10/11에서 원 미만을 버리고 차액은 세액이며 포함 개당 비교 공급가액은 단가의 10/11에서 원 미만을 버린다. 별도 행 세액은 공급가액의 10%에서 원 미만을 버린다. 품목과 업체는 NFKC 후 공백 제거 및 영문 소문자로 정리하고 업체 법인 표현을 제거하여 이름 순으로 배열한다. 가격 동률이면 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "SHOE-HEEL-Q",
+        "SHOE-SOLE-11"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "SHOE-HEEL-08",
+        "SHOE-HEEL-10"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SHOE-HEEL-08",
+      "includes_vat": true,
+      "quantity": 20,
+      "unit_price": 2420
+    },
+    "output": {
+      "supply": 44000,
+      "total": 48400,
+      "vat": 4400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "SHOE-HEEL-08",
+      "includes_vat": true,
+      "quantity": 2,
+      "unit_price": 3850
+    },
+    "output": {
+      "supply": 7000,
+      "total": 7700,
+      "vat": 700
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상수선굽"
+    },
+    "output": "가상수선굽",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SHOE-HEEL-08"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "SHOE-HEEL-10",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 2150
+    },
+    "output": {
+      "supply": 12900,
+      "total": 14190,
+      "vat": 1290
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "SHOE-HEEL-10",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 4600
+    },
+    "output": {
+      "supply": 13800,
+      "total": 15180,
+      "vat": 1380
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상구두부속"
+    },
+    "output": "가상구두부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "굽고정핀묶음",
+          "unit_price": 3500,
+          "vendor": "가상수선굽"
+        },
+        {
+          "item": "수선굽30",
+          "unit_price": 2150,
+          "vendor": "가상구두부속"
+        },
+        {
+          "item": "수선접착제소",
+          "unit_price": 4600,
+          "vendor": "가상구두부속"
+        }
+      ],
+      "grand_total": 85470,
+      "supply_total": 77700,
+      "unique_document_count": 2,
+      "vat_total": 7770,
+      "vendor_totals": [
+        {
+          "supply": 26700,
+          "total": 29370,
+          "vat": 2670,
+          "vendor": "가상구두부속"
+        },
+        {
+          "supply": 51000,
+          "total": 56100,
+          "vat": 5100,
+          "vendor": "가상수선굽"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

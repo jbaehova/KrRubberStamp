@@ -1,0 +1,43 @@
+task_id: B1_A228_e70cee2f
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상비오름책상 가상류다혜의 입사 연도 정산을 진행해 주세요. 재직 시작일과 카드 지급일을 대조해 카드 공제액을 구합니다. 재직
+  중 치료비의 의료비 공제와 최종 국세도 적어 주세요.
+input_files:
+- path: inputs/01_입사확정.hwpx
+  format: hwpx
+- path: inputs/02_입사전카드.pdf
+  format: pdf
+- path: inputs/03_입사후카드.xlsx
+  format: xlsx
+- path: inputs/04_본인진료.pdf
+  format: pdf
+- path: inputs/05_급여접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    credit_card_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - credit_card_deduction
+  - medical_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-5c3d097b-316b-5a96-ba71-a9cc11b33b09
+scenario_seed: 16648943810790293523
+scenario_hash: 538f616a85eb694f12eb2481439af54291da91fd46890320e88c591ac20742f5
+authorship:
+  method: individually_written
+  case_id: A228
+  case_sha256: e70cee2f9f980013a622a19b29b4b344a81f41c0af610c34cee53a83f97790bd
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- credit_card_deduction
+- medical_credit
+- final_national_tax

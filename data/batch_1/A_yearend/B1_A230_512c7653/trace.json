@@ -1,0 +1,250 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 67900000,
+      "dependents": [
+        {
+          "age": 19,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상한예울",
+          "person_id": "uni",
+          "relation": "child",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 7300000,
+          "date": "2025-03-05",
+          "institution_type": "university",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "uni",
+          "scholarship": 2100000
+        }
+      ],
+      "employee_age": 46,
+      "employee_name": "가상한지온",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "marital_status": "married",
+      "non_taxable": 2400000,
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자다. 소득 없는 대학생 자녀를 실제 부양하며 공제는 직원에게 배정했다. 직원이 등록금을 먼저 부담하고 장학금으로 일부를 보전받았다. 다른 교육비 없이 특별공제를 신청했다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "education.0.excluded": false
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 19,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상한예울",
+          "person_id": "uni",
+          "relation": "child",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 3000000,
+      "rejected": []
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 67900000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 13025000,
+      "salary_income": 52475000,
+      "total_salary": 65500000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 65500000,
+      "spending": {}
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 65500000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 250000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 65500000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 65500000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 7300000,
+          "date": "2025-03-05",
+          "excluded": false,
+          "institution_type": "university",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "uni",
+          "scholarship": 2100000
+        }
+      ],
+      "salary": 65500000
+    },
+    "output": 780000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 65500000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 65500000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 65500000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 65500000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 49475000
+    },
+    "output": 6161250,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 6161250,
+      "salary": 65500000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 780000,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 6161250,
+      "total_tax_credits": 1690000
+    },
+    "output": 4471250,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 4471250
+    },
+    "output": 447125,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 447125,
+      "final_national": 4471250,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 447125,
+      "national": 4471250,
+      "total": 4918375
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

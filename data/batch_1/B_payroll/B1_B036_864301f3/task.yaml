@@ -1,0 +1,46 @@
+task_id: B1_B036_864301f3
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상푸른관측팀의 가상홍다원은 2월에 근로했지만 은행 실행 기록상 급여는 3월 5일에 지급되었습니다. 취소된 2월 지급 계획을
+  제외하고 실제 지급일을 확인하여 소득세와 지방소득세 및 공제 합계를 구해 주세요. 기본공제 대상인 8세 자녀 한 명이 있는 가족 세 명이며 실지급액도
+  필요합니다.
+input_files:
+- path: inputs/01_2월귀속약정.pdf
+  format: pdf
+- path: inputs/02_취소실행기록.xlsx
+  format: xlsx
+- path: inputs/03_근로보험확인.hwpx
+  format: hwpx
+- path: inputs/04_실제지급기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - income_tax
+  - local_income_tax
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-36b8255b-e082-527d-b63b-e565ba7a7093
+scenario_seed: 9674578568728590749
+scenario_hash: 477224b05eb0fe3ac8e72b9d527483640f0725f5d4237628dc3841b562a7b1cd
+authorship:
+  method: individually_written
+  case_id: B036
+  case_sha256: 864301f33cacb99dec5e579a7b3948ff4177977711993b7943f09205e35164f9
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- income_tax
+- local_income_tax
+- total_deductions
+- net_pay

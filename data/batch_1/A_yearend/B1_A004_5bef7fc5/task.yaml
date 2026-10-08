@@ -1,0 +1,45 @@
+task_id: B1_A004_5bef7fc5
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상오름공방에서 가상김아람의 정산 전표를 입력합니다. 지급총액에 포함된 식대를 분리해 총급여와 근로소득금액을 구하고, 소득세
+  결정세액과 지방소득세 결정세액을 확인해 주세요. 두 기납부세액을 차감한 정산 합계도 필요합니다. 환급은 음수로 적어 주세요.
+input_files:
+- path: inputs/01_급여마감.xlsx
+  format: xlsx
+- path: inputs/02_정산신청.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    total_salary:
+      type: integer
+    salary_income:
+      type: integer
+    final_national_tax:
+      type: integer
+    final_local_tax:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - total_salary
+  - salary_income
+  - final_national_tax
+  - final_local_tax
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-ec12cf54-40cc-5015-9e63-40547618696a
+scenario_seed: 6624654062850445130
+scenario_hash: 04c6876e97e11e8cc418227c9bd8674632d281a5764693d4e078e725eccfacf6
+authorship:
+  method: individually_written
+  case_id: A004
+  case_sha256: 5bef7fc5700c8f4aab49ecf33c53adfdd4295e941eb2571564971f0e44fc2ee1
+  source_file: batch_1/A_yearend/cases_004_053.json
+answer_fields:
+- total_salary
+- salary_income
+- final_national_tax
+- final_local_tax
+- settlement_total

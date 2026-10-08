@@ -1,0 +1,200 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-16",
+          "document_id": "PASTRY-ROLL-3",
+          "event": "received",
+          "event_id": "PASTRY-SMALL-IN",
+          "location": "제과작업준비대"
+        },
+        {
+          "date": "2026-05-17",
+          "document_id": "PASTRY-SPAT-5",
+          "event": "received",
+          "event_id": "PASTRY-SPAT-IN",
+          "location": "제과작업준비대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-12",
+          "document_id": "PASTRY-ROLL-3",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "PASTRY-SMALL-C",
+          "vendor": "가상반죽도구"
+        },
+        {
+          "date": "2026-05-13",
+          "document_id": "PASTRY-ROLL-4",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "PASTRY-LARGE-C",
+          "vendor": "가상반죽도구"
+        },
+        {
+          "date": "2026-05-14",
+          "document_id": "PASTRY-SPAT-5",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "PASTRY-SPAT-C",
+          "vendor": "가상주걱상점"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "PASTRY-SMALL-C",
+          "items": [
+            {
+              "name": "반죽밀대30",
+              "quantity": 4,
+              "unit_price": 8900
+            }
+          ],
+          "sheet_id": "PASTRY-SMALL-L"
+        },
+        {
+          "header_record_id": "PASTRY-LARGE-C",
+          "items": [
+            {
+              "name": "반죽밀대50",
+              "quantity": 6,
+              "unit_price": 8400
+            }
+          ],
+          "sheet_id": "PASTRY-LARGE-L"
+        },
+        {
+          "header_record_id": "PASTRY-SPAT-C",
+          "items": [
+            {
+              "name": "반죽주걱소",
+              "quantity": 9,
+              "unit_price": 3400
+            },
+            {
+              "name": "반죽주걱대",
+              "quantity": 3,
+              "unit_price": 4900
+            }
+          ],
+          "sheet_id": "PASTRY-SPAT-L"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 연결하고 invoice 또는 order 번호의 received 이벤트를 확인한다. 수령 이벤트가 없는 원문은 구매 합계에 넣지 않는다. 별도 단가는 공급가액이며 세액은 행 공급가액의 10%에서 원 미만을 버린다. 업체 이름은 NFKC 후 공백과 법인 표기를 제거하고 이름 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "PASTRY-ROLL-4"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "PASTRY-ROLL-3",
+        "PASTRY-SPAT-5"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "PASTRY-ROLL-3",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 8900
+    },
+    "output": {
+      "supply": 35600,
+      "total": 39160,
+      "vat": 3560
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상반죽도구"
+    },
+    "output": "가상반죽도구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "PASTRY-SPAT-5",
+      "includes_vat": false,
+      "quantity": 9,
+      "unit_price": 3400
+    },
+    "output": {
+      "supply": 30600,
+      "total": 33660,
+      "vat": 3060
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "PASTRY-SPAT-5",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 4900
+    },
+    "output": {
+      "supply": 14700,
+      "total": 16170,
+      "vat": 1470
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상주걱상점"
+    },
+    "output": "가상주걱상점",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "반죽밀대30",
+          "unit_price": 8900,
+          "vendor": "가상반죽도구"
+        },
+        {
+          "item": "반죽주걱대",
+          "unit_price": 4900,
+          "vendor": "가상주걱상점"
+        },
+        {
+          "item": "반죽주걱소",
+          "unit_price": 3400,
+          "vendor": "가상주걱상점"
+        }
+      ],
+      "grand_total": 88990,
+      "supply_total": 80900,
+      "unique_document_count": 2,
+      "vat_total": 8090,
+      "vendor_totals": [
+        {
+          "supply": 35600,
+          "total": 39160,
+          "vat": 3560,
+          "vendor": "가상반죽도구"
+        },
+        {
+          "supply": 45300,
+          "total": 49830,
+          "vat": 4530,
+          "vendor": "가상주걱상점"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

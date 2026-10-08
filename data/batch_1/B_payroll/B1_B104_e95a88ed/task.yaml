@@ -1,0 +1,51 @@
+task_id: B1_B104_e95a88ed
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상나루기록사는 정액 계약의 통상임금 마스터와 4월 원천세 급여란을 따로 갱신합니다. 계약의 소정근로 대가와 당월 판매량에
+  따라 확정된 비정기 실적 수당을 구분해 통상 월 임금과 표시 시급을 작성해 주세요. 지급 총액, 비과세 식대 및 간이세액표용 과세급여도 구합니다.
+input_files:
+- path: inputs/01_채무발생.pdf
+  format: pdf
+- path: inputs/02_4월실적.xlsx
+  format: xlsx
+- path: inputs/03_전표범위.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    ordinary_hourly_wage_floor:
+      type: integer
+    variable_allowance:
+      type: integer
+    gross_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - ordinary_hourly_wage_floor
+  - variable_allowance
+  - gross_pay
+  - non_taxable_pay
+  - taxable_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-8bbe12dc-3eb7-55ef-afb2-3a4de0c50db1
+scenario_seed: 16814902711039319797
+scenario_hash: 4f5ebff4cb20c75e628a9fde5d9f34359de43a6a5c04676afdbf8b01200b1dc6
+authorship:
+  method: individually_written
+  case_id: B104
+  case_sha256: e95a88ed30405ef5282e5bbbd060b8569a4d86152f97a27dfb0b610c37f7a6a5
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- ordinary_monthly_wage
+- ordinary_hourly_wage_floor
+- variable_allowance
+- gross_pay
+- non_taxable_pay
+- taxable_pay

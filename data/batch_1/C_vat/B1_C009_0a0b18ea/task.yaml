@@ -1,0 +1,42 @@
+task_id: B1_C009_0a0b18ea
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상보이는문장 법인의 재무 담당자가 광고 제작 매출과 외주비 계산서를 주었습니다. 매출세액(output_vat)에서 외주 매입의
+  공제가능 매입세액(deductible_input_vat)을 차감해 납부액(payable_vat)을 계산해 주세요. 소비자 상대 소매 거래가 없는
+  이 신고의 발행세액공제(receipt_credit)도 answer.json에 정수로 표시해 주세요.
+input_files:
+- path: inputs/01_법인_신고요청.pdf
+  format: pdf
+- path: inputs/02_프로젝트_계산서.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - output_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-ac635436-c184-5048-98fe-febc8c39c37c
+scenario_seed: 723699560775013694
+scenario_hash: e7410376b9a016411e2637a3ed26700d88d8ccab530f46315bd99eab9392770b
+authorship:
+  method: individually_written
+  case_id: C009
+  case_sha256: 0a0b18ea8c19d53e297918d766977e40ffb35a0ee2fccc2682fb70b89eaf7a8d
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- output_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

@@ -1,0 +1,50 @@
+task_id: B1_D170_146facda
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 소형 인쇄기 부품 자료를 지급 계정별로 묶어 주세요. 업체 표기 기준을 적용한 vendor_totals만 answer.json에
+  담아 주세요.
+input_files:
+- path: inputs/01_급지롤러명세.pdf
+  format: pdf
+- path: inputs/02_급지판명세.hwpx
+  format: hwpx
+- path: inputs/03_청소포구매.xlsx
+  format: xlsx
+- path: inputs/04_구동벨트구매.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-8cd922d8-270c-5e61-9787-f0dd78357540
+scenario_seed: 1472585657908701037
+scenario_hash: 617b682a15e3fafd17f3f92535306a983334618f0291c7a9af79eb3be540120d
+authorship:
+  method: individually_written
+  case_id: D170
+  case_sha256: 146facda90fba76d9c60aa6549b987f08c4b879918245b501f00f2df49d6165b
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals

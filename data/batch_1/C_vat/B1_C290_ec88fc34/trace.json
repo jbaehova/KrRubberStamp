@@ -1,0 +1,333 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "실구매",
+          "date": "2026-06-25",
+          "description": "과세 패치 봉제에 쓸 실을 구매",
+          "document_ids": [
+            "실카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "패치 봉제 작업대"
+          },
+          "operation_id": "패치판매",
+          "participants": [
+            {
+              "name": "합성서크",
+              "organization": "가상미니패치",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "실-290"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 패치 제작 판매",
+          "operation_id": "패치판매",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "실구매",
+          "date": "2026-06-25",
+          "document_id": "실카드",
+          "transaction_id": "실-290"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "실카드",
+        "purpose": "business",
+        "transaction_id": "실-290"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "실카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "실-290"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "7월카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "제작예약-290"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "소액카드갑"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "패치갑-290"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "소액카드을"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "패치을-290"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-25",
+      "transaction_id": "실-290"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 22000,
+      "includes_vat": true,
+      "transaction_id": "실-290"
+    },
+    "output": {
+      "gross": 22000,
+      "supply_base": 20000,
+      "vat": 2000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "실-290",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 2000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-07-03",
+      "transaction_id": "제작예약-290"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-26",
+      "transaction_id": "패치갑-290"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 10021,
+      "includes_vat": true,
+      "transaction_id": "패치갑-290"
+    },
+    "output": {
+      "gross": 10021,
+      "supply_base": 9110,
+      "vat": 911
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 9110
+    },
+    "output": 911,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "패치갑-290"
+    },
+    "output": {
+      "eligible_gross": 10021
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-27",
+      "transaction_id": "패치을-290"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 12331,
+      "includes_vat": true,
+      "transaction_id": "패치을-290"
+    },
+    "output": {
+      "gross": 12331,
+      "supply_base": 11210,
+      "vat": 1121
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 11210
+    },
+    "output": 1121,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "패치을-290"
+    },
+    "output": {
+      "eligible_gross": 12331
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 79000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 22352,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 290,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 290
+    },
+    "output": 290,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 290,
+      "liability_before_credit": 2032
+    },
+    "output": 290,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 1742,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 1742,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 2032,
+      "prepaid_vat": 0,
+      "receipt_credit": 290
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 2000,
+      "net_vat": 1742,
+      "noncreditable_vat": 2000,
+      "output_vat": 2032,
+      "payable_vat": 1742,
+      "prepaid_vat": 0,
+      "receipt_credit": 290,
+      "refund_vat": 0,
+      "tax_base": 20320,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

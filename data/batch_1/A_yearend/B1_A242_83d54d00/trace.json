@@ -1,0 +1,345 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 44300000,
+      "cards": [
+        {
+          "amount": 5400000,
+          "category": "debit",
+          "date": "2025-03-26",
+          "payment_method": "debit",
+          "person_id": "self"
+        },
+        {
+          "amount": 14700000,
+          "category": "debit",
+          "date": "2025-11-26",
+          "payment_method": "debit",
+          "person_id": "self"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 71,
+          "assigned_claimant": "other_sibling",
+          "income_amount": 0,
+          "name": "가상변나율",
+          "person_id": "parent",
+          "relation": "parent",
+          "supported": true
+        }
+      ],
+      "donations": [
+        {
+          "amount": 1650000,
+          "date": "2025-06-20",
+          "kind": "public",
+          "organization_id": "ORG-APR",
+          "person_id": "self"
+        },
+        {
+          "amount": 2450000,
+          "date": "2025-10-20",
+          "kind": "public",
+          "organization_id": "ORG-APR",
+          "person_id": "self"
+        }
+      ],
+      "employee_age": 38,
+      "employee_name": "가상변하온",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-04-07",
+      "marital_status": "married",
+      "medical": [
+        {
+          "amount": 2900000,
+          "date": "2025-07-09",
+          "kind": "ordinary",
+          "person_id": "parent",
+          "reimbursed": 0,
+          "treatment_purpose": "therapeutic"
+        }
+      ],
+      "non_taxable": 1800000,
+      "organization_designations": [
+        {
+          "kind": "public",
+          "organization_id": "ORG-APR",
+          "valid_from": "2025-07-01",
+          "valid_to": "2027-12-31"
+        }
+      ],
+      "paid_local_tax": 207900,
+      "paid_national_tax": 2080000,
+      "reference_year": 2025,
+      "scope_note": "근로소득만 있는 국내 거주자다. 4월 이전 다른 직장 근무는 없었다. 부모를 부양하지만 최종 공제는 형제에게 배정했다. 모든 지출은 직원 부담이고 진료 보전과 기부 이월은 없다. 의료비 및 기부 특별공제를 신청했다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "donations.0.eligible_organization": false,
+      "donations.1.eligible_organization": true,
+      "medical.0.excluded": false
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 71,
+          "assigned_claimant": "other_sibling",
+          "income_amount": 0,
+          "name": "가상변나율",
+          "person_id": "parent",
+          "relation": "parent",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 1500000,
+      "rejected": [
+        "parent"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 44300000,
+      "non_taxable": 1800000
+    },
+    "output": {
+      "salary_deduction": 11625000,
+      "salary_income": 30875000,
+      "total_salary": 42500000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 42500000,
+      "spending": {
+        "debit": 14700000
+      }
+    },
+    "output": 1222500,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 42500000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 42500000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 2900000,
+          "date": "2025-07-09",
+          "excluded": false,
+          "kind": "ordinary",
+          "person_id": "parent",
+          "reimbursed": 0,
+          "treatment_purpose": "therapeutic"
+        }
+      ],
+      "salary": 42500000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 42500000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1650000,
+          "date": "2025-06-20",
+          "eligible_organization": false,
+          "kind": "public",
+          "organization_id": "ORG-APR",
+          "person_id": "self"
+        },
+        {
+          "amount": 2450000,
+          "date": "2025-10-20",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "ORG-APR",
+          "person_id": "self"
+        }
+      ],
+      "salary": 42500000
+    },
+    "output": 367500,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1650000,
+          "date": "2025-06-20",
+          "eligible_organization": false,
+          "kind": "public",
+          "organization_id": "ORG-APR",
+          "person_id": "self"
+        },
+        {
+          "amount": 2450000,
+          "date": "2025-10-20",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "ORG-APR",
+          "person_id": "self"
+        }
+      ],
+      "salary": 42500000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1650000,
+          "date": "2025-06-20",
+          "eligible_organization": false,
+          "kind": "public",
+          "organization_id": "ORG-APR",
+          "person_id": "self"
+        },
+        {
+          "amount": 2450000,
+          "date": "2025-10-20",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "ORG-APR",
+          "person_id": "self"
+        }
+      ],
+      "salary": 42500000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 42500000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 28152500
+    },
+    "output": 2962875,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 2962875,
+      "salary": 42500000
+    },
+    "output": 664000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 367500,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 2962875,
+      "total_tax_credits": 1031500
+    },
+    "output": 1931375,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 1931375
+    },
+    "output": 193137,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 193137,
+      "final_national": 1931375,
+      "paid_local": 207900,
+      "paid_national": 2080000
+    },
+    "output": {
+      "local": -14763,
+      "national": -148625,
+      "total": -163388
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

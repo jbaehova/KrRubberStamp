@@ -1,0 +1,262 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-07-09",
+          "document_id": "SHELF-MAIN-31",
+          "event": "received",
+          "event_id": "SHELF-MAIN-IN",
+          "location": "교육모형창고"
+        },
+        {
+          "date": "2026-07-09",
+          "document_id": "SHELF-WHEEL-34",
+          "event": "received",
+          "event_id": "SHELF-WHEEL-IN",
+          "location": "교육모형창고"
+        },
+        {
+          "date": "2026-07-10",
+          "document_id": "SHELF-TIE-35",
+          "event": "received",
+          "event_id": "SHELF-TIE-IN",
+          "location": "교육모형창고"
+        },
+        {
+          "date": "2026-07-05",
+          "document_id": "SHELF-STOP-32",
+          "event": "cancelled_before_dispatch",
+          "event_id": "SHELF-STOP-E",
+          "location": "판매처출고대기"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-07-03",
+          "document_id": "SHELF-MAIN-31",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "SHELF-MAIN-C",
+          "vendor": "가상모형선반"
+        },
+        {
+          "date": "2026-06-28",
+          "document_id": "SHELF-Q-28",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "SHELF-Q-C",
+          "vendor": "가상가동보관"
+        },
+        {
+          "date": "2026-07-04",
+          "document_id": "SHELF-STOP-32",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SHELF-STOP-C",
+          "vendor": "가상모형선반"
+        },
+        {
+          "date": "2026-07-06",
+          "document_id": "SHELF-WHEEL-34",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SHELF-WHEEL-C",
+          "vendor": "가상가동보관"
+        },
+        {
+          "date": "2026-07-07",
+          "document_id": "SHELF-TIE-35",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "SHELF-TIE-C",
+          "vendor": "가상안전결속"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "SHELF-MAIN-C",
+          "items": [
+            {
+              "name": "모형보관선반",
+              "quantity": 3,
+              "unit_price": 156000
+            }
+          ],
+          "sheet_id": "SHELF-MAIN-L"
+        },
+        {
+          "header_record_id": "SHELF-Q-C",
+          "items": [
+            {
+              "name": "모형보관선반",
+              "quantity": 3,
+              "unit_price": 128000
+            }
+          ],
+          "sheet_id": "SHELF-Q-L"
+        },
+        {
+          "header_record_id": "SHELF-STOP-C",
+          "items": [
+            {
+              "name": "선반보강판",
+              "quantity": 3,
+              "unit_price": 24000
+            }
+          ],
+          "sheet_id": "SHELF-STOP-L"
+        },
+        {
+          "header_record_id": "SHELF-WHEEL-C",
+          "items": [
+            {
+              "name": "선반가동바퀴",
+              "quantity": 12,
+              "unit_price": 8300
+            }
+          ],
+          "sheet_id": "SHELF-WHEEL-L"
+        },
+        {
+          "header_record_id": "SHELF-TIE-C",
+          "items": [
+            {
+              "name": "선반안전고정끈",
+              "quantity": 6,
+              "unit_price": 4700
+            }
+          ],
+          "sheet_id": "SHELF-TIE-L"
+        }
+      ],
+      "processing_policy": "품목 첨부는 header_record_id로 표지에 연결한다. invoice 또는 order에 received 이력이 있는 번호만 실제 구매다. quote, cancelled_before_dispatch, 수령 없는 자료는 실제 구매 합계에서 제외한다. 별도 가격은 각 행의 수량 곱하기 단가가 공급가액이며 그 10%에서 원 미만을 버린 세액을 더한다. 건수는 실제 인수한 서로 다른 document_id 수다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "SHELF-Q-28",
+        "SHELF-STOP-32"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "SHELF-MAIN-31",
+        "SHELF-TIE-35",
+        "SHELF-WHEEL-34"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SHELF-MAIN-31",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 156000
+    },
+    "output": {
+      "supply": 468000,
+      "total": 514800,
+      "vat": 46800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상모형선반"
+    },
+    "output": "가상모형선반",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SHELF-WHEEL-34",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 8300
+    },
+    "output": {
+      "supply": 99600,
+      "total": 109560,
+      "vat": 9960
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상가동보관"
+    },
+    "output": "가상가동보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SHELF-TIE-35",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 4700
+    },
+    "output": {
+      "supply": 28200,
+      "total": 31020,
+      "vat": 2820
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상안전결속"
+    },
+    "output": "가상안전결속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "모형보관선반",
+          "unit_price": 156000,
+          "vendor": "가상모형선반"
+        },
+        {
+          "item": "선반가동바퀴",
+          "unit_price": 8300,
+          "vendor": "가상가동보관"
+        },
+        {
+          "item": "선반안전고정끈",
+          "unit_price": 4700,
+          "vendor": "가상안전결속"
+        }
+      ],
+      "grand_total": 655380,
+      "supply_total": 595800,
+      "unique_document_count": 3,
+      "vat_total": 59580,
+      "vendor_totals": [
+        {
+          "supply": 99600,
+          "total": 109560,
+          "vat": 9960,
+          "vendor": "가상가동보관"
+        },
+        {
+          "supply": 468000,
+          "total": 514800,
+          "vat": 46800,
+          "vendor": "가상모형선반"
+        },
+        {
+          "supply": 28200,
+          "total": 31020,
+          "vat": 2820,
+          "vendor": "가상안전결속"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

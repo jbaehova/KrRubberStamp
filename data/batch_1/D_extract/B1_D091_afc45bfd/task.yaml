@@ -1,0 +1,51 @@
+task_id: B1_D091_afc45bfd
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 체험 전시 LED 부품을 추가 구입합니다. 전각 영문과 공백 표기를 통합한 cheapest_by_item 및 기존 supply_total을
+  답하세요. 이름 및 가격 기준은 확장 전시석 대장에 있습니다.
+input_files:
+- path: inputs/01_첫전시석.pdf
+  format: pdf
+- path: inputs/02_확장전시석.xlsx
+  format: xlsx
+- path: inputs/03_전원선.hwpx
+  format: hwpx
+- path: inputs/04_추가모듈.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-206e3729-74c8-5572-9aa2-146e200af930
+scenario_seed: 12665349194652260186
+scenario_hash: 43f785e01349b8e347f0fa54da11fb040df4cfa1f9e3410c3b13e9978c4b8830
+authorship:
+  method: individually_written
+  case_id: D091
+  case_sha256: afc45bfd1787175a0065bd4361904800a6ab5c08f89b993a0a2f32c7b2faa11e
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item
+- supply_total

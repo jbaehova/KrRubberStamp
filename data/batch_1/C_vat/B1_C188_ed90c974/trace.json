@@ -1,0 +1,205 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_delivery",
+          "activity_id": "택시인수",
+          "date": "2026-03-04",
+          "description": "택시 영업에 쓸 신차를 등록 차고에서 인수했다.",
+          "document_ids": [
+            "택시전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "택시 영업 차고"
+          },
+          "operation_id": "택시운송",
+          "participants": [
+            {
+              "name": "가상차운송",
+              "organization": "가상첫택시",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "C188-차량",
+          "vehicle_id": "가상-T188"
+        }
+      ],
+      "operations": [
+        {
+          "description": "허가받은 과세 택시 운송",
+          "operation_id": "택시운송",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "택시인수",
+          "date": "2026-03-04",
+          "document_id": "택시전자",
+          "transaction_id": "C188-차량"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "taxi_transport",
+          "permitted_operation_id": "택시운송",
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-T188"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "택시전자",
+        "purpose": "passenger_car_purchase",
+        "transaction_id": "C188-차량"
+      },
+      {
+        "transaction_id": "C188-차량",
+        "vehicle_direct_business": true,
+        "vehicle_id": "가상-T188",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "택시전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C188-차량"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-04",
+      "transaction_id": "C188-차량"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 29700000,
+      "includes_vat": true,
+      "transaction_id": "C188-차량"
+    },
+    "output": {
+      "gross": 29700000,
+      "supply_base": 27000000,
+      "vat": 2700000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_purchase",
+      "supplier_general": true,
+      "transaction_id": "C188-차량",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 2700000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 0
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -2700000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -2700000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -2700000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 2700000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 2700000,
+      "input_vat": 2700000,
+      "net_vat": -2700000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 2700000,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,43 @@
+task_id: B1_A283_943a5549
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상노을테이프의 가상서우린 어머니 자료를 정리해 주세요. 가족 최종 배정 확인서에 따라 어머니 기본공제와 의료비 및 공익기부를
+  계산하고 직원 본인 치료비는 남겨 정산해 주세요.
+input_files:
+- path: inputs/01_형제최종합의.hwpx
+  format: hwpx
+- path: inputs/02_어머니치료.pdf
+  format: pdf
+- path: inputs/03_직원치료.xlsx
+  format: xlsx
+- path: inputs/04_어머니기부.pdf
+  format: pdf
+- path: inputs/05_급여접수.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    medical_credit:
+      type: integer
+    donation_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - medical_credit
+  - donation_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-b5a6f9d8-3086-554f-a491-c44bc11fe44c
+scenario_seed: 10680943240865458375
+scenario_hash: 54c82e5deee9a449dd931d6dc3f9d3dec1250ca44ae2cf95abbff5f87dbc4e4f
+authorship:
+  method: individually_written
+  case_id: A283
+  case_sha256: 943a554999e528c76220245114849177d2684453ae4450151ba3613846cb7d8a
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- eligible_dependents
+- medical_credit
+- donation_credit

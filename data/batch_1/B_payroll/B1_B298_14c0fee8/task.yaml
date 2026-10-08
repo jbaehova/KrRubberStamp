@@ -1,0 +1,63 @@
+task_id: B1_B298_14c0fee8
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상넓은설계국의 직원에게 단일 월 프로젝트 완료금이 확정됐습니다. 통상임금과 과세급여를 분리하고 해당 고액 구간 소득세를 계산해
+  주세요. 기관이 통지한 큰 연금 및 건강 기초에는 상한을 적용해 국민연금과 건강보험 및 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_설계국계약.pdf
+  format: pdf
+- path: inputs/02_정기수당.hwpx
+  format: hwpx
+- path: inputs/03_완료대가.xlsx
+  format: xlsx
+- path: inputs/04_가족승인.pdf
+  format: pdf
+- path: inputs/05_실제지급.hwpx
+  format: hwpx
+- path: inputs/06_연금통지.xlsx
+  format: xlsx
+- path: inputs/07_건강통지.pdf
+  format: pdf
+- path: inputs/08_고용통지.xlsx
+  format: xlsx
+- path: inputs/09_최고구간원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - taxable_pay
+  - income_tax
+  - national_pension
+  - health_insurance
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-5c4a9010-b575-59b3-87a4-0efc85ffcbe2
+scenario_seed: 1495475350238228180
+scenario_hash: 65fdc43a1d2cc3b6eec890b111aacb2b495a93a7145ea1f35472e94463aeb4e9
+authorship:
+  method: individually_written
+  case_id: B298
+  case_sha256: 14c0fee85d4d6ed4ea6766d3260db4d32b0943d81258627b00957cd6313a4a04
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- ordinary_monthly_wage
+- taxable_pay
+- income_tax
+- national_pension
+- health_insurance
+- net_pay

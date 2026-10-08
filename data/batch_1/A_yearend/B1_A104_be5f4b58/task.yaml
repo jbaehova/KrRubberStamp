@@ -1,0 +1,43 @@
+task_id: B1_A104_be5f4b58
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상달개비환경의 가상기서온 정산표를 작성합니다. 급여에서 공제한 공적연금과 의무 보험료, 개인이 납입한 연금저축을 같은 칸에
+  합치지 말아 주세요. 공적연금 소득공제액과 특별소득공제액 및 연금계좌 세액공제액을 각각 계산하고 과세표준을 적어 주세요.
+input_files:
+- path: inputs/01_급여공제대장.xlsx
+  format: xlsx
+- path: inputs/02_연금저축증명.pdf
+  format: pdf
+- path: inputs/03_정산신청.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    pension_deduction:
+      type: integer
+    special_income_deduction:
+      type: integer
+    pension_account_credit:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - pension_deduction
+  - special_income_deduction
+  - pension_account_credit
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-96da1192-7102-59f6-b844-8313db0e061f
+scenario_seed: 13717765835015826656
+scenario_hash: aa60a397eb2859c89592978289437265c5a728d3c2bd851a095b77890713c36a
+authorship:
+  method: individually_written
+  case_id: A104
+  case_sha256: be5f4b58dc1bace0086f3371e6580ef98f15a66addd47010510a16ac7442020c
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- pension_deduction
+- special_income_deduction
+- pension_account_credit
+- tax_base

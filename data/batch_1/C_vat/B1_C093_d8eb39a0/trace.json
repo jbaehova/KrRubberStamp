@@ -1,0 +1,452 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C093-의자활동",
+          "date": "2026-01-16",
+          "description": "진료 직원이 면세 진료에만 사용할 의자를 진료실에 설치했다.",
+          "document_ids": [
+            "C093-의자계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상시선두칸 진료실"
+          },
+          "operation_id": "C093-진료",
+          "participants": [
+            {
+              "name": "가상 진료직원",
+              "organization": "가상시선두칸",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C093-진료의자"
+        },
+        {
+          "action": "service",
+          "activity_id": "C093-시설활동",
+          "date": "2026-02-13",
+          "description": "판매 직원이 과세 안경 진열대 설치 완료를 확인했다. 진료실에서는 사용하지 않는다.",
+          "document_ids": [
+            "C093-시설계산서",
+            "C093-시설카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상시선두칸 안경 판매대"
+          },
+          "operation_id": "C093-판매",
+          "participants": [
+            {
+              "name": "가상 판매직원",
+              "organization": "가상시선두칸",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C093-판매시설"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C093-포장활동",
+          "date": "2026-03-04",
+          "description": "직원이 과세 안경 판매에만 사용할 포장재를 받았다.",
+          "document_ids": [
+            "C093-포장카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상시선두칸 안경 판매대"
+          },
+          "operation_id": "C093-판매",
+          "participants": [
+            {
+              "name": "가상 판매직원",
+              "organization": "가상시선두칸",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C093-포장재"
+        }
+      ],
+      "operations": [
+        {
+          "description": "의료기관 자격 등 법령 요건을 충족한 면세 진료",
+          "operation_id": "C093-진료",
+          "output_taxable": false
+        },
+        {
+          "description": "소비자 안경 과세 판매",
+          "operation_id": "C093-판매",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C093-의자활동",
+          "date": "2026-01-16",
+          "document_id": "C093-의자계산서",
+          "transaction_id": "C093-진료의자"
+        },
+        {
+          "activity_id": "C093-시설활동",
+          "date": "2026-02-13",
+          "document_id": "C093-시설계산서",
+          "transaction_id": "C093-판매시설"
+        },
+        {
+          "activity_id": "C093-시설활동",
+          "date": "2026-02-13",
+          "document_id": "C093-시설카드",
+          "transaction_id": "C093-판매시설"
+        },
+        {
+          "activity_id": "C093-포장활동",
+          "date": "2026-03-04",
+          "document_id": "C093-포장카드",
+          "transaction_id": "C093-포장재"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C093-의자계산서",
+        "purpose": "exempt_business",
+        "transaction_id": "C093-진료의자"
+      },
+      {
+        "business_related": true,
+        "document_id": "C093-시설계산서",
+        "purpose": "business",
+        "transaction_id": "C093-판매시설"
+      },
+      {
+        "business_related": true,
+        "document_id": "C093-시설카드",
+        "purpose": "business",
+        "transaction_id": "C093-판매시설"
+      },
+      {
+        "business_related": true,
+        "document_id": "C093-포장카드",
+        "purpose": "business",
+        "transaction_id": "C093-포장재"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C093-판매카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C093-안경판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C093-의자계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C093-진료의자"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C093-시설계산서",
+        "C093-시설카드"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "C093-판매시설"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C093-포장카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C093-포장재"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-17",
+      "transaction_id": "C093-안경판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 6600000,
+      "includes_vat": true,
+      "transaction_id": "C093-안경판매"
+    },
+    "output": {
+      "gross": 6600000,
+      "supply_base": 6000000,
+      "vat": 600000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 6000000
+    },
+    "output": 600000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C093-안경판매"
+    },
+    "output": {
+      "eligible_gross": 6600000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-01-16",
+      "transaction_id": "C093-진료의자"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 8000000,
+      "includes_vat": false,
+      "transaction_id": "C093-진료의자"
+    },
+    "output": {
+      "gross": 8800000,
+      "supply_base": 8000000,
+      "vat": 800000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "exempt_business",
+      "supplier_general": true,
+      "transaction_id": "C093-진료의자",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 800000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-13",
+      "transaction_id": "C093-판매시설"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2000000,
+      "includes_vat": false,
+      "transaction_id": "C093-판매시설"
+    },
+    "output": {
+      "gross": 2200000,
+      "supply_base": 2000000,
+      "vat": 200000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C093-판매시설",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 200000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-04",
+      "transaction_id": "C093-포장재"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 880000,
+      "includes_vat": true,
+      "transaction_id": "C093-포장재"
+    },
+    "output": {
+      "gross": 880000,
+      "supply_base": 800000,
+      "vat": 80000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C093-포장재",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 80000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 185000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 6600000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 400000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 660000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 400000,
+      "prepaid_assessed_vat": 660000
+    },
+    "output": -260000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 200000,
+      "output_vat": 600000,
+      "prepaid_vat": 660000,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 200000,
+      "input_vat": 1080000,
+      "net_vat": -260000,
+      "noncreditable_vat": 880000,
+      "output_vat": 600000,
+      "payable_vat": 0,
+      "prepaid_vat": 660000,
+      "receipt_credit": 0,
+      "refund_vat": 260000,
+      "tax_base": 6000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

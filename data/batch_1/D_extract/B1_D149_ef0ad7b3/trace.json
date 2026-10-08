@@ -1,0 +1,249 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-06",
+          "document_id": "INSPECT-149-A",
+          "event": "received",
+          "event_id": "e149-a",
+          "location": "순회 점검 준비실"
+        },
+        {
+          "date": "2026-03-10",
+          "document_id": "INSPECT-149-B",
+          "event": "received",
+          "event_id": "e149-b",
+          "location": "순회 점검 준비실"
+        },
+        {
+          "date": "2026-03-14",
+          "document_id": "INSPECT-149-C",
+          "event": "received",
+          "event_id": "e149-c",
+          "location": "순회 점검 준비실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-03",
+          "document_id": "INSPECT-149-A",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h149-a",
+          "vendor": "가상순회점검"
+        },
+        {
+          "date": "2026-03-08",
+          "document_id": "INSPECT-149-B",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h149-b",
+          "vendor": "가상계기연결"
+        },
+        {
+          "date": "2026-03-11",
+          "document_id": "INSPECT-149-C",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h149-c",
+          "vendor": "가상현장케이블"
+        },
+        {
+          "date": "2026-03-01",
+          "document_id": "INSPECT-149-Q",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "h149-q",
+          "vendor": "가상계기연결"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h149-a",
+          "items": [
+            {
+              "name": "점검기연결선",
+              "quantity": 5,
+              "unit_price": 16503
+            }
+          ],
+          "sheet_id": "s149-a"
+        },
+        {
+          "header_record_id": "h149-b",
+          "items": [
+            {
+              "name": "점검기연결선",
+              "quantity": 3,
+              "unit_price": 14800
+            },
+            {
+              "name": "점검기어댑터",
+              "quantity": 3,
+              "unit_price": 7300
+            }
+          ],
+          "sheet_id": "s149-b"
+        },
+        {
+          "header_record_id": "h149-c",
+          "items": [
+            {
+              "name": "점검기연결선",
+              "quantity": 4,
+              "unit_price": 16830
+            }
+          ],
+          "sheet_id": "s149-c"
+        },
+        {
+          "header_record_id": "h149-q",
+          "items": [
+            {
+              "name": "점검기연결선",
+              "quantity": 10,
+              "unit_price": 12000
+            }
+          ],
+          "sheet_id": "s149-q"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때 포함하고 quote, 무인수 및 출고 전 취소는 제외한다. 같은 document_id의 동일 내용은 한 번만 집계한다. 포함 품목 총액의 10/11 원 미만 버림을 공급가액으로 하고 차액을 세액으로 한다. 별도는 수량 곱하기 단가의 공급가액과 품목별 10% 원 미만 버림 세액을 계산한다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 배열은 정규화 품목 이름 오름차순이다. 비교는 개당 공급가액이며 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 최저 동률은 정규화 업체명 오름차순 첫 업체다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "INSPECT-149-Q"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "INSPECT-149-A",
+        "INSPECT-149-B",
+        "INSPECT-149-C"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "INSPECT-149-A",
+      "includes_vat": true,
+      "quantity": 5,
+      "unit_price": 16503
+    },
+    "output": {
+      "supply": 75013,
+      "total": 82515,
+      "vat": 7502
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상순회점검"
+    },
+    "output": "가상순회점검",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "INSPECT-149-B",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 14800
+    },
+    "output": {
+      "supply": 44400,
+      "total": 48840,
+      "vat": 4440
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "INSPECT-149-B",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 7300
+    },
+    "output": {
+      "supply": 21900,
+      "total": 24090,
+      "vat": 2190
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상계기연결"
+    },
+    "output": "가상계기연결",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "INSPECT-149-C",
+      "includes_vat": true,
+      "quantity": 4,
+      "unit_price": 16830
+    },
+    "output": {
+      "supply": 61200,
+      "total": 67320,
+      "vat": 6120
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상현장케이블"
+    },
+    "output": "가상현장케이블",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "점검기어댑터",
+          "unit_price": 7300,
+          "vendor": "가상계기연결"
+        },
+        {
+          "item": "점검기연결선",
+          "unit_price": 14800,
+          "vendor": "가상계기연결"
+        }
+      ],
+      "grand_total": 222765,
+      "supply_total": 202513,
+      "unique_document_count": 3,
+      "vat_total": 20252,
+      "vendor_totals": [
+        {
+          "supply": 66300,
+          "total": 72930,
+          "vat": 6630,
+          "vendor": "가상계기연결"
+        },
+        {
+          "supply": 75013,
+          "total": 82515,
+          "vat": 7502,
+          "vendor": "가상순회점검"
+        },
+        {
+          "supply": 61200,
+          "total": 67320,
+          "vat": 6120,
+          "vendor": "가상현장케이블"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

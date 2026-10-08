@@ -1,0 +1,50 @@
+task_id: B1_D011_901748d0
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 야간 강의실 점검 후 산 표지와 구급함의 지출 결의를 준비하고 있습니다. 각 판매처에 지급할 금액을 세금과 함께 묶고 전체
+  집행액을 확인해 주세요. answer.json에는 vendor_totals와 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_야광표지_검수.pdf
+  format: pdf
+- path: inputs/02_구급함_인수대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-a292d7a8-41d8-5a65-8716-7982e96d26f3
+scenario_seed: 10382847525803111804
+scenario_hash: d7d74e87701573e5cad0850da536146f1ef060e1c5022e612afefc81366c3166
+authorship:
+  method: individually_written
+  case_id: D011
+  case_sha256: 901748d06489b57cfc41643aa8bda9fb126506a62b6adf20281be8b032621c0c
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- grand_total

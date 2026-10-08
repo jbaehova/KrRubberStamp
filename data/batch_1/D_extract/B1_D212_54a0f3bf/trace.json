@@ -1,0 +1,120 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-05",
+          "document_id": "MAT-FIX-06",
+          "event": "received",
+          "event_id": "MAT-FIX-IN",
+          "location": "재활운동실창고"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-03",
+          "document_id": "MAT-FIX-06",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "MAT-FAST-C",
+          "vendor": "가상운동시설"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "MAT-FAST-C",
+          "items": [
+            {
+              "name": "매트고정판",
+              "quantity": 16,
+              "unit_price": 7150
+            },
+            {
+              "name": "고정판앵커",
+              "quantity": 32,
+              "unit_price": 385
+            }
+          ],
+          "sheet_id": "MAT-FAST-L"
+        }
+      ],
+      "processing_policy": "첨부의 header_record_id와 표지 record_id를 연결하고 document_id의 received 기록을 확인한다. 포함 가격의 각 행 공급가액은 총액의 10/11에서 원 미만을 버리며 차액이 세액이다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "MAT-FIX-06"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "MAT-FIX-06",
+      "includes_vat": true,
+      "quantity": 16,
+      "unit_price": 7150
+    },
+    "output": {
+      "supply": 104000,
+      "total": 114400,
+      "vat": 10400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "MAT-FIX-06",
+      "includes_vat": true,
+      "quantity": 32,
+      "unit_price": 385
+    },
+    "output": {
+      "supply": 11200,
+      "total": 12320,
+      "vat": 1120
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상운동시설"
+    },
+    "output": "가상운동시설",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "고정판앵커",
+          "unit_price": 350,
+          "vendor": "가상운동시설"
+        },
+        {
+          "item": "매트고정판",
+          "unit_price": 6500,
+          "vendor": "가상운동시설"
+        }
+      ],
+      "grand_total": 126720,
+      "supply_total": 115200,
+      "unique_document_count": 1,
+      "vat_total": 11520,
+      "vendor_totals": [
+        {
+          "supply": 115200,
+          "total": 126720,
+          "vat": 11520,
+          "vendor": "가상운동시설"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,61 @@
+task_id: B1_C100_da275098
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상나무키는 직원 개인 카드의 회사 부품과 대표 가족 물품을 같은 금액이라는 이유로 묶었습니다. 실제 수령자, 보완 계산서,
+  세액 구분 및 앞선 공제 사용액을 확인하세요. 고유 거래 수(unique_transaction_count), 불공제 세액(noncreditable_vat),
+  공제가능 매입세액(deductible_input_vat), 발행세액공제(receipt_credit), 납부액(payable_vat)을 answer.json에
+  정수로 적어 주세요.
+input_files:
+- path: inputs/01_키보드_소매업.hwpx
+  format: hwpx
+- path: inputs/02_공제사용_선납.xlsx
+  format: xlsx
+- path: inputs/03_계산서_발급판매.pdf
+  format: pdf
+- path: inputs/04_소비자_현금영수증.xlsx
+  format: xlsx
+- path: inputs/05_직원개인_부품카드.pdf
+  format: pdf
+- path: inputs/06_회사부품_계산서.xlsx
+  format: xlsx
+- path: inputs/07_가족물품_카드.pdf
+  format: pdf
+- path: inputs/08_소모품_전표.xlsx
+  format: xlsx
+- path: inputs/09_수령자_공간대조.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-1cf959fe-11c3-5a45-bf2b-fa257f6e4e53
+scenario_seed: 15719621638862650410
+scenario_hash: 2c3cf987297b83557746d6bb18c49705443e1bbdfef8a915856140245084b353
+authorship:
+  method: individually_written
+  case_id: C100
+  case_sha256: da2750982bf3bc2afed30be51b34fafd194b97a3b7ef8c8741e7edc421b8ec02
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

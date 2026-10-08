@@ -1,0 +1,42 @@
+task_id: B1_C123_6ec2e8b8
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상안쪽수납의 현재 판매 자료와 같은 해 공제 사용 기록으로 발행 공제(receipt_credit), 매출세액(output_vat),
+  납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_사업장확인.hwpx
+  format: hwpx
+- path: inputs/02_올해사용.xlsx
+  format: xlsx
+- path: inputs/03_판매전표.pdf
+  format: pdf
+- path: inputs/04_전달사본.png
+  format: png
+  duplicate_of: inputs/03_판매전표.pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    output_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - output_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-4b49b898-8713-56df-a9df-fcd53db47dd1
+scenario_seed: 7981197369384451191
+scenario_hash: 2ee423834176a2f872d1999e6b31a7473464fd327f64fcbb85315a30d56eba7a
+authorship:
+  method: individually_written
+  case_id: C123
+  case_sha256: 6ec2e8b8a4713c770adfcdccda737f8b8c6bed1c08a5512d27e733527a95756b
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- receipt_credit
+- output_vat
+- payable_vat

@@ -1,0 +1,360 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "명판직원급식",
+          "date": "2026-04-21",
+          "description": "작업 직원만 수령한 구내 식사이다.",
+          "document_ids": [
+            "급식전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "명판 제작 작업실"
+          },
+          "operation_id": "명판소매제작",
+          "participants": [
+            {
+              "name": "가상윤명판",
+              "organization": "가상문패법인",
+              "role": "employee"
+            },
+            {
+              "name": "가상백명판",
+              "organization": "가상문패법인",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "명판급식주문"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "명판차수리",
+          "date": "2026-04-22",
+          "description": "법인 관리 이동용 승용차를 수리했다.",
+          "document_ids": [
+            "관리차카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "문패 관리 차고"
+          },
+          "operation_id": "명판소매제작",
+          "participants": [
+            {
+              "name": "가상윤명판",
+              "organization": "가상문패법인",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "문패관리차정비",
+          "vehicle_id": "가상-문패관리50"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 명판 제작 소매",
+          "operation_id": "명판소매제작",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "명판직원급식",
+          "date": "2026-04-21",
+          "document_id": "급식전자",
+          "transaction_id": "명판급식주문"
+        },
+        {
+          "activity_id": "명판차수리",
+          "date": "2026-04-22",
+          "document_id": "관리차카드",
+          "transaction_id": "문패관리차정비"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-문패관리50"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "급식전자",
+        "purpose": "business",
+        "transaction_id": "명판급식주문"
+      },
+      {
+        "business_related": true,
+        "document_id": "관리차카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "문패관리차정비"
+      },
+      {
+        "transaction_id": "문패관리차정비",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-문패관리50",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "급식전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "명판급식주문"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "명판카드마감"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "명판매장마감"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "관리차카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "문패관리차정비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-21",
+      "transaction_id": "명판급식주문"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 704000,
+      "includes_vat": true,
+      "transaction_id": "명판급식주문"
+    },
+    "output": {
+      "gross": 704000,
+      "supply_base": 640000,
+      "vat": 64000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "명판급식주문",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 64000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-20",
+      "transaction_id": "명판매장마감"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 9350000,
+      "includes_vat": true,
+      "transaction_id": "명판매장마감"
+    },
+    "output": {
+      "gross": 9350000,
+      "supply_base": 8500000,
+      "vat": 850000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 8500000
+    },
+    "output": 850000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "명판매장마감"
+    },
+    "output": {
+      "eligible_gross": 9350000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-22",
+      "transaction_id": "문패관리차정비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1056000,
+      "includes_vat": true,
+      "transaction_id": "문패관리차정비"
+    },
+    "output": {
+      "gross": 1056000,
+      "supply_base": 960000,
+      "vat": 96000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "문패관리차정비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 96000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 442000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 9350000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 786000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 786000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 786000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 64000,
+      "output_vat": 850000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 64000,
+      "input_vat": 160000,
+      "net_vat": 786000,
+      "noncreditable_vat": 96000,
+      "output_vat": 850000,
+      "payable_vat": 786000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 8500000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

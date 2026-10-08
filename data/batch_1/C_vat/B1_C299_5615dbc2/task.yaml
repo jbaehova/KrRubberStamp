@@ -1,0 +1,56 @@
+task_id: B1_C299_5615dbc2
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상유리받침의 신고 지점 전년 자료와 재고 공급자 조회를 확인해서 발행 공제(receipt_credit), 불공제세액(noncreditable_vat),
+  선납세액(prepaid_vat), 환급세액(refund_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/신고지점.pdf
+  format: pdf
+- path: inputs/전년지점.xlsx
+  format: xlsx
+- path: inputs/공급자확인.hwpx
+  format: hwpx
+- path: inputs/실제입고.pdf
+  format: pdf
+- path: inputs/유리현금.pdf
+  format: pdf
+- path: inputs/현금스캔.png
+  format: png
+  duplicate_of: inputs/유리현금.pdf
+- path: inputs/받침판매.xlsx
+  format: xlsx
+- path: inputs/고지지급.hwpx
+  format: hwpx
+- path: inputs/반기검토.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    prepaid_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - noncreditable_vat
+  - prepaid_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-d0862ba1-537c-54d5-b9e7-f89c0f2a9a2b
+scenario_seed: 6203105689261164272
+scenario_hash: cc4d8c3221533b892b3ad8b35addb27541fe034890fab63a340e5252a7b7a9f7
+authorship:
+  method: individually_written
+  case_id: C299
+  case_sha256: 5615dbc2489dc6f0553704d8351bf32831e35e67037597b31dbbe815ccf9f985
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- receipt_credit
+- noncreditable_vat
+- prepaid_vat
+- refund_vat

@@ -1,0 +1,59 @@
+task_id: B1_A290_032ac1ca
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상송림축판의 가상황루온 정산을 마감해 주세요. 본인 1주택 대장과 장기대출 조건을 연결하고 카드의 관리비 및 진료의 미용
+  수납을 구분해 주세요. 주택이자와 카드 소득공제 및 합계 제한 초과액을 적고 의료비 공제와 최종 국세를 계산해 주세요.
+input_files:
+- path: inputs/01_세대주택.hwpx
+  format: hwpx
+- path: inputs/02_대출조건.pdf
+  format: pdf
+- path: inputs/03_일반직불.xlsx
+  format: xlsx
+- path: inputs/04_시장소비.pdf
+  format: pdf
+- path: inputs/05_관리비.xlsx
+  format: xlsx
+- path: inputs/06_치료수납.pdf
+  format: pdf
+- path: inputs/07_미용수납.hwpx
+  format: hwpx
+- path: inputs/08_급여.xlsx
+  format: xlsx
+- path: inputs/09_신청접수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    income_deduction_limit_excess:
+      type: integer
+    medical_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - housing_income_deduction
+  - credit_card_deduction
+  - income_deduction_limit_excess
+  - medical_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-13b5f658-13cd-54f3-86b0-67a724338258
+scenario_seed: 228207804841747826
+scenario_hash: 54cfb9128613734f48724a50974e8c2477a23f3c7b4e3bbdedab3ee0ad64355c
+authorship:
+  method: individually_written
+  case_id: A290
+  case_sha256: 032ac1ca169065722630b3fa1901e935f5d0c671ceaa83967d01dcd7e4f5bb4d
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- housing_income_deduction
+- credit_card_deduction
+- income_deduction_limit_excess
+- medical_credit
+- final_national_tax

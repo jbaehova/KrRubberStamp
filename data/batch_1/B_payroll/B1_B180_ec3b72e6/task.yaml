@@ -1,0 +1,45 @@
+task_id: B1_B180_ec3b72e6
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상초점개발실의 정액 과세급여는 고액 산식의 경계를 1만원 넘습니다. 과세급여와 소득세, 지방소득세 및 실지급액을 계산해 승인해
+  주세요. 현재 보험 기준은 별도 확정 통지를 사용합니다.
+input_files:
+- path: inputs/01_초점계약.pdf
+  format: pdf
+- path: inputs/02_초점가족.hwpx
+  format: hwpx
+- path: inputs/03_초점기관.xlsx
+  format: xlsx
+- path: inputs/04_고액공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-19a66058-dde2-5b86-b8f3-c459caf2cef2
+scenario_seed: 17022325551377769173
+scenario_hash: f7c8dc4cba2677de50c9af554ae1887cdaca2b766d14e4af07dfa878adb02be6
+authorship:
+  method: individually_written
+  case_id: B180
+  case_sha256: ec3b72e69ced62d564bea2f7fbc7c3ea0f68225dcff9a40c97ce870371b2a69d
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- taxable_pay
+- income_tax
+- local_income_tax
+- net_pay

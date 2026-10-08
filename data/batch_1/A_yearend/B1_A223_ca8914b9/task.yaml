@@ -1,0 +1,45 @@
+task_id: B1_A223_ca8914b9
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상연두철침 가상홍시온의 주택이자 공제를 검토해 주세요. 대출 조건 확인서와 연말 세대 주택 조회를 연결해서 주택자금 소득공제액을
+  계산합니다. 부모 인적공제와 과세표준도 함께 적어 주세요.
+input_files:
+- path: inputs/01_대출확인.pdf
+  format: pdf
+- path: inputs/02_세대주택.xlsx
+  format: xlsx
+- path: inputs/03_이자납부.pdf
+  format: pdf
+- path: inputs/04_부양신청.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - housing_income_deduction
+  - basic_deduction
+  - additional_deduction
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-5d5c9366-6f60-5889-96ce-3601ad2d67d8
+scenario_seed: 14594218855282578362
+scenario_hash: 0c3f779e62a25bdb50f22ed48b65cd96086ffe61a383992d4b76d13e195a6a17
+authorship:
+  method: individually_written
+  case_id: A223
+  case_sha256: ca8914b9b36d13bace48485b3080cc88d99ccd5b590af05378f6d721dcd5e443
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- housing_income_deduction
+- basic_deduction
+- additional_deduction
+- tax_base

@@ -1,0 +1,42 @@
+task_id: B1_C039_59080d3f
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상반듯수리는 대표가 대신 결제한 가족 가게의 공구까지 자료에 넣었습니다. 물품을 받은 사업장과 비용 부담 기록을 읽어 매입세액(input_vat)과
+  공제불가 세액(noncreditable_vat)을 확인해 주세요. 이번 사업장의 납부액(payable_vat)을 answer.json에 정수로
+  써 주세요.
+input_files:
+- path: inputs/01_비용부담_설명.hwpx
+  format: hwpx
+- path: inputs/02_전년_세무확인.pdf
+  format: pdf
+- path: inputs/03_집기_수리.xlsx
+  format: xlsx
+- path: inputs/04_다른가게_공구.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-7903983b-1247-5b53-a780-6751b0775d24
+scenario_seed: 6415392236664820421
+scenario_hash: 82ecf2c58699384ab764ae901e25f5d24f66d6cc33c51e7bfb93913be2d9fd16
+authorship:
+  method: individually_written
+  case_id: C039
+  case_sha256: 59080d3fc13492c54d06c763542da19da798c0c53595e83fb7432a623281e6ad
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- payable_vat

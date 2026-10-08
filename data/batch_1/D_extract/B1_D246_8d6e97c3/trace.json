@@ -1,0 +1,252 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-25",
+          "document_id": "CLINIC-BOX-21",
+          "event": "received",
+          "event_id": "CLINIC-BOX-A",
+          "location": "진료기록보관실"
+        },
+        {
+          "date": "2026-06-25",
+          "document_id": "CLINIC-BOX-21",
+          "event": "received",
+          "event_id": "CLINIC-BOX-B",
+          "location": "진료기록보관실"
+        },
+        {
+          "date": "2026-06-26",
+          "document_id": "CLINIC-FOLDER-22",
+          "event": "received",
+          "event_id": "CLINIC-FOLDER-IN",
+          "location": "진료기록보관실"
+        },
+        {
+          "date": "2026-06-27",
+          "document_id": "CLINIC-SEAL-23",
+          "event": "received",
+          "event_id": "CLINIC-SEAL-A",
+          "location": "진료기록보관실"
+        },
+        {
+          "date": "2026-06-27",
+          "document_id": "CLINIC-SEAL-23",
+          "event": "received",
+          "event_id": "CLINIC-SEAL-B",
+          "location": "진료기록보관실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-21",
+          "document_id": "CLINIC-BOX-21",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "CLINIC-BOX-C",
+          "vendor": "가상진료보관"
+        },
+        {
+          "date": "2026-06-22",
+          "document_id": "CLINIC-FOLDER-22",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "CLINIC-FOLDER-C",
+          "vendor": "가상진료보관"
+        },
+        {
+          "date": "2026-06-23",
+          "document_id": "CLINIC-SEAL-23",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "CLINIC-SEAL-C",
+          "vendor": "가상기록봉인"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "CLINIC-BOX-C",
+          "items": [
+            {
+              "name": "진료기록보관함",
+              "quantity": 6,
+              "unit_price": 17600
+            }
+          ],
+          "sheet_id": "CLINIC-BOX-L"
+        },
+        {
+          "header_record_id": "CLINIC-BOX-C",
+          "items": [
+            {
+              "name": "보관함칸막이",
+              "quantity": 18,
+              "unit_price": 1210
+            }
+          ],
+          "sheet_id": "CLINIC-DIVIDE-L"
+        },
+        {
+          "header_record_id": "CLINIC-FOLDER-C",
+          "items": [
+            {
+              "name": "진료폴더A4",
+              "quantity": 30,
+              "unit_price": 1650
+            }
+          ],
+          "sheet_id": "CLINIC-FOLDER-L"
+        },
+        {
+          "header_record_id": "CLINIC-SEAL-C",
+          "items": [
+            {
+              "name": "기록봉인띠",
+              "quantity": 60,
+              "unit_price": 187
+            }
+          ],
+          "sheet_id": "CLINIC-SEAL-L"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 연결한다. invoice 또는 order 번호에 received가 있으면 구매다. 같은 번호의 동일 장소와 날짜 및 상태 확인은 구매를 늘리지 않는다. 포함 행 공급가액은 행 총액의 10/11에서 원 미만을 버리고 차액은 세액이다. 별도 행은 수량 곱하기 단가가 공급가액이고 그 10%에서 원 미만을 버린 세액을 더한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "CLINIC-BOX-21",
+        "CLINIC-FOLDER-22",
+        "CLINIC-SEAL-23"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "CLINIC-BOX-21",
+      "includes_vat": true,
+      "quantity": 6,
+      "unit_price": 17600
+    },
+    "output": {
+      "supply": 96000,
+      "total": 105600,
+      "vat": 9600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "CLINIC-BOX-21",
+      "includes_vat": true,
+      "quantity": 18,
+      "unit_price": 1210
+    },
+    "output": {
+      "supply": 19800,
+      "total": 21780,
+      "vat": 1980
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상진료보관"
+    },
+    "output": "가상진료보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CLINIC-FOLDER-22",
+      "includes_vat": false,
+      "quantity": 30,
+      "unit_price": 1650
+    },
+    "output": {
+      "supply": 49500,
+      "total": 54450,
+      "vat": 4950
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상진료보관"
+    },
+    "output": "가상진료보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CLINIC-SEAL-23",
+      "includes_vat": true,
+      "quantity": 60,
+      "unit_price": 187
+    },
+    "output": {
+      "supply": 10200,
+      "total": 11220,
+      "vat": 1020
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상기록봉인"
+    },
+    "output": "가상기록봉인",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "기록봉인띠",
+          "unit_price": 170,
+          "vendor": "가상기록봉인"
+        },
+        {
+          "item": "보관함칸막이",
+          "unit_price": 1100,
+          "vendor": "가상진료보관"
+        },
+        {
+          "item": "진료기록보관함",
+          "unit_price": 16000,
+          "vendor": "가상진료보관"
+        },
+        {
+          "item": "진료폴더a4",
+          "unit_price": 1650,
+          "vendor": "가상진료보관"
+        }
+      ],
+      "grand_total": 193050,
+      "supply_total": 175500,
+      "unique_document_count": 3,
+      "vat_total": 17550,
+      "vendor_totals": [
+        {
+          "supply": 10200,
+          "total": 11220,
+          "vat": 1020,
+          "vendor": "가상기록봉인"
+        },
+        {
+          "supply": 165300,
+          "total": 181830,
+          "vat": 16530,
+          "vendor": "가상진료보관"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

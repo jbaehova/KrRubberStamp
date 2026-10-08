@@ -1,0 +1,45 @@
+task_id: B1_B021_66b4c6ca
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상하늘교정실이 가상조하민의 현금 식대를 27만원으로 인상했습니다. 회사는 식사를 제공하지 않습니다. 지급된 식대 전체를 없애지
+  말고 비과세 한도만 나누어 총지급액, 비과세급여와 과세급여를 계산해 주세요. 인상된 정액 식대를 포함한 월 통상임금도 필요합니다.
+input_files:
+- path: inputs/01_정액기본계약.hwpx
+  format: hwpx
+- path: inputs/02_식대변경.pdf
+  format: pdf
+- path: inputs/03_인상월마감.xlsx
+  format: xlsx
+- path: inputs/04_식대한도.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    gross_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    ordinary_monthly_wage:
+      type: integer
+  required:
+  - gross_pay
+  - non_taxable_pay
+  - taxable_pay
+  - ordinary_monthly_wage
+  additionalProperties: false
+canary: KrRubberStamp-canary-74c15f32-23f8-525c-8456-70f0535144ff
+scenario_seed: 7400758660048462520
+scenario_hash: 424381c7764e93782d341d521440da82aedc2abaf5a37a25a61f6ecd52e4579f
+authorship:
+  method: individually_written
+  case_id: B021
+  case_sha256: 66b4c6ca5895a2b8f944493c985b05042a9b8e41161ca0d7fe281474004e2068
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- gross_pay
+- non_taxable_pay
+- taxable_pay
+- ordinary_monthly_wage

@@ -1,0 +1,43 @@
+task_id: B1_B123_3064c45d
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상가로등사진실의 급여 폴더에는 은행 실행 기록 뒤에 작성된 새 지급 계획이 있습니다. 실제 실행을 우선하여 적용일을 정하고
+  두 자녀를 반영한 소득세 및 지방소득세를 계산해 주세요. 최종 공제 합계도 적어 후속 계획을 사용한 담당자 시트와 대조합니다.
+input_files:
+- path: inputs/01_사진정액.pdf
+  format: pdf
+- path: inputs/02_은행과계획.xlsx
+  format: xlsx
+- path: inputs/03_사진가족.hwpx
+  format: hwpx
+- path: inputs/04_사진일정.pdf
+  format: pdf
+- path: inputs/05_적용월참조.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - income_tax
+  - local_income_tax
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-6c9c3572-500e-5e16-a898-6b897f7bcf1f
+scenario_seed: 3487127917399305411
+scenario_hash: 56a72fdb8022da774f3ff1a81a956035f32a02ed8ffdc47c120441767be706d1
+authorship:
+  method: individually_written
+  case_id: B123
+  case_sha256: 3064c45d82eeecc3ebd8cf285743791c55edb3f2cc6d8fcae76c0063fc1d51ea
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- income_tax
+- local_income_tax
+- total_deductions

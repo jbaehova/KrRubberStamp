@@ -1,0 +1,74 @@
+task_id: B1_A100_53187eaa
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상솔개감리의 가상호서준은 서른한 살 장애인 자녀와 고령 아버지의 자료를 제출했습니다. 자녀의 근로소득 종류와 총급여를 확인해
+  공제대상 인원 및 기본과 추가공제액과 자녀세액공제액을 구해 주세요. 자녀의 특수교육과 대학원 학비 및 두 유형 보험을 각각 판단합니다. 아버지
+  의료비는 보전금을 빼서 계산하고 최종 소득세도 적어 주세요.
+input_files:
+- path: inputs/01_가족신청.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_자녀소득장애.pdf
+  format: pdf
+- path: inputs/04_아버지소득.pdf
+  format: pdf
+- path: inputs/05_자녀특수교육.pdf
+  format: pdf
+- path: inputs/06_자녀대학원.pdf
+  format: pdf
+- path: inputs/07_자녀일반보험.pdf
+  format: pdf
+- path: inputs/08_자녀전용보험.pdf
+  format: pdf
+- path: inputs/09_아버지진료.pdf
+  format: pdf
+- path: inputs/10_아버지보전금.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    child_credit:
+      type: integer
+    education_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - additional_deduction
+  - child_credit
+  - education_credit
+  - insurance_credit
+  - medical_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-ecffc816-d2a4-5f34-82aa-35cc35ced024
+scenario_seed: 5987674976373362304
+scenario_hash: 0842df614f19ae01078612386c05a30c78a5dd77b11282921bfdf8f97f03991a
+authorship:
+  method: individually_written
+  case_id: A100
+  case_sha256: 53187eaabd3ace80859c15b98a135e57878937b60e132699caeb12bafd79ce73
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- additional_deduction
+- child_credit
+- education_credit
+- insurance_credit
+- medical_credit
+- final_national_tax

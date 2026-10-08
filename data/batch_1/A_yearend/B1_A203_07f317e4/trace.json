@@ -1,0 +1,345 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 103000000,
+      "dependents": [
+        {
+          "age": 72,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "earned_income_only": true,
+          "gross_salary": 5000000,
+          "income_amount": 1500000,
+          "name": "가상복유나",
+          "person_id": "mother",
+          "relation": "parent",
+          "supported": true
+        },
+        {
+          "age": 23,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상복도빈",
+          "person_id": "grandchild",
+          "relation": "grandchild",
+          "supported": true
+        },
+        {
+          "age": 18,
+          "assigned_claimant": "sibling",
+          "income_amount": 0,
+          "name": "가상복채원",
+          "person_id": "sibling",
+          "relation": "sibling",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 5200000,
+          "date": "2025-06-19",
+          "institution_type": "qualified_special_education",
+          "level": "special_disabled",
+          "paid_by_self": true,
+          "person_id": "mother",
+          "scholarship": 0
+        },
+        {
+          "amount": 7000000,
+          "date": "2025-08-29",
+          "institution_type": "graduate_school",
+          "level": "graduate",
+          "paid_by_self": true,
+          "person_id": "grandchild",
+          "scholarship": 0
+        }
+      ],
+      "employee_age": 57,
+      "employee_name": "가상복하은",
+      "employee_sex": "female",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "marital_status": "married",
+      "medical": [
+        {
+          "amount": 5400000,
+          "date": "2025-09-11",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "sibling",
+          "reimbursed": 0
+        }
+      ],
+      "non_taxable": 2000000,
+      "paid_local_tax": 1172000,
+      "paid_national_tax": 11720000,
+      "pension_accounts": {
+        "irp": 7600000,
+        "pension_savings": 1800000
+      },
+      "reference_year": 2025,
+      "scenario_id": "봄맞이부속 고액 급여 가족 승인",
+      "scope_note": "국내 거주 근로소득자이며 기혼 여성이다. 세 가족은 실제 부양하고 최종 신청 배정을 사용한다. 부모의 장애인 증명은 연간 유효하고 총급여는 비과세를 뺀 근로소득만 있는 금액이며 소득금액은 근로소득공제 후다. 부모 특수교육기관은 적격으로 확인됐다. 손자 및 동생은 소득이 없다. 모든 교육 및 진료비는 직원 부담으로 장학금과 의료 보전이 없다. 개인 연금도 본인 납부다. 다른 공제와 감면 및 이월은 없다. 동생은 주민등록상 직원과 동거하며 실제 생계를 같이하지만 다른 가족에게 신청을 배정했다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "education.0.excluded": false,
+      "education.1.excluded": false
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 72,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "earned_income_only": true,
+          "gross_salary": 5000000,
+          "income_amount": 1500000,
+          "name": "가상복유나",
+          "person_id": "mother",
+          "relation": "parent",
+          "supported": true
+        },
+        {
+          "age": 23,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "name": "가상복도빈",
+          "person_id": "grandchild",
+          "relation": "grandchild",
+          "supported": true
+        },
+        {
+          "age": 18,
+          "assigned_claimant": "sibling",
+          "income_amount": 0,
+          "name": "가상복채원",
+          "person_id": "sibling",
+          "relation": "sibling",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 3000000,
+      "basic": 3000000,
+      "rejected": [
+        "grandchild",
+        "sibling"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 103000000,
+      "non_taxable": 2000000
+    },
+    "output": {
+      "salary_deduction": 14770000,
+      "salary_income": 86230000,
+      "total_salary": 101000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 101000000,
+      "spending": {}
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {
+        "irp": 7600000,
+        "pension_savings": 1800000
+      },
+      "salary": 101000000
+    },
+    "output": 1080000,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 101000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 5400000,
+          "date": "2025-09-11",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "sibling",
+          "reimbursed": 0
+        }
+      ],
+      "salary": 101000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 5200000,
+          "date": "2025-06-19",
+          "excluded": false,
+          "institution_type": "qualified_special_education",
+          "level": "special_disabled",
+          "paid_by_self": true,
+          "person_id": "mother",
+          "scholarship": 0
+        },
+        {
+          "amount": 7000000,
+          "date": "2025-08-29",
+          "excluded": false,
+          "institution_type": "graduate_school",
+          "level": "graduate",
+          "paid_by_self": true,
+          "person_id": "grandchild",
+          "scholarship": 0
+        }
+      ],
+      "salary": 101000000
+    },
+    "output": 780000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 101000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 101000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 101000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 101000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 80230000
+    },
+    "output": 13495200,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 13495200,
+      "salary": 101000000
+    },
+    "output": 500000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 780000,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 13495200,
+      "total_tax_credits": 2360000
+    },
+    "output": 11135200,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 11135200
+    },
+    "output": 1113520,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 1113520,
+      "final_national": 11135200,
+      "paid_local": 1172000,
+      "paid_national": 11720000
+    },
+    "output": {
+      "local": -58480,
+      "national": -584800,
+      "total": -643280
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

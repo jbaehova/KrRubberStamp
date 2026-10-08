@@ -1,0 +1,311 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 49600000,
+      "dependents": [
+        {
+          "age": 20,
+          "assigned_claimant": "self",
+          "income_amount": 2600000,
+          "person_id": "daughter",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 14,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "grandson",
+          "relation": "grandchild",
+          "supported": true
+        }
+      ],
+      "employee_age": 70,
+      "employee_name": "가상길윤서",
+      "employee_sex": "female",
+      "employment_end": "2025-08-31",
+      "employment_start": "2025-01-01",
+      "household_head": true,
+      "housing_mortgage": {
+        "borrowed_date": "2019-03-14",
+        "fixed_rate": false,
+        "interest_payments": [
+          {
+            "amount": 5600000,
+            "date": "2025-08-31"
+          },
+          {
+            "amount": 3900000,
+            "date": "2025-09-01"
+          }
+        ],
+        "non_deferred": true,
+        "requirements_met": true,
+        "term_years": 15
+      },
+      "insurance": [
+        {
+          "amount": 620000,
+          "date": "2025-08-31",
+          "kind": "general",
+          "paid_by_self": true,
+          "person_id": "self"
+        },
+        {
+          "amount": 410000,
+          "date": "2025-09-01",
+          "kind": "general",
+          "paid_by_self": true,
+          "person_id": "self"
+        }
+      ],
+      "marital_status": "widowed",
+      "non_taxable": 1600000,
+      "reference_year": 2025,
+      "scope_note": "국내 거주 사별 여성 근로자가 성인 자녀와 손자를 실제 부양하며 신청 배정은 본인이다. 성인 자녀는 종합소득금액 260만원이고 손자는 무소득이다. 본인 1주택 대출의 공통 적격 요건은 확인했다. 보험과 이자는 본인 자비이며 8월 31일 퇴직 뒤 새 근로는 없다. 특별공제를 신청했다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "housing_mortgage.interest_paid": 5600000
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 20,
+          "assigned_claimant": "self",
+          "income_amount": 2600000,
+          "person_id": "daughter",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 14,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "grandson",
+          "relation": "grandchild",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 2000000,
+      "basic": 3000000,
+      "rejected": [
+        "daughter"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 49600000,
+      "non_taxable": 1600000
+    },
+    "output": {
+      "salary_deduction": 12150000,
+      "salary_income": 35850000,
+      "total_salary": 48000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {
+      "borrowed_date": "2019-03-14",
+      "fixed_rate": false,
+      "interest_paid": 5600000,
+      "interest_payments": [
+        {
+          "amount": 5600000,
+          "date": "2025-08-31"
+        },
+        {
+          "amount": 3900000,
+          "date": "2025-09-01"
+        }
+      ],
+      "non_deferred": true,
+      "requirements_met": true,
+      "term_years": 15
+    },
+    "output": 5600000,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 48000000,
+      "spending": {}
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 48000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 250000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 620000,
+          "date": "2025-08-31",
+          "kind": "general",
+          "paid_by_self": true,
+          "person_id": "self"
+        },
+        {
+          "amount": 410000,
+          "date": "2025-09-01",
+          "kind": "general",
+          "paid_by_self": true,
+          "person_id": "self"
+        }
+      ],
+      "salary": 48000000
+    },
+    "output": 74400,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 48000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 48000000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 48000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 48000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 48000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 48000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 25250000
+    },
+    "output": 2527500,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 2527500,
+      "salary": 48000000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 5600000,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 74400,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 2527500,
+      "total_tax_credits": 984400
+    },
+    "output": 1543100,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 1543100
+    },
+    "output": 154310,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 154310,
+      "final_national": 1543100,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 154310,
+      "national": 1543100,
+      "total": 1697410
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

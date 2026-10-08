@@ -1,0 +1,43 @@
+task_id: B1_B110_b001df31
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상첫빛검수실의 승인 카드는 계약상 소정근로인 새벽 검수입니다. 시작과 끝 사이의 야간 구간만 찾아 별도 가산액을 계산해 주세요.
+  시급 기본급과 야간 가산액 및 총지급액을 명세서에 각각 표시하며, 정규근로를 평일 연장으로 옮기지 않습니다.
+input_files:
+- path: inputs/01_새벽계약.hwpx
+  format: hwpx
+- path: inputs/02_새벽카드.xlsx
+  format: xlsx
+- path: inputs/03_새벽공제.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    night_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - night_pay
+  - overtime_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-cde15492-371d-5daa-bd1f-e548de071197
+scenario_seed: 12682663427734756905
+scenario_hash: 654bb0630e789cd2cc12f6cc3dd3fc5b7220cde162b82a63f981d6c4a53cf628
+authorship:
+  method: individually_written
+  case_id: B110
+  case_sha256: b001df311ff7de29e71ea3290651b5776c5fdc8b6a9e9828edfe4b37a50a9e49
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- base_pay
+- night_pay
+- overtime_pay
+- gross_pay

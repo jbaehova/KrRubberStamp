@@ -1,0 +1,58 @@
+task_id: B1_D025_8511d10a
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 빈 점포 전시 준비가 끝나 물품비를 결산합니다. 조명 배치 뒤 추가한 케이블과 작품 설명용 비품도 반영해 판매처별 세액과 지급액을
+  모아 주세요. answer.json에는 vendor_totals와 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_조명_인수.pdf
+  format: pdf
+- path: inputs/02_고정와이어_구매.xlsx
+  format: xlsx
+- path: inputs/03_동선표찰_납품.hwpx
+  format: hwpx
+- path: inputs/04_받침블록_추가인수.pdf
+  format: pdf
+- path: inputs/05_연장케이블_구매.xlsx
+  format: xlsx
+- path: inputs/06_설명홀더_확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8d30f77b-6412-568e-b317-4afe29d2faf6
+scenario_seed: 9588674926145961108
+scenario_hash: e6ad0f0d0944c0049b9385a4ae247e01e44279f901063a82dc356b30c92186dc
+authorship:
+  method: individually_written
+  case_id: D025
+  case_sha256: 8511d10ad79ffc94595102f75088e400ed50996e956b6cc4a34e3f2514d24ac2
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- grand_total

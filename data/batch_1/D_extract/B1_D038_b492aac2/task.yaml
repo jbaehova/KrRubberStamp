@@ -1,0 +1,56 @@
+task_id: B1_D038_b492aac2
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 봉사 통신팀의 4월 비품비를 지급하려 합니다. 주문 접수 자료와 계산서가 한 폴더에 있으니 월말 전체 인수 대장에 연결해 실제
+  입고분의 업체별 지급액을 확인해 주세요. answer.json에는 vendor_totals와 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_4월초_주문접수.pdf
+  format: pdf
+- path: inputs/02_홀더_발행명세.xlsx
+  format: xlsx
+- path: inputs/03_클립_발행명세.hwpx
+  format: hwpx
+- path: inputs/04_예비분_주문.pdf
+  format: pdf
+- path: inputs/05_4월_전체인수대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-9c3927e2-2d13-5fc3-860a-bbb8114c2c1c
+scenario_seed: 13011650027916731252
+scenario_hash: 0abaa0f67efa96c8a68b6aade8b03eee80d0f6ccdd891e4a6c53b37721036157
+authorship:
+  method: individually_written
+  case_id: D038
+  case_sha256: b492aac2ffada37439baabc0e64b1d6644b33e56a5abffc775a5313cac084881
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- grand_total

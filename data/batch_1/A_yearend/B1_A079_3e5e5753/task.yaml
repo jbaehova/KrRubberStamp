@@ -1,0 +1,43 @@
+task_id: B1_A079_3e5e5753
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상호수청소의 가상안주현은 배우자의 카드 내역과 배우자를 위해 직접 낸 수술비를 제출했습니다. 배우자의 소득 자료를 확인해
+  공제대상 인원과 신용카드 등 사용금액 소득공제액을 판단해 주세요. 같은 배우자라고 의료비까지 일괄 제외하지 말고 의료비 세액공제액도 구합니다.
+input_files:
+- path: inputs/01_직원확인.hwpx
+  format: hwpx
+- path: inputs/02_급여누계.xlsx
+  format: xlsx
+- path: inputs/03_배우자소득.pdf
+  format: pdf
+- path: inputs/04_배우자카드.xlsx
+  format: xlsx
+- path: inputs/05_배우자수술비.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - credit_card_deduction
+  - medical_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-065afa5f-5261-547f-94b0-69b591c2de03
+scenario_seed: 4494125496388932347
+scenario_hash: f84ca205ef0784d48f952c7a65bde5849c9e2c8286313d8546a480fb6890d42b
+authorship:
+  method: individually_written
+  case_id: A079
+  case_sha256: 3e5e5753fc49d2fbf90b63c12a9e89bfbe60c776324ee82623f4114eca17d4f8
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- eligible_dependents
+- credit_card_deduction
+- medical_credit

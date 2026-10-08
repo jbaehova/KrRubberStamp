@@ -1,0 +1,292 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-25",
+          "document_id": "IRR-O-0221",
+          "event": "received",
+          "event_id": "e102b",
+          "location": "옥상 화분열"
+        },
+        {
+          "date": "2026-02-14",
+          "document_id": "IRR-O-0210",
+          "event": "received",
+          "event_id": "e102a",
+          "location": "동측 화분열"
+        },
+        {
+          "date": "2026-03-09",
+          "document_id": "IRR-O-0305",
+          "event": "received",
+          "event_id": "e102c",
+          "location": "서측 화분열"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-10",
+          "document_id": "IRR-O-0210",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h102a",
+          "vendor": "가상물분배"
+        },
+        {
+          "date": "2026-02-08",
+          "document_id": "IRR-Q-0208",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "h102q",
+          "vendor": "가상견적관수"
+        },
+        {
+          "date": "2026-02-21",
+          "document_id": "IRR-O-0221",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "h102b",
+          "vendor": "가상급수고리"
+        },
+        {
+          "date": "2026-03-05",
+          "document_id": "IRR-O-0305",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h102c",
+          "vendor": "가상화분관로"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h102b",
+          "items": [
+            {
+              "name": "관수분배관",
+              "quantity": 6,
+              "unit_price": 8470
+            },
+            {
+              "name": "관수고리",
+              "quantity": 18,
+              "unit_price": 3080
+            }
+          ],
+          "sheet_id": "s102b"
+        },
+        {
+          "header_record_id": "h102a",
+          "items": [
+            {
+              "name": "관수분배관",
+              "quantity": 5,
+              "unit_price": 7400
+            },
+            {
+              "name": "관수고리",
+              "quantity": 15,
+              "unit_price": 2900
+            }
+          ],
+          "sheet_id": "s102a"
+        },
+        {
+          "header_record_id": "h102c",
+          "items": [
+            {
+              "name": "관수분배관",
+              "quantity": 4,
+              "unit_price": 7600
+            },
+            {
+              "name": "관수고리",
+              "quantity": 12,
+              "unit_price": 2750
+            }
+          ],
+          "sheet_id": "s102c"
+        },
+        {
+          "header_record_id": "h102q",
+          "items": [
+            {
+              "name": "관수분배관",
+              "quantity": 8,
+              "unit_price": 6800
+            },
+            {
+              "name": "관수고리",
+              "quantity": 24,
+              "unit_price": 2400
+            }
+          ],
+          "sheet_id": "s102q"
+        }
+      ],
+      "processing_policy": "header_record_id로 모든 품목표를 표지에 연결한다. invoice/order는 document_id의 received 기록이 있어야 집계하며 quote나 인수 없는 자료 및 출고 전 취소는 제외한다. 같은 번호 동일 내용은 한 번 집계한다. 동일 규격의 개당 공급가액 단가를 비교한다. 포함 비교 단가는 단가의 10/11 원 미만 버림이다. 실제 포함 품목 총액은 10/11 원 미만 버린 공급가액 및 차액 세액으로 분리하고 별도 공급가액은 단가 곱하기 수량이며 세액은 10% 원 미만 버림이다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화, 업체 법인 표기 제거를 적용한다. 품목 오름차순이며 동률은 업체 오름차순 첫 업체다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "IRR-Q-0208"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "IRR-O-0210",
+        "IRR-O-0221",
+        "IRR-O-0305"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "IRR-O-0210",
+      "includes_vat": false,
+      "quantity": 5,
+      "unit_price": 7400
+    },
+    "output": {
+      "supply": 37000,
+      "total": 40700,
+      "vat": 3700
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "IRR-O-0210",
+      "includes_vat": false,
+      "quantity": 15,
+      "unit_price": 2900
+    },
+    "output": {
+      "supply": 43500,
+      "total": 47850,
+      "vat": 4350
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상물분배"
+    },
+    "output": "가상물분배",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "IRR-O-0221",
+      "includes_vat": true,
+      "quantity": 6,
+      "unit_price": 8470
+    },
+    "output": {
+      "supply": 46200,
+      "total": 50820,
+      "vat": 4620
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "IRR-O-0221",
+      "includes_vat": true,
+      "quantity": 18,
+      "unit_price": 3080
+    },
+    "output": {
+      "supply": 50400,
+      "total": 55440,
+      "vat": 5040
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상급수고리"
+    },
+    "output": "가상급수고리",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "IRR-O-0305",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 7600
+    },
+    "output": {
+      "supply": 30400,
+      "total": 33440,
+      "vat": 3040
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "IRR-O-0305",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 2750
+    },
+    "output": {
+      "supply": 33000,
+      "total": 36300,
+      "vat": 3300
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상화분관로"
+    },
+    "output": "가상화분관로",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "관수고리",
+          "unit_price": 2750,
+          "vendor": "가상화분관로"
+        },
+        {
+          "item": "관수분배관",
+          "unit_price": 7400,
+          "vendor": "가상물분배"
+        }
+      ],
+      "grand_total": 264550,
+      "supply_total": 240500,
+      "unique_document_count": 3,
+      "vat_total": 24050,
+      "vendor_totals": [
+        {
+          "supply": 96600,
+          "total": 106260,
+          "vat": 9660,
+          "vendor": "가상급수고리"
+        },
+        {
+          "supply": 80500,
+          "total": 88550,
+          "vat": 8050,
+          "vendor": "가상물분배"
+        },
+        {
+          "supply": 63400,
+          "total": 69740,
+          "vat": 6340,
+          "vendor": "가상화분관로"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,54 @@
+task_id: B1_D077_09291349
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 케이블 명세를 판매처에 재요청한 뒤 원래 자료도 찾았습니다. 번호와 내용으로 대조해 vendor_totals와 vat_total을
+  답하세요. 처리 기준은 통신 케이블 대장에 있습니다.
+input_files:
+- path: inputs/01_영상케이블.pdf
+  format: pdf
+- path: inputs/02_통신케이블.xlsx
+  format: xlsx
+- path: inputs/03_재전송명세.hwpx
+  format: hwpx
+- path: inputs/04_연장선.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-3c8d4c2d-f4a6-56a7-85d4-6ff69a50b012
+scenario_seed: 660080027354330956
+scenario_hash: c2878bc8966333d918d7ce71b2f736ef19a8acc3e58f149e78fbe659bf3ad5d7
+authorship:
+  method: individually_written
+  case_id: D077
+  case_sha256: 09291349a1c8f74c0d26ce2daf6eb02b011de54ff1f44f4220b3fe07f67acfc7
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals
+- vat_total

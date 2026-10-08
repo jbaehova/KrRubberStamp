@@ -1,0 +1,215 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-04",
+          "document_id": "COUNT-145-M",
+          "event": "received",
+          "event_id": "install145-m",
+          "location": "현관 검수석"
+        },
+        {
+          "date": "2026-04-04",
+          "document_id": "COUNT-145-M",
+          "event": "received",
+          "event_id": "entry145-m",
+          "location": "현관 검수석"
+        },
+        {
+          "date": "2026-04-10",
+          "document_id": "COUNT-145-L",
+          "event": "received",
+          "event_id": "e145-l",
+          "location": "현관 검수석"
+        },
+        {
+          "date": "2026-04-12",
+          "document_id": "COUNT-145-P",
+          "event": "received",
+          "event_id": "e145-p",
+          "location": "현관 검수석"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-02",
+          "document_id": "COUNT-145-M",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h145-main",
+          "vendor": "가상출입계수"
+        },
+        {
+          "date": "2026-04-08",
+          "document_id": "COUNT-145-L",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h145-module",
+          "vendor": "가상출입계수"
+        },
+        {
+          "date": "2026-04-09",
+          "document_id": "COUNT-145-P",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h145-plate",
+          "vendor": "가상설치부품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h145-main",
+          "items": [
+            {
+              "name": "출입계수기",
+              "quantity": 2,
+              "unit_price": 242003
+            }
+          ],
+          "sheet_id": "s145-m"
+        },
+        {
+          "header_record_id": "h145-module",
+          "items": [
+            {
+              "name": "계수기연결모듈",
+              "quantity": 2,
+              "unit_price": 38000
+            }
+          ],
+          "sheet_id": "s145-l"
+        },
+        {
+          "header_record_id": "h145-plate",
+          "items": [
+            {
+              "name": "계수기고정판",
+              "quantity": 4,
+              "unit_price": 9500
+            }
+          ],
+          "sheet_id": "s145-p"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목을 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있어야 포함한다. 동일 날짜와 장소로 같은 수령을 증명하는 여러 기록은 구매를 추가하지 않는다. quote, 무인수와 출고 전 취소는 제외하고 document_id가 같은 동일 내용은 한 번만 계산한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 별도는 품목 수량 곱하기 단가를 공급가액으로 하고 그 10% 원 미만 버림을 세액으로 한다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 거친 이름 오름차순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "COUNT-145-L",
+        "COUNT-145-M",
+        "COUNT-145-P"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "COUNT-145-M",
+      "includes_vat": true,
+      "quantity": 2,
+      "unit_price": 242003
+    },
+    "output": {
+      "supply": 440005,
+      "total": 484006,
+      "vat": 44001
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상출입계수"
+    },
+    "output": "가상출입계수",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "COUNT-145-L",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 38000
+    },
+    "output": {
+      "supply": 76000,
+      "total": 83600,
+      "vat": 7600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상출입계수"
+    },
+    "output": "가상출입계수",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "COUNT-145-P",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 9500
+    },
+    "output": {
+      "supply": 38000,
+      "total": 41800,
+      "vat": 3800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상설치부품"
+    },
+    "output": "가상설치부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "계수기고정판",
+          "unit_price": 9500,
+          "vendor": "가상설치부품"
+        },
+        {
+          "item": "계수기연결모듈",
+          "unit_price": 38000,
+          "vendor": "가상출입계수"
+        },
+        {
+          "item": "출입계수기",
+          "unit_price": 220002,
+          "vendor": "가상출입계수"
+        }
+      ],
+      "grand_total": 609406,
+      "supply_total": 554005,
+      "unique_document_count": 3,
+      "vat_total": 55401,
+      "vendor_totals": [
+        {
+          "supply": 38000,
+          "total": 41800,
+          "vat": 3800,
+          "vendor": "가상설치부품"
+        },
+        {
+          "supply": 516005,
+          "total": 567606,
+          "vat": 51601,
+          "vendor": "가상출입계수"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

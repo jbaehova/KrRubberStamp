@@ -1,0 +1,51 @@
+task_id: B1_D174_001a573d
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 관찰 용기 사업의 실제 구매 단가와 지출액을 정리해 주세요. cheapest_by_item과 grand_total을 answer.json에
+  담아 주세요.
+input_files:
+- path: inputs/01_용기와깔때기.pdf
+  format: pdf
+- path: inputs/02_깔때기추가.xlsx
+  format: xlsx
+- path: inputs/03_여과지구매.hwpx
+  format: hwpx
+- path: inputs/04_뚜껑구매.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-eb4ff231-e915-56d7-bd1f-783e9efceac2
+scenario_seed: 7414270671530175
+scenario_hash: 6d588c6dee5f76cfb04a064997144b1d9deb959d00ae414b9415c8e77651e159
+authorship:
+  method: individually_written
+  case_id: D174
+  case_sha256: 001a573d69a528bf11d588b6c0634e776f84e02e962e758ecadfb315aba33394
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item
+- grand_total

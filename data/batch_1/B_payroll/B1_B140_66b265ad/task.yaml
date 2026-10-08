@@ -1,0 +1,47 @@
+task_id: B1_B140_66b265ad
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상초승전산실의 유급 주휴일 야간 점검은 짧은 한 카드입니다. 휴일 실제 근로 대가와 야간 가산을 각각 정확한 시급으로 계산해
+  주세요. 두 항목을 합쳐 한 번만 올린 파일과 대조하려 하므로 휴일수당, 야간수당, 총지급액이 필요합니다. 표시 시급은 참고 값으로만 씁니다.
+input_files:
+- path: inputs/01_초승임금.hwpx
+  format: hwpx
+- path: inputs/02_잠금점검.xlsx
+  format: xlsx
+- path: inputs/03_초승일정.pdf
+  format: pdf
+- path: inputs/04_초승공제.hwpx
+  format: hwpx
+- path: inputs/05_단수공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_hourly_wage_floor:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - ordinary_hourly_wage_floor
+  - holiday_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-1af70eb4-f0f7-5af7-a6b4-9253d3ec5c7f
+scenario_seed: 7400088933828414902
+scenario_hash: 21734d8c9c5ef000c57a043362b20040802549954912ed783b91a85b04ed693a
+authorship:
+  method: individually_written
+  case_id: B140
+  case_sha256: 66b265ad8f244db65102d5f75576d62ecf797c603a0145c5cc398fe57354d544
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- ordinary_hourly_wage_floor
+- holiday_pay
+- night_pay
+- gross_pay

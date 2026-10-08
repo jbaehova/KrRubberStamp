@@ -1,0 +1,41 @@
+task_id: B1_A076_ecab798a
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상꽃비편집의 가상오한별은 연말 기준 일곱 살 자녀의 장기 입원비를 전액 냈습니다. 부양가족 수와 자녀세액공제액을 확인하고
+  의료비 세액공제액을 구해 주세요. 자녀가 어리다는 표현만 보고 의료비가 한도 없이 공제된다고 안내하지 마세요.
+input_files:
+- path: inputs/01_가족신청.hwpx
+  format: hwpx
+- path: inputs/02_급여누계.xlsx
+  format: xlsx
+- path: inputs/03_자녀연령확인.pdf
+  format: pdf
+- path: inputs/04_자녀입원비.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    child_credit:
+      type: integer
+    medical_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - child_credit
+  - medical_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-ec4359bf-6163-5566-a3c4-34ec661a26ac
+scenario_seed: 17053858048083812132
+scenario_hash: 76e6b170315a920d3c589471c217f31a72c0c4d455833daec0d2a202e226546d
+authorship:
+  method: individually_written
+  case_id: A076
+  case_sha256: ecab798a1df8df249f4c996a30e4eb354963f3879411aa7953d2b9593520822e
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- eligible_dependents
+- child_credit
+- medical_credit

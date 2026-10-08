@@ -1,0 +1,39 @@
+task_id: B1_B067_ecd85b17
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상정온안내소 직원의 명세서에 건강보험과 장기요양보험을 한 칸으로 합쳐 두었습니다. 두 부담액을 각각 계산하고, 세금과 다른
+  보험도 반영한 전체 공제 합계를 구해 주세요. 과거 보험 정산액은 없는 정상 고지입니다.
+input_files:
+- path: inputs/01_안내소급여.pdf
+  format: pdf
+- path: inputs/02_보험분리표.xlsx
+  format: xlsx
+- path: inputs/03_요양비율.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - health_insurance
+  - long_term_care
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-29fffe72-84b3-5e49-ab4f-150aca405990
+scenario_seed: 17066490942623161632
+scenario_hash: 0972423e3a3fb397c771ca8b471760a993b09e3415574404472b2bf4b165b863
+authorship:
+  method: individually_written
+  case_id: B067
+  case_sha256: ecd85b1715799d209f67cf7f05c55b7acbc3b7289b97165299dc4693e2fa2d2e
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- health_insurance
+- long_term_care
+- total_deductions

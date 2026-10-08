@@ -1,0 +1,60 @@
+task_id: B1_C094_4e17f1d3
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상차고상판은 차량 정비와 차고 확장 공사를 같은 분기 파일에 넣었습니다. 공식 차종, 토지 자체 조성, 기존 사무동 수리를
+  구별해 주세요. 전체 매입세액(input_vat), 불공제 세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat),
+  선납세액(prepaid_vat), 납부액(payable_vat)을 answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_상판업_신고.hwpx
+  format: hwpx
+- path: inputs/02_차량등록_영업.xlsx
+  format: xlsx
+- path: inputs/03_상판_납품계산서.pdf
+  format: pdf
+- path: inputs/04_화물차_정비.hwpx
+  format: hwpx
+- path: inputs/05_관리차_정비.xlsx
+  format: xlsx
+- path: inputs/06_신설부지_공사.pdf
+  format: pdf
+- path: inputs/07_사무동_문수리.hwpx
+  format: hwpx
+- path: inputs/08_고지_실제납부.pdf
+  format: pdf
+- path: inputs/09_현장별_작업범위.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    prepaid_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - prepaid_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-13003d7f-06a3-5ec2-a493-05254f012bb8
+scenario_seed: 5627232151119813567
+scenario_hash: e918b5b79662a1aa5cdbbb5a8ca719efbe135ab9a43841077909ce26212656bd
+authorship:
+  method: individually_written
+  case_id: C094
+  case_sha256: 4e17f1d3bc275bbf82ee2e69326cb3b104c4a66e87d178b20101e30a55f6994a
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- prepaid_vat
+- payable_vat

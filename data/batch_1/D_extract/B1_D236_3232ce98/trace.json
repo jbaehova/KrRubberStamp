@@ -1,0 +1,96 @@
+[
+  {
+    "inputs": {
+      "document_id": "BEAUTY-COMB-3",
+      "includes_vat": false,
+      "quantity": 16,
+      "unit_price": 1800
+    },
+    "output": {
+      "supply": 28800,
+      "total": 31680,
+      "vat": 2880
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상미용교육품"
+    },
+    "output": "가상미용교육품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "BEAUTY-SCISSOR-4",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 26400
+    },
+    "output": {
+      "supply": 211200,
+      "total": 232320,
+      "vat": 21120
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상가위전문"
+    },
+    "output": "가상가위전문",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "BEAUTY-COMB-3"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "BEAUTY-SCISSOR-4"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "교육커트가위",
+          "unit_price": 26400,
+          "vendor": "가상가위전문"
+        },
+        {
+          "item": "교육커트빗",
+          "unit_price": 1800,
+          "vendor": "가상미용교육품"
+        }
+      ],
+      "grand_total": 264000,
+      "supply_total": 240000,
+      "unique_document_count": 2,
+      "vat_total": 24000,
+      "vendor_totals": [
+        {
+          "supply": 211200,
+          "total": 232320,
+          "vat": 21120,
+          "vendor": "가상가위전문"
+        },
+        {
+          "supply": 28800,
+          "total": 31680,
+          "vat": 2880,
+          "vendor": "가상미용교육품"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,120 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-04",
+          "document_id": "AID-ORDER-111",
+          "event": "received",
+          "event_id": "e111",
+          "location": "교육 준비실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-01",
+          "document_id": "AID-ORDER-111",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h111",
+          "vendor": "가상교육도구"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h111",
+          "items": [
+            {
+              "name": "교육용압박패드",
+              "quantity": 8,
+              "unit_price": 18500
+            },
+            {
+              "name": "실습표시벨트",
+              "quantity": 8,
+              "unit_price": 6400
+            }
+          ],
+          "sheet_id": "s111"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있어야 집계한다. quote, 무인수 자료와 출고 전 취소는 제외하고 같은 document_id의 동일 내용은 한 번만 센다. 별도 가격은 품목별 수량 곱하기 단가를 공급가액으로 하고 그 10% 원 미만 버림 세액을 더한다. 포함 가격은 품목 총액의 10/11 원 미만 버림을 공급가액으로 잡고 차액을 세액으로 한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "AID-ORDER-111"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "AID-ORDER-111",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 18500
+    },
+    "output": {
+      "supply": 148000,
+      "total": 162800,
+      "vat": 14800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "AID-ORDER-111",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 6400
+    },
+    "output": {
+      "supply": 51200,
+      "total": 56320,
+      "vat": 5120
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상교육도구"
+    },
+    "output": "가상교육도구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "교육용압박패드",
+          "unit_price": 18500,
+          "vendor": "가상교육도구"
+        },
+        {
+          "item": "실습표시벨트",
+          "unit_price": 6400,
+          "vendor": "가상교육도구"
+        }
+      ],
+      "grand_total": 219120,
+      "supply_total": 199200,
+      "unique_document_count": 1,
+      "vat_total": 19920,
+      "vendor_totals": [
+        {
+          "supply": 199200,
+          "total": 219120,
+          "vat": 19920,
+          "vendor": "가상교육도구"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

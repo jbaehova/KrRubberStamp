@@ -1,0 +1,341 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 62200000,
+      "dependents": [
+        {
+          "age": 15,
+          "assigned_claimant": "other",
+          "income_amount": 0,
+          "person_id": "older",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 9,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "younger",
+          "relation": "child",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 1800000,
+          "date": "2025-06-10",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "older"
+        },
+        {
+          "amount": 1300000,
+          "date": "2025-06-11",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "younger"
+        }
+      ],
+      "employee_age": 43,
+      "employee_name": "가상류도연",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "marital_status": "divorced",
+      "medical": [
+        {
+          "amount": 2900000,
+          "date": "2025-07-18",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "older"
+        },
+        {
+          "amount": 2300000,
+          "date": "2025-08-22",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "younger"
+        },
+        {
+          "amount": 1100000,
+          "date": "2025-10-07",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "self",
+          "treatment_purpose": "therapeutic"
+        },
+        {
+          "amount": 900000,
+          "date": "2025-11-03",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "self",
+          "treatment_purpose": "cosmetic"
+        }
+      ],
+      "non_taxable": 2400000,
+      "reference_year": 2025,
+      "scope_note": "국내 거주 이혼 근로자가 두 무소득 자녀를 실제 지원한다. 가족 합의에서 첫째 관련 공제를 전 배우자에게 배정하고 둘째를 본인에게 배정했다. 학교 수업료와 진료비는 직원이 냈고 보전금이나 장학금은 없다. 의료기관 목적 구분을 확인하고 특별공제를 신청했다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "medical.2.excluded": false,
+      "medical.3.excluded": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 15,
+          "assigned_claimant": "other",
+          "income_amount": 0,
+          "person_id": "older",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 9,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "younger",
+          "relation": "child",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 1000000,
+      "basic": 3000000,
+      "rejected": [
+        "older"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 62200000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 12740000,
+      "salary_income": 47060000,
+      "total_salary": 59800000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 59800000,
+      "spending": {}
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 59800000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 250000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 59800000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 2900000,
+          "date": "2025-07-18",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "older"
+        },
+        {
+          "amount": 2300000,
+          "date": "2025-08-22",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "younger"
+        },
+        {
+          "amount": 1100000,
+          "date": "2025-10-07",
+          "excluded": false,
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "self",
+          "treatment_purpose": "therapeutic"
+        },
+        {
+          "amount": 900000,
+          "date": "2025-11-03",
+          "excluded": true,
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "self",
+          "treatment_purpose": "cosmetic"
+        }
+      ],
+      "salary": 59800000
+    },
+    "output": 240900,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1800000,
+          "date": "2025-06-10",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "older"
+        },
+        {
+          "amount": 1300000,
+          "date": "2025-06-11",
+          "level": "school",
+          "paid_by_self": true,
+          "person_id": "younger"
+        }
+      ],
+      "salary": 59800000
+    },
+    "output": 195000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 59800000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 59800000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 59800000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 59800000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 43060000
+    },
+    "output": 5199000,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 5199000,
+      "salary": 59800000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 195000,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 240900,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 5199000,
+      "total_tax_credits": 1345900
+    },
+    "output": 3853100,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 3853100
+    },
+    "output": 385310,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 385310,
+      "final_national": 3853100,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 385310,
+      "national": 3853100,
+      "total": 4238410
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

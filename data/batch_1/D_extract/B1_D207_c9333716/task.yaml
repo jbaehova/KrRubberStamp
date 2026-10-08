@@ -1,0 +1,45 @@
+task_id: B1_D207_c9333716
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 객실 수선품의 업체별 송금표를 작성해 주세요. vendor_totals만 answer.json에 제출하면 됩니다.
+input_files:
+- path: inputs/01_문수선품.pdf
+  format: pdf
+- path: inputs/02_방수품.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-efaa9652-da73-5012-9d74-4cd8fc4e978b
+scenario_seed: 14497992194708604161
+scenario_hash: 2b06adabe8320c673aa89af27d1dcd6716516a842f1e56a175a3dfdbfa06400f
+authorship:
+  method: individually_written
+  case_id: D207
+  case_sha256: c933371661fe0501e1bd2f02df066c3f2f6b280134f20db369d59531c632f559
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals

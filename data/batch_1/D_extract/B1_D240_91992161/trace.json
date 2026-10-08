@@ -1,0 +1,156 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-07-15",
+          "document_id": "DENT-HOLDER-13",
+          "event": "received",
+          "event_id": "DENT-A-CHECK",
+          "location": "치과접수실책상"
+        },
+        {
+          "date": "2026-07-15",
+          "document_id": "DENT-HOLDER-13",
+          "event": "received",
+          "event_id": "DENT-B-CHECK",
+          "location": "치과접수실책상"
+        },
+        {
+          "date": "2026-07-16",
+          "document_id": "DENT-NUM-14",
+          "event": "received",
+          "event_id": "DENT-NUM-IN",
+          "location": "치과접수실책상"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-07-13",
+          "document_id": "DENT-HOLDER-13",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "DENT-HOLDER-C",
+          "vendor": "가상접수문구"
+        },
+        {
+          "date": "2026-07-14",
+          "document_id": "DENT-NUM-14",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "DENT-NUM-C",
+          "vendor": "가상접수문구"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "DENT-HOLDER-C",
+          "items": [
+            {
+              "name": "서식꽂이3단",
+              "quantity": 3,
+              "unit_price": 18900
+            }
+          ],
+          "sheet_id": "DENT-HOLDER-L"
+        },
+        {
+          "header_record_id": "DENT-NUM-C",
+          "items": [
+            {
+              "name": "접수번호라벨",
+              "quantity": 8,
+              "unit_price": 2900
+            }
+          ],
+          "sheet_id": "DENT-NUM-L"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 연결한다. invoice 또는 order 번호에 received가 있으면 구매다. 동일 원문 번호의 같은 장소와 날짜 및 상태 확인은 실제 구매를 늘리지 않는다. 별도 단가는 공급가액이고 행 세액은 그 10%에서 원 미만을 버린다. 업체명은 NFKC 후 공백과 법인 표현을 제거해 이름 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "DENT-HOLDER-13",
+        "DENT-NUM-14"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "DENT-HOLDER-13",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 18900
+    },
+    "output": {
+      "supply": 56700,
+      "total": 62370,
+      "vat": 5670
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상접수문구"
+    },
+    "output": "가상접수문구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "DENT-NUM-14",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 2900
+    },
+    "output": {
+      "supply": 23200,
+      "total": 25520,
+      "vat": 2320
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상접수문구"
+    },
+    "output": "가상접수문구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "서식꽂이3단",
+          "unit_price": 18900,
+          "vendor": "가상접수문구"
+        },
+        {
+          "item": "접수번호라벨",
+          "unit_price": 2900,
+          "vendor": "가상접수문구"
+        }
+      ],
+      "grand_total": 87890,
+      "supply_total": 79900,
+      "unique_document_count": 2,
+      "vat_total": 7990,
+      "vendor_totals": [
+        {
+          "supply": 79900,
+          "total": 87890,
+          "vat": 7990,
+          "vendor": "가상접수문구"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

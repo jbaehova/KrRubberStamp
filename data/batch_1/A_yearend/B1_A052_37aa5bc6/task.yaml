@@ -1,0 +1,56 @@
+task_id: B1_A052_37aa5bc6
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상누리행정의 가상한지후 월세 정산을 검토합니다. 직원은 세대원이고 주택 면적도 크지만 세대주 공제 신청과 기준시가 자료를
+  함께 봐야 합니다. 두 반기 이체 합계에 월세 한도를 적용한 월세 세액공제액을 구해 주세요. 연금계좌 공제액과 소득세 및 지방소득세 결정세액도
+  작성해 주세요.
+input_files:
+- path: inputs/01_직원.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_세대확인.hwpx
+  format: hwpx
+- path: inputs/04_면적.pdf
+  format: pdf
+- path: inputs/05_기준시가.pdf
+  format: pdf
+- path: inputs/06_계약주소.pdf
+  format: pdf
+- path: inputs/07_상반기이체.xlsx
+  format: xlsx
+- path: inputs/08_하반기이체.xlsx
+  format: xlsx
+- path: inputs/09_연금계좌.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    rent_credit:
+      type: integer
+    pension_account_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+    final_local_tax:
+      type: integer
+  required:
+  - rent_credit
+  - pension_account_credit
+  - final_national_tax
+  - final_local_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-4f25625a-f377-5f7d-b8c1-ddda16956b7d
+scenario_seed: 4011119326477576669
+scenario_hash: ae3394af9b5a6c236b71619545887de3a38e7fa4aa2f9c68eb5afe64fdd64824
+authorship:
+  method: individually_written
+  case_id: A052
+  case_sha256: 37aa5bc68e6669dd7ba27cd510c946ff24b86702e67ae4196890dfe163a97238
+  source_file: batch_1/A_yearend/cases_004_053.json
+answer_fields:
+- rent_credit
+- pension_account_credit
+- final_national_tax
+- final_local_tax

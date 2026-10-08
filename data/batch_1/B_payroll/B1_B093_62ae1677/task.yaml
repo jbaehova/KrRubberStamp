@@ -1,0 +1,62 @@
+task_id: B1_B093_62ae1677
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상마음분석보조실의 단기 직원 지급 범위는 첨부 네 근무일입니다. 소정 일정의 월합계 대신 개별 승인 카드의 실근로를 합쳐
+  기본급을 구해 주세요. 금요일 카드는 수정 승인 이력이 있으니 최신본의 휴게를 적용합니다. 결근한 주의 주휴수당과 야간 가산 및 고용보험을 반영한
+  실지급액도 필요합니다.
+input_files:
+- path: inputs/01_단기분석계약.pdf
+  format: pdf
+- path: inputs/02_월화출근.xlsx
+  format: xlsx
+- path: inputs/03_목요일출근.pdf
+  format: pdf
+- path: inputs/04_금요일원승인.hwpx
+  format: hwpx
+- path: inputs/05_금요일수정.xlsx
+  format: xlsx
+- path: inputs/06_주출근확인.hwpx
+  format: hwpx
+- path: inputs/07_단기보험.pdf
+  format: pdf
+- path: inputs/08_단기가족.hwpx
+  format: hwpx
+- path: inputs/09_단기은행.pdf
+  format: pdf
+- path: inputs/10_단기공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    employment_insurance:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - night_pay
+  - employment_insurance
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-17171523-a5c2-5e37-bdd5-404fa0faa39d
+scenario_seed: 7110645564619443853
+scenario_hash: b57e33c57d64ce3d9d9d796792dd582fecc7fc71bbd57188c4d8426e2879bc3c
+authorship:
+  method: individually_written
+  case_id: B093
+  case_sha256: 62ae16779ad94e8d1a8ab38b9b2129a895b6684ffcca5359c770e5ffd81d2892
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- night_pay
+- employment_insurance
+- net_pay

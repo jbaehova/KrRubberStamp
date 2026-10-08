@@ -1,0 +1,78 @@
+task_id: B1_D298_57382e1d
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 객석 번호판 보강의 업체별 지급과 실제 단가 이력을 정리합니다. vendor_totals와 cheapest_by_item을
+  제출해 주세요.
+input_files:
+- path: inputs/01_번호판원본표지.pdf
+  format: pdf
+- path: inputs/02_원본품목.xlsx
+  format: xlsx
+- path: inputs/03_재발행표지.hwpx
+  format: hwpx
+- path: inputs/04_재발행품목.xlsx
+  format: xlsx
+- path: inputs/05_보충표지.pdf
+  format: pdf
+- path: inputs/06_보충품목.xlsx
+  format: xlsx
+- path: inputs/07_다른업체표지.hwpx
+  format: hwpx
+- path: inputs/08_다른업체품목.xlsx
+  format: xlsx
+- path: inputs/09_시설함인수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-dd85a047-ac7c-5ea0-85ee-de0df33d1332
+scenario_seed: 6284823983729067209
+scenario_hash: 4042ba61b31b69ac0ebe76bb1ad8e12db994e9e928b2b78e30342c444503cc02
+authorship:
+  method: individually_written
+  case_id: D298
+  case_sha256: 57382e1d6206c4c95cb8710f73c2761b515997eedb2785b597eba7d3d14ffedb
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item

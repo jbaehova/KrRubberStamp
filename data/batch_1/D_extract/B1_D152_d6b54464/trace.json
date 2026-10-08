@@ -1,0 +1,257 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-03",
+          "document_id": "ROTATE-152-O",
+          "event": "cancelled_before_dispatch",
+          "event_id": "e152-o",
+          "location": "전시 준비 담당석"
+        },
+        {
+          "date": "2026-02-08",
+          "document_id": "ROTATE-152-N",
+          "event": "received",
+          "event_id": "e152-n",
+          "location": "회전 전시 준비실"
+        },
+        {
+          "date": "2026-02-13",
+          "document_id": "ROTATE-152-L",
+          "event": "received",
+          "event_id": "e152-l",
+          "location": "회전 전시 준비실"
+        },
+        {
+          "date": "2026-02-15",
+          "document_id": "ROTATE-152-P",
+          "event": "received",
+          "event_id": "e152-p",
+          "location": "회전 전시 준비실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-02",
+          "document_id": "ROTATE-152-O",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h152-old",
+          "vendor": "가상회전전시"
+        },
+        {
+          "date": "2026-02-05",
+          "document_id": "ROTATE-152-N",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h152-new",
+          "vendor": "가상회전전시"
+        },
+        {
+          "date": "2026-02-04",
+          "document_id": "ROTATE-152-Q",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "h152-quote",
+          "vendor": "가상전시회전"
+        },
+        {
+          "date": "2026-02-11",
+          "document_id": "ROTATE-152-L",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h152-later",
+          "vendor": "가상전시회전"
+        },
+        {
+          "date": "2026-02-13",
+          "document_id": "ROTATE-152-P",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h152-plate",
+          "vendor": "가상전시고정"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h152-old",
+          "items": [
+            {
+              "name": "회전받침40",
+              "quantity": 2,
+              "unit_price": 157000
+            }
+          ],
+          "sheet_id": "s152-o"
+        },
+        {
+          "header_record_id": "h152-new",
+          "items": [
+            {
+              "name": "회전받침30",
+              "quantity": 2,
+              "unit_price": 121000
+            }
+          ],
+          "sheet_id": "s152-n"
+        },
+        {
+          "header_record_id": "h152-quote",
+          "items": [
+            {
+              "name": "회전받침30",
+              "quantity": 2,
+              "unit_price": 108000
+            }
+          ],
+          "sheet_id": "s152-q"
+        },
+        {
+          "header_record_id": "h152-later",
+          "items": [
+            {
+              "name": "회전받침30",
+              "quantity": 1,
+              "unit_price": 117000
+            }
+          ],
+          "sheet_id": "s152-l"
+        },
+        {
+          "header_record_id": "h152-plate",
+          "items": [
+            {
+              "name": "받침고정판",
+              "quantity": 3,
+              "unit_price": 7900
+            }
+          ],
+          "sheet_id": "s152-p"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때 포함한다. quote, 무인수 및 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 계산한다. 별도는 품목 수량 곱하기 단가에 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시만 제거하여 규격 문자는 보존한다. 품목 배열은 정규화 이름 오름차순이고 동일 규격 개당 공급가액을 비교한다. 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이며 최저 동률은 정규화 업체명 오름차순 첫 업체다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "ROTATE-152-O",
+        "ROTATE-152-Q"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "ROTATE-152-L",
+        "ROTATE-152-N",
+        "ROTATE-152-P"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "ROTATE-152-N",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 121000
+    },
+    "output": {
+      "supply": 242000,
+      "total": 266200,
+      "vat": 24200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상회전전시"
+    },
+    "output": "가상회전전시",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "ROTATE-152-L",
+      "includes_vat": false,
+      "quantity": 1,
+      "unit_price": 117000
+    },
+    "output": {
+      "supply": 117000,
+      "total": 128700,
+      "vat": 11700
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상전시회전"
+    },
+    "output": "가상전시회전",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "ROTATE-152-P",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 7900
+    },
+    "output": {
+      "supply": 23700,
+      "total": 26070,
+      "vat": 2370
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상전시고정"
+    },
+    "output": "가상전시고정",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "받침고정판",
+          "unit_price": 7900,
+          "vendor": "가상전시고정"
+        },
+        {
+          "item": "회전받침30",
+          "unit_price": 117000,
+          "vendor": "가상전시회전"
+        }
+      ],
+      "grand_total": 420970,
+      "supply_total": 382700,
+      "unique_document_count": 3,
+      "vat_total": 38270,
+      "vendor_totals": [
+        {
+          "supply": 23700,
+          "total": 26070,
+          "vat": 2370,
+          "vendor": "가상전시고정"
+        },
+        {
+          "supply": 117000,
+          "total": 128700,
+          "vat": 11700,
+          "vendor": "가상전시회전"
+        },
+        {
+          "supply": 242000,
+          "total": 266200,
+          "vat": 24200,
+          "vendor": "가상회전전시"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

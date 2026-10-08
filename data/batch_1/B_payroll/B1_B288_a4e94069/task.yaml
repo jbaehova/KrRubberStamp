@@ -1,0 +1,59 @@
+task_id: B1_B288_a4e94069
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상구석수선실은 상시 네 명이며 밤 추가 작업의 휴게를 재승인했습니다. 최종 승인에서 연장 대가와 야간 가산을 구해 주세요.
+  배식 제공과 120퍼센트 선택을 적용한 과세급여, 소득세 및 실지급액도 작성해 주세요.
+input_files:
+- path: inputs/01_수선계약.hwpx
+  format: hwpx
+- path: inputs/02_배식확인.pdf
+  format: pdf
+- path: inputs/03_초기밤카드.xlsx
+  format: xlsx
+- path: inputs/04_최종밤카드.hwpx
+  format: hwpx
+- path: inputs/05_은행범위.pdf
+  format: pdf
+- path: inputs/06_가족선택.xlsx
+  format: xlsx
+- path: inputs/07_연금통지.pdf
+  format: pdf
+- path: inputs/08_다른보험.xlsx
+  format: xlsx
+- path: inputs/09_수선세무원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - taxable_pay
+  - income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-c54ccd57-be3e-5a4a-9159-76cc759f46f7
+scenario_seed: 11883099914602357315
+scenario_hash: c3233a50236227687204a9815c62d54539aace5fff6e58d0ce35f94531bd7cd1
+authorship:
+  method: individually_written
+  case_id: B288
+  case_sha256: a4e94069b859224365ebd2a12dadf31198bf2264f35571c85bc87da927a05fb7
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- overtime_pay
+- night_pay
+- taxable_pay
+- income_tax
+- net_pay

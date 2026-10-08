@@ -1,0 +1,151 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-05",
+          "document_id": "LEVEL-134",
+          "event": "received",
+          "event_id": "e134",
+          "location": "측정 실습실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-03",
+          "document_id": "LEVEL-134",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h134-external",
+          "vendor": "가상측정대"
+        },
+        {
+          "date": "2026-06-03",
+          "document_id": "LEVEL-134",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h134-internal",
+          "vendor": "가상측정대"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h134-external",
+          "items": [
+            {
+              "name": "수평측정대",
+              "quantity": 2,
+              "unit_price": 176000
+            },
+            {
+              "name": "측정대고정패드",
+              "quantity": 8,
+              "unit_price": 4300
+            }
+          ],
+          "sheet_id": "s134-e"
+        },
+        {
+          "header_record_id": "h134-internal",
+          "items": [
+            {
+              "name": "수평측정대",
+              "quantity": 2,
+              "unit_price": 176000
+            },
+            {
+              "name": "측정대고정패드",
+              "quantity": 8,
+              "unit_price": 4300
+            }
+          ],
+          "sheet_id": "s134-i"
+        }
+      ],
+      "processing_policy": "header_record_id로 각각의 품목표를 원문 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있어야 집계한다. quote, 무인수 및 출고 전 취소는 제외하고 document_id가 같은 동일 내용은 한 번만 계산한다. 별도 공급가액은 품목 수량 곱하기 단가이며 그 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 하여 그 이름 오름차순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "LEVEL-134"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "LEVEL-134",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 176000
+    },
+    "output": {
+      "supply": 352000,
+      "total": 387200,
+      "vat": 35200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "LEVEL-134",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 4300
+    },
+    "output": {
+      "supply": 34400,
+      "total": 37840,
+      "vat": 3440
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상측정대"
+    },
+    "output": "가상측정대",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "LEVEL-134"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "수평측정대",
+          "unit_price": 176000,
+          "vendor": "가상측정대"
+        },
+        {
+          "item": "측정대고정패드",
+          "unit_price": 4300,
+          "vendor": "가상측정대"
+        }
+      ],
+      "grand_total": 425040,
+      "supply_total": 386400,
+      "unique_document_count": 1,
+      "vat_total": 38640,
+      "vendor_totals": [
+        {
+          "supply": 386400,
+          "total": 425040,
+          "vat": 38640,
+          "vendor": "가상측정대"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

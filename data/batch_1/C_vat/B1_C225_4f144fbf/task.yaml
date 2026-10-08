@@ -1,0 +1,50 @@
+task_id: B1_C225_4f144fbf
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상달린뒤대여의 정비 계약은 봄 점검과 여름 부품 교체를 따로 검수합니다. 한 차의 자료가 한 봉투에 왔으니 정비 공급 완료일을
+  허가 등록과 함께 확인해 주세요. 상반기 매입세액(input_vat), 공제가능 매입세액(deductible_input_vat), 고유 거래 수(unique_transaction_count),
+  대여 매출을 반영한 납부액(payable_vat)을 answer.json에 정리해 주세요.
+input_files:
+- path: inputs/대여업등록.hwpx
+  format: hwpx
+- path: inputs/차량허가.xlsx
+  format: xlsx
+- path: inputs/정비완료.hwpx
+  format: hwpx
+- path: inputs/대여료.pdf
+  format: pdf
+- path: inputs/봄정비.pdf
+  format: pdf
+- path: inputs/여름정비.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - input_vat
+  - deductible_input_vat
+  - unique_transaction_count
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-193c9add-b16c-5b0e-bf44-bd2050ed74be
+scenario_seed: 5698267113917387827
+scenario_hash: e0fc64c0203f63420a254f4c806de7f2dfcbd746a1c61867d4a5358017b9aba8
+authorship:
+  method: individually_written
+  case_id: C225
+  case_sha256: 4f144fbfd8561433f2370138ae08e69cec83d241711f473a426afef5da222857
+  source_file: batch_1/C_vat/cases_204_253.json
+answer_fields:
+- input_vat
+- deductible_input_vat
+- unique_transaction_count
+- payable_vat

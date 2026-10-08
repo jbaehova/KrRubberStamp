@@ -1,0 +1,244 @@
+[
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 20,
+          "assigned_claimant": "self",
+          "earned_income_only": true,
+          "gross_salary": 4800000,
+          "income_amount": 1440000,
+          "person_id": "first",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 18,
+          "assigned_claimant": "self",
+          "earned_income_only": true,
+          "gross_salary": 5200000,
+          "income_amount": 1620000,
+          "person_id": "second",
+          "relation": "child",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 3000000,
+      "rejected": [
+        "second"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 76200000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 13440000,
+      "salary_income": 60360000,
+      "total_salary": 73800000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 73800000,
+      "spending": {}
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 73800000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 250000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 620000,
+          "date": "2025-05-12",
+          "kind": "general",
+          "paid_by_self": true,
+          "person_id": "first"
+        },
+        {
+          "amount": 790000,
+          "date": "2025-05-13",
+          "kind": "general",
+          "paid_by_self": true,
+          "person_id": "second"
+        }
+      ],
+      "salary": 73800000
+    },
+    "output": 74400,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 4100000,
+          "date": "2025-10-22",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "second"
+        }
+      ],
+      "salary": 73800000
+    },
+    "output": 282900,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 7800000,
+          "date": "2025-08-11",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "first",
+          "scholarship": 1700000
+        }
+      ],
+      "salary": 73800000
+    },
+    "output": 915000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 73800000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 73800000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 73800000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 73800000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 57360000
+    },
+    "output": 8006400,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 8006400,
+      "salary": 73800000
+    },
+    "output": 500000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 915000,
+        "hometown_credit": 0,
+        "insurance_credit": 74400,
+        "medical_credit": 282900,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 8006400,
+      "total_tax_credits": 2022300
+    },
+    "output": 5984100,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 5984100
+    },
+    "output": 598410,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 598410,
+      "final_national": 5984100,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 598410,
+      "national": 5984100,
+      "total": 6582510
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

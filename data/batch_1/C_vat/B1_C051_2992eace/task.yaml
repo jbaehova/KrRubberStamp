@@ -1,0 +1,62 @@
+task_id: B1_C051_2992eace
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상한칸책꽂이는 두 고객에게 같은 가격으로 납품했고 재고 주문은 7월에 도착했습니다. 금액이 같다는 이유로 주문을 합치지 말고
+  거래 식별자와 공급일을 확인해 주세요. 실제 거래 수(unique_transaction_count), 매출 공급가액(tax_base), 공제가능
+  매입세액(deductible_input_vat), 예정고지 세액(prepaid_vat), 환급액(refund_vat)을 answer.json에
+  정수로 적어 주세요.
+input_files:
+- path: inputs/01_납품업_의뢰.hwpx
+  format: hwpx
+- path: inputs/02_전년_실적.pdf
+  format: pdf
+- path: inputs/03_선납_영수증.xlsx
+  format: xlsx
+- path: inputs/04_동쪽_납품.pdf
+  format: pdf
+- path: inputs/05_서쪽_납품.pdf
+  format: pdf
+- path: inputs/06_고정_부속.xlsx
+  format: xlsx
+- path: inputs/07_7월_재고.pdf
+  format: pdf
+- path: inputs/08_입고_기록.hwpx
+  format: hwpx
+- path: inputs/09_동쪽계산서_사진.png
+  format: png
+  duplicate_of: inputs/04_동쪽_납품.pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    tax_base:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    prepaid_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - tax_base
+  - deductible_input_vat
+  - prepaid_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-6278c672-fd58-528a-ad42-3b182905c590
+scenario_seed: 2995714874484640118
+scenario_hash: 5a484fbcada955b08c620026c39a0ebce3ec45fac32215eb5fcdfcdf9e41b7be
+authorship:
+  method: individually_written
+  case_id: C051
+  case_sha256: 2992eace6e02c97668b5939ae741e047e33a3bdad0a3b16dfd7d35bf0fd07926
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- unique_transaction_count
+- tax_base
+- deductible_input_vat
+- prepaid_vat
+- refund_vat

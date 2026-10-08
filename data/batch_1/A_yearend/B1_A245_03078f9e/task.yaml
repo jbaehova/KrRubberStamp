@@ -1,0 +1,55 @@
+task_id: B1_A245_03078f9e
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상저녁클립 가상손새은의 정산을 마감해 주세요. 월세 계약과 전입 주소 및 연말 주택 조회를 함께 확인합니다. 치료비와 미용
+  시술 및 본인 대학원 등록금을 구분해 월세와 의료비 및 교육비 공제액을 적어 주세요.
+input_files:
+- path: inputs/01_계약원본.pdf
+  format: pdf
+- path: inputs/02_전입기록.hwpx
+  format: hwpx
+- path: inputs/03_연말주택.xlsx
+  format: xlsx
+- path: inputs/04_월세이체.pdf
+  format: pdf
+- path: inputs/05_치료병원.pdf
+  format: pdf
+- path: inputs/06_미용수납.xlsx
+  format: xlsx
+- path: inputs/07_대학원납부.hwpx
+  format: hwpx
+- path: inputs/08_급여확정.xlsx
+  format: xlsx
+- path: inputs/09_접수범위.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    rent_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    education_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - rent_credit
+  - medical_credit
+  - education_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-03247d5d-fbf6-5516-b54c-56fefe70356e
+scenario_seed: 218301017583938705
+scenario_hash: c8238f4aad9cae0dd4b89ba52c21204e06922a20d85b71c173b487ab135ac947
+authorship:
+  method: individually_written
+  case_id: A245
+  case_sha256: 03078f9e6f326c913f9e40ff918d6eee0589313e2455211df5f72876d26a46bc
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- rent_credit
+- medical_credit
+- education_credit
+- final_national_tax

@@ -1,0 +1,41 @@
+task_id: B1_A176_272b5412
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상치자장비의 가상강노아 의료비를 마감해 주세요. 자녀 입원비에 대한 보험 지급확인서를 연결하고 직원 본인 진료와 합쳐 의료비
+  세액공제액을 계산합니다. 자녀 유치원 수업료의 교육비 공제액과 결정 국세도 적어 주세요.
+input_files:
+- path: inputs/01_병원납부.pdf
+  format: pdf
+- path: inputs/02_보험지급.xlsx
+  format: xlsx
+- path: inputs/03_유치원가족.hwpx
+  format: hwpx
+- path: inputs/04_급여접수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    medical_credit:
+      type: integer
+    education_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - medical_credit
+  - education_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-c4389a7e-fee6-5435-a139-df20ea0a977b
+scenario_seed: 2822442028790029498
+scenario_hash: 8fa4087bdc3b551871c1adaa18c2fbb28599a560a37b23d71938122e6dcba4c6
+authorship:
+  method: individually_written
+  case_id: A176
+  case_sha256: 272b54123d299cba002b88d00782728bca1c707842bbbee1f1bf5a868d0ea853
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- medical_credit
+- education_credit
+- final_national_tax

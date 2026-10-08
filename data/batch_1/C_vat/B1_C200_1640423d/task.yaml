@@ -1,0 +1,57 @@
+task_id: B1_C200_1640423d
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상초봄대여의 차량 기간별 등록과 정비 및 카드 공급을 연결해 불공제세액(noncreditable_vat), 공제 매입세액(deductible_input_vat),
+  발행 공제(receipt_credit), 순세액(net_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/대여신고.hwpx
+  format: hwpx
+- path: inputs/대여허가.xlsx
+  format: xlsx
+- path: inputs/등록기간.pdf
+  format: pdf
+- path: inputs/겨울완료.hwpx
+  format: hwpx
+- path: inputs/봄완료.hwpx
+  format: hwpx
+- path: inputs/여름완료.xlsx
+  format: xlsx
+- path: inputs/겨울전표.pdf
+  format: pdf
+- path: inputs/봄전표.pdf
+  format: pdf
+- path: inputs/여름전표.pdf
+  format: pdf
+- path: inputs/대여공급.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    net_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - net_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-8eb13d4b-8361-5f4a-b797-c00420371d16
+scenario_seed: 1603354298375476502
+scenario_hash: f46520453e3f965be5beb7d931d075b883f26b26b39943eaf67ae8e8756b9615
+authorship:
+  method: individually_written
+  case_id: C200
+  case_sha256: 1640423d4bc4151630171cb7e14a8e9c8289fb48def251a580523ee63065a170
+  source_file: batch_1/C_vat/cases_154_203.json
+answer_fields:
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- net_vat

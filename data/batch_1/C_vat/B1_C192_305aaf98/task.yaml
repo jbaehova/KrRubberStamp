@@ -1,0 +1,51 @@
+task_id: B1_C192_305aaf98
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상정밀탭의 공급자 이력, 차량 등록, 인수 자료를 통합해 매입세액(input_vat), 불공제세액(noncreditable_vat),
+  환급액(refund_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/정밀신고.hwpx
+  format: hwpx
+- path: inputs/공급자등록.xlsx
+  format: xlsx
+- path: inputs/관리차등록.pdf
+  format: pdf
+- path: inputs/사월인수.hwpx
+  format: hwpx
+- path: inputs/오월인수.hwpx
+  format: hwpx
+- path: inputs/차고정비.xlsx
+  format: xlsx
+- path: inputs/첫금속.pdf
+  format: pdf
+- path: inputs/다음금속.pdf
+  format: pdf
+- path: inputs/정비카드.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-c2919b80-5080-5040-8dca-6f082ab833f4
+scenario_seed: 3484290330200786142
+scenario_hash: c225002b14a507936a8fe677e69707a420a5b6a3e725a9fec6c18e5329b753ef
+authorship:
+  method: individually_written
+  case_id: C192
+  case_sha256: 305aaf9841f244de6faacdb30cc3a18f93464c0cd5a7ca6a696f19b008867f5a
+  source_file: batch_1/C_vat/cases_154_203.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- refund_vat

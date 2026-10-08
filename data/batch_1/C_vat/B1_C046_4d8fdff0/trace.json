@@ -1,0 +1,431 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "ground_work",
+          "activity_id": "ACT-C046-땅",
+          "date": "2026-02-15",
+          "description": "대표가 토지 평탄화와 성토 완료를 확인했다. 장비 설치나 건물 공사는 없었다.",
+          "document_ids": [
+            "가상-C046-조성계산서"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "가상정리바구니 창고 부지"
+          },
+          "operation_id": "OPS-C046",
+          "participants": [
+            {
+              "name": "가상 바구니대표",
+              "organization": "가상정리바구니",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "가상-C046-부지정리"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C046-선반",
+          "date": "2026-04-06",
+          "description": "직원이 기존 창고 내부의 판매 재고 보관 선반 설치를 확인했다.",
+          "document_ids": [
+            "가상-C046-설비계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상정리바구니 기존 창고 내부"
+          },
+          "operation_id": "OPS-C046",
+          "participants": [
+            {
+              "name": "가상 창고직원",
+              "organization": "가상정리바구니",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C046-보관설비"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C046-재고",
+          "date": "2026-05-04",
+          "description": "직원이 판매용 바구니를 받아 선반에 보관했다.",
+          "document_ids": [
+            "가상-C046-재고계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상정리바구니 재고 창고"
+          },
+          "operation_id": "OPS-C046",
+          "participants": [
+            {
+              "name": "가상 입고직원",
+              "organization": "가상정리바구니",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C046-바구니입고"
+        }
+      ],
+      "operations": [
+        {
+          "description": "수납 바구니 소매 판매",
+          "operation_id": "OPS-C046",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C046-땅",
+          "date": "2026-02-15",
+          "document_id": "가상-C046-조성계산서",
+          "transaction_id": "가상-C046-부지정리"
+        },
+        {
+          "activity_id": "ACT-C046-선반",
+          "date": "2026-04-06",
+          "document_id": "가상-C046-설비계산서",
+          "transaction_id": "가상-C046-보관설비"
+        },
+        {
+          "activity_id": "ACT-C046-재고",
+          "date": "2026-05-04",
+          "document_id": "가상-C046-재고계산서",
+          "transaction_id": "가상-C046-바구니입고"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C046-조성계산서",
+        "purpose": "land",
+        "transaction_id": "가상-C046-부지정리"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C046-설비계산서",
+        "purpose": "business",
+        "transaction_id": "가상-C046-보관설비"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C046-재고계산서",
+        "purpose": "business",
+        "transaction_id": "가상-C046-바구니입고"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C046-재고계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C046-바구니입고"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C046-판매카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C046-바구니판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C046-설비계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C046-보관설비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C046-조성계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C046-부지정리"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-04",
+      "transaction_id": "가상-C046-바구니입고"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C046-바구니입고"
+    },
+    "output": {
+      "gross": 5500000,
+      "supply_base": 5000000,
+      "vat": 500000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C046-바구니입고",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 500000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-23",
+      "transaction_id": "가상-C046-바구니판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 22000000,
+      "includes_vat": true,
+      "transaction_id": "가상-C046-바구니판매"
+    },
+    "output": {
+      "gross": 22000000,
+      "supply_base": 20000000,
+      "vat": 2000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 20000000
+    },
+    "output": 2000000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "가상-C046-바구니판매"
+    },
+    "output": {
+      "eligible_gross": 22000000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-06",
+      "transaction_id": "가상-C046-보관설비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 9000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C046-보관설비"
+    },
+    "output": {
+      "gross": 9900000,
+      "supply_base": 9000000,
+      "vat": 900000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C046-보관설비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 900000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-15",
+      "transaction_id": "가상-C046-부지정리"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 6000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C046-부지정리"
+    },
+    "output": {
+      "gross": 6600000,
+      "supply_base": 6000000,
+      "vat": 600000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "가상-C046-부지정리",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 600000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 360000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 22000000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 286000,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 286000
+    },
+    "output": 286000,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 286000,
+      "liability_before_credit": 600000
+    },
+    "output": 286000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 500000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 314000,
+      "prepaid_assessed_vat": 500000
+    },
+    "output": -186000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 1400000,
+      "output_vat": 2000000,
+      "prepaid_vat": 500000,
+      "receipt_credit": 286000
+    },
+    "output": {
+      "deductible_input_vat": 1400000,
+      "input_vat": 2000000,
+      "net_vat": -186000,
+      "noncreditable_vat": 600000,
+      "output_vat": 2000000,
+      "payable_vat": 0,
+      "prepaid_vat": 500000,
+      "receipt_credit": 286000,
+      "refund_vat": 186000,
+      "tax_base": 20000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

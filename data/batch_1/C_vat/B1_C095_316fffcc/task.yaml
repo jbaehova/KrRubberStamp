@@ -1,0 +1,60 @@
+task_id: B1_C095_316fffcc
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상차곡그릇은 6월 주문 마감표와 카드 및 계산서 파일을 함께 보냈습니다. 실제 공급일과 거래 번호를 연결해 현재 기간만 신고하세요.
+  고유 거래 수(unique_transaction_count), 매출 공급가액(tax_base), 공제가능 매입세액(deductible_input_vat),
+  발행세액공제(receipt_credit), 납부액(payable_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_주문마감_업무.hwpx
+  format: hwpx
+- path: inputs/02_주문_공급대조.xlsx
+  format: xlsx
+- path: inputs/03_완료주문_두증빙.pdf
+  format: pdf
+- path: inputs/04_다른소비자_판매.xlsx
+  format: xlsx
+- path: inputs/05_7월배송_판매.pdf
+  format: pdf
+- path: inputs/06_전년재료_공급.hwpx
+  format: hwpx
+- path: inputs/07_현재재료_카드.xlsx
+  format: xlsx
+- path: inputs/08_현재재료_계산서.pdf
+  format: pdf
+- path: inputs/09_창고인수_고지납부.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    tax_base:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - tax_base
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-f2025c5d-95bb-56d5-94e2-52867a3da395
+scenario_seed: 3562347082000062880
+scenario_hash: f144b3c18d6d3f96454954abe40b77053f68005c09a68219d509573f547fba29
+authorship:
+  method: individually_written
+  case_id: C095
+  case_sha256: 316fffcc054359a0e4ca954d7a1c62464ffd7958c7f67c1ff4204d2d91ea93cf
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- tax_base
+- deductible_input_vat
+- receipt_credit
+- payable_vat

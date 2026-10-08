@@ -1,0 +1,73 @@
+task_id: B1_D049_1cc81b2d
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 한파 대피실을 순차 개설하며 산 물품의 결산서를 작성해 주세요. 각 대피실의 납품 자료를 거래처별로 합치고 사업 전체의 공급가액과
+  부가세, 지급 총액을 확인해 주세요. answer.json에는 vendor_totals와 supply_total, vat_total과 grand_total을
+  적어 주세요.
+input_files:
+- path: inputs/01_침상덮개_명세.pdf
+  format: pdf
+- path: inputs/02_담요주머니_대장.xlsx
+  format: xlsx
+- path: inputs/03_입구안내판_확인.hwpx
+  format: hwpx
+- path: inputs/04_반사포_명세.pdf
+  format: pdf
+- path: inputs/05_보호매트_대장.xlsx
+  format: xlsx
+- path: inputs/06_순서표홀더_확인.hwpx
+  format: hwpx
+- path: inputs/07_물품상자_명세.pdf
+  format: pdf
+- path: inputs/08_번호표_대장.xlsx
+  format: xlsx
+- path: inputs/09_보온컵_확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - supply_total
+  - vat_total
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-bf027758-4f98-5842-aac8-a1461c7ed7c6
+scenario_seed: 2073937510115907775
+scenario_hash: a59a9822dc4f9ce25696f10b862efd0461503ef9be9696bf8a521abf71ae8718
+authorship:
+  method: individually_written
+  case_id: D049
+  case_sha256: 1cc81b2d60d118bfdf8020136516710e2f96a3b58974c5fdce07c386bf3b8b5d
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- supply_total
+- vat_total
+- grand_total

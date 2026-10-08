@@ -1,0 +1,66 @@
+task_id: B1_B101_b543e147
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상소복봉투실의 시급제 마감 자료를 확인해 주세요. 소정 일정에서 무급 결근을 빼고 주별 개근 자료로 주휴를 정합니다. 두
+  주의 법정 유급 주휴일에는 별도 실제 작업이 있고 작업 카드는 여러 부서에서 제출했습니다. 식별자와 승인 내용으로 지급할 근로 사건을 정하여 기본급과
+  주휴, 휴일 및 야간 수당과 실지급액을 구해 주세요.
+input_files:
+- path: inputs/01_봉투시급.hwpx
+  format: hwpx
+- path: inputs/02_봉투결근.xlsx
+  format: xlsx
+- path: inputs/03_봉투주별.hwpx
+  format: hwpx
+- path: inputs/04_첫주휴일.pdf
+  format: pdf
+- path: inputs/05_둘째생산부.xlsx
+  format: xlsx
+- path: inputs/06_둘째총무부.pdf
+  format: pdf
+- path: inputs/07_봉투휴일.hwpx
+  format: hwpx
+- path: inputs/08_봉투공제.xlsx
+  format: xlsx
+- path: inputs/09_봉투은행.pdf
+  format: pdf
+- path: inputs/10_봉투공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - holiday_pay
+  - night_pay
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-6c26bc87-e0e2-5fba-a9a0-9d85c2cd43cf
+scenario_seed: 13061531043522063065
+scenario_hash: 4ecf4deaf208f08497304d3eec59c6ace486987d49f7d52b35be88b17f7e183c
+authorship:
+  method: individually_written
+  case_id: B101
+  case_sha256: b543e147f7deaad9c040ac996d0be3aeacfcde6d7ab77bba8bbaddff7e25cd00
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- holiday_pay
+- night_pay
+- gross_pay
+- net_pay

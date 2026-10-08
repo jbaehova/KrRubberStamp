@@ -1,0 +1,41 @@
+task_id: B1_A204_c2142151
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상잔물결제본의 가상서라윤 연금 납입 확인서를 처리해 주세요. 연금저축과 IRP를 나누어 확인한 뒤 연금계좌 세액공제액과 근로소득세
+  결정세액을 회신하면 됩니다.
+input_files:
+- path: inputs/01_계좌납입.xlsx
+  format: xlsx
+- path: inputs/02_급여와신청.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    pension_account_credit:
+      type: integer
+    pension_deduction:
+      type: integer
+    standard_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - pension_account_credit
+  - pension_deduction
+  - standard_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-f188acc6-c598-5383-be67-506b7cadb900
+scenario_seed: 13984839377698673952
+scenario_hash: 6c1ad45a724f516efea4380adb3db22e823bc9b21d1a831cc5eee9d29f848863
+authorship:
+  method: individually_written
+  case_id: A204
+  case_sha256: c2142151b49fd5202cea3a3dcf64538fabb988fa70cc7c5199e9948e261f77fb
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- pension_account_credit
+- pension_deduction
+- standard_credit
+- final_national_tax

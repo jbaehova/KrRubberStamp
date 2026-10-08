@@ -1,0 +1,50 @@
+task_id: B1_D224_de3d43b8
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 수선점 지퍼 및 부속의 실제 단가와 지출을 정리해 주세요. cheapest_by_item과 grand_total을 제출해 주세요.
+input_files:
+- path: inputs/01_지퍼인수표지.pdf
+  format: pdf
+- path: inputs/02_지퍼부속명세.xlsx
+  format: xlsx
+- path: inputs/03_슬라이더구매.hwpx
+  format: hwpx
+- path: inputs/04_슬라이더수량.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-9cd35d54-d50f-5bcb-b79f-45176c4fafad
+scenario_seed: 16014030310194470951
+scenario_hash: 4137b9878296d50d02086a1f3f5f3b200847ec61178e32797235b24975ebd0c1
+authorship:
+  method: individually_written
+  case_id: D224
+  case_sha256: de3d43b89d7ae027ac59e18f5291b5951162e39f9a0e55c5cb40751ea5eee7f3
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- grand_total

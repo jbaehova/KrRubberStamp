@@ -1,0 +1,364 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "금속받음",
+          "date": "2026-05-12",
+          "description": "판매용 케이스 금속 부품을 받았다.",
+          "document_ids": [
+            "금속카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "재봉 케이스 제작실"
+          },
+          "operation_id": "재봉케이스제작",
+          "participants": [
+            {
+              "name": "가상오케이스",
+              "organization": "가상바늘케이스",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "케이스금속인수"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "천받음",
+          "date": "2026-05-13",
+          "description": "판매용 케이스 천 재료를 받았다.",
+          "document_ids": [
+            "천카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "재봉 케이스 제작실"
+          },
+          "operation_id": "재봉케이스제작",
+          "participants": [
+            {
+              "name": "가상오케이스",
+              "organization": "가상바늘케이스",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "케이스천인수"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 재봉 케이스 제작 소매",
+          "operation_id": "재봉케이스제작",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "금속받음",
+          "date": "2026-05-12",
+          "document_id": "금속카드",
+          "transaction_id": "케이스금속인수"
+        },
+        {
+          "activity_id": "천받음",
+          "date": "2026-05-13",
+          "document_id": "천카드",
+          "transaction_id": "케이스천인수"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "supplier_status_records": [
+        {
+          "status": "general",
+          "supplier_id": "가상-금속251",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-12-31"
+        },
+        {
+          "status": "simplified_no_invoice_duty",
+          "supplier_id": "가상-천251",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-12-31"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "금속카드",
+        "purpose": "business",
+        "transaction_id": "케이스금속인수"
+      },
+      {
+        "business_related": true,
+        "document_id": "천카드",
+        "purpose": "business",
+        "transaction_id": "케이스천인수"
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "가상-금속251",
+        "transaction_id": "케이스금속인수"
+      },
+      {
+        "supplier_general": false,
+        "supplier_id": "가상-천251",
+        "transaction_id": "케이스천인수"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "금속카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "케이스금속인수"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "천카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "케이스천인수"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "케이스현금발급"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "케이스추가판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-12",
+      "transaction_id": "케이스금속인수"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1540000,
+      "includes_vat": true,
+      "transaction_id": "케이스금속인수"
+    },
+    "output": {
+      "gross": 1540000,
+      "supply_base": 1400000,
+      "vat": 140000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "케이스금속인수",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 140000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-13",
+      "transaction_id": "케이스천인수"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1760000,
+      "includes_vat": true,
+      "transaction_id": "케이스천인수"
+    },
+    "output": {
+      "gross": 1760000,
+      "supply_base": 1600000,
+      "vat": 160000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "케이스천인수",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 160000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-20",
+      "transaction_id": "케이스추가판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 22000000,
+      "includes_vat": true,
+      "transaction_id": "케이스추가판매"
+    },
+    "output": {
+      "gross": 22000000,
+      "supply_base": 20000000,
+      "vat": 2000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 20000000
+    },
+    "output": 2000000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "케이스추가판매"
+    },
+    "output": {
+      "eligible_gross": 22000000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 993000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 22000000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 286000,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 9890000,
+      "annual_limit": 10000000,
+      "raw_credit": 286000
+    },
+    "output": 110000,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 110000,
+      "liability_before_credit": 1860000
+    },
+    "output": 110000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 14200000
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 1750000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 1750000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 140000,
+      "output_vat": 2000000,
+      "prepaid_vat": 0,
+      "receipt_credit": 110000
+    },
+    "output": {
+      "deductible_input_vat": 140000,
+      "input_vat": 300000,
+      "net_vat": 1750000,
+      "noncreditable_vat": 160000,
+      "output_vat": 2000000,
+      "payable_vat": 1750000,
+      "prepaid_vat": 0,
+      "receipt_credit": 110000,
+      "refund_vat": 0,
+      "tax_base": 20000000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

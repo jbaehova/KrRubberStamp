@@ -1,0 +1,55 @@
+task_id: B1_C142_853036ff
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상삼단설치의 회차별 완료 확인과 결제 증빙을 통합해 공급가액(tax_base), 거래 수(unique_transaction_count),
+  발행 공제(receipt_credit), 납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_사업자인계.hwpx
+  format: hwpx
+- path: inputs/02_묶음계약.xlsx
+  format: xlsx
+- path: inputs/03_거실완료.hwpx
+  format: hwpx
+- path: inputs/04_거실영수.pdf
+  format: pdf
+- path: inputs/05_거실계산서.xlsx
+  format: xlsx
+- path: inputs/06_서재완료.hwpx
+  format: hwpx
+- path: inputs/07_서재영수.pdf
+  format: pdf
+- path: inputs/08_침실완료.hwpx
+  format: hwpx
+- path: inputs/09_침실계산서.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    unique_transaction_count:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - unique_transaction_count
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-0e3f3727-435c-5e85-a8dd-01a711b11401
+scenario_seed: 9597231278142091098
+scenario_hash: 726693004ae020e4dbafc96882dd350a6e8011c516ff7c2dc993ed8c6ef14ef7
+authorship:
+  method: individually_written
+  case_id: C142
+  case_sha256: 853036ffc8ed6f5a1654eb3f5559392b92e40b18a566cf8d3f9787196d46a4aa
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- tax_base
+- unique_transaction_count
+- receipt_credit
+- payable_vat

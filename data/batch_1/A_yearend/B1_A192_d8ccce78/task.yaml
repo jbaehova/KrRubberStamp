@@ -1,0 +1,66 @@
+task_id: B1_A192_d8ccce78
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상해당화운영의 가상조희담은 하반기에 입사했고 가족 자료가 여러 봉투에 나뉘어 왔습니다. 가족별 나이와 소득을 확인하고 재직
+  기간을 납부일에 적용해 주세요. 공제대상 가족 수, 교육비와 보험료 및 의료비의 세액공제액과 신용카드 등 소득공제액을 적고 실제 원천징수 누계로
+  총 정산액을 계산합니다.
+input_files:
+- path: inputs/01_입사신청.hwpx
+  format: hwpx
+- path: inputs/02_지급누계.xlsx
+  format: xlsx
+- path: inputs/03_원천세.pdf
+  format: pdf
+- path: inputs/04_학생가족.hwpx
+  format: hwpx
+- path: inputs/05_배우자소득.xlsx
+  format: xlsx
+- path: inputs/06_학비장학.pdf
+  format: pdf
+- path: inputs/07_배우자보험.pdf
+  format: pdf
+- path: inputs/08_입사전진료.hwpx
+  format: hwpx
+- path: inputs/09_입사후진료.pdf
+  format: pdf
+- path: inputs/10_가족카드.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    education_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    settlement_total:
+      type: integer
+  required:
+  - eligible_dependents
+  - education_credit
+  - insurance_credit
+  - medical_credit
+  - credit_card_deduction
+  - settlement_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-7c1f9d7f-450b-52e0-9a64-2063c4432ffb
+scenario_seed: 15622088225338434121
+scenario_hash: 399e6f9a2cf144d4d235484ed57bc62aa235d0fa81002185a234cd1b03726bbd
+authorship:
+  method: individually_written
+  case_id: A192
+  case_sha256: d8ccce78b91c22499a331f63e26d9f44c2c8566c53bd9382601db8c0fc69488a
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- eligible_dependents
+- education_credit
+- insurance_credit
+- medical_credit
+- credit_card_deduction
+- settlement_total

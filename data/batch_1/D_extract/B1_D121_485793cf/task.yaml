@@ -1,0 +1,51 @@
+task_id: B1_D121_485793cf
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 기록 수선 도구를 다음에 구매할 때 참고할 cheapest_by_item을 정리해 주세요. 실제 지출 grand_total도
+  함께 확인합니다.
+input_files:
+- path: inputs/01_수선도구최초명세.pdf
+  format: pdf
+- path: inputs/02_시연붓납품.hwpx
+  format: hwpx
+- path: inputs/03_롤러추가명세.xlsx
+  format: xlsx
+- path: inputs/04_붓추가명세.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-7e625432-f0d8-5b13-a368-13bf7328b844
+scenario_seed: 5212797612379927953
+scenario_hash: 1f260c501b85a39a6d6a085acfff70f4d7c03b4b82feb8109f0b8b4c9bc93aa3
+authorship:
+  method: individually_written
+  case_id: D121
+  case_sha256: 485793cf53e8f591ab76f4a0c2c2ee2c1e8fde7c1276b18fda64d04d562e5059
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- grand_total

@@ -1,0 +1,176 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-04",
+          "document_id": "ROUTE-BOX-11",
+          "event": "received",
+          "event_id": "ROUTE-BOX-IN",
+          "location": "순회자료창고"
+        },
+        {
+          "date": "2026-04-04",
+          "document_id": "ROUTE-DIV-12",
+          "event": "received",
+          "event_id": "ROUTE-DIV-IN",
+          "location": "순회자료창고"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-01",
+          "document_id": "ROUTE-BOX-11",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "ROUTE-BOX-C",
+          "vendor": "가상순회보관"
+        },
+        {
+          "date": "2026-04-03",
+          "document_id": "ROUTE-DIV-12",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "ROUTE-DIV-C",
+          "vendor": "가상자료구분"
+        },
+        {
+          "date": "2026-04-05",
+          "document_id": "ROUTE-LARGE-15",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "ROUTE-LARGE-C",
+          "vendor": "가상순회보관"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "ROUTE-BOX-C",
+          "items": [
+            {
+              "name": "순회자료함30",
+              "quantity": 5,
+              "unit_price": 51000
+            }
+          ],
+          "sheet_id": "ROUTE-BOX-L"
+        },
+        {
+          "header_record_id": "ROUTE-DIV-C",
+          "items": [
+            {
+              "name": "자료구분판30",
+              "quantity": 20,
+              "unit_price": 1800
+            }
+          ],
+          "sheet_id": "ROUTE-DIV-L"
+        },
+        {
+          "header_record_id": "ROUTE-LARGE-C",
+          "items": [
+            {
+              "name": "순회자료함50",
+              "quantity": 3,
+              "unit_price": 74000
+            }
+          ],
+          "sheet_id": "ROUTE-LARGE-L"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목 첨부를 표지에 연결한다. invoice 또는 order 번호에 received 이벤트가 있는 자료만 실제 구매 합계에 넣는다. 주문 발행이나 청구 일자만으로 인수를 추정하지 않는다. 별도 단가의 공급가액은 수량 곱하기 단가이며 행별 10%에서 원 미만을 버린 세액을 더한다. 건수는 실제 인수한 서로 다른 document_id 수다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "ROUTE-LARGE-15"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "ROUTE-BOX-11",
+        "ROUTE-DIV-12"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "ROUTE-BOX-11",
+      "includes_vat": false,
+      "quantity": 5,
+      "unit_price": 51000
+    },
+    "output": {
+      "supply": 255000,
+      "total": 280500,
+      "vat": 25500
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상순회보관"
+    },
+    "output": "가상순회보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "ROUTE-DIV-12",
+      "includes_vat": false,
+      "quantity": 20,
+      "unit_price": 1800
+    },
+    "output": {
+      "supply": 36000,
+      "total": 39600,
+      "vat": 3600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상자료구분"
+    },
+    "output": "가상자료구분",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "순회자료함30",
+          "unit_price": 51000,
+          "vendor": "가상순회보관"
+        },
+        {
+          "item": "자료구분판30",
+          "unit_price": 1800,
+          "vendor": "가상자료구분"
+        }
+      ],
+      "grand_total": 320100,
+      "supply_total": 291000,
+      "unique_document_count": 2,
+      "vat_total": 29100,
+      "vendor_totals": [
+        {
+          "supply": 255000,
+          "total": 280500,
+          "vat": 25500,
+          "vendor": "가상순회보관"
+        },
+        {
+          "supply": 36000,
+          "total": 39600,
+          "vat": 3600,
+          "vendor": "가상자료구분"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

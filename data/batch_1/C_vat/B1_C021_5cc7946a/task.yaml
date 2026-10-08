@@ -1,0 +1,46 @@
+task_id: B1_C021_5cc7946a
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상여백인쇄의 인쇄 납품 자료와 카드 식사 전표를 정리해 주세요. 참석자 기록에서 식사의 목적을 확인하여 매입세액(input_vat)을
+  공제불가 세액(noncreditable_vat)과 공제가능 세액(deductible_input_vat)으로 나눠 주세요. 최종 납부액(payable_vat)을
+  answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_인쇄소_범위.hwpx
+  format: hwpx
+- path: inputs/02_전년_세무기록.pdf
+  format: pdf
+- path: inputs/03_안내서_납품.pdf
+  format: pdf
+- path: inputs/04_식당_전표.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-74fac7d5-8c0e-582b-8cfe-94f7db08fa3d
+scenario_seed: 6685475355036397005
+scenario_hash: f5d8ed25005c56cbe8b0ea38defd6eb91181b0d0902fce002fe8cf5f74fc9a36
+authorship:
+  method: individually_written
+  case_id: C021
+  case_sha256: 5cc7946a0b92adcd4304e2175d547e292097ee71c830e90b2d1be2bf5d11dc1a
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- payable_vat

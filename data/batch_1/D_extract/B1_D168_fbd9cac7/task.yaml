@@ -1,0 +1,47 @@
+task_id: B1_D168_fbd9cac7
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 향토 지도 펼침대 구매 자료를 후임자에게 넘길 단가표로 정리해 주세요. answer.json에는 cheapest_by_item과
+  supply_total이 필요합니다.
+input_files:
+- path: inputs/01_지도대60명세.hwpx
+  format: hwpx
+- path: inputs/02_지도대90명세.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-9dc3d6e4-8e11-5c89-b00e-0700af31e623
+scenario_seed: 18147759130518147263
+scenario_hash: d7261921e552f71af300b35239d02a606644f09fb7cb4e104e247a9886568762
+authorship:
+  method: individually_written
+  case_id: D168
+  case_sha256: fbd9cac73be2d0bffb2faf4ababf5e6dfbbcfec158d8b61edbac7ca0d168a0c2
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item
+- supply_total

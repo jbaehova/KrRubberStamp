@@ -1,0 +1,50 @@
+task_id: B1_D123_aa6bd99d
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 자료 복원 장비의 판매처 지급 목록이 필요합니다. 원문 업체 이름을 정해진 기준으로 정리해 vendor_totals를 작성해
+  주세요.
+input_files:
+- path: inputs/01_자료변환연결기.pdf
+  format: pdf
+- path: inputs/02_자료변환연결선.xlsx
+  format: xlsx
+- path: inputs/03_자료읽기장치.hwpx
+  format: hwpx
+- path: inputs/04_고정받침.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-c3f6952f-bbac-5123-8164-60ac3cc1d0ce
+scenario_seed: 12280148081515236423
+scenario_hash: 92acedbae9df8ce3124e8721aa6237ba83ee450fb94c2358b5e288d16f092080
+authorship:
+  method: individually_written
+  case_id: D123
+  case_sha256: aa6bd99dfbe90c4788b54c14cd322991e239744b083b44f7f35ce75385d38fa3
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals

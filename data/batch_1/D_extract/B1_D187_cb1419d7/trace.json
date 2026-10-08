@@ -1,0 +1,186 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-08-05",
+          "document_id": "AUDIO-RX-81",
+          "event": "received",
+          "event_id": "AUDIO-RX-OPS",
+          "location": "행사준비실"
+        },
+        {
+          "date": "2026-08-05",
+          "document_id": "AUDIO-RX-81",
+          "event": "received",
+          "event_id": "AUDIO-RX-TECH",
+          "location": "행사준비실"
+        },
+        {
+          "date": "2026-08-05",
+          "document_id": "AUDIO-TX-82",
+          "event": "received",
+          "event_id": "AUDIO-TX-IN",
+          "location": "행사준비실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-08-01",
+          "document_id": "AUDIO-RX-81",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "AUDIO-RX-C",
+          "vendor": "가상행사청취"
+        },
+        {
+          "date": "2026-08-02",
+          "document_id": "AUDIO-TX-82",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "AUDIO-TX-C",
+          "vendor": "가상행사청취"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "AUDIO-RX-C",
+          "items": [
+            {
+              "name": "행사음성수신기",
+              "quantity": 12,
+              "unit_price": 36500
+            }
+          ],
+          "sheet_id": "AUDIO-RX-BODY"
+        },
+        {
+          "header_record_id": "AUDIO-RX-C",
+          "items": [
+            {
+              "name": "수신기이어폰",
+              "quantity": 12,
+              "unit_price": 4600
+            }
+          ],
+          "sheet_id": "AUDIO-RX-EAR"
+        },
+        {
+          "header_record_id": "AUDIO-TX-C",
+          "items": [
+            {
+              "name": "행사음성송신기",
+              "quantity": 1,
+              "unit_price": 248000
+            }
+          ],
+          "sheet_id": "AUDIO-TX-L"
+        }
+      ],
+      "processing_policy": "각 첨부는 header_record_id로 표지에 연결한다. invoice 또는 order 번호의 received 사실만 구매에 포함한다. 같은 날짜와 장소에서 동일 원문 번호를 확인한 기록이 여러 개라도 한 인수다. 별도 가격의 공급가액은 각 행 수량 곱하기 단가이고 세액은 그 10%에서 원 미만을 버린 값이다. 지급액과 서로 다른 document_id 수를 기록한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "AUDIO-RX-81",
+        "AUDIO-TX-82"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "AUDIO-RX-81",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 36500
+    },
+    "output": {
+      "supply": 438000,
+      "total": 481800,
+      "vat": 43800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "AUDIO-RX-81",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 4600
+    },
+    "output": {
+      "supply": 55200,
+      "total": 60720,
+      "vat": 5520
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상행사청취"
+    },
+    "output": "가상행사청취",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "AUDIO-TX-82",
+      "includes_vat": false,
+      "quantity": 1,
+      "unit_price": 248000
+    },
+    "output": {
+      "supply": 248000,
+      "total": 272800,
+      "vat": 24800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상행사청취"
+    },
+    "output": "가상행사청취",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "수신기이어폰",
+          "unit_price": 4600,
+          "vendor": "가상행사청취"
+        },
+        {
+          "item": "행사음성송신기",
+          "unit_price": 248000,
+          "vendor": "가상행사청취"
+        },
+        {
+          "item": "행사음성수신기",
+          "unit_price": 36500,
+          "vendor": "가상행사청취"
+        }
+      ],
+      "grand_total": 815320,
+      "supply_total": 741200,
+      "unique_document_count": 2,
+      "vat_total": 74120,
+      "vendor_totals": [
+        {
+          "supply": 741200,
+          "total": 815320,
+          "vat": 74120,
+          "vendor": "가상행사청취"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

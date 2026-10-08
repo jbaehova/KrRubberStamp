@@ -1,0 +1,183 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-03",
+          "document_id": "SIGN-BOARD-60",
+          "event": "cancelled_before_dispatch",
+          "event_id": "SIGN-OLD-STOP",
+          "location": "판재출고대기"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "SIGN-BOARD-45",
+          "event": "received",
+          "event_id": "SIGN-NEW-IN",
+          "location": "간판제작작업대"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "SIGN-FRAME-45",
+          "event": "received",
+          "event_id": "SIGN-FRAME-IN",
+          "location": "간판제작작업대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-02",
+          "document_id": "SIGN-BOARD-60",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SIGN-OLD-C",
+          "vendor": "가상간판판재"
+        },
+        {
+          "date": "2026-06-04",
+          "document_id": "SIGN-BOARD-45",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "SIGN-NEW-C",
+          "vendor": "가상간판판재"
+        },
+        {
+          "date": "2026-06-05",
+          "document_id": "SIGN-FRAME-45",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "SIGN-FRAME-C",
+          "vendor": "가상프레임판매"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "SIGN-OLD-C",
+          "items": [
+            {
+              "name": "간판판재60",
+              "quantity": 4,
+              "unit_price": 24500
+            }
+          ],
+          "sheet_id": "SIGN-OLD-L"
+        },
+        {
+          "header_record_id": "SIGN-NEW-C",
+          "items": [
+            {
+              "name": "간판판재45",
+              "quantity": 4,
+              "unit_price": 25800
+            }
+          ],
+          "sheet_id": "SIGN-NEW-L"
+        },
+        {
+          "header_record_id": "SIGN-FRAME-C",
+          "items": [
+            {
+              "name": "간판프레임45",
+              "quantity": 4,
+              "unit_price": 19700
+            }
+          ],
+          "sheet_id": "SIGN-FRAME-L"
+        }
+      ],
+      "processing_policy": "첨부의 header_record_id로 표지에 연결한다. invoice 또는 order 번호에 received가 있는 원문만 구매다. cancelled_before_dispatch는 인수 구매가 아니다. 별도 단가는 공급가액이며 세액은 행 공급가액의 10%에서 원 미만을 버린다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자로 정리하고 업체 법인 표현을 제거해 이름 순으로 배열한다. 가격 동률이면 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "SIGN-BOARD-60"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "SIGN-BOARD-45",
+        "SIGN-FRAME-45"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SIGN-BOARD-45",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 25800
+    },
+    "output": {
+      "supply": 103200,
+      "total": 113520,
+      "vat": 10320
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상간판판재"
+    },
+    "output": "가상간판판재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SIGN-FRAME-45",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 19700
+    },
+    "output": {
+      "supply": 78800,
+      "total": 86680,
+      "vat": 7880
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상프레임판매"
+    },
+    "output": "가상프레임판매",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "간판판재45",
+          "unit_price": 25800,
+          "vendor": "가상간판판재"
+        },
+        {
+          "item": "간판프레임45",
+          "unit_price": 19700,
+          "vendor": "가상프레임판매"
+        }
+      ],
+      "grand_total": 200200,
+      "supply_total": 182000,
+      "unique_document_count": 2,
+      "vat_total": 18200,
+      "vendor_totals": [
+        {
+          "supply": 103200,
+          "total": 113520,
+          "vat": 10320,
+          "vendor": "가상간판판재"
+        },
+        {
+          "supply": 78800,
+          "total": 86680,
+          "vat": 7880,
+          "vendor": "가상프레임판매"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

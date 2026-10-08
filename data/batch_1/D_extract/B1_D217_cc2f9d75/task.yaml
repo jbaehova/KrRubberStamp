@@ -1,0 +1,47 @@
+task_id: B1_D217_cc2f9d75
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 화병 받침의 재주문 단가표와 이번 공급가액 원가를 작성해 주세요. cheapest_by_item과 supply_total을
+  제출해 주세요.
+input_files:
+- path: inputs/01_화기받침명세.hwpx
+  format: hwpx
+- path: inputs/02_꽃매대보충.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-f2ab55a7-0536-5818-a27d-6a54a2a27425
+scenario_seed: 14713151636133580629
+scenario_hash: 87ba76b3093532d1ac4cdf2fa664ac37afa6356222f6e0cd1592c53b27058e1d
+authorship:
+  method: individually_written
+  case_id: D217
+  case_sha256: cc2f9d759e330f558760e1945149f1938d4d2769e7b9332229f8ce44527cf444
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- supply_total

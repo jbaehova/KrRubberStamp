@@ -1,0 +1,281 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "공장도착",
+          "date": "2026-05-14",
+          "description": "공장 도구 소독실에 장비를 설치했다.",
+          "document_ids": [
+            "소독전자1"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "위생 준비 공장"
+          },
+          "operation_id": "장비준비",
+          "participants": [
+            {
+              "name": "가상문준비",
+              "organization": "가상위생준비",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C172-공장기"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "가정도착",
+          "date": "2026-05-14",
+          "description": "가족 주거지에서 개인 물품 소독용으로 인수했다.",
+          "document_ids": [
+            "소독전자2"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "대표 가족 주거지"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상문가족",
+              "organization": "가상문가정",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "C172-주거기"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 위생 장비 제작",
+          "operation_id": "장비준비",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "공장도착",
+          "date": "2026-05-14",
+          "document_id": "소독전자1",
+          "transaction_id": "C172-공장기"
+        },
+        {
+          "activity_id": "가정도착",
+          "date": "2026-05-14",
+          "document_id": "소독전자2",
+          "transaction_id": "C172-주거기"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "소독전자1",
+        "purpose": "business",
+        "transaction_id": "C172-공장기"
+      },
+      {
+        "business_related": false,
+        "document_id": "소독전자2",
+        "purpose": "private",
+        "transaction_id": "C172-주거기"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "소독전자1"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C172-공장기"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "소독전자2"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C172-주거기"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-14",
+      "transaction_id": "C172-공장기"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 935000,
+      "includes_vat": true,
+      "transaction_id": "C172-공장기"
+    },
+    "output": {
+      "gross": 935000,
+      "supply_base": 850000,
+      "vat": 85000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C172-공장기",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 85000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-14",
+      "transaction_id": "C172-주거기"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 935000,
+      "includes_vat": true,
+      "transaction_id": "C172-주거기"
+    },
+    "output": {
+      "gross": 935000,
+      "supply_base": 850000,
+      "vat": 85000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "C172-주거기",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 85000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 407000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -85000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -85000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -85000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 85000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 85000,
+      "input_vat": 170000,
+      "net_vat": -85000,
+      "noncreditable_vat": 85000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 85000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

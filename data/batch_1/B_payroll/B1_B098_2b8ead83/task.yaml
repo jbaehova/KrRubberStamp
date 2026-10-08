@@ -1,0 +1,72 @@
+task_id: B1_B098_2b8ead83
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상늘품실험실의 고령 신규 채용 직원에게 당월 고액 정액을 지급합니다. 기관별 부과 통지에서 국민연금과 고용보험을 확인하고
+  건강보험 및 장기요양을 계산해 주세요. 두 자녀 공제 후120% 신청을 적용한 소득세와 지방소득세 및 실지급액도 필요합니다. 과세급여의4500만원
+  경계는 첨부 공식 산식을 사용합니다.
+input_files:
+- path: inputs/01_고령신규약정.pdf
+  format: pdf
+- path: inputs/02_신규식대.hwpx
+  format: hwpx
+- path: inputs/03_신규연금.pdf
+  format: pdf
+- path: inputs/04_신규건강.xlsx
+  format: xlsx
+- path: inputs/05_신규고용.hwpx
+  format: hwpx
+- path: inputs/06_신규가족.pdf
+  format: pdf
+- path: inputs/07_신규선택.hwpx
+  format: hwpx
+- path: inputs/08_신규정상월.xlsx
+  format: xlsx
+- path: inputs/09_4500경계참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    taxable_pay:
+      type: integer
+    national_pension:
+      type: integer
+    employment_insurance:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - taxable_pay
+  - national_pension
+  - employment_insurance
+  - health_insurance
+  - long_term_care
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-ae48500d-5275-53cc-a635-6d91df61ec1d
+scenario_seed: 3138636771450089336
+scenario_hash: 1dbbbc32532a52e8065e16b0960675df2b9221ca5c0da98bafb0d3a0e44d5740
+authorship:
+  method: individually_written
+  case_id: B098
+  case_sha256: 2b8ead83b142ef78694269c29a3c6609a109ab4f171a02df072f553e9d7220bc
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- taxable_pay
+- national_pension
+- employment_insurance
+- health_insurance
+- long_term_care
+- income_tax
+- local_income_tax
+- net_pay

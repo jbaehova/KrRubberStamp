@@ -1,0 +1,115 @@
+[
+  {
+    "inputs": {
+      "document_id": "CHECK-TORQUE-3",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 69700
+    },
+    "output": {
+      "supply": 139400,
+      "total": 153340,
+      "vat": 13940
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상시설점검"
+    },
+    "output": "가상시설점검",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CHECK-TAPE-5",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 15600
+    },
+    "output": {
+      "supply": 46800,
+      "total": 51480,
+      "vat": 4680
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상시설점검"
+    },
+    "output": "가상시설점검",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CHECK-POUCH-6",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 18900
+    },
+    "output": {
+      "supply": 37800,
+      "total": 41580,
+      "vat": 3780
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상도구보관"
+    },
+    "output": "가상도구보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CHECK-TORQUE-3"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "점검도구파우치",
+          "unit_price": 18900,
+          "vendor": "가상도구보관"
+        },
+        {
+          "item": "점검측정테이프",
+          "unit_price": 15600,
+          "vendor": "가상시설점검"
+        },
+        {
+          "item": "점검토크드라이버",
+          "unit_price": 69700,
+          "vendor": "가상시설점검"
+        }
+      ],
+      "grand_total": 246400,
+      "supply_total": 224000,
+      "unique_document_count": 3,
+      "vat_total": 22400,
+      "vendor_totals": [
+        {
+          "supply": 37800,
+          "total": 41580,
+          "vat": 3780,
+          "vendor": "가상도구보관"
+        },
+        {
+          "supply": 186200,
+          "total": 204820,
+          "vat": 18620,
+          "vendor": "가상시설점검"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

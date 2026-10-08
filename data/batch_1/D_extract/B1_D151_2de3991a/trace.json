@@ -1,0 +1,228 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-04",
+          "document_id": "SPECTRUM-151-A",
+          "event": "received",
+          "event_id": "e151-a",
+          "location": "분광 관찰실"
+        },
+        {
+          "date": "2026-06-09",
+          "document_id": "SPECTRUM-151-B",
+          "event": "received",
+          "event_id": "e151-b",
+          "location": "분광 관찰실"
+        },
+        {
+          "date": "2026-06-13",
+          "document_id": "SPECTRUM-151-C",
+          "event": "received",
+          "event_id": "e151-c",
+          "location": "분광 관찰실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-02",
+          "document_id": "SPECTRUM-151-A",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h151-first",
+          "vendor": "가상광학소모품"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "SPECTRUM-151-B",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "h151-other",
+          "vendor": "가상분광부품"
+        },
+        {
+          "date": "2026-06-11",
+          "document_id": "SPECTRUM-151-C",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h151-cotton",
+          "vendor": "가상광학소모품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h151-first",
+          "items": [
+            {
+              "name": "관찰큐벳10",
+              "quantity": 12,
+              "unit_price": 6500
+            }
+          ],
+          "sheet_id": "lot151-1"
+        },
+        {
+          "header_record_id": "h151-first",
+          "items": [
+            {
+              "name": "관찰큐벳10",
+              "quantity": 8,
+              "unit_price": 6100
+            }
+          ],
+          "sheet_id": "lot151-2"
+        },
+        {
+          "header_record_id": "h151-other",
+          "items": [
+            {
+              "name": "관찰큐벳10",
+              "quantity": 10,
+              "unit_price": 6601
+            }
+          ],
+          "sheet_id": "s151-other"
+        },
+        {
+          "header_record_id": "h151-cotton",
+          "items": [
+            {
+              "name": "큐벳세척솜",
+              "quantity": 30,
+              "unit_price": 410
+            }
+          ],
+          "sheet_id": "s151-cotton"
+        }
+      ],
+      "processing_policy": "header_record_id로 표지에 해당하는 모든 로트 품목표를 연결하고 반복 품목 행도 수량과 단가를 모두 보존한다. invoice와 order는 document_id의 received가 있을 때 포함하고 quote, 무인수 및 출고 전 취소는 제외한다. 같은 document_id의 동일 내용은 한 번만 센다. 별도는 품목 수량 곱하기 단가의 공급가액과 그 10% 원 미만 버림 세액으로 계산한다. 포함 총액은 품목별 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 배열은 정규화 이름 오름차순이다. 비교는 동일 규격 개당 공급가액 단가이며 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 최저 동률은 정규화 업체명 오름차순 첫 업체다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "SPECTRUM-151-A",
+        "SPECTRUM-151-B",
+        "SPECTRUM-151-C"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SPECTRUM-151-A",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 6500
+    },
+    "output": {
+      "supply": 78000,
+      "total": 85800,
+      "vat": 7800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "SPECTRUM-151-A",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 6100
+    },
+    "output": {
+      "supply": 48800,
+      "total": 53680,
+      "vat": 4880
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상광학소모품"
+    },
+    "output": "가상광학소모품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SPECTRUM-151-B",
+      "includes_vat": true,
+      "quantity": 10,
+      "unit_price": 6601
+    },
+    "output": {
+      "supply": 60009,
+      "total": 66010,
+      "vat": 6001
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상분광부품"
+    },
+    "output": "가상분광부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SPECTRUM-151-C",
+      "includes_vat": false,
+      "quantity": 30,
+      "unit_price": 410
+    },
+    "output": {
+      "supply": 12300,
+      "total": 13530,
+      "vat": 1230
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상광학소모품"
+    },
+    "output": "가상광학소모품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "관찰큐벳10",
+          "unit_price": 6000,
+          "vendor": "가상분광부품"
+        },
+        {
+          "item": "큐벳세척솜",
+          "unit_price": 410,
+          "vendor": "가상광학소모품"
+        }
+      ],
+      "grand_total": 219020,
+      "supply_total": 199109,
+      "unique_document_count": 3,
+      "vat_total": 19911,
+      "vendor_totals": [
+        {
+          "supply": 139100,
+          "total": 153010,
+          "vat": 13910,
+          "vendor": "가상광학소모품"
+        },
+        {
+          "supply": 60009,
+          "total": 66010,
+          "vat": 6001,
+          "vendor": "가상분광부품"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,82 @@
+task_id: B1_D103_9e8506aa
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 센서 자료는 표지와 품목표 수신 순서가 다릅니다. 연결 번호 및 인수 이력으로 거래를 복원해 vendor_totals, cheapest_by_item,
+  grand_total을 답하세요. 표기와 가격 처리 계약은 현장 대장에 있습니다.
+input_files:
+- path: inputs/01_동쪽표지.pdf
+  format: pdf
+- path: inputs/02_첫수신품목.xlsx
+  format: xlsx
+- path: inputs/03_추가주문표지.hwpx
+  format: hwpx
+- path: inputs/04_둘째수신품목.pdf
+  format: pdf
+- path: inputs/05_중앙표지.pdf
+  format: pdf
+- path: inputs/06_셋째수신품목.xlsx
+  format: xlsx
+- path: inputs/07_서쪽표지.hwpx
+  format: hwpx
+- path: inputs/08_마지막수신품목.pdf
+  format: pdf
+- path: inputs/09_현장이력.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-85e093cd-14df-5167-8c44-fdfde43fa023
+scenario_seed: 11422543358132510337
+scenario_hash: d458bd41584a6bbc024cb01a91c96326a751683837f878962d78d0ba6f3305da
+authorship:
+  method: individually_written
+  case_id: D103
+  case_sha256: 9e8506aa3cfc5e81da65607c9e1025b2aa87b1b99fd8c8ef2794ea6f870eac32
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item
+- grand_total

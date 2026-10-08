@@ -1,0 +1,68 @@
+task_id: B1_B052_582f5923
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상노을수리실은 상시 근로자 네 명이고 가상신은재 직원은 만 62세입니다. 법정 유급 주휴일의 실제 근로와 평일 추가 근로의
+  원시 기록을 확인하여 연장수당, 휴일수당과 야간 가산을 계산해 주세요. 법정 가산 외 우대 약정은 없습니다. 회사 식사와 현금 식대도 함께 지급하므로
+  과세급여를 확인하고 국민연금 및 고용보험 공제액과 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_수리실근로계약.pdf
+  format: pdf
+- path: inputs/02_사업장주휴.hwpx
+  format: hwpx
+- path: inputs/03_주휴일근로.xlsx
+  format: xlsx
+- path: inputs/04_평일추가.pdf
+  format: pdf
+- path: inputs/05_회사식사확인.hwpx
+  format: hwpx
+- path: inputs/06_연금미부과.pdf
+  format: pdf
+- path: inputs/07_계속보험.xlsx
+  format: xlsx
+- path: inputs/08_정상일정은행.hwpx
+  format: hwpx
+- path: inputs/09_가산과세기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    national_pension:
+      type: integer
+    employment_insurance:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - holiday_pay
+  - night_pay
+  - taxable_pay
+  - national_pension
+  - employment_insurance
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-c7dd8a74-d875-52f7-8a9c-3bc086122ec7
+scenario_seed: 6354395607449267986
+scenario_hash: af3212acded426ecfad335b6dbb5eed5424fceccd8647032f781aaeeb4bc8a11
+authorship:
+  method: individually_written
+  case_id: B052
+  case_sha256: 582f59235050ef12882d5c629d9ee95e200102e0197882bfcedbcf04d66f5f95
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- overtime_pay
+- holiday_pay
+- night_pay
+- taxable_pay
+- national_pension
+- employment_insurance
+- net_pay

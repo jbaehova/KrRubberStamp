@@ -1,0 +1,305 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C083-첫날활동",
+          "date": "2026-04-18",
+          "description": "직원이 커팅 장비의 첫 교체 날을 받아 설치했다.",
+          "document_ids": [
+            "C083-첫카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상반듯커팅 장비실"
+          },
+          "operation_id": "C083-커팅",
+          "participants": [
+            {
+              "name": "가상 장비직원",
+              "organization": "가상반듯커팅",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C083-첫날"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "C083-둘째날활동",
+          "date": "2026-05-16",
+          "description": "직원이 다음 달 별도 교체 날을 받아 설치했다.",
+          "document_ids": [
+            "C083-둘째카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상반듯커팅 장비실"
+          },
+          "operation_id": "C083-커팅",
+          "participants": [
+            {
+              "name": "가상 장비직원",
+              "organization": "가상반듯커팅",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C083-둘째날"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 자재 커팅 용역",
+          "operation_id": "C083-커팅",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C083-첫날활동",
+          "date": "2026-04-18",
+          "document_id": "C083-첫카드",
+          "transaction_id": "C083-첫날"
+        },
+        {
+          "activity_id": "C083-둘째날활동",
+          "date": "2026-05-16",
+          "document_id": "C083-둘째카드",
+          "transaction_id": "C083-둘째날"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "supplier_status_records": [
+        {
+          "status": "simplified_no_invoice_duty",
+          "supplier_id": "가상날유통",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-04-30"
+        },
+        {
+          "status": "general",
+          "supplier_id": "가상날유통",
+          "valid_from": "2026-05-01",
+          "valid_to": "2026-12-31"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C083-첫카드",
+        "purpose": "business",
+        "transaction_id": "C083-첫날"
+      },
+      {
+        "business_related": true,
+        "document_id": "C083-둘째카드",
+        "purpose": "business",
+        "transaction_id": "C083-둘째날"
+      },
+      {
+        "supplier_general": false,
+        "supplier_id": "가상날유통",
+        "transaction_id": "C083-첫날"
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "가상날유통",
+        "transaction_id": "C083-둘째날"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C083-둘째카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C083-둘째날"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C083-첫카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C083-첫날"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-16",
+      "transaction_id": "C083-둘째날"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 660000,
+      "includes_vat": true,
+      "transaction_id": "C083-둘째날"
+    },
+    "output": {
+      "gross": 660000,
+      "supply_base": 600000,
+      "vat": 60000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C083-둘째날",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 60000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-18",
+      "transaction_id": "C083-첫날"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 550000,
+      "includes_vat": true,
+      "transaction_id": "C083-첫날"
+    },
+    "output": {
+      "gross": 550000,
+      "supply_base": 500000,
+      "vat": 50000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "C083-첫날",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 50000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 128000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -60000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -60000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -60000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 60000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 60000,
+      "input_vat": 110000,
+      "net_vat": -60000,
+      "noncreditable_vat": 50000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 60000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

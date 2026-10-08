@@ -1,0 +1,45 @@
+task_id: B1_B079_11ccfb78
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상소담배치실에서 낮은 기준소득 신고액이 적힌 국민연금 통지를 받았습니다. 공단의 7월 보험 부과 통지에 맞는 하반기 하한을
+  적용한 기준소득월액과 근로자 국민연금 부담액을 구해 주세요. 다른 보험의 통지액은 연금 하한으로 바꾸지 않습니다.
+input_files:
+- path: inputs/01_배치실지급.pdf
+  format: pdf
+- path: inputs/02_낮은연금신고.hwpx
+  format: hwpx
+- path: inputs/03_7월실행.xlsx
+  format: xlsx
+- path: inputs/04_하반기하한.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    employment_insurance:
+      type: integer
+  required:
+  - pension_base_income
+  - national_pension
+  - health_insurance
+  - employment_insurance
+  additionalProperties: false
+canary: KrRubberStamp-canary-f575ae1e-9bf5-550f-bfec-74302ea4f57b
+scenario_seed: 1282676490143776943
+scenario_hash: fa9fba660e5856e8493bfb9fc68a8cc7869b5beabd69555eee2ed446593b5cc2
+authorship:
+  method: individually_written
+  case_id: B079
+  case_sha256: 11ccfb78ccc3c0af6837528c37b96246c06aa94d3896dda0b862d43ba721641d
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- pension_base_income
+- national_pension
+- health_insurance
+- employment_insurance

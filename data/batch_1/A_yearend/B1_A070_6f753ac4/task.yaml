@@ -1,0 +1,45 @@
+task_id: B1_A070_6f753ac4
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상해밀정밀의 가상송서한은 쉰여덟 살 어머니의 장애인 증명서와 일반 보장성보험료를 제출했습니다. 어머니 나이만 보고 가족 공제에서
+  제외하지 말고 공제대상 인원과 기본 및 추가공제액을 구해 주세요. 직원이 납부한 어머니의 보험료 세액공제액도 계산합니다.
+input_files:
+- path: inputs/01_신청인.hwpx
+  format: hwpx
+- path: inputs/02_급여기초.xlsx
+  format: xlsx
+- path: inputs/03_모친증명.pdf
+  format: pdf
+- path: inputs/04_모친보험료.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - additional_deduction
+  - insurance_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-f1311eb4-2890-53d6-b1a0-e191af4ebc3f
+scenario_seed: 8031390127627800310
+scenario_hash: 0bdefb029b0f72856c8bd292b283e55d56a472350b719b7b6e4af384a8f9bddd
+authorship:
+  method: individually_written
+  case_id: A070
+  case_sha256: 6f753ac4d9d58ef6a1816eb50e15040a73a4d83d76dee5a3df6e8e33b9cc4b9c
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- additional_deduction
+- insurance_credit

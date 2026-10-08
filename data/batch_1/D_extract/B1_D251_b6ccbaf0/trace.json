@@ -1,0 +1,260 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-09",
+          "document_id": "POST-TRAY-05",
+          "event": "received",
+          "event_id": "POST-TRAY-IN",
+          "location": "우편대행점준비실"
+        },
+        {
+          "date": "2026-05-10",
+          "document_id": "POST-BIN-06",
+          "event": "received",
+          "event_id": "POST-BIN-IN",
+          "location": "우편대행점준비실"
+        },
+        {
+          "date": "2026-05-10",
+          "document_id": "POST-STAMP-07",
+          "event": "received",
+          "event_id": "POST-STAMP-IN",
+          "location": "우편대행점준비실"
+        },
+        {
+          "date": "2026-05-09",
+          "document_id": "POST-TRAY-08",
+          "event": "cancelled_before_dispatch",
+          "event_id": "POST-BIG-STOP",
+          "location": "창구비품출고실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-05",
+          "document_id": "POST-TRAY-05",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "POST-TRAY-C",
+          "vendor": "주식회사 가상창구비품"
+        },
+        {
+          "date": "2026-05-06",
+          "document_id": "POST-BIN-06",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "POST-BIN-C",
+          "vendor": "㈜가상창구비품"
+        },
+        {
+          "date": "2026-05-07",
+          "document_id": "POST-STAMP-07",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "POST-STAMP-C",
+          "vendor": "가상발송인장"
+        },
+        {
+          "date": "2026-05-08",
+          "document_id": "POST-TRAY-08",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "POST-BIG-C",
+          "vendor": "주식회사 가상창구비품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "POST-TRAY-C",
+          "items": [
+            {
+              "name": "창구트레이소",
+              "quantity": 4,
+              "unit_price": 9300
+            }
+          ],
+          "sheet_id": "POST-TRAY-L"
+        },
+        {
+          "header_record_id": "POST-BIN-C",
+          "items": [
+            {
+              "name": "발송서류통",
+              "quantity": 3,
+              "unit_price": 14200
+            }
+          ],
+          "sheet_id": "POST-BIN-L"
+        },
+        {
+          "header_record_id": "POST-STAMP-C",
+          "items": [
+            {
+              "name": "발송확인스탬프",
+              "quantity": 2,
+              "unit_price": 18600
+            },
+            {
+              "name": "스탬프보충잉크",
+              "quantity": 1,
+              "unit_price": 5800
+            }
+          ],
+          "sheet_id": "POST-STAMP-L"
+        },
+        {
+          "header_record_id": "POST-BIG-C",
+          "items": [
+            {
+              "name": "창구트레이대",
+              "quantity": 4,
+              "unit_price": 17100
+            }
+          ],
+          "sheet_id": "POST-BIG-L"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 연결한다. invoice 또는 order 번호의 received가 실제 구매이며 cancelled_before_dispatch는 구매가 아니다. 별도 단가는 공급가액이고 행 세액은 그 10%에서 원 미만을 버린다. 업체명은 NFKC 후 공백과 법인 표현을 제거하고 이름 순으로 배열한다. 원문 document_id가 같은 동일 내용은 한 번 센다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "POST-TRAY-08"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "POST-BIN-06",
+        "POST-STAMP-07",
+        "POST-TRAY-05"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "POST-TRAY-05",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 9300
+    },
+    "output": {
+      "supply": 37200,
+      "total": 40920,
+      "vat": 3720
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "주식회사 가상창구비품"
+    },
+    "output": "가상창구비품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "POST-BIN-06",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 14200
+    },
+    "output": {
+      "supply": 42600,
+      "total": 46860,
+      "vat": 4260
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "㈜가상창구비품"
+    },
+    "output": "가상창구비품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "POST-STAMP-07",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 18600
+    },
+    "output": {
+      "supply": 37200,
+      "total": 40920,
+      "vat": 3720
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "POST-STAMP-07",
+      "includes_vat": false,
+      "quantity": 1,
+      "unit_price": 5800
+    },
+    "output": {
+      "supply": 5800,
+      "total": 6380,
+      "vat": 580
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상발송인장"
+    },
+    "output": "가상발송인장",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "발송서류통",
+          "unit_price": 14200,
+          "vendor": "가상창구비품"
+        },
+        {
+          "item": "발송확인스탬프",
+          "unit_price": 18600,
+          "vendor": "가상발송인장"
+        },
+        {
+          "item": "스탬프보충잉크",
+          "unit_price": 5800,
+          "vendor": "가상발송인장"
+        },
+        {
+          "item": "창구트레이소",
+          "unit_price": 9300,
+          "vendor": "가상창구비품"
+        }
+      ],
+      "grand_total": 135080,
+      "supply_total": 122800,
+      "unique_document_count": 3,
+      "vat_total": 12280,
+      "vendor_totals": [
+        {
+          "supply": 43000,
+          "total": 47300,
+          "vat": 4300,
+          "vendor": "가상발송인장"
+        },
+        {
+          "supply": 79800,
+          "total": 87780,
+          "vat": 7980,
+          "vendor": "가상창구비품"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,232 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-05",
+          "document_id": "ENTRY-BOARD-11",
+          "event": "received",
+          "event_id": "ENTRY-BOARD-IN",
+          "location": "전자출입설치실"
+        },
+        {
+          "date": "2026-06-05",
+          "document_id": "ENTRY-CONN-12",
+          "event": "received",
+          "event_id": "ENTRY-CONN-IN",
+          "location": "전자출입설치실"
+        },
+        {
+          "date": "2026-06-04",
+          "document_id": "ENTRY-KEY-13",
+          "event": "cancelled_before_dispatch",
+          "event_id": "ENTRY-KEY-STOP",
+          "location": "열쇠출고대기"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-01",
+          "document_id": "ENTRY-BOARD-11",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "ENTRY-EXT-C",
+          "vendor": "가상전자출입"
+        },
+        {
+          "date": "2026-06-01",
+          "document_id": "ENTRY-BOARD-11",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "ENTRY-STORE-C",
+          "vendor": "가상전자출입"
+        },
+        {
+          "date": "2026-06-02",
+          "document_id": "ENTRY-CONN-12",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "ENTRY-CONN-C",
+          "vendor": "가상전자출입"
+        },
+        {
+          "date": "2026-06-03",
+          "document_id": "ENTRY-KEY-13",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "ENTRY-KEY-C",
+          "vendor": "가상출입열쇠"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "ENTRY-EXT-C",
+          "items": [
+            {
+              "name": "전자출입판",
+              "quantity": 2,
+              "unit_price": 128000
+            },
+            {
+              "name": "출입판고정프레임",
+              "quantity": 2,
+              "unit_price": 19700
+            }
+          ],
+          "sheet_id": "ENTRY-EXT-L"
+        },
+        {
+          "header_record_id": "ENTRY-STORE-C",
+          "items": [
+            {
+              "name": "전자출입판",
+              "quantity": 2,
+              "unit_price": 128000
+            },
+            {
+              "name": "출입판고정프레임",
+              "quantity": 2,
+              "unit_price": 19700
+            }
+          ],
+          "sheet_id": "ENTRY-STORE-L"
+        },
+        {
+          "header_record_id": "ENTRY-CONN-C",
+          "items": [
+            {
+              "name": "출입판연결단자",
+              "quantity": 8,
+              "unit_price": 2350
+            }
+          ],
+          "sheet_id": "ENTRY-CONN-L"
+        },
+        {
+          "header_record_id": "ENTRY-KEY-C",
+          "items": [
+            {
+              "name": "출입판비상키",
+              "quantity": 4,
+              "unit_price": 9400
+            }
+          ],
+          "sheet_id": "ENTRY-KEY-L"
+        }
+      ],
+      "processing_policy": "각 품목표는 header_record_id로 연결한다. invoice 또는 order에 received가 있는 번호만 실제 구매다. cancelled_before_dispatch는 구매 수에 넣지 않는다. 다른 record_id라도 document_id와 업체와 날짜 및 가격 조건과 모든 품목이 같으면 같은 원자료로 한 번만 센다. 구매 수는 서로 다른 실제 인수 document_id 수이며 첨부나 상태 기록 수와 다르다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "ENTRY-KEY-13"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "ENTRY-BOARD-11",
+        "ENTRY-CONN-12"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "ENTRY-BOARD-11",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 128000
+    },
+    "output": {
+      "supply": 256000,
+      "total": 281600,
+      "vat": 25600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "ENTRY-BOARD-11",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 19700
+    },
+    "output": {
+      "supply": 39400,
+      "total": 43340,
+      "vat": 3940
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상전자출입"
+    },
+    "output": "가상전자출입",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "ENTRY-BOARD-11"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "ENTRY-CONN-12",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 2350
+    },
+    "output": {
+      "supply": 18800,
+      "total": 20680,
+      "vat": 1880
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상전자출입"
+    },
+    "output": "가상전자출입",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "전자출입판",
+          "unit_price": 128000,
+          "vendor": "가상전자출입"
+        },
+        {
+          "item": "출입판고정프레임",
+          "unit_price": 19700,
+          "vendor": "가상전자출입"
+        },
+        {
+          "item": "출입판연결단자",
+          "unit_price": 2350,
+          "vendor": "가상전자출입"
+        }
+      ],
+      "grand_total": 345620,
+      "supply_total": 314200,
+      "unique_document_count": 2,
+      "vat_total": 31420,
+      "vendor_totals": [
+        {
+          "supply": 314200,
+          "total": 345620,
+          "vat": 31420,
+          "vendor": "가상전자출입"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

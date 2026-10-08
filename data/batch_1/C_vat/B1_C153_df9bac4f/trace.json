@@ -1,0 +1,402 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C153-재고인수",
+          "date": "2026-06-03",
+          "description": "직원이 판매할 조명을 재고실에 인수했다.",
+          "document_ids": [
+            "C153-재고계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상독서조명 재고실"
+          },
+          "operation_id": "C153-조명",
+          "participants": [
+            {
+              "name": "가상오재고",
+              "organization": "가상읽는조명",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C153-재고"
+        },
+        {
+          "action": "service",
+          "activity_id": "C153-서비스완료",
+          "date": "2026-06-04",
+          "description": "납품용 조명 검사 서비스를 작업장에서 완료하고 직원이 확인했다.",
+          "document_ids": [
+            "C153-검사카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상조명 검사대"
+          },
+          "operation_id": "C153-조명",
+          "participants": [
+            {
+              "name": "가상오재고",
+              "organization": "가상읽는조명",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C153-검사"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 독서 조명 소매 영업",
+          "operation_id": "C153-조명",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C153-재고인수",
+          "date": "2026-06-03",
+          "document_id": "C153-재고계산서",
+          "transaction_id": "C153-재고"
+        },
+        {
+          "activity_id": "C153-서비스완료",
+          "date": "2026-06-04",
+          "document_id": "C153-검사카드",
+          "transaction_id": "C153-검사"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C153-재고계산서",
+        "purpose": "business",
+        "transaction_id": "C153-재고"
+      },
+      {
+        "business_related": true,
+        "document_id": "C153-검사카드",
+        "purpose": "business",
+        "transaction_id": "C153-검사"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C153-검사카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C153-검사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C153-둘째영수"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "C153-둘째판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C153-재고계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C153-재고"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C153-첫카드",
+        "C153-첫계산서"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "C153-첫판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-04",
+      "transaction_id": "C153-검사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 319000,
+      "includes_vat": true,
+      "transaction_id": "C153-검사"
+    },
+    "output": {
+      "gross": 319000,
+      "supply_base": 290000,
+      "vat": 29000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C153-검사",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 29000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-18",
+      "transaction_id": "C153-둘째판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 11000000,
+      "includes_vat": true,
+      "transaction_id": "C153-둘째판매"
+    },
+    "output": {
+      "gross": 11000000,
+      "supply_base": 10000000,
+      "vat": 1000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 10000000
+    },
+    "output": 1000000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C153-둘째판매"
+    },
+    "output": {
+      "eligible_gross": 11000000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-03",
+      "transaction_id": "C153-재고"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 13200000,
+      "includes_vat": true,
+      "transaction_id": "C153-재고"
+    },
+    "output": {
+      "gross": 13200000,
+      "supply_base": 12000000,
+      "vat": 1200000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C153-재고",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 1200000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-17",
+      "transaction_id": "C153-첫판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 8800000,
+      "includes_vat": true,
+      "transaction_id": "C153-첫판매"
+    },
+    "output": {
+      "gross": 8800000,
+      "supply_base": 8000000,
+      "vat": 800000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 8000000
+    },
+    "output": 800000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "C153-첫판매"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 893000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 11000000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 143000,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 9930000,
+      "annual_limit": 10000000,
+      "raw_credit": 143000
+    },
+    "output": 70000,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 70000,
+      "liability_before_credit": 600000
+    },
+    "output": 70000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 420000
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 530000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 530000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 1200000,
+      "output_vat": 1800000,
+      "prepaid_vat": 0,
+      "receipt_credit": 70000
+    },
+    "output": {
+      "deductible_input_vat": 1200000,
+      "input_vat": 1229000,
+      "net_vat": 530000,
+      "noncreditable_vat": 29000,
+      "output_vat": 1800000,
+      "payable_vat": 530000,
+      "prepaid_vat": 0,
+      "receipt_credit": 70000,
+      "refund_vat": 0,
+      "tax_base": 18000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

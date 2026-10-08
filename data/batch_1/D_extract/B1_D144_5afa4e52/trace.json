@@ -1,0 +1,228 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-05",
+          "document_id": "TRANS-144-B",
+          "event": "received",
+          "event_id": "e144-b",
+          "location": "통역 준비실"
+        },
+        {
+          "date": "2026-02-08",
+          "document_id": "TRANS-144-L",
+          "event": "received",
+          "event_id": "e144-l",
+          "location": "통역 준비실"
+        },
+        {
+          "date": "2026-02-11",
+          "document_id": "TRANS-144-K",
+          "event": "received",
+          "event_id": "e144-k",
+          "location": "통역 준비실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-03",
+          "document_id": "TRANS-144-B",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h144-base",
+          "vendor": "가상통역받침"
+        },
+        {
+          "date": "2026-02-05",
+          "document_id": "TRANS-144-L",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h144-lead",
+          "vendor": "가상충전연결"
+        },
+        {
+          "date": "2026-02-09",
+          "document_id": "TRANS-144-K",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h144-kit",
+          "vendor": "가상휴대단말"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h144-base",
+          "items": [
+            {
+              "name": "ＤｅｓｋＢａｓｅ",
+              "quantity": 6,
+              "unit_price": 17603
+            }
+          ],
+          "sheet_id": "s144-b"
+        },
+        {
+          "header_record_id": "h144-lead",
+          "items": [
+            {
+              "name": "ChargeLead",
+              "quantity": 10,
+              "unit_price": 4900
+            }
+          ],
+          "sheet_id": "s144-l"
+        },
+        {
+          "header_record_id": "h144-kit",
+          "items": [
+            {
+              "name": "deskbase",
+              "quantity": 4,
+              "unit_price": 16100
+            },
+            {
+              "name": "ＣＨＡＲＧＥＬＥＡＤ",
+              "quantity": 4,
+              "unit_price": 4650
+            }
+          ],
+          "sheet_id": "s144-k"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때 포함하고 quote, 무인수와 출고 전 취소는 제외한다. 같은 document_id의 같은 내용은 한 번만 계산한다. 포함 품목 총액의 10/11 원 미만 버림을 공급가액으로 하고 차액을 세액으로 잡는다. 별도는 수량 곱하기 단가의 공급가액과 품목별 10% 원 미만 버림 세액으로 계산한다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하고 업체 법인 표시를 제거한다. 배열은 정규화 이름 오름차순이고 개당 공급가액 단가를 비교한다. 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이며 최저 동률은 정규화 업체명 오름차순 첫 업체다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "TRANS-144-B",
+        "TRANS-144-K",
+        "TRANS-144-L"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "TRANS-144-B",
+      "includes_vat": true,
+      "quantity": 6,
+      "unit_price": 17603
+    },
+    "output": {
+      "supply": 96016,
+      "total": 105618,
+      "vat": 9602
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상통역받침"
+    },
+    "output": "가상통역받침",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TRANS-144-L",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 4900
+    },
+    "output": {
+      "supply": 49000,
+      "total": 53900,
+      "vat": 4900
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상충전연결"
+    },
+    "output": "가상충전연결",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TRANS-144-K",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 16100
+    },
+    "output": {
+      "supply": 64400,
+      "total": 70840,
+      "vat": 6440
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "TRANS-144-K",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 4650
+    },
+    "output": {
+      "supply": 18600,
+      "total": 20460,
+      "vat": 1860
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상휴대단말"
+    },
+    "output": "가상휴대단말",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "chargelead",
+          "unit_price": 4650,
+          "vendor": "가상휴대단말"
+        },
+        {
+          "item": "deskbase",
+          "unit_price": 16002,
+          "vendor": "가상통역받침"
+        }
+      ],
+      "grand_total": 250818,
+      "supply_total": 228016,
+      "unique_document_count": 3,
+      "vat_total": 22802,
+      "vendor_totals": [
+        {
+          "supply": 49000,
+          "total": 53900,
+          "vat": 4900,
+          "vendor": "가상충전연결"
+        },
+        {
+          "supply": 96016,
+          "total": 105618,
+          "vat": 9602,
+          "vendor": "가상통역받침"
+        },
+        {
+          "supply": 83000,
+          "total": 91300,
+          "vat": 8300,
+          "vendor": "가상휴대단말"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,68 @@
+task_id: B1_A094_4f620860
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상제비콘텐츠의 가상봉지수는 부녀자 공제와 가족 추가공제를 함께 신청했습니다. 근로소득금액으로 부녀자 요건을 확인하고 배우자
+  및 두 자녀와 동생의 소득과 나이 및 장애인 증명을 읽어 공제대상 인원과 기본 및 추가공제액을 구해 주세요. 자녀세액공제액, 보험료 세액공제액
+  및 가족 카드 소득공제액도 각각 계산해 잘못 등록된 가족을 정리합니다.
+input_files:
+- path: inputs/01_직원인사.hwpx
+  format: hwpx
+- path: inputs/02_급여확정.xlsx
+  format: xlsx
+- path: inputs/03_배우자증명.pdf
+  format: pdf
+- path: inputs/04_큰자녀소득.pdf
+  format: pdf
+- path: inputs/05_작은자녀.pdf
+  format: pdf
+- path: inputs/06_동생장애증명.hwpx
+  format: hwpx
+- path: inputs/07_배우자보험.pdf
+  format: pdf
+- path: inputs/08_동생전용보험.pdf
+  format: pdf
+- path: inputs/09_명의별카드.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    salary_income:
+      type: integer
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    child_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+  required:
+  - salary_income
+  - eligible_dependents
+  - basic_deduction
+  - additional_deduction
+  - child_credit
+  - insurance_credit
+  - credit_card_deduction
+  additionalProperties: false
+canary: KrRubberStamp-canary-61aca744-6a6b-508f-8c58-ab4004a6d29e
+scenario_seed: 5720143687087654113
+scenario_hash: c117b3af715bff279da1efda7eaa20fe3c3a64c2fb2501c7428700fafbac2020
+authorship:
+  method: individually_written
+  case_id: A094
+  case_sha256: 4f620860750d84e184883915aae317634687e14f0d0d99ec4646e5df1e4208d5
+  source_file: batch_1/A_yearend/cases_054_103.json
+answer_fields:
+- salary_income
+- eligible_dependents
+- basic_deduction
+- additional_deduction
+- child_credit
+- insurance_credit
+- credit_card_deduction

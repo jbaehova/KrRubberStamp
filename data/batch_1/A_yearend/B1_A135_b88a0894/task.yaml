@@ -1,0 +1,48 @@
+task_id: B1_A135_b88a0894
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상산수유정비의 가상담주원은 어머니 보험료와 병원비를 냈습니다. 어머니의 근로소득 자료를 확인해 가족 수와 기본공제액 및 보험료
+  세액공제액을 구해 주세요. 실제 부양하며 직원이 부담한 의료비 세액공제액도 별도로 계산합니다. 어머니 소득 때문에 모든 지출을 한꺼번에 삭제하지
+  마세요.
+input_files:
+- path: inputs/01_부양부담확인.hwpx
+  format: hwpx
+- path: inputs/02_직원급여.xlsx
+  format: xlsx
+- path: inputs/03_어머니소득.pdf
+  format: pdf
+- path: inputs/04_어머니보험.pdf
+  format: pdf
+- path: inputs/05_어머니진료.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - insurance_credit
+  - medical_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-3aa2b285-ad2b-5801-949f-d332ee8d2947
+scenario_seed: 13297450284918737909
+scenario_hash: ad429cf87a345ff6e64742d4ea3ba1823c5f92c60079f7b5d9140429f7f3bfc5
+authorship:
+  method: individually_written
+  case_id: A135
+  case_sha256: b88a0894caff8bf5aa20b4fb1db7fb0881bea40791fd5a4effd4948e9a089d49
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- insurance_credit
+- medical_credit

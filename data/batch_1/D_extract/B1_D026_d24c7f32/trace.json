@@ -1,0 +1,273 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-01-09",
+          "document_id": "BRAILLE-ENTRY-0107",
+          "event": "received",
+          "event_id": "BT-R-ENTRY",
+          "location": "가상안내센터 입구"
+        },
+        {
+          "date": "2026-01-13",
+          "document_id": "BRAILLE-LIFT-0110",
+          "event": "received",
+          "event_id": "BT-R-LIFT",
+          "location": "가상안내센터 승강기 앞"
+        },
+        {
+          "date": "2026-02-05",
+          "document_id": "BRAILLE-BOARD-0203",
+          "event": "received",
+          "event_id": "BT-R-ANNEX",
+          "location": "가상안내센터 별관"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-01-04",
+          "document_id": "BRAILLE-Q-0104",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "BT-H-BUDGET",
+          "vendor": "가상예산표찰"
+        },
+        {
+          "date": "2026-01-07",
+          "document_id": "BRAILLE-ENTRY-0107",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "BT-H-ENTRY",
+          "vendor": "가상길안내"
+        },
+        {
+          "date": "2026-01-10",
+          "document_id": "BRAILLE-LIFT-0110",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "BT-H-LIFT",
+          "vendor": "가상감각표지"
+        },
+        {
+          "date": "2026-02-03",
+          "document_id": "BRAILLE-BOARD-0203",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "BT-H-ANNEX",
+          "vendor": "가상표찰부속"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "BT-H-BUDGET",
+          "items": [
+            {
+              "name": "점자방향표찰",
+              "quantity": 10,
+              "unit_price": 20000
+            },
+            {
+              "name": "안내표찰고정판",
+              "quantity": 10,
+              "unit_price": 4800
+            }
+          ],
+          "sheet_id": "BT-S-BUDGET"
+        },
+        {
+          "header_record_id": "BT-H-ENTRY",
+          "items": [
+            {
+              "name": "점자방향표찰",
+              "quantity": 6,
+              "unit_price": 28000
+            },
+            {
+              "name": "안내표찰고정판",
+              "quantity": 6,
+              "unit_price": 6500
+            }
+          ],
+          "sheet_id": "BT-S-ENTRY"
+        },
+        {
+          "header_record_id": "BT-H-LIFT",
+          "items": [
+            {
+              "name": "점자방향표찰",
+              "quantity": 4,
+              "unit_price": 26500
+            },
+            {
+              "name": "안내표찰고정판",
+              "quantity": 4,
+              "unit_price": 6200
+            }
+          ],
+          "sheet_id": "BT-S-LIFT"
+        },
+        {
+          "header_record_id": "BT-H-ANNEX",
+          "items": [
+            {
+              "name": "안내표찰고정판",
+              "quantity": 9,
+              "unit_price": 5900
+            }
+          ],
+          "sheet_id": "BT-S-ANNEX"
+        }
+      ],
+      "processing_policy": "실제 물품 인수 기록이 연결되는 주문 또는 계산서만 지급액과 구매 단가 이력에 반영한다. 견적은 구매 실적으로 사용하지 않는다. 발행 자료와 품목 부속표는 header_record_id로 연결하고 인수 기록은 document_id로 연결한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "BRAILLE-Q-0104"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "BRAILLE-BOARD-0203",
+        "BRAILLE-ENTRY-0107",
+        "BRAILLE-LIFT-0110"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "BRAILLE-ENTRY-0107",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 28000
+    },
+    "output": {
+      "supply": 168000,
+      "total": 184800,
+      "vat": 16800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "BRAILLE-ENTRY-0107",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 6500
+    },
+    "output": {
+      "supply": 39000,
+      "total": 42900,
+      "vat": 3900
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상길안내"
+    },
+    "output": "가상길안내",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "BRAILLE-LIFT-0110",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 26500
+    },
+    "output": {
+      "supply": 106000,
+      "total": 116600,
+      "vat": 10600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "BRAILLE-LIFT-0110",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 6200
+    },
+    "output": {
+      "supply": 24800,
+      "total": 27280,
+      "vat": 2480
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상감각표지"
+    },
+    "output": "가상감각표지",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "BRAILLE-BOARD-0203",
+      "includes_vat": false,
+      "quantity": 9,
+      "unit_price": 5900
+    },
+    "output": {
+      "supply": 53100,
+      "total": 58410,
+      "vat": 5310
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상표찰부속"
+    },
+    "output": "가상표찰부속",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "안내표찰고정판",
+          "unit_price": 5900,
+          "vendor": "가상표찰부속"
+        },
+        {
+          "item": "점자방향표찰",
+          "unit_price": 26500,
+          "vendor": "가상감각표지"
+        }
+      ],
+      "grand_total": 429990,
+      "supply_total": 390900,
+      "unique_document_count": 3,
+      "vat_total": 39090,
+      "vendor_totals": [
+        {
+          "supply": 130800,
+          "total": 143880,
+          "vat": 13080,
+          "vendor": "가상감각표지"
+        },
+        {
+          "supply": 207000,
+          "total": 227700,
+          "vat": 20700,
+          "vendor": "가상길안내"
+        },
+        {
+          "supply": 53100,
+          "total": 58410,
+          "vat": 5310,
+          "vendor": "가상표찰부속"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,291 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "교대도시락",
+          "date": "2026-03-12",
+          "description": "작업 교대 직원이 작업실에서 도시락을 받았다.",
+          "document_ids": [
+            "식당전표교대"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "센서 교대 작업실"
+          },
+          "operation_id": "센서제조",
+          "participants": [
+            {
+              "name": "가상범교대",
+              "organization": "가상교대센서",
+              "role": "employee"
+            },
+            {
+              "name": "가상신교대",
+              "organization": "가상교대센서",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "도시락교대"
+        },
+        {
+          "action": "meal",
+          "activity_id": "협의식사",
+          "date": "2026-03-13",
+          "description": "납품 고객 구매담당자와 협의하며 식사했다.",
+          "document_ids": [
+            "식당전표협의"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "구내 옆 식당"
+          },
+          "operation_id": "센서제조",
+          "participants": [
+            {
+              "name": "가상범교대",
+              "organization": "가상교대센서",
+              "role": "employee"
+            },
+            {
+              "name": "가상민구매",
+              "organization": "가상외부부품",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "도시락협의"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 센서 제조 및 납품",
+          "operation_id": "센서제조",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "교대도시락",
+          "date": "2026-03-12",
+          "document_id": "식당전표교대",
+          "transaction_id": "도시락교대"
+        },
+        {
+          "activity_id": "협의식사",
+          "date": "2026-03-13",
+          "document_id": "식당전표협의",
+          "transaction_id": "도시락협의"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "식당전표교대",
+        "purpose": "business",
+        "transaction_id": "도시락교대"
+      },
+      {
+        "business_related": true,
+        "document_id": "식당전표협의",
+        "purpose": "hospitality",
+        "transaction_id": "도시락협의"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "식당전표교대"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "도시락교대"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "식당전표협의"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "도시락협의"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-12",
+      "transaction_id": "도시락교대"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 297000,
+      "includes_vat": true,
+      "transaction_id": "도시락교대"
+    },
+    "output": {
+      "gross": 297000,
+      "supply_base": 270000,
+      "vat": 27000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "도시락교대",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 27000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-13",
+      "transaction_id": "도시락협의"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 176000,
+      "includes_vat": true,
+      "transaction_id": "도시락협의"
+    },
+    "output": {
+      "gross": 176000,
+      "supply_base": 160000,
+      "vat": 16000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "도시락협의",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 16000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 613000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -27000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -27000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -27000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 27000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 27000,
+      "input_vat": 43000,
+      "net_vat": -27000,
+      "noncreditable_vat": 16000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 27000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,467 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "재료반입",
+          "date": "2026-06-04",
+          "description": "모듈 장치 제작용 재료를 한 번 반입",
+          "document_ids": [
+            "재료전자",
+            "재료카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "모듈 제작실"
+          },
+          "operation_id": "모듈제작",
+          "participants": [
+            {
+              "name": "합성체룬",
+              "organization": "가상모듈교실",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "재료-300"
+        },
+        {
+          "action": "vehicle_lease",
+          "activity_id": "직원차임차",
+          "date": "2026-06-01",
+          "description": "직원 업무 이동용 승용차를 임차하여 해당 업무에 전용",
+          "document_ids": [
+            "차임차전자"
+          ],
+          "location": {
+            "kind": "road",
+            "name": "모듈 직원 이동 도로"
+          },
+          "operation_id": "모듈제작",
+          "participants": [
+            {
+              "name": "합성체룬",
+              "organization": "가상모듈교실",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "차임차-300",
+          "vehicle_id": "직원차-300"
+        },
+        {
+          "action": "meal",
+          "activity_id": "교실음료",
+          "date": "2026-06-06",
+          "description": "면세 강의 담당 직원만 준비실에서 음료를 소비",
+          "document_ids": [
+            "교실카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "면세 강의 직원 준비실"
+          },
+          "operation_id": "면세교실",
+          "participants": [
+            {
+              "name": "합성두람",
+              "organization": "가상모듈교실",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "음료-300"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 모듈 장치 제작 및 직원 이동",
+          "operation_id": "모듈제작",
+          "output_taxable": true
+        },
+        {
+          "description": "법정 면세 교육 강의",
+          "operation_id": "면세교실",
+          "output_taxable": false
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "재료반입",
+          "date": "2026-06-04",
+          "document_id": "재료전자",
+          "transaction_id": "재료-300"
+        },
+        {
+          "activity_id": "재료반입",
+          "date": "2026-06-04",
+          "document_id": "재료카드",
+          "transaction_id": "재료-300"
+        },
+        {
+          "activity_id": "직원차임차",
+          "date": "2026-06-01",
+          "document_id": "차임차전자",
+          "transaction_id": "차임차-300"
+        },
+        {
+          "activity_id": "교실음료",
+          "date": "2026-06-06",
+          "document_id": "교실카드",
+          "transaction_id": "음료-300"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "직원차-300"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "재료전자",
+        "purpose": "business",
+        "transaction_id": "재료-300"
+      },
+      {
+        "business_related": true,
+        "document_id": "재료카드",
+        "purpose": "business",
+        "transaction_id": "재료-300"
+      },
+      {
+        "business_related": true,
+        "document_id": "차임차전자",
+        "purpose": "passenger_car_rental",
+        "transaction_id": "차임차-300"
+      },
+      {
+        "business_related": true,
+        "document_id": "교실카드",
+        "purpose": "exempt_business",
+        "transaction_id": "음료-300"
+      },
+      {
+        "transaction_id": "차임차-300",
+        "vehicle_direct_business": false,
+        "vehicle_id": "직원차-300",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "교실카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "음료-300"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "납품전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "장치납품-300"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "재료전자",
+        "재료카드"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "재료-300"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "차임차전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "차임차-300"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-06",
+      "transaction_id": "음료-300"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 220000,
+      "includes_vat": true,
+      "transaction_id": "음료-300"
+    },
+    "output": {
+      "gross": 220000,
+      "supply_base": 200000,
+      "vat": 20000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "exempt_business",
+      "supplier_general": true,
+      "transaction_id": "음료-300",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 20000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-12",
+      "transaction_id": "장치납품-300"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 12340000,
+      "includes_vat": false,
+      "transaction_id": "장치납품-300"
+    },
+    "output": {
+      "gross": 13574000,
+      "supply_base": 12340000,
+      "vat": 1234000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 12340000
+    },
+    "output": 1234000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "장치납품-300"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-04",
+      "transaction_id": "재료-300"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3000000,
+      "includes_vat": false,
+      "transaction_id": "재료-300"
+    },
+    "output": {
+      "gross": 3300000,
+      "supply_base": 3000000,
+      "vat": 300000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "재료-300",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 300000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-01",
+      "transaction_id": "차임차-300"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "차임차-300"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_rental",
+      "supplier_general": true,
+      "transaction_id": "차임차-300",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 100000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 690000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 934000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 765000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 934000,
+      "prepaid_assessed_vat": 765000
+    },
+    "output": 169000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 300000,
+      "output_vat": 1234000,
+      "prepaid_vat": 765000,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 300000,
+      "input_vat": 420000,
+      "net_vat": 169000,
+      "noncreditable_vat": 120000,
+      "output_vat": 1234000,
+      "payable_vat": 169000,
+      "prepaid_vat": 765000,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 12340000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

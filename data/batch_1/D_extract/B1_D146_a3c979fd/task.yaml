@@ -1,0 +1,82 @@
+task_id: B1_D146_a3c979fd
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 지지대 구매 이력을 재구매 검토 자료로 남겨 주세요. 실제 기재 단가 기준의 cheapest_by_item과 vendor_totals
+  및 grand_total을 확인합니다.
+input_files:
+- path: inputs/01_유상표지.pdf
+  format: pdf
+- path: inputs/02_유상품목.xlsx
+  format: xlsx
+- path: inputs/03_유상수령.hwpx
+  format: hwpx
+- path: inputs/04_시연표지.hwpx
+  format: hwpx
+- path: inputs/05_시연품목.pdf
+  format: pdf
+- path: inputs/06_시연수령.xlsx
+  format: xlsx
+- path: inputs/07_후속표지.pdf
+  format: pdf
+- path: inputs/08_후속품목.hwpx
+  format: hwpx
+- path: inputs/09_후속수령.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-d7f08e81-97b8-5f63-a2ee-2bd6ad6d619f
+scenario_seed: 11802098427711848017
+scenario_hash: bf5c20ab899ccaa9dad11df0e62cb717fc1e6db830012e22325d2eb648771e91
+authorship:
+  method: individually_written
+  case_id: D146
+  case_sha256: a3c979fd63f5fe5183b6747ce9ea46aed92d52fa168309cc3016e497e9035edb
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- vendor_totals
+- grand_total

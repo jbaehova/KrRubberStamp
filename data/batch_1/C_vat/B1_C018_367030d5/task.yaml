@@ -1,0 +1,42 @@
+task_id: B1_C018_367030d5
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상서랍공급의 납품 계산서를 정리하고 이미 납부한 예정고지를 차감해 주세요. 매출세액(output_vat), 공제가능 매입세액(deductible_input_vat),
+  예정고지 세액(prepaid_vat), 최종 납부액(payable_vat)을 answer.json에 정수로 작성해 주세요. 이번 납품은 계산서를
+  발급한 기업 간 거래입니다.
+input_files:
+- path: inputs/01_납품업_납부확인.hwpx
+  format: hwpx
+- path: inputs/02_서랍_계산서.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    prepaid_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - output_vat
+  - deductible_input_vat
+  - prepaid_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-dfd3f66b-e7e0-5c0b-86a8-197190407340
+scenario_seed: 3922688967778615308
+scenario_hash: 76f75643c1d9773b32140a5750278ebaa45edc4637d9f2278f487e81267e1fed
+authorship:
+  method: individually_written
+  case_id: C018
+  case_sha256: 367030d538c9c00cc29eb86c895aa543e6a4f3b9dd8e5a22b811da9d7a702282
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- output_vat
+- deductible_input_vat
+- prepaid_vat
+- payable_vat

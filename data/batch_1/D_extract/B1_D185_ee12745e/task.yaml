@@ -1,0 +1,51 @@
+task_id: B1_D185_ee12745e
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 밀봉 작업의 구매 기록을 다음 담당자에게 넘겨 주세요. 품목별 단가 cheapest_by_item과 구매 건수 unique_document_count를
+  확인합니다.
+input_files:
+- path: inputs/01_첫클립.xlsx
+  format: xlsx
+- path: inputs/02_현장클립.pdf
+  format: pdf
+- path: inputs/03_보충클립.hwpx
+  format: hwpx
+- path: inputs/04_밀봉집게.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - cheapest_by_item
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-39756374-d984-5947-a93f-ae6f57641a00
+scenario_seed: 17154901881688859732
+scenario_hash: 352de71f430ac2b46269621142bead0e270f779ddefb90f1a5715f31b27f976a
+authorship:
+  method: individually_written
+  case_id: D185
+  case_sha256: ee12745eeebea4547686a376613fb48d05f55bb733b4d69071e73c143537e2a3
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item
+- unique_document_count

@@ -1,0 +1,60 @@
+task_id: B1_A298_7b146a3b
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상초록종이틀의 가상변시우에게 가족 정산을 회신해 주세요. 배우자의 소득과 장애인 아버지의 실제 부양 및 자녀 최종 배정을
+  확인해 주세요. 배우자 보험과 진료는 분리하고 아버지 특수교육과 자녀 장학금 자료를 연결해 가족 공제 및 보험과 의료비 및 교육비 공제액을 적어
+  주세요.
+input_files:
+- path: inputs/01_부양배정.hwpx
+  format: hwpx
+- path: inputs/02_배우자소득.xlsx
+  format: xlsx
+- path: inputs/03_배우자보험.pdf
+  format: pdf
+- path: inputs/04_배우자수술.xlsx
+  format: xlsx
+- path: inputs/05_아버지치료.pdf
+  format: pdf
+- path: inputs/06_아버지재활.hwpx
+  format: hwpx
+- path: inputs/07_자녀학부.xlsx
+  format: xlsx
+- path: inputs/08_급여확정.pdf
+  format: pdf
+- path: inputs/09_직원등록.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    additional_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    education_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - additional_deduction
+  - insurance_credit
+  - medical_credit
+  - education_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-f796465c-25d2-59af-93ab-b8d832406bab
+scenario_seed: 8868830368909313064
+scenario_hash: 101de8ed29688d12b7cd55c8f7109346b58c454cac767b8050f209b562ac70c0
+authorship:
+  method: individually_written
+  case_id: A298
+  case_sha256: 7b146a3b40094428af7c1ebc314c7c98306cbdf6af6f064808ec3016ee4845b3
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- eligible_dependents
+- additional_deduction
+- insurance_credit
+- medical_credit
+- education_credit

@@ -1,0 +1,41 @@
+task_id: B1_B279_53422fae
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상묶음접수관의 건강보험 통지에는 급여와 별도인 낮은 보수월액이 있습니다. 부과 대상 통지를 그대로 적용해 건강보험 근로자
+  부담액과 요양보험을 구하고 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_정액지급.pdf
+  format: pdf
+- path: inputs/02_건강통지.xlsx
+  format: xlsx
+- path: inputs/03_다른공제.hwpx
+  format: hwpx
+- path: inputs/04_하한원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - health_insurance
+  - long_term_care
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-10bc5768-9dd6-5b4a-843b-f5a39082fbef
+scenario_seed: 5999410078170818280
+scenario_hash: 2e62934994b4f311823b95e4dad65d2f47cf67c28b27039f155a4cbfce11f982
+authorship:
+  method: individually_written
+  case_id: B279
+  case_sha256: 53422fae0b4526e8cc77635f587c1972f0b5dfb202eac015b0f220d80db573a9
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- health_insurance
+- long_term_care
+- net_pay

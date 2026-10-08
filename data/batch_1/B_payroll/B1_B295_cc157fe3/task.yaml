@@ -1,0 +1,59 @@
+task_id: B1_B295_cc157fe3
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상은빛표지국은 아직 은행 실행 전인 큰 당월 실적 지급을 승인합니다. 취소 계획을 제외한 유효 지급일을 effective_payment_date에
+  YYYY-MM-DD로 적어 주세요. 과세급여와 소득세 및6월 부과 연금 공제와 전체 공제액도 계산해 주세요.
+input_files:
+- path: inputs/01_정액조건.pdf
+  format: pdf
+- path: inputs/02_실적금.hwpx
+  format: hwpx
+- path: inputs/03_초기계획.xlsx
+  format: xlsx
+- path: inputs/04_유효최종.pdf
+  format: pdf
+- path: inputs/05_취소계획.hwpx
+  format: hwpx
+- path: inputs/06_육월연금.xlsx
+  format: xlsx
+- path: inputs/07_건강기관.pdf
+  format: pdf
+- path: inputs/08_고용가족.xlsx
+  format: xlsx
+- path: inputs/09_경계원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    national_pension:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - effective_payment_date
+  - taxable_pay
+  - income_tax
+  - national_pension
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-dd2d295d-d0cd-5923-bff2-ef219e714b4b
+scenario_seed: 14705800771200744861
+scenario_hash: c66a03c4ddba566bb876e76c0b3eeb4f9ca53fcf281d2f1a7fec5f48f90b1466
+authorship:
+  method: individually_written
+  case_id: B295
+  case_sha256: cc157fe30115fd9d5bd2082c9dbb82abf3976d3bb161d9081f4dae416ce2817d
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- effective_payment_date
+- taxable_pay
+- income_tax
+- national_pension
+- total_deductions

@@ -1,0 +1,54 @@
+task_id: B1_D275_2da7a1ec
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 이동대차 부품의 영수증 세 장은 단가와 수량 및 발행일이 같습니다. 원문 번호를 확인해 재발급과 별도 구매를 구별한 뒤 업체별
+  지급액과 실제 구매 원본 수를 정리해 주세요. vendor_totals와 unique_document_count를 제출합니다.
+input_files:
+- path: inputs/01_바퀴원본.pdf
+  format: pdf
+- path: inputs/02_바퀴재발급.hwpx
+  format: hwpx
+- path: inputs/03_추가바퀴.xlsx
+  format: xlsx
+- path: inputs/04_대차패드.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-caaf70d6-7b35-58b9-9c07-dd0a9680eaff
+scenario_seed: 3289776091512796142
+scenario_hash: 98ac0204257abd8a7414892fd2c3f2b4d5a96015e67ef8268d4379a71373a9f0
+authorship:
+  method: individually_written
+  case_id: D275
+  case_sha256: 2da7a1ecdd3173ee7d0396ef4abec7c5bf31f268955b7e0dd485665c7aba8922
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- vendor_totals
+- unique_document_count

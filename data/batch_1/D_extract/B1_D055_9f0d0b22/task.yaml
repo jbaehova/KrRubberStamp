@@ -1,0 +1,48 @@
+task_id: B1_D055_9f0d0b22
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 날짜순 낭독회 구매 자료를 판매처별 송금표로 바꿔 주세요. 같은 업체의 별개 인수는 합쳐 vendor_totals만 답하세요.
+  작성 기준은 보관 매체 확인서에 있습니다.
+input_files:
+- path: inputs/01_첫대본.pdf
+  format: pdf
+- path: inputs/02_보관매체.hwpx
+  format: hwpx
+- path: inputs/03_추가대본.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-42c91c4a-e7c9-5bd5-a238-a225bcc93033
+scenario_seed: 11460828870868879398
+scenario_hash: 7961d7abffebfa48aea83a14098a11989b6402bf0e17a9e20cabc8e901e97993
+authorship:
+  method: individually_written
+  case_id: D055
+  case_sha256: 9f0d0b22cfae48266c8efc332c6ffe92114f34fac61df6112c01ab2fdfa7c1cf
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals

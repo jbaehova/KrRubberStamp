@@ -1,0 +1,61 @@
+task_id: B1_D200_a31f9636
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 문서 보존 작업용 전등의 실제 구매 기준과 집행액을 정리해 주세요. cheapest_by_item과 grand_total을
+  answer.json에 담습니다.
+input_files:
+- path: inputs/01_첫작업등표지.pdf
+  format: pdf
+- path: inputs/02_나머지조달표지.hwpx
+  format: hwpx
+- path: inputs/03_작업등제안품목.xlsx
+  format: xlsx
+- path: inputs/04_큰작업등품목.pdf
+  format: pdf
+- path: inputs/05_첫작업등품목.xlsx
+  format: xlsx
+- path: inputs/06_다른작업등품목.hwpx
+  format: hwpx
+- path: inputs/07_보호커버품목.pdf
+  format: pdf
+- path: inputs/08_작업실인수.xlsx
+  format: xlsx
+- path: inputs/09_후속주문처리.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-618fe47f-eb49-53b6-815a-c6b32111dc1e
+scenario_seed: 11754278711354237304
+scenario_hash: 714888efb761b86e7b1d2e823f0611d08ffe70e3a3d21dfdd04c6d1db8059ef2
+authorship:
+  method: individually_written
+  case_id: D200
+  case_sha256: a31f96360d34a178f8f08afbd437af0af32996ce82fc0334f35f3a60068c2885
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- cheapest_by_item
+- grand_total

@@ -1,0 +1,53 @@
+task_id: B1_D273_2d8647cd
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 라디오 장비에 실제 구입한 케이블의 가격 이력을 만듭니다. cheapest_by_item과 supply_total을 작성해
+  주세요.
+input_files:
+- path: inputs/01_케이블청구표지.pdf
+  format: pdf
+- path: inputs/02_청구품목.xlsx
+  format: xlsx
+- path: inputs/03_보충주문.hwpx
+  format: hwpx
+- path: inputs/04_케이블견적.pdf
+  format: pdf
+- path: inputs/05_부품함인수.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-06ec5b62-f9ca-59e5-8061-e2270829ed9b
+scenario_seed: 3280388325167932436
+scenario_hash: 63f6d8b224c2d40b2d9a6b813049e54977d3bf87df61268b47f5bc97638b798f
+authorship:
+  method: individually_written
+  case_id: D273
+  case_sha256: 2d8647cd2ef92414c7b7f5daf53b839fdc1e8e7d496b47cd42df647842255590
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- cheapest_by_item
+- supply_total

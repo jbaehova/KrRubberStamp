@@ -1,0 +1,208 @@
+[
+  {
+    "inputs": {
+      "activities": [],
+      "operations": [],
+      "purchase_links": [],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C124-카드가"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C124-판매가"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C124-카드나"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C124-판매나"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-01",
+      "transaction_id": "C124-판매가"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 77,
+      "includes_vat": true,
+      "transaction_id": "C124-판매가"
+    },
+    "output": {
+      "gross": 77,
+      "supply_base": 70,
+      "vat": 7
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 70
+    },
+    "output": 7,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C124-판매가"
+    },
+    "output": {
+      "eligible_gross": 77
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-01",
+      "transaction_id": "C124-판매나"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 99,
+      "includes_vat": true,
+      "transaction_id": "C124-판매나"
+    },
+    "output": {
+      "gross": 99,
+      "supply_base": 90,
+      "vat": 9
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 90
+    },
+    "output": 9,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C124-판매나"
+    },
+    "output": {
+      "eligible_gross": 99
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 46000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 176,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 2,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 2
+    },
+    "output": 2,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 2,
+      "liability_before_credit": 16
+    },
+    "output": 2,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 14,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 14,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 16,
+      "prepaid_vat": 0,
+      "receipt_credit": 2
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 0,
+      "net_vat": 14,
+      "noncreditable_vat": 0,
+      "output_vat": 16,
+      "payable_vat": 14,
+      "prepaid_vat": 0,
+      "receipt_credit": 2,
+      "refund_vat": 0,
+      "tax_base": 160,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

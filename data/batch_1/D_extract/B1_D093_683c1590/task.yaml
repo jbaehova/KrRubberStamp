@@ -1,0 +1,62 @@
+task_id: B1_D093_683c1590
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 온실 조명 부품의 후속 발주 자료를 만듭니다. 표지와 품목표를 연결하고 이름 표기를 통합한 cheapest_by_item과
+  기존 supply_total을 답하세요. 인수 및 비교 계약은 첫 품목 대장에 있습니다.
+input_files:
+- path: inputs/01_모듈표지.pdf
+  format: pdf
+- path: inputs/02_모듈품목.xlsx
+  format: xlsx
+- path: inputs/03_회로표지.hwpx
+  format: hwpx
+- path: inputs/04_회로품목.pdf
+  format: pdf
+- path: inputs/05_추가잭.xlsx
+  format: xlsx
+- path: inputs/06_생장모듈.hwpx
+  format: hwpx
+- path: inputs/07_전원잭.pdf
+  format: pdf
+- path: inputs/08_잎조명.xlsx
+  format: xlsx
+- path: inputs/09_모듈표지사본.png
+  format: png
+  duplicate_of: inputs/01_모듈표지.pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-74afbddf-8755-55c0-98df-af4b4d402ceb
+scenario_seed: 7510901990393766569
+scenario_hash: a5eefdd346244ebfb94138576896fb854593efec2c68b32248cac9fec2022061
+authorship:
+  method: individually_written
+  case_id: D093
+  case_sha256: 683c1590d831e2a9786d74684334576f782af8c1385e50b06028187855926b12
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item
+- supply_total

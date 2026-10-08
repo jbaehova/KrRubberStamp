@@ -1,0 +1,41 @@
+task_id: B1_B172_ec43f2f1
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상덮개전사실은 같은 전사 작업의 approved 카드와 superseded 카드를 함께 받았습니다. 유효 승인된 작업으로
+  연장수당, 야간 가산과 총지급액을 계산해 주세요.
+input_files:
+- path: inputs/01_전사약정.pdf
+  format: pdf
+- path: inputs/02_유효카드.xlsx
+  format: xlsx
+- path: inputs/03_폐기카드.hwpx
+  format: hwpx
+- path: inputs/04_전사마감.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-4d9f96ea-9c4d-5592-a16b-982b67c7ffa4
+scenario_seed: 17024718135006369890
+scenario_hash: 761f5f89fad8370b4ebeedc72c913ebf6c71523d64a0d9a49e9e0234337b4f02
+authorship:
+  method: individually_written
+  case_id: B172
+  case_sha256: ec43f2f16634986267d71629ec0d915edf1a4d98b144c2d02e84bfcc735d7b09
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- overtime_pay
+- night_pay
+- gross_pay

@@ -1,0 +1,62 @@
+task_id: B1_C053_b5b5b8fe
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상오래쓰는펜은 소비자 현금영수증 주문과 기업 계산서 주문을 함께 보냈습니다. 발행 증빙의 종류별로 매출을 나누고 출력 항목이
+  부족한 포장재 전표 및 식사 참석 기록을 확인해 주세요. 매출 공급가액(tax_base), 매입세액(input_vat), 공제불가 세액(noncreditable_vat),
+  영수증 발행세액공제(receipt_credit), 납부액(payable_vat)을 answer.json에 원 단위 정수로 작성해 주세요. 발행
+  공제 계산의 원 미만 끝수는 버려 주세요.
+input_files:
+- path: inputs/01_펜매장_의뢰.hwpx
+  format: hwpx
+- path: inputs/02_전년_실적.pdf
+  format: pdf
+- path: inputs/03_선납_확인.xlsx
+  format: xlsx
+- path: inputs/04_개인_현금.pdf
+  format: pdf
+- path: inputs/05_기업_계산서.pdf
+  format: pdf
+- path: inputs/06_포장_카드.xlsx
+  format: xlsx
+- path: inputs/07_식당_전표.pdf
+  format: pdf
+- path: inputs/08_활동_확인.hwpx
+  format: hwpx
+- path: inputs/09_기업계산서_사진.png
+  format: png
+  duplicate_of: inputs/05_기업_계산서.pdf
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - tax_base
+  - input_vat
+  - noncreditable_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-29da2c19-c8b1-5532-88aa-8ab958efa19e
+scenario_seed: 13093574892722249637
+scenario_hash: 58cc01648d454e076f3f873c96c6c8bebd6c4aba44f877ed9cef32f120a81a10
+authorship:
+  method: individually_written
+  case_id: C053
+  case_sha256: b5b5b8fe00aedfa5b0a73a7e779101bb6e6330d7a4322d8680e7d815ed0b6694
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- tax_base
+- input_vat
+- noncreditable_vat
+- receipt_credit
+- payable_vat

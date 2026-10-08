@@ -1,0 +1,43 @@
+task_id: B1_B122_fa8069c1
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상장면복원실에는 같은 작업의 폐기본, 승인본, 새 초안이 들어왔습니다. 상태를 먼저 확인하고 지급 대상 승인본의 평일 연장수당과
+  야간 가산액을 계산해 주세요. 새 번호의 초안을 사용한 예산 초안과 비교할 수 있도록 총지급액도 구합니다.
+input_files:
+- path: inputs/01_복원임금.hwpx
+  format: hwpx
+- path: inputs/02_복원이력.xlsx
+  format: xlsx
+- path: inputs/03_복원일정.pdf
+  format: pdf
+- path: inputs/04_복원부과.hwpx
+  format: hwpx
+- path: inputs/05_복원공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-cf143c92-2199-51b3-b23f-d5fb71b8a2a9
+scenario_seed: 18050543586562502073
+scenario_hash: 9731fa2b619b8957ac7b4b076e99510d4d4e41371b45d19b2c14c47e5992336a
+authorship:
+  method: individually_written
+  case_id: B122
+  case_sha256: fa8069c18fc36db9760d0fe4d1fdcd518ef4d4ea947335b45ba57c3b68b0b25b
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- overtime_pay
+- night_pay
+- gross_pay

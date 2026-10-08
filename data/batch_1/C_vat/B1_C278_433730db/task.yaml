@@ -1,0 +1,41 @@
+task_id: B1_C278_433730db
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상납작장식의 현금영수증과 전자계산서가 연결된 주문을 보고 거래 수(unique_transaction_count), 매출세액(output_vat),
+  발행 공제(receipt_credit)를 answer.json에 적어 주세요.
+input_files:
+- path: inputs/현금발급.pdf
+  format: pdf
+- path: inputs/계산서출력.hwpx
+  format: hwpx
+- path: inputs/발급연결.xlsx
+  format: xlsx
+- path: inputs/장식신고.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+  required:
+  - unique_transaction_count
+  - output_vat
+  - receipt_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-fc17365d-2eb2-52b9-b416-b62ed4566813
+scenario_seed: 4843393643757333605
+scenario_hash: 27c0a5d380f7ea4e69210440d5e3ecea01c83b721c042ccd1c53ec8a27945f62
+authorship:
+  method: individually_written
+  case_id: C278
+  case_sha256: 433730db8b8a6c65ca901ac714ad2ed3656eea4da8fcb872b99fb90b17d44e90
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- unique_transaction_count
+- output_vat
+- receipt_credit

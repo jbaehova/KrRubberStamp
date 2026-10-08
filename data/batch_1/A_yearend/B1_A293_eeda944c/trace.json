@@ -1,0 +1,321 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 78200000,
+      "dependents": [
+        {
+          "age": 74,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 2300000,
+          "person_id": "mother",
+          "relation": "parent",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 5900000,
+          "date": "2025-05-14",
+          "institution_type": "qualified_special_education",
+          "level": "special_disabled",
+          "paid_by_self": true,
+          "person_id": "mother"
+        },
+        {
+          "amount": 3700000,
+          "date": "2025-08-15",
+          "institution_type": "university",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "mother"
+        }
+      ],
+      "employee_age": 50,
+      "employee_name": "가상천이온",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "insurance": [
+        {
+          "amount": 910000,
+          "date": "2025-03-23",
+          "kind": "disabled",
+          "paid_by_self": true,
+          "person_id": "mother"
+        }
+      ],
+      "medical": [
+        {
+          "amount": 4300000,
+          "date": "2025-09-19",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "mother",
+          "treatment_purpose": "therapeutic"
+        },
+        {
+          "amount": 1600000,
+          "date": "2025-10-04",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "mother",
+          "treatment_purpose": "cosmetic"
+        }
+      ],
+      "non_taxable": 2400000,
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자가 같은 세대의 어머니를 실제 부양하며 신청 배정은 본인이다. 어머니는 세법상 장애인이고 종합소득금액 230만원이 있다. 적격 특수교육기관을 별도 확인했다. 모든 지출은 직원 부담이며 치료 보전금과 장학금은 없다. 특별공제를 신청했다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "education.0.excluded": false,
+      "education.1.excluded": false,
+      "medical.0.excluded": false,
+      "medical.1.excluded": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 74,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 2300000,
+          "person_id": "mother",
+          "relation": "parent",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 1500000,
+      "rejected": [
+        "mother"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 78200000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 13540000,
+      "salary_income": 62260000,
+      "total_salary": 75800000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 75800000,
+      "spending": {}
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 75800000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 910000,
+          "date": "2025-03-23",
+          "kind": "disabled",
+          "paid_by_self": true,
+          "person_id": "mother"
+        }
+      ],
+      "salary": 75800000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 4300000,
+          "date": "2025-09-19",
+          "excluded": false,
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "mother",
+          "treatment_purpose": "therapeutic"
+        },
+        {
+          "amount": 1600000,
+          "date": "2025-10-04",
+          "excluded": true,
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "mother",
+          "treatment_purpose": "cosmetic"
+        }
+      ],
+      "salary": 75800000
+    },
+    "output": 303900,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 5900000,
+          "date": "2025-05-14",
+          "excluded": false,
+          "institution_type": "qualified_special_education",
+          "level": "special_disabled",
+          "paid_by_self": true,
+          "person_id": "mother"
+        },
+        {
+          "amount": 3700000,
+          "date": "2025-08-15",
+          "excluded": false,
+          "institution_type": "university",
+          "level": "university",
+          "paid_by_self": true,
+          "person_id": "mother"
+        }
+      ],
+      "salary": 75800000
+    },
+    "output": 885000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 75800000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 75800000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 75800000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 75800000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 60760000
+    },
+    "output": 8822400,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 8822400,
+      "salary": 75800000
+    },
+    "output": 500000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 885000,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 303900,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 8822400,
+      "total_tax_credits": 1688900
+    },
+    "output": 7133500,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 7133500
+    },
+    "output": 713350,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 713350,
+      "final_national": 7133500,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 713350,
+      "national": 7133500,
+      "total": 7846850
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

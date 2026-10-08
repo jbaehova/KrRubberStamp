@@ -1,0 +1,43 @@
+task_id: B1_D021_eb6ef6f4
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 학교 수리 주간의 자재비를 지원금 정산서에 옮겨 주세요. 문고정 부품부터 마지막 가방걸이 구매까지 반영하고, 명세의 세금 표기에
+  따라 공급가액과 부가세를 나눠야 합니다. answer.json에는 supply_total과 vat_total, grand_total을 적어 주세요.
+input_files:
+- path: inputs/01_문고정_명세.pdf
+  format: pdf
+- path: inputs/02_책상발_구매대장.xlsx
+  format: xlsx
+- path: inputs/03_창문손잡이_인수.hwpx
+  format: hwpx
+- path: inputs/04_보호패드_결제.pdf
+  format: pdf
+- path: inputs/05_가방걸이_추가구매.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+    grand_total:
+      type: integer
+  required:
+  - supply_total
+  - vat_total
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-a9ba8c62-9e9f-5151-a8fb-13adf463ac43
+scenario_seed: 16964768377539690625
+scenario_hash: 3eabafecb6365ca9816c4af2ae848bcaa821d893606f409a2812c9ca50274dbd
+authorship:
+  method: individually_written
+  case_id: D021
+  case_sha256: eb6ef6f4c8088081aed14f29b0640ab3e18de657904dfa74235ea05852f41786
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- supply_total
+- vat_total
+- grand_total

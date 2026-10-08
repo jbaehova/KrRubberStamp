@@ -1,0 +1,281 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "C107-장치수령",
+          "date": "2026-03-09",
+          "description": "직원이 대여용 조립 장치를 보관실에서 수령했다.",
+          "document_ids": [
+            "C107-장치계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상전시장 보관실"
+          },
+          "operation_id": "C107-대여",
+          "participants": [
+            {
+              "name": "가상송설치",
+              "organization": "가상다음전시",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C107-장치"
+        },
+        {
+          "action": "service",
+          "activity_id": "C107-운송완료",
+          "date": "2026-03-09",
+          "description": "장치 운송을 끝내고 직원이 하역 완료를 확인했다.",
+          "document_ids": [
+            "C107-운송계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상전시장 보관실"
+          },
+          "operation_id": "C107-대여",
+          "participants": [
+            {
+              "name": "가상송설치",
+              "organization": "가상다음전시",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C107-운송"
+        }
+      ],
+      "operations": [
+        {
+          "description": "전시 장치 유상 대여 준비",
+          "operation_id": "C107-대여",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C107-장치수령",
+          "date": "2026-03-09",
+          "document_id": "C107-장치계산서",
+          "transaction_id": "C107-장치"
+        },
+        {
+          "activity_id": "C107-운송완료",
+          "date": "2026-03-09",
+          "document_id": "C107-운송계산서",
+          "transaction_id": "C107-운송"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C107-장치계산서",
+        "purpose": "business",
+        "transaction_id": "C107-장치"
+      },
+      {
+        "business_related": true,
+        "document_id": "C107-운송계산서",
+        "purpose": "business",
+        "transaction_id": "C107-운송"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C107-운송계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C107-운송"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C107-장치계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C107-장치"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-09",
+      "transaction_id": "C107-운송"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 280000,
+      "includes_vat": false,
+      "transaction_id": "C107-운송"
+    },
+    "output": {
+      "gross": 308000,
+      "supply_base": 280000,
+      "vat": 28000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C107-운송",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 28000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-09",
+      "transaction_id": "C107-장치"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 6710000,
+      "includes_vat": true,
+      "transaction_id": "C107-장치"
+    },
+    "output": {
+      "gross": 6710000,
+      "supply_base": 6100000,
+      "vat": 610000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C107-장치",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 610000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 297000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -638000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -638000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -638000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 638000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 638000,
+      "input_vat": 638000,
+      "net_vat": -638000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 638000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

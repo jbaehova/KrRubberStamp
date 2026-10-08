@@ -1,0 +1,262 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-05",
+          "document_id": "WALL-142-B",
+          "event": "received",
+          "event_id": "e142-b",
+          "location": "표본실 벽면"
+        },
+        {
+          "date": "2026-03-07",
+          "document_id": "WALL-142-R",
+          "event": "received",
+          "event_id": "e142-r",
+          "location": "표본실 벽면"
+        },
+        {
+          "date": "2026-03-09",
+          "document_id": "WALL-142-P",
+          "event": "received",
+          "event_id": "e142-p",
+          "location": "표본실 벽면"
+        },
+        {
+          "date": "2026-03-10",
+          "document_id": "WALL-142-X",
+          "event": "cancelled_before_dispatch",
+          "event_id": "e142-x",
+          "location": "발주 담당석"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-02",
+          "document_id": "WALL-142-B",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h142-board",
+          "vendor": "가상표본벽면"
+        },
+        {
+          "date": "2026-03-04",
+          "document_id": "WALL-142-R",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h142-rail",
+          "vendor": "가상벽면철물"
+        },
+        {
+          "date": "2026-03-06",
+          "document_id": "WALL-142-P",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h142-pad",
+          "vendor": "가상표본완충"
+        },
+        {
+          "date": "2026-03-01",
+          "document_id": "WALL-142-Q",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "h142-quote",
+          "vendor": "가상벽면철물"
+        },
+        {
+          "date": "2026-03-08",
+          "document_id": "WALL-142-X",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h142-expand",
+          "vendor": "가상표본벽면"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h142-board",
+          "items": [
+            {
+              "name": "표본걸이판",
+              "quantity": 3,
+              "unit_price": 83000
+            }
+          ],
+          "sheet_id": "s142-b"
+        },
+        {
+          "header_record_id": "h142-rail",
+          "items": [
+            {
+              "name": "고정레일",
+              "quantity": 6,
+              "unit_price": 14200
+            }
+          ],
+          "sheet_id": "s142-r"
+        },
+        {
+          "header_record_id": "h142-pad",
+          "items": [
+            {
+              "name": "완충받침",
+              "quantity": 12,
+              "unit_price": 3500
+            }
+          ],
+          "sheet_id": "s142-p"
+        },
+        {
+          "header_record_id": "h142-quote",
+          "items": [
+            {
+              "name": "대체표본걸이판",
+              "quantity": 3,
+              "unit_price": 79000
+            }
+          ],
+          "sheet_id": "s142-q"
+        },
+        {
+          "header_record_id": "h142-expand",
+          "items": [
+            {
+              "name": "확장레일",
+              "quantity": 6,
+              "unit_price": 18700
+            }
+          ],
+          "sheet_id": "s142-x"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 원문 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때만 포함한다. quote, 무인수와 출고 전 취소는 제외하고 같은 document_id의 동일 내용은 한 번만 계산한다. 별도 공급가액은 품목 수량 곱하기 단가이며 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 하여 그 이름 오름차순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "WALL-142-Q",
+        "WALL-142-X"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "WALL-142-B",
+        "WALL-142-P",
+        "WALL-142-R"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "WALL-142-B",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 83000
+    },
+    "output": {
+      "supply": 249000,
+      "total": 273900,
+      "vat": 24900
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상표본벽면"
+    },
+    "output": "가상표본벽면",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "WALL-142-R",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 14200
+    },
+    "output": {
+      "supply": 85200,
+      "total": 93720,
+      "vat": 8520
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상벽면철물"
+    },
+    "output": "가상벽면철물",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "WALL-142-P",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 3500
+    },
+    "output": {
+      "supply": 42000,
+      "total": 46200,
+      "vat": 4200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상표본완충"
+    },
+    "output": "가상표본완충",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "고정레일",
+          "unit_price": 14200,
+          "vendor": "가상벽면철물"
+        },
+        {
+          "item": "완충받침",
+          "unit_price": 3500,
+          "vendor": "가상표본완충"
+        },
+        {
+          "item": "표본걸이판",
+          "unit_price": 83000,
+          "vendor": "가상표본벽면"
+        }
+      ],
+      "grand_total": 413820,
+      "supply_total": 376200,
+      "unique_document_count": 3,
+      "vat_total": 37620,
+      "vendor_totals": [
+        {
+          "supply": 85200,
+          "total": 93720,
+          "vat": 8520,
+          "vendor": "가상벽면철물"
+        },
+        {
+          "supply": 249000,
+          "total": 273900,
+          "vat": 24900,
+          "vendor": "가상표본벽면"
+        },
+        {
+          "supply": 42000,
+          "total": 46200,
+          "vat": 4200,
+          "vendor": "가상표본완충"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

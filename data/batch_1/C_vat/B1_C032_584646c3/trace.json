@@ -1,0 +1,249 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C032-용품",
+          "date": "2026-05-15",
+          "description": "물류 직원이 대량 고객 주문에 사용할 러닝용품을 받아 출고 준비를 했다.",
+          "document_ids": [
+            "가상-C032-용품수취"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상달리는짐 물류 창고"
+          },
+          "operation_id": "OPS-C032",
+          "participants": [
+            {
+              "name": "가상 물류직원",
+              "organization": "가상달리는짐",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C032-주문재고"
+        }
+      ],
+      "operations": [
+        {
+          "description": "러닝용품 소매 판매",
+          "operation_id": "OPS-C032",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C032-용품",
+          "date": "2026-05-15",
+          "document_id": "가상-C032-용품수취",
+          "transaction_id": "가상-C032-주문재고"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C032-용품수취",
+        "purpose": "business",
+        "transaction_id": "가상-C032-주문재고"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C032-대형카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C032-대량인도"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C032-용품수취"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C032-주문재고"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-18",
+      "transaction_id": "가상-C032-대량인도"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 825000000,
+      "includes_vat": true,
+      "transaction_id": "가상-C032-대량인도"
+    },
+    "output": {
+      "gross": 825000000,
+      "supply_base": 750000000,
+      "vat": 75000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 750000000
+    },
+    "output": 75000000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "가상-C032-대량인도"
+    },
+    "output": {
+      "eligible_gross": 825000000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-15",
+      "transaction_id": "가상-C032-주문재고"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 250000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C032-주문재고"
+    },
+    "output": {
+      "gross": 275000000,
+      "supply_base": 250000000,
+      "vat": 25000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C032-주문재고",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 25000000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 780000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 825000000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 10725000,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 10725000
+    },
+    "output": 10000000,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 10000000,
+      "liability_before_credit": 50000000
+    },
+    "output": 10000000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 40000000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 40000000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 25000000,
+      "output_vat": 75000000,
+      "prepaid_vat": 0,
+      "receipt_credit": 10000000
+    },
+    "output": {
+      "deductible_input_vat": 25000000,
+      "input_vat": 25000000,
+      "net_vat": 40000000,
+      "noncreditable_vat": 0,
+      "output_vat": 75000000,
+      "payable_vat": 40000000,
+      "prepaid_vat": 0,
+      "receipt_credit": 10000000,
+      "refund_vat": 0,
+      "tax_base": 750000000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,43 @@
+task_id: B1_B054_9c3d83a4
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상흰돌서가의 현장 교육 주가 끝났습니다. 시급 계약과 해당 주 배정 및 출근 원장을 읽고 정규 근로 임금, 별도 주휴수당,
+  총지급액 및 공단 공제를 반영한 실지급액을 구해 주세요. 교육 주에 추가 근로나 결근은 없습니다.
+input_files:
+- path: inputs/01_교육주시급.pdf
+  format: pdf
+- path: inputs/02_교육주원장.xlsx
+  format: xlsx
+- path: inputs/03_교육공제.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-3d06e19d-57d5-5ea8-89ba-74ad832b073b
+scenario_seed: 11258299385299494642
+scenario_hash: 505812bc8787227ef2ca19cd2a0ae29348ec076f270015dd2568b31437a03bee
+authorship:
+  method: individually_written
+  case_id: B054
+  case_sha256: 9c3d83a453c666f24a192eee477a1d0efa4b8e8a9e33b5b5dcafaa978d2acced
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- gross_pay
+- net_pay

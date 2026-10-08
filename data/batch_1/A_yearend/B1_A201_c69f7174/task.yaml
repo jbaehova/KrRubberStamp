@@ -1,0 +1,64 @@
+task_id: B1_A201_c69f7174
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상닭의장풀정비의 가상모시율 자료를 정리해 주세요. 실제 거주 주소와 임차 계약 주소를 대조하고 두 아이의 학교 및 학원 기관
+  유형을 확인합니다. 카드 청구서의 관리비도 일반 소비와 구분해 월세 세액공제액, 교육비 세액공제액 및 신용카드 등 소득공제액을 적어 주세요. 기본공제액과
+  결정 국세도 필요합니다.
+input_files:
+- path: inputs/01_직원신청.hwpx
+  format: hwpx
+- path: inputs/02_급여누계.xlsx
+  format: xlsx
+- path: inputs/03_두아이등록.pdf
+  format: pdf
+- path: inputs/04_임대계약.pdf
+  format: pdf
+- path: inputs/05_주민세대.hwpx
+  format: hwpx
+- path: inputs/06_월세이체.xlsx
+  format: xlsx
+- path: inputs/07_학교납부.pdf
+  format: pdf
+- path: inputs/08_학원납부.pdf
+  format: pdf
+- path: inputs/09_유치원납부.hwpx
+  format: hwpx
+- path: inputs/10_일반소비.xlsx
+  format: xlsx
+- path: inputs/11_관리비청구.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    rent_credit:
+      type: integer
+    education_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    basic_deduction:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - rent_credit
+  - education_credit
+  - credit_card_deduction
+  - basic_deduction
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-fbd074ba-fc67-580f-beb0-cd262100d288
+scenario_seed: 14312282887402215646
+scenario_hash: f9651bd1a92cfb5c254c56c1e749e716499f20a7be9b834401cd03e6e407f756
+authorship:
+  method: individually_written
+  case_id: A201
+  case_sha256: c69f7174d482d8de7cda0b27143c96a649372a85c81a48542ad68408ab55d899
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- rent_credit
+- education_credit
+- credit_card_deduction
+- basic_deduction
+- final_national_tax

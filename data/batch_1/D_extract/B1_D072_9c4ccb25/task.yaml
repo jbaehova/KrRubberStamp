@@ -1,0 +1,47 @@
+task_id: B1_D072_9c4ccb25
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 화상 안내 부스의 고정 부품을 재구매합니다. 표기가 다른 같은 품목을 통합해 cheapest_by_item만 보내 주세요.
+  이름 정규화와 가격 기준은 별관 부속품 대장에 있습니다.
+input_files:
+- path: inputs/01_본관.pdf
+  format: pdf
+- path: inputs/02_별관.xlsx
+  format: xlsx
+- path: inputs/03_상담석.hwpx
+  format: hwpx
+- path: inputs/04_연결석.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-d011e364-c5ef-565b-b4e8-7e49f07b8229
+scenario_seed: 11262600130822735410
+scenario_hash: 5d254043bf6d53ed6cc4acf14ebfecc9c78fd4c1048d02352e686a43b27b77c5
+authorship:
+  method: individually_written
+  case_id: D072
+  case_sha256: 9c4ccb25acf50632ae91ae7111157313e9d0a503b30cf1efa84c5b95d29213b3
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item

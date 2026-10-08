@@ -1,0 +1,51 @@
+task_id: B1_B139_cff507e0
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상살구교정실은 급여 계약 등록 후 당월 교정 성과금을 별도 승인했습니다. 성과금은 통상임금 기준에 포함하지 않는 당월 실적
+  대가입니다. 월 통상임금과 최종 과세급여를 구하고, 성과금을 누락한 이전 행 대신 사용할 소득세와 지방소득세를 계산해 주세요.
+input_files:
+- path: inputs/01_살구정액.pdf
+  format: pdf
+- path: inputs/02_당월성과.hwpx
+  format: hwpx
+- path: inputs/03_살구공단.xlsx
+  format: xlsx
+- path: inputs/04_살구범위.pdf
+  format: pdf
+- path: inputs/05_행이동참조.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    variable_allowance:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - variable_allowance
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-29788a95-1ac8-52dc-8bfd-d44cf15e7bcb
+scenario_seed: 14984891994128309005
+scenario_hash: 5e219fbab6d6c046cd7c189d6872ab76a6e0701a0cce73ceae26c63a78133c65
+authorship:
+  method: individually_written
+  case_id: B139
+  case_sha256: cff507e0139cdb0d93ba8ff049174dba181e0ac627ba9fc0570cabd760d41358
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- ordinary_monthly_wage
+- variable_allowance
+- taxable_pay
+- income_tax
+- local_income_tax

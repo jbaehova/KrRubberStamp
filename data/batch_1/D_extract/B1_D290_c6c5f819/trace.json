@@ -1,0 +1,320 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-16",
+          "document_id": "CHEESE-SHELF-81",
+          "event": "received",
+          "event_id": "CHEESE-SHELF-IN",
+          "location": "치즈판매대"
+        },
+        {
+          "date": "2026-05-16",
+          "document_id": "CHEESE-TRAY-82",
+          "event": "received",
+          "event_id": "CHEESE-TRAY-IN",
+          "location": "치즈판매대"
+        },
+        {
+          "date": "2026-05-16",
+          "document_id": "CHEESE-HOLDER-83",
+          "event": "received",
+          "event_id": "CHEESE-HOLDER-IN",
+          "location": "치즈판매대"
+        },
+        {
+          "date": "2026-05-17",
+          "document_id": "CHEESE-KNIFE-84",
+          "event": "received",
+          "event_id": "CHEESE-KNIFE-IN",
+          "location": "치즈조리대"
+        },
+        {
+          "date": "2026-05-17",
+          "document_id": "CHEESE-BOARD-85",
+          "event": "received",
+          "event_id": "CHEESE-BOARD-IN",
+          "location": "치즈조리대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-12",
+          "document_id": "CHEESE-SHELF-81",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "CHEESE-SHELF-H",
+          "vendor": "주식회사 가상치즈진열"
+        },
+        {
+          "date": "2026-05-13",
+          "document_id": "CHEESE-TRAY-82",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "CHEESE-TRAY-H",
+          "vendor": "(주)가상치즈진열"
+        },
+        {
+          "date": "2026-05-13",
+          "document_id": "CHEESE-HOLDER-83",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "CHEESE-HOLDER-H",
+          "vendor": "㈜ 가상 치즈 진열"
+        },
+        {
+          "date": "2026-05-14",
+          "document_id": "CHEESE-KNIFE-84",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "CHEESE-KNIFE-H",
+          "vendor": "가상치즈도구"
+        },
+        {
+          "date": "2026-05-14",
+          "document_id": "CHEESE-BOARD-85",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "CHEESE-BOARD-H",
+          "vendor": "가상위생도마"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "CHEESE-SHELF-H",
+          "items": [
+            {
+              "name": "냉장선반45",
+              "quantity": 2,
+              "unit_price": 34600
+            }
+          ],
+          "sheet_id": "CHEESE-SHELF-L"
+        },
+        {
+          "header_record_id": "CHEESE-TRAY-H",
+          "items": [
+            {
+              "name": "치즈진열트레이",
+              "quantity": 8,
+              "unit_price": 15400
+            }
+          ],
+          "sheet_id": "CHEESE-TRAY-L"
+        },
+        {
+          "header_record_id": "CHEESE-HOLDER-H",
+          "items": [
+            {
+              "name": "가격표홀더H4",
+              "quantity": 16,
+              "unit_price": 870
+            }
+          ],
+          "sheet_id": "CHEESE-HOLDER-L"
+        },
+        {
+          "header_record_id": "CHEESE-KNIFE-H",
+          "items": [
+            {
+              "name": "치즈칼K2",
+              "quantity": 3,
+              "unit_price": 28600
+            }
+          ],
+          "sheet_id": "CHEESE-KNIFE-L"
+        },
+        {
+          "header_record_id": "CHEESE-BOARD-H",
+          "items": [
+            {
+              "name": "치즈도마300",
+              "quantity": 3,
+              "unit_price": 22400
+            }
+          ],
+          "sheet_id": "CHEESE-BOARD-L"
+        }
+      ],
+      "processing_policy": "품목 header_record_id를 표지 record_id에 연결하고 document_id에 received가 있는 invoice 또는 order만 구매다. 포함 행 금액 10/11의 원 미만을 버리면 공급가액이고 차액이 세액이다. 별도 행의 세액은 공급가액 10%의 원 미만을 버린 값이다. 업체명은 NFKC 후 공백과 법인 표현 제거 및 영문 소문자 변환으로 정리하고 이름 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 5,
+      "received_document_ids": [
+        "CHEESE-BOARD-85",
+        "CHEESE-HOLDER-83",
+        "CHEESE-KNIFE-84",
+        "CHEESE-SHELF-81",
+        "CHEESE-TRAY-82"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "CHEESE-SHELF-81",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 34600
+    },
+    "output": {
+      "supply": 69200,
+      "total": 76120,
+      "vat": 6920
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "주식회사 가상치즈진열"
+    },
+    "output": "가상치즈진열",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CHEESE-TRAY-82",
+      "includes_vat": true,
+      "quantity": 8,
+      "unit_price": 15400
+    },
+    "output": {
+      "supply": 112000,
+      "total": 123200,
+      "vat": 11200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "(주)가상치즈진열"
+    },
+    "output": "가상치즈진열",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CHEESE-HOLDER-83",
+      "includes_vat": false,
+      "quantity": 16,
+      "unit_price": 870
+    },
+    "output": {
+      "supply": 13920,
+      "total": 15312,
+      "vat": 1392
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "㈜ 가상 치즈 진열"
+    },
+    "output": "가상치즈진열",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CHEESE-KNIFE-84",
+      "includes_vat": true,
+      "quantity": 3,
+      "unit_price": 28600
+    },
+    "output": {
+      "supply": 78000,
+      "total": 85800,
+      "vat": 7800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상치즈도구"
+    },
+    "output": "가상치즈도구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CHEESE-BOARD-85",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 22400
+    },
+    "output": {
+      "supply": 67200,
+      "total": 73920,
+      "vat": 6720
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상위생도마"
+    },
+    "output": "가상위생도마",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 5
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "가격표홀더h4",
+          "unit_price": 870,
+          "vendor": "가상치즈진열"
+        },
+        {
+          "item": "냉장선반45",
+          "unit_price": 34600,
+          "vendor": "가상치즈진열"
+        },
+        {
+          "item": "치즈도마300",
+          "unit_price": 22400,
+          "vendor": "가상위생도마"
+        },
+        {
+          "item": "치즈진열트레이",
+          "unit_price": 14000,
+          "vendor": "가상치즈진열"
+        },
+        {
+          "item": "치즈칼k2",
+          "unit_price": 26000,
+          "vendor": "가상치즈도구"
+        }
+      ],
+      "grand_total": 374352,
+      "supply_total": 340320,
+      "unique_document_count": 5,
+      "vat_total": 34032,
+      "vendor_totals": [
+        {
+          "supply": 67200,
+          "total": 73920,
+          "vat": 6720,
+          "vendor": "가상위생도마"
+        },
+        {
+          "supply": 78000,
+          "total": 85800,
+          "vat": 7800,
+          "vendor": "가상치즈도구"
+        },
+        {
+          "supply": 195120,
+          "total": 214632,
+          "vat": 19512,
+          "vendor": "가상치즈진열"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

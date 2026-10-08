@@ -1,0 +1,57 @@
+task_id: B1_C287_3f7df528
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상회전창고의 진입 개선 자료를 거래 번호로 묶어 거래 수(unique_transaction_count), 매입세액(input_vat),
+  불공제세액(noncreditable_vat), 공제 매입세액(deductible_input_vat)을 answer.json에 써 주세요. 전자계산서와
+  카드가 겹친 부분도 확인해 주세요.
+input_files:
+- path: inputs/부동산공사.hwpx
+  format: hwpx
+- path: inputs/설비수리.xlsx
+  format: xlsx
+- path: inputs/토지전자.pdf
+  format: pdf
+- path: inputs/토지스캔.png
+  format: png
+  duplicate_of: inputs/토지전자.pdf
+- path: inputs/문전자.hwpx
+  format: hwpx
+- path: inputs/문카드.pdf
+  format: pdf
+- path: inputs/보관운영.pdf
+  format: pdf
+- path: inputs/신고기간.hwpx
+  format: hwpx
+- path: inputs/세금이력.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-3a7cfc08-419e-5dc8-9aa5-17d2704cd546
+scenario_seed: 4575082349976617311
+scenario_hash: 998003ac962590b07c6b5b681af7420f03b648adcff53ff645ff9a1eb5583698
+authorship:
+  method: individually_written
+  case_id: C287
+  case_sha256: 3f7df5285084015ffb3acbdfa973c4b4982c35814c66590d092186b83aaa1e6f
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- unique_transaction_count
+- input_vat
+- noncreditable_vat
+- deductible_input_vat

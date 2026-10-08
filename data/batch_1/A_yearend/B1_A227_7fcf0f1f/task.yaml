@@ -1,0 +1,41 @@
+task_id: B1_A227_7fcf0f1f
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상푸른링 가상안시우 카드 신청을 정리해 주세요. 같은 직불카드의 관리비와 일반 소비를 청구 항목으로 구분합니다. 카드 소득공제액과
+  과세표준 및 최종 국세를 계산해 주세요.
+input_files:
+- path: inputs/01_일반청구.xlsx
+  format: xlsx
+- path: inputs/02_관리청구.pdf
+  format: pdf
+- path: inputs/03_연금급여.pdf
+  format: pdf
+- path: inputs/04_신청범위.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    credit_card_deduction:
+      type: integer
+    tax_base:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - credit_card_deduction
+  - tax_base
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-e673fe26-9bc9-5c07-b89a-fd71a64fb996
+scenario_seed: 9209596390436998000
+scenario_hash: 16c34c12191c25f4ef3e0be8b95cd384c1dddf697fc54a2318ffec1bee45ae1f
+authorship:
+  method: individually_written
+  case_id: A227
+  case_sha256: 7fcf0f1f60b78b7032b0ba916b2441004063d92b8e9796232e459811c8b40f0d
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- credit_card_deduction
+- tax_base
+- final_national_tax

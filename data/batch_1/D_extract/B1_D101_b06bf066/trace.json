@@ -1,0 +1,249 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-13",
+          "document_id": "PHOTOBASE-0311-A",
+          "event": "received",
+          "event_id": "e101a",
+          "location": "기록 촬영석"
+        },
+        {
+          "date": "2026-03-18",
+          "document_id": "PHOTOBASE-0314-B",
+          "event": "received",
+          "event_id": "e101b",
+          "location": "기록 촬영석"
+        },
+        {
+          "date": "2026-03-22",
+          "document_id": "PHOTOBASE-0320-C",
+          "event": "received",
+          "event_id": "e101c",
+          "location": "평면 촬영석"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-11",
+          "document_id": "PHOTOBASE-0311-A",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h101a",
+          "vendor": "주식회사 가상 기록받침"
+        },
+        {
+          "date": "2026-03-14",
+          "document_id": "PHOTOBASE-0314-B",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h101b",
+          "vendor": "(주)가상기록받침"
+        },
+        {
+          "date": "2026-03-25",
+          "document_id": "PHOTOBASE-0325-P",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h101p",
+          "vendor": "㈜가상기록받침"
+        },
+        {
+          "date": "2026-03-20",
+          "document_id": "PHOTOBASE-0320-C",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h101c",
+          "vendor": "가상평면촬영"
+        },
+        {
+          "date": "2026-03-27",
+          "document_id": "PHOTOBASE-0327-Q",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h101q",
+          "vendor": "가상배경판"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h101a",
+          "items": [
+            {
+              "name": "촬영받침대",
+              "quantity": 2,
+              "unit_price": 176000
+            }
+          ],
+          "sheet_id": "s101a"
+        },
+        {
+          "header_record_id": "h101b",
+          "items": [
+            {
+              "name": "촬영받침고정쇠",
+              "quantity": 8,
+              "unit_price": 11700
+            }
+          ],
+          "sheet_id": "s101b"
+        },
+        {
+          "header_record_id": "h101p",
+          "items": [
+            {
+              "name": "촬영받침대",
+              "quantity": 2,
+              "unit_price": 172000
+            }
+          ],
+          "sheet_id": "s101p"
+        },
+        {
+          "header_record_id": "h101c",
+          "items": [
+            {
+              "name": "평면촬영매트",
+              "quantity": 3,
+              "unit_price": 38900
+            }
+          ],
+          "sheet_id": "s101c"
+        },
+        {
+          "header_record_id": "h101q",
+          "items": [
+            {
+              "name": "촬영배경판",
+              "quantity": 4,
+              "unit_price": 52000
+            }
+          ],
+          "sheet_id": "s101q"
+        }
+      ],
+      "processing_policy": "전체 표지에 header_record_id로 품목표를 연결한다. invoice나 order라도 document_id의 received 이력이 있어야 인수 범위다. 인수 이력 없는 청구와 quote 및 출고 전 취소는 제외한다. 동일 번호 동일 내용은 한 번 집계한다. 별도 공급가액은 단가 곱하기 수량이고 품목별 그 10% 원 미만 버림이 세액이다. 업체명은 NFKC 후 공백과 법인 표기를 제거하고 영문 소문자화하며 업체 오름차순이다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "PHOTOBASE-0325-P",
+        "PHOTOBASE-0327-Q"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "PHOTOBASE-0311-A",
+        "PHOTOBASE-0314-B",
+        "PHOTOBASE-0320-C"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "PHOTOBASE-0311-A",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 176000
+    },
+    "output": {
+      "supply": 352000,
+      "total": 387200,
+      "vat": 35200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "주식회사 가상 기록받침"
+    },
+    "output": "가상기록받침",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "PHOTOBASE-0314-B",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 11700
+    },
+    "output": {
+      "supply": 93600,
+      "total": 102960,
+      "vat": 9360
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "(주)가상기록받침"
+    },
+    "output": "가상기록받침",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "PHOTOBASE-0320-C",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 38900
+    },
+    "output": {
+      "supply": 116700,
+      "total": 128370,
+      "vat": 11670
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상평면촬영"
+    },
+    "output": "가상평면촬영",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "촬영받침고정쇠",
+          "unit_price": 11700,
+          "vendor": "가상기록받침"
+        },
+        {
+          "item": "촬영받침대",
+          "unit_price": 176000,
+          "vendor": "가상기록받침"
+        },
+        {
+          "item": "평면촬영매트",
+          "unit_price": 38900,
+          "vendor": "가상평면촬영"
+        }
+      ],
+      "grand_total": 618530,
+      "supply_total": 562300,
+      "unique_document_count": 3,
+      "vat_total": 56230,
+      "vendor_totals": [
+        {
+          "supply": 445600,
+          "total": 490160,
+          "vat": 44560,
+          "vendor": "가상기록받침"
+        },
+        {
+          "supply": 116700,
+          "total": 128370,
+          "vat": 11670,
+          "vendor": "가상평면촬영"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

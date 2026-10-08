@@ -1,0 +1,54 @@
+task_id: B1_D026_d24c7f32
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 별관까지 점자 안내를 확대해 설치를 마쳤습니다. 구매 폴더에 예산 검토 자료와 실제 인수 자료가 함께 들어 있으니 지급할 물품비를
+  마감해 주세요. 다음 설치 때 참고할 품목별 최저 공급가액 단가 업체도 answer.json의 grand_total과 cheapest_by_item으로
+  정리해 주세요.
+input_files:
+- path: inputs/01_예산검토_견적.pdf
+  format: pdf
+- path: inputs/02_입구품목_명세.xlsx
+  format: xlsx
+- path: inputs/03_승강기_주문.hwpx
+  format: hwpx
+- path: inputs/04_별관고정판_명세.pdf
+  format: pdf
+- path: inputs/05_현장인수_대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    grand_total:
+      type: integer
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - grand_total
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-74f25d32-0b62-5c79-9a30-cd448fe82971
+scenario_seed: 15153626702197973063
+scenario_hash: 7768a23e6192850a05cd3d0a6b4b6e2683735f67b02737d61bb066b88d4aa827
+authorship:
+  method: individually_written
+  case_id: D026
+  case_sha256: d24c7f32c3626047f878f1620e0771d1e672395dbcab3c506d7a928e6d92eed9
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- grand_total
+- cheapest_by_item

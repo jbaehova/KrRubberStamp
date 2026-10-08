@@ -1,0 +1,42 @@
+task_id: B1_C035_14aaa3f9
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상겹겹천의 입고팀과 경리팀이 같은 재고 계산서를 각자 전달했습니다. 거래 식별자와 문서번호를 대조해 중복을 제거해 주세요.
+  이번 기간 실제 거래 수(unique_transaction_count), 공제가능 매입세액(deductible_input_vat), 납부액(payable_vat)을
+  answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_팀별_자료안내.hwpx
+  format: hwpx
+- path: inputs/02_천_납품.pdf
+  format: pdf
+- path: inputs/03_입고팀_재고.xlsx
+  format: xlsx
+- path: inputs/04_경리팀_재전달.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-1d9c96bb-514e-52ec-8cfa-cb1a3e9881c0
+scenario_seed: 1489182916759355639
+scenario_hash: b553c6fef74184a44470acee3c56bee8c543f631d488bfc4d04e52eb826edd38
+authorship:
+  method: individually_written
+  case_id: C035
+  case_sha256: 14aaa3f9070580f7f490aed0b3ac00e688f19231bf3c8f5816d2d286c8d06401
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- unique_transaction_count
+- deductible_input_vat
+- payable_vat

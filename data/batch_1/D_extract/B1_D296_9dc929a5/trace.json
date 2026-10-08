@@ -1,0 +1,201 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-18",
+          "document_id": "PHONE-HUB-46",
+          "event": "received",
+          "event_id": "PHONE-HUB-IN",
+          "location": "휴대전화수리대"
+        },
+        {
+          "date": "2026-02-18",
+          "document_id": "PHONE-CABLE-47",
+          "event": "received",
+          "event_id": "PHONE-CABLE-IN",
+          "location": "휴대전화수리대"
+        },
+        {
+          "date": "2026-02-16",
+          "document_id": "PHONE-WIRELESS-48",
+          "event": "cancelled_before_dispatch",
+          "event_id": "PHONE-WIRELESS-CANCEL",
+          "location": "무선장비출고실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-14",
+          "document_id": "PHONE-HUB-46",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "PHONE-HUB-H",
+          "vendor": "주식회사 가상충전부품"
+        },
+        {
+          "date": "2026-02-15",
+          "document_id": "PHONE-CABLE-47",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "PHONE-CABLE-H",
+          "vendor": "(주)가상충전부품"
+        },
+        {
+          "date": "2026-02-15",
+          "document_id": "PHONE-WIRELESS-48",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "PHONE-WIRELESS-H",
+          "vendor": "가상무선장비"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "PHONE-HUB-H",
+          "items": [
+            {
+              "name": "충전허브6PORT",
+              "quantity": 2,
+              "unit_price": 53900
+            }
+          ],
+          "sheet_id": "PHONE-HUB-L"
+        },
+        {
+          "header_record_id": "PHONE-CABLE-H",
+          "items": [
+            {
+              "name": "충전케이블C1M",
+              "quantity": 12,
+              "unit_price": 4700
+            },
+            {
+              "name": "충전케이블L1M",
+              "quantity": 8,
+              "unit_price": 5900
+            }
+          ],
+          "sheet_id": "PHONE-CABLE-L"
+        },
+        {
+          "header_record_id": "PHONE-WIRELESS-H",
+          "items": [
+            {
+              "name": "무선충전패드W1",
+              "quantity": 6,
+              "unit_price": 26400
+            }
+          ],
+          "sheet_id": "PHONE-WIRELESS-L"
+        }
+      ],
+      "processing_policy": "품목 header_record_id와 표지 record_id를 연결한다. invoice 또는 order의 document_id에 received가 있는 원문만 구매이며 cancelled_before_dispatch는 제외한다. 포함 행 금액 10/11의 원 미만을 버린 공급가액과 차액 세액을 사용하고 별도 행 세액은 공급가액 10%의 원 미만을 버린 값이다. 업체는 NFKC 후 공백과 법인 표현 제거 및 영문 소문자 변환으로 정리해 이름 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "PHONE-WIRELESS-48"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "PHONE-CABLE-47",
+        "PHONE-HUB-46"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "PHONE-HUB-46",
+      "includes_vat": true,
+      "quantity": 2,
+      "unit_price": 53900
+    },
+    "output": {
+      "supply": 98000,
+      "total": 107800,
+      "vat": 9800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "주식회사 가상충전부품"
+    },
+    "output": "가상충전부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "PHONE-CABLE-47",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 4700
+    },
+    "output": {
+      "supply": 56400,
+      "total": 62040,
+      "vat": 5640
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "PHONE-CABLE-47",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 5900
+    },
+    "output": {
+      "supply": 47200,
+      "total": 51920,
+      "vat": 4720
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "(주)가상충전부품"
+    },
+    "output": "가상충전부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "충전케이블c1m",
+          "unit_price": 4700,
+          "vendor": "가상충전부품"
+        },
+        {
+          "item": "충전케이블l1m",
+          "unit_price": 5900,
+          "vendor": "가상충전부품"
+        },
+        {
+          "item": "충전허브6port",
+          "unit_price": 49000,
+          "vendor": "가상충전부품"
+        }
+      ],
+      "grand_total": 221760,
+      "supply_total": 201600,
+      "unique_document_count": 2,
+      "vat_total": 20160,
+      "vendor_totals": [
+        {
+          "supply": 201600,
+          "total": 221760,
+          "vat": 20160,
+          "vendor": "가상충전부품"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

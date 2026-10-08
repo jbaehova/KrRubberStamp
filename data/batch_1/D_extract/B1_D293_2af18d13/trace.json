@@ -1,0 +1,202 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-08",
+          "document_id": "WOOD-CLAMP-31",
+          "event": "received",
+          "event_id": "WOOD-A-IN",
+          "location": "목공교육자재실"
+        },
+        {
+          "date": "2026-06-09",
+          "document_id": "WOOD-CLAMP-32",
+          "event": "received",
+          "event_id": "WOOD-B-IN",
+          "location": "목공교육자재실"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "WOOD-CLAMP-33",
+          "event": "cancelled_before_dispatch",
+          "event_id": "WOOD-C-CANCEL",
+          "location": "목공고정출고대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-04",
+          "document_id": "WOOD-CLAMP-31",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "WOOD-CLAMP-A",
+          "vendor": "가상목공고정"
+        },
+        {
+          "date": "2026-06-05",
+          "document_id": "WOOD-CLAMP-32",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "WOOD-CLAMP-B",
+          "vendor": "가상공방클램프"
+        },
+        {
+          "date": "2026-06-06",
+          "document_id": "WOOD-CLAMP-33",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "WOOD-CLAMP-C",
+          "vendor": "가상목공고정"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "WOOD-CLAMP-A",
+          "items": [
+            {
+              "name": "목공클램프G150",
+              "quantity": 8,
+              "unit_price": 13700
+            },
+            {
+              "name": "클램프보호패드",
+              "quantity": 16,
+              "unit_price": 650
+            }
+          ],
+          "sheet_id": "WOOD-A-L"
+        },
+        {
+          "header_record_id": "WOOD-CLAMP-B",
+          "items": [
+            {
+              "name": "목공 클램프 g150",
+              "quantity": 4,
+              "unit_price": 12900
+            }
+          ],
+          "sheet_id": "WOOD-B-L"
+        },
+        {
+          "header_record_id": "WOOD-CLAMP-C",
+          "items": [
+            {
+              "name": "목공클램프G150",
+              "quantity": 12,
+              "unit_price": 11600
+            }
+          ],
+          "sheet_id": "WOOD-C-L"
+        }
+      ],
+      "processing_policy": "품목 header_record_id와 표지 record_id를 연결한다. invoice 또는 order 중 document_id에 received가 있는 원문만 실제 구매이며 cancelled_before_dispatch는 제외한다. 단가는 공급가액이다. 품목 및 업체는 NFKC 후 공백 제거와 영문 소문자 변환을 적용하고 법인 표현을 제거한다. 결과는 품목명 순이며 같은 최저 단가면 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "WOOD-CLAMP-33"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "WOOD-CLAMP-31",
+        "WOOD-CLAMP-32"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "WOOD-CLAMP-31",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 13700
+    },
+    "output": {
+      "supply": 109600,
+      "total": 120560,
+      "vat": 10960
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "WOOD-CLAMP-31",
+      "includes_vat": false,
+      "quantity": 16,
+      "unit_price": 650
+    },
+    "output": {
+      "supply": 10400,
+      "total": 11440,
+      "vat": 1040
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상목공고정"
+    },
+    "output": "가상목공고정",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "WOOD-CLAMP-32",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 12900
+    },
+    "output": {
+      "supply": 51600,
+      "total": 56760,
+      "vat": 5160
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상공방클램프"
+    },
+    "output": "가상공방클램프",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "목공클램프g150",
+          "unit_price": 12900,
+          "vendor": "가상공방클램프"
+        },
+        {
+          "item": "클램프보호패드",
+          "unit_price": 650,
+          "vendor": "가상목공고정"
+        }
+      ],
+      "grand_total": 188760,
+      "supply_total": 171600,
+      "unique_document_count": 2,
+      "vat_total": 17160,
+      "vendor_totals": [
+        {
+          "supply": 51600,
+          "total": 56760,
+          "vat": 5160,
+          "vendor": "가상공방클램프"
+        },
+        {
+          "supply": 120000,
+          "total": 132000,
+          "vat": 12000,
+          "vendor": "가상목공고정"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

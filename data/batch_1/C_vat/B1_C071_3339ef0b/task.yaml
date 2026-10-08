@@ -1,0 +1,46 @@
+task_id: B1_C071_3339ef0b
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상잔잔쟁반의 판매 담당자는 카드로 결제한 기업 고객에게 세금계산서도 발급했습니다. 판매 단말기와 발급 자료를 그냥 합치지
+  말고 거래를 연결하세요. 고유 거래 수(unique_transaction_count), 매출 공급가액(tax_base), 발행세액공제(receipt_credit),
+  납부액(payable_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_매장_고객인계.hwpx
+  format: hwpx
+- path: inputs/02_단말기_기업결제.xlsx
+  format: xlsx
+- path: inputs/03_기업_발급계산서.pdf
+  format: pdf
+- path: inputs/04_가정_현금영수증.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    tax_base:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - tax_base
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-4e382331-7768-5108-99e4-ff3f8fa92ad2
+scenario_seed: 3691244203117439932
+scenario_hash: 74d14d2037d641b07cad82a26001ef63f233226d6f7be1bef447e382080b3ddb
+authorship:
+  method: individually_written
+  case_id: C071
+  case_sha256: 3339ef0bb208ebbc2e5a639da9bb80277c095713157de3998117efd2b120cd29
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- tax_base
+- receipt_credit
+- payable_vat

@@ -1,0 +1,37 @@
+task_id: B1_B264_548457c0
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상단추자료실의 가족 공제 등록은 본인과 무소득 부모 두 명입니다. 자녀 공제 없이 정액 급여에 적용할 소득세와 지방소득세를
+  구한 뒤 세후 이체액을 작성해 주세요.
+input_files:
+- path: inputs/01_급여인계표.xlsx
+  format: xlsx
+- path: inputs/02_세무인계기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-de126ccf-d8b2-560b-b19b-89539d17702b
+scenario_seed: 6090089078846599937
+scenario_hash: ba2e09562d270fbc383568fc7f52bbba1ddddbf94faf217975c0facab8c526b5
+authorship:
+  method: individually_written
+  case_id: B264
+  case_sha256: 548457c0232333014592a3f3867f6dd668d231a89702784cfa642efd2aca9d75
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- income_tax
+- local_income_tax
+- net_pay

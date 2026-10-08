@@ -1,0 +1,47 @@
+task_id: B1_D085_d6125cf6
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 표본 보관 튜브의 추가 발주처를 찾습니다. 거래마다 세금 표시를 확인해 공급가액 단가를 맞춘 cheapest_by_item만
+  보내 주세요. 비교 및 이름 처리 기준은 받침 대장에 있습니다.
+input_files:
+- path: inputs/01_튜브결제.pdf
+  format: pdf
+- path: inputs/02_받침별도.xlsx
+  format: xlsx
+- path: inputs/03_추가튜브.hwpx
+  format: hwpx
+- path: inputs/04_함께구입.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-71180722-e1e0-5428-a544-e7b560708dfb
+scenario_seed: 15425493889405851378
+scenario_hash: 91ba107cc8a7695530f50634b0a75f0af1f1b97b97c4d765e7dbd7a49109ab6a
+authorship:
+  method: individually_written
+  case_id: D085
+  case_sha256: d6125cf6f2fe96f203b3181aaade7d8cc0aadd29725d0e90d4fe6b1c29a747f8
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item

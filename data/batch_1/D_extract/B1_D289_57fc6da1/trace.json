@@ -1,0 +1,225 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-16",
+          "document_id": "CANDLE-GLASS-42",
+          "event": "received",
+          "event_id": "CANDLE-GLASS-IN",
+          "location": "향초포장실"
+        },
+        {
+          "date": "2026-04-16",
+          "document_id": "CANDLE-LID-43",
+          "event": "received",
+          "event_id": "CANDLE-LID-IN",
+          "location": "향초포장실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-12",
+          "document_id": "CANDLE-GLASS-42",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "CANDLE-GLASS-ORIG",
+          "vendor": "가상향초유리"
+        },
+        {
+          "date": "2026-04-12",
+          "document_id": "CANDLE-GLASS-42",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "CANDLE-GLASS-REISSUE",
+          "vendor": "가상향초유리"
+        },
+        {
+          "date": "2026-04-13",
+          "document_id": "CANDLE-LID-43",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "CANDLE-LID-H",
+          "vendor": "가상향초유리"
+        },
+        {
+          "date": "2026-04-14",
+          "document_id": "CANDLE-TRAY-44",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "CANDLE-TRAY-H",
+          "vendor": "가상장식받침"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "CANDLE-GLASS-ORIG",
+          "items": [
+            {
+              "name": "향초유리컵200",
+              "quantity": 48,
+              "unit_price": 1750
+            },
+            {
+              "name": "유리컵완충틀",
+              "quantity": 4,
+              "unit_price": 6200
+            }
+          ],
+          "sheet_id": "CANDLE-GLASS-O-L"
+        },
+        {
+          "header_record_id": "CANDLE-GLASS-REISSUE",
+          "items": [
+            {
+              "name": "향초유리컵200",
+              "quantity": 48,
+              "unit_price": 1750
+            },
+            {
+              "name": "유리컵완충틀",
+              "quantity": 4,
+              "unit_price": 6200
+            }
+          ],
+          "sheet_id": "CANDLE-GLASS-R-L"
+        },
+        {
+          "header_record_id": "CANDLE-LID-H",
+          "items": [
+            {
+              "name": "향초뚜껑200",
+              "quantity": 48,
+              "unit_price": 650
+            }
+          ],
+          "sheet_id": "CANDLE-LID-L"
+        },
+        {
+          "header_record_id": "CANDLE-TRAY-H",
+          "items": [
+            {
+              "name": "장식받침T2",
+              "quantity": 12,
+              "unit_price": 3900
+            }
+          ],
+          "sheet_id": "CANDLE-TRAY-L"
+        }
+      ],
+      "processing_policy": "표지 record_id와 품목 header_record_id를 연결한다. invoice 또는 order의 document_id에 received가 있는 원문만 구매다. 서로 다른 record_id라도 document_id와 연결한 최종 내용이 같으면 한 번 계산한다. 미수령 주문은 제외한다. 모두 별도 단가이며 행 세액은 공급가액 10%의 원 미만을 버린 값이다. 업체는 NFKC 후 공백과 법인 표현 제거 및 영문 소문자 변환을 적용해 이름 순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "CANDLE-TRAY-44"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "CANDLE-GLASS-42",
+        "CANDLE-LID-43"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "CANDLE-GLASS-42",
+      "includes_vat": false,
+      "quantity": 48,
+      "unit_price": 1750
+    },
+    "output": {
+      "supply": 84000,
+      "total": 92400,
+      "vat": 8400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "CANDLE-GLASS-42",
+      "includes_vat": false,
+      "quantity": 4,
+      "unit_price": 6200
+    },
+    "output": {
+      "supply": 24800,
+      "total": 27280,
+      "vat": 2480
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상향초유리"
+    },
+    "output": "가상향초유리",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CANDLE-GLASS-42"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "CANDLE-LID-43",
+      "includes_vat": false,
+      "quantity": 48,
+      "unit_price": 650
+    },
+    "output": {
+      "supply": 31200,
+      "total": 34320,
+      "vat": 3120
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상향초유리"
+    },
+    "output": "가상향초유리",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "유리컵완충틀",
+          "unit_price": 6200,
+          "vendor": "가상향초유리"
+        },
+        {
+          "item": "향초뚜껑200",
+          "unit_price": 650,
+          "vendor": "가상향초유리"
+        },
+        {
+          "item": "향초유리컵200",
+          "unit_price": 1750,
+          "vendor": "가상향초유리"
+        }
+      ],
+      "grand_total": 154000,
+      "supply_total": 140000,
+      "unique_document_count": 2,
+      "vat_total": 14000,
+      "vendor_totals": [
+        {
+          "supply": 140000,
+          "total": 154000,
+          "vat": 14000,
+          "vendor": "가상향초유리"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

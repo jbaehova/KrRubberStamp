@@ -1,0 +1,55 @@
+task_id: B1_D034_05e4c0c5
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 접근성 간담회 비품의 지급 대장을 작성해 주세요. 납품 표지와 품목 부속표가 따로 보관되어 있으니 참조 번호로 연결해 거래처별
+  금액을 확인해야 합니다. 지원금 장부에 넣을 공급가액 합계도 answer.json의 vendor_totals와 supply_total로 정리해
+  주세요.
+input_files:
+- path: inputs/01_납품표지_묶음.pdf
+  format: pdf
+- path: inputs/02_품목부속표_B.xlsx
+  format: xlsx
+- path: inputs/03_품목부속표_A.hwpx
+  format: hwpx
+- path: inputs/04_현장인수_기록.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - vendor_totals
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-00866b06-b44a-56b9-89ec-c233272a9d6f
+scenario_seed: 424676218434976712
+scenario_hash: 48f6d31a1460e3d73e8363918856369267cbe2c1f6f6926261477801330124d9
+authorship:
+  method: individually_written
+  case_id: D034
+  case_sha256: 05e4c0c5485f7bc8cfeebd2be0fb50ca94354e17e6f208175591de5316105e1d
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- vendor_totals
+- supply_total

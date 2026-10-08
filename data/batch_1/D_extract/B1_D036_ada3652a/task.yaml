@@ -1,0 +1,53 @@
+task_id: B1_D036_ada3652a
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 항해 전시의 새 체험 코너를 준비합니다. 기존 구매 자료로 로프 모형과 방향 자석의 최저 공급가액 단가 업체를 찾고, 이번
+  전시 물품의 공급가액 합계도 확인해 주세요. answer.json에는 cheapest_by_item과 supply_total을 작성해 주세요.
+input_files:
+- path: inputs/01_매듭로프_인수.pdf
+  format: pdf
+- path: inputs/02_방향자석_구매.xlsx
+  format: xlsx
+- path: inputs/03_로프모형_보충.hwpx
+  format: hwpx
+- path: inputs/04_자석_추가명세.pdf
+  format: pdf
+- path: inputs/05_로프_추가구매.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-5d8a0abe-6b47-5fe2-9b38-2b3ac1874f3e
+scenario_seed: 12511955422591917787
+scenario_hash: 9217217adc786ee2233d94d1d83ed10523f952a0c354074e59c410a8d8e0d432
+authorship:
+  method: individually_written
+  case_id: D036
+  case_sha256: ada3652a691d1edb519aa2a63367c045f6733f234304f8c1fc0b99438268d20c
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item
+- supply_total

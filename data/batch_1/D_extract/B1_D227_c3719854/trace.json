@@ -1,0 +1,156 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-23",
+          "document_id": "LOG-SCALE-20",
+          "event": "received",
+          "event_id": "LOG-WARE-IN",
+          "location": "물류사무실입고대"
+        },
+        {
+          "date": "2026-05-23",
+          "document_id": "LOG-SCALE-20",
+          "event": "received",
+          "event_id": "LOG-QA-IN",
+          "location": "물류사무실입고대"
+        },
+        {
+          "date": "2026-05-24",
+          "document_id": "LOG-PLATE-21",
+          "event": "received",
+          "event_id": "LOG-PLATE-IN",
+          "location": "물류사무실입고대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-20",
+          "document_id": "LOG-SCALE-20",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "LOG-SCALE-C",
+          "vendor": "가상포장계량"
+        },
+        {
+          "date": "2026-05-21",
+          "document_id": "LOG-PLATE-21",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "LOG-PLATE-C",
+          "vendor": "가상포장계량"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "LOG-SCALE-C",
+          "items": [
+            {
+              "name": "포장저울30K",
+              "quantity": 2,
+              "unit_price": 119000
+            }
+          ],
+          "sheet_id": "LOG-SCALE-L"
+        },
+        {
+          "header_record_id": "LOG-PLATE-C",
+          "items": [
+            {
+              "name": "저울교체판",
+              "quantity": 2,
+              "unit_price": 14600
+            }
+          ],
+          "sheet_id": "LOG-PLATE-L"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 표지에 연결한다. invoice 또는 order 번호에 received가 있으면 실제 구매다. 같은 document_id에 날짜와 장소 및 상태가 같은 수령 확인이 여럿 있어도 구매가 늘어나지 않는다. 별도 단가는 공급가액이고 행 세액은 그 10%에서 원 미만을 버린다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "LOG-PLATE-21",
+        "LOG-SCALE-20"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "LOG-SCALE-20",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 119000
+    },
+    "output": {
+      "supply": 238000,
+      "total": 261800,
+      "vat": 23800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상포장계량"
+    },
+    "output": "가상포장계량",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "LOG-PLATE-21",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 14600
+    },
+    "output": {
+      "supply": 29200,
+      "total": 32120,
+      "vat": 2920
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상포장계량"
+    },
+    "output": "가상포장계량",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "저울교체판",
+          "unit_price": 14600,
+          "vendor": "가상포장계량"
+        },
+        {
+          "item": "포장저울30k",
+          "unit_price": 119000,
+          "vendor": "가상포장계량"
+        }
+      ],
+      "grand_total": 293920,
+      "supply_total": 267200,
+      "unique_document_count": 2,
+      "vat_total": 26720,
+      "vendor_totals": [
+        {
+          "supply": 267200,
+          "total": 293920,
+          "vat": 26720,
+          "vendor": "가상포장계량"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

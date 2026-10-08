@@ -1,0 +1,50 @@
+task_id: B1_D211_2581fc2e
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 고객에게 전달할 사진 봉투 구매비를 인계해 주세요. vendor_totals와 supply_total을 answer.json에
+  적어 주세요.
+input_files:
+- path: inputs/01_사진봉투명세.xlsx
+  format: xlsx
+- path: inputs/02_액자봉투명세.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - vendor_totals
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-a0c6e9ce-96bd-5da9-8e75-f883134bd7cf
+scenario_seed: 2702718525925074439
+scenario_hash: cef2f4ef3749125b67a2f65addd767bc642278e6b723c8e220502bdabff8b2ab
+authorship:
+  method: individually_written
+  case_id: D211
+  case_sha256: 2581fc2e01a1a607c49e579f1485b9b3c095f5e9a5e8644307b0a14e6e27dfa1
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals
+- supply_total

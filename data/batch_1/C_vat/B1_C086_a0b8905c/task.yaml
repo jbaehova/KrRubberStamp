@@ -1,0 +1,46 @@
+task_id: B1_C086_a0b8905c
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상마지막고리는 재고 매입 뒤 남은 세금과 올해 예정신고에서 사용한 발행 공제를 함께 보내 왔습니다. 이전 신고 납부서와 현재
+  추가 정산 자료를 구별해 주세요. 이번 발행세액공제(receipt_credit), 공제가능 매입세액(deductible_input_vat), 정산액(net_vat),
+  환급액(refund_vat)을 answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_고리매장_현황.hwpx
+  format: hwpx
+- path: inputs/02_예정신고_공제와납부.pdf
+  format: pdf
+- path: inputs/03_판매와_재고.xlsx
+  format: xlsx
+- path: inputs/04_재고_인수기록.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    net_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - deductible_input_vat
+  - net_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-38f0dfb1-6b1e-57e4-bac1-8e55fb1e8597
+scenario_seed: 11581165169284247025
+scenario_hash: d44512818f867367b369dc1bb4dc08e700b984892e14775b1de8cfa88b97d5ef
+authorship:
+  method: individually_written
+  case_id: C086
+  case_sha256: a0b8905ca0506df1a0157d96ef912423354b844fc09cfd48f0d30c5f27f07558
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- receipt_credit
+- deductible_input_vat
+- net_vat
+- refund_vat

@@ -1,0 +1,244 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-05",
+          "document_id": "PRINT-KNIFE-03",
+          "event": "received",
+          "event_id": "PRINT-A-IN",
+          "location": "인쇄소절단준비대"
+        },
+        {
+          "date": "2026-03-10",
+          "document_id": "PRINT-KNIFE-07",
+          "event": "received",
+          "event_id": "PRINT-B-IN",
+          "location": "인쇄소절단준비대"
+        },
+        {
+          "date": "2026-03-10",
+          "document_id": "PRINT-MAT-08",
+          "event": "received",
+          "event_id": "PRINT-MAT-IN",
+          "location": "인쇄소절단준비대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-03",
+          "document_id": "PRINT-KNIFE-03",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "PRINT-BLADE-A",
+          "vendor": "가상인쇄날"
+        },
+        {
+          "date": "2026-03-07",
+          "document_id": "PRINT-KNIFE-07",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "PRINT-BLADE-B",
+          "vendor": "가상절단부품"
+        },
+        {
+          "date": "2026-03-08",
+          "document_id": "PRINT-MAT-08",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "PRINT-MAT-C",
+          "vendor": "가상인쇄날"
+        },
+        {
+          "date": "2026-02-25",
+          "document_id": "PRINT-KNIFE-Q1",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "PRINT-Q-A",
+          "vendor": "가상인쇄날"
+        },
+        {
+          "date": "2026-02-26",
+          "document_id": "PRINT-KNIFE-Q2",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "PRINT-Q-B",
+          "vendor": "가상절단부품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "PRINT-BLADE-A",
+          "items": [
+            {
+              "name": "절단날Ｃ８",
+              "quantity": 8,
+              "unit_price": 3750
+            }
+          ],
+          "sheet_id": "PRINT-BLADE-A-L"
+        },
+        {
+          "header_record_id": "PRINT-BLADE-B",
+          "items": [
+            {
+              "name": "절단날 c8",
+              "quantity": 3,
+              "unit_price": 3600
+            }
+          ],
+          "sheet_id": "PRINT-BLADE-B-L"
+        },
+        {
+          "header_record_id": "PRINT-MAT-C",
+          "items": [
+            {
+              "name": "절단매트A2",
+              "quantity": 2,
+              "unit_price": 16400
+            }
+          ],
+          "sheet_id": "PRINT-MAT-L"
+        },
+        {
+          "header_record_id": "PRINT-Q-A",
+          "items": [
+            {
+              "name": "절단날C8",
+              "quantity": 8,
+              "unit_price": 3150
+            }
+          ],
+          "sheet_id": "PRINT-Q-A-L"
+        },
+        {
+          "header_record_id": "PRINT-Q-B",
+          "items": [
+            {
+              "name": "절단날C8",
+              "quantity": 3,
+              "unit_price": 3200
+            }
+          ],
+          "sheet_id": "PRINT-Q-B-L"
+        }
+      ],
+      "processing_policy": "첨부를 header_record_id로 표지에 연결한다. invoice 또는 order의 document_id에 received가 있으면 구매이며 quote는 구매가 아니다. 별도 단가는 공급가액이다. 품목은 NFKC 후 공백 제거 및 영문 소문자로 정리하고 업체는 같은 처리에 법인 표현 제거를 더한다. 이름 순으로 배열하고 가격 동률이면 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "PRINT-KNIFE-Q1",
+        "PRINT-KNIFE-Q2"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "PRINT-KNIFE-03",
+        "PRINT-KNIFE-07",
+        "PRINT-MAT-08"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "PRINT-KNIFE-03",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 3750
+    },
+    "output": {
+      "supply": 30000,
+      "total": 33000,
+      "vat": 3000
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상인쇄날"
+    },
+    "output": "가상인쇄날",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "PRINT-KNIFE-07",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 3600
+    },
+    "output": {
+      "supply": 10800,
+      "total": 11880,
+      "vat": 1080
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상절단부품"
+    },
+    "output": "가상절단부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "PRINT-MAT-08",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 16400
+    },
+    "output": {
+      "supply": 32800,
+      "total": 36080,
+      "vat": 3280
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상인쇄날"
+    },
+    "output": "가상인쇄날",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "절단날c8",
+          "unit_price": 3600,
+          "vendor": "가상절단부품"
+        },
+        {
+          "item": "절단매트a2",
+          "unit_price": 16400,
+          "vendor": "가상인쇄날"
+        }
+      ],
+      "grand_total": 80960,
+      "supply_total": 73600,
+      "unique_document_count": 3,
+      "vat_total": 7360,
+      "vendor_totals": [
+        {
+          "supply": 62800,
+          "total": 69080,
+          "vat": 6280,
+          "vendor": "가상인쇄날"
+        },
+        {
+          "supply": 10800,
+          "total": 11880,
+          "vat": 1080,
+          "vendor": "가상절단부품"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

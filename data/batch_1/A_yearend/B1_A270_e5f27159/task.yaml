@@ -1,0 +1,43 @@
+task_id: B1_A270_e5f27159
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상들꽃정밀의 가상윤서리 주택이자 접수를 확인해 주세요. 직원 대출 주택 외에 배우자 보유 주택을 세대 대장에서 찾아 주택이자
+  소득공제액을 계산하고 공적연금 공제와 과세표준을 회신해 주세요.
+input_files:
+- path: inputs/01_직원대출.pdf
+  format: pdf
+- path: inputs/02_직원주택.hwpx
+  format: hwpx
+- path: inputs/03_배우자주택.pdf
+  format: pdf
+- path: inputs/04_급여연금.xlsx
+  format: xlsx
+- path: inputs/05_정산범위.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    pension_deduction:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - housing_income_deduction
+  - pension_deduction
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-3c22f847-738e-5b67-b18c-60f90e133300
+scenario_seed: 16569430606683728909
+scenario_hash: c8f2db3dd5a3cc22e2de05d4e80183ed8277aa8de96925164e1beb6159c62b59
+authorship:
+  method: individually_written
+  case_id: A270
+  case_sha256: e5f2715921de6c0da58cc7a0956e8908ba8cb1ac8b4342e35ebd19ded3f668d4
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- housing_income_deduction
+- pension_deduction
+- tax_base

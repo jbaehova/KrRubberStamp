@@ -1,0 +1,47 @@
+task_id: B1_D109_cc89344c
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 보관품을 재주문하기 전에 지난 실제 구매 단가를 정리해 주세요. cheapest_by_item과 공급가액 지출 supply_total이
+  필요합니다.
+input_files:
+- path: inputs/01_최초보관품구매.pdf
+  format: pdf
+- path: inputs/02_추가보관품구매.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-5baea034-33e0-5174-9323-eb6d235f11c1
+scenario_seed: 14738368759390307288
+scenario_hash: 5193019912b225482893dd3f2f5ef9d16a85e0b34d8cb6bb05e9eb76f62a00c4
+authorship:
+  method: individually_written
+  case_id: D109
+  case_sha256: cc89344ca82c83d84859fcc2f426f9428300825282c6c5bd11f3e3728878c932
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item
+- supply_total

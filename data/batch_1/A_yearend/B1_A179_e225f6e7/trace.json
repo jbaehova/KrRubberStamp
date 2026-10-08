@@ -1,0 +1,259 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 60100000,
+      "cards": [
+        {
+          "amount": 18000000,
+          "billed_item": "ordinary_goods_services",
+          "category": "debit",
+          "date": "2025-12-31",
+          "person_id": "self"
+        }
+      ],
+      "employee_age": 36,
+      "employee_name": "가상임도하",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "medical": [
+        {
+          "amount": 3200000,
+          "date": "2025-04-11",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "self",
+          "reimbursed": 0,
+          "treatment_purpose": "therapeutic"
+        },
+        {
+          "amount": 4000000,
+          "date": "2025-09-09",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "self",
+          "reimbursed": 0,
+          "treatment_purpose": "cosmetic"
+        }
+      ],
+      "non_taxable": 2100000,
+      "reference_year": 2025,
+      "scenario_id": "금낭화설계 미용 시술 두 제도 대조",
+      "scope_note": "국내 거주 근로소득자다. 모든 비용은 직원 본인 부담이고 실손 보전이 없다. 진료 목적은 병원 기록이며 카드액은 정상 국내 소비로 중복 없이 집계됐다. 미용 시술 카드액은 일반 사용액 안에 들어 있어 별도 카드 행을 추가하지 않는다. 가족과 다른 공제 및 감면과 이월은 없다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "cards.0.excluded": false,
+      "medical.0.excluded": false,
+      "medical.1.excluded": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": []
+    },
+    "output": {
+      "additional": 0,
+      "basic": 1500000,
+      "rejected": []
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 60100000,
+      "non_taxable": 2100000
+    },
+    "output": {
+      "salary_deduction": 12650000,
+      "salary_income": 45350000,
+      "total_salary": 58000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 58000000,
+      "spending": {
+        "debit": 18000000
+      }
+    },
+    "output": 1050000,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 3200000,
+          "date": "2025-04-11",
+          "excluded": false,
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "self",
+          "reimbursed": 0,
+          "treatment_purpose": "therapeutic"
+        },
+        {
+          "amount": 4000000,
+          "date": "2025-09-09",
+          "excluded": true,
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "person_id": "self",
+          "reimbursed": 0,
+          "treatment_purpose": "cosmetic"
+        }
+      ],
+      "salary": 58000000
+    },
+    "output": 219000,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 58000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 42800000
+    },
+    "output": 5160000,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 5160000,
+      "salary": 58000000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 219000,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 5160000,
+      "total_tax_credits": 879000
+    },
+    "output": 4281000,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 4281000
+    },
+    "output": 428100,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 428100,
+      "final_national": 4281000,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 428100,
+      "national": 4281000,
+      "total": 4709100
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

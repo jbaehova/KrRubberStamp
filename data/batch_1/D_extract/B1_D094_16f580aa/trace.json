@@ -1,0 +1,374 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-10",
+          "document_id": "TICKET-0410-A",
+          "event": "received",
+          "event_id": "e94a",
+          "location": "좌측 매표석"
+        },
+        {
+          "date": "2026-04-11",
+          "document_id": "TICKET-0411-B",
+          "event": "received",
+          "event_id": "e94b",
+          "location": "입구 대기선"
+        },
+        {
+          "date": "2026-04-13",
+          "document_id": "TICKET-0413-C",
+          "event": "received",
+          "event_id": "e94c",
+          "location": "좌측 매표석"
+        },
+        {
+          "date": "2026-04-14",
+          "document_id": "TICKET-0414-D",
+          "event": "received",
+          "event_id": "e94d",
+          "location": "입구 안내석"
+        },
+        {
+          "date": "2026-04-15",
+          "document_id": "TICKET-0415-E",
+          "event": "received",
+          "event_id": "e94e",
+          "location": "발권 창구"
+        },
+        {
+          "date": "2026-04-08",
+          "document_id": "ORDER-TK-0406",
+          "event": "cancelled_before_dispatch",
+          "event_id": "e94x",
+          "location": "발주 담당 접수"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-10",
+          "document_id": "TICKET-0410-A",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h94a",
+          "vendor": "가상매표집기"
+        },
+        {
+          "date": "2026-04-11",
+          "document_id": "TICKET-0411-B",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h94b",
+          "vendor": "가상줄안내"
+        },
+        {
+          "date": "2026-04-13",
+          "document_id": "TICKET-0413-C",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h94c",
+          "vendor": "가상매표집기"
+        },
+        {
+          "date": "2026-04-14",
+          "document_id": "TICKET-0414-D",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h94d",
+          "vendor": "가상칸막이상사"
+        },
+        {
+          "date": "2026-04-15",
+          "document_id": "TICKET-0415-E",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h94e",
+          "vendor": "가상입장표"
+        },
+        {
+          "date": "2026-04-02",
+          "document_id": "QUOTE-TK-0402",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "h94q",
+          "vendor": "가상칸막이상사"
+        },
+        {
+          "date": "2026-04-06",
+          "document_id": "ORDER-TK-0406",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h94x",
+          "vendor": "가상매표집기"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h94a",
+          "items": [
+            {
+              "name": "매표책상",
+              "quantity": 2,
+              "unit_price": 137000
+            }
+          ],
+          "sheet_id": "s94a"
+        },
+        {
+          "header_record_id": "h94b",
+          "items": [
+            {
+              "name": "대기줄차단띠",
+              "quantity": 4,
+              "unit_price": 58300
+            }
+          ],
+          "sheet_id": "s94b"
+        },
+        {
+          "header_record_id": "h94c",
+          "items": [
+            {
+              "name": "현금보관함",
+              "quantity": 2,
+              "unit_price": 42600
+            }
+          ],
+          "sheet_id": "s94c"
+        },
+        {
+          "header_record_id": "h94d",
+          "items": [
+            {
+              "name": "투명안내판",
+              "quantity": 3,
+              "unit_price": 26400
+            }
+          ],
+          "sheet_id": "s94d"
+        },
+        {
+          "header_record_id": "h94e",
+          "items": [
+            {
+              "name": "입장표용지",
+              "quantity": 15,
+              "unit_price": 7900
+            }
+          ],
+          "sheet_id": "s94e"
+        },
+        {
+          "header_record_id": "h94q",
+          "items": [
+            {
+              "name": "매표칸막이",
+              "quantity": 2,
+              "unit_price": 188000
+            }
+          ],
+          "sheet_id": "s94q"
+        },
+        {
+          "header_record_id": "h94x",
+          "items": [
+            {
+              "name": "동전정리함",
+              "quantity": 2,
+              "unit_price": 58000
+            }
+          ],
+          "sheet_id": "s94x"
+        }
+      ],
+      "processing_policy": "모든 원자료 표지에 header_record_id로 품목표를 연결한다. invoice나 order는 document_id의 received 기록이 있어야 실제 인수에 포함한다. quote, 인수 기록 없는 자료 및 출고 전 취소 기록은 제외한다. 같은 document_id의 동일 내용은 한 번만 집계한다. 포함 품목 총액의 10/11 원 미만 버림이 공급가액이고 차액이 부가세다. 별도 공급가액은 단가 곱하기 수량이고 품목별 그 10% 원 미만 버림이 부가세다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하며 업체의 주식회사, (주), ㈜를 제거한다. 업체 배열 및 품목 배열은 해당 정규화 이름 오름차순이다. 동일 규격 개당 공급가액 단가를 비교하고 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 최저 단가가 같으면 정규화 업체명 오름차순 첫 업체를 고른다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "ORDER-TK-0406",
+        "QUOTE-TK-0402"
+      ],
+      "joined_document_records_before_deduplication": 5,
+      "received_document_ids": [
+        "TICKET-0410-A",
+        "TICKET-0411-B",
+        "TICKET-0413-C",
+        "TICKET-0414-D",
+        "TICKET-0415-E"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "TICKET-0410-A",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 137000
+    },
+    "output": {
+      "supply": 274000,
+      "total": 301400,
+      "vat": 27400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상매표집기"
+    },
+    "output": "가상매표집기",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TICKET-0411-B",
+      "includes_vat": true,
+      "quantity": 4,
+      "unit_price": 58300
+    },
+    "output": {
+      "supply": 212000,
+      "total": 233200,
+      "vat": 21200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상줄안내"
+    },
+    "output": "가상줄안내",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TICKET-0413-C",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 42600
+    },
+    "output": {
+      "supply": 85200,
+      "total": 93720,
+      "vat": 8520
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상매표집기"
+    },
+    "output": "가상매표집기",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TICKET-0414-D",
+      "includes_vat": true,
+      "quantity": 3,
+      "unit_price": 26400
+    },
+    "output": {
+      "supply": 72000,
+      "total": 79200,
+      "vat": 7200
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상칸막이상사"
+    },
+    "output": "가상칸막이상사",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "TICKET-0415-E",
+      "includes_vat": false,
+      "quantity": 15,
+      "unit_price": 7900
+    },
+    "output": {
+      "supply": 118500,
+      "total": 130350,
+      "vat": 11850
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상입장표"
+    },
+    "output": "가상입장표",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 5
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "대기줄차단띠",
+          "unit_price": 53000,
+          "vendor": "가상줄안내"
+        },
+        {
+          "item": "매표책상",
+          "unit_price": 137000,
+          "vendor": "가상매표집기"
+        },
+        {
+          "item": "입장표용지",
+          "unit_price": 7900,
+          "vendor": "가상입장표"
+        },
+        {
+          "item": "투명안내판",
+          "unit_price": 24000,
+          "vendor": "가상칸막이상사"
+        },
+        {
+          "item": "현금보관함",
+          "unit_price": 42600,
+          "vendor": "가상매표집기"
+        }
+      ],
+      "grand_total": 837870,
+      "supply_total": 761700,
+      "unique_document_count": 5,
+      "vat_total": 76170,
+      "vendor_totals": [
+        {
+          "supply": 359200,
+          "total": 395120,
+          "vat": 35920,
+          "vendor": "가상매표집기"
+        },
+        {
+          "supply": 118500,
+          "total": 130350,
+          "vat": 11850,
+          "vendor": "가상입장표"
+        },
+        {
+          "supply": 212000,
+          "total": 233200,
+          "vat": 21200,
+          "vendor": "가상줄안내"
+        },
+        {
+          "supply": 72000,
+          "total": 79200,
+          "vat": 7200,
+          "vendor": "가상칸막이상사"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

@@ -1,0 +1,50 @@
+task_id: B1_C277_5eeeef93
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상끈고정의 구매 봉투에는 카드 전표 두 장과 전자계산서 한 장이 있습니다. 두 카드의 공급일과 금액이 같지만 별도 발주품을
+  각각 받았고, 전자계산서는 첫 반입의 증빙입니다. 발주 인수 번호로 연결하여 고유 거래 수(unique_transaction_count), 매입세액(input_vat),
+  공제가능 매입세액(deductible_input_vat), 환급액(refund_vat)을 answer.json에 써 주세요.
+input_files:
+- path: inputs/두발주인수.xlsx
+  format: xlsx
+- path: inputs/첫카드.pdf
+  format: pdf
+- path: inputs/둘째카드.pdf
+  format: pdf
+- path: inputs/추가전자.pdf
+  format: pdf
+- path: inputs/창고수령.hwpx
+  format: hwpx
+- path: inputs/매입검토.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    input_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - input_vat
+  - deductible_input_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-326f025d-c656-5789-863a-85bc8a821b88
+scenario_seed: 6840668301766073912
+scenario_hash: db448738be54d254f4c98e63e702c624ac1499be04578a6bad0e7ec3a2fa1fae
+authorship:
+  method: individually_written
+  case_id: C277
+  case_sha256: 5eeeef93b90a9e38a4563708fa2b08f7e3f5339a354fcffb27db2544b632b639
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- unique_transaction_count
+- input_vat
+- deductible_input_vat
+- refund_vat

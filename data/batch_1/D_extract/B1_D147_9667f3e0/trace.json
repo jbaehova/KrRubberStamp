@@ -1,0 +1,229 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-05",
+          "document_id": "SCALE-147-A",
+          "event": "received",
+          "event_id": "e147-a",
+          "location": "계측 실습실"
+        },
+        {
+          "date": "2026-05-10",
+          "document_id": "SCALE-147-B",
+          "event": "received",
+          "event_id": "e147-b",
+          "location": "계측 실습실"
+        },
+        {
+          "date": "2026-05-12",
+          "document_id": "SCALE-147-C",
+          "event": "received",
+          "event_id": "e147-c",
+          "location": "계측 실습실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-02",
+          "document_id": "SCALE-147-A",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h147-scale",
+          "vendor": "ＦＩＣＴＩＯＮ　ＳＣＡＬＥ"
+        },
+        {
+          "date": "2026-05-07",
+          "document_id": "SCALE-147-B",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h147-weight",
+          "vendor": "Fiction Scale"
+        },
+        {
+          "date": "2026-05-09",
+          "document_id": "SCALE-147-C",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h147-pad",
+          "vendor": "가상계측보호"
+        },
+        {
+          "date": "2026-05-15",
+          "document_id": "SCALE-147-D",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "h147-next",
+          "vendor": "fiction scale"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h147-scale",
+          "items": [
+            {
+              "name": "실습용저울",
+              "quantity": 3,
+              "unit_price": 118000
+            }
+          ],
+          "sheet_id": "s147-a"
+        },
+        {
+          "header_record_id": "h147-weight",
+          "items": [
+            {
+              "name": "저울추세트",
+              "quantity": 3,
+              "unit_price": 28500
+            }
+          ],
+          "sheet_id": "s147-b"
+        },
+        {
+          "header_record_id": "h147-pad",
+          "items": [
+            {
+              "name": "저울보호받침",
+              "quantity": 3,
+              "unit_price": 9600
+            }
+          ],
+          "sheet_id": "s147-c"
+        },
+        {
+          "header_record_id": "h147-next",
+          "items": [
+            {
+              "name": "실습용저울",
+              "quantity": 2,
+              "unit_price": 112000
+            }
+          ],
+          "sheet_id": "s147-d"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received 기록이 있어야 집계한다. quote, 무인수 및 출고 전 취소는 제외하고 같은 document_id의 같은 내용은 한 번만 센다. 별도 공급가액은 품목 수량 곱하기 단가이고 그 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 업체는 NFKC 후 공백 제거 및 영문 소문자화와 법인 표시 제거를 거친 이름 오름차순으로 배열한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "SCALE-147-D"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "SCALE-147-A",
+        "SCALE-147-B",
+        "SCALE-147-C"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SCALE-147-A",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 118000
+    },
+    "output": {
+      "supply": 354000,
+      "total": 389400,
+      "vat": 35400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "ＦＩＣＴＩＯＮ　ＳＣＡＬＥ"
+    },
+    "output": "fictionscale",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SCALE-147-B",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 28500
+    },
+    "output": {
+      "supply": 85500,
+      "total": 94050,
+      "vat": 8550
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "Fiction Scale"
+    },
+    "output": "fictionscale",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SCALE-147-C",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 9600
+    },
+    "output": {
+      "supply": 28800,
+      "total": 31680,
+      "vat": 2880
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상계측보호"
+    },
+    "output": "가상계측보호",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "실습용저울",
+          "unit_price": 118000,
+          "vendor": "fictionscale"
+        },
+        {
+          "item": "저울보호받침",
+          "unit_price": 9600,
+          "vendor": "가상계측보호"
+        },
+        {
+          "item": "저울추세트",
+          "unit_price": 28500,
+          "vendor": "fictionscale"
+        }
+      ],
+      "grand_total": 515130,
+      "supply_total": 468300,
+      "unique_document_count": 3,
+      "vat_total": 46830,
+      "vendor_totals": [
+        {
+          "supply": 439500,
+          "total": 483450,
+          "vat": 43950,
+          "vendor": "fictionscale"
+        },
+        {
+          "supply": 28800,
+          "total": 31680,
+          "vat": 2880,
+          "vendor": "가상계측보호"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

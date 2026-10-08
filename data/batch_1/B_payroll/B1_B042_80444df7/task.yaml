@@ -1,0 +1,68 @@
+task_id: B1_B042_80444df7
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상청람정밀의 가상차다인 급여를 승인하려고 합니다. 광복절 근무 기록에는 최초 승인본과 수정 승인본이 모두 남아 있고 별도
+  평일 추가 근로도 있습니다. 기록별 최신 승인본에서 휴게를 제외해 평일 연장수당, 휴일수당과 야간 가산수당을 구해 주세요. 8월 국민연금 신고액에
+  적용되는 상한을 반영하여 국민연금 부담액과 총지급액 및 실지급액을 작성해 주세요.
+input_files:
+- path: inputs/01_정밀직계약.hwpx
+  format: hwpx
+- path: inputs/02_광복절최초승인.pdf
+  format: pdf
+- path: inputs/03_광복절승인.xlsx
+  format: xlsx
+- path: inputs/04_평일추가.pdf
+  format: pdf
+- path: inputs/05_근무달력.xlsx
+  format: xlsx
+- path: inputs/06_식대제공확인.hwpx
+  format: hwpx
+- path: inputs/07_연금신고.pdf
+  format: pdf
+- path: inputs/08_보수통지.xlsx
+  format: xlsx
+- path: inputs/09_가족확인.hwpx
+  format: hwpx
+- path: inputs/10_은행실행.pdf
+  format: pdf
+- path: inputs/11_공식계산.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    national_pension:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - holiday_pay
+  - night_pay
+  - national_pension
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-70ec5b06-af77-5c8c-a1d9-def988a69585
+scenario_seed: 9242598062381289755
+scenario_hash: 31a2b2d74ecb59d886d49b7d62f35d391a78c0a2346090a680f3a9925d01eff2
+authorship:
+  method: individually_written
+  case_id: B042
+  case_sha256: 80444df7e5f3511bcbae566977c0c670245cd788a965db992dde59ebe1f7009e
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- overtime_pay
+- holiday_pay
+- night_pay
+- national_pension
+- gross_pay
+- net_pay

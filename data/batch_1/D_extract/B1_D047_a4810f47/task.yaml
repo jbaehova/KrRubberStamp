@@ -1,0 +1,61 @@
+task_id: B1_D047_a4810f47
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 공예 순회 전시의 다음 장소에 보관 재료를 발주하려 합니다. 각 장소에서 다르게 적은 품목 이름과 세금 표기를 맞춰 최저 공급가액
+  단가 업체를 찾아 주세요. 이번 구매의 부가세 합계도 answer.json의 cheapest_by_item과 vat_total로 보내 주세요.
+input_files:
+- path: inputs/01_케이스_첫명세.pdf
+  format: pdf
+- path: inputs/02_클립_대장.xlsx
+  format: xlsx
+- path: inputs/03_실패_인수.hwpx
+  format: hwpx
+- path: inputs/04_케이스_추가명세.pdf
+  format: pdf
+- path: inputs/05_클립_보충대장.xlsx
+  format: xlsx
+- path: inputs/06_실패_보충확인.hwpx
+  format: hwpx
+- path: inputs/07_케이스_마지막명세.pdf
+  format: pdf
+- path: inputs/08_포장리본_구매.xlsx
+  format: xlsx
+- path: inputs/09_작업앞치마_확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-5d30475c-a205-52a5-8073-d45905f3e1e3
+scenario_seed: 11853772494398084618
+scenario_hash: 470ce12bbbc0c86b23fcf94d4a62f53c3d4a44ec77172f1a84499c891863ac13
+authorship:
+  method: individually_written
+  case_id: D047
+  case_sha256: a4810f4798e4d60ad7ccdcb04235036b80c2ee57aaa77ea939f89330f8128593
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item
+- vat_total

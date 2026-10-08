@@ -1,0 +1,45 @@
+task_id: B1_A184_d36d897b
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상갈대계측의 가상반서율 추가공제 신청을 확인해 주세요. 자녀와 부모의 나이 및 소득, 직원의 혼인과 세대주 기록을 읽고 기본공제액
+  및 추가공제액과 자녀세액공제액을 적습니다. 자녀 대학 수업료의 교육비 세액공제액도 필요합니다.
+input_files:
+- path: inputs/01_세대와혼인.hwpx
+  format: hwpx
+- path: inputs/02_가족연령.pdf
+  format: pdf
+- path: inputs/03_대학학비.pdf
+  format: pdf
+- path: inputs/04_급여접수.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    child_credit:
+      type: integer
+    education_credit:
+      type: integer
+  required:
+  - basic_deduction
+  - additional_deduction
+  - child_credit
+  - education_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-678b3d80-1e79-5300-ade1-a3b72c4198a4
+scenario_seed: 15234984277637578650
+scenario_hash: 1a2d11148e6e781746089f140fcdb2fb7f3457382fd857ec128c8f1625797332
+authorship:
+  method: individually_written
+  case_id: A184
+  case_sha256: d36d897b6b3fbf9aad1a1b737932c01592b5d845b76e58578b7e7b48ca8cff33
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- basic_deduction
+- additional_deduction
+- child_credit
+- education_credit

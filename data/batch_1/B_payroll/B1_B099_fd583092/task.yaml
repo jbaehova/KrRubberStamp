@@ -1,0 +1,61 @@
+task_id: B1_B099_fd583092
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상누리정밀검사소의 급여 초안은 연장 작업 시간을 길게 사용했습니다. 같은 사건의 수정 승인본을 채택해 연장수당과 과세급여를
+  다시 구해 주세요. 과세급여가 속하는 정확한 구간에서 직원120% 신청을 적용한 소득세 및 지방소득세와 실지급액을 작성합니다.
+input_files:
+- path: inputs/01_정밀검사약정.hwpx
+  format: hwpx
+- path: inputs/02_길었던승인.pdf
+  format: pdf
+- path: inputs/03_정밀수정.xlsx
+  format: xlsx
+- path: inputs/04_정밀식대.hwpx
+  format: hwpx
+- path: inputs/05_정밀월달력.xlsx
+  format: xlsx
+- path: inputs/06_정밀연금.pdf
+  format: pdf
+- path: inputs/07_정밀보수.hwpx
+  format: hwpx
+- path: inputs/08_정밀가족선택.pdf
+  format: pdf
+- path: inputs/09_정밀실행.xlsx
+  format: xlsx
+- path: inputs/10_천만주변세액.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-d147bc91-689b-5fd8-aa36-d79f385754ac
+scenario_seed: 18255394496040763789
+scenario_hash: 1f9c9ea8946e65168357ecca5acc8944e60769c752270bf074eba73829b898c1
+authorship:
+  method: individually_written
+  case_id: B099
+  case_sha256: fd583092ab21818de90b95e73697e7f5f20993e5619d2e58d668dc143fdbd8f5
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- overtime_pay
+- taxable_pay
+- income_tax
+- local_income_tax
+- net_pay

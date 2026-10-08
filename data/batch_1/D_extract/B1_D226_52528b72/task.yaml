@@ -1,0 +1,50 @@
+task_id: B1_D226_52528b72
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 게임 제작실 메모리 부품의 실제 재주문 단가표를 작성해 주세요. cheapest_by_item과 supply_total이 필요합니다.
+input_files:
+- path: inputs/01_개발부품표지.hwpx
+  format: hwpx
+- path: inputs/02_개발메모리표.xlsx
+  format: xlsx
+- path: inputs/03_게임하드표지.pdf
+  format: pdf
+- path: inputs/04_게임하드품목.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-9efbcd59-78d5-5040-b47f-8b13b9c2b283
+scenario_seed: 5931956983610010289
+scenario_hash: ed51e93d857816faa55a68cdfe559c1973b247ea04ad4c2d722eb41f6e55561a
+authorship:
+  method: individually_written
+  case_id: D226
+  case_sha256: 52528b729ef8eab1b02d2417e336e8c924695bd344ad745f0c4ee44b09f8f282
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- supply_total

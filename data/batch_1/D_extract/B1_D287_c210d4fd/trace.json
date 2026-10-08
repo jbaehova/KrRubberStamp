@@ -1,0 +1,207 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-05",
+          "document_id": "MEAL-TANK-73",
+          "event": "received",
+          "event_id": "MEAL-TANK-IN",
+          "location": "배식준비실"
+        },
+        {
+          "date": "2026-02-05",
+          "document_id": "MEAL-LADLE-74",
+          "event": "received",
+          "event_id": "MEAL-LADLE-IN",
+          "location": "배식준비실"
+        },
+        {
+          "date": "2026-02-04",
+          "document_id": "MEAL-LID-75",
+          "event": "cancelled_before_dispatch",
+          "event_id": "MEAL-LID-CANCEL",
+          "location": "보온설비출고실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-02",
+          "document_id": "MEAL-TANK-73",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "MEAL-TANK-H",
+          "vendor": "가상보온설비"
+        },
+        {
+          "date": "2026-02-03",
+          "document_id": "MEAL-LADLE-74",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "MEAL-LADLE-H",
+          "vendor": "가상배식도구"
+        },
+        {
+          "date": "2026-02-03",
+          "document_id": "MEAL-LID-75",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "MEAL-LID-H",
+          "vendor": "가상보온설비"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "MEAL-TANK-H",
+          "items": [
+            {
+              "name": "보온통20L",
+              "quantity": 3,
+              "unit_price": 96800
+            },
+            {
+              "name": "보온통받침20L",
+              "quantity": 3,
+              "unit_price": 12100
+            }
+          ],
+          "sheet_id": "MEAL-TANK-L"
+        },
+        {
+          "header_record_id": "MEAL-LADLE-H",
+          "items": [
+            {
+              "name": "배식국자800",
+              "quantity": 6,
+              "unit_price": 13400
+            }
+          ],
+          "sheet_id": "MEAL-LADLE-L"
+        },
+        {
+          "header_record_id": "MEAL-LID-H",
+          "items": [
+            {
+              "name": "보온통예비뚜껑20L",
+              "quantity": 3,
+              "unit_price": 18700
+            }
+          ],
+          "sheet_id": "MEAL-LID-L"
+        }
+      ],
+      "processing_policy": "품목 header_record_id를 표지 record_id와 연결한다. invoice 또는 order의 document_id에 received가 확인된 원문만 구매이고 cancelled_before_dispatch는 제외한다. 포함 행 금액 10/11의 원 미만을 버려 공급가액을 정하며 차액이 세액이다. 별도 행은 공급가액 10%의 원 미만을 버린 세액을 더한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "MEAL-LID-75"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "MEAL-LADLE-74",
+        "MEAL-TANK-73"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "MEAL-TANK-73",
+      "includes_vat": true,
+      "quantity": 3,
+      "unit_price": 96800
+    },
+    "output": {
+      "supply": 264000,
+      "total": 290400,
+      "vat": 26400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "MEAL-TANK-73",
+      "includes_vat": true,
+      "quantity": 3,
+      "unit_price": 12100
+    },
+    "output": {
+      "supply": 33000,
+      "total": 36300,
+      "vat": 3300
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상보온설비"
+    },
+    "output": "가상보온설비",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "MEAL-LADLE-74",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 13400
+    },
+    "output": {
+      "supply": 80400,
+      "total": 88440,
+      "vat": 8040
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상배식도구"
+    },
+    "output": "가상배식도구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "배식국자800",
+          "unit_price": 13400,
+          "vendor": "가상배식도구"
+        },
+        {
+          "item": "보온통20l",
+          "unit_price": 88000,
+          "vendor": "가상보온설비"
+        },
+        {
+          "item": "보온통받침20l",
+          "unit_price": 11000,
+          "vendor": "가상보온설비"
+        }
+      ],
+      "grand_total": 415140,
+      "supply_total": 377400,
+      "unique_document_count": 2,
+      "vat_total": 37740,
+      "vendor_totals": [
+        {
+          "supply": 80400,
+          "total": 88440,
+          "vat": 8040,
+          "vendor": "가상배식도구"
+        },
+        {
+          "supply": 297000,
+          "total": 326700,
+          "vat": 29700,
+          "vendor": "가상보온설비"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

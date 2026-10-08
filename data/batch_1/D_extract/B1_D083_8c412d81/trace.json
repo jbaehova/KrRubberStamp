@@ -1,0 +1,235 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-04",
+          "document_id": "REPAIRBOOK-0604-A",
+          "event": "received",
+          "event_id": "e83a",
+          "location": "수선실 작업대"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "REPAIRBOOK-0607-B",
+          "event": "received",
+          "event_id": "e83b",
+          "location": "수선실 건조석"
+        },
+        {
+          "date": "2026-06-10",
+          "document_id": "REPAIRBOOK-0610-C",
+          "event": "received",
+          "event_id": "e83c",
+          "location": "수선실 도구함"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-04",
+          "document_id": "REPAIRBOOK-0604-A",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h83a",
+          "vendor": "가상책손질"
+        },
+        {
+          "date": "2026-06-07",
+          "document_id": "REPAIRBOOK-0607-B",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h83b",
+          "vendor": "가상보관봉"
+        },
+        {
+          "date": "2026-06-10",
+          "document_id": "REPAIRBOOK-0610-C",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h83c",
+          "vendor": "가상제책붓"
+        },
+        {
+          "date": "2026-05-30",
+          "document_id": "QUOTE-RB-0530",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "h83q",
+          "vendor": "가상책철물"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h83a",
+          "items": [
+            {
+              "name": "수선용압착판",
+              "quantity": 2,
+              "unit_price": 74000
+            }
+          ],
+          "sheet_id": "s83a"
+        },
+        {
+          "header_record_id": "h83b",
+          "items": [
+            {
+              "name": "건조보관봉",
+              "quantity": 3,
+              "unit_price": 39200
+            }
+          ],
+          "sheet_id": "s83b"
+        },
+        {
+          "header_record_id": "h83c",
+          "items": [
+            {
+              "name": "풀도포붓",
+              "quantity": 8,
+              "unit_price": 5100
+            }
+          ],
+          "sheet_id": "s83c"
+        },
+        {
+          "header_record_id": "h83q",
+          "items": [
+            {
+              "name": "금속책꽂이",
+              "quantity": 5,
+              "unit_price": 61000
+            }
+          ],
+          "sheet_id": "s83q"
+        }
+      ],
+      "processing_policy": "모든 원자료 표지에 header_record_id로 품목표를 연결한다. invoice나 order는 document_id의 received 기록이 있어야 실제 인수에 포함한다. quote, 인수 기록 없는 자료 및 출고 전 취소 기록은 제외한다. 같은 document_id의 동일 내용은 한 번만 집계한다. 포함 품목 총액의 10/11 원 미만 버림이 공급가액이고 차액이 부가세다. 별도 공급가액은 단가 곱하기 수량이고 품목별 그 10% 원 미만 버림이 부가세다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하며 업체의 주식회사, (주), ㈜를 제거한다. 업체 배열 및 품목 배열은 해당 정규화 이름 오름차순이다. 동일 규격 개당 공급가액 단가를 비교하고 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 최저 단가가 같으면 정규화 업체명 오름차순 첫 업체를 고른다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "QUOTE-RB-0530"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "REPAIRBOOK-0604-A",
+        "REPAIRBOOK-0607-B",
+        "REPAIRBOOK-0610-C"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "REPAIRBOOK-0604-A",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 74000
+    },
+    "output": {
+      "supply": 148000,
+      "total": 162800,
+      "vat": 14800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상책손질"
+    },
+    "output": "가상책손질",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "REPAIRBOOK-0607-B",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 39200
+    },
+    "output": {
+      "supply": 117600,
+      "total": 129360,
+      "vat": 11760
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상보관봉"
+    },
+    "output": "가상보관봉",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "REPAIRBOOK-0610-C",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 5100
+    },
+    "output": {
+      "supply": 40800,
+      "total": 44880,
+      "vat": 4080
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상제책붓"
+    },
+    "output": "가상제책붓",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "건조보관봉",
+          "unit_price": 39200,
+          "vendor": "가상보관봉"
+        },
+        {
+          "item": "수선용압착판",
+          "unit_price": 74000,
+          "vendor": "가상책손질"
+        },
+        {
+          "item": "풀도포붓",
+          "unit_price": 5100,
+          "vendor": "가상제책붓"
+        }
+      ],
+      "grand_total": 337040,
+      "supply_total": 306400,
+      "unique_document_count": 3,
+      "vat_total": 30640,
+      "vendor_totals": [
+        {
+          "supply": 117600,
+          "total": 129360,
+          "vat": 11760,
+          "vendor": "가상보관봉"
+        },
+        {
+          "supply": 40800,
+          "total": 44880,
+          "vat": 4080,
+          "vendor": "가상제책붓"
+        },
+        {
+          "supply": 148000,
+          "total": 162800,
+          "vat": 14800,
+          "vendor": "가상책손질"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

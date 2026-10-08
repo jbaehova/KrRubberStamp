@@ -1,0 +1,45 @@
+task_id: B1_B184_b028f2ee
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상접시도안실 직원의 계약에는 현금 식대가 있고 배식 등록에는 회사 음식물 제공이 확인됩니다. 비과세 현금 지급액, 과세급여와
+  소득세 및 지방세를 계산해 원천세 원장을 교정해 주세요.
+input_files:
+- path: inputs/01_접시약정.pdf
+  format: pdf
+- path: inputs/02_배식등록.hwpx
+  format: hwpx
+- path: inputs/03_접시일정.xlsx
+  format: xlsx
+- path: inputs/04_접시부과.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+  required:
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-b80a9687-e7cf-5732-9004-353cc81d4f71
+scenario_seed: 12693662657941824350
+scenario_hash: 762dce408c705331b60b3e67476b1a4c02d1e0af745d5ddc1c138bb52e0b4591
+authorship:
+  method: individually_written
+  case_id: B184
+  case_sha256: b028f2eef943635e6349e28d15fbf398cc08e40d4798200f841b3e0a2d65b8d5
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- non_taxable_pay
+- taxable_pay
+- income_tax
+- local_income_tax

@@ -1,0 +1,41 @@
+task_id: B1_D112_d1b700b2
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 통역석 헤드폰을 추가 구매할 업체를 고르기 위해 실제 구매 이력의 cheapest_by_item만 정리해 주세요. 물량 합계는
+  이번 답에 넣지 않아도 됩니다.
+input_files:
+- path: inputs/01_통역석구매이력.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-84d2f98f-26ab-5651-88ad-32b7d2fd3ad5
+scenario_seed: 15111547842749176512
+scenario_hash: 9af4132aa0ea97ddb8cc089686371a315c5306d3a4781ccf8a0ea116417fb05a
+authorship:
+  method: individually_written
+  case_id: D112
+  case_sha256: d1b700b2d5629ac0a9034fcbfba6cdd8a338d2d70b3518d57aae3239b5276064
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item

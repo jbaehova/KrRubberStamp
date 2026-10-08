@@ -1,0 +1,66 @@
+task_id: B1_D095_54ddd3d0
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 학습 키트 부품을 다시 발주합니다. 세금 기준을 맞춘 cheapest_by_item과 기존 supply_total, vat_total을
+  보내 주세요. 개당 비교 및 실제 품목 금액의 버림 기준은 첫 명세에 있습니다.
+input_files:
+- path: inputs/01_연결블록첫인수.pdf
+  format: pdf
+- path: inputs/02_블록다른인수.xlsx
+  format: xlsx
+- path: inputs/03_블록별도.hwpx
+  format: hwpx
+- path: inputs/04_고정핀별도.pdf
+  format: pdf
+- path: inputs/05_고정핀포함.xlsx
+  format: xlsx
+- path: inputs/06_다른핀.hwpx
+  format: hwpx
+- path: inputs/07_받침별도.pdf
+  format: pdf
+- path: inputs/08_받침포함.xlsx
+  format: xlsx
+- path: inputs/09_첫인수보관.png
+  format: png
+  duplicate_of: inputs/01_연결블록첫인수.pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-09cd03e5-6a9d-5ddc-955f-7a39b6d48393
+scenario_seed: 6115276763491868928
+scenario_hash: 84cf01623052bad998343b2285e8dd0c3e20402730d8b6fd91469d633b138ae7
+authorship:
+  method: individually_written
+  case_id: D095
+  case_sha256: 54ddd3d0f7222100bb76a52551530c06edc7e29cc66042798772919f722e1d69
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item
+- supply_total
+- vat_total

@@ -1,0 +1,64 @@
+task_id: B1_A042_406be871
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상숲길기록의 가상정하경 자료를 재검토합니다. 장애인 형제에게 소득이 있고 일반 대학과 특수교육 비용이 함께 제출되었습니다.
+  기본공제 가족 수와 추가공제액을 먼저 확인하고, 교육비 및 보험료 세액공제를 각각 구해 주세요. 직원의 두 종류 기부금도 반영한 기부금 세액공제액과
+  최종 소득세가 필요합니다.
+input_files:
+- path: inputs/01_직원.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_형제소득.hwpx
+  format: hwpx
+- path: inputs/04_장애증명.pdf
+  format: pdf
+- path: inputs/05_특수교육.pdf
+  format: pdf
+- path: inputs/06_일반대학.pdf
+  format: pdf
+- path: inputs/07_전용보험.pdf
+  format: pdf
+- path: inputs/08_공익기부.pdf
+  format: pdf
+- path: inputs/09_종교기부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    additional_deduction:
+      type: integer
+    education_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    donation_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - additional_deduction
+  - education_credit
+  - insurance_credit
+  - donation_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-2e9d64ed-8250-5b76-a58e-b4863bf06d0a
+scenario_seed: 4642059413606254305
+scenario_hash: 1ddf4fdad53e6efabfec548a8ac64833d7a4907dc1c0175b7431ddb154b41327
+authorship:
+  method: individually_written
+  case_id: A042
+  case_sha256: 406be871264246e184f17c0db661b5839aa0d60c32a1e92251111d0530b3346d
+  source_file: batch_1/A_yearend/cases_004_053.json
+answer_fields:
+- eligible_dependents
+- additional_deduction
+- education_credit
+- insurance_credit
+- donation_credit
+- final_national_tax

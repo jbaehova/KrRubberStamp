@@ -1,0 +1,51 @@
+task_id: B1_B118_cb7d7346
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상햇살분류실 직원에게 입금 안내서를 보내기 전 지급 항목을 확인하려 합니다. 기본급, 정기 역할수당, 현금 식대를 합친 총지급액과
+  그중 비과세 지급액을 구해 주세요. 공제 합계를 제외한 실지급액도 작성하여 계약 지급액과 은행 입금액의 관계를 설명할 수 있게 합니다.
+input_files:
+- path: inputs/01_입금지급.hwpx
+  format: hwpx
+- path: inputs/02_입금공제.xlsx
+  format: xlsx
+- path: inputs/03_안내범위.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    fixed_allowance:
+      type: integer
+    meal_allowance:
+      type: integer
+    gross_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - fixed_allowance
+  - meal_allowance
+  - gross_pay
+  - non_taxable_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-128db939-a334-56da-a7d0-3f69597484ca
+scenario_seed: 14663002708591069630
+scenario_hash: 5cdf3ba47cdf5a95315df63cd99517d2e4a54c65d8aa426456ab6c084b17f090
+authorship:
+  method: individually_written
+  case_id: B118
+  case_sha256: cb7d73468a2949be98ccd4ce3505824b54fb0b43abcfe31e10cae615de5396e9
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- base_pay
+- fixed_allowance
+- meal_allowance
+- gross_pay
+- non_taxable_pay
+- net_pay

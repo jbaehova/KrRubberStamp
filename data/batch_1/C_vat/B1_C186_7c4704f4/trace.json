@@ -1,0 +1,267 @@
+[
+  {
+    "inputs": {
+      "activities": [],
+      "operations": [],
+      "purchase_links": [],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "꽃집카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C186-꽃집"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "서점카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C186-서점"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "식당카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C186-식당"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-02",
+      "transaction_id": "C186-꽃집"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1210000,
+      "includes_vat": true,
+      "transaction_id": "C186-꽃집"
+    },
+    "output": {
+      "gross": 1210000,
+      "supply_base": 1100000,
+      "vat": 110000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1100000
+    },
+    "output": 110000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C186-꽃집"
+    },
+    "output": {
+      "eligible_gross": 1210000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-01",
+      "transaction_id": "C186-서점"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 880000,
+      "includes_vat": true,
+      "transaction_id": "C186-서점"
+    },
+    "output": {
+      "gross": 880000,
+      "supply_base": 800000,
+      "vat": 80000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 800000
+    },
+    "output": 80000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C186-서점"
+    },
+    "output": {
+      "eligible_gross": 880000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-17",
+      "transaction_id": "C186-식당"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1540000,
+      "includes_vat": true,
+      "transaction_id": "C186-식당"
+    },
+    "output": {
+      "gross": 1540000,
+      "supply_base": 1400000,
+      "vat": 140000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1400000
+    },
+    "output": 140000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C186-식당"
+    },
+    "output": {
+      "eligible_gross": 1540000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 456000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 3630000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 47190,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 47190
+    },
+    "output": 47190,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 47190,
+      "liability_before_credit": 330000
+    },
+    "output": 47190,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 282810,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 282810,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 330000,
+      "prepaid_vat": 0,
+      "receipt_credit": 47190
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 0,
+      "net_vat": 282810,
+      "noncreditable_vat": 0,
+      "output_vat": 330000,
+      "payable_vat": 282810,
+      "prepaid_vat": 0,
+      "receipt_credit": 47190,
+      "refund_vat": 0,
+      "tax_base": 3300000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

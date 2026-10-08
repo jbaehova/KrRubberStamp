@@ -1,0 +1,387 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 87600000,
+      "dependents": [
+        {
+          "age": 44,
+          "assigned_claimant": "other",
+          "income_amount": 900000,
+          "person_id": "spouse",
+          "relation": "spouse",
+          "supported": true
+        }
+      ],
+      "donations": [
+        {
+          "amount": 22500000,
+          "date": "2025-06-02",
+          "kind": "statutory",
+          "organization_id": "org_rescue",
+          "person_id": "self"
+        },
+        {
+          "amount": 3400000,
+          "date": "2025-04-30",
+          "kind": "public",
+          "organization_id": "org_field",
+          "person_id": "self"
+        },
+        {
+          "amount": 5900000,
+          "date": "2025-05-01",
+          "kind": "public",
+          "organization_id": "org_field",
+          "person_id": "spouse"
+        },
+        {
+          "amount": 9800000,
+          "date": "2025-11-23",
+          "kind": "religious",
+          "organization_id": "org_chapel",
+          "person_id": "self"
+        }
+      ],
+      "employee_age": 46,
+      "employee_name": "가상윤하겸",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "marital_status": "married",
+      "non_taxable": 2400000,
+      "organization_designations": [
+        {
+          "kind": "statutory",
+          "organization_id": "org_rescue",
+          "valid_from": "2024-01-01",
+          "valid_to": "2026-12-31"
+        },
+        {
+          "kind": "public",
+          "organization_id": "org_field",
+          "valid_from": "2025-05-01",
+          "valid_to": "2026-12-31"
+        },
+        {
+          "kind": "religious",
+          "organization_id": "org_chapel",
+          "valid_from": "2024-01-01",
+          "valid_to": "2026-12-31"
+        }
+      ],
+      "paid_national_tax": 6500000,
+      "pension_accounts": {
+        "irp": 1400000,
+        "pension_savings": 2800000
+      },
+      "public_pension_paid": 2931200,
+      "reference_year": 2025,
+      "scope_note": "국내 거주 기혼 근로자가 배우자를 실제 지원한다. 배우자의 소득금액은 90만원으로 가족 소득 범위 안이지만 배우자 관련 공제는 배우자가 자기 직장의 연말정산에서 신청하기로 최종 배정했다. 모든 기부는 당해 실제 수납이며 반환과 이월은 없다. 일반 기부 특별공제를 신청했고 기관 자격은 제출된 지정 유효기간에 따른다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "donations.0.eligible_organization": true,
+      "donations.1.eligible_organization": false,
+      "donations.2.eligible_organization": true,
+      "donations.3.eligible_organization": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 44,
+          "assigned_claimant": "other",
+          "income_amount": 900000,
+          "person_id": "spouse",
+          "relation": "spouse",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 1500000,
+      "rejected": [
+        "spouse"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 87600000,
+      "non_taxable": 2400000
+    },
+    "output": {
+      "salary_deduction": 14010000,
+      "salary_income": 71190000,
+      "total_salary": 85200000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 2931200
+    },
+    "output": 2931200,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 85200000,
+      "spending": {}
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {
+        "irp": 1400000,
+        "pension_savings": 2800000
+      },
+      "salary": 85200000
+    },
+    "output": 504000,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 85200000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 85200000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 85200000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 22500000,
+          "date": "2025-06-02",
+          "eligible_organization": true,
+          "kind": "statutory",
+          "organization_id": "org_rescue",
+          "person_id": "self"
+        },
+        {
+          "amount": 3400000,
+          "date": "2025-04-30",
+          "eligible_organization": false,
+          "kind": "public",
+          "organization_id": "org_field",
+          "person_id": "self"
+        },
+        {
+          "amount": 5900000,
+          "date": "2025-05-01",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "org_field",
+          "person_id": "spouse"
+        },
+        {
+          "amount": 9800000,
+          "date": "2025-11-23",
+          "eligible_organization": true,
+          "kind": "religious",
+          "organization_id": "org_chapel",
+          "person_id": "self"
+        }
+      ],
+      "salary": 85200000
+    },
+    "output": 6710700,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 22500000,
+          "date": "2025-06-02",
+          "eligible_organization": true,
+          "kind": "statutory",
+          "organization_id": "org_rescue",
+          "person_id": "self"
+        },
+        {
+          "amount": 3400000,
+          "date": "2025-04-30",
+          "eligible_organization": false,
+          "kind": "public",
+          "organization_id": "org_field",
+          "person_id": "self"
+        },
+        {
+          "amount": 5900000,
+          "date": "2025-05-01",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "org_field",
+          "person_id": "spouse"
+        },
+        {
+          "amount": 9800000,
+          "date": "2025-11-23",
+          "eligible_organization": true,
+          "kind": "religious",
+          "organization_id": "org_chapel",
+          "person_id": "self"
+        }
+      ],
+      "salary": 85200000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 22500000,
+          "date": "2025-06-02",
+          "eligible_organization": true,
+          "kind": "statutory",
+          "organization_id": "org_rescue",
+          "person_id": "self"
+        },
+        {
+          "amount": 3400000,
+          "date": "2025-04-30",
+          "eligible_organization": false,
+          "kind": "public",
+          "organization_id": "org_field",
+          "person_id": "self"
+        },
+        {
+          "amount": 5900000,
+          "date": "2025-05-01",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "org_field",
+          "person_id": "spouse"
+        },
+        {
+          "amount": 9800000,
+          "date": "2025-11-23",
+          "eligible_organization": true,
+          "kind": "religious",
+          "organization_id": "org_chapel",
+          "person_id": "self"
+        }
+      ],
+      "salary": 85200000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 85200000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 66758800
+    },
+    "output": 10262112,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 10262112,
+      "salary": 85200000
+    },
+    "output": 500000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 6710700,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 10262112,
+      "total_tax_credits": 7714700
+    },
+    "output": 2547412,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 2547412
+    },
+    "output": 254741,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 254741,
+      "final_national": 2547412,
+      "paid_local": 0,
+      "paid_national": 6500000
+    },
+    "output": {
+      "local": 254741,
+      "national": -3952588,
+      "total": -3697847
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

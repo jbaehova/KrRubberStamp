@@ -1,0 +1,51 @@
+task_id: B1_C296_1369d349
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상차문임대의 차량 등록 이력과 공급자 조회를 각각 연결해 불공제세액(noncreditable_vat), 공제 매입세액(deductible_input_vat),
+  환급세액(refund_vat)을 answer.json에 정리해 주세요.
+input_files:
+- path: inputs/차량기간.pdf
+  format: pdf
+- path: inputs/공급자조회.xlsx
+  format: xlsx
+- path: inputs/허가사용.hwpx
+  format: hwpx
+- path: inputs/관리사용.pdf
+  format: pdf
+- path: inputs/표지수령.xlsx
+  format: xlsx
+- path: inputs/전정비.hwpx
+  format: hwpx
+- path: inputs/후정비.pdf
+  format: pdf
+- path: inputs/표지현금.pdf
+  format: pdf
+- path: inputs/업무인계.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - deductible_input_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-96373df8-86ce-5673-92d5-b9de11d3f870
+scenario_seed: 1398881471527741065
+scenario_hash: 11a418feb89dc08bf7a76e9d2353eca993213a3e4f90e0b4ff69da0b3db63eb0
+authorship:
+  method: individually_written
+  case_id: C296
+  case_sha256: 1369d34969496689a44714e856e4286227a5ee8ca19c1bb26d640c221a8b1dfa
+  source_file: batch_1/C_vat/cases_254_300.json
+answer_fields:
+- noncreditable_vat
+- deductible_input_vat
+- refund_vat

@@ -1,0 +1,45 @@
+task_id: B1_A177_1853bd0f
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상회화기술의 가상송아림은 퇴직한 뒤에도 대출이자와 보험료를 냈습니다. 두 증명의 적용 기간을 따로 확인해 주택자금 소득공제액과
+  보험료 세액공제액을 적어 주세요. 퇴직 정산에 반영할 과세표준과 결정 국세도 필요합니다.
+input_files:
+- path: inputs/01_퇴직확인.hwpx
+  format: hwpx
+- path: inputs/02_주택이자.pdf
+  format: pdf
+- path: inputs/03_보험날짜.xlsx
+  format: xlsx
+- path: inputs/04_지급누계.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    housing_income_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    tax_base:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - housing_income_deduction
+  - insurance_credit
+  - tax_base
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-ad5b47ee-c036-5dec-8314-2bd3acfaa08a
+scenario_seed: 1752952554119523411
+scenario_hash: 7644d7c81aae510096400d7682df109c2238445b1322c8cd2d1c95bbccc19796
+authorship:
+  method: individually_written
+  case_id: A177
+  case_sha256: 1853bd0f78686c531c1ead9bc3c02a7705308b7c482ae6e27dffbb2022c87fc9
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- housing_income_deduction
+- insurance_credit
+- tax_base
+- final_national_tax

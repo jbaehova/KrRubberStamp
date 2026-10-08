@@ -1,0 +1,52 @@
+task_id: B1_D059_9f3c3deb
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 창고 보관 물품을 월말에 지급합니다. 판매처별 vendor_totals와 전체 grand_total을 보내 주세요. 실제 인수한
+  품목만 계산하며 임대료는 이 자료에 없습니다. 정산 기준은 습도계 대장에 있습니다.
+input_files:
+- path: inputs/01_첫흡습제.pdf
+  format: pdf
+- path: inputs/02_습도계.xlsx
+  format: xlsx
+- path: inputs/03_구획확장.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-4afe6b78-ae2c-5505-b4ec-8ebacad96dc0
+scenario_seed: 11474114034354675672
+scenario_hash: 61d6bac4c0b548325e590566e7fa0b88f84093b4359966b967037a0fed2837b7
+authorship:
+  method: individually_written
+  case_id: D059
+  case_sha256: 9f3c3debfa08dfd8f97ebb11755c12532a33bb65ba9abfe8a01de14f2e26be8d
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals
+- grand_total

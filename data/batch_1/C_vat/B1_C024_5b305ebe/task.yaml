@@ -1,0 +1,42 @@
+task_id: B1_C024_5b305ebe
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상맞춤액자의 카드 구입 내역에서 작업등 전표의 세액 표시를 확인해 주세요. 사업용 사용은 확인되었지만 공제용 전표에 세액이
+  구분되었는지 별도로 읽어야 합니다. 매입세액(input_vat), 공제불가 세액(noncreditable_vat), 납부액(payable_vat)을
+  answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_액자업_설명.pdf
+  format: pdf
+- path: inputs/02_전년_납부기록.hwpx
+  format: hwpx
+- path: inputs/03_행사액자_계산서.pdf
+  format: pdf
+- path: inputs/04_작업등_카드.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-f3ac8b55-f9f4-5406-9beb-74119be36cbd
+scenario_seed: 6570856028534037260
+scenario_hash: cd0c05bc401e8a673e11057ab026487013ff961ad20eac7ae9df1cb51e3c3126
+authorship:
+  method: individually_written
+  case_id: C024
+  case_sha256: 5b305ebe7b015b0cdf9f349ec6f6a3febbc379724b6f7c6ff6a216dfe5f1cb9c
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- payable_vat

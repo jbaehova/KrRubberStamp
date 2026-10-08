@@ -1,0 +1,46 @@
+task_id: B1_D141_86c82b75
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 철제 모형 운반품의 실제 구매 이력을 정리해 주세요. 인수 기록에 연결한 cheapest_by_item만 답하면 됩니다.
+input_files:
+- path: inputs/01_운반손잡이주문.pdf
+  format: pdf
+- path: inputs/02_고정띠청구.hwpx
+  format: hwpx
+- path: inputs/03_후속주문.xlsx
+  format: xlsx
+- path: inputs/04_모형실수령부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-f438e802-0af0-5e26-9f3b-53798eca2120
+scenario_seed: 9712060379026210873
+scenario_hash: 5c7302ca65e80098865fadb8a773c06e957528b1e920383923523c086efebff7
+authorship:
+  method: individually_written
+  case_id: D141
+  case_sha256: 86c82b754100c03952a2eb7ba890a07f386a2d542c62c19061ba54dbf713c56c
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- cheapest_by_item

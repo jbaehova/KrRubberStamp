@@ -1,0 +1,69 @@
+task_id: B1_B094_86e79d6a
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상마루모델연구실의 고액 급여 결재에 첨부 자료가 여러 기관과 부서에서 모였습니다. 가족12명의 표 확장과 두 자녀 및80%
+  신청을 반영하여 소득세를 구해 주세요. 식대 비과세 한도, 건강보험 상한과 장기요양을 반영한 과세급여 및 전체 공제 합계와 실지급액도 작성합니다.
+input_files:
+- path: inputs/01_연구급여.hwpx
+  format: hwpx
+- path: inputs/02_식대제공.pdf
+  format: pdf
+- path: inputs/03_연구연금.pdf
+  format: pdf
+- path: inputs/04_높은건강통지.xlsx
+  format: xlsx
+- path: inputs/05_연구고용.hwpx
+  format: hwpx
+- path: inputs/06_열두가족.pdf
+  format: pdf
+- path: inputs/07_선택신청.hwpx
+  format: hwpx
+- path: inputs/08_연구정상월.xlsx
+  format: xlsx
+- path: inputs/09_연구은행.pdf
+  format: pdf
+- path: inputs/10_다수고액참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - non_taxable_pay
+  - taxable_pay
+  - health_insurance
+  - long_term_care
+  - income_tax
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-5660a1e5-3e9b-5373-bbd4-1fc9c083e3f9
+scenario_seed: 9720911401423971268
+scenario_hash: 8df29947631c2e6e793be5664e3600155c83712a6b3578dbf784fa2390ddcdb1
+authorship:
+  method: individually_written
+  case_id: B094
+  case_sha256: 86e79d6a7eeba3c47533bf4cd49e552222487a85837f7d240d07eb50d7923c1d
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- non_taxable_pay
+- taxable_pay
+- health_insurance
+- long_term_care
+- income_tax
+- total_deductions
+- net_pay

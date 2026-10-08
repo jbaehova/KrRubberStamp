@@ -1,0 +1,42 @@
+task_id: B1_C080_fba29273
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상나란히진열은 현재 판매의 공제율만 곱한 계산을 받았습니다. 이미 같은 연도 신고에서 사용한 발행 공제액도 자료에 있습니다.
+  매출세액(output_vat), 이번 발행세액공제(receipt_credit), 납부액(payable_vat)을 answer.json에 정수로
+  작성해 주세요.
+input_files:
+- path: inputs/01_진열소품_사업.hwpx
+  format: hwpx
+- path: inputs/02_이전신고_공제확인.pdf
+  format: pdf
+- path: inputs/03_큰주문_카드.xlsx
+  format: xlsx
+- path: inputs/04_작은주문_현금영수증.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - output_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-e1a4ce9c-b231-5b19-ba8e-1d8f9fe1a759
+scenario_seed: 18132216072540604924
+scenario_hash: 03d2be8acec654160ddaa98583334f9dfb3eba4939acccf212a50fdbc7472815
+authorship:
+  method: individually_written
+  case_id: C080
+  case_sha256: fba292730a6949fc0499c7bd34be1775f91b6e2bb27f2361b5e4b0ca8f1659ec
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- output_vat
+- receipt_credit
+- payable_vat

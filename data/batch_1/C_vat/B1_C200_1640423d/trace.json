@@ -1,0 +1,470 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "겨울확인",
+          "date": "2026-01-12",
+          "description": "겨울 차량 정비 완료",
+          "document_ids": [
+            "겨울카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "초봄 대여 차고"
+          },
+          "operation_id": "초봄대여",
+          "participants": [
+            {
+              "name": "가상최대여",
+              "organization": "가상초봄대여",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "C200-겨울정비",
+          "vehicle_id": "가상-R200"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "등록후확인",
+          "date": "2026-05-15",
+          "description": "영업 등록 뒤 대여 차량 정비",
+          "document_ids": [
+            "봄카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "초봄 대여 차고"
+          },
+          "operation_id": "초봄대여",
+          "participants": [
+            {
+              "name": "가상최대여",
+              "organization": "가상초봄대여",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "C200-봄정비",
+          "vehicle_id": "가상-R200"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "여름확인",
+          "date": "2026-06-10",
+          "description": "다음 대여 차량 정비 완료",
+          "document_ids": [
+            "여름카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "초봄 대여 차고"
+          },
+          "operation_id": "초봄대여",
+          "participants": [
+            {
+              "name": "가상최대여",
+              "organization": "가상초봄대여",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "C200-여름정비",
+          "vehicle_id": "가상-R200"
+        }
+      ],
+      "operations": [
+        {
+          "description": "허가받은 과세 자동차 대여",
+          "operation_id": "초봄대여",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "겨울확인",
+          "date": "2026-01-12",
+          "document_id": "겨울카드",
+          "transaction_id": "C200-겨울정비"
+        },
+        {
+          "activity_id": "등록후확인",
+          "date": "2026-05-15",
+          "document_id": "봄카드",
+          "transaction_id": "C200-봄정비"
+        },
+        {
+          "activity_id": "여름확인",
+          "date": "2026-06-10",
+          "document_id": "여름카드",
+          "transaction_id": "C200-여름정비"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-04-30",
+          "vehicle_id": "가상-R200"
+        },
+        {
+          "business_license": "vehicle_rental",
+          "permitted_operation_id": "초봄대여",
+          "registration_class": "excise_passenger",
+          "valid_from": "2026-05-01",
+          "valid_to": "2026-12-31",
+          "vehicle_id": "가상-R200"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "겨울카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C200-겨울정비"
+      },
+      {
+        "business_related": true,
+        "document_id": "봄카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C200-봄정비"
+      },
+      {
+        "business_related": true,
+        "document_id": "여름카드",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "C200-여름정비"
+      },
+      {
+        "transaction_id": "C200-겨울정비",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-R200",
+        "vehicle_subject_excise": true
+      },
+      {
+        "transaction_id": "C200-봄정비",
+        "vehicle_direct_business": true,
+        "vehicle_id": "가상-R200",
+        "vehicle_subject_excise": true
+      },
+      {
+        "transaction_id": "C200-여름정비",
+        "vehicle_direct_business": true,
+        "vehicle_id": "가상-R200",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "겨울카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C200-겨울정비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "대여카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C200-대여매출"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "봄카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C200-봄정비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "여름카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C200-여름정비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-01-12",
+      "transaction_id": "C200-겨울정비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 220000,
+      "includes_vat": true,
+      "transaction_id": "C200-겨울정비"
+    },
+    "output": {
+      "gross": 220000,
+      "supply_base": 200000,
+      "vat": 20000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C200-겨울정비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 20000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-20",
+      "transaction_id": "C200-대여매출"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 990000,
+      "includes_vat": true,
+      "transaction_id": "C200-대여매출"
+    },
+    "output": {
+      "gross": 990000,
+      "supply_base": 900000,
+      "vat": 90000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 900000
+    },
+    "output": 90000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C200-대여매출"
+    },
+    "output": {
+      "eligible_gross": 990000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-15",
+      "transaction_id": "C200-봄정비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 220000,
+      "includes_vat": true,
+      "transaction_id": "C200-봄정비"
+    },
+    "output": {
+      "gross": 220000,
+      "supply_base": 200000,
+      "vat": 20000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C200-봄정비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 20000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-10",
+      "transaction_id": "C200-여름정비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 660000,
+      "includes_vat": true,
+      "transaction_id": "C200-여름정비"
+    },
+    "output": {
+      "gross": 660000,
+      "supply_base": 600000,
+      "vat": 60000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "C200-여름정비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 60000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 127000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 990000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 12870,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 12870
+    },
+    "output": 12870,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 12870,
+      "liability_before_credit": 10000
+    },
+    "output": 10000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 80000,
+      "output_vat": 90000,
+      "prepaid_vat": 0,
+      "receipt_credit": 10000
+    },
+    "output": {
+      "deductible_input_vat": 80000,
+      "input_vat": 100000,
+      "net_vat": 0,
+      "noncreditable_vat": 20000,
+      "output_vat": 90000,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 10000,
+      "refund_vat": 0,
+      "tax_base": 900000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

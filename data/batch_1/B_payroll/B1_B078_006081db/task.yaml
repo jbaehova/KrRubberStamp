@@ -1,0 +1,46 @@
+task_id: B1_B078_006081db
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상푸른분석실은 구내 배식을 받는 직원에게도 현금 식대를 지급했습니다. 배식 대상 확인과 급여 약정을 읽고 비과세 지급액,
+  과세급여 및 원천징수 소득세를 계산해 주세요. 회사의 실제 음식물 제공과 식대 지급은 서로 다른 자료에 있습니다. 공제 후 실지급액도 net_pay에
+  작성해 주세요.
+input_files:
+- path: inputs/01_분석직지급.hwpx
+  format: hwpx
+- path: inputs/02_배식대상.pdf
+  format: pdf
+- path: inputs/03_분석실월정보.xlsx
+  format: xlsx
+- path: inputs/04_배식식대참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-fed501e6-7a0b-5cb7-be60-093186620250
+scenario_seed: 27164376930200007
+scenario_hash: 3726e794e18d86523b5ce21f4ee6611ebce35cc62a55cff99de90e44aab8babb
+authorship:
+  method: individually_written
+  case_id: B078
+  case_sha256: 006081db5d7829c7c7a9058dddb475ed3f30bcad0f0ebd3d258a69a3d20f0ead
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- non_taxable_pay
+- taxable_pay
+- income_tax
+- net_pay

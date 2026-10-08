@@ -1,0 +1,40 @@
+task_id: B1_B116_81891e9f
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상두루읽기실 신규 급여 원장에는 공제대상 가족 본인 한 명만 등록되어 있습니다. 별도 원천징수 선택 신청도 없습니다. 정상
+  100퍼센트 기준의 소득세와 지방소득세를 산정하고, 급여에서 차감하는 전체 공제 합계도 구해 주세요. 연금과 건강 및 고용은 기관의 확정 기준을
+  사용합니다.
+input_files:
+- path: inputs/01_읽기급여.xlsx
+  format: xlsx
+- path: inputs/02_기본등록.hwpx
+  format: hwpx
+- path: inputs/03_기본공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+  required:
+  - income_tax
+  - local_income_tax
+  - total_deductions
+  additionalProperties: false
+canary: KrRubberStamp-canary-66aac76e-efac-59ab-aac5-ac00ce8bb54f
+scenario_seed: 9334025373896859835
+scenario_hash: d36b2f84c91fe21a5143f1384d5b4b6f49baa4a5dd57bcaca156463448e0a2fd
+authorship:
+  method: individually_written
+  case_id: B116
+  case_sha256: 81891e9faf9ae0bbdc5797398227a35b7f1736a0c82d208725f97675cc3898bc
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- income_tax
+- local_income_tax
+- total_deductions

@@ -1,0 +1,59 @@
+task_id: B1_B245_87d1b95b
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상접지표지실의 시급 직원은 근로자의 날에 쉬고 나머지 소정일을 모두 출근했습니다. 기본 실근로 대가와 별도 유급휴일 대가를
+  구하고 주휴수당 및 총지급액을 작성해 주세요. 직원에게 보낼 실지급액도 확인해 주세요.
+input_files:
+- path: inputs/01_시급약정.pdf
+  format: pdf
+- path: inputs/02_상시인원.hwpx
+  format: hwpx
+- path: inputs/03_휴일기초.xlsx
+  format: xlsx
+- path: inputs/04_실근로.pdf
+  format: pdf
+- path: inputs/05_주별개근.hwpx
+  format: hwpx
+- path: inputs/06_지급실행.xlsx
+  format: xlsx
+- path: inputs/07_연금고지.pdf
+  format: pdf
+- path: inputs/08_기관및가족.xlsx
+  format: xlsx
+- path: inputs/09_법정원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - paid_holiday_pay
+  - weekly_holiday_pay
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-3a655ecc-fe9b-52a1-bec0-1d1977af8384
+scenario_seed: 9786807268093511340
+scenario_hash: e60652df4eda4706686f87cc70e717f5f47b363b38be93e06b7fa9f859d7542b
+authorship:
+  method: individually_written
+  case_id: B245
+  case_sha256: 87d1b95b8becc6ac4e2442ccb08bef1e563a553a0252895aa471fbf23a53b91c
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- base_pay
+- paid_holiday_pay
+- weekly_holiday_pay
+- gross_pay
+- net_pay

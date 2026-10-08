@@ -1,0 +1,60 @@
+task_id: B1_C153_df9bac4f
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상읽는조명의 주문 연결표와 원증빙을 대조해 거래 수(unique_transaction_count), 매출세액(output_vat),
+  공제가능 매입세액(deductible_input_vat), 발행 공제(receipt_credit), 정산세액(net_vat)을 answer.json에
+  적어 주세요.
+input_files:
+- path: inputs/01_점포인계.hwpx
+  format: hwpx
+- path: inputs/02_세금이력.xlsx
+  format: xlsx
+- path: inputs/03_첫카드.pdf
+  format: pdf
+- path: inputs/04_첫계산서.xlsx
+  format: xlsx
+- path: inputs/05_둘째영수.pdf
+  format: pdf
+- path: inputs/06_재고계산서.pdf
+  format: pdf
+- path: inputs/07_재고인수.hwpx
+  format: hwpx
+- path: inputs/08_검사카드.pdf
+  format: pdf
+- path: inputs/09_검사완료.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    output_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    net_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - output_vat
+  - deductible_input_vat
+  - receipt_credit
+  - net_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-5e359b65-68f7-5969-ae08-a8f4f224c4d6
+scenario_seed: 16112661548951809549
+scenario_hash: acee7fbbcd031270bbdda74eff04f631dbe3fe773fc1b5492a5f1d5939095933
+authorship:
+  method: individually_written
+  case_id: C153
+  case_sha256: df9bac4f6b5e2e0d65212767dc04c58cc01a07b15293eec0514682f7352b3188
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- unique_transaction_count
+- output_vat
+- deductible_input_vat
+- receipt_credit
+- net_vat

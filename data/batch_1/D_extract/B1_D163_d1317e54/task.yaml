@@ -1,0 +1,52 @@
+task_id: B1_D163_d1317e54
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 수리 기록 촬영용 부품을 구매한 업체별 송금 요약이 필요합니다. answer.json에는 vendor_totals와 grand_total을
+  담아 주세요.
+input_files:
+- path: inputs/01_배경천납품.pdf
+  format: pdf
+- path: inputs/02_지지대납품.hwpx
+  format: hwpx
+- path: inputs/03_보관관추가.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-c04f663b-799c-59ac-b2f2-3a6f506cd0d0
+scenario_seed: 15073968327824467158
+scenario_hash: 9053d89a4e39eda57939619d8cc1b854285ecf2b716d50cb80ddca3810ebbcff
+authorship:
+  method: individually_written
+  case_id: D163
+  case_sha256: d1317e542f7764d6bf01f28b938b8eb44b9afcaf8ce927e5de07a14be7a1a97a
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals
+- grand_total

@@ -1,0 +1,171 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-12",
+          "document_id": "STAGE-ORDER-43",
+          "event": "received",
+          "event_id": "STAGE-FINAL-IN",
+          "location": "야외공연준비창고"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-04",
+          "document_id": "STAGE-OFFER-41",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "STAGE-FIRST-Q",
+          "vendor": "가상무대연결재"
+        },
+        {
+          "date": "2026-05-06",
+          "document_id": "STAGE-OFFER-42",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "STAGE-REVISED-Q",
+          "vendor": "가상무대연결재"
+        },
+        {
+          "date": "2026-05-08",
+          "document_id": "STAGE-ORDER-43",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "STAGE-FINAL-O",
+          "vendor": "가상무대연결재"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "STAGE-FIRST-Q",
+          "items": [
+            {
+              "name": "무대연결핀P8",
+              "quantity": 40,
+              "unit_price": 3600
+            },
+            {
+              "name": "무대고정끈2M",
+              "quantity": 20,
+              "unit_price": 1900
+            }
+          ],
+          "sheet_id": "STAGE-FIRST-L"
+        },
+        {
+          "header_record_id": "STAGE-REVISED-Q",
+          "items": [
+            {
+              "name": "무대연결핀P8",
+              "quantity": 30,
+              "unit_price": 3500
+            },
+            {
+              "name": "무대고정끈3M",
+              "quantity": 12,
+              "unit_price": 2400
+            }
+          ],
+          "sheet_id": "STAGE-REVISED-L"
+        },
+        {
+          "header_record_id": "STAGE-FINAL-O",
+          "items": [
+            {
+              "name": "무대연결핀P8",
+              "quantity": 18,
+              "unit_price": 3500
+            },
+            {
+              "name": "무대연결판B4",
+              "quantity": 6,
+              "unit_price": 5100
+            }
+          ],
+          "sheet_id": "STAGE-FINAL-L"
+        }
+      ],
+      "processing_policy": "별첨의 header_record_id를 표지 record_id에 연결한다. invoice 또는 order의 document_id에 received가 있는 원문만 실제 구매이고 quote는 제안이다. 모든 단가는 공급가액이며 행 세액은 공급가액 10%의 원 미만을 버린 값이다. 실제 구매 원문 번호를 한 번씩 센다. 현재 수령 기록은 제공한 인수 확인이 전부다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "STAGE-OFFER-41",
+        "STAGE-OFFER-42"
+      ],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "STAGE-ORDER-43"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "STAGE-ORDER-43",
+      "includes_vat": false,
+      "quantity": 18,
+      "unit_price": 3500
+    },
+    "output": {
+      "supply": 63000,
+      "total": 69300,
+      "vat": 6300
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "STAGE-ORDER-43",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 5100
+    },
+    "output": {
+      "supply": 30600,
+      "total": 33660,
+      "vat": 3060
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상무대연결재"
+    },
+    "output": "가상무대연결재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "무대연결판b4",
+          "unit_price": 5100,
+          "vendor": "가상무대연결재"
+        },
+        {
+          "item": "무대연결핀p8",
+          "unit_price": 3500,
+          "vendor": "가상무대연결재"
+        }
+      ],
+      "grand_total": 102960,
+      "supply_total": 93600,
+      "unique_document_count": 1,
+      "vat_total": 9360,
+      "vendor_totals": [
+        {
+          "supply": 93600,
+          "total": 102960,
+          "vat": 9360,
+          "vendor": "가상무대연결재"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

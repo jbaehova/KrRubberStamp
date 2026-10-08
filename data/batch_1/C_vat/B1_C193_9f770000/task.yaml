@@ -1,0 +1,51 @@
+task_id: B1_C193_9f770000
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상음향수리의 매출, 참석표, 부품 증빙, 고지 납부를 통합하여 불공제세액(noncreditable_vat), 발행 공제(receipt_credit),
+  환급액(refund_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/수리인계.hwpx
+  format: hwpx
+- path: inputs/완료수리.xlsx
+  format: xlsx
+- path: inputs/직원참석.hwpx
+  format: hwpx
+- path: inputs/고객참석.pdf
+  format: pdf
+- path: inputs/직원전표.pdf
+  format: pdf
+- path: inputs/협업전표.pdf
+  format: pdf
+- path: inputs/부품인수.xlsx
+  format: xlsx
+- path: inputs/부품영수.pdf
+  format: pdf
+- path: inputs/예정납부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - receipt_credit
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-1fdd5a4d-80a2-5018-9357-cb185d4a21a3
+scenario_seed: 11490652978503871727
+scenario_hash: 5bbc316892168091f515983291c93187d327fe8b4aeb2fb4ad79b17defd80e70
+authorship:
+  method: individually_written
+  case_id: C193
+  case_sha256: 9f770000fd01ecef716c1a98acdd7593614092a9a8fcc0ec90dc4646e829ab82
+  source_file: batch_1/C_vat/cases_154_203.json
+answer_fields:
+- noncreditable_vat
+- receipt_credit
+- refund_vat

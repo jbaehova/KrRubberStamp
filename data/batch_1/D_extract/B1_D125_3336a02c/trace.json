@@ -1,0 +1,176 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-05",
+          "document_id": "LABEL-125-H",
+          "event": "received",
+          "event_id": "e125-h",
+          "location": "표시물 작업석"
+        },
+        {
+          "date": "2026-05-08",
+          "document_id": "LABEL-125-R",
+          "event": "received",
+          "event_id": "e125-r",
+          "location": "표시물 작업석"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-04",
+          "document_id": "LABEL-125-H",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h125-head",
+          "vendor": "가상라벨부품"
+        },
+        {
+          "date": "2026-05-07",
+          "document_id": "LABEL-125-R",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h125-roll",
+          "vendor": "가상인쇄롤러"
+        },
+        {
+          "date": "2026-05-11",
+          "document_id": "LABEL-125-Q2",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "h125-quote",
+          "vendor": "가상라벨부품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h125-head",
+          "items": [
+            {
+              "name": "라벨프린터헤드",
+              "quantity": 1,
+              "unit_price": 175000
+            }
+          ],
+          "sheet_id": "s125-h"
+        },
+        {
+          "header_record_id": "h125-roll",
+          "items": [
+            {
+              "name": "라벨프린터롤러",
+              "quantity": 2,
+              "unit_price": 34000
+            }
+          ],
+          "sheet_id": "s125-r"
+        },
+        {
+          "header_record_id": "h125-quote",
+          "items": [
+            {
+              "name": "라벨프린터헤드",
+              "quantity": 1,
+              "unit_price": 158000
+            }
+          ],
+          "sheet_id": "s125-q"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice와 order는 document_id의 received가 있을 때만 집계한다. quote, 무인수와 출고 전 취소는 제외하고 같은 document_id의 동일 내용은 한 번만 센다. 별도는 품목 수량 곱하기 단가에 10% 원 미만 버림 세액을 더한다. 포함은 품목 총액의 10/11 원 미만 버림 공급가액과 차액 세액으로 계산한다. 업체와 품목은 NFKC 후 공백 제거와 영문 소문자화 및 업체 법인 표시 제거를 적용한다. 품목 배열은 그 이름 오름차순이고 같은 개당 공급가액 최저 단가는 정규화 업체명 오름차순 첫 업체다. 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "LABEL-125-Q2"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "LABEL-125-H",
+        "LABEL-125-R"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "LABEL-125-H",
+      "includes_vat": false,
+      "quantity": 1,
+      "unit_price": 175000
+    },
+    "output": {
+      "supply": 175000,
+      "total": 192500,
+      "vat": 17500
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상라벨부품"
+    },
+    "output": "가상라벨부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "LABEL-125-R",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 34000
+    },
+    "output": {
+      "supply": 68000,
+      "total": 74800,
+      "vat": 6800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상인쇄롤러"
+    },
+    "output": "가상인쇄롤러",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "라벨프린터롤러",
+          "unit_price": 34000,
+          "vendor": "가상인쇄롤러"
+        },
+        {
+          "item": "라벨프린터헤드",
+          "unit_price": 175000,
+          "vendor": "가상라벨부품"
+        }
+      ],
+      "grand_total": 267300,
+      "supply_total": 243000,
+      "unique_document_count": 2,
+      "vat_total": 24300,
+      "vendor_totals": [
+        {
+          "supply": 175000,
+          "total": 192500,
+          "vat": 17500,
+          "vendor": "가상라벨부품"
+        },
+        {
+          "supply": 68000,
+          "total": 74800,
+          "vat": 6800,
+          "vendor": "가상인쇄롤러"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

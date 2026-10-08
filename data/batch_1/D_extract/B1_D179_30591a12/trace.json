@@ -1,0 +1,210 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-25",
+          "document_id": "CLEAR-MAP-22",
+          "event": "received",
+          "event_id": "MAP-CLEAR-IN",
+          "location": "지도교육실"
+        },
+        {
+          "date": "2026-06-26",
+          "document_id": "JOIN-MAP-24",
+          "event": "received",
+          "event_id": "MAP-JOIN-IN",
+          "location": "지도교육실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-22",
+          "document_id": "CLEAR-MAP-22",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "MAP-CLEAR-EXT",
+          "vendor": "가상지도판재"
+        },
+        {
+          "date": "2026-06-22",
+          "document_id": "CLEAR-MAP-22",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "MAP-CLEAR-INT",
+          "vendor": "가상지도판재"
+        },
+        {
+          "date": "2026-06-24",
+          "document_id": "JOIN-MAP-24",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "MAP-JOIN-C",
+          "vendor": "가상지도판재"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "MAP-CLEAR-EXT",
+          "items": [
+            {
+              "name": "지도투명판",
+              "quantity": 6,
+              "unit_price": 24300
+            }
+          ],
+          "sheet_id": "MAP-CLEAR-PLATE"
+        },
+        {
+          "header_record_id": "MAP-CLEAR-EXT",
+          "items": [
+            {
+              "name": "투명판모서리캡",
+              "quantity": 24,
+              "unit_price": 650
+            }
+          ],
+          "sheet_id": "MAP-CLEAR-CAP"
+        },
+        {
+          "header_record_id": "MAP-CLEAR-INT",
+          "items": [
+            {
+              "name": "지도투명판",
+              "quantity": 6,
+              "unit_price": 24300
+            },
+            {
+              "name": "투명판모서리캡",
+              "quantity": 24,
+              "unit_price": 650
+            }
+          ],
+          "sheet_id": "MAP-CLEAR-ARCHIVE"
+        },
+        {
+          "header_record_id": "MAP-JOIN-C",
+          "items": [
+            {
+              "name": "지도접합판",
+              "quantity": 3,
+              "unit_price": 9800
+            }
+          ],
+          "sheet_id": "MAP-JOIN-L"
+        }
+      ],
+      "processing_policy": "품목표는 header_record_id로 연결하고 같은 표지의 첨부를 원문 순서대로 합한다. invoice 또는 order에 received가 있는 번호만 실제 구매다. 서로 다른 record_id여도 document_id 및 업체와 날짜와 가격 조건 및 품목 내용이 같으면 한 번만 계산한다. 별도 행은 수량 곱하기 단가가 공급가액이고 그 10%에서 원 미만을 버린 세액을 더한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "CLEAR-MAP-22",
+        "JOIN-MAP-24"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "CLEAR-MAP-22",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 24300
+    },
+    "output": {
+      "supply": 145800,
+      "total": 160380,
+      "vat": 14580
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "CLEAR-MAP-22",
+      "includes_vat": false,
+      "quantity": 24,
+      "unit_price": 650
+    },
+    "output": {
+      "supply": 15600,
+      "total": 17160,
+      "vat": 1560
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상지도판재"
+    },
+    "output": "가상지도판재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CLEAR-MAP-22"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "JOIN-MAP-24",
+      "includes_vat": false,
+      "quantity": 3,
+      "unit_price": 9800
+    },
+    "output": {
+      "supply": 29400,
+      "total": 32340,
+      "vat": 2940
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상지도판재"
+    },
+    "output": "가상지도판재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "지도접합판",
+          "unit_price": 9800,
+          "vendor": "가상지도판재"
+        },
+        {
+          "item": "지도투명판",
+          "unit_price": 24300,
+          "vendor": "가상지도판재"
+        },
+        {
+          "item": "투명판모서리캡",
+          "unit_price": 650,
+          "vendor": "가상지도판재"
+        }
+      ],
+      "grand_total": 209880,
+      "supply_total": 190800,
+      "unique_document_count": 2,
+      "vat_total": 19080,
+      "vendor_totals": [
+        {
+          "supply": 190800,
+          "total": 209880,
+          "vat": 19080,
+          "vendor": "가상지도판재"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

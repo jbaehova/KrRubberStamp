@@ -1,0 +1,234 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-06",
+          "document_id": "SWITCH-148-S",
+          "event": "received",
+          "event_id": "e148-s",
+          "location": "제어 설비 검수대"
+        },
+        {
+          "date": "2026-04-10",
+          "document_id": "SWITCH-148-C",
+          "event": "received",
+          "event_id": "e148-c",
+          "location": "제어 설비 검수대"
+        },
+        {
+          "date": "2026-04-13",
+          "document_id": "SWITCH-148-L",
+          "event": "received",
+          "event_id": "e148-l",
+          "location": "제어 설비 검수대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-04",
+          "document_id": "SWITCH-148-S",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h148-external",
+          "vendor": "가상제어스위치"
+        },
+        {
+          "date": "2026-04-08",
+          "document_id": "SWITCH-148-C",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h148-cap",
+          "vendor": "가상제어스위치"
+        },
+        {
+          "date": "2026-04-10",
+          "document_id": "SWITCH-148-L",
+          "kind": "order",
+          "price_includes_vat": true,
+          "record_id": "h148-light",
+          "vendor": "가상상태표시"
+        },
+        {
+          "date": "2026-04-04",
+          "document_id": "SWITCH-148-S",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "h148-erp",
+          "vendor": "가상제어스위치"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h148-external",
+          "items": [
+            {
+              "name": "제어스위치",
+              "quantity": 6,
+              "unit_price": 14303
+            }
+          ],
+          "sheet_id": "s148-s"
+        },
+        {
+          "header_record_id": "h148-cap",
+          "items": [
+            {
+              "name": "스위치연결캡",
+              "quantity": 12,
+              "unit_price": 2100
+            }
+          ],
+          "sheet_id": "s148-c"
+        },
+        {
+          "header_record_id": "h148-light",
+          "items": [
+            {
+              "name": "제어상태등",
+              "quantity": 6,
+              "unit_price": 6601
+            }
+          ],
+          "sheet_id": "s148-l"
+        },
+        {
+          "header_record_id": "h148-erp",
+          "items": [
+            {
+              "name": "제어스위치",
+              "quantity": 6,
+              "unit_price": 14303
+            }
+          ],
+          "sheet_id": "s148-erp"
+        }
+      ],
+      "processing_policy": "header_record_id로 표지별 품목 첨부를 연결한다. invoice와 order는 document_id의 received가 있을 때 포함하고 quote, 무인수 및 출고 전 취소는 제외한다. document_id가 같은 동일 내용은 한 번만 계산한다. 포함 단가의 품목 총액은 10/11 원 미만 버림 공급가액과 차액 세액으로 나눈다. 별도는 품목 수량 곱하기 단가에 10% 원 미만 버림 세액을 더한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 4,
+      "received_document_ids": [
+        "SWITCH-148-C",
+        "SWITCH-148-L",
+        "SWITCH-148-S"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "SWITCH-148-S",
+      "includes_vat": true,
+      "quantity": 6,
+      "unit_price": 14303
+    },
+    "output": {
+      "supply": 78016,
+      "total": 85818,
+      "vat": 7802
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상제어스위치"
+    },
+    "output": "가상제어스위치",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SWITCH-148-C",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 2100
+    },
+    "output": {
+      "supply": 25200,
+      "total": 27720,
+      "vat": 2520
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상제어스위치"
+    },
+    "output": "가상제어스위치",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SWITCH-148-L",
+      "includes_vat": true,
+      "quantity": 6,
+      "unit_price": 6601
+    },
+    "output": {
+      "supply": 36005,
+      "total": 39606,
+      "vat": 3601
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상상태표시"
+    },
+    "output": "가상상태표시",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "SWITCH-148-S"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "스위치연결캡",
+          "unit_price": 2100,
+          "vendor": "가상제어스위치"
+        },
+        {
+          "item": "제어상태등",
+          "unit_price": 6000,
+          "vendor": "가상상태표시"
+        },
+        {
+          "item": "제어스위치",
+          "unit_price": 13002,
+          "vendor": "가상제어스위치"
+        }
+      ],
+      "grand_total": 153144,
+      "supply_total": 139221,
+      "unique_document_count": 3,
+      "vat_total": 13923,
+      "vendor_totals": [
+        {
+          "supply": 36005,
+          "total": 39606,
+          "vat": 3601,
+          "vendor": "가상상태표시"
+        },
+        {
+          "supply": 103216,
+          "total": 113538,
+          "vat": 10322,
+          "vendor": "가상제어스위치"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

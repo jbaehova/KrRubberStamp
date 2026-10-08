@@ -1,0 +1,281 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "ground_work",
+          "activity_id": "지면완료",
+          "date": "2026-04-15",
+          "description": "노분류가 지면 평탄화와 토지 배수 조성 완료를 확인했다.",
+          "document_ids": [
+            "공사전자가"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "야적장 토지 12구역"
+          },
+          "operation_id": "자재분류",
+          "participants": [
+            {
+              "name": "가상노분류",
+              "organization": "가상야적분류",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C170-지면"
+        },
+        {
+          "action": "service",
+          "activity_id": "배관완료",
+          "date": "2026-04-15",
+          "description": "기존 작업동 내부 세척 배관 교체 완료 확인",
+          "document_ids": [
+            "공사전자나"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "분류 작업동 실내"
+          },
+          "operation_id": "자재분류",
+          "participants": [
+            {
+              "name": "가상노분류",
+              "organization": "가상야적분류",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C170-배관"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 자재 분류 서비스",
+          "operation_id": "자재분류",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "지면완료",
+          "date": "2026-04-15",
+          "document_id": "공사전자가",
+          "transaction_id": "C170-지면"
+        },
+        {
+          "activity_id": "배관완료",
+          "date": "2026-04-15",
+          "document_id": "공사전자나",
+          "transaction_id": "C170-배관"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "공사전자가",
+        "purpose": "land",
+        "transaction_id": "C170-지면"
+      },
+      {
+        "business_related": true,
+        "document_id": "공사전자나",
+        "purpose": "business",
+        "transaction_id": "C170-배관"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "공사전자나"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C170-배관"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "공사전자가"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C170-지면"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-15",
+      "transaction_id": "C170-배관"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1640000,
+      "includes_vat": false,
+      "transaction_id": "C170-배관"
+    },
+    "output": {
+      "gross": 1804000,
+      "supply_base": 1640000,
+      "vat": 164000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C170-배관",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 164000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-15",
+      "transaction_id": "C170-지면"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5830000,
+      "includes_vat": true,
+      "transaction_id": "C170-지면"
+    },
+    "output": {
+      "gross": 5830000,
+      "supply_base": 5300000,
+      "vat": 530000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "C170-지면",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 530000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 788000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -164000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -164000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -164000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 164000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 164000,
+      "input_vat": 694000,
+      "net_vat": -164000,
+      "noncreditable_vat": 530000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 164000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

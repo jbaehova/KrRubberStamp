@@ -1,0 +1,45 @@
+task_id: B1_A185_e193073b
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상수크령장치의 가상양은찬 정산 입력을 검토해 주세요. 카드 청구서의 실제 청구 항목으로 신용카드 등 소득공제액을 계산합니다.
+  급여에서 납부한 건강 및 장기요양과 고용보험의 특별소득공제액, 개인 IRP의 세액공제액 및 과세표준도 적어 주세요.
+input_files:
+- path: inputs/01_일반카드.xlsx
+  format: xlsx
+- path: inputs/02_관리비청구.pdf
+  format: pdf
+- path: inputs/03_보험연금납입.hwpx
+  format: hwpx
+- path: inputs/04_급여신청.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    credit_card_deduction:
+      type: integer
+    special_income_deduction:
+      type: integer
+    pension_account_credit:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - credit_card_deduction
+  - special_income_deduction
+  - pension_account_credit
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-3cd8f4c1-1ef0-584c-982f-24934e77ba2e
+scenario_seed: 16254343432786787107
+scenario_hash: 0d85fcad8644812f8cc76fc71d7d5c4c8ad217eae19e233ec3fc2327e0bd3b1a
+authorship:
+  method: individually_written
+  case_id: A185
+  case_sha256: e193073ba075bb23ed1cfb3e783968d65b978759db5f3aba95ed519fc00c8de3
+  source_file: batch_1/A_yearend/cases_154_203.json
+answer_fields:
+- credit_card_deduction
+- special_income_deduction
+- pension_account_credit
+- tax_base

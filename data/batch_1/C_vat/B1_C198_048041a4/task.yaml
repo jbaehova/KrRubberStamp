@@ -1,0 +1,55 @@
+task_id: B1_C198_048041a4
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상부지정리의 판매, 공사 계획, 인수, 결제 파일을 통합해 거래 수(unique_transaction_count), 불공제세액(noncreditable_vat),
+  발행 공제(receipt_credit), 납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/법인범위.hwpx
+  format: hwpx
+- path: inputs/원예업무.xlsx
+  format: xlsx
+- path: inputs/공사계획.pdf
+  format: pdf
+- path: inputs/부지완료.hwpx
+  format: hwpx
+- path: inputs/재료반입.xlsx
+  format: xlsx
+- path: inputs/판매단말.pdf
+  format: pdf
+- path: inputs/부지청구.pdf
+  format: pdf
+- path: inputs/재료계산.xlsx
+  format: xlsx
+- path: inputs/재료결제.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - noncreditable_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-21f4505d-5d9d-5496-8134-799d162c465d
+scenario_seed: 324331348846430619
+scenario_hash: 2031d408574242c0119697170986b29831bf795e4e05e14a5607a941309b46af
+authorship:
+  method: individually_written
+  case_id: C198
+  case_sha256: 048041a4b583c99b0d4839f9bc4dcc76c295f57203567b518a6d2c835a4efcef
+  source_file: batch_1/C_vat/cases_154_203.json
+answer_fields:
+- unique_transaction_count
+- noncreditable_vat
+- receipt_credit
+- payable_vat

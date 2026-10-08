@@ -1,0 +1,43 @@
+task_id: B1_B125_479ad05d
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상가느다란선제작실의 소정근로 외 추가 작업이 토요일에 있었습니다. 사업장 유급휴일 확인표를 읽고 평일 연장 항목인지 휴일
+  항목인지 구분해 지급액을 계산해 주세요. 연장수당과 휴일수당을 각각 적고 이번 총지급액으로 연결합니다.
+input_files:
+- path: inputs/01_제작휴무.pdf
+  format: pdf
+- path: inputs/02_토요일카드.hwpx
+  format: hwpx
+- path: inputs/03_유급확인.xlsx
+  format: xlsx
+- path: inputs/04_제작신고.pdf
+  format: pdf
+- path: inputs/05_휴무공식.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - holiday_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-2e9fb6f8-2450-5dd7-b619-bf4a94f44d05
+scenario_seed: 5159665423022428684
+scenario_hash: 02839fc13154364970b2c6f7ccbe7a726659e3d66298dcbf258cdb58dd9428ac
+authorship:
+  method: individually_written
+  case_id: B125
+  case_sha256: 479ad05d7b1e120cef57b0a7293ae75d485531205155008b5b6e44ebc684767b
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- overtime_pay
+- holiday_pay
+- gross_pay

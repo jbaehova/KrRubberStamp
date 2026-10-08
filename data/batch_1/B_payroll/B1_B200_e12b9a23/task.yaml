@@ -1,0 +1,63 @@
+task_id: B1_B200_e12b9a23
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상쐐기검사실은 야간 추가 카드의 휴게 수정과 실제 은행 실행 뒤 작성된 후속 계획을 받았습니다. 유효 승인 시간으로 연장수당과
+  야간 가산을 계산하고 실제 지급일의 자녀 공제 뒤 120퍼센트 신청을 적용하여 세금과 실지급액을 산정해 주세요.
+input_files:
+- path: inputs/01_쐐기계약.pdf
+  format: pdf
+- path: inputs/02_추가이전.hwpx
+  format: hwpx
+- path: inputs/03_추가수정.xlsx
+  format: xlsx
+- path: inputs/04_쐐기일정.pdf
+  format: pdf
+- path: inputs/05_2월실행.hwpx
+  format: hwpx
+- path: inputs/06_후속승인.xlsx
+  format: xlsx
+- path: inputs/07_쐐기선택.pdf
+  format: pdf
+- path: inputs/08_쐐기기관.hwpx
+  format: hwpx
+- path: inputs/09_쐐기공식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - income_tax
+  - local_income_tax
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-eaaa922d-87d7-56c9-8a35-01fb2226f29a
+scenario_seed: 16225231557804302449
+scenario_hash: 7b8977b7193f4f08d653a7dca4835a93a4b52abd4ce45d34a95b096af7f58700
+authorship:
+  method: individually_written
+  case_id: B200
+  case_sha256: e12b9a23096220713f11e2ffcc06b6864d87b8a29a86193a9caafb2a7536a57c
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- overtime_pay
+- night_pay
+- income_tax
+- local_income_tax
+- total_deductions
+- net_pay

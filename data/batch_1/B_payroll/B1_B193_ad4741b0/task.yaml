@@ -1,0 +1,69 @@
+task_id: B1_B193_ad4741b0
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상둥근홈공방은 6월 말 지급 계획과 7월 은행 실행 기록, 이후 다시 작성한 계획을 함께 보관합니다. 공단의 6월 보험 부과
+  통지에 적용할 연금 기준과 연금 부담액을 구하고 회사 배식에 따른 비과세 및 과세급여와 최종 실지급액을 계산해 주세요. 실행 상태로 확정한 실제
+  지급일을 effective_payment_date에 YYYY-MM-DD로 작성해 주세요. 국민연금 상하한은 은행 지급일 대신 공단 통지의 보험
+  부과월을 기준으로 적용합니다. 전체 공제액도 적어 주세요.
+input_files:
+- path: inputs/01_둥근홈계약.pdf
+  format: pdf
+- path: inputs/02_6월취소.hwpx
+  format: hwpx
+- path: inputs/03_7월은행.xlsx
+  format: xlsx
+- path: inputs/04_후속계획.pdf
+  format: pdf
+- path: inputs/05_공방배식.hwpx
+  format: hwpx
+- path: inputs/06_공방일정.xlsx
+  format: xlsx
+- path: inputs/07_공방연금.pdf
+  format: pdf
+- path: inputs/08_공방등록.hwpx
+  format: hwpx
+- path: inputs/09_반기범위.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - effective_payment_date
+  - pension_base_income
+  - national_pension
+  - non_taxable_pay
+  - taxable_pay
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-8f8cfdc9-23b4-5004-9f88-390a1ff72e1e
+scenario_seed: 12486020716479829617
+scenario_hash: ec97b12a24e3443e8153f61279f81a89322d92bd3487f70ba974a82441abf464
+authorship:
+  method: individually_written
+  case_id: B193
+  case_sha256: ad4741b017f2d6713283594595d32d116023fcf925e5bece1fe5e4428edab82c
+  source_file: batch_1/B_payroll/cases_154_203.json
+answer_fields:
+- effective_payment_date
+- pension_base_income
+- national_pension
+- non_taxable_pay
+- taxable_pay
+- total_deductions
+- net_pay

@@ -1,0 +1,56 @@
+task_id: B1_D190_7cee2774
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 점검 도구 구매비의 지급 장부를 정리해 주세요. 종이 자료와 전자 보관 자료를 원문 번호로 대조한 vendor_totals
+  및 grand_total이 필요합니다.
+input_files:
+- path: inputs/01_드라이버영수증표지.pdf
+  format: pdf
+- path: inputs/02_드라이버품목.xlsx
+  format: xlsx
+- path: inputs/03_테이프구매.pdf
+  format: pdf
+- path: inputs/04_파우치구매.hwpx
+  format: hwpx
+- path: inputs/05_전자보관본.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-020370da-ae93-59e4-8577-ee8c556202d4
+scenario_seed: 9002176085266950557
+scenario_hash: 7e31dbf839f0b86297211f8730ea7e7463f63a48c19be4d073479c44634abf95
+authorship:
+  method: individually_written
+  case_id: D190
+  case_sha256: 7cee277437da699d7e16dca427622e3c1459d5031a6aa0e263a2815a2685f01d
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals
+- grand_total

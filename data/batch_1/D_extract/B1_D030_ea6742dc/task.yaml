@@ -1,0 +1,47 @@
+task_id: B1_D030_ea6742dc
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 메이커 작업대 부품을 다시 살 때 참고할 단가표가 필요합니다. USB 허브와 LED 바의 영문 표기를 맞춰 같은 규격의 구매
+  이력을 비교해 주세요. 품목별 최저 공급가액 단가 업체를 answer.json의 cheapest_by_item에 정리해 주세요.
+input_files:
+- path: inputs/01_USB허브_명세.pdf
+  format: pdf
+- path: inputs/02_LED바_구매.xlsx
+  format: xlsx
+- path: inputs/03_허브_추가입고.hwpx
+  format: hwpx
+- path: inputs/04_조명_보충명세.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-ea3efdba-7da6-5181-a5a9-53e27b1a844d
+scenario_seed: 16890542442764399541
+scenario_hash: e4005b7cd285c03027a9a7a0e7d88809cdf4da8110cf947bb70f740c54c3a59e
+authorship:
+  method: individually_written
+  case_id: D030
+  case_sha256: ea6742dc9ca173b5b69375bede82e0c02463bccebcb102481531b821803ed219
+  source_file: batch_1/D_extract/cases_004_053.json
+answer_fields:
+- cheapest_by_item

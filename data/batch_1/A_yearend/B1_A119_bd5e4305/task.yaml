@@ -1,0 +1,43 @@
+task_id: B1_A119_bd5e4305
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상라일락번역의 가상염서후는 아버지 계좌에 보낸 돈으로 발급된 기부 영수증을 제출했습니다. 아버지의 공제 배정 확인서와 영수증
+  명의를 맞춰 본인을 제외한 가족 수 및 기본공제액을 정리해 주세요. 본인 명의의 별도 기부까지 반영한 기부금 세액공제액도 계산합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_가족배정.hwpx
+  format: hwpx
+- path: inputs/03_지원금송금.pdf
+  format: pdf
+- path: inputs/04_아버지기부.pdf
+  format: pdf
+- path: inputs/05_직원기부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    donation_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - donation_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-500bfe60-21d9-5e5a-af5f-e9c7872cbb75
+scenario_seed: 13645417611379770018
+scenario_hash: a1ca48c4bc17a05e0e62d16185f87859a6983e6fe71e74c723e55b9c5cc13926
+authorship:
+  method: individually_written
+  case_id: A119
+  case_sha256: bd5e4305622682a229651889b660f02136195170594c30f38d5413ae43ff4730
+  source_file: batch_1/A_yearend/cases_104_153.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- donation_credit

@@ -1,0 +1,46 @@
+task_id: B1_D165_15249b32
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 시각 안내실 자료가 품목표와 표지로 나뉘어 있습니다. 원문 참조를 연결해 vendor_totals를 answer.json에
+  정리해 주세요.
+input_files:
+- path: inputs/01_품목표와수령.xlsx
+  format: xlsx
+- path: inputs/02_안내실청구표지.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-d05a7ee9-e89d-56f1-bca5-3cc17b59df50
+scenario_seed: 1523513215062798773
+scenario_hash: f970608a27ac1925c49c85ac224608f6ec7070fa931ce52559eebb0cbd1f1ec1
+authorship:
+  method: individually_written
+  case_id: D165
+  case_sha256: 15249b327a6e71b58d25f96012935f6a0ff890a3ba7ac9617ca91e18c2f88301
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals

@@ -1,0 +1,59 @@
+task_id: B1_B248_f39e50c7
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상문서핀보관소의 일요일 오전 카드가 추가 근로로 수정 승인됐습니다. 오전 최종 승인과 오후 및 밤 카드를 함께 대조하여 휴일수당,
+  야간 가산과 연장수당을 구해 주세요. 이번 총지급액 및 실지급액도 작성해 주세요.
+input_files:
+- path: inputs/01_월급범위.pdf
+  format: pdf
+- path: inputs/02_오전초기.xlsx
+  format: xlsx
+- path: inputs/03_오전수정.hwpx
+  format: hwpx
+- path: inputs/04_오후카드.pdf
+  format: pdf
+- path: inputs/05_밤카드.xlsx
+  format: xlsx
+- path: inputs/06_지급달력.hwpx
+  format: hwpx
+- path: inputs/07_기관부과.pdf
+  format: pdf
+- path: inputs/08_가족인계.xlsx
+  format: xlsx
+- path: inputs/09_휴일원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - holiday_pay
+  - night_pay
+  - overtime_pay
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-8458201c-59bf-5fc0-ba9d-97197fcd0a94
+scenario_seed: 17554557213437067837
+scenario_hash: 6be24f2a01cf2870152ace954501ca1b251c450e353dc37ecf71cc43be60f8fc
+authorship:
+  method: individually_written
+  case_id: B248
+  case_sha256: f39e50c71030023dabc32f0dcc3b4b9fb183a627b21863ae0a3dc7ae520c7ab2
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- holiday_pay
+- night_pay
+- overtime_pay
+- gross_pay
+- net_pay

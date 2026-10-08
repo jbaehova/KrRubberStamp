@@ -1,0 +1,309 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_lease",
+          "activity_id": "C087-영업활동",
+          "date": "2026-01-30",
+          "description": "직원이 고객 임대에 직접 투입할 등록 영업 차량을 차고에 인수했다.",
+          "document_ids": [
+            "C087-영업계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상다시출발 대여 차고"
+          },
+          "operation_id": "C087-임대",
+          "participants": [
+            {
+              "name": "가상 대여직원",
+              "organization": "가상다시출발",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C087-영업임차",
+          "vehicle_id": "가상-R087-영업"
+        },
+        {
+          "action": "vehicle_lease",
+          "activity_id": "C087-관리활동",
+          "date": "2026-02-01",
+          "description": "관리 직원이 사무 이동용 차를 인수했다. 고객에게 차량 자체를 임대하지 않는다.",
+          "document_ids": [
+            "C087-관리계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상다시출발 사무실 주차장"
+          },
+          "operation_id": "C087-임대",
+          "participants": [
+            {
+              "name": "가상 관리직원",
+              "organization": "가상다시출발",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C087-관리임차",
+          "vehicle_id": "가상-R087-관리"
+        }
+      ],
+      "operations": [
+        {
+          "description": "등록 자동차 임대 영업",
+          "operation_id": "C087-임대",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "C087-영업활동",
+          "date": "2026-01-30",
+          "document_id": "C087-영업계산서",
+          "transaction_id": "C087-영업임차"
+        },
+        {
+          "activity_id": "C087-관리활동",
+          "date": "2026-02-01",
+          "document_id": "C087-관리계산서",
+          "transaction_id": "C087-관리임차"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "vehicle_rental",
+          "permitted_operation_id": "C087-임대",
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-R087-영업"
+        },
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상-R087-관리"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "C087-영업계산서",
+        "purpose": "passenger_car_rental",
+        "transaction_id": "C087-영업임차"
+      },
+      {
+        "business_related": true,
+        "document_id": "C087-관리계산서",
+        "purpose": "passenger_car_rental",
+        "transaction_id": "C087-관리임차"
+      },
+      {
+        "transaction_id": "C087-영업임차",
+        "vehicle_direct_business": true,
+        "vehicle_id": "가상-R087-영업",
+        "vehicle_subject_excise": true
+      },
+      {
+        "transaction_id": "C087-관리임차",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상-R087-관리",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C087-관리계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C087-관리임차"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "C087-영업계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "C087-영업임차"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-01",
+      "transaction_id": "C087-관리임차"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1260000,
+      "includes_vat": false,
+      "transaction_id": "C087-관리임차"
+    },
+    "output": {
+      "gross": 1386000,
+      "supply_base": 1260000,
+      "vat": 126000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_rental",
+      "supplier_general": true,
+      "transaction_id": "C087-관리임차",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 126000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-01-30",
+      "transaction_id": "C087-영업임차"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5940000,
+      "includes_vat": true,
+      "transaction_id": "C087-영업임차"
+    },
+    "output": {
+      "gross": 5940000,
+      "supply_base": 5400000,
+      "vat": 540000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_rental",
+      "supplier_general": true,
+      "transaction_id": "C087-영업임차",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 540000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 240000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -540000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -540000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -540000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 540000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 540000,
+      "input_vat": 666000,
+      "net_vat": -540000,
+      "noncreditable_vat": 126000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 540000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

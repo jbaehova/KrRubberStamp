@@ -1,0 +1,61 @@
+task_id: B1_C046_4d8fdff0
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상정리바구니는 창고 부지 작업과 내부 보관 설비를 한꺼번에 준비했습니다. 공사 내용과 사용 기록을 연결해 공제불가 세액(noncreditable_vat)
+  및 공제가능 매입세액(deductible_input_vat)을 구해 주세요. 소비자 카드 판매의 영수증 발행세액공제(receipt_credit)를
+  적용한 뒤 예정고지 세액(prepaid_vat)을 차감하여 환급액(refund_vat)을 answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_창고확장_의뢰.hwpx
+  format: hwpx
+- path: inputs/02_전년_신고.pdf
+  format: pdf
+- path: inputs/03_예정고지_납부.xlsx
+  format: xlsx
+- path: inputs/04_바구니_판매.pdf
+  format: pdf
+- path: inputs/05_토지_작업.pdf
+  format: pdf
+- path: inputs/06_내부_설비.xlsx
+  format: xlsx
+- path: inputs/07_재고_입고.pdf
+  format: pdf
+- path: inputs/08_현장_확인.hwpx
+  format: hwpx
+- path: inputs/09_토지작업_스캔.png
+  format: png
+  duplicate_of: inputs/05_토지_작업.pdf
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    prepaid_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - prepaid_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-fd5cbcc6-3f15-57dc-bc2a-d15b194c10bb
+scenario_seed: 5588931888586429352
+scenario_hash: 4ee1c015d4d4f6595614880660412e07fb5a66bec1f4b3f2d39b8c6737507b1f
+authorship:
+  method: individually_written
+  case_id: C046
+  case_sha256: 4d8fdff0f50c13a857ba307b5b4c71f4c73b5bda832299de7e207be7a0138f24
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- prepaid_vat
+- refund_vat

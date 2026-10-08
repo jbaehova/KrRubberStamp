@@ -1,0 +1,46 @@
+task_id: B1_D279_05e13ef1
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 수선용 굽과 밑창의 실제 구매 단가를 발주 참고표로 만듭니다. cheapest_by_item을 제출해 주세요.
+input_files:
+- path: inputs/01_포함가격굽.pdf
+  format: pdf
+- path: inputs/02_별도가격굽.xlsx
+  format: xlsx
+- path: inputs/03_남성밑창.hwpx
+  format: hwpx
+- path: inputs/04_여성밑창.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-b726ba5f-528a-53f9-8c2c-109c0b4b2db1
+scenario_seed: 423689047445068711
+scenario_hash: b7876e6dbaee6dfad75247843390ee470f28b7b936112d38587ad87b0015b345
+authorship:
+  method: individually_written
+  case_id: D279
+  case_sha256: 05e13ef1a02fdba74340b571cc33b12578fa93401e2a709906c04a14cff13c5b
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- cheapest_by_item

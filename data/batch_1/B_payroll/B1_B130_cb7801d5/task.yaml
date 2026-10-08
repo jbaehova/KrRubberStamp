@@ -1,0 +1,47 @@
+task_id: B1_B130_cb7801d5
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상귓가소리실은 건강보험 부과가 없는 지급을 등록하면서 최소 보험료가 자동 입력된 파일을 받았습니다. 확정 기관 자격을 사용하여
+  건강보험료와 장기요양보험료를 다시 산정해 주세요. 연금 및 고용과 세금은 각각의 자료대로 유지하고 최종 공제 합계 및 실지급액을 구합니다.
+input_files:
+- path: inputs/01_소리정액.hwpx
+  format: hwpx
+- path: inputs/02_건강없음.pdf
+  format: pdf
+- path: inputs/03_소리등록.xlsx
+  format: xlsx
+- path: inputs/04_소리범위.hwpx
+  format: hwpx
+- path: inputs/05_하한참조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - health_insurance
+  - long_term_care
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-6f51d6de-deef-513c-9baf-f2e2ac129137
+scenario_seed: 14661470601707001098
+scenario_hash: 46525622568d03151973a9a96dbdbc6bd9e982a95ab53dbe575f141ebfce7afc
+authorship:
+  method: individually_written
+  case_id: B130
+  case_sha256: cb7801d51b94150ae34a8efba1b6668e6af3bad5a8e301d836bfb002d82779ca
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- health_insurance
+- long_term_care
+- total_deductions
+- net_pay

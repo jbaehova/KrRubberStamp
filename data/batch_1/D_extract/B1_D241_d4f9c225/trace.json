@@ -1,0 +1,176 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-14",
+          "document_id": "PAPER-KNIFE-11",
+          "event": "received",
+          "event_id": "PAPER-KNIFE-IN",
+          "location": "종이공방도구대"
+        },
+        {
+          "date": "2026-02-14",
+          "document_id": "PAPER-BLADE-12",
+          "event": "received",
+          "event_id": "PAPER-BLADE-IN",
+          "location": "종이공방도구대"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-10",
+          "document_id": "PAPER-CUT-Q",
+          "kind": "quote",
+          "price_includes_vat": false,
+          "record_id": "PAPER-Q-C",
+          "vendor": "가상재단설비"
+        },
+        {
+          "date": "2026-02-11",
+          "document_id": "PAPER-KNIFE-11",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "PAPER-KNIFE-C",
+          "vendor": "가상종이도구"
+        },
+        {
+          "date": "2026-02-12",
+          "document_id": "PAPER-BLADE-12",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "PAPER-BLADE-C",
+          "vendor": "가상칼날판매"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "PAPER-Q-C",
+          "items": [
+            {
+              "name": "대형재단기",
+              "quantity": 1,
+              "unit_price": 790000
+            }
+          ],
+          "sheet_id": "PAPER-Q-L"
+        },
+        {
+          "header_record_id": "PAPER-KNIFE-C",
+          "items": [
+            {
+              "name": "종이커터18",
+              "quantity": 6,
+              "unit_price": 6300
+            }
+          ],
+          "sheet_id": "PAPER-KNIFE-L"
+        },
+        {
+          "header_record_id": "PAPER-BLADE-C",
+          "items": [
+            {
+              "name": "커터교체날18",
+              "quantity": 10,
+              "unit_price": 1400
+            }
+          ],
+          "sheet_id": "PAPER-BLADE-L"
+        }
+      ],
+      "processing_policy": "첨부를 header_record_id로 표지에 연결한다. quote는 실제 구매가 아니며 invoice 또는 order 번호에 received가 있는 경우만 구매다. PDF의 PNG 보관 이미지는 같은 파일의 사본이다. 별도 단가는 공급가액이며 각 행의 10%에서 원 미만을 버려 세액을 계산한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "PAPER-CUT-Q"
+      ],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "PAPER-BLADE-12",
+        "PAPER-KNIFE-11"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "PAPER-KNIFE-11",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 6300
+    },
+    "output": {
+      "supply": 37800,
+      "total": 41580,
+      "vat": 3780
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상종이도구"
+    },
+    "output": "가상종이도구",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "PAPER-BLADE-12",
+      "includes_vat": false,
+      "quantity": 10,
+      "unit_price": 1400
+    },
+    "output": {
+      "supply": 14000,
+      "total": 15400,
+      "vat": 1400
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상칼날판매"
+    },
+    "output": "가상칼날판매",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "종이커터18",
+          "unit_price": 6300,
+          "vendor": "가상종이도구"
+        },
+        {
+          "item": "커터교체날18",
+          "unit_price": 1400,
+          "vendor": "가상칼날판매"
+        }
+      ],
+      "grand_total": 56980,
+      "supply_total": 51800,
+      "unique_document_count": 2,
+      "vat_total": 5180,
+      "vendor_totals": [
+        {
+          "supply": 37800,
+          "total": 41580,
+          "vat": 3780,
+          "vendor": "가상종이도구"
+        },
+        {
+          "supply": 14000,
+          "total": 15400,
+          "vat": 1400,
+          "vendor": "가상칼날판매"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

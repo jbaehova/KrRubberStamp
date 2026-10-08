@@ -1,0 +1,64 @@
+task_id: B1_A045_6879d381
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상하늬전자 직원 가상진도윤의 가족 자료를 확인합니다. 배우자는 소득요건을 넘고 어머니는 동생에게 공제가 배정되었으며 어린
+  자녀만 직원에게 배정되어 있습니다. 가족 수와 기본공제액 및 자녀 공제를 작성해 주세요. 배우자 카드와 두 가족 병원비 및 자녀 보험료를 항목별로
+  판단해 카드 공제와 의료비 및 보험료 세액공제액도 적어 주세요.
+input_files:
+- path: inputs/01_직원.hwpx
+  format: hwpx
+- path: inputs/02_급여.xlsx
+  format: xlsx
+- path: inputs/03_배우자.pdf
+  format: pdf
+- path: inputs/04_어머니.hwpx
+  format: hwpx
+- path: inputs/05_자녀.pdf
+  format: pdf
+- path: inputs/06_배우자카드.xlsx
+  format: xlsx
+- path: inputs/07_배우자진료.pdf
+  format: pdf
+- path: inputs/08_어머니진료.pdf
+  format: pdf
+- path: inputs/09_자녀보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    child_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - child_credit
+  - credit_card_deduction
+  - medical_credit
+  - insurance_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-1bff0e89-5ab3-55a5-b254-f63ea189e611
+scenario_seed: 7528280804561751077
+scenario_hash: 44201f94c0a9b6b86dcde0ab678131cf2322b18c0baf8f31785afc3859fa1688
+authorship:
+  method: individually_written
+  case_id: A045
+  case_sha256: 6879d381554b8c258128fdb2fc65d7078f4d3419947a4639d4b67083e0f31c89
+  source_file: batch_1/A_yearend/cases_004_053.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- child_credit
+- credit_card_deduction
+- medical_credit
+- insurance_credit

@@ -1,0 +1,43 @@
+task_id: B1_B015_3f369923
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상솔잎분석실의 새 급여 파일에서 장기요양보험 계산 수식을 확인하려고 합니다. 가상임채온에게 고지된 건강보험 보수월액으로 건강보험
+  근로자 부담액을 구한 다음 정확한 장기요양 비율을 적용해 장기요양보험 부담액을 작성해 주세요. 공제 합계와 실지급액도 대조 값으로 필요합니다.
+input_files:
+- path: inputs/01_공제대상확인.hwpx
+  format: hwpx
+- path: inputs/02_건강보험수식입력.xlsx
+  format: xlsx
+- path: inputs/03_요양비율원문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - health_insurance
+  - long_term_care
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-d8432d6b-9a89-5e41-9fd0-ec527fa0081a
+scenario_seed: 4554996450041756936
+scenario_hash: ed17fbd86bfcbbe66096f62c615ffba41707db80f45d929bcbdf9401be8b1570
+authorship:
+  method: individually_written
+  case_id: B015
+  case_sha256: 3f3699234de77d0883f46a49b8e48c903e09c4802c8dc904cf67fc8c7e8ca33c
+  source_file: batch_1/B_payroll/cases_004_053.json
+answer_fields:
+- health_insurance
+- long_term_care
+- total_deductions
+- net_pay

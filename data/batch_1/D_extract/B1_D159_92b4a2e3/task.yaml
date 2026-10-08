@@ -1,0 +1,46 @@
+task_id: B1_D159_92b4a2e3
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 흙 기록 보관소 구매비를 업체 결제 계정에 입력해 주세요. 세액이 포함된 업체별 내역 vendor_totals를 answer.json에
+  작성합니다.
+input_files:
+- path: inputs/01_표본용기매입.xlsx
+  format: xlsx
+- path: inputs/02_기록지매입.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-25efa19a-bad4-51a7-bbf7-8e139235374e
+scenario_seed: 10571253321370166591
+scenario_hash: 72897308c360947a2f55c18603422565ffd9a1d92893ec48c118b905ec2a0dde
+authorship:
+  method: individually_written
+  case_id: D159
+  case_sha256: 92b4a2e30aefe53f135ca21687c2e351ec653008dfb39c2cf0f68ca2182058b4
+  source_file: batch_1/D_extract/cases_154_203.json
+answer_fields:
+- vendor_totals

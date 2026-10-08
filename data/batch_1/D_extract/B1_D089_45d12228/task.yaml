@@ -1,0 +1,54 @@
+task_id: B1_D089_45d12228
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 카메라 보관실 구매가 합본과 재제출 자료로 왔습니다. 실제 인수 번호로 대조해 vendor_totals와 unique_document_count를
+  답하세요. 인수 이력은 합본에, 작성 기준은 별도 파일에 있습니다.
+input_files:
+- path: inputs/01_두인수합본.xlsx
+  format: xlsx
+- path: inputs/02_첫인수재제출.pdf
+  format: pdf
+- path: inputs/03_방습제.hwpx
+  format: hwpx
+- path: inputs/04_장부작성기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - vendor_totals
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-b350dd63-fab0-5095-a766-8d84544fee25
+scenario_seed: 5030839817833527287
+scenario_hash: ef0289345c03a5a73b4ba61d047c3f08e1280b85ab8b730d6b59f6609cec3f80
+authorship:
+  method: individually_written
+  case_id: D089
+  case_sha256: 45d12228e7dbb7f7815843cc40a52e414406f431330348731bcd1caedfb15204
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- vendor_totals
+- unique_document_count

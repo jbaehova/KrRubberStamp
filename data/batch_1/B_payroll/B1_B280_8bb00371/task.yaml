@@ -1,0 +1,45 @@
+task_id: B1_B280_8bb00371
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상여백점검소는 정규 교대 뒤 출동의 구분을 다시 승인했습니다. 같은 카드의 초기 입력과 최종 승인을 읽고 기본급 지급액 및
+  연장수당을 구해 주세요. 현금 식대 비과세를 반영한 과세급여와 총지급액도 적어 수정 전표를 마무리합니다.
+input_files:
+- path: inputs/01_점검월급약정.pdf
+  format: pdf
+- path: inputs/02_소정초기.xlsx
+  format: xlsx
+- path: inputs/03_추가최종.hwpx
+  format: hwpx
+- path: inputs/04_정정공제원문.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - overtime_pay
+  - taxable_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-94b676c9-8ed8-58c1-8abe-ebf33c885004
+scenario_seed: 10065548954907560321
+scenario_hash: c7311807c30f11d5b58f762fb254467d64a5b02ad4a3cfdc2f848be2aa505750
+authorship:
+  method: individually_written
+  case_id: B280
+  case_sha256: 8bb00371e691c981fe6dab67896f4f1374201c06f6eebfbcbcad70ccc6d6efbf
+  source_file: batch_1/B_payroll/cases_254_300.json
+answer_fields:
+- base_pay
+- overtime_pay
+- taxable_pay
+- gross_pay

@@ -1,0 +1,41 @@
+task_id: B1_B215_0a778ceb
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상분류매듭소는 정액급여를 지급한 뒤 원천세 보관액을 별도로 납부합니다. 과세급여와 국세 및 지방세를 계산하고 직원 실지급액을
+  이체 검산표에 작성해 주세요.
+input_files:
+- path: inputs/01_세무지급인계.xlsx
+  format: xlsx
+- path: inputs/02_기관고지.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-710c1a84-3672-599f-b6d0-b57dee69522e
+scenario_seed: 754226404980791577
+scenario_hash: 90fcba9abab65e5e1b9991897351bb5e57358dd6e2425cfb9825b3414fe98cf6
+authorship:
+  method: individually_written
+  case_id: B215
+  case_sha256: 0a778ceb55199919025826905e466e99fb55df3ed779a6948ab0845b7a80309f
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- taxable_pay
+- income_tax
+- local_income_tax
+- net_pay

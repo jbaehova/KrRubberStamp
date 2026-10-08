@@ -1,0 +1,450 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C050-재고",
+          "date": "2026-02-12",
+          "description": "직원이 매장에서 판매할 수납함을 받아 창고에 보관했다.",
+          "document_ids": [
+            "가상-C050-재고계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상네모수납 매장창고"
+          },
+          "operation_id": "OPS-C050",
+          "participants": [
+            {
+              "name": "가상 매장직원",
+              "organization": "가상네모수납",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C050-판매재고"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C050-집물품",
+          "date": "2026-05-17",
+          "description": "배우자가 집 수납실에서 사용할 보관함을 받았다. 매장 판매나 창고 보관용으로 옮기지 않았다.",
+          "document_ids": [
+            "가상-C050-집카드"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "가상 대표 가족 주택 수납실"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상 대표배우자",
+              "organization": "가상 대표가족",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "가상-C050-집보관함"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "ACT-C050-표지",
+          "date": "2026-03-24",
+          "description": "직원이 상품 용도를 적은 표지를 받아 진열대에 붙였다.",
+          "document_ids": [
+            "가상-C050-표지계산서"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상네모수납 매장 진열대"
+          },
+          "operation_id": "OPS-C050",
+          "participants": [
+            {
+              "name": "가상 진열직원",
+              "organization": "가상네모수납",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "가상-C050-진열표지"
+        }
+      ],
+      "filing_site_id": "가상-S050-수납",
+      "operations": [
+        {
+          "description": "수납용품 소매 판매",
+          "operation_id": "OPS-C050",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "ACT-C050-재고",
+          "date": "2026-02-12",
+          "document_id": "가상-C050-재고계산서",
+          "transaction_id": "가상-C050-판매재고"
+        },
+        {
+          "activity_id": "ACT-C050-집물품",
+          "date": "2026-05-17",
+          "document_id": "가상-C050-집카드",
+          "transaction_id": "가상-C050-집보관함"
+        },
+        {
+          "activity_id": "ACT-C050-표지",
+          "date": "2026-03-24",
+          "document_id": "가상-C050-표지계산서",
+          "transaction_id": "가상-C050-진열표지"
+        }
+      ],
+      "site_year_records": [
+        {
+          "site_id": "가상-S050-보관",
+          "site_name": "가상네모보관",
+          "supply_base": 220000000,
+          "year": 2025
+        },
+        {
+          "site_id": "가상-S050-수납",
+          "site_name": "가상네모수납",
+          "supply_base": 1000000000,
+          "year": 2025
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "가상-C050-재고계산서",
+        "purpose": "business",
+        "transaction_id": "가상-C050-판매재고"
+      },
+      {
+        "business_related": false,
+        "document_id": "가상-C050-집카드",
+        "purpose": "private",
+        "transaction_id": "가상-C050-집보관함"
+      },
+      {
+        "business_related": true,
+        "document_id": "가상-C050-표지계산서",
+        "purpose": "business",
+        "transaction_id": "가상-C050-진열표지"
+      },
+      {
+        "filing_site_id": "가상-S050-수납",
+        "prior_year_site_supply_base": 1000000000
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C050-판매카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C050-수납판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C050-표지계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C050-진열표지"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C050-집카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "가상-C050-집보관함"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가상-C050-재고계산서"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가상-C050-판매재고"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-20",
+      "transaction_id": "가상-C050-수납판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 19800000,
+      "includes_vat": true,
+      "transaction_id": "가상-C050-수납판매"
+    },
+    "output": {
+      "gross": 19800000,
+      "supply_base": 18000000,
+      "vat": 1800000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 18000000
+    },
+    "output": 1800000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "가상-C050-수납판매"
+    },
+    "output": {
+      "eligible_gross": 19800000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-24",
+      "transaction_id": "가상-C050-진열표지"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C050-진열표지"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C050-진열표지",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 100000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-17",
+      "transaction_id": "가상-C050-집보관함"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1210000,
+      "includes_vat": true,
+      "transaction_id": "가상-C050-집보관함"
+    },
+    "output": {
+      "gross": 1210000,
+      "supply_base": 1100000,
+      "vat": 110000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "가상-C050-집보관함",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 110000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-12",
+      "transaction_id": "가상-C050-판매재고"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 7000000,
+      "includes_vat": false,
+      "transaction_id": "가상-C050-판매재고"
+    },
+    "output": {
+      "gross": 7700000,
+      "supply_base": 7000000,
+      "vat": 700000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "가상-C050-판매재고",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 700000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 1000000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 19800000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 257400,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 257400
+    },
+    "output": 257400,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 257400,
+      "liability_before_credit": 1000000
+    },
+    "output": 257400,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 1100000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 742600,
+      "prepaid_assessed_vat": 1100000
+    },
+    "output": -357400,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 800000,
+      "output_vat": 1800000,
+      "prepaid_vat": 1100000,
+      "receipt_credit": 257400
+    },
+    "output": {
+      "deductible_input_vat": 800000,
+      "input_vat": 910000,
+      "net_vat": -357400,
+      "noncreditable_vat": 110000,
+      "output_vat": 1800000,
+      "payable_vat": 0,
+      "prepaid_vat": 1100000,
+      "receipt_credit": 257400,
+      "refund_vat": 357400,
+      "tax_base": 18000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

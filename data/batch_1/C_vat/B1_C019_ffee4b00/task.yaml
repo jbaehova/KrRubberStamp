@@ -1,0 +1,50 @@
+task_id: B1_C019_ffee4b00
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상접는마당의 영업팀은 주문 접수월로 판매표를 만들었습니다. 공급 완료서를 읽어 이번 상반기에 포함할 실제 거래 수(unique_transaction_count)와
+  매출 공급가액(tax_base)을 확인해 주세요. 매출세액(output_vat)과 영수증 발행세액공제(receipt_credit)를 반영한 납부액(payable_vat)을
+  answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_마당매장_범위.hwpx
+  format: hwpx
+- path: inputs/02_사업장_기초.pdf
+  format: pdf
+- path: inputs/03_접이의자_인도.xlsx
+  format: xlsx
+- path: inputs/04_등받이의자_완료.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - tax_base
+  - output_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-964dde97-69fc-5f37-a432-34ca5c3736ea
+scenario_seed: 18441759991147304256
+scenario_hash: 9bd961a658ee02114966e5c6ef820c0a9e6044d072826db6d93f9c1cbb108da1
+authorship:
+  method: individually_written
+  case_id: C019
+  case_sha256: ffee4b00d9589540824a4690436232a09ddb279f076b3ca16185ff347527f45b
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- unique_transaction_count
+- tax_base
+- output_vat
+- receipt_credit
+- payable_vat

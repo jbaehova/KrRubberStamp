@@ -1,0 +1,229 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-02-23",
+          "document_id": "CAMSTORE-0223-A",
+          "event": "received",
+          "event_id": "e89a",
+          "location": "카메라 보관 선반"
+        },
+        {
+          "date": "2026-03-06",
+          "document_id": "CAMSTORE-0306-B",
+          "event": "received",
+          "event_id": "e89b",
+          "location": "추가 보관 선반"
+        },
+        {
+          "date": "2026-03-11",
+          "document_id": "CAMSTORE-0311-C",
+          "event": "received",
+          "event_id": "e89c",
+          "location": "보관실 방습함"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-02-23",
+          "document_id": "CAMSTORE-0223-A",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h89a",
+          "vendor": "가상카메라보관"
+        },
+        {
+          "date": "2026-03-06",
+          "document_id": "CAMSTORE-0306-B",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h89b",
+          "vendor": "가상카메라보관"
+        },
+        {
+          "date": "2026-02-23",
+          "document_id": "CAMSTORE-0223-A",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h89copy",
+          "vendor": "가상카메라보관"
+        },
+        {
+          "date": "2026-03-11",
+          "document_id": "CAMSTORE-0311-C",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "h89c",
+          "vendor": "가상습기보관"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "h89a",
+          "items": [
+            {
+              "name": "렌즈보관칸막이",
+              "quantity": 12,
+              "unit_price": 4200
+            }
+          ],
+          "sheet_id": "s89a"
+        },
+        {
+          "header_record_id": "h89b",
+          "items": [
+            {
+              "name": "렌즈보관칸막이",
+              "quantity": 8,
+              "unit_price": 4400
+            }
+          ],
+          "sheet_id": "s89b"
+        },
+        {
+          "header_record_id": "h89copy",
+          "items": [
+            {
+              "name": "렌즈보관칸막이",
+              "quantity": 12,
+              "unit_price": 4200
+            }
+          ],
+          "sheet_id": "s89copy"
+        },
+        {
+          "header_record_id": "h89c",
+          "items": [
+            {
+              "name": "보관함방습제",
+              "quantity": 20,
+              "unit_price": 1800
+            }
+          ],
+          "sheet_id": "s89c"
+        }
+      ],
+      "processing_policy": "모든 원자료 표지에 header_record_id로 품목표를 연결한다. invoice나 order는 document_id의 received 기록이 있어야 실제 인수에 포함한다. quote, 인수 기록 없는 자료 및 출고 전 취소 기록은 제외한다. 같은 document_id의 동일 내용은 한 번만 집계한다. 포함 품목 총액의 10/11 원 미만 버림이 공급가액이고 차액이 부가세다. 별도 공급가액은 단가 곱하기 수량이고 품목별 그 10% 원 미만 버림이 부가세다. 업체와 품목은 NFKC 후 공백 제거 및 영문 소문자화하며 업체의 주식회사, (주), ㈜를 제거한다. 업체 배열 및 품목 배열은 해당 정규화 이름 오름차순이다. 동일 규격 개당 공급가액 단가를 비교하고 포함 비교 단가는 기재 단가의 10/11 원 미만 버림이다. 최저 단가가 같으면 정규화 업체명 오름차순 첫 업체를 고른다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 4,
+      "received_document_ids": [
+        "CAMSTORE-0223-A",
+        "CAMSTORE-0306-B",
+        "CAMSTORE-0311-C"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "CAMSTORE-0223-A",
+      "includes_vat": false,
+      "quantity": 12,
+      "unit_price": 4200
+    },
+    "output": {
+      "supply": 50400,
+      "total": 55440,
+      "vat": 5040
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상카메라보관"
+    },
+    "output": "가상카메라보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CAMSTORE-0306-B",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 4400
+    },
+    "output": {
+      "supply": 35200,
+      "total": 38720,
+      "vat": 3520
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상카메라보관"
+    },
+    "output": "가상카메라보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "CAMSTORE-0223-A"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "CAMSTORE-0311-C",
+      "includes_vat": false,
+      "quantity": 20,
+      "unit_price": 1800
+    },
+    "output": {
+      "supply": 36000,
+      "total": 39600,
+      "vat": 3600
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상습기보관"
+    },
+    "output": "가상습기보관",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "렌즈보관칸막이",
+          "unit_price": 4200,
+          "vendor": "가상카메라보관"
+        },
+        {
+          "item": "보관함방습제",
+          "unit_price": 1800,
+          "vendor": "가상습기보관"
+        }
+      ],
+      "grand_total": 133760,
+      "supply_total": 121600,
+      "unique_document_count": 3,
+      "vat_total": 12160,
+      "vendor_totals": [
+        {
+          "supply": 36000,
+          "total": 39600,
+          "vat": 3600,
+          "vendor": "가상습기보관"
+        },
+        {
+          "supply": 85600,
+          "total": 94160,
+          "vat": 8560,
+          "vendor": "가상카메라보관"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

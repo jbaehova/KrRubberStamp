@@ -1,0 +1,49 @@
+task_id: B1_B076_90506837
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상네모자료보관소의 월 중 채용 직원에게 당월분으로 합의한 정액 급여를 지급합니다. 지급 약정은 이미 확정된 금액이므로 다시
+  일할 계산하지 말고 총지급액을 구해 주세요. 첫 달 기관별 부과 상태를 읽어 국민연금, 건강보험과 고용보험 부담액 및 실지급액을 마감합니다.
+input_files:
+- path: inputs/01_첫달지급합의.hwpx
+  format: hwpx
+- path: inputs/02_연금건강통지.pdf
+  format: pdf
+- path: inputs/03_고용근태.xlsx
+  format: xlsx
+- path: inputs/04_채용월세액.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    gross_pay:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    employment_insurance:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - gross_pay
+  - national_pension
+  - health_insurance
+  - employment_insurance
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-ea777d0f-91d9-580f-8c0b-badf75622360
+scenario_seed: 10398926126238945549
+scenario_hash: 11f4bd0c0a9b0618a32c63499c68377928312bb248bdcdda6d8f67a959035c4d
+authorship:
+  method: individually_written
+  case_id: B076
+  case_sha256: 905068374800510dc2d4d7409e88d966f67b856fdecca3205badcedbd268c0ac
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- gross_pay
+- national_pension
+- health_insurance
+- employment_insurance
+- net_pay

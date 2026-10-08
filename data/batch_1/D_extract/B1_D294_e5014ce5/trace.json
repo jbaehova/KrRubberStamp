@@ -1,0 +1,269 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-03-17",
+          "document_id": "HELMET-LINER-27",
+          "event": "received",
+          "event_id": "HELMET-LINER-IN",
+          "location": "대여헬멧관리실"
+        },
+        {
+          "date": "2026-03-17",
+          "document_id": "HELMET-SPRAY-28",
+          "event": "received",
+          "event_id": "HELMET-SPRAY-IN",
+          "location": "대여헬멧관리실"
+        },
+        {
+          "date": "2026-03-18",
+          "document_id": "HELMET-HOOK-29",
+          "event": "received",
+          "event_id": "HELMET-HOOK-IN",
+          "location": "대여헬멧관리실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-03-13",
+          "document_id": "HELMET-LINER-27",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "HELMET-LINER-O",
+          "vendor": "가상헬멧위생"
+        },
+        {
+          "date": "2026-03-13",
+          "document_id": "HELMET-LINER-27",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "HELMET-LINER-R",
+          "vendor": "가상헬멧위생"
+        },
+        {
+          "date": "2026-03-14",
+          "document_id": "HELMET-SPRAY-28",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "HELMET-SPRAY-H",
+          "vendor": "가상위생분무"
+        },
+        {
+          "date": "2026-03-14",
+          "document_id": "HELMET-HOOK-29",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "HELMET-HOOK-H",
+          "vendor": "가상건조걸이"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "HELMET-LINER-O",
+          "items": [
+            {
+              "name": "헬멧내피M",
+              "quantity": 18,
+              "unit_price": 4180
+            },
+            {
+              "name": "헬멧내피L",
+              "quantity": 12,
+              "unit_price": 4400
+            }
+          ],
+          "sheet_id": "HELMET-LINER-O-L"
+        },
+        {
+          "header_record_id": "HELMET-LINER-R",
+          "items": [
+            {
+              "name": "헬멧내피M",
+              "quantity": 18,
+              "unit_price": 4180
+            },
+            {
+              "name": "헬멧내피L",
+              "quantity": 12,
+              "unit_price": 4400
+            }
+          ],
+          "sheet_id": "HELMET-LINER-R-L"
+        },
+        {
+          "header_record_id": "HELMET-SPRAY-H",
+          "items": [
+            {
+              "name": "살균분무기500",
+              "quantity": 6,
+              "unit_price": 7300
+            }
+          ],
+          "sheet_id": "HELMET-SPRAY-L"
+        },
+        {
+          "header_record_id": "HELMET-HOOK-H",
+          "items": [
+            {
+              "name": "헬멧건조걸이",
+              "quantity": 15,
+              "unit_price": 3190
+            }
+          ],
+          "sheet_id": "HELMET-HOOK-L"
+        }
+      ],
+      "processing_policy": "품목 header_record_id를 표지 record_id와 연결한다. invoice 또는 order 중 document_id에 received가 있는 원문만 구매다. document_id와 연결한 내용이 같은 재발급은 한 번 합한다. 포함 행 금액 10/11의 원 미만을 버려 공급가액을 계산하며 차액이 세액이다. 별도 행 공급가액 10%의 원 미만을 버린 세액을 더한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 4,
+      "received_document_ids": [
+        "HELMET-HOOK-29",
+        "HELMET-LINER-27",
+        "HELMET-SPRAY-28"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "HELMET-LINER-27",
+      "includes_vat": true,
+      "quantity": 18,
+      "unit_price": 4180
+    },
+    "output": {
+      "supply": 68400,
+      "total": 75240,
+      "vat": 6840
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "HELMET-LINER-27",
+      "includes_vat": true,
+      "quantity": 12,
+      "unit_price": 4400
+    },
+    "output": {
+      "supply": 48000,
+      "total": 52800,
+      "vat": 4800
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상헬멧위생"
+    },
+    "output": "가상헬멧위생",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "HELMET-LINER-27"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "HELMET-SPRAY-28",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 7300
+    },
+    "output": {
+      "supply": 43800,
+      "total": 48180,
+      "vat": 4380
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상위생분무"
+    },
+    "output": "가상위생분무",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "HELMET-HOOK-29",
+      "includes_vat": true,
+      "quantity": 15,
+      "unit_price": 3190
+    },
+    "output": {
+      "supply": 43500,
+      "total": 47850,
+      "vat": 4350
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상건조걸이"
+    },
+    "output": "가상건조걸이",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 3
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "살균분무기500",
+          "unit_price": 7300,
+          "vendor": "가상위생분무"
+        },
+        {
+          "item": "헬멧건조걸이",
+          "unit_price": 2900,
+          "vendor": "가상건조걸이"
+        },
+        {
+          "item": "헬멧내피l",
+          "unit_price": 4000,
+          "vendor": "가상헬멧위생"
+        },
+        {
+          "item": "헬멧내피m",
+          "unit_price": 3800,
+          "vendor": "가상헬멧위생"
+        }
+      ],
+      "grand_total": 224070,
+      "supply_total": 203700,
+      "unique_document_count": 3,
+      "vat_total": 20370,
+      "vendor_totals": [
+        {
+          "supply": 43500,
+          "total": 47850,
+          "vat": 4350,
+          "vendor": "가상건조걸이"
+        },
+        {
+          "supply": 43800,
+          "total": 48180,
+          "vat": 4380,
+          "vendor": "가상위생분무"
+        },
+        {
+          "supply": 116400,
+          "total": 128040,
+          "vat": 11640,
+          "vendor": "가상헬멧위생"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

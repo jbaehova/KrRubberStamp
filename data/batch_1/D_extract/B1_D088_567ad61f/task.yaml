@@ -1,0 +1,51 @@
+task_id: B1_D088_567ad61f
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 잠금 부품의 긴급 재구매 자료가 필요합니다. cheapest_by_item과 기존 집행액 grand_total을 보내 주세요.
+  동일 가격 후보의 선택 및 금액 기준은 회의동 인수 대장에 있습니다.
+input_files:
+- path: inputs/01_사무동.pdf
+  format: pdf
+- path: inputs/02_회의동.xlsx
+  format: xlsx
+- path: inputs/03_창고동.hwpx
+  format: hwpx
+- path: inputs/04_상담동.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-f5a347c4-1aec-5612-95ff-17a2f954a2a7
+scenario_seed: 6231528463880541224
+scenario_hash: 7162fb09c6b697e209d1d14a6e17c6ea08044413707304b856ca20b7730dd02e
+authorship:
+  method: individually_written
+  case_id: D088
+  case_sha256: 567ad61f3155d428c59ef7a936074a810cdec2361f75663f44e396afb0324d3e
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- cheapest_by_item
+- grand_total

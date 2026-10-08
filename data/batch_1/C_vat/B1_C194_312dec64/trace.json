@@ -1,0 +1,399 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "손잡이수령",
+          "date": "2026-04-14",
+          "description": "판매용 손잡이 인수",
+          "document_ids": [
+            "손잡이카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "생활 용품 창고"
+          },
+          "operation_id": "생활판매",
+          "participants": [
+            {
+              "name": "가상황생활",
+              "organization": "가상도어생활",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C194-손잡이"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "받침수령",
+          "date": "2026-05-03",
+          "description": "판매용 받침 인수",
+          "document_ids": [
+            "받침현금"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "생활 용품 창고"
+          },
+          "operation_id": "생활판매",
+          "participants": [
+            {
+              "name": "가상황생활",
+              "organization": "가상도어생활",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C194-받침"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 생활 용품 판매",
+          "operation_id": "생활판매",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "손잡이수령",
+          "date": "2026-04-14",
+          "document_id": "손잡이카드",
+          "transaction_id": "C194-손잡이"
+        },
+        {
+          "activity_id": "받침수령",
+          "date": "2026-05-03",
+          "document_id": "받침현금",
+          "transaction_id": "C194-받침"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "손잡이카드",
+        "purpose": "business",
+        "transaction_id": "C194-손잡이"
+      },
+      {
+        "business_related": true,
+        "document_id": "받침현금",
+        "purpose": "business",
+        "transaction_id": "C194-받침"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "받침현금"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "C194-받침"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "손잡이카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C194-손잡이"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "판매카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C194-카드판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "판매현금"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "C194-현금판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-03",
+      "transaction_id": "C194-받침"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2750000,
+      "includes_vat": true,
+      "transaction_id": "C194-받침"
+    },
+    "output": {
+      "gross": 2750000,
+      "supply_base": 2500000,
+      "vat": 250000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C194-받침",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 250000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-14",
+      "transaction_id": "C194-손잡이"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1760000,
+      "includes_vat": true,
+      "transaction_id": "C194-손잡이"
+    },
+    "output": {
+      "gross": 1760000,
+      "supply_base": 1600000,
+      "vat": 160000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C194-손잡이",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 160000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-29",
+      "transaction_id": "C194-카드판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 9900000,
+      "includes_vat": true,
+      "transaction_id": "C194-카드판매"
+    },
+    "output": {
+      "gross": 9900000,
+      "supply_base": 9000000,
+      "vat": 900000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 9000000
+    },
+    "output": 900000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C194-카드판매"
+    },
+    "output": {
+      "eligible_gross": 9900000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-17",
+      "transaction_id": "C194-현금판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3300000,
+      "includes_vat": true,
+      "transaction_id": "C194-현금판매"
+    },
+    "output": {
+      "gross": 3300000,
+      "supply_base": 3000000,
+      "vat": 300000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 3000000
+    },
+    "output": 300000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C194-현금판매"
+    },
+    "output": {
+      "eligible_gross": 3300000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 931000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 13200000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 171600,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 9890000,
+      "annual_limit": 10000000,
+      "raw_credit": 171600
+    },
+    "output": 110000,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 110000,
+      "liability_before_credit": 950000
+    },
+    "output": 110000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 840000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 840000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 250000,
+      "output_vat": 1200000,
+      "prepaid_vat": 0,
+      "receipt_credit": 110000
+    },
+    "output": {
+      "deductible_input_vat": 250000,
+      "input_vat": 410000,
+      "net_vat": 840000,
+      "noncreditable_vat": 160000,
+      "output_vat": 1200000,
+      "payable_vat": 840000,
+      "prepaid_vat": 0,
+      "receipt_credit": 110000,
+      "refund_vat": 0,
+      "tax_base": 12000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

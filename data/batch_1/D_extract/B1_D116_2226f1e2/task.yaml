@@ -1,0 +1,50 @@
+task_id: B1_D116_2226f1e2
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 로봇 조립 교실 물품의 vendor_totals와 grand_total을 지급 예정표에 적어 주세요. 회차별 명세는 실제 인수
+  자료입니다.
+input_files:
+- path: inputs/01_첫회차인수.hwpx
+  format: hwpx
+- path: inputs/02_둘째회차인수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - vendor_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-c7d3024f-f38c-5ef3-8dc7-3ec3c77eafda
+scenario_seed: 2460920199640573198
+scenario_hash: 52e63407da0e2ce065a0998066c0bee4fc9e1d45203117e4af04be34979b6d5a
+authorship:
+  method: individually_written
+  case_id: D116
+  case_sha256: 2226f1e21028e50ed2e26a8328281dce548e4fef38c68c00f3303cd31f13efee
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals
+- grand_total

@@ -1,0 +1,57 @@
+task_id: B1_C048_8e9c497e
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상꼼꼼수리는 두 식당 전표와 공구 카드 전표를 함께 보냈습니다. 참석자와 실제 사용 기록을 읽고 공급자의 자격을 확인해 주세요.
+  매입세액(input_vat)을 공제불가 세액(noncreditable_vat)과 공제가능 매입세액(deductible_input_vat)으로 나눈
+  뒤 납부액(payable_vat)을 answer.json에 정수로 적어 주세요.
+input_files:
+- path: inputs/01_수리업_의뢰.hwpx
+  format: hwpx
+- path: inputs/02_전년_기초.pdf
+  format: pdf
+- path: inputs/03_선납_확인.xlsx
+  format: xlsx
+- path: inputs/04_작업대_수리.pdf
+  format: pdf
+- path: inputs/05_직원_점심.xlsx
+  format: xlsx
+- path: inputs/06_상담_저녁.pdf
+  format: pdf
+- path: inputs/07_공구_공급자.pdf
+  format: pdf
+- path: inputs/08_참석과_수령.hwpx
+  format: hwpx
+- path: inputs/09_식당전표_사진.png
+  format: png
+  duplicate_of: inputs/06_상담_저녁.pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-15cb59d2-de49-5fba-8504-0927f33be36e
+scenario_seed: 10276169256391772867
+scenario_hash: f42a0cbfa3672cdff04ff0cc29f0d47bb1749613707a0d07965422c92ab724b1
+authorship:
+  method: individually_written
+  case_id: C048
+  case_sha256: 8e9c497e43058ac33c56eb1efddff423580017fd56bc68e4dabd4fa521e056c0
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- payable_vat

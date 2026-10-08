@@ -1,0 +1,45 @@
+task_id: B1_A278_31077d1e
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상보름달와이어의 가상한도율 배우자 자료를 다시 확인해 주세요. 배우자는 근로소득만 있지만 총급여가 오백만 원을 넘었습니다.
+  가족 기본공제와 배우자 보험 및 치료비 공제액을 각각 계산해 회신해 주세요.
+input_files:
+- path: inputs/01_배우자소득.xlsx
+  format: xlsx
+- path: inputs/02_부양배정.hwpx
+  format: hwpx
+- path: inputs/03_배우자보험.pdf
+  format: pdf
+- path: inputs/04_배우자치료.xlsx
+  format: xlsx
+- path: inputs/05_직원급여.pdf
+  format: pdf
+- path: inputs/06_신청확정.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - insurance_credit
+  - medical_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-042f7a71-1b7d-5f4d-acaa-27530164e199
+scenario_seed: 3532930004483746639
+scenario_hash: b6f7574ec28d53d05e240d35cf94c704a891415537419803e1bf683cfd1972b8
+authorship:
+  method: individually_written
+  case_id: A278
+  case_sha256: 31077d1eed92ab4f64f79addccf13bb9b4617552675e8aa777fe659462da8b18
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- eligible_dependents
+- insurance_credit
+- medical_credit

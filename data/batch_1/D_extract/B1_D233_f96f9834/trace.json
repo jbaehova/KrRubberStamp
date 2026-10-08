@@ -1,0 +1,141 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-05-10",
+          "document_id": "BAKERY-PAN-8",
+          "event": "received",
+          "event_id": "BAKERY-PAN-IN",
+          "location": "제빵실도구장"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-05-08",
+          "document_id": "BAKERY-PAN-8",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "BAKERY-PAN-C",
+          "vendor": "가상팬공급"
+        },
+        {
+          "date": "2026-05-13",
+          "document_id": "BAKERY-PAN-13",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "BAKERY-NEW-C",
+          "vendor": "가상오븐도구"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "BAKERY-PAN-C",
+          "items": [
+            {
+              "name": "제빵팬46",
+              "quantity": 6,
+              "unit_price": 18300
+            },
+            {
+              "name": "제빵팬덮개46",
+              "quantity": 6,
+              "unit_price": 7400
+            }
+          ],
+          "sheet_id": "BAKERY-PAN-L"
+        },
+        {
+          "header_record_id": "BAKERY-NEW-C",
+          "items": [
+            {
+              "name": "제빵팬46",
+              "quantity": 6,
+              "unit_price": 16900
+            }
+          ],
+          "sheet_id": "BAKERY-NEW-L"
+        }
+      ],
+      "processing_policy": "header_record_id로 품목표를 표지에 연결한다. invoice 또는 order 번호에 received가 있어야 실제 구매다. 별도 단가는 공급가액이며 행 공급가액의 10%에서 원 미만을 버려 세액을 더한다. 품목 및 업체는 NFKC 후 공백 제거 및 영문 소문자로 정리하고 법인 표기를 제거한다. 이름 순으로 배열하고 가격 동률이면 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "BAKERY-PAN-13"
+      ],
+      "joined_document_records_before_deduplication": 1,
+      "received_document_ids": [
+        "BAKERY-PAN-8"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "BAKERY-PAN-8",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 18300
+    },
+    "output": {
+      "supply": 109800,
+      "total": 120780,
+      "vat": 10980
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "BAKERY-PAN-8",
+      "includes_vat": false,
+      "quantity": 6,
+      "unit_price": 7400
+    },
+    "output": {
+      "supply": 44400,
+      "total": 48840,
+      "vat": 4440
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상팬공급"
+    },
+    "output": "가상팬공급",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 1
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "제빵팬46",
+          "unit_price": 18300,
+          "vendor": "가상팬공급"
+        },
+        {
+          "item": "제빵팬덮개46",
+          "unit_price": 7400,
+          "vendor": "가상팬공급"
+        }
+      ],
+      "grand_total": 169620,
+      "supply_total": 154200,
+      "unique_document_count": 1,
+      "vat_total": 15420,
+      "vendor_totals": [
+        {
+          "supply": 154200,
+          "total": 169620,
+          "vat": 15420,
+          "vendor": "가상팬공급"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

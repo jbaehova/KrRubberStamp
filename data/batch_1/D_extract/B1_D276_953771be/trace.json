@@ -1,0 +1,185 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-04-10",
+          "document_id": "MUSEUM-TICKET-31",
+          "event": "received",
+          "event_id": "MUSEUM-GROSS-IN",
+          "location": "박물관발권실"
+        },
+        {
+          "date": "2026-04-11",
+          "document_id": "MUSEUM-RIBBON-32",
+          "event": "received",
+          "event_id": "MUSEUM-NET-IN",
+          "location": "박물관발권실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-04-08",
+          "document_id": "MUSEUM-TICKET-31",
+          "kind": "invoice",
+          "price_includes_vat": true,
+          "record_id": "MUSEUM-GROSS-H",
+          "vendor": "가상입장인쇄재"
+        },
+        {
+          "date": "2026-04-09",
+          "document_id": "MUSEUM-RIBBON-32",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "MUSEUM-NET-H",
+          "vendor": "가상표권소모품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "MUSEUM-GROSS-H",
+          "items": [
+            {
+              "name": "입장권롤60",
+              "quantity": 23,
+              "unit_price": 1012
+            }
+          ],
+          "sheet_id": "MUSEUM-PAPER-L"
+        },
+        {
+          "header_record_id": "MUSEUM-NET-H",
+          "items": [
+            {
+              "name": "프린터리본R2",
+              "quantity": 2,
+              "unit_price": 9900
+            }
+          ],
+          "sheet_id": "MUSEUM-RIBBON-L"
+        },
+        {
+          "header_record_id": "MUSEUM-GROSS-H",
+          "items": [
+            {
+              "name": "프린터청소카드",
+              "quantity": 5,
+              "unit_price": 1540
+            }
+          ],
+          "sheet_id": "MUSEUM-CLEAN-L"
+        }
+      ],
+      "processing_policy": "line_sheets.header_record_id를 headers.record_id에 연결하고 동일 표지의 모든 별첨을 모은다. invoice 또는 order의 document_id에 received가 있는 원문만 실제 구매다. 가격 조건은 연결한 표지의 price_includes_vat를 사용한다. 포함 행 금액의 10/11에서 원 미만을 버린 공급가액과 차액 세액을 기록한다. 별도 행 세액은 공급가액 10%의 원 미만을 버린 값이다. 서로 다른 원문 번호는 독립 구매다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [],
+      "joined_document_records_before_deduplication": 2,
+      "received_document_ids": [
+        "MUSEUM-RIBBON-32",
+        "MUSEUM-TICKET-31"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "MUSEUM-TICKET-31",
+      "includes_vat": true,
+      "quantity": 23,
+      "unit_price": 1012
+    },
+    "output": {
+      "supply": 21160,
+      "total": 23276,
+      "vat": 2116
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "MUSEUM-TICKET-31",
+      "includes_vat": true,
+      "quantity": 5,
+      "unit_price": 1540
+    },
+    "output": {
+      "supply": 7000,
+      "total": 7700,
+      "vat": 700
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상입장인쇄재"
+    },
+    "output": "가상입장인쇄재",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "MUSEUM-RIBBON-32",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 9900
+    },
+    "output": {
+      "supply": 19800,
+      "total": 21780,
+      "vat": 1980
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상표권소모품"
+    },
+    "output": "가상표권소모품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "입장권롤60",
+          "unit_price": 920,
+          "vendor": "가상입장인쇄재"
+        },
+        {
+          "item": "프린터리본r2",
+          "unit_price": 9900,
+          "vendor": "가상표권소모품"
+        },
+        {
+          "item": "프린터청소카드",
+          "unit_price": 1400,
+          "vendor": "가상입장인쇄재"
+        }
+      ],
+      "grand_total": 52756,
+      "supply_total": 47960,
+      "unique_document_count": 2,
+      "vat_total": 4796,
+      "vendor_totals": [
+        {
+          "supply": 28160,
+          "total": 30976,
+          "vat": 2816,
+          "vendor": "가상입장인쇄재"
+        },
+        {
+          "supply": 19800,
+          "total": 21780,
+          "vat": 1980,
+          "vendor": "가상표권소모품"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

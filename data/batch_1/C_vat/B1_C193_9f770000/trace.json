@@ -1,0 +1,436 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "직원식사",
+          "date": "2026-05-02",
+          "description": "직원들의 작업일 식사",
+          "document_ids": [
+            "직원카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상음향식당"
+          },
+          "operation_id": "음향수리",
+          "participants": [
+            {
+              "name": "가상추수리",
+              "organization": "가상음향수리",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C193-직원식대"
+        },
+        {
+          "action": "meal",
+          "activity_id": "고객식사",
+          "date": "2026-05-09",
+          "description": "발주 고객과 작업 직원이 같이 식사했다.",
+          "document_ids": [
+            "협업카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상음향식당"
+          },
+          "operation_id": "음향수리",
+          "participants": [
+            {
+              "name": "가상추수리",
+              "organization": "가상음향수리",
+              "role": "employee"
+            },
+            {
+              "name": "가상최발주",
+              "organization": "가상공연발주",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "C193-협업식대"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "부품인수",
+          "date": "2026-04-22",
+          "description": "수리용 부품을 창고에 받았다.",
+          "document_ids": [
+            "부품현금"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "음향 수리 창고"
+          },
+          "operation_id": "음향수리",
+          "participants": [
+            {
+              "name": "가상추수리",
+              "organization": "가상음향수리",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "C193-부품"
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 음향 장치 수리",
+          "operation_id": "음향수리",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "직원식사",
+          "date": "2026-05-02",
+          "document_id": "직원카드",
+          "transaction_id": "C193-직원식대"
+        },
+        {
+          "activity_id": "고객식사",
+          "date": "2026-05-09",
+          "document_id": "협업카드",
+          "transaction_id": "C193-협업식대"
+        },
+        {
+          "activity_id": "부품인수",
+          "date": "2026-04-22",
+          "document_id": "부품현금",
+          "transaction_id": "C193-부품"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "직원카드",
+        "purpose": "business",
+        "transaction_id": "C193-직원식대"
+      },
+      {
+        "business_related": true,
+        "document_id": "협업카드",
+        "purpose": "hospitality",
+        "transaction_id": "C193-협업식대"
+      },
+      {
+        "business_related": true,
+        "document_id": "부품현금",
+        "purpose": "business",
+        "transaction_id": "C193-부품"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "부품현금"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "C193-부품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "직원카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C193-직원식대"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "수리카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C193-카드수리"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "협업카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "C193-협업식대"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-22",
+      "transaction_id": "C193-부품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2090000,
+      "includes_vat": true,
+      "transaction_id": "C193-부품"
+    },
+    "output": {
+      "gross": 2090000,
+      "supply_base": 1900000,
+      "vat": 190000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C193-부품",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 190000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-02",
+      "transaction_id": "C193-직원식대"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "C193-직원식대"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "C193-직원식대",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 100000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-07",
+      "transaction_id": "C193-카드수리"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3300000,
+      "includes_vat": true,
+      "transaction_id": "C193-카드수리"
+    },
+    "output": {
+      "gross": 3300000,
+      "supply_base": 3000000,
+      "vat": 300000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 3000000
+    },
+    "output": 300000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "C193-카드수리"
+    },
+    "output": {
+      "eligible_gross": 3300000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-09",
+      "transaction_id": "C193-협업식대"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 132000,
+      "includes_vat": true,
+      "transaction_id": "C193-협업식대"
+    },
+    "output": {
+      "gross": 132000,
+      "supply_base": 120000,
+      "vat": 12000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "C193-협업식대",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 12000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 245000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 3300000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 42900,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 42900
+    },
+    "output": 42900,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 42900,
+      "liability_before_credit": 10000
+    },
+    "output": 10000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 600000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 600000
+    },
+    "output": -600000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 290000,
+      "output_vat": 300000,
+      "prepaid_vat": 600000,
+      "receipt_credit": 10000
+    },
+    "output": {
+      "deductible_input_vat": 290000,
+      "input_vat": 302000,
+      "net_vat": -600000,
+      "noncreditable_vat": 12000,
+      "output_vat": 300000,
+      "payable_vat": 0,
+      "prepaid_vat": 600000,
+      "receipt_credit": 10000,
+      "refund_vat": 600000,
+      "tax_base": 3000000,
+      "unique_transaction_count": 4
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

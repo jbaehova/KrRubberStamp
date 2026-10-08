@@ -1,0 +1,45 @@
+task_id: B1_B085_bf44693a
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상그루분석센터의 월 과세급여가 고액 구간 경계에 해당합니다. 일반 표의 마지막 행을 그대로 쓰지 말고 천만원 기준 가족 세액과
+  첨부 고액 산식으로 소득세 및 지방소득세를 구해 주세요. 과세급여와 실지급액도 함께 적어 경리 결재에 올립니다.
+input_files:
+- path: inputs/01_고액급여.pdf
+  format: pdf
+- path: inputs/02_고액공단.hwpx
+  format: hwpx
+- path: inputs/03_고액가족근태.xlsx
+  format: xlsx
+- path: inputs/04_2800경계산식.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-06e3ae41-2186-57b3-a9c8-3a09ec4a3dd9
+scenario_seed: 13782256458627757882
+scenario_hash: 4c005e46d4dce4bcfde317f4e8d84982ba220d24133845482461acc7957239e0
+authorship:
+  method: individually_written
+  case_id: B085
+  case_sha256: bf44693a43d7373a957ace58150c87fcfeb90059799193e2ca2665e13e4efce6
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- taxable_pay
+- income_tax
+- local_income_tax
+- net_pay

@@ -1,0 +1,82 @@
+task_id: B1_D245_f2ab92c3
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 침구 보강품의 업체 계정과 다음 구입 가격표를 결산해 주세요. vendor_totals와 cheapest_by_item 및
+  vat_total을 제출해 주세요.
+input_files:
+- path: inputs/01_침구첫표지.pdf
+  format: pdf
+- path: inputs/02_커버부속.xlsx
+  format: xlsx
+- path: inputs/03_베개부속.hwpx
+  format: hwpx
+- path: inputs/04_침구후속청구.pdf
+  format: pdf
+- path: inputs/05_다른직물표지.xlsx
+  format: xlsx
+- path: inputs/06_다른직물품목.hwpx
+  format: hwpx
+- path: inputs/07_첫린넨인수.pdf
+  format: pdf
+- path: inputs/08_후속린넨인수.xlsx
+  format: xlsx
+- path: inputs/09_대체린넨인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    vat_total:
+      type: integer
+  required:
+  - vendor_totals
+  - cheapest_by_item
+  - vat_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-840e164a-b8dc-5ae8-8d9e-e58e575d0a13
+scenario_seed: 17486231344564621011
+scenario_hash: 037613fd23540f72f76ff28ea1b663784fbdd0bee7f89ea8a390dc4ebf86bfa2
+authorship:
+  method: individually_written
+  case_id: D245
+  case_sha256: f2ab92c309134ed3550995a29ed6fd5270c427c98da9d669b1a81a1526476bd6
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- vendor_totals
+- cheapest_by_item
+- vat_total

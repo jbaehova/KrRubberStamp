@@ -1,0 +1,43 @@
+task_id: B1_B063_f4320ef2
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상곁나무측정실에서 국민연금 신고액 원본을 급여 프로그램으로 옮기고 있습니다. 신고액의 천원 단수를 반영한 기준소득월액과 근로자
+  국민연금 부담액을 구해 주세요. 건강보험과 장기요양 부담액도 원본의 별도 보수월액에서 계산하여 함께 대조합니다.
+input_files:
+- path: inputs/01_측정직급여.pdf
+  format: pdf
+- path: inputs/02_신고원본.xlsx
+  format: xlsx
+- path: inputs/03_신고단수규정.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    pension_base_income:
+      type: integer
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+  required:
+  - pension_base_income
+  - national_pension
+  - health_insurance
+  - long_term_care
+  additionalProperties: false
+canary: KrRubberStamp-canary-5e7f15e4-746a-5472-9c41-947230b0ead4
+scenario_seed: 17596143130562516333
+scenario_hash: f959be9f0f06b3e5c609c86efdfda7c1f5d0ec741674f5aaac951ca85c4675bd
+authorship:
+  method: individually_written
+  case_id: B063
+  case_sha256: f4320ef2ea1bd56d496dbe27b39cb76500b4dcc099280c9080a0c8d5709e38d4
+  source_file: batch_1/B_payroll/cases_054_103.json
+answer_fields:
+- pension_base_income
+- national_pension
+- health_insurance
+- long_term_care

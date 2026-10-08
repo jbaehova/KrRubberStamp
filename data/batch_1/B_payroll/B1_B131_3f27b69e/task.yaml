@@ -1,0 +1,51 @@
+task_id: B1_B131_3f27b69e
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상동그란식탁사의 직원은 회사 배식을 제공받지만 현금 식대 항목도 있습니다. 실제 식사 제공 자료와 지급 계약을 대조하여 비과세
+  지급액과 과세급여를 계산해 주세요. 과세 원장에 넣을 소득세와 지방소득세도 구합니다. 통상임금에서는 정기 식대의 지급 조건을 그대로 적용합니다.
+input_files:
+- path: inputs/01_식탁임금.pdf
+  format: pdf
+- path: inputs/02_배식사실.hwpx
+  format: hwpx
+- path: inputs/03_식탁지급.xlsx
+  format: xlsx
+- path: inputs/04_식탁부과.pdf
+  format: pdf
+- path: inputs/05_배식공식.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-189472a9-a6a5-5fa3-9854-eb653a21692b
+scenario_seed: 4550806739980506182
+scenario_hash: 8721e2db423e44983c23eeb1da4ef1efa5ad1fcd094a949db98d98aad6a0275b
+authorship:
+  method: individually_written
+  case_id: B131
+  case_sha256: 3f27b69e69fdd446bc11d68691760e40809cccd84ca09e75f3ba73717bc34b53
+  source_file: batch_1/B_payroll/cases_104_153.json
+answer_fields:
+- ordinary_monthly_wage
+- non_taxable_pay
+- taxable_pay
+- income_tax
+- local_income_tax

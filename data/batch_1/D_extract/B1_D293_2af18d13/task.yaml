@@ -1,0 +1,61 @@
+task_id: B1_D293_2af18d13
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 목공 교육에 실제 구입한 클램프의 최저 공급가액 단가와 세금 제외 지출을 정리합니다. cheapest_by_item과 supply_total을
+  제출해 주세요.
+input_files:
+- path: inputs/01_첫클램프표지.pdf
+  format: pdf
+- path: inputs/02_보충표지.hwpx
+  format: hwpx
+- path: inputs/03_추가표지.pdf
+  format: pdf
+- path: inputs/04_첫클램프품목.xlsx
+  format: xlsx
+- path: inputs/05_보충품목.xlsx
+  format: xlsx
+- path: inputs/06_추가품목.xlsx
+  format: xlsx
+- path: inputs/07_첫인수.pdf
+  format: pdf
+- path: inputs/08_보충인수.hwpx
+  format: hwpx
+- path: inputs/09_추가취소.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-76a8c65d-6303-547e-8e6e-37bde3786ff4
+scenario_seed: 3094409532286308880
+scenario_hash: 6defc7a31c719932fed34f401e51feb2a57d541c5d70c909a0c03ea47b7b0e38
+authorship:
+  method: individually_written
+  case_id: D293
+  case_sha256: 2af18d1321821210d70c57ffa1ffc0cdcc6815f5f95b077ea4da85ca318c7773
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- cheapest_by_item
+- supply_total

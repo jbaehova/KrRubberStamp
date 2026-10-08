@@ -1,0 +1,54 @@
+task_id: B1_D138_3c50dcb7
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 등화 장비 구매의 vendor_totals와 supply_total을 확인해 주세요. 외부 명세와 내부 대장에 같은 자료가
+  함께 있으니 원문 번호 기준을 따릅니다.
+input_files:
+- path: inputs/01_스탠드명세.pdf
+  format: pdf
+- path: inputs/02_전구인수.hwpx
+  format: hwpx
+- path: inputs/03_케이블인수.pdf
+  format: pdf
+- path: inputs/04_내부구매대장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - vendor_totals
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-ffe9c91f-8566-547c-95df-679ea4d2d8ee
+scenario_seed: 4346216320851824194
+scenario_hash: 6d022edd12e36df26bf4fc26edcf7ccb909e6238e64fe7d3643c89149d550737
+authorship:
+  method: individually_written
+  case_id: D138
+  case_sha256: 3c50dcb77160ce425e7797356a789e3da7ff89c7f599ed4a572c0c9ca9639d6b
+  source_file: batch_1/D_extract/cases_104_153.json
+answer_fields:
+- vendor_totals
+- supply_total

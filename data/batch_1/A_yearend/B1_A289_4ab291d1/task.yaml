@@ -1,0 +1,55 @@
+task_id: B1_A289_4ab291d1
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상별무늬보온재의 가상여지온 가족 정산을 처리해 주세요. 두 자녀의 근로소득 확인 자료를 각각 읽고 기본공제 및 보험을 판단한
+  뒤 대학생 등록금의 장학금 차감액을 적용해 주세요. 가족 공제 인원과 보험 및 교육비와 의료비 공제액을 회신해 주세요.
+input_files:
+- path: inputs/01_가족관계배정.hwpx
+  format: hwpx
+- path: inputs/02_첫째소득.xlsx
+  format: xlsx
+- path: inputs/03_둘째소득.pdf
+  format: pdf
+- path: inputs/04_등록금총액.pdf
+  format: pdf
+- path: inputs/05_장학금확정.hwpx
+  format: hwpx
+- path: inputs/06_자녀보험.xlsx
+  format: xlsx
+- path: inputs/07_둘째진료.pdf
+  format: pdf
+- path: inputs/08_급여확정.xlsx
+  format: xlsx
+- path: inputs/09_접수요약.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    insurance_credit:
+      type: integer
+    education_credit:
+      type: integer
+    medical_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - insurance_credit
+  - education_credit
+  - medical_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-4bf396a6-6997-5d39-b718-1289d4695b79
+scenario_seed: 5382524833479429620
+scenario_hash: 3b3fef3fa10b1a8987ba690d5fa6326e4871daea666845565e4883f3b5f7312f
+authorship:
+  method: individually_written
+  case_id: A289
+  case_sha256: 4ab291d176428df4ccdac366f53c54d4f9b6e0e642a0b5485270c7544e52d4e0
+  source_file: batch_1/A_yearend/cases_254_300.json
+answer_fields:
+- eligible_dependents
+- insurance_credit
+- education_credit
+- medical_credit

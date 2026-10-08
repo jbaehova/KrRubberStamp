@@ -1,0 +1,41 @@
+task_id: B1_A220_47f983d2
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상새솔끈 가상배윤서의 배우자 신청을 확인해 주세요. 배우자 소득 자료와 본인이 낸 병원비 및 배우자 명의 공익기부를 대조해서
+  가족 기본공제와 의료비 및 기부금 공제액을 적어 주세요.
+input_files:
+- path: inputs/01_배우자소득.hwpx
+  format: hwpx
+- path: inputs/02_진료영수증.pdf
+  format: pdf
+- path: inputs/03_기부확인.xlsx
+  format: xlsx
+- path: inputs/04_직원정산.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    basic_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+    donation_credit:
+      type: integer
+  required:
+  - basic_deduction
+  - medical_credit
+  - donation_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-8cecae02-94d4-5543-ae73-3c079bbdd2c2
+scenario_seed: 5186321385167952533
+scenario_hash: 7b7af73f5fad5dbc1ac6e950a3a5d2410f2f25a165f512cfd836320799466057
+authorship:
+  method: individually_written
+  case_id: A220
+  case_sha256: 47f983d24df29a95878c287c3a14271a2064bb420be9a3bb0137e25e41e84d3a
+  source_file: batch_1/A_yearend/cases_204_253.json
+answer_fields:
+- basic_deduction
+- medical_credit
+- donation_credit

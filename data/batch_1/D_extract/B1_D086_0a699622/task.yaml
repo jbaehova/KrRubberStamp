@@ -1,0 +1,38 @@
+task_id: B1_D086_0a699622
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 운송 비품을 정산합니다. 표지와 품목표 및 촬영 자료를 연결해 grand_total과 unique_document_count를
+  답하세요. 인수 이력과 집계 기준은 완충품 부속표에 있습니다.
+input_files:
+- path: inputs/01_완충품표지.pdf
+  format: pdf
+- path: inputs/02_완충품부속.xlsx
+  format: xlsx
+- path: inputs/03_바퀴인수.hwpx
+  format: hwpx
+- path: inputs/04_표지촬영.png
+  format: png
+  duplicate_of: inputs/01_완충품표지.pdf
+answer_schema:
+  type: object
+  properties:
+    grand_total:
+      type: integer
+    unique_document_count:
+      type: integer
+  required:
+  - grand_total
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-296c55d7-e8d9-5977-ab71-5516599e2ac0
+scenario_seed: 750295889503751767
+scenario_hash: b900c8e2d5e4f348e949d3d6c6a2cad890a44724c6517e4d8f95b64f80f214c1
+authorship:
+  method: individually_written
+  case_id: D086
+  case_sha256: 0a699622e24e8e57a98c8a9ab90d1ae117bbef86b5edf7f4b3812ad58de3becb
+  source_file: batch_1/D_extract/cases_054_103.json
+answer_fields:
+- grand_total
+- unique_document_count

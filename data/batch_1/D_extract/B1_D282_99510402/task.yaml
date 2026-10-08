@@ -1,0 +1,46 @@
+task_id: B1_D282_99510402
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 실제 구입한 레코드 속지와 보호 커버의 가격표를 정리해 주세요. cheapest_by_item을 제출해 주세요.
+input_files:
+- path: inputs/01_음반포장속지.xlsx
+  format: xlsx
+- path: inputs/02_레코드봉투속지.pdf
+  format: pdf
+- path: inputs/03_보호포장속지.hwpx
+  format: hwpx
+- path: inputs/04_보호커버.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+  required:
+  - cheapest_by_item
+  additionalProperties: false
+canary: KrRubberStamp-canary-c017469d-ce7a-591a-a9bc-2e1e9fd7f30f
+scenario_seed: 11047615767727152609
+scenario_hash: 8465ccd29f291f9ed1cf7e856596fbb53fe20ed9c7346837a0c8a22e1b2ceb76
+authorship:
+  method: individually_written
+  case_id: D282
+  case_sha256: 995104020a619de185af2a35e89a33751203dfd8c4ea994d5a6fe18faed74f54
+  source_file: batch_1/D_extract/cases_254_300.json
+answer_fields:
+- cheapest_by_item

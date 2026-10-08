@@ -1,0 +1,66 @@
+task_id: B1_C044_585523b8
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상고른타월은 카드 매출이 컸지만 재고 입고도 많았습니다. 구입 자료별 증빙의 세액 표시와 활동 기록을 확인하여 매입세액(input_vat),
+  공제불가 세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat)을 나눠 주세요. 남은 세액 범위에서
+  영수증 발행세액공제(receipt_credit)를 적용하고 납부액(payable_vat) 및 환급액(refund_vat)을 answer.json에
+  정수로 작성해 주세요.
+input_files:
+- path: inputs/01_타월점_신고.hwpx
+  format: hwpx
+- path: inputs/02_전년_실적.pdf
+  format: pdf
+- path: inputs/03_선납_기록.xlsx
+  format: xlsx
+- path: inputs/04_타월_판매.pdf
+  format: pdf
+- path: inputs/05_타월_재고.pdf
+  format: pdf
+- path: inputs/06_등_카드.xlsx
+  format: xlsx
+- path: inputs/07_안내지_인쇄.pdf
+  format: pdf
+- path: inputs/08_사용_기록.hwpx
+  format: hwpx
+- path: inputs/09_안내지_스캔.png
+  format: png
+  duplicate_of: inputs/07_안내지_인쇄.pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - input_vat
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-fbd432a5-fa79-55a2-8f93-7707c402833b
+scenario_seed: 6365032925613132334
+scenario_hash: 4f7640033d81becac40fa14fc16369f81f82ca9f6440323d7a75af06524ec9dd
+authorship:
+  method: individually_written
+  case_id: C044
+  case_sha256: 585523b8f2d60a2e53e94d6cf69c64686ee713a5f9e3f6a4f0ea5c1817f7b012
+  source_file: batch_1/C_vat/cases_004_053.json
+answer_fields:
+- input_vat
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat
+- refund_vat

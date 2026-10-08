@@ -1,0 +1,46 @@
+task_id: B1_C088_5650bc99
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상두번연결의 경리는 같은 날 같은 금액으로 구매한 접속 부품 한 행을 중복으로 지우려 합니다. 실제 발주와 수령 기록을 확인하세요.
+  고유 거래 수(unique_transaction_count), 전체 매입세액(input_vat), 공제가능 매입세액(deductible_input_vat),
+  환급액(refund_vat)을 answer.json에 정수로 작성해 주세요.
+input_files:
+- path: inputs/01_연결장치_사업.hwpx
+  format: hwpx
+- path: inputs/02_같은가격_계산서.xlsx
+  format: xlsx
+- path: inputs/03_두발주_수령시간.pdf
+  format: pdf
+- path: inputs/04_직원별_인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    unique_transaction_count:
+      type: integer
+    input_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - unique_transaction_count
+  - input_vat
+  - deductible_input_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-e52695f7-1be2-5d95-bdbb-67836fc413c0
+scenario_seed: 6219678451823890885
+scenario_hash: cd4022132e9931898a05a9611f8c27bb070cbcbc9eec1c3dbb5f80f59b3739a8
+authorship:
+  method: individually_written
+  case_id: C088
+  case_sha256: 5650bc99421d51c5dd063964af8e082e384f6d189cf2ba65d126cadf3681d753
+  source_file: batch_1/C_vat/cases_054_103.json
+answer_fields:
+- unique_transaction_count
+- input_vat
+- deductible_input_vat
+- refund_vat

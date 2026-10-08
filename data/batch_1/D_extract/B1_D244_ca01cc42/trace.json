@@ -1,0 +1,226 @@
+[
+  {
+    "inputs": {
+      "events": [
+        {
+          "date": "2026-06-19",
+          "document_id": "VEND-MOTOR-16",
+          "event": "received",
+          "event_id": "VEND-MOTOR-IN",
+          "location": "자동판매기수리실"
+        },
+        {
+          "date": "2026-06-19",
+          "document_id": "VEND-BUTTON-17",
+          "event": "received",
+          "event_id": "VEND-BUTTON-IN",
+          "location": "자동판매기수리실"
+        }
+      ],
+      "headers": [
+        {
+          "date": "2026-06-16",
+          "document_id": "VEND-MOTOR-16",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "VEND-MOTOR-EXT",
+          "vendor": "가상자동판매부품"
+        },
+        {
+          "date": "2026-06-16",
+          "document_id": "VEND-MOTOR-16",
+          "kind": "invoice",
+          "price_includes_vat": false,
+          "record_id": "VEND-MOTOR-NEW",
+          "vendor": "가상자동판매부품"
+        },
+        {
+          "date": "2026-06-17",
+          "document_id": "VEND-BUTTON-17",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "VEND-BUTTON-C",
+          "vendor": "가상스위치판매"
+        },
+        {
+          "date": "2026-06-20",
+          "document_id": "VEND-MOTOR-20",
+          "kind": "order",
+          "price_includes_vat": false,
+          "record_id": "VEND-NEXT-C",
+          "vendor": "가상자동판매부품"
+        }
+      ],
+      "line_sheets": [
+        {
+          "header_record_id": "VEND-MOTOR-EXT",
+          "items": [
+            {
+              "name": "배출모터M7",
+              "quantity": 2,
+              "unit_price": 64800
+            }
+          ],
+          "sheet_id": "VEND-MOTOR-EXT-L"
+        },
+        {
+          "header_record_id": "VEND-MOTOR-NEW",
+          "items": [
+            {
+              "name": "배출모터M7",
+              "quantity": 2,
+              "unit_price": 64800
+            }
+          ],
+          "sheet_id": "VEND-MOTOR-NEW-L"
+        },
+        {
+          "header_record_id": "VEND-BUTTON-C",
+          "items": [
+            {
+              "name": "선택버튼B4",
+              "quantity": 8,
+              "unit_price": 3700
+            },
+            {
+              "name": "버튼방수덮개B4",
+              "quantity": 8,
+              "unit_price": 980
+            }
+          ],
+          "sheet_id": "VEND-BUTTON-L"
+        },
+        {
+          "header_record_id": "VEND-NEXT-C",
+          "items": [
+            {
+              "name": "배출모터M7",
+              "quantity": 2,
+              "unit_price": 60200
+            }
+          ],
+          "sheet_id": "VEND-NEXT-L"
+        }
+      ],
+      "processing_policy": "품목표를 header_record_id로 표지에 연결한다. invoice 또는 order의 document_id에 received가 있는 원문만 구매다. 다른 record_id라도 document_id와 최종 내용이 같으면 한 번 합한다. 별도 단가는 공급가액이다. 품목 및 업체를 NFKC 후 공백 제거 및 영문 소문자로 정리하고 업체 법인 표현을 제거한다. 이름 순으로 배열하고 가격 동률이면 업체 이름 순으로 선택한다.",
+      "source_contract": "extract_evidence_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "VEND-MOTOR-20"
+      ],
+      "joined_document_records_before_deduplication": 3,
+      "received_document_ids": [
+        "VEND-BUTTON-17",
+        "VEND-MOTOR-16"
+      ]
+    },
+    "rule_id": "D.evidence_reconciliation"
+  },
+  {
+    "inputs": {
+      "document_id": "VEND-MOTOR-16",
+      "includes_vat": false,
+      "quantity": 2,
+      "unit_price": 64800
+    },
+    "output": {
+      "supply": 129600,
+      "total": 142560,
+      "vat": 12960
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상자동판매부품"
+    },
+    "output": "가상자동판매부품",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "document_id": "VEND-MOTOR-16"
+    },
+    "output": "skipped",
+    "rule_id": "D.deduplicate"
+  },
+  {
+    "inputs": {
+      "document_id": "VEND-BUTTON-17",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 3700
+    },
+    "output": {
+      "supply": 29600,
+      "total": 32560,
+      "vat": 2960
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "document_id": "VEND-BUTTON-17",
+      "includes_vat": false,
+      "quantity": 8,
+      "unit_price": 980
+    },
+    "output": {
+      "supply": 7840,
+      "total": 8624,
+      "vat": 784
+    },
+    "rule_id": "D.vat_split"
+  },
+  {
+    "inputs": {
+      "vendor": "가상스위치판매"
+    },
+    "output": "가상스위치판매",
+    "rule_id": "D.vendor_normalize"
+  },
+  {
+    "inputs": {
+      "unique_documents": 2
+    },
+    "output": {
+      "cheapest_by_item": [
+        {
+          "item": "배출모터m7",
+          "unit_price": 64800,
+          "vendor": "가상자동판매부품"
+        },
+        {
+          "item": "버튼방수덮개b4",
+          "unit_price": 980,
+          "vendor": "가상스위치판매"
+        },
+        {
+          "item": "선택버튼b4",
+          "unit_price": 3700,
+          "vendor": "가상스위치판매"
+        }
+      ],
+      "grand_total": 183744,
+      "supply_total": 167040,
+      "unique_document_count": 2,
+      "vat_total": 16704,
+      "vendor_totals": [
+        {
+          "supply": 37440,
+          "total": 41184,
+          "vat": 3744,
+          "vendor": "가상스위치판매"
+        },
+        {
+          "supply": 129600,
+          "total": 142560,
+          "vat": 12960,
+          "vendor": "가상자동판매부품"
+        }
+      ]
+    },
+    "rule_id": "D.aggregate"
+  }
+]

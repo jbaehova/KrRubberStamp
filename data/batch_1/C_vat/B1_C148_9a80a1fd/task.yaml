@@ -1,0 +1,55 @@
+task_id: B1_C148_9a80a1fd
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상넓힌자리의 전년 접수 기록, 확장 지출, 판매 전표를 함께 읽고 발행 공제(receipt_credit), 불공제세액(noncreditable_vat),
+  공제가능 매입세액(deductible_input_vat), 납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_확장사업장.hwpx
+  format: hwpx
+- path: inputs/02_전년신고.xlsx
+  format: xlsx
+- path: inputs/03_카드매출.pdf
+  format: pdf
+- path: inputs/04_진열청구.pdf
+  format: pdf
+- path: inputs/05_진열완료.hwpx
+  format: hwpx
+- path: inputs/06_토지청구.xlsx
+  format: xlsx
+- path: inputs/07_토지완료.hwpx
+  format: hwpx
+- path: inputs/08_식사전표.pdf
+  format: pdf
+- path: inputs/09_식사명단.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - noncreditable_vat
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-8d048e3a-4ee2-58db-a27d-ab9a0fd683ec
+scenario_seed: 11133076390381202253
+scenario_hash: b4f43892208e18bf23ae14860117358ee0a5c98c39a589927b1da75d47bb2f58
+authorship:
+  method: individually_written
+  case_id: C148
+  case_sha256: 9a80a1fdd1f5ab4d6918307ffe334cb6796390d4a1b2957d2419d8fc265534b2
+  source_file: batch_1/C_vat/cases_104_153.json
+answer_fields:
+- receipt_credit
+- noncreditable_vat
+- deductible_input_vat
+- payable_vat

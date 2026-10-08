@@ -1,0 +1,60 @@
+task_id: B1_D247_7b4d2c10
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 인쇄소 칼날과 매트의 실제 구매 기준표를 마감해 주세요. cheapest_by_item과 supply_total을 제출해 주세요.
+input_files:
+- path: inputs/01_첫칼날표지.pdf
+  format: pdf
+- path: inputs/02_첫칼날품목.xlsx
+  format: xlsx
+- path: inputs/03_보충칼날.hwpx
+  format: hwpx
+- path: inputs/04_매트표지.pdf
+  format: pdf
+- path: inputs/05_매트품목.xlsx
+  format: xlsx
+- path: inputs/06_첫칼날제안.hwpx
+  format: hwpx
+- path: inputs/07_다른칼날제안.pdf
+  format: pdf
+- path: inputs/08_첫칼날수령.xlsx
+  format: xlsx
+- path: inputs/09_추가도구수령.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    supply_total:
+      type: integer
+  required:
+  - cheapest_by_item
+  - supply_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-d0d69dde-1a13-51f7-9a11-d8e9fb7bfebe
+scenario_seed: 8884806087342852657
+scenario_hash: c5cf39ab234722720b9c2db2ec15d8feb6cac24f7b314738b18e87c7d69bd1cf
+authorship:
+  method: individually_written
+  case_id: D247
+  case_sha256: 7b4d2c100e4c8a310eff6cb187413f8b79bb262416e6d9f7772db10991550107
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- supply_total

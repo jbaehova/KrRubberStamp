@@ -1,0 +1,41 @@
+task_id: B1_A027_48716ee0
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상솔바람공업의 가상허수민 의료비 자료를 마감합니다. 본인 외래비와 미숙아 진료비를 분리해 의료비 세액공제액을 계산해 주세요.
+  올해 둘째 출생을 반영한 자녀 세액공제액도 함께 적어 주세요.
+input_files:
+- path: inputs/01_인사급여.xlsx
+  format: xlsx
+- path: inputs/02_출생.pdf
+  format: pdf
+- path: inputs/03_본인외래.pdf
+  format: pdf
+- path: inputs/04_미숙아진료.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    medical_credit:
+      type: integer
+    child_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - medical_credit
+  - child_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-93015868-c3a4-58d9-8c70-8f9bccb264b4
+scenario_seed: 5220075354556427854
+scenario_hash: 78dac84ef8ebc9fd5989a8936100bc3b09a1d06a19316bb7eba8eed0defe0a31
+authorship:
+  method: individually_written
+  case_id: A027
+  case_sha256: 48716ee0b91b6e4e1947d7ed60e9c46a6a77caa99d6272a8e530e9f4728bea93
+  source_file: batch_1/A_yearend/cases_004_053.json
+answer_fields:
+- medical_credit
+- child_credit
+- final_national_tax

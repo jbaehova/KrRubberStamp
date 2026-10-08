@@ -1,0 +1,61 @@
+task_id: B1_D244_ca01cc42
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 자동 판매기 부품의 실제 구입 가격표와 구매 근거를 정리해 주세요. cheapest_by_item과 unique_document_count를
+  제출해 주세요.
+input_files:
+- path: inputs/01_모터외부표지.pdf
+  format: pdf
+- path: inputs/02_모터외부품목.xlsx
+  format: xlsx
+- path: inputs/03_모터재발행.hwpx
+  format: hwpx
+- path: inputs/04_재발행품목.xlsx
+  format: xlsx
+- path: inputs/05_버튼주문.pdf
+  format: pdf
+- path: inputs/06_후속모터표지.hwpx
+  format: hwpx
+- path: inputs/07_후속모터내역.xlsx
+  format: xlsx
+- path: inputs/08_모터수령.pdf
+  format: pdf
+- path: inputs/09_버튼수령.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    cheapest_by_item:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          unit_price:
+            type: integer
+          vendor:
+            type: string
+        required:
+        - item
+        - unit_price
+        - vendor
+        additionalProperties: false
+    unique_document_count:
+      type: integer
+  required:
+  - cheapest_by_item
+  - unique_document_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-fa392c08-6f5d-52e8-834f-89d5267f9cc3
+scenario_seed: 14556140056219943726
+scenario_hash: c4d63135909d1424bd5f26fd92c3174c9d98f28cd5246d0687e0ce5ddeac1480
+authorship:
+  method: individually_written
+  case_id: D244
+  case_sha256: ca01cc4267d3032eff0b3065624a196dffb3e647f1af6dbb91492c1d58368aa4
+  source_file: batch_1/D_extract/cases_204_253.json
+answer_fields:
+- cheapest_by_item
+- unique_document_count

@@ -1,0 +1,45 @@
+task_id: B1_B222_0a3e4f9a
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상링제본실의 계속근로 직원은 연금 부과 종료 통지를 받았습니다. 연금과 고용보험을 각각 계산하고 전체 공제액 및 직원 이체액을
+  확인해 주세요.
+input_files:
+- path: inputs/01_계속근로약정.pdf
+  format: pdf
+- path: inputs/02_연금종료.hwpx
+  format: hwpx
+- path: inputs/03_계속부과.xlsx
+  format: xlsx
+- path: inputs/04_계산기준.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    national_pension:
+      type: integer
+    employment_insurance:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - national_pension
+  - employment_insurance
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-a509eaf2-7190-5377-b027-c44809209fab
+scenario_seed: 738114915253410063
+scenario_hash: 61dd8652f19a11406abb06999970e3d287c7959acbfc2584b6374deb76511b6c
+authorship:
+  method: individually_written
+  case_id: B222
+  case_sha256: 0a3e4f9acf18d90f6efd180cefceb556a6205a9be1e8e4204867dd6f285fd2dc
+  source_file: batch_1/B_payroll/cases_204_253.json
+answer_fields:
+- national_pension
+- employment_insurance
+- total_deductions
+- net_pay
