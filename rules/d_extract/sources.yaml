@@ -1,0 +1,24 @@
+- rule_id: D.vendor_normalize
+  description: NFKC와 공백 제거 및 법인 접두어 제거로 가상 업체명을 통합
+  source: "Unicode UAX 15 https://www.unicode.org/reports/tr15/ 및 DATA_SPEC.md 업체명 정규화 규약"
+  effective_period: not-applicable
+  verified: false
+  verification_note: "문자 정규화 사양과 자체 회귀 검증은 확보했으나 국세청이나 공단의 동일 업체명 집계 계산 예시는 없음"
+- rule_id: D.vat_split
+  description: 부가세 포함 총액의 공급가액은 total*10//11, 세액은 총액과 공급가액의 차이
+  source: "부가가치세법 제29조와 제30조. 입력 문서의 부가세 포함 여부에 따른 데이터셋 원 단위 분리 사양"
+  effective_period: not-applicable
+  verified: false
+  verification_note: "분야 C의 공식 10% 규칙을 사용하되 D 문서 단위 분리의 독립된 공식 계산 예시는 확보하지 못함. 생성 금액은 정확한 정수 분리를 보장함"
+- rule_id: D.deduplicate
+  description: 동일 문서 번호 자료는 내용이 같을 때 한 번만 합산, 내용이 다르면 오류
+  source: "DATA_SPEC.md 중복 문서 처리 및 입력 자료의 comparison_basis 명시 규약"
+  effective_period: not-applicable
+  verified: false
+  verification_note: "데이터셋의 명시적 업무 규약이며 적용되는 국세청이나 공단의 공식 예시 없음"
+- rule_id: D.aggregate
+  description: 정규화 업체별 합산, 품목별 공급가액 기준 개당 최저 단가 비교, 동률은 업체명 오름차순
+  source: "DATA_SPEC.md 집계 요구 및 입력 문서 comparison_basis 명시 규약"
+  effective_period: not-applicable
+  verified: false
+  verification_note: "자체 보존성과 중복 불변성 속성 검증. 국세청이나 공단의 동일 집계 공식 예시 없음"
