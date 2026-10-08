@@ -319,4 +319,3 @@ D038의 closing_date는 첨부 인수 대장의 마감 시점을 설명하는 �
   "unique_document_count": 3
 }
 ```
-
