@@ -16,6 +16,18 @@ LABELS = {
     "exceptions": "확인할 사항",
     "synthetic_notice": "자료 성격",
     "comparison_basis": "비교 기준",
+    "source_contract": "자료 연결 규약 번호",
+    "processing_policy": "인수 집계와 문서 연결 기준",
+    "headers": "원본 문서 표지",
+    "record_id": "표지 기록 번호",
+    "kind": "문서 종류",
+    "line_sheets": "품목 부속표",
+    "sheet_id": "부속표 번호",
+    "header_record_id": "연결할 표지 기록 번호",
+    "events": "실제 인수와 취소 기록",
+    "event_id": "현장 접수 기록 번호",
+    "event": "실제 접수 상태",
+    "location": "인수 또는 접수 장소",
 }
 INSTRUCTIONS = [
     "자료에 있는 업체별 공급가액과 부가세, 총액을 모아 주세요. 품목별 최저 단가 업체도 비교해서 answer.json으로 보내 주세요.",

@@ -15,7 +15,7 @@
   source: "부가가치세법 제29조 https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1032154833 및 국세청 도소매업 신고서 2~3쪽 https://www.nts.go.kr/comm/nttFileDownload.do?fileKey=95e20f2fcbd5b8094e3899abd6609bc2"
   effective_period: "2026-01-01/2026-06-30"
   verified: true
-  verification_note: "17개 공식 공급가액 및 세액 표 항목. 생성 금액은 10% 분리가 원 단위 정수로 정확한 경우만 사용"
+  verification_note: "17개 공식 공급가액 및 세액 표 항목. 입력 거래는 공급가액과 10% 세액을 원 단위 정수로 정확히 분리할 수 있는 범위로 제한"
 - rule_id: VAT_OUTPUT_10
   description: 국내 과세 재화와 용역의 공급가액에 부가가치세 10% 적용
   source: "부가가치세법 제30조 및 국세청 세무 안내 https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=239004&mi=40574"
@@ -55,7 +55,7 @@
   effective_period: "2026-01-01/2026-06-30"
   verified: false
   legal_verified: true
-  verification_note: "직접 불공제 분류만 구현하며 Batch 1 생성에서는 사용하지 않음. 과면세 공통매입 안분은 구현 및 생성 대상에서 제외"
+  verification_note: "면세사업 직접 귀속과 토지 자체의 조성 지출만 구현. 개별 집필 문항에 포함 가능하나 독립 공식 숫자 사례는 미확보. 과면세 공통매입 안분은 구현 및 평가 범위에서 제외"
 - rule_id: VAT_RECEIPT_BASE
   description: 신용카드와 현금영수증 발행 금액은 부가세 포함 금액을 사용하고 동일 거래 세금계산서 발급분은 제외
   source: "국세청 2024년 제2기 확정 도소매업 신고서 작성사례 PDF 2~3쪽 https://www.nts.go.kr/comm/nttFileDownload.do?fileKey=95e20f2fcbd5b8094e3899abd6609bc2"
@@ -74,21 +74,21 @@
   source: "부가가치세법 제46조제1항제3호 https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0046&lsiSeq=276117&urlMode=lsScJoRltInfoR; 국세청 도소매업 신고서 PDF 3쪽 https://www.nts.go.kr/comm/nttFileDownload.do?fileKey=95e20f2fcbd5b8094e3899abd6609bc2"
   effective_period: "2026-01-01/2026-06-30"
   verified: true
-  verification_note: "법령에서 우대율 적용기한 확인. 공식 도소매업 1540만원 * 1.3% = 200200원 회귀 검증. 생성 금액은 원 미만 공제액이 발생하지 않도록 구성"
+  verification_note: "법령에서 우대율 적용기한 확인. 공식 도소매업 1540만원 * 1.3% = 200200원 회귀 검증. 원 미만 공제액은 버리는 입력 계약으로 계산하며 공식 사례 외 끝수 경계는 자체 검사"
 - rule_id: VAT_CREDIT_ANNUAL_LIMIT
   description: 2026년 신용카드 등 발행세액공제 연간 한도 1000만원에서 이미 공제한 금액을 차감
   source: "부가가치세법 제46조제1항제3호 https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0046&lsiSeq=276117&urlMode=lsScJoRltInfoR"
   effective_period: "2026-01-01/2026-06-30"
   verified: false
   legal_verified: true
-  verification_note: "법령상 금액과 적용기한 확인. 공식 한도 도달 계산 사례는 확보하지 못해 법식 유도 테스트. Batch 1의 이미 공제한 금액은 0원"
+  verification_note: "법령상 금액과 적용기한 확인. 공식 한도 도달 계산 사례는 확보하지 못해 법식 유도 테스트. 입력에 명시한 올해 기공제액을 남은 한도 계산에 사용"
 - rule_id: VAT_CREDIT_PAYABLE_LIMIT
   description: 발행세액공제는 차감 전 양수 납부세액을 한도로 하며 초과액으로 환급을 만들지 않음
   source: "부가가치세법 제46조제2항 https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0046&lsiSeq=276117&urlMode=lsScJoRltInfoR; 국세청 도소매업 신고서 PDF 3쪽 https://www.nts.go.kr/comm/nttFileDownload.do?fileKey=95e20f2fcbd5b8094e3899abd6609bc2"
   effective_period: "2026-01-01/2026-06-30"
   verified: false
   legal_verified: true
-  verification_note: "법령상의 환급 불가 제한 확인. 신고서 순서에 따라 공제 이후 예정고지 차감. 공식 한도 초과 수치 사례 미확보. 환급 생성은 매입세액 초과 방식만 사용"
+  verification_note: "법령상의 발행 공제 자체로 환급을 만들 수 없는 제한 확인. 공제를 제한한 뒤 예정고지를 차감하며 예정고지 초과 납부로 환급 가능. 공식 한도 초과 수치 사례 미확보"
 - rule_id: VAT_PREPAID
   description: 확정신고 세액에서 입력에 명시된 같은 과세기간 예정고지 납부세액을 차감
   source: "부가가치세법 제49조 및 국세청 부가가치세 개요 https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7693&mi=2401; 공식 화물운수업 신고서 PDF 3쪽 https://www.nts.go.kr/comm/nttFileDownload.do?fileKey=4548e87d3b83680b1052815001597b9d"

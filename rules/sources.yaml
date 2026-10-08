@@ -315,13 +315,21 @@ rules:
   effective_period: not-applicable
   verified: false
   verification_note: 데이터셋의 명시적 업무 규약이며 적용되는 국세청이나 공단의 공식 예시 없음
+- rule_id: D.evidence_reconciliation
+  description: 원본 표지와 품목 부속표를 기록 번호로 연결하고 실제 인수 기록에 따라 집계 대상 거래를 복원
+  source: DATA_SPEC.md extract_evidence_v1 및 각 입력 문서의 processing_policy. 합성 업체가 명시한
+    인수 집계 규약이며 법률상 별도 세무 판단 규칙이 아님
+  effective_period: not-applicable
+  verified: false
+  verification_note: 미채택 견적과 출고 전 취소 주문 및 부속표 연결에 대한 자체 계약 검사. 정부의 동일 문서 접수 계산 예시
+    없음
 - rule_id: D.vat_split
   description: 부가세 포함 총액의 공급가액은 total*10//11, 세액은 총액과 공급가액의 차이
   source: 부가가치세법 제29조와 제30조. 입력 문서의 부가세 포함 여부에 따른 데이터셋 원 단위 분리 사양
   effective_period: not-applicable
   verified: false
-  verification_note: 분야 C의 공식 10% 규칙을 사용하되 D 문서 단위 분리의 독립된 공식 계산 예시는 확보하지 못함. 생성 금액은
-    정확한 정수 분리를 보장함
+  verification_note: 분야 C의 공식 10% 규칙을 사용하되 D 문서 단위 분리의 독립된 공식 계산 예시는 확보하지 못함. 원 미만
+    절사와 품목별 계산 순서는 입력 자료에 명시한 집계 규약임
 - rule_id: D.vendor_normalize
   description: NFKC와 공백 제거 및 법인 접두어 제거로 가상 업체명을 통합
   source: Unicode UAX 15 https://www.unicode.org/reports/tr15/ 및 DATA_SPEC.md 업체명
@@ -344,8 +352,8 @@ rules:
   effective_period: 2026-01-01/2026-06-30
   verified: false
   legal_verified: true
-  verification_note: 법령상 금액과 적용기한 확인. 공식 한도 도달 계산 사례는 확보하지 못해 법식 유도 테스트. Batch 1의
-    이미 공제한 금액은 0원
+  verification_note: 법령상 금액과 적용기한 확인. 공식 한도 도달 계산 사례는 확보하지 못해 법식 유도 테스트. 입력에 명시한 올해
+    기공제액을 남은 한도 계산에 사용
 - rule_id: VAT_CREDIT_ELIGIBILITY
   description: 소비자 상대 사업 개인사업자에 한해 적용하며 법인 및 전년도 사업장별 공급가액 10억원 초과 개인사업자는 제외
   source: 부가가치세법 제46조제1항 https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0046&lsiSeq=276117&urlMode=lsScJoRltInfoR;
@@ -362,16 +370,16 @@ rules:
   effective_period: 2026-01-01/2026-06-30
   verified: false
   legal_verified: true
-  verification_note: 법령상의 환급 불가 제한 확인. 신고서 순서에 따라 공제 이후 예정고지 차감. 공식 한도 초과 수치 사례 미확보.
-    환급 생성은 매입세액 초과 방식만 사용
+  verification_note: 법령상의 발행 공제 자체로 환급을 만들 수 없는 제한 확인. 공제를 제한한 뒤 예정고지를 차감하며 예정고지 초과
+    납부로 환급 가능. 공식 한도 초과 수치 사례 미확보
 - rule_id: VAT_CREDIT_RATE_2026
   description: 2026년 12월 31일까지 신용카드와 현금영수증 발행금액의 1.3% 공제
   source: 부가가치세법 제46조제1항제3호 https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0046&lsiSeq=276117&urlMode=lsScJoRltInfoR;
     국세청 도소매업 신고서 PDF 3쪽 https://www.nts.go.kr/comm/nttFileDownload.do?fileKey=95e20f2fcbd5b8094e3899abd6609bc2
   effective_period: 2026-01-01/2026-06-30
   verified: true
-  verification_note: 법령에서 우대율 적용기한 확인. 공식 도소매업 1540만원 * 1.3% = 200200원 회귀 검증. 생성 금액은
-    원 미만 공제액이 발생하지 않도록 구성
+  verification_note: 법령에서 우대율 적용기한 확인. 공식 도소매업 1540만원 * 1.3% = 200200원 회귀 검증. 원 미만
+    공제액은 버리는 입력 계약으로 계산하며 공식 사례 외 끝수 경계는 자체 검사
 - rule_id: VAT_DEDUP
   description: 실제 거래 고유번호가 같은 증빙은 공급가액과 세액을 한 번만 집계
   source: 국세청 2024년 제2기 확정 도소매업 신고서 작성사례 PDF 2~3쪽 https://www.nts.go.kr/comm/nttFileDownload.do?fileKey=95e20f2fcbd5b8094e3899abd6609bc2
@@ -385,8 +393,8 @@ rules:
   effective_period: 2026-01-01/2026-06-30
   verified: false
   legal_verified: true
-  verification_note: 직접 불공제 분류만 구현하며 Batch 1 생성에서는 사용하지 않음. 과면세 공통매입 안분은 구현 및 생성 대상에서
-    제외
+  verification_note: 면세사업 직접 귀속과 토지 자체의 조성 지출만 구현. 개별 집필 문항에 포함 가능하나 독립 공식 숫자 사례는
+    미확보. 과면세 공통매입 안분은 구현 및 평가 범위에서 제외
 - rule_id: VAT_HOSPITALITY
   description: 기업업무추진비인 거래처 접대 지출에 관련된 매입세액 불공제
   source: 부가가치세법 제39조제1항제6호 https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0039&lsiSeq=276117&urlMode=lsScJoRltInfoR;
@@ -461,4 +469,5 @@ rules:
     및 국세청 도소매업 신고서 2~3쪽 https://www.nts.go.kr/comm/nttFileDownload.do?fileKey=95e20f2fcbd5b8094e3899abd6609bc2
   effective_period: 2026-01-01/2026-06-30
   verified: true
-  verification_note: 17개 공식 공급가액 및 세액 표 항목. 생성 금액은 10% 분리가 원 단위 정수로 정확한 경우만 사용
+  verification_note: 17개 공식 공급가액 및 세액 표 항목. 입력 거래는 공급가액과 10% 세액을 원 단위 정수로 정확히 분리할
+    수 있는 범위로 제한

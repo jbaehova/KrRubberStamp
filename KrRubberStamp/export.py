@@ -24,6 +24,7 @@ SUPPORT_REPORTS = (
     "harness_design.md",
     "payroll_effective_date_audit.md",
     "vat_evidence_contract.md",
+    "extract_evidence_contract.md",
 )
 
 

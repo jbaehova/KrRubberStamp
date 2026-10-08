@@ -26,6 +26,12 @@ def calculate(domain: str, scenario: dict):
         normalized = interpret(scenario)
         answer, trace = import_module("rules.c_vat.engine").calculate(normalized)
         return answer, [derivation_trace(scenario, normalized), *trace]
+    if domain == "D_extract" and "source_contract" in scenario:
+        from rules.d_extract.evidence import interpret, derivation_trace
+
+        normalized = interpret(scenario)
+        answer, trace = import_module("rules.d_extract.engine").calculate(normalized)
+        return answer, [derivation_trace(scenario, normalized), *trace]
     return import_module(f"rules.{domain.lower()}.engine").calculate(scenario)
 
 

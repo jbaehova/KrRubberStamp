@@ -9,7 +9,7 @@
   source: "부가가치세법 제29조와 제30조. 입력 문서의 부가세 포함 여부에 따른 데이터셋 원 단위 분리 사양"
   effective_period: not-applicable
   verified: false
-  verification_note: "분야 C의 공식 10% 규칙을 사용하되 D 문서 단위 분리의 독립된 공식 계산 예시는 확보하지 못함. 생성 금액은 정확한 정수 분리를 보장함"
+  verification_note: "분야 C의 공식 10% 규칙을 사용하되 D 문서 단위 분리의 독립된 공식 계산 예시는 확보하지 못함. 원 미만 절사와 품목별 계산 순서는 입력 자료에 명시한 집계 규약임"
 - rule_id: D.deduplicate
   description: 동일 문서 번호 자료는 내용이 같을 때 한 번만 합산, 내용이 다르면 오류
   source: "DATA_SPEC.md 중복 문서 처리 및 입력 자료의 comparison_basis 명시 규약"
@@ -22,3 +22,9 @@
   effective_period: not-applicable
   verified: false
   verification_note: "자체 보존성과 중복 불변성 속성 검증. 국세청이나 공단의 동일 집계 공식 예시 없음"
+- rule_id: D.evidence_reconciliation
+  description: 원본 표지와 품목 부속표를 기록 번호로 연결하고 실제 인수 기록에 따라 집계 대상 거래를 복원
+  source: "DATA_SPEC.md extract_evidence_v1 및 각 입력 문서의 processing_policy. 합성 업체가 명시한 인수 집계 규약이며 법률상 별도 세무 판단 규칙이 아님"
+  effective_period: not-applicable
+  verified: false
+  verification_note: "미채택 견적과 출고 전 취소 주문 및 부속표 연결에 대한 자체 계약 검사. 정부의 동일 문서 접수 계산 예시 없음"
