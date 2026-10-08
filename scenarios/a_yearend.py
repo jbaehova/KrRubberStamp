@@ -90,6 +90,17 @@ LABELS = {
     "scope_note": "계산 대상의 전제",
     "calculation_notes": "정산 계산 안내",
     "rule_reference": "적용 규정 안내",
+    "housing_mortgage": "장기주택저당차입금 자료",
+    "requirements_met": "주택 및 차입자 공통 요건 확인",
+    "borrowed_date": "차입 약정일",
+    "term_years": "약정 상환 기간 연수",
+    "fixed_rate": "고정금리 약정 여부",
+    "non_deferred": "비거치식 상환 약정 여부",
+    "interest_paid": "귀속연도 실제 납부 이자",
+    "salary_segments": "근무처별 급여 자료",
+    "gross": "총지급액",
+    "tax_withheld": "원천징수 소득세",
+    "local_withheld": "원천징수 지방소득세",
 }
 
 

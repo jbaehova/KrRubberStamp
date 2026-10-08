@@ -39,6 +39,19 @@ LABELS = {
     "vehicle_direct_business": "운수업 또는 자동차판매업 등의 직접 영업용 자동차",
     "exceptions": "확인할 예외사항",
     "scope_note": "추가 신고 항목 안내",
+    "source_contract": "자료 연결 규약 번호",
+    "operations": "실제 사업 운영 기록",
+    "operation_id": "사업 활동 번호",
+    "output_taxable": "해당 사업 매출의 과세 여부",
+    "activities": "실제 수령과 사용 활동 기록",
+    "activity_id": "수령 및 사용 활동 번호",
+    "document_ids": "연결 증빙 번호",
+    "action": "실제 활동 종류",
+    "location": "수령 또는 사용 장소",
+    "kind": "장소 종류",
+    "organization": "소속 또는 장소 운영자",
+    "participants": "실제 참석 및 수령인",
+    "role": "해당 활동에서의 역할",
 }
 
 INSTRUCTIONS = [
