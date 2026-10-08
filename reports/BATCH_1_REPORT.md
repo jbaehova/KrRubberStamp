@@ -123,6 +123,8 @@ oracle은 실제 입력 문서를 추출 맵의 위치로 읽고 엔진을 적�
 
 ## 개별 원고 편집 감사
 
+- [부가세 C204부터 C300](authored_vat_204300_editorial.md)
+- [급여 B254부터 B300](authored_payroll_254300_editorial.md)
 - [연말정산 A204부터 A300](authored_yearend_204300_editorial.md)
 - [급여 B154부터 B253](authored_payroll_154253_editorial.md)
 - [연말정산 A001부터 A103](authored_yearend_first103_editorial.md)

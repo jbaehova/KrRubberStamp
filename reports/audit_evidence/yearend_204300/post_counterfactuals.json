@@ -1,0 +1,3669 @@
+{
+  "source_sha": {
+    "authored/batch_1/A_yearend/cases_204_253.json": "8e8310dd8ea89f4f82848e223d8fbd9a102c896d56c35c5281338771b9209d95",
+    "authored/batch_1/A_yearend/cases_254_300.json": "1ee0c72235d7b2cdb77c043a40dc59cc1cc04bb4801dd697772173c7e0341d3b"
+  },
+  "calculation_source_sha": {
+    "rules/a_yearend/evidence.py": "7251c8cdf5ca1acfdf4f8570b9d3c3a5a82bffb4f6759c31604d0e6ab33c6246",
+    "rules/a_yearend/engine.py": "76ea6298f7f7ca494417d07dca0ec873eef8fe5d9c907607cc2d4cb06b7a7aa2",
+    "KrRubberStamp/registry.py": "b6a3e6df990409dccdc59a1968f682fc288afa5121d05201bbf6e0c6aadeca44"
+  },
+  "checks": 129,
+  "case_count": 69,
+  "matched": 129,
+  "results": [
+    {
+      "case_id": "A219",
+      "intervention": "child age at basic boundary",
+      "edits": [
+        [
+          "dependents.0.age",
+          20
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 1500000,
+        "insurance_credit": 0,
+        "medical_credit": 266100
+      },
+      "after": {
+        "basic_deduction": 3000000,
+        "insurance_credit": 91200,
+        "medical_credit": 266100
+      },
+      "changed_fields": [
+        "basic_deduction",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A220",
+      "intervention": "spouse income within basic limit",
+      "edits": [
+        [
+          "dependents.0.income_amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 1500000,
+        "medical_credit": 301500,
+        "donation_credit": 0
+      },
+      "after": {
+        "basic_deduction": 3000000,
+        "medical_credit": 301500,
+        "donation_credit": 195000
+      },
+      "changed_fields": [
+        "basic_deduction",
+        "donation_credit"
+      ]
+    },
+    {
+      "case_id": "A221",
+      "intervention": "actual address mismatch",
+      "edits": [
+        [
+          "rent.resident_registration_address",
+          "가상시 은빛로 41 303호"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 1054000,
+        "pension_account_credit": 495000,
+        "final_national_tax": 1997000
+      },
+      "after": {
+        "rent_credit": 0,
+        "pension_account_credit": 495000,
+        "final_national_tax": 3051000
+      },
+      "changed_fields": [
+        "rent_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A222",
+      "intervention": "no household home",
+      "edits": [
+        [
+          "rent.household_homes_at_year_end",
+          []
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 0,
+        "basic_deduction": 3000000,
+        "final_national_tax": 4917000
+      },
+      "after": {
+        "rent_credit": 1080000,
+        "basic_deduction": 3000000,
+        "final_national_tax": 3837000
+      },
+      "changed_fields": [
+        "rent_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A223",
+      "intervention": "remove second household home",
+      "edits": [
+        [
+          "housing_mortgage.household_homes_at_year_end",
+          [
+            {
+              "home_id": "OWN",
+              "address": "가상시 초록길 32 701호",
+              "owner_person_id": "self"
+            }
+          ]
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 0,
+        "basic_deduction": 3000000,
+        "additional_deduction": 1000000,
+        "tax_base": 71275000
+      },
+      "after": {
+        "housing_income_deduction": 13900000,
+        "basic_deduction": 3000000,
+        "additional_deduction": 1000000,
+        "tax_base": 57375000
+      },
+      "changed_fields": [
+        "housing_income_deduction",
+        "tax_base"
+      ]
+    },
+    {
+      "case_id": "A224",
+      "intervention": "designation extended through late donation",
+      "edits": [
+        [
+          "organization_designations.0.valid_to",
+          "2025-12-31"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "donation_credit": 270000,
+        "standard_credit": 0,
+        "final_national_tax": 4487250
+      },
+      "after": {
+        "donation_credit": 630000,
+        "standard_credit": 0,
+        "final_national_tax": 4127250
+      },
+      "changed_fields": [
+        "donation_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A225",
+      "intervention": "second institution is regular school",
+      "edits": [
+        [
+          "education.1.institution_type",
+          "primary_secondary_school"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "education_credit": 130500,
+        "basic_deduction": 3000000,
+        "child_credit": 250000
+      },
+      "after": {
+        "education_credit": 450000,
+        "basic_deduction": 3000000,
+        "child_credit": 250000
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A226",
+      "intervention": "second medical purpose therapeutic",
+      "edits": [
+        [
+          "medical.1.treatment_purpose",
+          "therapeutic"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 161250,
+        "credit_card_deduction": 952500,
+        "final_national_tax": 2178125
+      },
+      "after": {
+        "medical_credit": 446250,
+        "credit_card_deduction": 952500,
+        "final_national_tax": 1893125
+      },
+      "changed_fields": [
+        "medical_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A227",
+      "intervention": "second bill ordinary consumption",
+      "edits": [
+        [
+          "cards.1.billed_item",
+          "ordinary_goods_services"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 1207500,
+        "tax_base": 29603500,
+        "final_national_tax": 2390525
+      },
+      "after": {
+        "credit_card_deduction": 2287500,
+        "tax_base": 28523500,
+        "final_national_tax": 2228525
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "tax_base",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A228",
+      "intervention": "first card after employment starts",
+      "edits": [
+        [
+          "cards.0.date",
+          "2025-05-06"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 1425000,
+        "medical_credit": 117900,
+        "final_national_tax": 710350
+      },
+      "after": {
+        "credit_card_deduction": 3000000,
+        "medical_credit": 117900,
+        "final_national_tax": 489500
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A229",
+      "intervention": "insurance burden borne by employee",
+      "edits": [
+        [
+          "insurance.0.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "insurance_credit": 0,
+        "medical_credit": 229950,
+        "standard_credit": 0
+      },
+      "after": {
+        "insurance_credit": 118800,
+        "medical_credit": 229950,
+        "standard_credit": 0
+      },
+      "changed_fields": [
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A230",
+      "intervention": "no scholarship",
+      "edits": [
+        [
+          "education.0.scholarship",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "education_credit": 780000,
+        "basic_deduction": 3000000,
+        "final_national_tax": 4471250
+      },
+      "after": {
+        "education_credit": 1095000,
+        "basic_deduction": 3000000,
+        "final_national_tax": 4156250
+      },
+      "changed_fields": [
+        "education_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A231",
+      "intervention": "second child assigned employee",
+      "edits": [
+        [
+          "dependents.1.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "child_credit": 250000,
+        "education_credit": 96000
+      },
+      "after": {
+        "eligible_dependents": 2,
+        "child_credit": 550000,
+        "education_credit": 217500
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "child_credit",
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A232",
+      "intervention": "salary-only dependent at 5m",
+      "edits": [
+        [
+          "dependents.0.gross_salary",
+          5000000
+        ],
+        [
+          "dependents.0.income_amount",
+          1500000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 1500000,
+        "insurance_credit": 0,
+        "medical_credit": 176400
+      },
+      "after": {
+        "basic_deduction": 3000000,
+        "insurance_credit": 86400,
+        "medical_credit": 176400
+      },
+      "changed_fields": [
+        "basic_deduction",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A233",
+      "intervention": "sibling card belongs to employee",
+      "edits": [
+        [
+          "cards.0.person_id",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 3000000,
+        "education_credit": 720000,
+        "credit_card_deduction": 326250
+      },
+      "after": {
+        "basic_deduction": 3000000,
+        "education_credit": 720000,
+        "credit_card_deduction": 2186250
+      },
+      "changed_fields": [
+        "credit_card_deduction"
+      ]
+    },
+    {
+      "case_id": "A234",
+      "intervention": "parent age reaches60",
+      "edits": [
+        [
+          "dependents.0.age",
+          60
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 0,
+        "insurance_credit": 0,
+        "medical_credit": 180900
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "insurance_credit": 104400,
+        "medical_credit": 180900
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A235",
+      "intervention": "large dwelling price above alternative limit",
+      "edits": [
+        [
+          "rent.standard_value",
+          400000001
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 1500000,
+        "pension_account_credit": 600000,
+        "final_national_tax": 6313600
+      },
+      "after": {
+        "rent_credit": 0,
+        "pension_account_credit": 600000,
+        "final_national_tax": 7813600
+      },
+      "changed_fields": [
+        "rent_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A236",
+      "intervention": "spouse second course undergraduate",
+      "edits": [
+        [
+          "education.1.level",
+          "university"
+        ],
+        [
+          "education.1.institution_type",
+          "university"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "education_credit": 915000,
+        "basic_deduction": 3000000,
+        "insurance_credit": 81600
+      },
+      "after": {
+        "education_credit": 1725000,
+        "basic_deduction": 3000000,
+        "insurance_credit": 81600
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A237",
+      "intervention": "final request itemized",
+      "edits": [
+        [
+          "deduction_choice",
+          "itemized"
+        ],
+        [
+          "special_deductions_requested",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 0,
+        "standard_credit": 130000,
+        "final_national_tax": 7599600
+      },
+      "after": {
+        "housing_income_deduction": 12600000,
+        "standard_credit": 0,
+        "final_national_tax": 5093500
+      },
+      "changed_fields": [
+        "housing_income_deduction",
+        "standard_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A238",
+      "intervention": "no actual reimbursement",
+      "edits": [
+        [
+          "medical.0.reimbursed",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 193200,
+        "final_national_tax": 2535300,
+        "settlement_national_tax": 145300
+      },
+      "after": {
+        "medical_credit": 440700,
+        "final_national_tax": 2287800,
+        "settlement_national_tax": -102200
+      },
+      "changed_fields": [
+        "medical_credit",
+        "final_national_tax",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A239",
+      "intervention": "parent assigned employee",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 0,
+        "medical_credit": 0,
+        "donation_credit": 0
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "medical_credit": 216450,
+        "donation_credit": 270000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "medical_credit",
+        "donation_credit"
+      ]
+    },
+    {
+      "case_id": "A240",
+      "intervention": "parent income within basic limit",
+      "edits": [
+        [
+          "dependents.0.income_amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "education_credit": 795000,
+        "insurance_credit": 0,
+        "basic_deduction": 1500000
+      },
+      "after": {
+        "education_credit": 795000,
+        "insurance_credit": 114000,
+        "basic_deduction": 3000000
+      },
+      "changed_fields": [
+        "insurance_credit",
+        "basic_deduction"
+      ]
+    },
+    {
+      "case_id": "A241",
+      "intervention": "culture paid debit",
+      "edits": [
+        [
+          "cards.1.payment_method",
+          "debit"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 2538750,
+        "pension_account_credit": 696000,
+        "tax_base": 59076250
+      },
+      "after": {
+        "credit_card_deduction": 3340000,
+        "pension_account_credit": 696000,
+        "tax_base": 58275000
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "tax_base"
+      ]
+    },
+    {
+      "case_id": "A242",
+      "intervention": "first card within employment",
+      "edits": [
+        [
+          "cards.0.date",
+          "2025-04-07"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 1222500,
+        "medical_credit": 0,
+        "donation_credit": 367500,
+        "settlement_total": -163388
+      },
+      "after": {
+        "credit_card_deduction": 2842500,
+        "medical_credit": 0,
+        "donation_credit": 367500,
+        "settlement_total": -430688
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "settlement_total"
+      ]
+    },
+    {
+      "case_id": "A242",
+      "intervention": "parent reassigned employee",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 1222500,
+        "medical_credit": 0,
+        "donation_credit": 367500,
+        "settlement_total": -163388
+      },
+      "after": {
+        "credit_card_deduction": 1222500,
+        "medical_credit": 243750,
+        "donation_credit": 367500,
+        "settlement_total": -844013
+      },
+      "changed_fields": [
+        "medical_credit",
+        "settlement_total"
+      ]
+    },
+    {
+      "case_id": "A242",
+      "intervention": "organization active before first donation",
+      "edits": [
+        [
+          "organization_designations.0.valid_from",
+          "2025-06-01"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 1222500,
+        "medical_credit": 0,
+        "donation_credit": 367500,
+        "settlement_total": -163388
+      },
+      "after": {
+        "credit_card_deduction": 1222500,
+        "medical_credit": 0,
+        "donation_credit": 615000,
+        "settlement_total": -435638
+      },
+      "changed_fields": [
+        "donation_credit",
+        "settlement_total"
+      ]
+    },
+    {
+      "case_id": "A243",
+      "intervention": "matching rent addresses while homes remain",
+      "edits": [
+        [
+          "rent.resident_registration_address",
+          "가상시 저녁길 67 302호"
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 0,
+        "rent_credit": 0,
+        "education_credit": 795000,
+        "tax_base": 58090000
+      },
+      "after": {
+        "housing_income_deduction": 0,
+        "rent_credit": 0,
+        "education_credit": 795000,
+        "tax_base": 58090000
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A243",
+      "intervention": "remove scholarship",
+      "edits": [
+        [
+          "education.0.scholarship",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 0,
+        "rent_credit": 0,
+        "education_credit": 795000,
+        "tax_base": 58090000
+      },
+      "after": {
+        "housing_income_deduction": 0,
+        "rent_credit": 0,
+        "education_credit": 1140000,
+        "tax_base": 58090000
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A244",
+      "intervention": "child earned-only salary beyond5m",
+      "edits": [
+        [
+          "dependents.0.gross_salary",
+          5100000
+        ],
+        [
+          "dependents.0.income_amount",
+          1560000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 2,
+        "basic_deduction": 4500000,
+        "additional_deduction": 2000000,
+        "insurance_credit": 111600,
+        "medical_credit": 224100,
+        "education_credit": 735000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "basic_deduction": 3000000,
+        "additional_deduction": 2000000,
+        "insurance_credit": 0,
+        "medical_credit": 224100,
+        "education_credit": 735000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "basic_deduction",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A244",
+      "intervention": "spouse income within limit",
+      "edits": [
+        [
+          "dependents.1.income_amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 2,
+        "basic_deduction": 4500000,
+        "additional_deduction": 2000000,
+        "insurance_credit": 111600,
+        "medical_credit": 224100,
+        "education_credit": 735000
+      },
+      "after": {
+        "eligible_dependents": 3,
+        "basic_deduction": 6000000,
+        "additional_deduction": 2000000,
+        "insurance_credit": 111600,
+        "medical_credit": 224100,
+        "education_credit": 735000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "basic_deduction"
+      ]
+    },
+    {
+      "case_id": "A244",
+      "intervention": "sibling disability absent",
+      "edits": [
+        [
+          "dependents.2.disabled",
+          false
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 2,
+        "basic_deduction": 4500000,
+        "additional_deduction": 2000000,
+        "insurance_credit": 111600,
+        "medical_credit": 224100,
+        "education_credit": 735000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "basic_deduction": 3000000,
+        "additional_deduction": 0,
+        "insurance_credit": 111600,
+        "medical_credit": 224100,
+        "education_credit": 0
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "basic_deduction",
+        "additional_deduction",
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A245",
+      "intervention": "only match address while house remains",
+      "edits": [
+        [
+          "rent.resident_registration_address",
+          "가상시 새길 62 502호"
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 0,
+        "medical_credit": 178350,
+        "education_credit": 630000,
+        "final_national_tax": 4091400
+      },
+      "after": {
+        "rent_credit": 0,
+        "medical_credit": 178350,
+        "education_credit": 630000,
+        "final_national_tax": 4091400
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A245",
+      "intervention": "remove home and match address",
+      "edits": [
+        [
+          "rent.household_homes_at_year_end",
+          []
+        ],
+        [
+          "rent.resident_registration_address",
+          "가상시 새길 62 502호"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 0,
+        "medical_credit": 178350,
+        "education_credit": 630000,
+        "final_national_tax": 4091400
+      },
+      "after": {
+        "rent_credit": 915000,
+        "medical_credit": 178350,
+        "education_credit": 630000,
+        "final_national_tax": 3176400
+      },
+      "changed_fields": [
+        "rent_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A245",
+      "intervention": "cosmetic procedure therapeutic",
+      "edits": [
+        [
+          "medical.1.treatment_purpose",
+          "therapeutic"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 0,
+        "medical_credit": 178350,
+        "education_credit": 630000,
+        "final_national_tax": 4091400
+      },
+      "after": {
+        "rent_credit": 0,
+        "medical_credit": 409350,
+        "education_credit": 630000,
+        "final_national_tax": 3860400
+      },
+      "changed_fields": [
+        "medical_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A246",
+      "intervention": "public designation starts before April donation",
+      "edits": [
+        [
+          "organization_designations.2.valid_from",
+          "2025-01-01"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "donation_credit": 1533000,
+        "tax_base": 26400000,
+        "total_tax_credits": 2225000,
+        "final_national_tax": 475000
+      },
+      "after": {
+        "donation_credit": 2223000,
+        "tax_base": 26400000,
+        "total_tax_credits": 2915000,
+        "final_national_tax": 0
+      },
+      "changed_fields": [
+        "donation_credit",
+        "total_tax_credits",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A246",
+      "intervention": "first statutory donation zero",
+      "edits": [
+        [
+          "donations.0.amount",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "donation_credit": 1533000,
+        "tax_base": 26400000,
+        "total_tax_credits": 2225000,
+        "final_national_tax": 475000
+      },
+      "after": {
+        "donation_credit": 963000,
+        "tax_base": 26400000,
+        "total_tax_credits": 1655000,
+        "final_national_tax": 1045000
+      },
+      "changed_fields": [
+        "donation_credit",
+        "total_tax_credits",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A248",
+      "intervention": "spouse within income limit",
+      "edits": [
+        [
+          "dependents.0.income_amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 1278750,
+        "basic_deduction": 4500000,
+        "additional_deduction": 3000000,
+        "pension_account_credit": 792000
+      },
+      "after": {
+        "credit_card_deduction": 2500000,
+        "basic_deduction": 6000000,
+        "additional_deduction": 3000000,
+        "pension_account_credit": 792000
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "basic_deduction"
+      ]
+    },
+    {
+      "case_id": "A248",
+      "intervention": "sibling card owner employee",
+      "edits": [
+        [
+          "cards.5.person_id",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 1278750,
+        "basic_deduction": 4500000,
+        "additional_deduction": 3000000,
+        "pension_account_credit": 792000
+      },
+      "after": {
+        "credit_card_deduction": 2500000,
+        "basic_deduction": 4500000,
+        "additional_deduction": 3000000,
+        "pension_account_credit": 792000
+      },
+      "changed_fields": [
+        "credit_card_deduction"
+      ]
+    },
+    {
+      "case_id": "A248",
+      "intervention": "management fee ordinary goods",
+      "edits": [
+        [
+          "cards.2.billed_item",
+          "ordinary_goods_services"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 1278750,
+        "basic_deduction": 4500000,
+        "additional_deduction": 3000000,
+        "pension_account_credit": 792000
+      },
+      "after": {
+        "credit_card_deduction": 2418750,
+        "basic_deduction": 4500000,
+        "additional_deduction": 3000000,
+        "pension_account_credit": 792000
+      },
+      "changed_fields": [
+        "credit_card_deduction"
+      ]
+    },
+    {
+      "case_id": "A248",
+      "intervention": "culture debit payment",
+      "edits": [
+        [
+          "cards.1.payment_method",
+          "debit"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 1278750,
+        "basic_deduction": 4500000,
+        "additional_deduction": 3000000,
+        "pension_account_credit": 792000
+      },
+      "after": {
+        "credit_card_deduction": 1743750,
+        "basic_deduction": 4500000,
+        "additional_deduction": 3000000,
+        "pension_account_credit": 792000
+      },
+      "changed_fields": [
+        "credit_card_deduction"
+      ]
+    },
+    {
+      "case_id": "A249",
+      "intervention": "university tuition employee burden",
+      "edits": [
+        [
+          "education.0.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 3000000,
+        "education_credit": 784500,
+        "child_credit": 250000
+      },
+      "after": {
+        "basic_deduction": 3000000,
+        "education_credit": 1789500,
+        "child_credit": 250000
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A249",
+      "intervention": "academy is school",
+      "edits": [
+        [
+          "education.2.institution_type",
+          "primary_secondary_school"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 3000000,
+        "education_credit": 784500,
+        "child_credit": 250000
+      },
+      "after": {
+        "basic_deduction": 3000000,
+        "education_credit": 1077000,
+        "child_credit": 250000
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A249",
+      "intervention": "parent income within limit",
+      "edits": [
+        [
+          "dependents.2.income_amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 3000000,
+        "education_credit": 784500,
+        "child_credit": 250000
+      },
+      "after": {
+        "basic_deduction": 4500000,
+        "education_credit": 784500,
+        "child_credit": 250000
+      },
+      "changed_fields": [
+        "basic_deduction"
+      ]
+    },
+    {
+      "case_id": "A250",
+      "intervention": "working child income corrected while age49 remains",
+      "edits": [
+        [
+          "dependents.1.gross_salary",
+          5000000
+        ],
+        [
+          "dependents.1.income_amount",
+          1500000
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 0,
+        "medical_credit": 1001100,
+        "education_credit": 585000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 0,
+        "medical_credit": 1001100,
+        "education_credit": 585000
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A250",
+      "intervention": "insurance employee paid",
+      "edits": [
+        [
+          "insurance.0.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 0,
+        "medical_credit": 1001100,
+        "education_credit": 585000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 106800,
+        "medical_credit": 1001100,
+        "education_credit": 585000
+      },
+      "changed_fields": [
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A250",
+      "intervention": "no medical reimbursement",
+      "edits": [
+        [
+          "medical.0.reimbursed",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 0,
+        "medical_credit": 1001100,
+        "education_credit": 585000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 0,
+        "medical_credit": 1050000,
+        "education_credit": 585000
+      },
+      "changed_fields": [
+        "medical_credit"
+      ]
+    },
+    {
+      "case_id": "A252",
+      "intervention": "final itemized request",
+      "edits": [
+        [
+          "deduction_choice",
+          "itemized"
+        ],
+        [
+          "special_deductions_requested",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "standard_credit": 130000,
+        "special_income_deduction": 0,
+        "insurance_credit": 0,
+        "education_credit": 0,
+        "political_credit": 111909,
+        "hometown_credit": 173409,
+        "pension_account_credit": 600000,
+        "credit_card_deduction": 847500,
+        "total_tax_credits": 1675318,
+        "final_national_tax": 3272807
+      },
+      "after": {
+        "standard_credit": 0,
+        "special_income_deduction": 2585000,
+        "insurance_credit": 94800,
+        "education_credit": 540000,
+        "political_credit": 111909,
+        "hometown_credit": 173409,
+        "pension_account_credit": 600000,
+        "credit_card_deduction": 847500,
+        "total_tax_credits": 2180118,
+        "final_national_tax": 2380257
+      },
+      "changed_fields": [
+        "standard_credit",
+        "special_income_deduction",
+        "insurance_credit",
+        "education_credit",
+        "total_tax_credits",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A252",
+      "intervention": "management fee ordinary goods",
+      "edits": [
+        [
+          "cards.1.billed_item",
+          "ordinary_goods_services"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "standard_credit": 130000,
+        "special_income_deduction": 0,
+        "insurance_credit": 0,
+        "education_credit": 0,
+        "political_credit": 111909,
+        "hometown_credit": 173409,
+        "pension_account_credit": 600000,
+        "credit_card_deduction": 847500,
+        "total_tax_credits": 1675318,
+        "final_national_tax": 3272807
+      },
+      "after": {
+        "standard_credit": 130000,
+        "special_income_deduction": 0,
+        "insurance_credit": 0,
+        "education_credit": 0,
+        "political_credit": 111909,
+        "hometown_credit": 173409,
+        "pension_account_credit": 600000,
+        "credit_card_deduction": 1657500,
+        "total_tax_credits": 1675318,
+        "final_national_tax": 3151307
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A253",
+      "intervention": "medical date inemployment",
+      "edits": [
+        [
+          "medical.0.date",
+          "2025-09-30"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "after": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 0,
+        "medical_credit": 198750,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "changed_fields": [
+        "medical_credit"
+      ]
+    },
+    {
+      "case_id": "A253",
+      "intervention": "rent date inemployment",
+      "edits": [
+        [
+          "rent.payments.0.date",
+          "2025-09-30"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "after": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 134300,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "changed_fields": [
+        "rent_credit"
+      ]
+    },
+    {
+      "case_id": "A268",
+      "intervention": "first interest paid onfirst workingday",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.0.date",
+          "2025-05-01"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 8700000,
+        "tax_base": 38950000,
+        "final_national_tax": 3922500
+      },
+      "after": {
+        "housing_income_deduction": 11900000,
+        "tax_base": 35750000,
+        "final_national_tax": 3442500
+      },
+      "changed_fields": [
+        "housing_income_deduction",
+        "tax_base",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A268",
+      "intervention": "increase outsideemployment interest only",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.0.amount",
+          6400000
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 8700000,
+        "tax_base": 38950000,
+        "final_national_tax": 3922500
+      },
+      "after": {
+        "housing_income_deduction": 8700000,
+        "tax_base": 38950000,
+        "final_national_tax": 3922500
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A269",
+      "intervention": "registeredaddress matches contract",
+      "edits": [
+        [
+          "rent.resident_registration_address",
+          "가상시 청솔로 18 402호"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 0,
+        "medical_credit": 134100,
+        "standard_credit": 0,
+        "final_national_tax": 3411900
+      },
+      "after": {
+        "rent_credit": 1173000,
+        "medical_credit": 134100,
+        "standard_credit": 0,
+        "final_national_tax": 2238900
+      },
+      "changed_fields": [
+        "rent_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A270",
+      "intervention": "remove spouse home",
+      "edits": [
+        [
+          "housing_mortgage.household_homes_at_year_end",
+          [
+            {
+              "home_id": "home_employee",
+              "address": "가상시 솔등길 4",
+              "owner_person_id": "self"
+            }
+          ]
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 0,
+        "pension_deduction": 2943000,
+        "tax_base": 63157000
+      },
+      "after": {
+        "housing_income_deduction": 11600000,
+        "pension_deduction": 2943000,
+        "tax_base": 51557000
+      },
+      "changed_fields": [
+        "housing_income_deduction",
+        "tax_base"
+      ]
+    },
+    {
+      "case_id": "A271",
+      "intervention": "public designation activebefore June24",
+      "edits": [
+        [
+          "organization_designations.0.valid_from",
+          "2025-06-24"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "donation_credit": 255000,
+        "final_national_tax": 6836200,
+        "settlement_national_tax": 1536200
+      },
+      "after": {
+        "donation_credit": 630000,
+        "final_national_tax": 6461200,
+        "settlement_national_tax": 1161200
+      },
+      "changed_fields": [
+        "donation_credit",
+        "final_national_tax",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A273",
+      "intervention": "management fee ordinary consumption",
+      "edits": [
+        [
+          "cards.1.billed_item",
+          "ordinary_goods_services"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "credit_card_deduction": 360000,
+        "tax_base": 26890000,
+        "computed_tax": 2773500
+      },
+      "after": {
+        "credit_card_deduction": 1140000,
+        "tax_base": 26110000,
+        "computed_tax": 2656500
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "tax_base",
+        "computed_tax"
+      ]
+    },
+    {
+      "case_id": "A274",
+      "intervention": "medical purpose therapeutic",
+      "edits": [
+        [
+          "medical.1.treatment_purpose",
+          "therapeutic"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 156600,
+        "pension_account_credit": 372000,
+        "final_national_tax": 3729900
+      },
+      "after": {
+        "medical_credit": 284100,
+        "pension_account_credit": 372000,
+        "final_national_tax": 3602400
+      },
+      "changed_fields": [
+        "medical_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A277",
+      "intervention": "father actually supported",
+      "edits": [
+        [
+          "dependents.0.supported",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "credit_card_deduction": 615000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "insurance_credit": 82800,
+        "medical_credit": 376500,
+        "credit_card_deduction": 615000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "insurance_credit",
+        "medical_credit"
+      ]
+    },
+    {
+      "case_id": "A278",
+      "intervention": "salaryonly spouse 5m",
+      "edits": [
+        [
+          "dependents.0.gross_salary",
+          5000000
+        ],
+        [
+          "dependents.0.income_amount",
+          1500000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 0,
+        "insurance_credit": 0,
+        "medical_credit": 309000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "insurance_credit": 108000,
+        "medical_credit": 309000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A279",
+      "intervention": "first course employee burden",
+      "edits": [
+        [
+          "education.0.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "education_credit": 720000,
+        "final_national_tax": 7693600,
+        "settlement_national_tax": 1573600
+      },
+      "after": {
+        "education_credit": 1410000,
+        "final_national_tax": 7003600,
+        "settlement_national_tax": 883600
+      },
+      "changed_fields": [
+        "education_credit",
+        "final_national_tax",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A280",
+      "intervention": "price within alternativehousing limit",
+      "edits": [
+        [
+          "rent.standard_value",
+          400000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 0,
+        "insurance_credit": 85200,
+        "standard_credit": 0
+      },
+      "after": {
+        "rent_credit": 1350000,
+        "insurance_credit": 85200,
+        "standard_credit": 0
+      },
+      "changed_fields": [
+        "rent_credit"
+      ]
+    },
+    {
+      "case_id": "A281",
+      "intervention": "culture creditpaid debit",
+      "edits": [
+        [
+          "cards.1.payment_method",
+          "debit"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "total_salary": 73200000,
+        "credit_card_deduction": 2515000,
+        "tax_base": 55775000
+      },
+      "after": {
+        "total_salary": 73200000,
+        "credit_card_deduction": 2860000,
+        "tax_base": 55430000
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "tax_base"
+      ]
+    },
+    {
+      "case_id": "A283",
+      "intervention": "mother assignedemployee",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 0,
+        "medical_credit": 108900,
+        "donation_credit": 0
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "medical_credit": 888900,
+        "donation_credit": 180000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "medical_credit",
+        "donation_credit"
+      ]
+    },
+    {
+      "case_id": "A284",
+      "intervention": "second medical paidbefore retirement",
+      "edits": [
+        [
+          "medical.1.date",
+          "2025-09-30"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 194700,
+        "donation_credit": 285000,
+        "final_national_tax": 2121300
+      },
+      "after": {
+        "medical_credit": 419700,
+        "donation_credit": 285000,
+        "final_national_tax": 1896300
+      },
+      "changed_fields": [
+        "medical_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A284",
+      "intervention": "charity movedbefore retirement",
+      "edits": [
+        [
+          "donations.0.date",
+          "2025-09-30"
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 194700,
+        "donation_credit": 285000,
+        "final_national_tax": 2121300
+      },
+      "after": {
+        "medical_credit": 194700,
+        "donation_credit": 285000,
+        "final_national_tax": 2121300
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A285",
+      "intervention": "final itemizedchoice",
+      "edits": [
+        [
+          "deduction_choice",
+          "itemized"
+        ],
+        [
+          "special_deductions_requested",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 0,
+        "standard_credit": 130000,
+        "political_credit": 114909,
+        "tax_base": 79760000
+      },
+      "after": {
+        "housing_income_deduction": 7300000,
+        "standard_credit": 0,
+        "political_credit": 114909,
+        "tax_base": 72460000
+      },
+      "changed_fields": [
+        "housing_income_deduction",
+        "standard_credit",
+        "tax_base"
+      ]
+    },
+    {
+      "case_id": "A286",
+      "intervention": "second course undergraduate",
+      "edits": [
+        [
+          "education.1.level",
+          "university"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "education_credit": 525000,
+        "tax_base": 50140000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "education_credit": 1260000,
+        "tax_base": 50140000
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A287",
+      "intervention": "interest February payment March1",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.0.date",
+          "2025-03-01"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 5500000,
+        "donation_credit": 240000,
+        "pension_account_credit": 516000,
+        "settlement_national_tax": -513000
+      },
+      "after": {
+        "housing_income_deduction": 7900000,
+        "donation_credit": 240000,
+        "pension_account_credit": 516000,
+        "settlement_national_tax": -873000
+      },
+      "changed_fields": [
+        "housing_income_deduction",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A287",
+      "intervention": "designation September stillactive",
+      "edits": [
+        [
+          "organization_designations.0.valid_to",
+          "2025-09-01"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 5500000,
+        "donation_credit": 240000,
+        "pension_account_credit": 516000,
+        "settlement_national_tax": -513000
+      },
+      "after": {
+        "housing_income_deduction": 5500000,
+        "donation_credit": 555000,
+        "pension_account_credit": 516000,
+        "settlement_national_tax": -828000
+      },
+      "changed_fields": [
+        "donation_credit",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A287",
+      "intervention": "outsideinterestamount doubles",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.3.amount",
+          5600000
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 5500000,
+        "donation_credit": 240000,
+        "pension_account_credit": 516000,
+        "settlement_national_tax": -513000
+      },
+      "after": {
+        "housing_income_deduction": 5500000,
+        "donation_credit": 240000,
+        "pension_account_credit": 516000,
+        "settlement_national_tax": -513000
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A288",
+      "intervention": "firstchild assignedemployee",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 1000000,
+        "child_credit": 250000,
+        "education_credit": 195000,
+        "medical_credit": 240900
+      },
+      "after": {
+        "eligible_dependents": 2,
+        "additional_deduction": 1000000,
+        "child_credit": 550000,
+        "education_credit": 465000,
+        "medical_credit": 675900
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "child_credit",
+        "education_credit",
+        "medical_credit"
+      ]
+    },
+    {
+      "case_id": "A288",
+      "intervention": "cosmetic receipt therapeutic",
+      "edits": [
+        [
+          "medical.3.treatment_purpose",
+          "therapeutic"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 1000000,
+        "child_credit": 250000,
+        "education_credit": 195000,
+        "medical_credit": 240900
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "additional_deduction": 1000000,
+        "child_credit": 250000,
+        "education_credit": 195000,
+        "medical_credit": 375900
+      },
+      "changed_fields": [
+        "medical_credit"
+      ]
+    },
+    {
+      "case_id": "A289",
+      "intervention": "secondchild onlysalary 5m",
+      "edits": [
+        [
+          "dependents.1.gross_salary",
+          5000000
+        ],
+        [
+          "dependents.1.income_amount",
+          1500000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "insurance_credit": 74400,
+        "education_credit": 915000,
+        "medical_credit": 282900
+      },
+      "after": {
+        "eligible_dependents": 2,
+        "insurance_credit": 120000,
+        "education_credit": 915000,
+        "medical_credit": 282900
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A289",
+      "intervention": "schoolscholarship zero",
+      "edits": [
+        [
+          "education.0.scholarship",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "insurance_credit": 74400,
+        "education_credit": 915000,
+        "medical_credit": 282900
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "insurance_credit": 74400,
+        "education_credit": 1170000,
+        "medical_credit": 282900
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A290",
+      "intervention": "management bill ordinarygoods",
+      "edits": [
+        [
+          "cards.2.billed_item",
+          "ordinary_goods_services"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 5495000,
+        "income_deduction_limit_excess": 495000,
+        "medical_credit": 158100,
+        "final_national_tax": 2202900
+      },
+      "after": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 6000000,
+        "income_deduction_limit_excess": 1000000,
+        "medical_credit": 158100,
+        "final_national_tax": 2202900
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "income_deduction_limit_excess"
+      ]
+    },
+    {
+      "case_id": "A290",
+      "intervention": "cosmeticmedical therapeutic",
+      "edits": [
+        [
+          "medical.1.treatment_purpose",
+          "therapeutic"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 5495000,
+        "income_deduction_limit_excess": 495000,
+        "medical_credit": 158100,
+        "final_national_tax": 2202900
+      },
+      "after": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 5495000,
+        "income_deduction_limit_excess": 495000,
+        "medical_credit": 368100,
+        "final_national_tax": 1992900
+      },
+      "changed_fields": [
+        "medical_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A291",
+      "intervention": "spouse assignedemployee",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 0,
+        "pension_deduction": 2931200,
+        "donation_credit": 6710700,
+        "pension_account_credit": 504000,
+        "settlement_national_tax": -3952588
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "pension_deduction": 2931200,
+        "donation_credit": 8480700,
+        "pension_account_credit": 504000,
+        "settlement_national_tax": -6082588
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "donation_credit",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A291",
+      "intervention": "designation dayearlier",
+      "edits": [
+        [
+          "organization_designations.1.valid_from",
+          "2025-04-30"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 0,
+        "pension_deduction": 2931200,
+        "donation_credit": 6710700,
+        "pension_account_credit": 504000,
+        "settlement_national_tax": -3952588
+      },
+      "after": {
+        "eligible_dependents": 0,
+        "pension_deduction": 2931200,
+        "donation_credit": 7730700,
+        "pension_account_credit": 504000,
+        "settlement_national_tax": -4972588
+      },
+      "changed_fields": [
+        "donation_credit",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A292",
+      "intervention": "head nohousing claim",
+      "edits": [
+        [
+          "rent.head_claims_housing",
+          false
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 0,
+        "education_credit": 615000,
+        "medical_credit": 128400,
+        "final_national_tax": 3458100
+      },
+      "after": {
+        "rent_credit": 918000,
+        "education_credit": 615000,
+        "medical_credit": 128400,
+        "final_national_tax": 2540100
+      },
+      "changed_fields": [
+        "rent_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A292",
+      "intervention": "rentdate changed whileheadclaims",
+      "edits": [
+        [
+          "rent.payments.0.date",
+          "2025-04-01"
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 0,
+        "education_credit": 615000,
+        "medical_credit": 128400,
+        "final_national_tax": 3458100
+      },
+      "after": {
+        "rent_credit": 0,
+        "education_credit": 615000,
+        "medical_credit": 128400,
+        "final_national_tax": 3458100
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A292",
+      "intervention": "schoolcost employeeburden",
+      "edits": [
+        [
+          "education.0.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "rent_credit": 0,
+        "education_credit": 615000,
+        "medical_credit": 128400,
+        "final_national_tax": 3458100
+      },
+      "after": {
+        "rent_credit": 0,
+        "education_credit": 1200000,
+        "medical_credit": 128400,
+        "final_national_tax": 2873100
+      },
+      "changed_fields": [
+        "education_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A293",
+      "intervention": "parent incomewithinlimit",
+      "edits": [
+        [
+          "dependents.0.income_amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 0,
+        "education_credit": 885000,
+        "insurance_credit": 0,
+        "medical_credit": 303900
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "education_credit": 885000,
+        "insurance_credit": 136500,
+        "medical_credit": 303900
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A293",
+      "intervention": "cosmeticmedical therapeutic",
+      "edits": [
+        [
+          "medical.1.treatment_purpose",
+          "therapeutic"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 0,
+        "education_credit": 885000,
+        "insurance_credit": 0,
+        "medical_credit": 303900
+      },
+      "after": {
+        "eligible_dependents": 0,
+        "education_credit": 885000,
+        "insurance_credit": 0,
+        "medical_credit": 543900
+      },
+      "changed_fields": [
+        "medical_credit"
+      ]
+    },
+    {
+      "case_id": "A294",
+      "intervention": "sibling no disability",
+      "edits": [
+        [
+          "dependents.0.disabled",
+          false
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "education_credit": 1395000,
+        "insurance_credit": 145500,
+        "credit_card_deduction": 705000
+      },
+      "after": {
+        "eligible_dependents": 0,
+        "additional_deduction": 0,
+        "education_credit": 1395000,
+        "insurance_credit": 0,
+        "credit_card_deduction": 705000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "additional_deduction",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A294",
+      "intervention": "siblingcard employeeowner",
+      "edits": [
+        [
+          "cards.1.person_id",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "education_credit": 1395000,
+        "insurance_credit": 145500,
+        "credit_card_deduction": 705000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "education_credit": 1395000,
+        "insurance_credit": 145500,
+        "credit_card_deduction": 1935000
+      },
+      "changed_fields": [
+        "credit_card_deduction"
+      ]
+    },
+    {
+      "case_id": "A294",
+      "intervention": "company tuition employeeburden",
+      "edits": [
+        [
+          "education.1.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "education_credit": 1395000,
+        "insurance_credit": 145500,
+        "credit_card_deduction": 705000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "education_credit": 1935000,
+        "insurance_credit": 145500,
+        "credit_card_deduction": 705000
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A295",
+      "intervention": "secondpostpartum separatebirthevent",
+      "edits": [
+        [
+          "medical.1.birth_event",
+          "distinct_birth"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 529500,
+        "child_credit": 500000,
+        "final_national_tax": 2465500
+      },
+      "after": {
+        "medical_credit": 664500,
+        "child_credit": 500000,
+        "final_national_tax": 2330500
+      },
+      "changed_fields": [
+        "medical_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A295",
+      "intervention": "secondglasses ownedspouse",
+      "edits": [
+        [
+          "medical.3.person_id",
+          "spouse"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 529500,
+        "child_credit": 500000,
+        "final_national_tax": 2465500
+      },
+      "after": {
+        "medical_credit": 513000,
+        "child_credit": 500000,
+        "final_national_tax": 2482000
+      },
+      "changed_fields": [
+        "medical_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A295",
+      "intervention": "medicalreimbursement zero",
+      "edits": [
+        [
+          "medical.5.reimbursed",
+          0
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 529500,
+        "child_credit": 500000,
+        "final_national_tax": 2465500
+      },
+      "after": {
+        "medical_credit": 664500,
+        "child_credit": 500000,
+        "final_national_tax": 2330500
+      },
+      "changed_fields": [
+        "medical_credit",
+        "final_national_tax"
+      ]
+    },
+    {
+      "case_id": "A296",
+      "intervention": "culture originallydebit",
+      "edits": [
+        [
+          "cards.1.payment_method",
+          "debit"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "credit_card_deduction": 2437500,
+        "education_credit": 330000,
+        "tax_base": 59862500
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "credit_card_deduction": 2500000,
+        "education_credit": 330000,
+        "tax_base": 59800000
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "tax_base"
+      ]
+    },
+    {
+      "case_id": "A296",
+      "intervention": "motherassigned employee",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "credit_card_deduction": 2437500,
+        "education_credit": 330000,
+        "tax_base": 59862500
+      },
+      "after": {
+        "eligible_dependents": 2,
+        "credit_card_deduction": 2500000,
+        "education_credit": 330000,
+        "tax_base": 57300000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "credit_card_deduction",
+        "tax_base"
+      ]
+    },
+    {
+      "case_id": "A296",
+      "intervention": "academy regularschool",
+      "edits": [
+        [
+          "education.1.institution_type",
+          "primary_secondary_school"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "credit_card_deduction": 2437500,
+        "education_credit": 330000,
+        "tax_base": 59862500
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "credit_card_deduction": 2437500,
+        "education_credit": 450000,
+        "tax_base": 59862500
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A297",
+      "intervention": "child incomewithinlimit",
+      "edits": [
+        [
+          "dependents.0.income_amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 74400,
+        "housing_income_deduction": 5600000
+      },
+      "after": {
+        "eligible_dependents": 2,
+        "additional_deduction": 2000000,
+        "insurance_credit": 74400,
+        "housing_income_deduction": 5600000
+      },
+      "changed_fields": [
+        "eligible_dependents"
+      ]
+    },
+    {
+      "case_id": "A297",
+      "intervention": "postretirement interest withinemployment",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.1.date",
+          "2025-08-31"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 74400,
+        "housing_income_deduction": 5600000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 74400,
+        "housing_income_deduction": 9500000
+      },
+      "changed_fields": [
+        "housing_income_deduction"
+      ]
+    },
+    {
+      "case_id": "A297",
+      "intervention": "postretirement insurance withinemployment",
+      "edits": [
+        [
+          "insurance.1.date",
+          "2025-08-31"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 74400,
+        "housing_income_deduction": 5600000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 120000,
+        "housing_income_deduction": 5600000
+      },
+      "changed_fields": [
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A298",
+      "intervention": "spouse incomewithinlimit",
+      "edits": [
+        [
+          "dependents.0.income_amount",
+          1000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 3000000,
+        "insurance_credit": 0,
+        "medical_credit": 703500,
+        "education_credit": 810000
+      },
+      "after": {
+        "eligible_dependents": 2,
+        "additional_deduction": 3000000,
+        "insurance_credit": 91200,
+        "medical_credit": 703500,
+        "education_credit": 810000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A298",
+      "intervention": "childassigned employee",
+      "edits": [
+        [
+          "dependents.2.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 3000000,
+        "insurance_credit": 0,
+        "medical_credit": 703500,
+        "education_credit": 810000
+      },
+      "after": {
+        "eligible_dependents": 2,
+        "additional_deduction": 3000000,
+        "insurance_credit": 0,
+        "medical_credit": 703500,
+        "education_credit": 1530000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A299",
+      "intervention": "final itemizedchoice",
+      "edits": [
+        [
+          "deduction_choice",
+          "itemized"
+        ],
+        [
+          "special_deductions_requested",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "standard_credit": 130000,
+        "insurance_credit": 0,
+        "education_credit": 0,
+        "credit_card_deduction": 1650000,
+        "political_credit": 128409,
+        "hometown_credit": 173409,
+        "pension_account_credit": 792000,
+        "settlement_total": -218700
+      },
+      "after": {
+        "standard_credit": 0,
+        "insurance_credit": 105600,
+        "education_credit": 870000,
+        "credit_card_deduction": 1650000,
+        "political_credit": 128409,
+        "hometown_credit": 173409,
+        "pension_account_credit": 792000,
+        "settlement_total": -1148860
+      },
+      "changed_fields": [
+        "standard_credit",
+        "insurance_credit",
+        "education_credit",
+        "settlement_total"
+      ]
+    },
+    {
+      "case_id": "A299",
+      "intervention": "sibling card employeeowned",
+      "edits": [
+        [
+          "cards.1.person_id",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "standard_credit": 130000,
+        "insurance_credit": 0,
+        "education_credit": 0,
+        "credit_card_deduction": 1650000,
+        "political_credit": 128409,
+        "hometown_credit": 173409,
+        "pension_account_credit": 792000,
+        "settlement_total": -218700
+      },
+      "after": {
+        "standard_credit": 130000,
+        "insurance_credit": 0,
+        "education_credit": 0,
+        "credit_card_deduction": 3000000,
+        "political_credit": 128409,
+        "hometown_credit": 173409,
+        "pension_account_credit": 792000,
+        "settlement_total": -441450
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "settlement_total"
+      ]
+    },
+    {
+      "case_id": "A300",
+      "intervention": "firstinterest onemploymentstart",
+      "edits": [
+        [
+          "housing_mortgage.interest_payments.0.date",
+          "2025-02-01"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 9000000,
+        "rent_credit": 0,
+        "education_credit": 262500,
+        "donation_credit": 315000,
+        "settlement_national_tax": -167500
+      },
+      "after": {
+        "housing_income_deduction": 10500000,
+        "rent_credit": 0,
+        "education_credit": 262500,
+        "donation_credit": 315000,
+        "settlement_national_tax": -527500
+      },
+      "changed_fields": [
+        "housing_income_deduction",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A300",
+      "intervention": "schoolacademyreclassified",
+      "edits": [
+        [
+          "education.1.institution_type",
+          "primary_secondary_school"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 9000000,
+        "rent_credit": 0,
+        "education_credit": 262500,
+        "donation_credit": 315000,
+        "settlement_national_tax": -167500
+      },
+      "after": {
+        "housing_income_deduction": 9000000,
+        "rent_credit": 0,
+        "education_credit": 450000,
+        "donation_credit": 315000,
+        "settlement_national_tax": -355000
+      },
+      "changed_fields": [
+        "education_credit",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A300",
+      "intervention": "organization earlierdesignation",
+      "edits": [
+        [
+          "organization_designations.0.valid_from",
+          "2025-05-31"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 9000000,
+        "rent_credit": 0,
+        "education_credit": 262500,
+        "donation_credit": 315000,
+        "settlement_national_tax": -167500
+      },
+      "after": {
+        "housing_income_deduction": 9000000,
+        "rent_credit": 0,
+        "education_credit": 262500,
+        "donation_credit": 525000,
+        "settlement_national_tax": -377500
+      },
+      "changed_fields": [
+        "donation_credit",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A210",
+      "intervention": "incorrect annual-reset first birth",
+      "edits": [
+        [
+          "dependents.2.birth_order_this_year",
+          1
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 6000000,
+        "child_credit": 1250000,
+        "tax_base": 47260000
+      },
+      "after": {
+        "basic_deduction": 6000000,
+        "child_credit": 850000,
+        "tax_base": 47260000
+      },
+      "changed_fields": [
+        "child_credit"
+      ]
+    },
+    {
+      "case_id": "A247",
+      "intervention": "incorrect annual-reset first birth",
+      "edits": [
+        [
+          "dependents.1.birth_order_this_year",
+          1
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 1664750,
+        "insurance_credit": 0,
+        "child_credit": 500000,
+        "basic_deduction": 3000000
+      },
+      "after": {
+        "medical_credit": 1664750,
+        "insurance_credit": 0,
+        "child_credit": 300000,
+        "basic_deduction": 3000000
+      },
+      "changed_fields": [
+        "child_credit"
+      ]
+    },
+    {
+      "case_id": "A247",
+      "intervention": "cosmetic purpose therapeutic",
+      "edits": [
+        [
+          "medical.3.treatment_purpose",
+          "therapeutic"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 1664750,
+        "insurance_credit": 0,
+        "child_credit": 500000,
+        "basic_deduction": 3000000
+      },
+      "after": {
+        "medical_credit": 1804250,
+        "insurance_credit": 0,
+        "child_credit": 500000,
+        "basic_deduction": 3000000
+      },
+      "changed_fields": [
+        "medical_credit"
+      ]
+    },
+    {
+      "case_id": "A247",
+      "intervention": "adult child reaches basic age",
+      "edits": [
+        [
+          "dependents.0.age",
+          20
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "medical_credit": 1664750,
+        "insurance_credit": 0,
+        "child_credit": 500000,
+        "basic_deduction": 3000000
+      },
+      "after": {
+        "medical_credit": 1664750,
+        "insurance_credit": 98400,
+        "child_credit": 750000,
+        "basic_deduction": 4500000
+      },
+      "changed_fields": [
+        "insurance_credit",
+        "child_credit",
+        "basic_deduction"
+      ]
+    },
+    {
+      "case_id": "A251",
+      "intervention": "postretirement card moved into employment",
+      "edits": [
+        [
+          "cards.3.date",
+          "2025-10-31"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 5650000,
+        "income_deduction_limit_excess": 650000,
+        "education_credit": 0,
+        "tax_base": 28350000
+      },
+      "after": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 5800000,
+        "income_deduction_limit_excess": 800000,
+        "education_credit": 0,
+        "tax_base": 28350000
+      },
+      "changed_fields": [
+        "credit_card_deduction",
+        "income_deduction_limit_excess"
+      ]
+    },
+    {
+      "case_id": "A251",
+      "intervention": "child assigned employee",
+      "edits": [
+        [
+          "dependents.0.assigned_claimant",
+          "self"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 5650000,
+        "income_deduction_limit_excess": 650000,
+        "education_credit": 0,
+        "tax_base": 28350000
+      },
+      "after": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 5650000,
+        "income_deduction_limit_excess": 650000,
+        "education_credit": 138000,
+        "tax_base": 26850000
+      },
+      "changed_fields": [
+        "education_credit",
+        "tax_base"
+      ]
+    },
+    {
+      "case_id": "A251",
+      "intervention": "mortgage interest below aggregate cap",
+      "edits": [
+        [
+          "housing_mortgage.interest_paid",
+          18000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 20000000,
+        "credit_card_deduction": 5650000,
+        "income_deduction_limit_excess": 650000,
+        "education_credit": 0,
+        "tax_base": 28350000
+      },
+      "after": {
+        "housing_income_deduction": 18000000,
+        "credit_card_deduction": 5650000,
+        "income_deduction_limit_excess": 0,
+        "education_credit": 0,
+        "tax_base": 29700000
+      },
+      "changed_fields": [
+        "housing_income_deduction",
+        "income_deduction_limit_excess",
+        "tax_base"
+      ]
+    },
+    {
+      "case_id": "A253",
+      "intervention": "actual in-employment mortgage interest below 6m cap",
+      "edits": [
+        [
+          "housing_mortgage.interest_paid",
+          5700000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "after": {
+        "housing_income_deduction": 5700000,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "changed_fields": [
+        "housing_income_deduction"
+      ]
+    },
+    {
+      "case_id": "A253",
+      "intervention": "unsupported loan term below ten-year condition",
+      "edits": [
+        [
+          "housing_mortgage.term_years",
+          9
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "after": {
+        "housing_income_deduction": 0,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "changed_fields": [
+        "housing_income_deduction"
+      ]
+    },
+    {
+      "case_id": "A253",
+      "intervention": "one owned household home remains eligible",
+      "edits": [
+        [
+          "housing_mortgage.household_homes_at_year_end",
+          [
+            {
+              "home_id": "only",
+              "address": "가상시 하나길 1",
+              "owner_person_id": "self"
+            }
+          ]
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "after": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A253",
+      "intervention": "two owned household homes fail condition",
+      "edits": [
+        [
+          "housing_mortgage.household_homes_at_year_end",
+          [
+            {
+              "home_id": "first",
+              "address": "가상시 하나길 1",
+              "owner_person_id": "self"
+            },
+            {
+              "home_id": "second",
+              "address": "가상시 두길 2",
+              "owner_person_id": "self"
+            }
+          ]
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "after": {
+        "housing_income_deduction": 0,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "changed_fields": [
+        "housing_income_deduction"
+      ]
+    },
+    {
+      "case_id": "A253",
+      "intervention": "larger already eligible interest remains capped",
+      "edits": [
+        [
+          "housing_mortgage.interest_paid",
+          9700000
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "after": {
+        "housing_income_deduction": 6000000,
+        "rent_credit": 0,
+        "medical_credit": 0,
+        "donation_credit": 3570000,
+        "settlement_total": -3277800
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A272",
+      "intervention": "spouse payment instead borne by employee",
+      "edits": [
+        [
+          "education.1.paid_by_self",
+          true
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 4500000,
+        "child_credit": 250000,
+        "education_credit": 555000
+      },
+      "after": {
+        "basic_deduction": 4500000,
+        "child_credit": 250000,
+        "education_credit": 660000
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A272",
+      "intervention": "school employee portion not borne by employee",
+      "edits": [
+        [
+          "education.0.paid_by_self",
+          false
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 4500000,
+        "child_credit": 250000,
+        "education_credit": 555000
+      },
+      "after": {
+        "basic_deduction": 4500000,
+        "child_credit": 250000,
+        "education_credit": 390000
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A272",
+      "intervention": "larger spouse payment still excluded",
+      "edits": [
+        [
+          "education.1.amount",
+          1700000
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 4500000,
+        "child_credit": 250000,
+        "education_credit": 555000
+      },
+      "after": {
+        "basic_deduction": 4500000,
+        "child_credit": 250000,
+        "education_credit": 555000
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A275",
+      "intervention": "prepaid spring tuition paid first working day",
+      "edits": [
+        [
+          "education.0.date",
+          "2025-03-01"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "education_credit": 1005000,
+        "final_national_tax": 121500,
+        "settlement_national_tax": -728500
+      },
+      "after": {
+        "education_credit": 1350000,
+        "final_national_tax": 0,
+        "settlement_national_tax": -850000
+      },
+      "changed_fields": [
+        "education_credit",
+        "final_national_tax",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A275",
+      "intervention": "spring additional tuition paid before employment",
+      "edits": [
+        [
+          "education.1.date",
+          "2025-02-28"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "education_credit": 1005000,
+        "final_national_tax": 121500,
+        "settlement_national_tax": -728500
+      },
+      "after": {
+        "education_credit": 810000,
+        "final_national_tax": 316500,
+        "settlement_national_tax": -533500
+      },
+      "changed_fields": [
+        "education_credit",
+        "final_national_tax",
+        "settlement_national_tax"
+      ]
+    },
+    {
+      "case_id": "A275",
+      "intervention": "larger spring prepayment still outside employment",
+      "edits": [
+        [
+          "education.0.amount",
+          12400000
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "education_credit": 1005000,
+        "final_national_tax": 121500,
+        "settlement_national_tax": -728500
+      },
+      "after": {
+        "education_credit": 1005000,
+        "final_national_tax": 121500,
+        "settlement_national_tax": -728500
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A276",
+      "intervention": "larger ordinary undergraduate tuition stays capped",
+      "edits": [
+        [
+          "education.0.amount",
+          20000000
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 4000000,
+        "education_credit": 3030000
+      },
+      "after": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 4000000,
+        "education_credit": 3030000
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A276",
+      "intervention": "larger qualified special education remains uncapped",
+      "edits": [
+        [
+          "education.1.amount",
+          23000000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 4000000,
+        "education_credit": 3030000
+      },
+      "after": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 4000000,
+        "education_credit": 4800000
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A276",
+      "intervention": "ordinary university instead qualified special education",
+      "edits": [
+        [
+          "education.0.level",
+          "special_disabled"
+        ],
+        [
+          "education.0.institution_type",
+          "qualified_special_education"
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 4000000,
+        "education_credit": 3030000
+      },
+      "after": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 4000000,
+        "education_credit": 3540000
+      },
+      "changed_fields": [
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A276",
+      "intervention": "special education beneficiary not disabled",
+      "edits": [
+        [
+          "dependents.1.disabled",
+          false
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 4000000,
+        "education_credit": 3030000
+      },
+      "after": {
+        "basic_deduction": 4500000,
+        "additional_deduction": 2000000,
+        "education_credit": 1350000
+      },
+      "changed_fields": [
+        "additional_deduction",
+        "education_credit"
+      ]
+    },
+    {
+      "case_id": "A282",
+      "intervention": "coherent earned-only salary beyond5m",
+      "edits": [
+        [
+          "dependents.0.gross_salary",
+          5100000
+        ],
+        [
+          "dependents.0.income_amount",
+          1560000
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 270000
+      },
+      "after": {
+        "eligible_dependents": 0,
+        "additional_deduction": 0,
+        "insurance_credit": 120000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "additional_deduction",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A282",
+      "intervention": "adult child disability absent",
+      "edits": [
+        [
+          "dependents.0.disabled",
+          false
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 270000
+      },
+      "after": {
+        "eligible_dependents": 0,
+        "additional_deduction": 0,
+        "insurance_credit": 120000
+      },
+      "changed_fields": [
+        "eligible_dependents",
+        "additional_deduction",
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A282",
+      "intervention": "child insurance actual burden absent",
+      "edits": [
+        [
+          "insurance.1.paid_by_self",
+          false
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 270000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 120000
+      },
+      "changed_fields": [
+        "insurance_credit"
+      ]
+    },
+    {
+      "case_id": "A282",
+      "intervention": "both insurance premiums larger but separately capped",
+      "edits": [
+        [
+          "insurance.0.amount",
+          2300000
+        ],
+        [
+          "insurance.1.amount",
+          2400000
+        ]
+      ],
+      "expectation": "invariance",
+      "matched_expected": true,
+      "before": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 270000
+      },
+      "after": {
+        "eligible_dependents": 1,
+        "additional_deduction": 2000000,
+        "insurance_credit": 270000
+      },
+      "changed_fields": []
+    },
+    {
+      "case_id": "A243",
+      "intervention": "remove second household home",
+      "edits": [
+        [
+          "housing_mortgage.household_homes_at_year_end",
+          [
+            {
+              "home_id": "OWN1",
+              "address": "가상시 저녁길 61 301호",
+              "owner_person_id": "self"
+            }
+          ]
+        ]
+      ],
+      "expectation": "change",
+      "matched_expected": true,
+      "before": {
+        "housing_income_deduction": 0,
+        "rent_credit": 0,
+        "education_credit": 795000,
+        "tax_base": 58090000
+      },
+      "after": {
+        "housing_income_deduction": 11500000,
+        "rent_credit": 0,
+        "education_credit": 795000,
+        "tax_base": 46590000
+      },
+      "changed_fields": [
+        "housing_income_deduction",
+        "tax_base"
+      ]
+    }
+  ]
+}

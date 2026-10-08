@@ -243,6 +243,10 @@ def build_reports(
     ]
     lines += [f"- `{rule['rule_id']}`: {rule['description']}" for rule in unverified]
     editorials = [
+        ("부가세 C204부터 C300", "authored_vat_204300_editorial.md"),
+        ("급여 B254부터 B300", "authored_payroll_254300_editorial.md"),
+        ("연말정산 A204부터 A300", "authored_yearend_204300_editorial.md"),
+        ("급여 B154부터 B253", "authored_payroll_154253_editorial.md"),
         ("연말정산 A001부터 A103", "authored_yearend_first103_editorial.md"),
         ("연말정산 A104부터 A203", "authored_yearend_104203_editorial.md"),
         ("급여 B001부터 B153", "authored_payroll_first153_editorial.md"),
