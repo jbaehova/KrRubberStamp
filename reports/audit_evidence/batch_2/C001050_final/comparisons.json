@@ -1,0 +1,1061 @@
+{
+  "source_sha256": "c014dd5bf70ffd3be69921fb5bc4cd4f347d83ce98a9e9a7829bac3bace165ac",
+  "read_scope": {
+    "batch1_metadata_cases": 300,
+    "current_complete_cases": 50,
+    "closer_batch1_raw_graphs_read_at_least": 62,
+    "author_frozen_proof_read": true,
+    "keepers_exactly_preserved": 10
+  },
+  "comparison_method": "Independent manual case-by-case decision and source relationship review. No automatic similarity score.",
+  "counts": {
+    "rewrite": 12,
+    "keep": 38
+  },
+  "rows": [
+    {
+      "case_id": "C001",
+      "closest_batch1": "C154",
+      "closest_batch1_title": "분할 결제로 받은 보관함 납품 대금",
+      "current_peer": "C014",
+      "verdict": "rewrite",
+      "reason": "기존 C154에도 두 실행 수금과 하나의 완료 공급이 있다. 새 거래번호 계약과 거래 수 요청 추가 외에 선택과 공급세액 판단이 같다. 두 지급을 모두 삭제한 유효 반사실도 요청 답이 그대로여서 지급행의 새 외형을 다양성으로 인정하지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "adb563f8ab4e3467c39513eac82e31feec1b6d7d9fb39f9eb4f572990143c3b5"
+    },
+    {
+      "case_id": "C002",
+      "closest_batch1": "C079",
+      "closest_batch1_title": "현금 수금 대장과 발급한 영수증의 범위",
+      "current_peer": "C007",
+      "verdict": "keep",
+      "reason": "기존은 독립 현금 공급별 발급 여부를 고른다. 현재는 하나의 전체 공급에 카드와 미발급 현금이 귀속된다. 카드 비중만 바꾸면 전체 공급세액은 그대로이고 발급 공제만 바뀐다. 공급을 두 거래로 분리하지 않는 실제 범위 판단이 새롭다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "tax_base",
+        "output_vat",
+        "receipt_credit"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "baa7803c0d981eb1ad574ce0580cde6c2bc404f32b91cc07b3961a7d439c8d91"
+    },
+    {
+      "case_id": "C003",
+      "closest_batch1": "C217",
+      "closest_batch1_title": "직원 작업대 세척기의 미지급 구매",
+      "current_peer": "C022",
+      "verdict": "rewrite",
+      "reason": "기존 C217은 완료 인수와 적격 전체 전자를 미지급 상태와 분리했다. 현재도 같은 전체 공제 판단이며 0원 지급을 일부 이체로 바꾼 상태 차이다. 이체만 완납으로 바꿔도 요청 전체 매입 및 환급이 그대로다. 새로운 부분 증빙과 전체 증빙의 겹침은 없다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "input_vat",
+        "deductible_input_vat",
+        "refund_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "8b9e26a316cea6637d1f2ddccb4b949033b0b888d9f5fcccbe55263c15e7056d"
+    },
+    {
+      "case_id": "C004",
+      "closest_batch1": "C124",
+      "closest_batch1_title": "시험 결제 두 건의 발행 공제 끝수",
+      "current_peer": null,
+      "verdict": "keep",
+      "reason": "기존 승인 유지 객체다. 발급 88원과 무발급 포함 공급187원의 집합 차이가 합산 절사와 교차하여 요청 공제1원 및 매출세액17원에 드러난다. 원본 객체와 유효 반사실을 다시 확인했다.",
+      "center_fact_paths": [
+        "transactions",
+        "activities"
+      ],
+      "requested_answer_fields": [
+        "receipt_credit",
+        "output_vat",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": true,
+      "prior_keeper_reason": "기존의 발급액 합산 후 절사에 미발급 현금의 공급세액 합산을 함께 대조한다. 발급 88원과 전체 공급 187원이 서로 다른 공제 결과를 만들므로 포함 집합과 절사 단계의 상호작용이 요청 답에 보인다.",
+      "case_object_sha256": "199d78bf29e00509b694cb59bdd65d4b9b8a4508523929f61dad97c71b32edc6"
+    },
+    {
+      "case_id": "C005",
+      "closest_batch1": "C017",
+      "closest_batch1_title": "현금영수증 한 건과 카드 한 건의 판매 경로",
+      "current_peer": "C012",
+      "verdict": "keep",
+      "reason": "기존 두 발급은 독립 전체 공급이다. 현재는 하나의 완료 공급에 두 지급 발급이 붙고 지급합계 자체가 전체 공급보다 작다. 실제 지급 합계와 전체 공급세액을 분리하여 미수잔액을 공제 모수에 넣지 않는다. C012는 이 관계의 반복이므로 따로 유지하지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "receipt_credit",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "d8457b45013cb52481a260325a141232389a02d847f890629e692bde682292ff"
+    },
+    {
+      "case_id": "C006",
+      "closest_batch1": "C264",
+      "closest_batch1_title": "법인 시험 시설의 두 직접 재료 반입",
+      "current_peer": "C003",
+      "verdict": "rewrite",
+      "reason": "기존 C264도 과세 작업장에 인수한 두 독립 정상 매입의 합산이다. 한 매입의 전자를 전체 카드로 바꾸고 다른 매입에 지급이 없다는 사실을 붙였으나 둘 다 전체 적격 증빙으로 동일하게 공제된다. 동액과 증빙 매체 및 지급행 유무 외에 자료 선택 관계가 추가되지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "unique_transaction_count",
+        "refund_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "298947138fff345e70aebc73b1e4a3f0cc003097455275fdc71b7a787ab40eed"
+    },
+    {
+      "case_id": "C007",
+      "closest_batch1": "C130",
+      "closest_batch1_title": "오프라인 장부와 재전송된 카드 승인 파일",
+      "current_peer": "C002",
+      "verdict": "keep",
+      "reason": "가까운 기존 C130은 같은 전체 공급의 총액 장부와 공급가액 카드 원본을 맞춘다. 현재는 더 큰 전체 공급760000원과 부분 지급240000원 별도세액 및 발급264000원 총액의 세 범위를 맞춘다. 지급 참조의 원금과 세액을 정상화한 뒤 일부 발급만 합산한다. C002의 동일 총액 표기와는 이 연결 기준이 다르다는 좁은 범위로 인정한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "tax_base",
+        "receipt_credit"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "954cc8b440ce881be7a9ad3954314a5ef271923e6f36c636b08611e1c1e2ef07"
+    },
+    {
+      "case_id": "C008",
+      "closest_batch1": "C215",
+      "closest_batch1_title": "무대 바퀴 교체팀의 주간 정산",
+      "current_peer": "C015",
+      "verdict": "keep",
+      "reason": "기존은 전체 매출 현금영수증과 전체 매입 카드의 방향을 구별한다. 현재 동일 카드 매체에서 매출은 전체 공급 일부만 발급됐고 매입은 지급 및 증빙이 전부다. 양 방향에서 같은 결제 원본의 적용 범위를 다르게 복원한다. 카드 대신 현금으로 옮긴 C015는 별도 의미로 인정하지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "deductible_input_vat",
+        "receipt_credit"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "0ae6e29404cd91aef3fbe4b3753888429d8efe5bc6673223dddc5e230056f66d"
+    },
+    {
+      "case_id": "C009",
+      "closest_batch1": "C277",
+      "closest_batch1_title": "같은 날 같은 가격의 두 반입과 한 번의 전자 발급",
+      "current_peer": "C013",
+      "verdict": "keep",
+      "reason": "기존 동액 독립 구매 두 건의 원본 귀속과 가까우나 이번 매출 두 건은 발급 범위가 각각 전체 및 부분이다. 동액 공급을 하나로 합치지 않고 동일 법적 발급 종류의 범위를 공급별로 분리한다. 공급 총세액120000원과 실제 발급합계990000원의 공제를 따로 계산한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "receipt_credit",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "6434b714f88fc9b6824e166bf6debee9537d093b7f3f08e57876df98cc5ca3b4"
+    },
+    {
+      "case_id": "C010",
+      "closest_batch1": "C159",
+      "closest_batch1_title": "입금되지 않은 방송 자막 납품 잔금",
+      "current_peer": "C033",
+      "verdict": "keep",
+      "reason": "기존 C159는 완료 공급에 전체 전자가 존재하고 일부 수금이 있다. 현재는 실제 완료 공급만 있고 지급과 발급 집합이 모두 비어 있다. 존재하지 않는 증빙을 만들어 매출을 없애거나 발급 공제를 넣지 않는 원자료 복원 업무다. 빈 집합과 공급 존재를 실제 문서에서 함께 확인했다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "receipt_credit",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "7589ea20b2bad2b654fe1701b34439cef0efee5c49de0582e3242ef5427e7de4"
+    },
+    {
+      "case_id": "C011",
+      "closest_batch1": "C122",
+      "closest_batch1_title": "결제 봉투와 별도로 도착한 세금계산서",
+      "current_peer": "C003",
+      "verdict": "rewrite",
+      "reason": "현재 중심은 완료 구매의 전체 전자로 전체 세액을 공제하는 C003/C217과 같다. 두 부분 현금 장부는 비적격 보조 원본이며 합산·선택·전체 전자의 범위를 바꾸지 않는다. 정상 지급행과 장부 수를 늘린 것만으로 새 문제라고 유지하지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "input_vat",
+        "deductible_input_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "2a3799b770dfcc7bdf291374d9e59af08e28feacb594d21dd1946c82dbd33813"
+    },
+    {
+      "case_id": "C012",
+      "closest_batch1": "C017",
+      "closest_batch1_title": "현금영수증 한 건과 카드 한 건의 판매 경로",
+      "current_peer": "C005",
+      "verdict": "rewrite",
+      "reason": "C005와 하나의 공급에 두 실제 부분 지급 및 각각의 발급을 합산하고 미수 잔액을 제외하는 완결 관계가 같다. 두 지급을 카드로 만들거나 동액으로 맞추고 별도 승인 ID를 붙인 차이뿐이다. 독립 원본은 양쪽 모두 이미 둘이며 실제 사본 선택이나 서로 다른 범위의 제외가 생기지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "receipt_credit",
+        "output_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "a5f0357cf4b36b5549e014a88760139d849fd06bd214bc58fbc50e89c88270ec"
+    },
+    {
+      "case_id": "C013",
+      "closest_batch1": "C079",
+      "closest_batch1_title": "현금 수금 대장과 발급한 영수증의 범위",
+      "current_peer": "C002",
+      "verdict": "rewrite",
+      "reason": "독립 공급 둘 모두 C002의 카드 부분 발급과 미발급 현금 완납 구조를 그대로 가진다. 실행 배열 교차와 정상 거래 증가 외 선택 조건이나 집계 범위 차이는 없다. 배열 순서는 계약에서 의미를 갖지 않으므로 새 업무 관계로 인정하지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "receipt_credit",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "1eb12b51c705b80f458845f6f5c13f0b007eb102aa6fdcdc09b7c3273c1e8311"
+    },
+    {
+      "case_id": "C014",
+      "closest_batch1": "C166",
+      "closest_batch1_title": "현장 방문 검사와 납부한 예정고지",
+      "current_peer": "C001",
+      "verdict": "rewrite",
+      "reason": "기존 C166의 완료 공급 전체 세액에서 유효 예정고지를 차감하는 중심 판단이 같다. 고객 지급을 둘로 나눈 C001 관계를 곁들였지만 그 지급을 모두 삭제해도 세액 및 선납과 순세액은 같다. 새 계약과 분할 고객 입금은 기존 고지 정산과 결합된 판단을 만들지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "prepaid_vat",
+        "net_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "551c7bf2709baf82ce246d395d120e9d121d88bb4e7b88d6a235b3ab94612ffc"
+    },
+    {
+      "case_id": "C015",
+      "closest_batch1": "C215",
+      "closest_batch1_title": "무대 바퀴 교체팀의 주간 정산",
+      "current_peer": "C008",
+      "verdict": "rewrite",
+      "reason": "C008과 전체 매출 일부 발급 및 전체 적격 매입의 방향별 범위 구별이 같다. 매출과 매입 카드를 각각 현금영수증으로 바꾼 매체 차이이며 지원 법규와 합산 및 제외 관계는 동일하다. 답 칸을 순세액으로 바꾼 것도 차이 근거가 아니다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "receipt_credit",
+        "net_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "bf5257ce4cad752fbecc310805e19dfb85a7c3afc9d10d34ca1e3869350b29dc"
+    },
+    {
+      "case_id": "C016",
+      "closest_batch1": "C076",
+      "closest_batch1_title": "같은 현장 조끼를 입은 두 사람의 저녁 식사",
+      "current_peer": null,
+      "verdict": "keep",
+      "reason": "기존 승인 유지 객체다. 같은 고객 현장이라는 사실 중 외주는 회사 과세 업무의 인수이고 식사만 외부 고객 참석으로 제한된다. 고객과의 연결을 두 활동에 일괄 전파하지 않는다.",
+      "center_fact_paths": [
+        "transactions",
+        "activities"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "noncreditable_vat",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": true,
+      "prior_keeper_reason": "고객이 나타나는 장소 기록과 실제 식사 참여자 기록을 구별한다. 외주 절단은 고객 현장에서 자기 회사의 설치 계약에 귀속되고 식사만 고객 참여로 제한되므로 고객 관련 사실의 두 의미를 비교한다.",
+      "case_object_sha256": "a7ef85837d16c40f4f23cb9b4f955206a2ad8bb867c27b856cd0776f470d51ab"
+    },
+    {
+      "case_id": "C017",
+      "closest_batch1": "C039",
+      "closest_batch1_title": "가족의 별도 가게에 들어간 공구",
+      "current_peer": "C028",
+      "verdict": "keep",
+      "reason": "기존 승인 유지 객체다. 가족 독립 점포가 유상 매출 상대이기도 하지만 사적 계산대의 실제 수령은 그 매출 계약 밖이다. 같은 상대와 조직의 거래라도 매출 포함과 매입 제외가 서로 다른 방향에서 작동한다.",
+      "center_fact_paths": [
+        "transactions",
+        "activities"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "noncreditable_vat",
+        "net_vat"
+      ],
+      "exact_preserved_keeper": true,
+      "prior_keeper_reason": "가족 독립 사업자는 회사의 유상 매출 상대이면서 별도 사적 계산대 수령자다. 같은 상대의 매출은 포함하고 계약 밖 사적 매입만 제외하는 방향 차이가 실제 답에 남는다.",
+      "case_object_sha256": "213863933af0207a5178c1e650664d1a9a913aff5dc7391b702495d54687eeac"
+    },
+    {
+      "case_id": "C018",
+      "closest_batch1": "C081",
+      "closest_batch1_title": "면세 교육실과 과세 재료 판매대의 직접 지출",
+      "current_peer": "C027",
+      "verdict": "keep",
+      "reason": "기존 직접 과세 및 면세 사용 대조에 실제 지급 완결성과 전체 적격 전자 범위의 반대 연결을 둔다. 과세 구매는 부분 지급이어도 전체 공제이며 면세 구매는 완납 및 전체 증빙이어도 제한된다. 지급 비율을 귀속 판단으로 대신할 수 없는 대비를 문항 한 개로 인정한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "noncreditable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "15ac7ed88d115952306abd191c8dee196d84390370cc376ec59cfd2397b2463b"
+    },
+    {
+      "case_id": "C019",
+      "closest_batch1": "C273",
+      "closest_batch1_title": "같은 토지 조성의 세 공정별 발급 세액",
+      "current_peer": "C028",
+      "verdict": "keep",
+      "reason": "부분 카드의 일부 세액과 같은 공급 전체 전자의 범위를 복원한 뒤 토지 최초 조성의 전체 공급세액300000원을 제한한다. 과거 여러 전체 토지 전자의 정상 합산과 달리 부분 카드 세액100000원을 전체 불공제 범위로 오인할 위험을 실제 원본 연결로 해결한다. 같은 부분 토지 사례를 반복 허용하는 판정은 아니다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "input_vat",
+        "noncreditable_vat",
+        "deductible_input_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "193ab2e56d2bf6da4d5d615304fa42275686e9d6df622c8b7cd067ca290226b5"
+    },
+    {
+      "case_id": "C020",
+      "closest_batch1": "C137",
+      "closest_batch1_title": "원본에도 세액 구분이 없는 차량 정비 증빙",
+      "current_peer": "C027",
+      "verdict": "keep",
+      "reason": "전체 카드에는 세액 구분이 없고 같은 공급 전체 전자가 보완하지만 일반 승용차 제한은 남는다. 독립 검사에서 전자 제거만은 불공제 불변이고 전자 없는 비대상 차도 미표시 때문에 제한됐다. 증빙 보완과 차량 요건은 서로 다른 단계다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "noncreditable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "a06b66422e2952ffd9e0d47dfe95525322b1d3cbee63642eaea9d0881b3b7c98"
+    },
+    {
+      "case_id": "C021",
+      "closest_batch1": "C270",
+      "closest_batch1_title": "단골 공구상의 전환 뒤 발급한 현금영수증",
+      "current_peer": "C030",
+      "verdict": "keep",
+      "reason": "간이 공급자의 전체 카드 매입 제한이 소비자 부분 발급의 공제 전 납부세액을 남긴다. 공급자만 일반으로 바꾸면 적격 전체 매입이 매출세액을 넘어 환급이고 발급 공제도0원이다. 두 조건이 후속 한도에서 실제 상호작용한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "noncreditable_vat",
+        "receipt_credit",
+        "payable_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "d54bcf2ce8406fe6c2be3a9271b228ca76eb09756a0cfd0fca05979818c4b75d"
+    },
+    {
+      "case_id": "C022",
+      "closest_batch1": "C219",
+      "closest_batch1_title": "보관함 부품 구매의 두 번호 체계",
+      "current_peer": "C003",
+      "verdict": "keep",
+      "reason": "기존 같은 전체 카드와 전체 전자의 중복과 달리 부분 카드330000원과 미발급 현금220000원 및 전체 전자1100000원이 서로 다른 범위다. 부분 카드 세액을 전체 전자와 더하거나 결제비율로 줄이지 않는다. 전체 전자 제거는 지원 밖 부분 매입으로 거절되며 이를 정상 비례공제로 기록하지 않았다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "input_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "26464cc4c5e152ab3f8a4f1fa85b7d6d0643420c9f8212e2e7558f53d44642af"
+    },
+    {
+      "case_id": "C023",
+      "closest_batch1": "C020",
+      "closest_batch1_title": "창고에 오지 않은 6월 주문 재료",
+      "current_peer": "C042",
+      "verdict": "keep",
+      "reason": "현재 판매의 전체 공급세액과 실제 부분 발급은 남기며 미래 구매의 부분 카드 및 전체 전자는 함께 기간에서 제외한다. 미래 설비의 공급과 인수 및 지급과 발급을 같이 현재로 옮기면 전체 매입이 공제되고 판매 발급 공제도 납부세액 제한으로 사라진다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "deductible_input_vat",
+        "receipt_credit"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "d7984f382ad584a82fa8e02a29cf031e38d4ab5130235c25d1249a526e34d587"
+    },
+    {
+      "case_id": "C024",
+      "closest_batch1": "C122",
+      "closest_batch1_title": "결제 봉투와 별도로 도착한 세금계산서",
+      "current_peer": "C025",
+      "verdict": "keep",
+      "reason": "기존 일반 영수증 보완과 가까우나 여기서는 세액이 구분되지 않은 전체 카드와 적격 전체 전자가 같은 공급을 덮는다. 두 원본의 세액 표시 사실이 서로 달라도 충돌이나 카드 역산 표시로 처리하지 않고 전자의 독립 기재 근거로 전체 공제한다. 실제 전자 제거는 공제0원으로 바뀐다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "input_vat",
+        "deductible_input_vat",
+        "noncreditable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "9a786090c0229755a147fad8fde6684f98374032c663e8e794061c584806e490"
+    },
+    {
+      "case_id": "C025",
+      "closest_batch1": "C277",
+      "closest_batch1_title": "같은 날 같은 가격의 두 반입과 한 번의 전자 발급",
+      "current_peer": "C024",
+      "verdict": "keep",
+      "reason": "두 독립 동액 구매 모두 미표시 카드이며 적격 전자의 공급 참조는 첫 구매 하나다. 기존 C277에서는 두 카드 자체가 모두 적격이어서 전자의 귀속이 공제 차이를 만들지 않았다. 현재는 전자를 다른 구매까지 전파하면 공제액이2배가 되는 범위 선택이 핵심이다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "noncreditable_vat",
+        "input_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "327e88502dde33595fd6f7fc22d5bf0dbf6ab3d87b5b544f0e20ed12df9cdc1c"
+    },
+    {
+      "case_id": "C026",
+      "closest_batch1": "C171",
+      "closest_batch1_title": "전시 준비 중 서로 다른 두 점심 참석표",
+      "current_peer": "C039",
+      "verdict": "keep",
+      "reason": "두 부분 카드가 같은 적격 전체 전자 범위로 보완되지만 직원 식사와 고객 동석 식사의 전체 사용 제한이 다르다. 부분 카드액만으로 고객 식사의 제한 범위를 축소하지 않는다. 전체 증빙 적격을 두 활동에 동일하게 확인한 뒤 참여자 조건을 적용한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "noncreditable_vat",
+        "refund_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "28a84ecd9935abe50e2666935ae214a7f4ccaf7cbe0cfb7033554109d330d177"
+    },
+    {
+      "case_id": "C027",
+      "closest_batch1": "C184",
+      "closest_batch1_title": "유료 교재 판매실과 면세 수업실의 설치 지출",
+      "current_peer": "C020",
+      "verdict": "keep",
+      "reason": "미표시 전체 카드는 적격 전체 전자로 보완되어도 면세 사용 때문에 전체 제한이다. 독립 전자 제거 및 과세 사용 변경의 조합에서는 미표시 카드가 계속 제한되어 증빙과 사용의 두 단계가 구별된다. 차량 제한인 C020과 동일 활동 분류 문제라고 묶지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "input_vat",
+        "deductible_input_vat",
+        "noncreditable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "1987aa782f20313a4483b70a61d7d4771781e1e482ab68fc734e96b3490bedef"
+    },
+    {
+      "case_id": "C028",
+      "closest_batch1": "C183",
+      "closest_batch1_title": "회사 명의로 청구된 대표 집 방충망 수리",
+      "current_peer": "C019",
+      "verdict": "keep",
+      "reason": "가족 주거 설치의 부분 현금영수증과 전체 전자를 같은 공급에 연결하여 사적 사용의 전체 불공제액을 복원한다. 부분 지급 여부나 전체 전자 수취만으로 사적 사용을 회사 공제로 바꾸지 않는다. 가족 수령을 실제 과세 공방 수령으로 함께 바꾸는 유효 반사실에서 전체 공제가 바뀐다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "noncreditable_vat",
+        "deductible_input_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "847fea13ab4304a5b0837ad70ec89de36a0413f03f75e1efdf264c3cd92e847e"
+    },
+    {
+      "case_id": "C029",
+      "closest_batch1": "C075",
+      "closest_batch1_title": "허가받은 택시의 수리비 공제 검토",
+      "current_peer": "C031",
+      "verdict": "keep",
+      "reason": "영업 택시 정비의 부분 카드와 전체 전자를 복원하는 한편 운송 전체 공급과 승객 부분 카드의 다른 범위를 맞춘다. 같은 카드 원본이어도 정비 전체 세액과 판매 부분 발급 공제의 모수가 다르다. 직접 차량 사용 제한은 실제 요청 정비 공제액에도 작동한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "receipt_credit",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "cfe38772c4136012919dfecce1e419fb84f6779da48bf1266d6546443c535aed"
+    },
+    {
+      "case_id": "C030",
+      "closest_batch1": "C037",
+      "closest_batch1_title": "매입 공제 뒤 세금보다 큰 발행 공제액",
+      "current_peer": "C021",
+      "verdict": "keep",
+      "reason": "판매의 부분 발급 공제율715원보다 전체 전자 매입 차감 뒤 납부세액300원이 작다. 매입은 부분 이체액이 아니라 전체 공급97000원으로 공제해야 어느 한도가 먼저 적용되는지 맞는다. 지급 범위와 발급 범위를 양 방향에서 복원한 후 한도로 연결한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "receipt_credit",
+        "net_vat",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "fd08f2454e807ec3ea94e048f45262b8a5d6c5a6d7ee4c1aeae5926b4656ccca"
+    },
+    {
+      "case_id": "C031",
+      "closest_batch1": "C182",
+      "closest_batch1_title": "허가 대여 차량을 다른 사업 직원 이동에 사용한 달",
+      "current_peer": "C041",
+      "verdict": "keep",
+      "reason": "유효 허가는 같은 차량 및 직접 대여 작업에만 연결되며 현재 정비 둘은 실제 사용 작업 ID가 다르다. 직접 대여 정비는 부분 카드에 전체 전자를 보완하고 사무 정비는 지급이 없어도 전체 전자가 있다. 지급 완결성 대신 사용 ID와 전체 증빙 범위를 각각 확인하는 대비다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "noncreditable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "d97b59f2ecd3c978dc239443a86bb9f12c83d7f8c1fdc0be99e974a1399122b6"
+    },
+    {
+      "case_id": "C032",
+      "closest_batch1": "C280",
+      "closest_batch1_title": "전년 자료의 지점 코드가 뒤바뀐 조립 완구점",
+      "current_peer": "C005",
+      "verdict": "rewrite",
+      "reason": "신고 점포와 전년 선택 후10억원 초과로 발급 공제를 제외하는 중심 판단은 C280과 같다. 새 두 부분 발급 및 미수 기록은 이 자격 제외 뒤 요청 답에 나타나지 않는다. 정상 발급행을 나누고 새 계약으로 감싼 차이를 자격 대조의 새 의미로 승인하지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "receipt_credit",
+        "output_vat",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "67117cfed96d371a495bc6bb8dac2d9507a4b230de8046bf7868f82ff4f8d57c"
+    },
+    {
+      "case_id": "C033",
+      "closest_batch1": "C169",
+      "closest_batch1_title": "법인 취미점의 세 결제 경로",
+      "current_peer": "C010",
+      "verdict": "rewrite",
+      "reason": "기존 C169도 법인 소매점의 발급 및 미발급 독립 공급을 모두 합산하고 발급 공제를0원으로 제한한다. 무발급 지급을 빈 지급 집합으로 바꾸고 발급 대금을 일부로 줄였으나 실제 공제 범위 판단은 법인 요건에 가려진다. 정상 공급 수 조정 외 새 중앙 선택이 없다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "receipt_credit",
+        "output_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "d8a2f0ea06d69148781bfa3e1ce856c57ed93cdd71ecd8b63ab8eaee85bf8b87"
+    },
+    {
+      "case_id": "C034",
+      "closest_batch1": "C031",
+      "closest_batch1_title": "기업 납품용 카드 결제를 받는 실험기구업",
+      "current_peer": "C008",
+      "verdict": "rewrite",
+      "reason": "기존 C031에도 개인 비소비자 상대 업종의 카드 매출과 적격 전체 전자 매입이 있다. 매출 수금을 부분 카드로 및 매입 지급을 부분 이체로 바꾸어도 발급 공제는 업종 요건 때문에0원이고 전체 매입 공제 관계는 같다. 현재 핵심이 아닌 지급 상태 변경을 새 의미로 인정하지 않는다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "tax_base",
+        "receipt_credit",
+        "deductible_input_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "bd092ddec3bf2505335a2e5c78b3ecf10e424386d0ff7db5016807a6ed8a36e5"
+    },
+    {
+      "case_id": "C035",
+      "closest_batch1": "C238",
+      "closest_batch1_title": "인계 장부에 남은 지난해 전시 깃발",
+      "current_peer": "C042",
+      "verdict": "keep",
+      "reason": "현재 및 미래 공급에 같은 금액의 부분 승인이 존재해 승인 금액이나 접수 자료로 범위를 선택할 수 없다. 실제 공급일에 해당 지급 및 발급 참조를 같이 귀속시켜 현재 전체 매출과 현재 부분 공제만 남긴다. 공급 전체액과 지급액이 다르게 움직이는 기간 연결을 한 번 인정한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "receipt_credit",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "e530d845ba764650250c1affe4fab2355171521ceb4e9546914f4ccf6a0c4a41"
+    },
+    {
+      "case_id": "C036",
+      "closest_batch1": "C071",
+      "closest_batch1_title": "고객이 요청한 계산서와 판매 단말기 대조",
+      "current_peer": "C043",
+      "verdict": "keep",
+      "reason": "첫 공급 전체 계산서가 두 부분 지급 발급 모두의 공제 모수를 제외하며 둘째 별도 미수 공급의 부분 발급만 남긴다. 기존 한 카드 전체 중복 제외에서 발급 여러 원본의 범위로 확장됐고 첫 계산서를 제거하면 현재 실제 발급550000원이 추가되어 요청 공제가 변한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "tax_base",
+        "receipt_credit",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "66515bb1b0cfd0696bbfe90fb70bc9d313e7ab864da4bd1d3dc7c84df0b13a64"
+    },
+    {
+      "case_id": "C037",
+      "closest_batch1": "C176",
+      "closest_batch1_title": "예정신고 후 남은 발행 공제의 연간 몫",
+      "current_peer": "C050",
+      "verdict": "keep",
+      "reason": "실제 발급330000000원의 공제4290000원은 연간 잔여5724300원 아래다. 잘못 전체 공급550000000원을 모수로 쓰면 연간 잔여로 제한돼5724300원을 공제한다. 실제 미발급 수금을 발급으로 바꾸는 유효 반사실에서도 한도 단계가 달라져 연간 이력이 장식이 아니다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "receipt_credit",
+        "net_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "7c7f18eb3bca5648d4055054e6635b1cbdd6ae02c1eff5eb0ae3fa772d16e1d9"
+    },
+    {
+      "case_id": "C038",
+      "closest_batch1": "C083",
+      "closest_batch1_title": "공급자 전환 전후에 구입한 커팅 날",
+      "current_peer": "C040",
+      "verdict": "keep",
+      "reason": "동일 공급자의 간이 포기 전후를 실제 공급일로 고르며 첫 카드 전체는 공급자 자격으로 제한되고 둘째 미표시 전체 카드는 같은 공급 적격 전자가 보완한다. 전자 보완을 자격 부적격 과거 공급에 전파하지 않는다. 5월1일 일반 적용을 공식 이력 전제로 확인했다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "noncreditable_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "3f5e6b02786199813e937bd8753c63aa11f74e9bc51a22de1dcbfc0ec5868dda"
+    },
+    {
+      "case_id": "C039",
+      "closest_batch1": "C201",
+      "closest_batch1_title": "재료 중복과 고객 점심 및 다음 달 설치의 정리",
+      "current_peer": "C048",
+      "verdict": "keep",
+      "reason": "고객 식사의 부분 카드 및 전체 전자는 전체 사용 제한을 유지하고 자재의 미표시 전체 카드 및 전체 전자는 증빙 부족을 보완한다. 매출 부분 발급은 독립 공급이라 매입 전자를 매출 공제 제외로 전용하지 않는다. 증빙 보완과 활동 제한이 서로 다른 구매에서 반대로 작동한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "noncreditable_vat",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "542a7a82588be7c81fae51045a3107ae5a67fd35ddfb9b8e99c15f0c6205f4c8"
+    },
+    {
+      "case_id": "C040",
+      "closest_batch1": "C291",
+      "closest_batch1_title": "이름이 같은 자재상과 면세 강의 전용 설치",
+      "current_peer": "C038",
+      "verdict": "keep",
+      "reason": "기존 승인 유지 객체다. 일반 공급자 구매는 사적 인수 때문에 제외하고 회사 과세 인수는 간이 공급자 때문에 제외한다. 세번째 적격 회사 구매는 남아 두 제한축을 서로 대신 적용할 수 없다.",
+      "center_fact_paths": [
+        "transactions",
+        "activities"
+      ],
+      "requested_answer_fields": [
+        "input_vat",
+        "noncreditable_vat",
+        "deductible_input_vat",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": true,
+      "prior_keeper_reason": "첫 구매는 공급자 적격이지만 사적 수령이고 둘째는 회사 과세 사용이지만 공급자가 부적격이다. 서로 다른 사실 축을 교차하여 세 번째 정상 구매를 유지하는 선택 관계가 남는다.",
+      "case_object_sha256": "4a9835d00469f5f0d1d2a04e42a770ad2a3f6706a4868ea6556be791c5e8b0bc"
+    },
+    {
+      "case_id": "C041",
+      "closest_batch1": "C293",
+      "closest_batch1_title": "작은 올해 지점 매출과 허가차 관리 운행의 착시",
+      "current_peer": "C031",
+      "verdict": "keep",
+      "reason": "기존 승인 유지 객체다. 허가 차량의 실제 사용은 다른 제작업이며 토지 공사는 허가 업무에 직접 연결되어도 제한된다. 업무 ID를 맞추는 판단과 토지 사용 제한이 서로 다른 지출에 작동한다.",
+      "center_fact_paths": [
+        "transactions",
+        "activities"
+      ],
+      "requested_answer_fields": [
+        "noncreditable_vat",
+        "deductible_input_vat",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": true,
+      "prior_keeper_reason": "차량 허가와 실제 다른 사업 사용의 ID 불일치에 토지 직접 공사를 결합한다. 허가 업무에 연결된 토지라고 해도 토지 제한은 유지되는 반대 연결 관계를 다룬다.",
+      "case_object_sha256": "2c9489f47615e4f748cef804d22c3c64347274febd557ddcb88cb2bba47601b5"
+    },
+    {
+      "case_id": "C042",
+      "closest_batch1": "C290",
+      "closest_batch1_title": "소액 단말 판매 끝수와 다음 달 제작 인도",
+      "current_peer": "C035",
+      "verdict": "keep",
+      "reason": "미래 공급 및 연결 부분 발급은 함께 현재 범위 밖이며 현재 전체 미표시 매입은 거래에 포함하되 공제만0원이다. 현재 판매의 부분 발급은 유지하므로 자료를 버리는 기간 제외와 세액만 제한하는 증빙 부족의 효과가 분리된다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "deductible_input_vat",
+        "receipt_credit",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "dfe26c2b46a85fc1a6b53f9fadaffd960fdd421989e3dc6cba8548a7597cd4c4"
+    },
+    {
+      "case_id": "C043",
+      "closest_batch1": "C294",
+      "closest_batch1_title": "앞선 공제 잔여를 계산하며 현금 발급 중복을 찾은 달",
+      "current_peer": "C036",
+      "verdict": "rewrite",
+      "reason": "C242/C294의 신고 자격 및 전체 전자 중복 제외와 연간 잔여 연결이 중심이다. 첫 전체 전자를 삭제해 부분 발급을 모두 추가해도 요청3필드가 전부 그대로이며 둘째 부분 발급을 전체로 늘려도 같다. 두 새 범위 관계가 잔여5996000원에 가려져 기존 구조의 문서행 및 수치 변형을 넘지 못한다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "receipt_credit",
+        "output_vat",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "382f33277b3ae3c0d4136076354e96008dbe68554bc4ad7983cf4cd11e4de45b"
+    },
+    {
+      "case_id": "C044",
+      "closest_batch1": "C198",
+      "closest_batch1_title": "법인 단말기 매출과 토지 공사를 포함한 구매 통합",
+      "current_peer": "C033",
+      "verdict": "keep",
+      "reason": "기존 승인 유지 객체다. 전년 실제 완료 공급만 기간에서 제외하고 현재 세 발급 공급은 남기지만 법인 자격 제한은 현재 발급 전부에 적용한다. 기간 제외와 주체 제한이 서로 다른 범위로 작동한다.",
+      "center_fact_paths": [
+        "transactions",
+        "activities"
+      ],
+      "requested_answer_fields": [
+        "output_vat",
+        "receipt_credit",
+        "payable_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": true,
+      "prior_keeper_reason": "법인 발행 공제 제외에 전년 완료 공급의 올해 회수 제외를 결합했다. 현재 발급 공급은 모두 남기되 주체 자격은 전체에 적용하고 기간 선택은 한 거래에만 적용한다.",
+      "case_object_sha256": "0a22b675a315f22e1de9d4622830894beaee41d7f717201c2233b5d4615f6144"
+    },
+    {
+      "case_id": "C045",
+      "closest_batch1": "C230",
+      "closest_batch1_title": "가맹 간판 세 곳과 실제 청구 사업자 두 곳",
+      "current_peer": "C036",
+      "verdict": "keep",
+      "reason": "기존 승인 유지 객체다. 같은 표시 상호의 두 실제 공급자 ID는 세무 자격을 따로 고르며 같은 판매 공급 ID의 카드와 전자는 한 공급으로 연결한다. 동일성 판단의 방향이 매입 주체와 매출 증빙에서 반대다.",
+      "center_fact_paths": [
+        "transactions",
+        "activities"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "receipt_credit",
+        "payable_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": true,
+      "prior_keeper_reason": "같은 상호의 서로 다른 공급자 자격 선택에 판매 카드와 전자의 동일 공급 연결을 결합했다. 표시 상호는 매입을 합칠 근거가 아니고 실제 거래 ID는 매출을 합칠 근거인 상반된 동일성 판단이다.",
+      "case_object_sha256": "7da4e155fc54316ada7045b743b7c1e4ad97fa945d808fdfe25c2a5bbebf65ea"
+    },
+    {
+      "case_id": "C046",
+      "closest_batch1": "C289",
+      "closest_batch1_title": "대여 등록 말소 뒤 다시 수리한 한 대의 차",
+      "current_peer": "C020",
+      "verdict": "keep",
+      "reason": "기존 말소 전후 차량 대조와 가까우나 유효기간 정비의 부분 카드는 전체 전자로 보완하고 말소 후 미표시 전체 카드의 전자 보완은 공제를 살리지 못한다. 실제 공급일의 등록 효력과 증빙별 적격 범위가 서로 다른 두 정비에서 다른 결과를 만든다. 반복적인 말소 날짜 변형으로 확대하지 않는 좁은 판정이다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "noncreditable_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "0382f85afc1498448a9f5e87ce2065e38cdaab7d9caf61465b7c61fa336bebde"
+    },
+    {
+      "case_id": "C047",
+      "closest_batch1": "C195",
+      "closest_batch1_title": "공급자 전환일과 세 번째 입고일이 엇갈린 장부",
+      "current_peer": "C023",
+      "verdict": "keep",
+      "reason": "기존 승인 유지 객체다. 현재 면세 전용 녹화는 거래 및 불공제 합계에 남지만 미래 과세 설비는 거래와 모든 현재 세액 합계에서 제외된다. 두 비공제의 요청 건수와 불공제 합계가 서로 다르다.",
+      "center_fact_paths": [
+        "transactions",
+        "activities"
+      ],
+      "requested_answer_fields": [
+        "deductible_input_vat",
+        "noncreditable_vat",
+        "payable_vat",
+        "unique_transaction_count"
+      ],
+      "exact_preserved_keeper": true,
+      "prior_keeper_reason": "직접 면세 녹화 용역 제한과 미래 과세 설비의 기간 제외를 구별한다. 둘 다 현재 공제되지 않지만 기간 밖 매입은 현재 불공제 합계에도 들어가지 않는 차이를 요청 답에 남긴다.",
+      "case_object_sha256": "dcdff4a996567ea630ce72c70fafd0ddda7605e59921c0ff3988ce73f00a5e36"
+    },
+    {
+      "case_id": "C048",
+      "closest_batch1": "C144",
+      "closest_batch1_title": "담당자 이름이 같은 식사와 가정 배송",
+      "current_peer": "C039",
+      "verdict": "keep",
+      "reason": "기존 승인 유지 객체다. 가족 식사는 증빙 적격이지만 사용이 사적이고 실제 회사 물품은 사용 적격이나 증빙이 부족하다. 독립 정상 구매는 남아 두 제한의 교차 관계가 요청 답에 반영된다.",
+      "center_fact_paths": [
+        "transactions",
+        "activities"
+      ],
+      "requested_answer_fields": [
+        "noncreditable_vat",
+        "deductible_input_vat",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": true,
+      "prior_keeper_reason": "가족 식사는 증빙 적격이지만 사용이 사적이고 회사 물품은 사용이 정상이나 증빙이 부족하다. 서로 다른 제한이 발생하는 교차 관계를 명시하고 정상 구매를 유지한다.",
+      "case_object_sha256": "aa60f040d33fcd02abb2806114f5bd9f7c93a499b70b24e76387a0f068a6af37"
+    },
+    {
+      "case_id": "C049",
+      "closest_batch1": "C193",
+      "closest_batch1_title": "협업 점심과 부품 원가 뒤에 남은 고지 세금",
+      "current_peer": "C030",
+      "verdict": "keep",
+      "reason": "기존 승인 유지 객체다. 토지 제한 후 적격 집기 매입을 차감한 납부세액15000원이 발급율28600원보다 작아 먼저 공제 제한한다. 유효 고지는 그 뒤 환급800000원을 만든다. 단계별 반사실로 고지를 먼저 적용하는 잘못된 순서와 구별된다.",
+      "center_fact_paths": [
+        "transactions",
+        "activities"
+      ],
+      "requested_answer_fields": [
+        "receipt_credit",
+        "deductible_input_vat",
+        "net_vat",
+        "refund_vat"
+      ],
+      "exact_preserved_keeper": true,
+      "prior_keeper_reason": "토지 지출 제한 후 남는 납부세액이 발행 공제율 결과보다 작아 공제 전 세액 한도가 먼저 적용된다. 이후 유효 고지가 환급을 만드는 순서를 각각 바꾸는 반사실이 있다.",
+      "case_object_sha256": "923abf9d6378303dac6bbc6dd11c168440bab2ed8dbc040de330f3d745c9e9be"
+    },
+    {
+      "case_id": "C050",
+      "closest_batch1": "C194",
+      "closest_batch1_title": "공제 잔여와 세액 칸 보완을 같이 맡은 생활매장",
+      "current_peer": "C037",
+      "verdict": "keep",
+      "reason": "미표시 전액 지급 구매는 제한하되 부분 이체 구매는 실제 전체 전자로470000원을 공제한다. 매출 부분 발급에는 실제 예정신고의 잔여5710000원을 적용한다. 판매 발급 일부의 크기는 현재 잔여에 가려지지만 전체 매입 증빙과 지급 범위의 반대 연결은 요청 공제 및 납부액에 남는다. 지급액 자체를 공제 범위로 쓰지 않는 전체 매입 대조까지 포함한 제한적 유지다.",
+      "center_fact_paths": [
+        "supplies",
+        "payments",
+        "evidence_documents"
+      ],
+      "requested_answer_fields": [
+        "noncreditable_vat",
+        "deductible_input_vat",
+        "receipt_credit",
+        "payable_vat"
+      ],
+      "exact_preserved_keeper": false,
+      "prior_keeper_reason": null,
+      "case_object_sha256": "c4a294f535ce10a3d5c38a7cd83f5027ee253991301e9380bbcf8a795d134f90"
+    }
+  ],
+  "whole_chunk_editorial_approved": false
+}

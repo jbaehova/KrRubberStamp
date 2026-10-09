@@ -1,0 +1,205 @@
+{
+  "source_sha256": "c014dd5bf70ffd3be69921fb5bc4cd4f347d83ce98a9e9a7829bac3bace165ac",
+  "records": [
+    {
+      "case_id": "C001",
+      "design": "Remove both actual customer payments while preserving completed full supply and invoice.",
+      "kind": "invariant",
+      "before": {
+        "output_vat": 120000,
+        "unique_transaction_count": 1
+      },
+      "after": {
+        "output_vat": 120000,
+        "unique_transaction_count": 1
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C003",
+      "design": "Only partial payment becomes full payment; full supply credit is unchanged.",
+      "kind": "invariant",
+      "before": {
+        "input_vat": 154000,
+        "deductible_input_vat": 154000,
+        "refund_vat": 154000
+      },
+      "after": {
+        "input_vat": 154000,
+        "deductible_input_vat": 154000,
+        "refund_vat": 154000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C005",
+      "design": "Remove actual issued cash receipt without removing its actual payment.",
+      "kind": "change",
+      "before": {
+        "output_vat": 100000,
+        "receipt_credit": 10010,
+        "payable_vat": 89990
+      },
+      "after": {
+        "output_vat": 100000,
+        "receipt_credit": 4290,
+        "payable_vat": 95710
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C012",
+      "design": "Remove second issued card receipt but keep both independent actual approvals.",
+      "kind": "change",
+      "before": {
+        "receipt_credit": 8580,
+        "output_vat": 90000,
+        "unique_transaction_count": 1
+      },
+      "after": {
+        "receipt_credit": 4290,
+        "output_vat": 90000,
+        "unique_transaction_count": 1
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C014",
+      "design": "Remove both customer transfers; tax prepayment and complete supply remain.",
+      "kind": "invariant",
+      "before": {
+        "output_vat": 910000,
+        "prepaid_vat": 560000,
+        "net_vat": 350000
+      },
+      "after": {
+        "output_vat": 910000,
+        "prepaid_vat": 560000,
+        "net_vat": 350000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C020",
+      "design": "Remove invoice but keep full unstated-VAT card: vehicle block remains.",
+      "kind": "invariant",
+      "before": {
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 70000
+      },
+      "after": {
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 70000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C020",
+      "design": "Remove invoice and change official vehicle class to non-excise: missing VAT still blocks.",
+      "kind": "invariant",
+      "before": {
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 70000
+      },
+      "after": {
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 70000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C027",
+      "design": "Remove invoice: exempt use still blocks full unstated-VAT card.",
+      "kind": "invariant",
+      "before": {
+        "input_vat": 80000,
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 80000
+      },
+      "after": {
+        "input_vat": 80000,
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 80000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C027",
+      "design": "Without invoice even taxable-use counterfactual remains blocked by missing stated VAT.",
+      "kind": "invariant",
+      "before": {
+        "input_vat": 80000,
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 80000
+      },
+      "after": {
+        "input_vat": 80000,
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 80000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C022",
+      "design": "Removing full invoice leaves unsupported partial purchase credit and is rejected, not accepted as proportionate credit.",
+      "kind": "rejection",
+      "error": "Partial purchase evidence requires a full tax invoice",
+      "passed": true
+    },
+    {
+      "case_id": "C043",
+      "design": "Remove first whole invoice: both partial issuances enter candidate but annual cap masks all requested fields.",
+      "kind": "invariant",
+      "before": {
+        "receipt_credit": 5996000,
+        "output_vat": 130000000,
+        "payable_vat": 124004000
+      },
+      "after": {
+        "receipt_credit": 5996000,
+        "output_vat": 130000000,
+        "payable_vat": 124004000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C043",
+      "design": "Make second issued payment cover full supply with matching receipt and remove unissued cash: annual cap masks all requested fields.",
+      "kind": "invariant",
+      "before": {
+        "receipt_credit": 5996000,
+        "output_vat": 130000000,
+        "payable_vat": 124004000
+      },
+      "after": {
+        "receipt_credit": 5996000,
+        "output_vat": 130000000,
+        "payable_vat": 124004000
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C050",
+      "design": "Only invoice-backed purchase partial transfer becomes full payment; deductible whole purchase remains unchanged.",
+      "kind": "invariant",
+      "before": {
+        "noncreditable_vat": 320000,
+        "deductible_input_vat": 470000,
+        "receipt_credit": 5710000,
+        "payable_vat": 53820000
+      },
+      "after": {
+        "noncreditable_vat": 320000,
+        "deductible_input_vat": 470000,
+        "receipt_credit": 5710000,
+        "payable_vat": 53820000
+      },
+      "passed": true
+    }
+  ],
+  "counts": {
+    "invariant": 10,
+    "change": 2,
+    "rejection": 1
+  }
+}

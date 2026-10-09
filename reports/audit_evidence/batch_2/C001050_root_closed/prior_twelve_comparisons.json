@@ -1,0 +1,219 @@
+{
+  "source_sha256": "d025227396a2a1a0074e8ba69d45fac18dd4538e6e46eb29b027f524935ed523",
+  "frozen_37_sha256": "3128bc6ac3104cb00221a5160844145e490074b7f985f646ef8d9ef7d7334bed",
+  "method": "직접 읽은 닫힌 원고의 실제 공급, 지급, 원본 효력, 사용 활동과 요청 필드를 수기로 대조했다. reservation 및 숫자 차이는 의미 승인 근거가 아니다.",
+  "case_comparisons": [
+    {
+      "case_id": "C001",
+      "nearest_prior": [
+        "B1 C219",
+        "B2 C060",
+        "B2 C051"
+      ],
+      "whole_process": "한 실제 판매의 현금과 카드 두 부분 지급에 각각 다른 발급기관의 독립 정정 참조가 붙는다. 두 현재 범위를 합산하고 세 번째 미발급 은행 지급은 공급에만 남긴다.",
+      "difference": "C060의 동일 원본 재전달 dedup과 다른 승인 취소 선택은 없다. C051의 한 정정과 달리 서로 대체하지 않는 두 독립 chain이 같은 공급의 발급 모수로 수렴하며 각 chain의 효력 손실이 별개로 요청 공제를 바꾼다.",
+      "status": "root_review_pending"
+    },
+    {
+      "case_id": "C003",
+      "nearest_prior": [
+        "B2 C052",
+        "B2 C058"
+      ],
+      "whole_process": "한 판매의 지급 단위 현금 원본 취소와 공급 전체 전자 취소를 구별하고 유효 카드 부분만 모수로 남긴다.",
+      "difference": "한 범위의 취소 원리를 반대 상태로 바꾸는 대신 같은 공급에 동시에 붙은 두 범위의 효력을 처리한다. 전체 전자 복원은 모든 부분 모수를 배제하고 현금 원본 복원은 해당 지급 부분만 추가한다. 두 유효 CF의 출력 변화가 서로 다르다.",
+      "status": "root_review_pending"
+    },
+    {
+      "case_id": "C006",
+      "nearest_prior": [
+        "B1 C219",
+        "B2 C053",
+        "B2 C057",
+        "B2 C062",
+        "B2 C064"
+      ],
+      "whole_process": "같은 전량 구매에 카드 지급 범위와 지급 참조 없는 전체 전자의 독립 금액 정정 두 chain이 각각 적격 전체 증빙을 만든다.",
+      "difference": "현재 카드와 현재 전자를 서로 대체하는 관계로 오인하면 안 된다. 어느 한 현재 증빙을 잃는 유효 CF는 전체 공제를 유지하며 두 증빙을 함께 잃을 때만 일반 인수 영수증이 남아 공제가 사라진다. 단일 선택 경로의 modality 교체와 다른 보호 관계다.",
+      "status": "root_review_pending"
+    },
+    {
+      "case_id": "C011",
+      "nearest_prior": [
+        "B2 C062",
+        "B2 C064"
+      ],
+      "whole_process": "전량 구매의 오기 전체 전자를 정정하고 세액 미표시 전액 카드가 함께 유효하다.",
+      "difference": "미표시 카드가 요청 계산에서 적격 경로를 만들지 않아 전체 전자 단독 선택 업무와 충분히 구별되지 않는다.",
+      "status": "requires_individual_rewrite_root_hold"
+    },
+    {
+      "case_id": "C012",
+      "nearest_prior": [
+        "B2 C004",
+        "B2 C061",
+        "B2 C051"
+      ],
+      "whole_process": "한 완료 공급의 현금 정정 부분과 유효 카드 부분 및 미발급 이체 잔액을 연결하고 선택된 부분 발급 전체에 한 번 절사한다.",
+      "difference": "C061의 세 독립 전량 공급과 달리 공급 전체 과세액은 하나이고 두 지급 범위 및 미발급 지급을 분해해 발급 모수를 만든다. 유효 발급 2310원과 전량 공급 5500원의 구별 뒤 합산 절사 30원을 계산하며 지급별 먼저 절사한 29원은 잘못이다. 단순 끝수나 금액 변경만 차이로 세지 않는다.",
+      "status": "root_review_pending"
+    },
+    {
+      "case_id": "C013",
+      "nearest_prior": [
+        "B1 C291",
+        "B1 C294",
+        "B2 C078"
+      ],
+      "whole_process": "동일 상호인 공급자 두 등록번호를 실제 구매에 연결하고 일반 공급자의 현재 표시 정정 카드와 별개 간이 공급자의 적격 표시 카드를 다르게 처리한다.",
+      "difference": "C078의 공급일과 확인일 사이 전환 조회 축은 없다. 실제 두 등록 ID를 구별해야 일반 구매 정정을 다른 공급자에 전파하지 않고 별도 간이 구매 제한을 유지한다.",
+      "status": "root_review_pending"
+    },
+    {
+      "case_id": "C014",
+      "nearest_prior": [
+        "B1 C184",
+        "B2 C027",
+        "B2 C085"
+      ],
+      "whole_process": "전용 면세 활동의 적격 전체 전자 구매와 전용 과세 활동의 취소 전체 전자/일반 인수 영수증 구매를 연결해 서로 다른 공제 장애를 나눈다.",
+      "difference": "활동 귀속만으로 두 입력을 나누거나 한 미표시 카드를 보완하는 단일 구매가 아니다. 면세 구매는 증빙을 갖춰도 제한되고 과세 구매는 실제 공급을 유지한 채 적격 전체 원본을 잃어 제한된다. 과세 구매 전자의 효력 복원은 그 입력만 공제시킨다.",
+      "status": "root_review_pending"
+    },
+    {
+      "case_id": "C015",
+      "nearest_prior": [
+        "B1 C128",
+        "B2 C066"
+      ],
+      "whole_process": "유효 매입 증빙 선택으로 입력 공제를 적용하고 남은 양수 납부세액으로 부분 발급 공제를 제한한다.",
+      "difference": "현재 카드 replacement와 C066 전체 전자 선택은 입력 원본 방식 차이이며 3000/4000 금액 차이로 전체 업무를 구별할 수 없다.",
+      "status": "requires_individual_rewrite_root_hold"
+    },
+    {
+      "case_id": "C032",
+      "nearest_prior": [
+        "B1 C071",
+        "B2 C059",
+        "B2 C067"
+      ],
+      "whole_process": "첫 판매의 지급 부분 카드 금액 정정과 별개 둘째 판매의 전체 전자 효력에 따른 부분 카드 제외를 같이 처리한다.",
+      "difference": "두 판매에 같은 whole-invoice 상태만 적용하는 C059나 whole-invoice replacement 후 연간 잔여를 보는 C067과 다르다. 실제 replacement는 첫 지급 부분에만 적용되며 공급전체 제외는 둘째 전자에서만 적용된다.",
+      "status": "root_review_pending"
+    },
+    {
+      "case_id": "C033",
+      "nearest_prior": [
+        "B2 C007",
+        "B2 C051"
+      ],
+      "whole_process": "한 판매의 동액 두 지급이 서로 다른 VAT 포함 기준을 가지며 현금 gross 원본과 카드 net 대체 원본을 해당 실행에 각각 맞춰 부분 발급을 합산한다.",
+      "difference": "서로 같은 인쇄 숫자 110000은 gross121000과 gross110000의 서로 다른 실제 지급이다. 정정 참조를 고른 뒤 서로 반대 표시 기준을 정규화해야 같은 거래의 부분 모수를 맞출 수 있다. 한 지급의 단순 unit 변환과 구별된다.",
+      "status": "root_review_pending"
+    },
+    {
+      "case_id": "C034",
+      "nearest_prior": [
+        "B2 C008",
+        "B2 C051",
+        "B2 C053",
+        "B2 C065"
+      ],
+      "whole_process": "동액 두 취소 원본이 매출의 부분 카드 지급과 매입의 전체 카드 지급에 독립적으로 연결되고 현재 금액이 다르게 확정된다.",
+      "difference": "현재 원본 확정은 모두 이미 인계된 정상 상태다. 별개 방향 및 공급 범위 때문에 같은 440000원 오기 금액을 공통 정정 금액으로 덮을 수 없다. 매출 chain 손실은 발급 공제만 바꾸고 매입 chain 손실은 입력 공제만 바꾼다. C065 전자 효력의 반대 상태를 recast하지 않았다.",
+      "status": "root_review_pending"
+    },
+    {
+      "case_id": "C043",
+      "nearest_prior": [
+        "B1 C287",
+        "B2 C039",
+        "B2 C083"
+      ],
+      "whole_process": "두 판매의 전체 전자 효력에 따른 부분 발급 선택과 건물 수리의 증빙 제한 및 토지 조성의 목적 제한을 공급 ID별로 연결한다.",
+      "difference": "토지 적격 카드의 현재 정정 효력이 목적 제한을 없애지 않는 불변을 명시한다. 새 workflow 차이는 토지 상태 장식이 아니라 과세 건물 수리의 whole invoice 취소와 두 판매의 whole invoice 범위가 서로 다른 요청 입력 및 발급 값에 작용한다. 연간 캡이나 자격 비활성으로 선택을 가리지 않는다.",
+      "status": "root_review_pending"
+    }
+  ],
+  "self_pairs": [
+    {
+      "pair": [
+        "C001",
+        "C012"
+      ],
+      "difference": "두 독립 지급 정정 chain의 수렴과 각 효력 손실 대조 대 한 지급 정정 후 미발급 잔액 제외와 합산 절사 carry. 같은 partial-receipt 기본 원리를 공유하므로 전체 결합에 대한 root 판단이 필요하다."
+    },
+    {
+      "pair": [
+        "C012",
+        "C033"
+      ],
+      "difference": "모든 금액 gross인 단일 정정과 발급 합산 절사 carry 대 동액 실행의 서로 다른 VAT basis와 반대 표시 원본 매칭. 금액 차이만 차이로 주장하지 않는다."
+    },
+    {
+      "pair": [
+        "C001",
+        "C034"
+      ],
+      "difference": "한 판매에 두 부분 지급 정정이 모이는 관계 대 독립한 매출 부분/매입 전체 공급 방향으로 갈라지는 두 정정 관계."
+    },
+    {
+      "pair": [
+        "C006",
+        "C011"
+      ],
+      "difference": "현재 C006은 두 적격 독립 보호 경로와 단일 손실 불변 및 동시 손실 변화가 있다. 현재 C011은 전자 단독 경로이며 root가 C064 중복으로 보류했다. C011을 이 차이만으로 승인하지 않는다."
+    },
+    {
+      "pair": [
+        "C003",
+        "C032"
+      ],
+      "difference": "한 공급에 동시에 붙은 지급/전체 효력 대 두 공급 각각에 붙은 부분 금액 정정/전체 효력. 자료 선택 범위와 요청 CF의 적용 거래가 다르다."
+    },
+    {
+      "pair": [
+        "C014",
+        "C043"
+      ],
+      "difference": "두 입력의 exempt-purpose/proof 장애만을 보고하는 업무 대 land-purpose/proof 장애와 독립 두 판매의 전체 전자 범위가 함께 정산 요청으로 연결되는 업무."
+    }
+  ],
+  "known_rejected_previous_versions": [
+    {
+      "case_id": "C001",
+      "against": "C060",
+      "resolution": "duplicate/revoked independent approvals 원고를 두 independent replacement chains 원고로 직접 다시 썼다."
+    },
+    {
+      "case_id": "C006",
+      "against": "C063",
+      "resolution": "input selection to refund possibility 원고를 independent proof resilience 원고로 직접 다시 썼다."
+    },
+    {
+      "case_id": "C012",
+      "against": "C065",
+      "resolution": "opposite invoice statuses 원고를 selected partial payments aggregation 원고로 직접 다시 썼다."
+    },
+    {
+      "case_id": "C034",
+      "against": "C064",
+      "resolution": "latest/earlier invoice dates 원고를 partial-sale/whole-input opposing replacement ranges 원고로 직접 다시 썼다."
+    },
+    {
+      "case_id": "C011",
+      "against": "C055 then C064",
+      "resolution": "첫 충돌 후 쓴 현재 전자 단독 경로도 보류했다. 다음 실제 원고 재집필이 필요하다."
+    },
+    {
+      "case_id": "C015",
+      "against": "C066",
+      "resolution": "수단 및 잔여 세금 차이로 정당화하지 않고 재집필한다."
+    }
+  ],
+  "root_semantic_acceptance": "pending",
+  "two_cases_on_hold": [
+    "C011",
+    "C015"
+  ]
+}

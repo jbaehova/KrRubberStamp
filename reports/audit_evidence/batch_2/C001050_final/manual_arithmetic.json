@@ -1,0 +1,153 @@
+{
+  "source_sha256": "c014dd5bf70ffd3be69921fb5bc4cd4f347d83ce98a9e9a7829bac3bace165ac",
+  "independent_literal_expected_values": true,
+  "passed": 10,
+  "records": [
+    {
+      "case_id": "C009",
+      "expected": {
+        "output_vat": 120000,
+        "receipt_credit": 12870,
+        "unique_transaction_count": 2
+      },
+      "actual": {
+        "output_vat": 120000,
+        "receipt_credit": 12870,
+        "unique_transaction_count": 2
+      },
+      "reason": "660000/11=60000 each supply; issued 660000+330000 gives 12870.",
+      "passed": true
+    },
+    {
+      "case_id": "C011",
+      "expected": {
+        "input_vat": 50000,
+        "deductible_input_vat": 50000,
+        "unique_transaction_count": 1
+      },
+      "actual": {
+        "input_vat": 50000,
+        "deductible_input_vat": 50000,
+        "unique_transaction_count": 1
+      },
+      "reason": "Whole supply 550000/11=50000; ledgers do not add supplies or credit.",
+      "passed": true
+    },
+    {
+      "case_id": "C012",
+      "expected": {
+        "receipt_credit": 8580,
+        "output_vat": 90000,
+        "unique_transaction_count": 1
+      },
+      "actual": {
+        "receipt_credit": 8580,
+        "output_vat": 90000,
+        "unique_transaction_count": 1
+      },
+      "reason": "Two different approvals total660000; credit8580. Whole supply990000 has VAT90000.",
+      "passed": true
+    },
+    {
+      "case_id": "C014",
+      "expected": {
+        "output_vat": 910000,
+        "prepaid_vat": 560000,
+        "net_vat": 350000
+      },
+      "actual": {
+        "output_vat": 910000,
+        "prepaid_vat": 560000,
+        "net_vat": 350000
+      },
+      "reason": "Supply base9100000 gives910000; tax prepayment560000 is separate from customer transfers.",
+      "passed": true
+    },
+    {
+      "case_id": "C015",
+      "expected": {
+        "deductible_input_vat": 30000,
+        "receipt_credit": 5720,
+        "net_vat": 64280
+      },
+      "actual": {
+        "deductible_input_vat": 30000,
+        "receipt_credit": 5720,
+        "net_vat": 64280
+      },
+      "reason": "Sales VAT100000 less purchase30000 less issued440000*13/1000=5720.",
+      "passed": true
+    },
+    {
+      "case_id": "C018",
+      "expected": {
+        "deductible_input_vat": 100000,
+        "noncreditable_vat": 60000
+      },
+      "actual": {
+        "deductible_input_vat": 100000,
+        "noncreditable_vat": 60000
+      },
+      "reason": "Taxable input base1000000 gives100000; exempt-use input base600000 gives blocked60000.",
+      "passed": true
+    },
+    {
+      "case_id": "C025",
+      "expected": {
+        "deductible_input_vat": 40000,
+        "noncreditable_vat": 40000,
+        "input_vat": 80000
+      },
+      "actual": {
+        "deductible_input_vat": 40000,
+        "noncreditable_vat": 40000,
+        "input_vat": 80000
+      },
+      "reason": "Two440000 purchases each VAT40000; only first full invoice cures unstated VAT.",
+      "passed": true
+    },
+    {
+      "case_id": "C031",
+      "expected": {
+        "deductible_input_vat": 50000,
+        "noncreditable_vat": 70000
+      },
+      "actual": {
+        "deductible_input_vat": 50000,
+        "noncreditable_vat": 70000
+      },
+      "reason": "550000 rental repair VAT50000 qualifies;770000 office-use repair VAT70000 does not.",
+      "passed": true
+    },
+    {
+      "case_id": "C037",
+      "expected": {
+        "receipt_credit": 4290000,
+        "net_vat": 45710000,
+        "unique_transaction_count": 1
+      },
+      "actual": {
+        "receipt_credit": 4290000,
+        "net_vat": 45710000,
+        "unique_transaction_count": 1
+      },
+      "reason": "Issued330000000*13/1000=4290000 below remaining5724300; wholeVAT50000000 less credit.",
+      "passed": true
+    },
+    {
+      "case_id": "C046",
+      "expected": {
+        "deductible_input_vat": 60000,
+        "noncreditable_vat": 80000,
+        "unique_transaction_count": 2
+      },
+      "actual": {
+        "deductible_input_vat": 60000,
+        "noncreditable_vat": 80000,
+        "unique_transaction_count": 2
+      },
+      "reason": "Rental-period repair660000 gives60000; later880000 gives80000 blocked despite full invoice.",
+      "passed": true
+    }
+  ]
+}
