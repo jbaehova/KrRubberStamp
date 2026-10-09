@@ -1,0 +1,95 @@
+[
+  {
+    "id": "BFINAL-1",
+    "severity": "high",
+    "kind": "weekly_holiday_employment_duration_premise",
+    "case_ids": [
+      "B005",
+      "B009",
+      "B012",
+      "B013",
+      "B015",
+      "B037"
+    ],
+    "status": "open",
+    "source_urls": [
+      "https://1350.moel.go.kr/rtmview.do?id=1000315238",
+      "https://1350.moel.go.kr/home/hp/data/faqView.do?faq_idx=1000000822"
+    ],
+    "rule_summary": "개근과주15시간 외에1주7일 근로관계 존속이 필요하다. 마지막 소정일 전후 종료를 명시한 현재 원고는 해당 주 주휴 산출의 재직 전제를 충족하지 않는다. B037은 기준0원이지만 정상개근 CF에서 문제가 나타난다.",
+    "fixes": [
+      {
+        "case_id": "B005",
+        "fact_paths": [
+          "payrolls.0.facts.scope"
+        ],
+        "end_date": "2026-11-15",
+        "requested_wording": "11월2일 입사와11월15일 일요일 주휴일까지 근로관계 유지. 실제 소정근로는2~13일 카드만이며 두 주 개근.",
+        "notes": "기관별 기존11월 확정 통지 및 완전 종료 명세 전제 유지. 직접 시급 CF도 주휴일까지 재직을 유지해야 한다."
+      },
+      {
+        "case_id": "B009",
+        "fact_paths": [
+          "payrolls.0.facts.scope",
+          "payrolls.1.facts.scope"
+        ],
+        "end_date": "2026-11-08",
+        "requested_wording": "각 계약은11월2일부터8일 일요일 주휴일까지 근로관계 유지. 소정근로는 각 기존 카드일만.",
+        "notes": "결근 CF 직원A scope에 일요일까지 재직을 명시하고 금요일6시간 결근 및 주18시간 유지. 직원B의 개근 주휴 전제도 함께 수정."
+      },
+      {
+        "case_id": "B012",
+        "fact_paths": [
+          "payrolls.0.facts.scope"
+        ],
+        "end_date": "2026-11-15",
+        "requested_wording": "11월9일부터15일 일요일 주휴일까지 재직. 월화만8시간씩 주16시간 소정이고 나머지일은 소정의무 없는 휴무.",
+        "notes": "추가3시간 및 전체 종료 명세와11월기관확정 유지. 카드 종료 변경 CF는 계약종료일을 바꾸지 않는다."
+      },
+      {
+        "case_id": "B013",
+        "fact_paths": [
+          "payrolls.1.facts.scope"
+        ],
+        "end_date": "2026-11-22",
+        "requested_wording": "시급 계약은11월16일부터22일 일요일 주휴일까지 재직. 기존 월수금 카드가 실제 소정 전체.",
+        "notes": "월급직 scope와실행25일 및보험11월과숫자는 유지."
+      },
+      {
+        "case_id": "B015",
+        "fact_paths": [
+          "payrolls.0.facts.scope"
+        ],
+        "end_date": "2026-05-03",
+        "requested_wording": "4월27일부터5월3일 일요일 주휴일까지 재직. 월화목금의소정약정과5월1일유급휴무 및 나머지3일개근 유지.",
+        "notes": "현재확정5월기관회신 및 종료 지급 전체 범위 명시 유지. 시급 변경 CF도 재직 전제 유지."
+      },
+      {
+        "case_id": "B037",
+        "fact_paths": [
+          "payrolls.0.facts.scope"
+        ],
+        "end_date": "2026-11-08",
+        "requested_wording": "11월2일부터8일 일요일 주휴일까지 재직. 기존화요일6시간결근과3실제카드 유지.",
+        "notes": "정상개근 CF scope에도8일주휴일까지재직을명시. 현재기준0원의이유는금요일퇴직이아니라결근이다."
+      }
+    ],
+    "document_scope": "각scope가포함된계약문서 재렌더 필수. 현재문서title/note 및processing_policy에는구체적퇴직일이없어자동수정할필요없다. 오히려종료월전체근로/정상개근주휴에관한설명은새재직전제와일치한다. week_id 표제의날짜범위를명확히덧붙여도가능하지만시스템key를임의교체할필요없다.",
+    "expected_answer_effect_of_minimal_fix": "같은카드와개근및약정시간/기관통지를유지하고재직전제만고치면gold수치와계산그래프는같다. sourceSHA및provenance/trace는변하므로모든50currentphysical검증을새SHA로닫아야한다."
+  },
+  {
+    "id": "BFINAL-2",
+    "severity": "medium",
+    "kind": "payroll_period_wording",
+    "case_ids": [
+      "B002"
+    ],
+    "status": "open",
+    "fact_paths": [
+      "payrolls.0.facts.scope",
+      "payrolls.1.facts.scope"
+    ],
+    "fix": "전월 정상 월급을10월 한 달 전체 정상 월급으로 고친다. 문서 제목/급여ID/보험 부과월의10월과일치시킨다.",
+    "expected_answer_effect": "없음.귀속월오독방지이며기존정확한10월실행일과부과월유지."
+  }
+]
