@@ -283,7 +283,23 @@ def verify_remote(api, plan, repo_id):
     return {"revision": revision, "downloaded_files_checked": len(targets), "rows": ROWS}
 
 
-def publish(plan, api):
+def publication_card(manifest, *, repo_id=None, card_path=None):
+    """A custom card must be tied to the exact exported corpus."""
+    if card_path is None:
+        return _dataset_card(manifest, repo_id=repo_id)
+    card = Path(card_path).read_text(encoding="utf-8")
+    required = (
+        manifest["dataset_name"],
+        manifest["canary"],
+        manifest["jsonl_sha256"],
+        "data/train.jsonl",
+    )
+    if any(value not in card for value in required):
+        raise ValueError("Custom dataset card does not describe this exact export")
+    return card
+
+
+def publish(plan, api, *, card_path=None):
     """Only called by --publish after full local preflight has passed."""
     identity = api.whoami()
     namespace = identity.get("name")
@@ -291,7 +307,7 @@ def publish(plan, api):
         raise ValueError("Cannot determine the authenticated personal namespace")
     repo_id = f"{namespace}/{DATASET_NAME}"
     (plan.folder / "README.md").write_text(
-        _dataset_card(plan.manifest, repo_id=repo_id), encoding="utf-8"
+        publication_card(plan.manifest, repo_id=repo_id, card_path=card_path), encoding="utf-8"
     )
     # Existing repositories may be resumed only for this exact export. We never
     # delete remote files or overwrite a different release under the same name.
@@ -339,13 +355,18 @@ def main(argv=None):
     parser.add_argument(
         "--publish", action="store_true", help="Create/update the public HF dataset"
     )
+    parser.add_argument(
+        "--card", type=Path, help="Use a reviewed card matching the export canary and hash"
+    )
     args = parser.parse_args(argv)
     try:
         plan = preflight(args.folder)
+        if args.card is not None:
+            publication_card(plan.manifest, card_path=args.card)
         if args.publish:
             from huggingface_hub import HfApi
 
-            result = publish(plan, HfApi())
+            result = publish(plan, HfApi(), card_path=args.card)
         else:
             result = {
                 "uploaded": False,

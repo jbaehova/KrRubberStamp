@@ -10,6 +10,32 @@ import pytest
 from scripts import publish_hf as publishing
 
 
+def test_reviewed_card_preserves_metadata_and_binds_to_current_export(tmp_path):
+    manifest = {
+        "dataset_name": "KrRubberStamp-1.65K",
+        "canary": "current-canary",
+        "jsonl_sha256": "current-jsonl-hash",
+    }
+    card = tmp_path / "card.md"
+    content = "---\nlanguage: [ko]\n---\n# KrRubberStamp-1.65K\ndata/train.jsonl\ncurrent-canary\ncurrent-jsonl-hash\n"
+    card.write_text(content)
+    assert publishing.publication_card(manifest, card_path=card) == content
+
+
+@pytest.mark.parametrize("stale", ["current-canary", "current-jsonl-hash", "data/train.jsonl"])
+def test_stale_custom_card_is_rejected_before_publication(tmp_path, stale):
+    manifest = {
+        "dataset_name": "KrRubberStamp-1.65K",
+        "canary": "current-canary",
+        "jsonl_sha256": "current-jsonl-hash",
+    }
+    card = tmp_path / "card.md"
+    content = "KrRubberStamp-1.65K data/train.jsonl current-canary current-jsonl-hash"
+    card.write_text(content.replace(stale, "obsolete"))
+    with pytest.raises(ValueError, match="this exact export"):
+        publishing.publication_card(manifest, card_path=card)
+
+
 @pytest.fixture
 def minimum_export(tmp_path):
     manifest = {

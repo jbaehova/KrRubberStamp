@@ -1,33 +1,18 @@
-<p align="center">
-  <img src="assets/readme-hero.svg" alt="KrRubberStamp: 1,650 individually authored Korean office tasks, from documents to decisions to exact answers" width="100%">
-</p>
+# KrRubberStamp
 
-<p align="center">
-  <a href="https://huggingface.co/datasets/jbaehova/KrRubberStamp-1.65K"><img src="https://img.shields.io/badge/Hugging_Face-1%2C650_tasks-f1c44a?style=flat-square" alt="Hugging Face: 1,650 tasks"></a>
-  <a href="https://github.com/jbaehova/KrRubberStamp/actions/workflows/ci.yml"><img src="https://github.com/jbaehova/KrRubberStamp/actions/workflows/ci.yml/badge.svg" alt="Repository checks"></a>
-  <img src="https://img.shields.io/badge/Python-3.12-334155?style=flat-square" alt="Python 3.12">
-  <a href="DATA_LICENSE"><img src="https://img.shields.io/badge/Data-CC_BY_4.0-ae342b?style=flat-square" alt="Data license: CC BY 4.0"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/Code-Apache_2.0-334155?style=flat-square" alt="Code license: Apache 2.0"></a>
-</p>
+**서류를 읽고, 근거를 연결하고, 정확한 답을 내는 한국 사무 실무 벤치마크.**
 
-<p align="center">
-  <strong>서류를 읽고, 근거를 연결하고, 정확한 답을 내는 한국 사무 실무 벤치마크.</strong><br>
-  연말정산부터 급여 정산, 부가세 신고, 견적 비교까지. 한 문항씩 직접 설계한 1,650개의 업무입니다.
-</p>
+연말정산부터 급여 정산, 부가세 신고, 견적 비교까지. 한 문항씩 직접 설계한 1,650개의 업무입니다.
 
-<p align="center">
-  <a href="https://huggingface.co/datasets/jbaehova/KrRubberStamp-1.65K"><strong>데이터셋 받기 ↗</strong></a>
-  &nbsp; / &nbsp;
-  <a href="reports/AUTHORED_CASE_CATALOG.md">문항 둘러보기</a>
-  &nbsp; / &nbsp;
-  <a href="DATA_SPEC.md">데이터 명세</a>
-</p>
+[데이터셋 받기](https://huggingface.co/datasets/jbaehova/KrRubberStamp-1.65K) / [문항 둘러보기](reports/AUTHORED_CASE_CATALOG.md) / [데이터 명세](DATA_SPEC.md)
 
 Korean office rubber stamp, as an AI benchmark dataset: auto-graded tasks on year-end tax, payroll, VAT, and document extraction.
 
 새 시드의 보조 자료 생성: `uv run krt generate --seed 987654 --n 1200 --output data/generated_seed_987654`. 이 출력은 개별 집필 공개본과 별도의 자동 변형 자료입니다.
 
 ## 서류 뒤에 있는 판단을 평가합니다
+
+한국어 문서 질의응답(document question answering)과 정보 추출(information extraction)을 평가합니다. 연말정산과 급여 및 부가세 자료를 연결하는 재무 추론(financial reasoning)도 포함합니다.
 
 같은 직원의 정정 급여 명세에서 어떤 승인본을 선택할지, 할인과 배송비를 어디에 적용할지, 만료된 견적을 제외하면 어떤 구매 조합이 유리한지. 정답을 내려면 문서 속 숫자와 함께 자료의 관계를 읽어야 합니다.
 
@@ -71,7 +56,7 @@ uv run krt grade --data data/batch_1 --answers answers/my_answers --report repor
 uv run krt grade --data data/batch_2 --answers answers/my_answers --report reports/grade_local_2.json
 ```
 
-숫자는 원 단위 정수의 정확 일치로 채점합니다. 문자열은 유니코드와 공백 및 대소문자를 정규화한 뒤 정확 일치로 채점합니다. 주 지표는 **문항 전체 정답률**이며 필드별 정답률도 제공합니다. LLM 심사위원은 사용하지 않습니다.
+숫자는 정수의 정확 일치로 채점하며 금액은 원 단위입니다. 문자열은 유니코드와 공백 및 대소문자를 정규화한 뒤 정확 일치로 채점합니다. 주 지표는 **문항 전체 정답률**이며 필드별 정답률도 제공합니다. LLM 심사위원은 사용하지 않습니다.
 
 <details>
 <summary><strong>보조 생성기로 새로운 시드의 자료 만들기</strong></summary>
@@ -103,7 +88,9 @@ uv run krt generate --seed 987654 --n 1200 --output data/generated_seed_987654
 | [Batch 2](reports/BATCH_2_REPORT.md) | 450 | 12,477 | 100% | 0% |
 | **전체** | **1,650** | **18,001** | **100%** | **0%** |
 
-`oracle`은 렌더링된 입력을 추출 맵으로 복원하고 규칙 엔진에서 답을 다시 계산하는 가짜 솔버입니다. `null`은 빈 답을 제출합니다. 이 결과는 하네스와 계산 재현성 검증이며 실제 모델의 성능 점수가 아닙니다. 코드 검증에서는 **1,528개 테스트를 통과**했으며 구축과 검증 과정에서 모델 API 호출은 **0회**입니다.
+[최종 공개 검증](reports/FINAL_1650_RELEASE.md)과 [설치 패키지 검증](reports/final_1650_portable_package.md)에서 재현 결과를 확인할 수 있습니다.
+
+`oracle`은 렌더링된 입력을 추출 맵으로 복원하고 규칙 엔진에서 답을 다시 계산하는 가짜 솔버입니다. `null`은 빈 답을 제출합니다. 이 결과는 하네스와 계산 재현성 검증이며 실제 모델의 성능 점수가 아닙니다. 코드 검증에서는 **1,532개 테스트를 통과**했으며 구축과 검증 과정에서 모델 API 호출은 **0회**입니다.
 
 원고를 읽는 내부 검토와 증빙의 값이나 날짜를 바꾸는 반사실 점검도 수행했습니다. 독립 전문가의 승인으로 표현하지 않습니다. 사람 검수는 배치마다 60개씩 **총 120문항이 대기 중**입니다. [Batch 1 검수 목록](reports/REVIEW_QUEUE_BATCH_1.md)과 [Batch 2 검수 목록](reports/REVIEW_QUEUE_BATCH_2.md)에 입력과 정답 및 계산 과정을 모았습니다.
 
@@ -146,7 +133,7 @@ uv run pre-commit run --all-files
 uv run krt export-hf --upto 2
 uv run --with datasets python scripts/export_authored_verification.py exports/upto_2
 uv run --with 'huggingface-hub>=2.2.0' python scripts/publish_hf.py exports/upto_2
-uv run --with 'huggingface-hub>=2.2.0' python scripts/publish_hf.py exports/upto_2 --publish
+uv run --with 'huggingface-hub>=2.2.0' python scripts/publish_hf.py exports/upto_2 --card docs/HUGGING_FACE_DATASET_CARD.md --publish
 ```
 
 `exports/upto_2/`에 데이터셋 카드와 JSONL을 만들고 입력 문서 및 개별 집필 원본을 복사합니다. 오프라인 검증은 Hugging Face Datasets로 JSONL을 읽고 자료 참조와 원본 해시를 확인합니다. 게시 스크립트는 정확히 1,650문항과 배치 `[1, 2]` 및 승인 원고의 SHA256을 검사합니다.
