@@ -24,6 +24,6 @@
 
 ## 찾기와 사용하기
 
-GitHub 소개에 한국어 문서 이해와 연말정산 및 급여와 부가세 평가 용도를 적고 홈페이지를 Hugging Face로 연결했다. 검색용 주제15개를 적용했다. Hugging Face 카드에는 한국어 및 영어 소개와 문서 질의응답 및 정보 추출 태그를 담았다. 언어 ko와 문서 이해 태그로 필터한 검색에서 실제 데이터셋을 확인했다. 양쪽 README는 이미지 없이 텍스트로 구성했다.
+GitHub 소개에 한국어 문서 이해와 연말정산 및 급여와 부가세 평가 용도를 적고 홈페이지를 Hugging Face로 연결했다. 검색용 주제15개를 적용했다. Hugging Face 카드에는 한국어 및 영어 소개와 문서 질의응답 및 정보 추출 태그를 담았다. 언어 ko와 문서 이해 태그로 필터한 검색에서 실제 데이터셋을 확인했다. GitHub는 중앙 정렬한 텍스트 제목과 기존 기술 스택 및 상태 배지를 유지했다. Hugging Face 설명은 이미지 없는 텍스트로 구성했다.
 
 [게시 검증 기록](HUGGING_FACE_PUBLICATION.json)과 [검색 메타데이터 기록](DISCOVERY_METADATA.json)을 함께 보관한다. 카드 원본은 [docs/HUGGING_FACE_DATASET_CARD.md](../docs/HUGGING_FACE_DATASET_CARD.md)다.

@@ -1,10 +1,25 @@
-# KrRubberStamp
+<h1 align="center">KrRubberStamp</h1>
 
-**서류를 읽고, 근거를 연결하고, 정확한 답을 내는 한국 사무 실무 벤치마크.**
+<p align="center">
+  <a href="https://huggingface.co/datasets/jbaehova/KrRubberStamp-1.65K"><img src="https://img.shields.io/badge/Hugging_Face-1%2C650_tasks-f1c44a?style=flat-square" alt="Hugging Face: 1,650 tasks"></a>
+  <a href="https://github.com/jbaehova/KrRubberStamp/actions/workflows/ci.yml"><img src="https://github.com/jbaehova/KrRubberStamp/actions/workflows/ci.yml/badge.svg" alt="Repository checks"></a>
+  <img src="https://img.shields.io/badge/Python-3.12-334155?style=flat-square" alt="Python 3.12">
+  <a href="DATA_LICENSE"><img src="https://img.shields.io/badge/Data-CC_BY_4.0-ae342b?style=flat-square" alt="Data license: CC BY 4.0"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Code-Apache_2.0-334155?style=flat-square" alt="Code license: Apache 2.0"></a>
+</p>
 
-연말정산부터 급여 정산, 부가세 신고, 견적 비교까지. 한 문항씩 직접 설계한 1,650개의 업무입니다.
+<p align="center">
+  <strong>서류를 읽고, 근거를 연결하고, 정확한 답을 내는 한국 사무 실무 벤치마크.</strong><br>
+  연말정산부터 급여 정산, 부가세 신고, 견적 비교까지. 한 문항씩 직접 설계한 1,650개의 업무입니다.
+</p>
 
-[데이터셋 받기](https://huggingface.co/datasets/jbaehova/KrRubberStamp-1.65K) / [문항 둘러보기](reports/AUTHORED_CASE_CATALOG.md) / [데이터 명세](DATA_SPEC.md)
+<p align="center">
+  <a href="https://huggingface.co/datasets/jbaehova/KrRubberStamp-1.65K"><strong>데이터셋 받기 ↗</strong></a>
+  &nbsp; / &nbsp;
+  <a href="reports/AUTHORED_CASE_CATALOG.md">문항 둘러보기</a>
+  &nbsp; / &nbsp;
+  <a href="DATA_SPEC.md">데이터 명세</a>
+</p>
 
 Korean office rubber stamp, as an AI benchmark dataset: auto-graded tasks on year-end tax, payroll, VAT, and document extraction.
 
