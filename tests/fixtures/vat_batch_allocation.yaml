@@ -1,0 +1,163 @@
+- example: 공동 송금의 수수료를 세금 원금에서 분리
+  facts:
+    source_contract: vat_bank_batch_allocation_v1
+    processing_policy: 독립 납세자들의 자금을 수탁한 가상 경리조직의 은행 원본과 확정 분배 지시를 대조한다. 은행 수수료는 세금 납부가 아니고 지시된 원금만 각 등록번호에 귀속한다. 세법상 상계권과 수수료 매입 공제를 추정하지 않는다.
+    as_of_date: '2026-08-10'
+    filings:
+      - filing_id: F제작
+        taxpayer_id: T제작
+        registration_id: R제작
+        business_name: 가상제작법인
+        facts:
+          source_contract: vat_activity_evidence_v1
+          taxpayer_type: general
+          period_start: '2026-01-01'
+          period_end: '2026-06-30'
+          business_name: 가상제작법인
+          business_type: corporation
+          consumer_facing_business: false
+          prior_year_site_supply_base: 90000000
+          receipt_credit_previously_claimed: 0
+          prepaid_assessed_vat: 0
+          scope_note: 독립 소매 납세자에게 전량 인도한 재화의 적격 계산서이며 다른 거래나 공제는 없다.
+          operations: []
+          activities: []
+          transactions:
+            - {transaction_id: 연결납품, document_id: 공동전자, direction: sale, date: '2026-06-02', description: 소매 업체에 재고 인도, amount: 1100000, includes_vat: true, taxable: true, evidence: tax_invoice, invoice_issued: true, vat_separately_stated: true, counterparty_consumer: false}
+      - filing_id: F소매
+        taxpayer_id: T소매
+        registration_id: R소매
+        business_name: 가상소매점
+        facts:
+          source_contract: vat_activity_evidence_v1
+          taxpayer_type: general
+          period_start: '2026-01-01'
+          period_end: '2026-06-30'
+          business_name: 가상소매점
+          business_type: individual
+          consumer_facing_business: true
+          prior_year_site_supply_base: 80000000
+          receipt_credit_previously_claimed: 0
+          prepaid_assessed_vat: 0
+          scope_note: 위 법인의 납품을 받은 독립 소매 사업자다. 재고는 전량 소비자 카드 판매에 사용했다. 카드 전액 발급에 전자는 없고 기공제 및 선납은 없다.
+          operations:
+            - {operation_id: 판매업무, description: 과세 소매 재고 판매, output_taxable: true}
+          activities:
+            - activity_id: 재고인수
+              transaction_id: 연결납품
+              document_ids: [공동전자]
+              date: '2026-06-02'
+              action: delivery
+              location: {name: 소매 창고, kind: worksite, organization: 가상소매점}
+              participants: [{name: 가상서하, role: employee, organization: 가상소매점}]
+              operation_id: 판매업무
+              description: 소속 직원이 판매 재고를 전량 인수
+          transactions:
+            - {transaction_id: 연결납품, document_id: 공동전자, direction: purchase, date: '2026-06-02', description: 제조 법인에서 받은 판매 재고, amount: 1100000, includes_vat: true, taxable: true, evidence: tax_invoice, invoice_issued: true, vat_separately_stated: true, counterparty_consumer: false, supplier_general: true, vehicle_subject_excise: false, vehicle_direct_business: false, activity_id: 재고인수}
+            - {transaction_id: 소비자판매, document_id: 소비자카드, direction: sale, date: '2026-06-25', description: 인수한 재고를 소비자에게 전량 판매, amount: 2200000, includes_vat: true, taxable: true, evidence: card_receipt, invoice_issued: false, vat_separately_stated: false, counterparty_consumer: true}
+    bank_executions:
+      - {execution_id: 공동송금, date: '2026-07-24', status: executed, direction: debit, amount: 171900, bank_fee: 500}
+    allocation_instructions:
+      - {instruction_id: 제작분, execution_id: 공동송금, filing_id: F제작, registration_id: R제작, kind: settlement_payment, amount: 100000}
+      - {instruction_id: 소매분, execution_id: 공동송금, filing_id: F소매, registration_id: R소매, kind: settlement_payment, amount: 71400}
+  manual_expected:
+    filing_calculations:
+      - filing_id: F소매
+        taxpayer_id: T소매
+        registration_id: R소매
+        business_name: 가상소매점
+        calculation: {tax_base: 2000000, output_vat: 200000, input_vat: 100000, noncreditable_vat: 0, deductible_input_vat: 100000, receipt_credit: 28600, prepaid_vat: 0, net_vat: 71400, payable_vat: 71400, refund_vat: 0, unique_transaction_count: 2}
+      - filing_id: F제작
+        taxpayer_id: T제작
+        registration_id: R제작
+        business_name: 가상제작법인
+        calculation: {tax_base: 1000000, output_vat: 100000, input_vat: 0, noncreditable_vat: 0, deductible_input_vat: 0, receipt_credit: 0, prepaid_vat: 0, net_vat: 100000, payable_vat: 100000, refund_vat: 0, unique_transaction_count: 1}
+    registration_settlements:
+      - {filing_id: F소매, taxpayer_id: T소매, registration_id: R소매, business_name: 가상소매점, tax_due: 71400, payable_vat: 71400, refund_vat: 0, paid: 71400, received: 0, net_outflow: 71400, balance: 0}
+      - {filing_id: F제작, taxpayer_id: T제작, registration_id: R제작, business_name: 가상제작법인, tax_due: 100000, payable_vat: 100000, refund_vat: 0, paid: 100000, received: 0, net_outflow: 100000, balance: 0}
+    tax_due_total: 171400
+    paid_total: 171400
+    received_total: 0
+    balance_total: 0
+    execution_reconciliations:
+      - {execution_id: 공동송금, direction: debit, amount: 171900, bank_fee: 500, allocated_principal: 171400, settlement_principal: 171400, assessed_principal: 0, included: true}
+    bank_cash_totals: {debit_total: 171900, credit_total: 0, fee_total: 500, assessed_debit_total: 0, settlement_net_outflow: 171400}
+  manual_reasoning: 제조법인은 110만원의 VAT10만원이다. 소매는 매출20만원에서 재고10만원을 차감하고 카드220만원의1.3%인28600원을 차감해71400원이다. 두 신고의 내부 거래는 서로 다른 납세자의 매출과 매입이어서 각각 한 번씩 계산한다. 출금171900원 중 수수료500원을 빼면 지시 원금171400원으로 양쪽 납부가 맞는다.
+- example: 두 실행에 걸친 명시 분배와 각자의 미납 잔액
+  facts:
+    source_contract: vat_bank_batch_allocation_v1
+    processing_policy: 한 은행 실행이 여러 납세자를 포함하고 같은 납세자가 여러 실행에 나타날 수 있다. 확정 분배 지시의 원금만 등록번호별로 합산하고 수수료는 어느 납세자의 세금에도 더하지 않는다. 양수 잔액은 가상 사적 장부의 세금 원금 대조 차이다.
+    as_of_date: '2026-08-12'
+    filings:
+      - filing_id: F정리
+        taxpayer_id: T정리
+        registration_id: R정리
+        business_name: 가상정리서비스
+        facts:
+          source_contract: vat_activity_evidence_v1
+          taxpayer_type: general
+          period_start: '2026-01-01'
+          period_end: '2026-06-30'
+          business_name: 가상정리서비스
+          business_type: individual
+          consumer_facing_business: true
+          prior_year_site_supply_base: 70000000
+          receipt_credit_previously_claimed: 0
+          prepaid_assessed_vat: 0
+          scope_note: 가정 고객에게 완료한 국내 과세 서비스 전액의 카드 전표이며 전자 발행이나 매입은 없다.
+          operations: []
+          activities: []
+          transactions:
+            - {transaction_id: 정리완료, document_id: 정리전표, direction: sale, date: '2026-05-18', description: 가정 방문 정리 완료, amount: 2200000, includes_vat: true, taxable: true, evidence: card_receipt, invoice_issued: false, vat_separately_stated: false, counterparty_consumer: true}
+      - filing_id: F안내
+        taxpayer_id: T안내
+        registration_id: R안내
+        business_name: 가상안내법인
+        facts:
+          source_contract: vat_activity_evidence_v1
+          taxpayer_type: general
+          period_start: '2026-01-01'
+          period_end: '2026-06-30'
+          business_name: 가상안내법인
+          business_type: corporation
+          consumer_facing_business: false
+          prior_year_site_supply_base: 60000000
+          receipt_credit_previously_claimed: 0
+          prepaid_assessed_vat: 0
+          scope_note: 기업 행사 안내물을 납품하고 정상 전체 전자를 발행했다. 다른 거래나 공제는 없다.
+          operations: []
+          activities: []
+          transactions:
+            - {transaction_id: 안내납품, document_id: 안내전자, direction: sale, date: '2026-04-09', description: 기업 안내판 전량 인도, amount: 880000, includes_vat: true, taxable: true, evidence: tax_invoice, invoice_issued: true, vat_separately_stated: true, counterparty_consumer: false}
+    bank_executions:
+      - {execution_id: 일차출금, date: '2026-07-23', status: executed, direction: debit, amount: 130500, bank_fee: 500}
+      - {execution_id: 이차출금, date: '2026-07-24', status: executed, direction: debit, amount: 100700, bank_fee: 700}
+    allocation_instructions:
+      - {instruction_id: 정리일차, execution_id: 일차출금, filing_id: F정리, registration_id: R정리, kind: settlement_payment, amount: 80000}
+      - {instruction_id: 안내일차, execution_id: 일차출금, filing_id: F안내, registration_id: R안내, kind: settlement_payment, amount: 50000}
+      - {instruction_id: 정리이차, execution_id: 이차출금, filing_id: F정리, registration_id: R정리, kind: settlement_payment, amount: 80000}
+      - {instruction_id: 안내이차, execution_id: 이차출금, filing_id: F안내, registration_id: R안내, kind: settlement_payment, amount: 20000}
+  manual_expected:
+    filing_calculations:
+      - filing_id: F안내
+        taxpayer_id: T안내
+        registration_id: R안내
+        business_name: 가상안내법인
+        calculation: {tax_base: 800000, output_vat: 80000, input_vat: 0, noncreditable_vat: 0, deductible_input_vat: 0, receipt_credit: 0, prepaid_vat: 0, net_vat: 80000, payable_vat: 80000, refund_vat: 0, unique_transaction_count: 1}
+      - filing_id: F정리
+        taxpayer_id: T정리
+        registration_id: R정리
+        business_name: 가상정리서비스
+        calculation: {tax_base: 2000000, output_vat: 200000, input_vat: 0, noncreditable_vat: 0, deductible_input_vat: 0, receipt_credit: 28600, prepaid_vat: 0, net_vat: 171400, payable_vat: 171400, refund_vat: 0, unique_transaction_count: 1}
+    registration_settlements:
+      - {filing_id: F안내, taxpayer_id: T안내, registration_id: R안내, business_name: 가상안내법인, tax_due: 80000, payable_vat: 80000, refund_vat: 0, paid: 70000, received: 0, net_outflow: 70000, balance: 10000}
+      - {filing_id: F정리, taxpayer_id: T정리, registration_id: R정리, business_name: 가상정리서비스, tax_due: 171400, payable_vat: 171400, refund_vat: 0, paid: 160000, received: 0, net_outflow: 160000, balance: 11400}
+    tax_due_total: 251400
+    paid_total: 230000
+    received_total: 0
+    balance_total: 21400
+    execution_reconciliations:
+      - {execution_id: 이차출금, direction: debit, amount: 100700, bank_fee: 700, allocated_principal: 100000, settlement_principal: 100000, assessed_principal: 0, included: true}
+      - {execution_id: 일차출금, direction: debit, amount: 130500, bank_fee: 500, allocated_principal: 130000, settlement_principal: 130000, assessed_principal: 0, included: true}
+    bank_cash_totals: {debit_total: 231200, credit_total: 0, fee_total: 1200, assessed_debit_total: 0, settlement_net_outflow: 230000}
+  manual_reasoning: 정리 서비스 VAT20만원에서 카드공제28600원을 빼171400원이고 안내법인은8만원이다. 일차은행원금13만원과이차원금10만원을지시서대로나누면정리16만원과안내7만원이며두미납차이11400/10000원이다. 은행총출금231200원을세금230000원으로분리하는1200원수수료는어느미납에서도추가차감하지않는다.

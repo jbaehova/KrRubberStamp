@@ -35,6 +35,10 @@ def calculate(domain: str, scenario: dict):
         answer, trace = import_module("rules.b_payroll.engine").calculate(normalized)
         return answer, [derivation_trace(scenario, normalized), *trace]
     if domain == "C_vat" and "source_contract" in scenario:
+        from rules.c_vat.batch_allocation import CONTRACT as ALLOCATION, calculate as allocate_batch
+
+        if scenario["source_contract"] == ALLOCATION:
+            return allocate_batch(scenario)
         from rules.c_vat.bank_reconciliation import CONTRACT as BANK, calculate as reconcile_cash
 
         if scenario["source_contract"] == BANK:

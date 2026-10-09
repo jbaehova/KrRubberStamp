@@ -78,7 +78,7 @@ oracle은 실제 입력 문서를 추출 맵의 위치로 읽고 엔진을 적�
 
 ## 공식 예시와 미검증 규칙
 
-현재 규칙 출처 75개 중 verified: true는 30개이며 verified: false는 45개입니다. 공식 법령 확인과 독립 공식 수치 예시 회귀 검증을 구분합니다.
+현재 규칙 출처 76개 중 verified: true는 30개이며 verified: false는 46개입니다. 공식 법령 확인과 독립 공식 수치 예시 회귀 검증을 구분합니다.
 
 원문 출처: [sources.yaml](../rules/sources.yaml)
 
@@ -110,6 +110,7 @@ oracle은 실제 입력 문서를 추출 맵의 위치로 읽고 엔진을 적�
 - `COMMON_TRUNCATE_TEN`: 양수와 음수 금액의 10원 미만을 0 방향으로 절사
 - `C_DOCUMENT_LIFECYCLE_SELECTION`: 최종 확인된 원본 효력과 대체 참조를 대조하여 유효 원본만 기존 공급 및 지급 증빙 계산에 연결
 - `C_DOCUMENT_RECONCILIATION`: 확정 공급과 같은 날 실제 지급 및 개별 발급 증빙을 연결해 부분 매출 발급액과 전체 적격 매입 증빙을 복원
+- `C_VAT_BANK_BATCH_ALLOCATION`: 일괄 은행 실행의 확정 분배 지시를 독립 납세자별 신고 정산 원금과 수수료로 대조
 - `C_VAT_BANK_RECONCILIATION`: 서로 다른 납세자의 독립 신고 계산과 실제 납부 또는 환급 은행 실행을 등록번호별로 대조
 - `D.aggregate`: 정규화 업체별 합산, 품목별 공급가액 기준 개당 최저 단가 비교, 동률은 업체명 오름차순
 - `D.cart_procurement_comparison`: 품목별 한 견적을 선택하는 전체 장바구니 조합에서 공급사 ID별 상품 합계와 무료배송 기준 및 일회 배송비를 계산하여 최종 구매비를 비교
