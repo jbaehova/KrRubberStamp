@@ -103,6 +103,30 @@ def test_preview_cannot_be_mistaken_for_completed_batch(editorial_source, tmp_pa
     assert not (tmp_path / "release").exists()
 
 
+@pytest.mark.parametrize("batch", [2, 4])
+def test_new_batch_recovers_its_own_manuscript(editorial_source, tmp_path, batch):
+    source, _ = editorial_source
+    target = source.parents[2] / f"batch_{batch}" / "D_extract/editorial.json"
+    target.parent.mkdir(parents=True)
+    source.rename(target)
+    output = tmp_path / "preview"
+    summary = authoring.build_authored(output, batch=batch, preview=True)
+    assert summary["batch"] == batch and summary["accepted"] == 1
+    task_path = next(output.glob("*/*/task.yaml"))
+    task = yaml.safe_load(task_path.read_text(encoding="utf-8"))
+    assert task["task_id"].startswith(f"B{batch}_D999_")
+    assert task["authorship"]["source_file"] == f"batch_{batch}/D_extract/editorial.json"
+    assert validate_task(task_path.parent)["passed"]
+
+
+@pytest.mark.parametrize("batch", [0, 5])
+def test_unrequested_batch_is_not_published(editorial_source, tmp_path, batch):
+    output = tmp_path / "unrequested"
+    with pytest.raises(ValueError, match="four authorized"):
+        authoring.build_authored(output, batch=batch, preview=True)
+    assert not output.exists()
+
+
 def test_duplicate_literals_are_rejected(editorial_source, tmp_path):
     source, case = editorial_source
     duplicate = json.loads(json.dumps(case))

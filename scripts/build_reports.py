@@ -1,4 +1,4 @@
-"""Current authored Batch 1 report and a deterministic human review queue."""
+"""Current authored batch report and a deterministic human review queue."""
 
 import argparse
 from collections import Counter
@@ -25,8 +25,8 @@ def _link(path, output):
     return Path(os.path.relpath(path, output)).as_posix()
 
 
-def _review_queue(tasks, output, *, project_root, preview, seed):
-    heading = "개별 집필 미리보기 검수 대기열" if preview else "Batch 1 사람 검수 대기열"
+def _review_queue(tasks, output, *, project_root, preview, seed, batch=1):
+    heading = "개별 집필 미리보기 검수 대기열" if preview else f"Batch {batch} 사람 검수 대기열"
     lines = [
         f"# {heading}",
         "",
@@ -109,19 +109,20 @@ def build_reports(
     project_root=None,
     preview=False,
     seed=20261009,
+    batch=1,
 ):
     """Fail closed on incomplete release counts or stale fake-solver evidence."""
     project_root = Path(project_root) if project_root else ROOT
-    batch_dir = Path(batch_dir) if batch_dir else project_root / "data/batch_1"
+    batch_dir = Path(batch_dir) if batch_dir else project_root / f"data/batch_{batch}"
     measurement_root = Path(measurement_root) if measurement_root else project_root / "reports"
     output = Path(output) if output else project_root / "reports"
     tasks, manifests = collect_authored_tasks(
         batch_dir.parent,
-        [1],
+        [batch],
         allow_preview=preview,
-        batch_directories={1: batch_dir},
+        batch_directories={batch: batch_dir},
     )
-    metrics = checked_measurements(measurement_root, tasks, 1, preview=preview)
+    metrics = checked_measurements(measurement_root, tasks, batch, preview=preview)
     rules_path = project_root / "rules/sources.yaml"
     rules = yaml.safe_load(rules_path.read_text(encoding="utf-8"))["rules"]
     unverified = [rule for rule in rules if rule["verified"] is not True]
@@ -137,20 +138,20 @@ def build_reports(
         if document["format"] != "png"
     )
     file_bytes = sum(path.stat().st_size for path in batch_dir.rglob("*") if path.is_file())
-    manifest = manifests[1]
+    manifest = manifests[batch]
     queue, selected = _review_queue(
-        tasks, output, project_root=project_root, preview=preview, seed=seed
+        tasks, output, project_root=project_root, preview=preview, seed=seed, batch=batch
     )
     # Release names cannot be produced for an incomplete editorial preview.
-    queue_name = "REVIEW_QUEUE_AUTHORED_PREVIEW.md" if preview else "REVIEW_QUEUE_BATCH_1.md"
-    report_name = "AUTHORED_PREVIEW_REPORT.md" if preview else "BATCH_1_REPORT.md"
+    queue_name = "REVIEW_QUEUE_AUTHORED_PREVIEW.md" if preview else f"REVIEW_QUEUE_BATCH_{batch}.md"
+    report_name = "AUTHORED_PREVIEW_REPORT.md" if preview else f"BATCH_{batch}_REPORT.md"
     lines = [
-        f"# KrRubberStamp {'개별 집필 미리보기' if preview else 'Batch 1'} 보고서",
+        f"# KrRubberStamp {'개별 집필 미리보기' if preview else f'Batch {batch}'} 보고서",
         "",
         (
-            "미완성 원고의 편집 검토 결과입니다. Batch 1의 1,200문항 완성을 의미하지 않습니다."
+            f"미완성 원고의 편집 검토 결과입니다. Batch {batch}의 1,200문항 완성을 의미하지 않습니다."
             if preview
-            else "이번 보고서는 개별 집필을 완료한 Batch 1만 대상으로 합니다."
+            else f"이번 보고서는 개별 집필을 완료한 Batch {batch}만 대상으로 합니다."
         ),
         "",
         f"현재 문항 {len(tasks):,}개. 파일 용량은 {file_bytes / 1024**2:.1f} MiB입니다. 모든 문항과 정답을 공개하며 비공개 분할은 없습니다.",
@@ -254,6 +255,11 @@ def build_reports(
         ("문서 추출 첫 50문항", "authored_extract_first50_editorial.md"),
         ("문서 추출 D254부터 D300", "authored_extract_254300_editorial.md"),
     ]
+    if batch != 1:
+        editorials = [
+            (path.stem, path.name)
+            for path in sorted((project_root / "reports").glob(f"authored_batch_{batch}_*.md"))
+        ]
     available = [
         (label, project_root / "reports" / name)
         for label, name in editorials
@@ -293,7 +299,7 @@ def build_reports(
         (
             "미완성 미리보기는 완성 배포본의 파일명과 내보내기 이름으로 게시할 수 없습니다."
             if preview
-            else "uv run krt export-hf --batch 1은 KrRubberStamp-1.2K JSONL과 입력 파일, 공개 정답 및 집필 원고 스냅샷과 데이터카드를 만듭니다. Hugging Face 업로드는 실행하지 않았습니다."
+            else f"uv run krt export-hf --batch {batch}은 이 배치 1,200문항의 JSONL과 입력 파일, 공개 정답 및 집필 원고 스냅샷과 데이터카드를 만듭니다. 누적 배포에는 --upto {batch}를 사용합니다. 내보내기 자체는 Hugging Face 업로드를 수행하지 않습니다."
         ),
         "",
         "각 문항과 데이터카드에 카나리아 GUID를 제공합니다. 카나리아 인지만으로 모델의 학습 포함을 확정할 수는 없습니다. 하네스는 입력 문서와 지시문 및 답안 스키마만 제공하며 공개 원고와 정답, trace와 추출 맵 및 카나리아 메타데이터를 모델에 제공하지 않습니다.",
@@ -315,7 +321,8 @@ def build_reports(
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data", type=Path, default=ROOT / "data/batch_1")
+    parser.add_argument("--data", type=Path)
+    parser.add_argument("--batch", type=int, default=1)
     parser.add_argument("--measurements", type=Path, default=ROOT / "reports")
     parser.add_argument("--output", type=Path, default=ROOT / "reports")
     parser.add_argument(
@@ -325,7 +332,12 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         result = build_reports(
-            args.data, args.measurements, args.output, preview=args.preview, seed=args.seed
+            args.data,
+            args.measurements,
+            args.output,
+            preview=args.preview,
+            seed=args.seed,
+            batch=args.batch,
         )
     except (OSError, ValueError) as exc:
         parser.exit(2, f"build_reports: {exc}\n")

@@ -126,8 +126,8 @@ def _build_authored_at(output, *, batch=1, preview=False, file_name=None, domain
     from render.authored import render_authored
     from validate import validate_task
 
-    if batch != 1:
-        raise ValueError("Only Batch 1 is authorized")
+    if type(batch) is not int or not 1 <= batch <= 4:
+        raise ValueError("Select one of the four authorized 1,200-case batches")
     if (file_name or domain) and not preview:
         raise ValueError("A source-file or domain subset is only permitted for a preview")
     if domain and domain not in DOMAINS:
@@ -150,6 +150,12 @@ def _build_authored_at(output, *, batch=1, preview=False, file_name=None, domain
     hashes = [scenario_hash(case["facts"]) for case, _ in cases]
     if len(set(hashes)) != len(hashes):
         raise ValueError("Repeated authored facts require editorial revision")
+    if not preview:
+        previous = [case for number in range(1, batch) for case, _ in load_cases(number)]
+        previous_instructions = {case["instruction"] for case in previous}
+        previous_hashes = {scenario_hash(case["facts"]) for case in previous}
+        if previous_instructions.intersection(instructions) or previous_hashes.intersection(hashes):
+            raise ValueError("Authored instructions and facts must differ from previous batches")
     output = Path(output)
     if output.exists() and any(output.iterdir()):
         raise FileExistsError(f"Refusing to replace task set: {output}")
