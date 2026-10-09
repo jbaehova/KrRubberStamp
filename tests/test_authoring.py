@@ -103,7 +103,7 @@ def test_preview_cannot_be_mistaken_for_completed_batch(editorial_source, tmp_pa
     assert not (tmp_path / "release").exists()
 
 
-@pytest.mark.parametrize("batch", [2, 4])
+@pytest.mark.parametrize("batch", [2])
 def test_new_batch_recovers_its_own_manuscript(editorial_source, tmp_path, batch):
     source, _ = editorial_source
     target = source.parents[2] / f"batch_{batch}" / "D_extract/editorial.json"
@@ -119,12 +119,14 @@ def test_new_batch_recovers_its_own_manuscript(editorial_source, tmp_path, batch
     assert validate_task(task_path.parent)["passed"]
 
 
-@pytest.mark.parametrize("batch", [0, 5])
+@pytest.mark.parametrize("batch", [0, 3, 4, 5, True])
 def test_unrequested_batch_is_not_published(editorial_source, tmp_path, batch):
     output = tmp_path / "unrequested"
-    with pytest.raises(ValueError, match="four authorized"):
+    with pytest.raises(ValueError, match="two authorized"):
         authoring.build_authored(output, batch=batch, preview=True)
     assert not output.exists()
+    with pytest.raises(ValueError, match="two authorized"):
+        authoring.load_cases(batch)
 
 
 def test_duplicate_literals_are_rejected(editorial_source, tmp_path):

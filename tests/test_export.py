@@ -13,6 +13,14 @@ from harness import run_fake, stage_task
 from validate import validate_batch
 
 
+@pytest.mark.parametrize("batches", [[3], [4], [1, 2, 3], [1, 2, 3, 4], [True]])
+def test_export_rejects_batches_outside_final_scope_before_reading_data(tmp_path, batches):
+    output = tmp_path / "export"
+    with pytest.raises(ValueError, match="unique authorized batch numbers"):
+        export.export_hf(tmp_path / "absent", batches, output, allow_preview=True)
+    assert not output.exists()
+
+
 @pytest.fixture
 def authored_export(tmp_path, monkeypatch):
     project = tmp_path / "project"

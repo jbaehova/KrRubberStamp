@@ -14,8 +14,8 @@ def main(argv=None):
     parser.add_argument("--case-file", action="append")
     parser.add_argument("--completed-from", type=Path)
     selection = parser.add_mutually_exclusive_group()
-    selection.add_argument("--batch", type=int)
-    selection.add_argument("--upto", type=int)
+    selection.add_argument("--batch", type=int, choices=(1, 2))
+    selection.add_argument("--upto", type=int, choices=(1, 2))
     args = parser.parse_args(argv)
     batches = list(range(1, args.upto + 1)) if args.upto is not None else [args.batch or 1]
     cases = (
@@ -44,7 +44,7 @@ def main(argv=None):
     lines = [
         "# 개별 문항 집필 목록",
         "",
-        f"완료 원고 {len(cases)}개를 수록했다. 배치당 1,200개를 구성하며 현재 승인된 누적 목표는 4,800개다. 이 목록은 집필 내용을 검토할 수 있도록 보여 주며 독립 전문가의 승인이나 문항 다양성 점수를 뜻하지 않는다.",
+        f"완료 원고 {len(cases)}개를 수록했다. 배치당 1,200개를 구성하며 최종 누적 목표는 2,400개다. Batch 1과 Batch 2만 집필하고 배포한다. 이 목록은 집필 내용을 검토할 수 있도록 보여 주며 독립 전문가의 승인이나 문항 다양성 점수를 뜻하지 않는다.",
         "",
     ]
     for case, source in cases:

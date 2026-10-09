@@ -13,9 +13,9 @@ from scripts import publish_hf as publishing
 @pytest.fixture
 def minimum_export(tmp_path):
     manifest = {
-        "rows": 4800,
-        "dataset_name": "KrRubberStamp-4.8K",
-        "batches": [1, 2, 3, 4],
+        "rows": 2400,
+        "dataset_name": "KrRubberStamp-2.4K",
+        "batches": [1, 2],
         "preview": False,
         "authorship": "individually_written",
         "jsonl_sha256": hashlib.sha256(b"\n").hexdigest(),
@@ -25,12 +25,23 @@ def minimum_export(tmp_path):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("fixture\n", encoding="utf-8")
     (tmp_path / "data/train.jsonl").write_bytes(b"\n")
-    (tmp_path / "README.md").write_text("KrRubberStamp-4.8K data/train.jsonl\n")
+    (tmp_path / "README.md").write_text("KrRubberStamp-2.4K data/train.jsonl\n")
     (tmp_path / "export_manifest.json").write_text(json.dumps(manifest))
     return tmp_path, manifest
 
 
-@pytest.mark.parametrize("override", [{"rows": 1200}, {"preview": True}, {"batches": [1, 2, 3]}])
+@pytest.mark.parametrize(
+    "override",
+    [
+        {"rows": 1200},
+        {"rows": 3600},
+        {"rows": 4800},
+        {"preview": True},
+        {"batches": [1, 2, 3]},
+        {"batches": [1, 2, 3, 4]},
+        {"dataset_name": "KrRubberStamp-4.8K"},
+    ],
+)
 def test_incomplete_release_never_reaches_upstream_or_network(
     minimum_export, monkeypatch, override
 ):
@@ -70,6 +81,7 @@ def test_dry_run_does_not_authenticate_or_publish(minimum_export, monkeypatch, c
     assert publishing.main([str(folder)]) == 0
     result = json.loads(capsys.readouterr().out)
     assert result["dry_run"] is True and result["uploaded"] is False
+    assert result["rows"] == 2400 and result["dataset_name"] == "KrRubberStamp-2.4K"
 
 
 def test_private_files_and_symlink_inputs_cannot_enter_export(tmp_path):
@@ -85,13 +97,31 @@ def test_private_files_and_symlink_inputs_cannot_enter_export(tmp_path):
         publishing.artifact(tmp_path, "data/linked.pdf")
 
 
+@pytest.mark.parametrize("directory", ["data/batch_3", "authored/batch_4"])
+def test_unrequested_batch_artifacts_cannot_enter_export(tmp_path, directory):
+    path = tmp_path / directory / "extra.json"
+    path.parent.mkdir(parents=True)
+    path.write_text("[]\n")
+    with pytest.raises(ValueError, match="Only Batch 1 and Batch 2"):
+        publishing.inventory(tmp_path)
+
+
+def test_default_publish_folder_is_final_two_batch_export(monkeypatch):
+    def inspect_folder(folder):
+        assert folder == publishing.Path("exports/upto_2")
+        raise ValueError("fixture gate")
+
+    monkeypatch.setattr(publishing, "preflight", inspect_folder)
+    assert publishing.main([]) == 1
+
+
 def test_revision_pinned_download_detects_remote_corruption(tmp_path):
     names = (
         "README.md",
         "export_manifest.json",
         "data/train.jsonl",
         *(f"data/batch_{batch}/manifest.json" for batch in publishing.BATCHES),
-        "data/batch_4/sample.pdf",
+        "data/batch_2/sample.pdf",
     )
     for name in names:
         path = tmp_path / name
@@ -112,18 +142,19 @@ def test_revision_pinned_download_detects_remote_corruption(tmp_path):
             assert kwargs["revision"] == revision
             return tmp_path / kwargs["filename"]
 
-    result = publishing.verify_remote(Hub(), plan, "fixture/KrRubberStamp-4.8K")
+    result = publishing.verify_remote(Hub(), plan, "fixture/KrRubberStamp-2.4K")
     assert result["revision"] == revision and result["downloaded_files_checked"] == len(names)
+    assert result["rows"] == 2400
     bad = tmp_path / "bad"
     bad.write_bytes(b"corrupt")
     hub = Hub()
     original = hub.hf_hub_download
     hub.hf_hub_download = lambda **kw: bad if kw["filename"] == names[-1] else original(**kw)
     with pytest.raises(ValueError, match="Downloaded release artifact differs"):
-        publishing.verify_remote(hub, plan, "fixture/KrRubberStamp-4.8K")
+        publishing.verify_remote(hub, plan, "fixture/KrRubberStamp-2.4K")
     with pytest.raises(ValueError, match="Remote files differ"):
         publishing.verify_remote(
-            Hub(), replace(plan, files=names[:-1]), "fixture/KrRubberStamp-4.8K"
+            Hub(), replace(plan, files=names[:-1]), "fixture/KrRubberStamp-2.4K"
         )
 
 

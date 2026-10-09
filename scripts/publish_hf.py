@@ -1,4 +1,4 @@
-"""Publish only the complete, verified 4,800-case export with explicit --publish.
+"""Publish only the complete, verified 2,400-case export with explicit --publish.
 
 Dry-run is entirely local. Authentication comes from huggingface_hub's existing
 login, never from arguments or copied credentials. Re-run a failed publish with
@@ -23,9 +23,9 @@ from KrRubberStamp.export import (
 from KrRubberStamp.io import read_json
 from KrRubberStamp.tasks import scenario_hash
 
-DATASET_NAME = "KrRubberStamp-4.8K"
-BATCHES = [1, 2, 3, 4]
-ROWS = 4800
+DATASET_NAME = "KrRubberStamp-2.4K"
+BATCHES = [1, 2]
+ROWS = 2400
 ROOT_FILES = {
     "README.md",
     "export_manifest.json",
@@ -84,6 +84,10 @@ def inventory(folder):
             raise ValueError("Unexpected private or hidden file in public export")
         if relative.as_posix() not in ROOT_FILES and relative.parts[0] not in ROOT_DIRS:
             raise ValueError(f"Unexpected file outside public export roots: {relative}")
+        if relative.parts[0] in {"data", "authored"} and len(relative.parts) > 1:
+            batch_directory = re.fullmatch(r"batch_([0-9]+)", relative.parts[1])
+            if batch_directory and int(batch_directory[1]) not in BATCHES:
+                raise ValueError("Only Batch 1 and Batch 2 artifacts may be published")
         files.append(relative.as_posix())
     return tuple(files)
 
@@ -129,7 +133,7 @@ def preflight(folder):
         or manifest.get("preview") is not False
         or manifest.get("authorship") != "individually_written"
     ):
-        raise ValueError("Publishing requires the complete individually written 4,800-case export")
+        raise ValueError("Publishing requires the complete individually written 2,400-case export")
     for relative in sorted(ROOT_FILES | {"data/train.jsonl", "rules/sources.yaml"}):
         artifact(folder, relative)
     if sha256(folder / "data/train.jsonl") != manifest.get("jsonl_sha256"):
@@ -290,7 +294,7 @@ def publish(plan, api):
             *[f"**/{part}/*" for part in sorted(IGNORED_PARTS)],
             *[f"**/{name}" for name in sorted(SECRET_NAMES)],
         ],
-        commit_message="Publish individually written KrRubberStamp 4.8K benchmark",
+        commit_message="Publish individually written KrRubberStamp 2.4K benchmark",
     )
     result = verify_remote(api, plan, repo_id)
     result.update(
@@ -301,7 +305,7 @@ def publish(plan, api):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("folder", type=Path, nargs="?", default=Path("exports/upto_4"))
+    parser.add_argument("folder", type=Path, nargs="?", default=Path("exports/upto_2"))
     parser.add_argument(
         "--publish", action="store_true", help="Create/update the public HF dataset"
     )

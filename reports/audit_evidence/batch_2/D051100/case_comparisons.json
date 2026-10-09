@@ -1,0 +1,1650 @@
+[
+  {
+    "case_id": "D051",
+    "case_sha256": "805738412a60ee088b40f095b6cc23351812d638cffc9ce4cb6043c86e8a75ae",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B1 D001"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "실인수 이력의 개당 단가 대신 필요 장수와 두 판매 포장 크기를 연결해 올림 구매 총액으로 선택한다. 13장에서는 B 1800원이고 10장에서는 A 1100원으로 바뀐다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D052",
+    "case_sha256": "41ec48dfc8377ab51a26ef67d3a4214fe00cbd1beed95888adb79a36e1a1be08",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B1 D158",
+      "B2 D051"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "포장별 상품액에 주문 한 번의 운임을 더한다. 10장에서는 열장안 2700원, 20장에서는 개별안 5000원이 되어 고정 운임의 분담과 주문 수량이 실제 순위를 바꾼다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D053",
+    "case_sha256": "b144dbeb1e04b060ef4ea46cfca4e5d8eb71a9cc603a71e0ddb514a5c091390c",
+    "difficulty": "easy",
+    "document_count": 2,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B2 D051",
+      "B2 D001"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "여러 업체 가격 순위가 아닌 지정 단일 제안의 주문 승인이다. 요구 19장을 줄이지 않고 4포장 24장, 잉여 5장과 상품 및 배송 13750원을 구한다. 실제 구매 승인 수량을 산정하는 요청을 유지한다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D054",
+    "case_sha256": "a72f627e9d3d81b19dfff1342992b311d5b97f282dbb25a7305d530f54bf6e04",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B2 D051"
+    ],
+    "review_state": "rewrite_required",
+    "relationship_reason": "동일 필요 수량을 각 포장 크기로 올려 두 총액과 잉여를 비교하는 완결 관계가 같다. 한 후보의 잉여가 0인 수치와 chosen_leftover_units를 요청한 차이는 별도 자료 접점이 아니다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D055",
+    "case_sha256": "c8e14e7dbd80674ceb3631436e2b6fda46afd083557aebb7eaafc3f339d2554d",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B2 D051",
+      "B2 D054"
+    ],
+    "review_state": "rewrite_required",
+    "relationship_reason": "낱개 포장 수량 1도 같은 올림 구매 관계의 한 값이다. 두 포장 견적을 필요량에 연결하고 총액 및 잉여로 비교하는 골격이 같고 11개에서 10개로 바꾸는 반사실 역시 수량 경계 이동이다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D056",
+    "case_sha256": "8e5fddfda0bfe36540f242a513c1711c0b591caab0f522ec32355691b29d4aff",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B1 D174",
+      "B2 D027"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "이미 구매한 유상 행의 동봉품 0원과 달리 필요한 물량 전체를 독립 무상 견적으로 승인할지 판단한다. 상품 및 배송 0원도 유효한 후보이고 두 포장 재고가 하나로 줄면 유상안으로 바뀐다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D057",
+    "case_sha256": "f38ef18803abdbbde9de0aa90474d9fa9139487e73fd666f732bd339c3a1426d",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B2 D051"
+    ],
+    "review_state": "rewrite_required",
+    "relationship_reason": "개당 표시가 550/4와 825/6의 동률은 숫자 관계이다. 자료 연결과 선택은 D051과 똑같은 필요량→포장 올림→실구매 총액이며 동률 표기가 새 귀속 또는 선택 관계를 만들지 않는다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D058",
+    "case_sha256": "2e1d54d1874eb01e660cba956e79159acfd9b600d99d928d7eaecfdb0f7f7072",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B2 D052"
+    ],
+    "review_state": "rewrite_required",
+    "relationship_reason": "상품 가격의 우위가 주문당 고정 운임을 더한 후 뒤집히는 동일 관계다. 양쪽 포장이 4개인 것과 운임만 바꾸는 반사실은 이미 D052가 구현한 실제 도착비 비교를 되풀이한다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D059",
+    "case_sha256": "dcebe0bf8f810ee161c50d17c1f884df3c5413b96e64adc75ed154d9a64bb45a",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B1 D279",
+      "B2 D052"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "한 견적 안에서도 상품과 운임의 세금 표시를 따로 적용한다. 상품 포함+배송 별도 1210원과 상품 별도+배송 포함 1232원을 비교하고 배송 원문 변경은 상품 세액을 유지한 채 선택을 바꾼다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D060",
+    "case_sha256": "e744171722ebaf8f47708dc6b3b3cd7ca4cc1981a854218355a94a795f1c1699",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B2 D052",
+      "B2 D058"
+    ],
+    "review_state": "rewrite_required",
+    "relationship_reason": "도착 속도 두 값이 모두 납기 내이므로 기준 원고의 선택은 기본 포장 상품액과 고정 운임 비교에 그친다. 더 빠른 도착을 우선하지 말라는 설명은 실제 제외 자료를 연결하지 않는다. 납기를 좁힌 반사실은 정상 작동하지만 기준 원고의 새 관계를 증명하지 않는다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D061",
+    "case_sha256": "6595287866f236df03205ff9fb1a0470ffd34fca3dd7f5ac133b0b63b0eaebfd",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B2 D051",
+      "B1 D131"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "독립 quote_id를 가진 같은 업체의 택일 포장 두 안이다. 업체 계정 합산과 달리 둘 다 별도 후보로 남겨 실제 주문안을 선택한다. 13개에서 12개로 바꾸면 같은 업체 안의 선택 ID가 바뀐다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D062",
+    "case_sha256": "b5aab0e6e9012114dfbdd59cb4164613d80303e21af32f26f3fd3d2e2f6076cd",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B1 D285",
+      "B2 D051"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "주문 포장 수를 먼저 확정하고 포함 상품액 전체를 분리한다. 한 포장 공급가액 버림을 더하면 REST-PAIR 36원의 공급가액 32원과 다른 결과가 생긴다. 실제 총액을 비교하는 요청과 합산 단위를 함께 확인한다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D063",
+    "case_sha256": "d5b37d40fb1fd4004730e2a7c9bb38ffcb91394a9a6eced5f41d9fd6c984e6e1",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B2 D069",
+      "B2 D052"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "필요와 최소 주문만 산다는 약정이 무료배송을 얻으려는 임의 증량을 금지한다. 4개 수요에서는 2300원안이고 수요가 6개로 늘어 진짜 두 포장이 필요할 때만 2000원 무료배송안으로 바뀐다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D064",
+    "case_sha256": "b12f8214b96aa25bd8a5d9e685005ee9bed2fe308a60736d328615b393a7e9b4",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B1 D052",
+      "B2 D059"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "같은 공급가액 1000원이어도 포함 1101원과 별도 1100원의 실제 지급 총액은 다르다. 공급가액 동률 선택을 실제 예산 승인으로 가져오면 틀린다. 별도 가격 1원 변경으로 총액 동률과 업체 우선이 실제 발생한다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D065",
+    "case_sha256": "b5fb6ab6b415d38f008709d5dbbf5f2e0f8a98c9a58d9c26c8772c7ae0c13702",
+    "difficulty": "easy",
+    "document_count": 3,
+    "exception_count": 0,
+    "closest_neighbors": [
+      "B2 D051",
+      "B2 D059"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "필요 길이 45m에서 20m 롤 3개와 30m 롤 2개로 확보하며 상품과 배송의 독립 세금 표시를 적용한다. 40m면 첫 안의 구매 포장 수가 내려가 선택이 달라지고 배송만 없애도 선택이 달라져 포장 규모와 배송 구성의 결합이 실제 작동한다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D066",
+    "case_sha256": "9990da5328039dcfd210e5ee51e679e440284cabcfc9f8a58da024631e2fae11",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D051"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "필요 수량으로 구한 포장 수와 견적의 최소 주문을 연결한다. 도매안 1포장 필요에도 4포장을 사야 하며 MOQ를 1로 바꾸면 총액과 선택이 바뀐다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D067",
+    "case_sha256": "106048fed4f4772acb9adbfefd6ce18c89a3e1b32d9a1b7ce65f3ce3e0957c88",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D066",
+      "B2 D072"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "재고 확인의 기준이 필요량 올림이 아닌 MOQ 적용 뒤 세 포장이다. 두 포장은 기본 필요량을 충족해도 주문을 실행할 수 없다. 재고 3으로 바꾸면 해당 도매안만 적격이 된다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D068",
+    "case_sha256": "8b8d80c2c4e96261b22d4461f6837789069493e182374bfbe5f92ded347fb331",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D063",
+      "B2 D059"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "별도 상품 2000원에 세액 200원을 붙인 상품 총액을 무료배송 기준 2200원에 연결한다. 공급가액만 비교하면 운임 550원을 남겨 잘못 선택한다. 기준 2201에서는 실제 다른 업체로 선택이 바뀐다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D069",
+    "case_sha256": "dc8bc9bc93a85b5611e422bdadea7964f5176eec715ca8d89d65af2d94302822",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D063",
+      "B2 D068"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "상품 2000원은 기준 2500원 미달이고 운임을 더한 2700원을 다시 기준에 넣는 순환 계산을 금지한다. 상품총액 자체를 충족하는 기준으로 고쳤을 때만 운임과 선택이 바뀐다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D070",
+    "case_sha256": "4336a03908d13187239d76e35a39f90379c8a879d9f0b3e941610ff52ead7b8d",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B1 D281",
+      "B2 D071"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "납기와 재고는 가능하지만 주문일 전 종료 가격을 선택할 수 없다. 종료일을 주문일까지 늘리면 저가안만 적격으로 들어온다. 실인수 여부를 선택하는 기존 구매 정산과 다른 주문 시점 가격 효력이다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D071",
+    "case_sha256": "526a9f234e6257b7e716b348c02d5b94654b93b7882df90f4af55b0145809e84",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D070",
+      "B2 D081"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "할인 시작과 주문일 및 도착일을 분리한다. 주문일은 할인 전이고 도착일은 할인 후라 도착일 효력으로 가격을 소급하면 틀린다. 시작일만 주문일에 맞추면 할인안이 적격이다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D072",
+    "case_sha256": "8eeb0e90954dd5ca074b59fd92557d5619ac5f54b3447f60d7fb7f304fd8a6d2",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D067"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "필요 21개를 10개 포장으로 세 개 올린 뒤 재고 두 포장을 대조한다. MOQ가 아닌 마지막 일부 필요량의 포장 올림이 재고 부적격을 만들며 재고 한 포장 확보가 선택을 바꾼다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D073",
+    "case_sha256": "97b28096df0efff855bb02cf9d8f2b240188e6f863b75a32d938010be8f3168c",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D074"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "금요일 주문에서 달력일 3일을 더해 월요일 납기에 맞춘다. 주말을 뺀 영업일 계산은 다른 도착일과 적격 판정을 만든다. 일반 하루 늦음 비교와 달리 주말 산정 약정의 날짜 접점을 확인한다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D074",
+    "case_sha256": "14e2710d3446158def50f79ecd4c9f2b4af7e948e406c5d179b63ba2f21bfb1b",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D073",
+      "B2 D070"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "주문 후 날짜를 더한 도착일을 최종 허용일에 연결한다. 저가 후보가 하루 늦어 제외되고 허용 마지막 날로 이동시키면 선택 가능해진다. 가격 효력 기준 날짜와 다른 실제 도착 가능성이다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D075",
+    "case_sha256": "f3412566e18099133d77d6c5c7cf903c5058ad4ff5c09be3d83193254d0fe080",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B1 D127",
+      "B2 D086"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "견적 ID의 동일 내용 재제출을 제거한 뒤 택일 구매 대안 수를 센다. 실제 구매 증빙 합산과 달리 두 후보만 비교하며 재제출 제거가 금액과 후보 수를 유지하는지 확인한다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D076",
+    "case_sha256": "e8ea2d37e618afd08256b7d90760fd35d0abfa4d5847516721088a48530b3b72",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B1 D019",
+      "B2 D051"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "동일 실제 도착 총액에서 잉여 최소가 아닌 정규화 업체 우선으로 택일한다. 확보 12개의 가 업체가 확보 10개의 나 업체보다 먼저여서 실제 잉여가 남는다. 금액이 달라지면 업체 순위보다 금액이 우선한다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D077",
+    "case_sha256": "f8d624ec028cf3b423b26cd36215dc5dfd15979817636b03f1ec3358b8c1e037",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D076",
+      "B1 D131"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "법인 표기를 정리한 뒤 총액과 공급사까지 같은 독립 견적은 ID를 비교한다. 주식회사 및 (주) 표기가 원문 문자열 순서를 대신하지 않는다. ID 변경만으로 선택이 바뀐다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D078",
+    "case_sha256": "9af1ce5ae942583655498b0a941fc85702998fc1c711047ed25c8454b6b87bd2",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D072"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "두 공급사의 재고가 모두 실제 구매 포장 수보다 모자라 선택이 없다. 하나를 강제로 뽑지 않는 승인 보류 업무이며 한 후보의 재고만 충족시킬 때 null이 실제 견적으로 바뀐다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D079",
+    "case_sha256": "077d919e565bacfba843d4f245169548bc73de413e350b3aa6fbdf8f8e306221",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D068",
+      "B2 D056"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "배송 기준 숫자 0과 기준 없음 null은 별개 원문 조건이다. 0 기준은 운임을 제거해 선택을 바꾸며 null로 고치면 원 운임이 살아난다. 상품가격 0과 무료배송 기준 0도 다른 입력 역할이다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D080",
+    "case_sha256": "7c5d632ea35bd3a4b2a2c8181f413839baddb2c58fae1b997f38e2dd69ea873d",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D066",
+      "B2 D068"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "MOQ가 필요 이상의 상품액을 만들고 그 금액이 배송 경계를 충족한다. 최소 포장을 줄이면 구매액뿐 아니라 무료배송 자격이 함께 사라져 실제 총액 4000원에서 2800원이 된다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D081",
+    "case_sha256": "f433263e481b9d1f0884bc70b1fb92bd2a20c024e707f809d0c6f29f848affd8",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D070",
+      "B2 D071"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "주문일 당일 종료 가격은 이후 도착해도 유효하다. 주문일 가격 확정과 실제 배송 가능 기간을 분리하는 반대 선택 관계이며 주문일을 효력 밖으로 보내면 제외된다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D082",
+    "case_sha256": "e0a54b97a733804fa50633d3feefe085feb807b26a4b7f39c9e1c99474a489ef",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D068"
+    ],
+    "review_state": "rewrite_required",
+    "relationship_reason": "상품 총액으로 무료배송을 확인한 뒤 표시 운임과 그 세액을 0으로 처리하는 계산은 D068의 무료배송 계산에 이미 포함된다. 여기서는 기준 2000원으로 상품 공급가액도 기준을 충족하며 큰 표시 운임은 제외된 자료일 뿐이다. 운임 금액 불변 반사실은 정상이나 새 업무 관계는 아니다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D083",
+    "case_sha256": "8cb48cc37bf032fb98d9c0d70b2a84668249bc1601c9b139aaa06110dcdf0d7e",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D061",
+      "B2 D069"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "같은 공급사의 포장 대안을 합산 주문으로 오인하면 무료배송이 생긴다. 각 ID 자신의 상품액 2000/2200원은 기준 3500원 아래여서 운임이 남고 다른 업체가 선택된다. 한 대안의 기준만 바꾸면 그 안만 무료가 된다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D084",
+    "case_sha256": "34434c82879c9274ea3ebcaa31784d3dd850a8ac457b22e75328ec027fbaafbf",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D059",
+      "B1 D285"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "상품 별도 39원의 세액 3원과 운임 별도 19원의 세액 1원을 각각 버려 총액 62원을 만든다. 합친 58원에서 한 번 버리면 63원이 되어 선택도 바뀌는 독립 항목별 버림 관계다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D085",
+    "case_sha256": "78dd4106326edaac17f536396c83f3ef476837a02996f240f3fce4c7385d557d",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D056",
+      "B2 D079"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "무상 상품도 양수 배송 기준을 충족하지 않으면 실제 도착비 900원이 남아 유상 상품 750원보다 비싸다. 기준 0으로 바꾸면 무상안이 0원으로 선택되어 무상 상품과 무료배송의 독립 약정을 확인한다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D086",
+    "case_sha256": "34c21a48b39e10c6a0ba66f3c0c4544397b465e4c369df84ae8899e942140b90",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D075",
+      "B1 D275"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "동일 내용인 독립 견적 A/B와 동일 ID 재제출 A를 함께 대조한다. 독립 ID는 남기고 재제출만 제거해 후보 수 2를 구한다. B를 A 재제출로 바꾸면 실제 후보 수가 1로 내려간다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D087",
+    "case_sha256": "ee056b69c0566a789e6404bdf80bbaa2eba258b06764e3853fdd669a073fb186",
+    "difficulty": "medium",
+    "document_count": 4,
+    "exception_count": 1,
+    "closest_neighbors": [
+      "B2 D074",
+      "B2 D068"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "상품액이 무료배송을 충족해 싼 대포장안이라도 실제 도착이 늦으면 선택 불가하다. 배송비 제거와 납기 적격이 서로 다른 경로이며 납기를 충족시킨 반사실에서 무료배송 대포장안으로 바뀐다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D088",
+    "case_sha256": "d87ae64ae3a32d709cde4ed9ff457926e6f68de50dae95ecaf0ecda5427d6f5a",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D067",
+      "B2 D070"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "서로 다른 견적의 MOQ 재고 부족과 주문일 가격 만료를 분리한다. 재고를 충족시킨 후보만 새 적격이 되고 만료 후보는 계속 제외된다. 두 조건을 하나의 제외 목록으로 미리 주지 않는다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D089",
+    "case_sha256": "be83ccc5d64c9209bffd9d97b5e37ff36e263aae2fc851ff8c98db0b4993e157",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D068",
+      "B2 D087"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "별도 상품 세액이 무료배송을 채운 후보와 더 낮지만 배송이 늦은 무료 후보를 함께 비교한다. 세액을 빼거나 늦은 안을 허용하면 각각 다른 비용 및 선택 오류가 생긴다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D090",
+    "case_sha256": "208f1b04b0007d790c20e5a3209d7bb03c03b976229b1a1e7acb8e77a1cf1ede",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D070",
+      "B2 D077"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "만료 저가 견적을 제외한 뒤 정규화 동일 법인 및 총액 동률의 적격 대안을 ID로 고른다. 만료안 효력 변경과 적격안 가격 변경을 따로 검증해 두 판단이 각각 실제 선택을 바꾼다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1,
+      2
+    ]
+  },
+  {
+    "case_id": "D091",
+    "case_sha256": "c49a61fac149ea5c7edfea1eb95224e43fc9374f3f2c672a9f3624f460810835",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 3,
+    "closest_neighbors": [
+      "B2 D078",
+      "B2 D070",
+      "B2 D074"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "후보별로 가격 만료, 포장 재고 부족, 납기 초과가 다르게 발생해 모두 부적격이다. 가격 효력만 고치면 해당 한 후보만 적격으로 들어와 단일 재고 부족만 있는 승인 보류와 구별된다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D092",
+    "case_sha256": "35be9b813c11860dc8f005fb2f7d9ee196921f6709cea10ab3b7cc9430f0d702",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D075",
+      "B2 D072"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "견적 재제출 제거와 별도 저가 후보의 구매 포장 재고 부족을 함께 대조한다. 사본 제거는 답을 유지하고 재고를 채우면 후보 수와 선택이 바뀌므로 두 조건의 역할이 분리된다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1,
+      2
+    ]
+  },
+  {
+    "case_id": "D093",
+    "case_sha256": "80fc318976285a82de0672bfd016e57b5768f820cc2a3d48deff4c087cb79bf2",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D080",
+      "B2 D087"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "최소 포장을 줄이면 상품액은 줄지만 무료배송도 없어져 오히려 다른 업체가 선택된다. 현재 더 싼 대포장안은 늦어서 제외된다. 실제 MOQ→상품액→운임의 비단조 비용 관계와 배송 가능성의 결합이다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D094",
+    "case_sha256": "d1ad99b850fe9d6850abb5933571f70cc99912dde76d65fe6a020b9d527afeeb",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D071",
+      "B2 D072",
+      "B2 D081"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "주문 당일 종료 가격은 배송일이 뒤여도 유효하지만 주문 후 시작 할인은 부적격이다. 별도 저가 후보는 마지막 구매 포장 재고가 없으며 할인 시작만 바꿔도 재고 탈락 후보를 되살리지 않는다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D095",
+    "case_sha256": "ed27a42faab698aa1a6356618e7db296aa7033bc5239ea8550e9c6c7edd64e2f",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D084",
+      "B2 D068"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "개별 상품/운임 버림의 62원과 표시 총액 63원으로 무료배송을 얻는 안을 함께 대조한다. 상품 공급가액으로 기준을 비교하면 두번째 안의 운임이 남는다. 첫 안 운임의 한 원 경계 이동 시 무료배송 안이 실제 선택된다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D096",
+    "case_sha256": "902b7080925e0eb8bf3ff1e1281472fb60784df77a19beb64cff83220104d4dd",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D067",
+      "B2 D074",
+      "B2 D088"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "연말 주문의 달력 도착일을 다음 해 납기에 비교하고 다른 후보의 MOQ 재고를 따로 대조한다. 연도 변경 자체를 다양성 근거로 삼지 않으며 재고 부족과 실제 도착 초과라는 다른 탈락 조건의 결합을 검수했다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D097",
+    "case_sha256": "618bc814c957d4fd525bc0d5f03a4f5cad117494552536c434c0c87cf08a3b28",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D083",
+      "B2 D075"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "같은 업체의 택일 대안은 상품액 합산을 금지하고 동일 견적 제출본만 제거한다. 사본을 독립 대안으로 세거나 대안 상품을 합치면 각각 후보 수와 운임이 잘못된다. 서로 다른 두 ID 관계를 구분한다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D098",
+    "case_sha256": "eba8e362b75b7690a369655c6b0b0f4d76935876b63fd98b6fc622160fda9bc3",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D079",
+      "B2 D072"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "배송 기준 0으로 운임은 이미 없어졌어도 구매 포장 재고가 부족하면 저가안은 선택 불가다. 재고만 채우면 그 안이 선택되고 null 배송기준의 다른 후보 운임은 유지된다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D099",
+    "case_sha256": "6b139f4986512817847455b7a5439163a40ec03b432d73303d6eb2c896ddba30",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D085",
+      "B2 D056",
+      "B2 D072"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "무상 상품의 양수 배송기준은 운임을 남기고 독립 무상 무료배송안은 필요한 포장 재고가 없다. 무료와 유상이라는 표지만 비교할 수 없으며 무료 후보의 재고만 채워야 0원 선택이 된다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1
+    ]
+  },
+  {
+    "case_id": "D100",
+    "case_sha256": "f5854ea431d113319a5adcca64ecee403c9a07f6416f34284650586603d5223a",
+    "difficulty": "hard",
+    "document_count": 9,
+    "exception_count": 2,
+    "closest_neighbors": [
+      "B2 D072",
+      "B2 D068"
+    ],
+    "review_state": "accept_candidate",
+    "relationship_reason": "필요 21개의 마지막 포장을 올리면 저가 후보 재고가 모자라고 다른 후보의 별도 상품 세액은 무료배송 경계를 충족한다. 재고 확보와 배송기준 한 원 이동을 따로 검증하여 각각 다른 실제 구매 선택을 확인했다.",
+    "decisive_source_paths": [
+      "required_units",
+      "quotes.*.quote_id",
+      "quotes.*.pack_units",
+      "quotes.*.minimum_packs",
+      "quotes.*.pack_price",
+      "quotes.*.shipping_price",
+      "quotes.*.free_shipping_at",
+      "order_date",
+      "latest_delivery_date",
+      "quotes.*.stock_packs",
+      "quotes.*.valid_from",
+      "quotes.*.valid_until",
+      "quotes.*.lead_days"
+    ],
+    "independent_arithmetic_passed": true,
+    "physical_restore_passed": true,
+    "counterfactual_tests": [
+      1,
+      2
+    ]
+  }
+]

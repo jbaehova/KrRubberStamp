@@ -1,0 +1,86 @@
+{
+  "source_sha256": "90b8c07e858746f327544205e5fb97045ee736b5817e10a80043178c85991cf3",
+  "frozen_first50_sha256": "819ae6c3208a51228d8d77c232de8e6e67e65c132dbf5435c23386ae3d999d68",
+  "comparison_scope": {
+    "B1_D": 300,
+    "B2_D001050": 50,
+    "B2_D051100_unchanged": 44,
+    "new_cart_cases": 6
+  },
+  "cases": [
+    {
+      "case_id": "D054",
+      "nearest_neighbors": [
+        "B1 D001",
+        "B1 D058",
+        "B2 D052",
+        "new D055",
+        "new D060"
+      ],
+      "actual_difference": "Individually cheapest landed-price choices are split suppliers2420; actual jointly shipped whole cartBOX2090 wins. Neither unrelated format changes nor extra fields establish novelty.",
+      "baseline_total": 2090,
+      "wrong_independent_total": 2420
+    },
+    {
+      "case_id": "D055",
+      "nearest_neighbors": [
+        "B2 D068",
+        "new D054",
+        "new D057",
+        "new D082"
+      ],
+      "actual_difference": "Two selected distinct item totals jointly cross one vendor threshold; neither item alone crosses. Unlike D054 fixed freight, selected merchandise identity controls free shipping.",
+      "baseline_total": 2200,
+      "threshold_counterfactual_total": 2420
+    },
+    {
+      "case_id": "D057",
+      "nearest_neighbors": [
+        "B1 D285",
+        "B2 D084",
+        "new D055"
+      ],
+      "actual_difference": "Separate excluded VAT floors produce2212 not incorrectly pooled2213, changing vendor-group threshold eligibility and chosen actual cart. Included tax splitting alone preserves gross, so not claimed to change cheapest selection.",
+      "baseline_total": 2213,
+      "excluded_pair_with_shipping": 4412
+    },
+    {
+      "case_id": "D058",
+      "nearest_neighbors": [
+        "B1 D023",
+        "B1 D128",
+        "B2 D061",
+        "B2 D053",
+        "new D055"
+      ],
+      "actual_difference": "Explicit department item IDs prohibit whole-pack pooling despite identical names/units; need2+2packs not pooled3, changing actual group merchandise and freight eligibility.",
+      "baseline_total": 2200,
+      "prohibited_pooled_total": 1980
+    },
+    {
+      "case_id": "D060",
+      "nearest_neighbors": [
+        "B1 D020",
+        "B1 D139",
+        "B2 D077",
+        "new D054",
+        "new D058"
+      ],
+      "actual_difference": "Distinct vendor IDs with same normalizedname remain independent shipping accounts; correctly separate costs3000 exceed real consolidatedvendor2500, whereas prohibited name pooling yields2000. Item identity and vendor identity refer to different source joins.",
+      "baseline_total": 2500,
+      "prohibited_name_pooling_total": 2000
+    },
+    {
+      "case_id": "D082",
+      "nearest_neighbors": [
+        "B2 D070",
+        "B2 D087",
+        "new D055"
+      ],
+      "actual_difference": "Exclude actual expired seconditem offer before building complete carts; valid backup makesDEAL3080 lose toREADY2750; makingexpiredeligible producesDEAL2420 and6instead4completecarts.",
+      "baseline_total": 2750,
+      "expired_quote_valid_counterfactual_total": 2420
+    }
+  ],
+  "final_independent_semantic_approval_pending": true
+}

@@ -246,9 +246,11 @@ def collect_authored_tasks(data_root, batches, *, allow_preview=False, batch_dir
     if (
         not batches
         or len(set(batches)) != len(batches)
-        or any(type(batch) is not int or batch < 1 for batch in batches)
+        or any(
+            type(batch) is not int or batch not in authoring.AUTHORIZED_BATCHES for batch in batches
+        )
     ):
-        raise ValueError("Select unique positive batch numbers")
+        raise ValueError("Select unique authorized batch numbers: 1 and 2")
     tasks, manifests, seen = [], {}, set()
     for batch in sorted(batches):
         directory = (

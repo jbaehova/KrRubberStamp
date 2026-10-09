@@ -1,0 +1,1041 @@
+[
+  {
+    "case_id": "D051",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "required_units"
+      ],
+      "value": 10,
+      "expect": {
+        "chosen_quote_id": "LABEL-A",
+        "chosen_total": 1100
+      },
+      "why": "필요량이 한 큰 포장에 맞으면 포장 올림 비용의 순위가 바뀐다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D052",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "required_units"
+      ],
+      "value": 20,
+      "expect": {
+        "chosen_quote_id": "ENV-EACH",
+        "chosen_total": 5000
+      },
+      "why": "더 많은 실제 상품을 주문해도 고정 운임은 한번만 발생하여 대안 순위가 바뀐다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D053",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "required_units"
+      ],
+      "value": 25,
+      "expect": {
+        "chosen_total": 17050,
+        "chosen_leftover_units": 5,
+        "quote_comparisons.0.packs": 5
+      },
+      "why": "지정 단일 제안에서도 필요량 증가가 실제 구매 포장과 예산을 바꾼다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D054",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "required_units"
+      ],
+      "value": 10,
+      "expect": {
+        "chosen_total": 1000,
+        "chosen_leftover_units": 0
+      },
+      "why": "필요량이 큰 포장에 정확히 맞으면 작은 포장이던 선택 총액과 잉여 관계가 바뀐다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D055",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "required_units"
+      ],
+      "value": 10,
+      "expect": {
+        "chosen_quote_id": "CAP-EACH",
+        "chosen_leftover_units": 0,
+        "quote_comparisons.0.total": 1200
+      },
+      "why": "낱개 필요량 감소가 낱개안만의 실제 비용을 낮춰 묶음의 잉여 구매 이점을 없앤다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D056",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "stock_packs"
+      ],
+      "value": 1,
+      "expect": {
+        "chosen_quote_id": "LABEL-SALE",
+        "chosen_total": 1650
+      },
+      "why": "0원 가격도 실제 필요한 두 포장 재고가 없으면 선택할 수 없다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D057",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "required_units"
+      ],
+      "value": 7,
+      "expect": {
+        "chosen_quote_id": "TAG-FOUR",
+        "chosen_total": 1100
+      },
+      "why": "동일 개당가격 두 포장안은 필요량이 달라지면 구매 총액 순위가 반전된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D058",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "shipping_price"
+      ],
+      "value": 0,
+      "expect": {
+        "chosen_vendor": "가상패드직판",
+        "chosen_total": 880
+      },
+      "why": "상품 외 고정 운임을 제거하면 도착 가격 선택이 상품가격 우위 후보로 바뀐다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D059",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        1,
+        "shipping_price"
+      ],
+      "value": 100,
+      "expect": {
+        "chosen_quote_id": "HOLDER-EX",
+        "chosen_total": 1200
+      },
+      "why": "포함 운임 원문만 변경하면 상품 별도 세액은 유지되며 최종 선택은 바뀐다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D060",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "latest_delivery_date"
+      ],
+      "value": "2026-09-07",
+      "expect": {
+        "chosen_quote_id": "TAG-INSTANT",
+        "chosen_total": 2500,
+        "eligible_quote_count": 1
+      },
+      "why": "허용 도착일을 주문 당일로 좁히면 가격 우위의 정기안만 납기 부적격으로 바뀐다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D061",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "required_units"
+      ],
+      "value": 12,
+      "expect": {
+        "chosen_quote_id": "RING-BULK",
+        "quote_comparisons.0.packs": 1
+      },
+      "why": "같은 업체 독립 포장안에서도 필요량이 큰 포장에 맞으면 실제 구매안이 달라진다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D062",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "required_units"
+      ],
+      "value": 6,
+      "expect": {
+        "chosen_quote_id": "REST-PAIR",
+        "quote_comparisons.1.merchandise_supply": 32,
+        "quote_comparisons.1.merchandise_vat": 4,
+        "quote_comparisons.1.total": 36
+      },
+      "why": "필요량 한 개 증가에도 두 개 포장안은 구매포장수와 전체 상품 세액이 그대로이고 낱개안만 증가한다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D063",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "required_units"
+      ],
+      "value": 6,
+      "expect": {
+        "chosen_quote_id": "SEAL-EXTRA",
+        "chosen_total": 2000,
+        "quote_comparisons.0.shipping_total": 0
+      },
+      "why": "필요량 자체가 추가 포장을 요구할 때만 그 실제 상품액으로 무료배송이 생긴다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D064",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        1,
+        "pack_price"
+      ],
+      "value": 1001,
+      "expect": {
+        "chosen_quote_id": "PLATE-IN",
+        "chosen_total": 1101
+      },
+      "why": "별도 상품 가격 1원 증가가 최종 지급총액 동률을 만들며 동률 약정 순서로 바뀐다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D065",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "shipping_price"
+      ],
+      "value": 0,
+      "expect": {
+        "chosen_total": 33000,
+        "chosen_leftover_units": 15
+      },
+      "why": "길이 상품액은 그대로 두고 운임만 없애면 서로 다른 롤 크기 구매안의 순위가 바뀐다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D066",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "minimum_packs"
+      ],
+      "value": 1,
+      "expect": {
+        "chosen_quote_id": "ENV-MIN",
+        "chosen_leftover_units": 1
+      },
+      "why": "최소 주문 제한 제거가 실제 소량 구매비와 잉여를 함께 낮춘다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D067",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "stock_packs"
+      ],
+      "value": 3,
+      "expect": {
+        "chosen_quote_id": "TOOL-LOT",
+        "eligible_quote_count": 2
+      },
+      "why": "최소 주문 적용 후 세 포장까지 재고가 확보되면 도매 제안이 적격이 된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D068",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "free_shipping_at"
+      ],
+      "value": 2201,
+      "expect": {
+        "chosen_quote_id": "CARD-FLAT",
+        "chosen_total": 2400,
+        "quote_comparisons.1.shipping_total": 550
+      },
+      "why": "상품 총액 바로 위 기준으로 바꾸면 운임이 남아 구매처가 반전된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D069",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "free_shipping_at"
+      ],
+      "value": 2000,
+      "expect": {
+        "chosen_vendor": "가상시트배송",
+        "chosen_total": 2000
+      },
+      "why": "운임이 아닌 실제 상품금액이 기준을 충족할 때만 무료배송이 선택을 바꾼다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D070",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "valid_until"
+      ],
+      "value": "2026-05-18",
+      "expect": {
+        "chosen_quote_id": "HOOK-OLD",
+        "eligible_quote_count": 2
+      },
+      "why": "효력 종료가 주문일을 포함하도록 바뀌면 만료 저가안이 실제 선택 가능해진다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D071",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "valid_from"
+      ],
+      "value": "2026-06-15",
+      "expect": {
+        "chosen_quote_id": "REST-PROMO",
+        "chosen_total": 1200
+      },
+      "why": "가격 시작이 주문일을 포함하면 도착일과 무관하게 할인안이 적격이 된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D072",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "stock_packs"
+      ],
+      "value": 3,
+      "expect": {
+        "chosen_vendor": "가상핀낱재고",
+        "eligible_quote_count": 2
+      },
+      "why": "마지막 올림 포장까지 재고를 늘리면 저가안의 실제 구매가 가능하다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D073",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "lead_days"
+      ],
+      "value": 4,
+      "expect": {
+        "chosen_quote_id": "SIGN-ONE",
+        "quote_comparisons.1.delivery_date": "2026-08-18"
+      },
+      "why": "정기 배송 달력일이 하루 늘면 주말 포함 최종 납기를 넘는다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D074",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        1,
+        "lead_days"
+      ],
+      "value": 5,
+      "expect": {
+        "chosen_quote_id": "HANDLE-LATE",
+        "chosen_total": 2200
+      },
+      "why": "저가 배송을 최종 허용일 당일로 바꾸면 해당 제안도 적격이다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D075",
+    "test_number": 1,
+    "mutation": {
+      "drop_quote": 1,
+      "invariant": true,
+      "expect": {
+        "eligible_quote_count": 2
+      },
+      "why": "동일 견적 제출본만 제거해도 독립 구매 대안과 최종 답은 유지된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": false
+  },
+  {
+    "case_id": "D076",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "pack_price"
+      ],
+      "value": 999,
+      "expect": {
+        "chosen_vendor": "가상나캡",
+        "chosen_leftover_units": 0
+      },
+      "why": "총액 동률이 실제 더 낮은 총액으로 풀리면 업체 정렬보다 금액이 우선한다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D077",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "quote_id"
+      ],
+      "value": "DIV-0",
+      "expect": {
+        "chosen_quote_id": "DIV-0"
+      },
+      "why": "같은 총액과 정규화 업체의 독립 제안에서 최종 ID 우선순위를 실제로 바꾼다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D078",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "stock_packs"
+      ],
+      "value": 3,
+      "expect": {
+        "eligible_quote_count": 1,
+        "chosen_quote_id": "PIN-A",
+        "chosen_total": 3300
+      },
+      "why": "후보 하나만 필요 구매포장 재고를 확보하면 null 승인 상태가 실제 선택으로 바뀐다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D079",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "free_shipping_at"
+      ],
+      "value": null,
+      "expect": {
+        "chosen_quote_id": "CLIP-NONE",
+        "chosen_total": 1200
+      },
+      "why": "수치0 약정을 기준 없음으로 바꾸면 원 표시 운임이 살아난다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D080",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "minimum_packs"
+      ],
+      "value": 1,
+      "expect": {
+        "chosen_total": 2800,
+        "quote_comparisons.0.shipping_total": 1800,
+        "quote_comparisons.0.packs": 1
+      },
+      "why": "최소구매 감소가 실제 상품액을 줄이면서 무료배송 경계를 더는 충족하지 못한다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D081",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "valid_until"
+      ],
+      "value": "2026-06-21",
+      "expect": {
+        "chosen_quote_id": "BASE-LONG",
+        "eligible_quote_count": 1
+      },
+      "why": "주문일 자체가 효력 밖으로 바뀌면 이후 도착 여부와 별개로 제외된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D082",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "shipping_price"
+      ],
+      "value": 99999,
+      "invariant": true,
+      "expect": {
+        "chosen_total": 2200
+      },
+      "why": "상품액으로 무료배송을 이미 충족하므로 표시 운임의 크기는 답을 바꾸지 않는다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": false
+  },
+  {
+    "case_id": "D083",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "free_shipping_at"
+      ],
+      "value": 2000,
+      "expect": {
+        "chosen_quote_id": "PAD-S",
+        "chosen_total": 2000
+      },
+      "why": "한 대안 자신의 상품액만으로 기준을 충족하도록 고치면 그 대안만 운임이 제거된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D084",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "shipping_price"
+      ],
+      "value": 20,
+      "expect": {
+        "chosen_quote_id": "SMALL-INCLUDED",
+        "chosen_total": 63
+      },
+      "why": "별도 운임 세액 버림의 다음 정수 경계를 넘으면 전체 총액도 바뀐다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D085",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "free_shipping_at"
+      ],
+      "value": 0,
+      "expect": {
+        "chosen_vendor": "가상스티커무상",
+        "chosen_total": 0
+      },
+      "why": "무상 상품도 수치0 무료배송 약정으로 바꾸면 실제 도착비가 0이 된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D086",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        2,
+        "quote_id"
+      ],
+      "value": "KEEP-A",
+      "expect": {
+        "eligible_quote_count": 1,
+        "chosen_quote_id": "KEEP-A"
+      },
+      "why": "독립 원문 B를 동일 ID 동일 내용 제출본으로 바꾸면 실제 대안 수가 하나 줄어든다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D087",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "lead_days"
+      ],
+      "value": 4,
+      "expect": {
+        "chosen_quote_id": "RECORD-BULK",
+        "chosen_leftover_units": 3
+      },
+      "why": "대포장 무료배송안이 최종 납기 당일에 가능해지면 그 낮은 비용을 선택한다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D088",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "stock_packs"
+      ],
+      "value": 3,
+      "expect": {
+        "chosen_quote_id": "R-A",
+        "eligible_quote_count": 3
+      },
+      "why": "최소 구매재고를 충족시킨 제안만 새 적격으로 들어오며 만료 후보는 그대로 제외된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D089",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        1,
+        "lead_days"
+      ],
+      "value": 4,
+      "expect": {
+        "chosen_quote_id": "CAP-LATE",
+        "chosen_total": 1800
+      },
+      "why": "무료배송 저가안의 실제 도착이 최종 납기 안으로 들어오면 선택된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D090",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        2,
+        "pack_price"
+      ],
+      "value": 1801,
+      "expect": {
+        "chosen_quote_id": "PLATE-Z",
+        "chosen_leftover_units": 0
+      },
+      "why": "동일 법인 총액 동률을 풀면 견적 ID보다 실제 더 낮은 총액이 우선한다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D090",
+    "test_number": 2,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "valid_until"
+      ],
+      "value": "2026-03-16",
+      "expect": {
+        "chosen_quote_id": "PLATE-OLD",
+        "chosen_total": 900
+      },
+      "why": "만료 제안의 효력만 주문일을 포함하게 하면 가장 낮은 실구매 총액이 선택된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D091",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "valid_until"
+      ],
+      "value": "2026-04-20",
+      "expect": {
+        "eligible_quote_count": 1,
+        "chosen_quote_id": "FAIL-TIME",
+        "chosen_total": 1400
+      },
+      "why": "서로 다른 세 실패 중 가격효력 하나만 해결되면 오직 그 제안이 적격이 된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D092",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        2,
+        "stock_packs"
+      ],
+      "value": 3,
+      "expect": {
+        "eligible_quote_count": 3,
+        "chosen_quote_id": "STRAP-B"
+      },
+      "why": "저가안의 실제 세 포장 재고를 확보하면 중복 사본은 여전히 한번이며 새 저가안은 선택된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D092",
+    "test_number": 2,
+    "mutation": {
+      "drop_quote": 1,
+      "invariant": true,
+      "expect": {
+        "eligible_quote_count": 2
+      },
+      "why": "같은 ID 제출본 제거 자체는 실제 적격 대안 수와 선택을 바꾸지 않는다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": false
+  },
+  {
+    "case_id": "D093",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "minimum_packs"
+      ],
+      "value": 1,
+      "expect": {
+        "chosen_quote_id": "SMALL-READY",
+        "chosen_leftover_units": 0
+      },
+      "why": "최소포장 감소가 무료배송을 없애서 더 적게 사는 대안의 실제 비용이 오히려 커진다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D094",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        1,
+        "valid_from"
+      ],
+      "value": "2026-07-20",
+      "expect": {
+        "chosen_quote_id": "BASE-NEXT",
+        "eligible_quote_count": 2
+      },
+      "why": "할인 시작을 주문일에 맞추면 재고 부족인 다른 후보와 별개로 할인안이 적격이 된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D095",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "shipping_price"
+      ],
+      "value": 20,
+      "expect": {
+        "chosen_quote_id": "MICRO-B",
+        "chosen_total": 63
+      },
+      "why": "별도 운임의 정수 세액 경계를 넘으면 무료배송 포함상품 제안이 더 낮은 총액이 된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D096",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "lead_days"
+      ],
+      "value": 2,
+      "expect": {
+        "chosen_quote_id": "YEAR-LATE",
+        "eligible_quote_count": 2
+      },
+      "why": "해를 넘는 실제 도착일을 새해 첫날에 맞추면 최소재고 부족 후보와 별개로 저가 배송안이 가능해진다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D097",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        2,
+        "free_shipping_at"
+      ],
+      "value": 2200,
+      "expect": {
+        "chosen_quote_id": "REST-L",
+        "eligible_quote_count": 3
+      },
+      "why": "대포장 대안 자신의 상품액으로만 무료배송이 충족되면 독립 소포장안과 사본은 영향을 받지 않는다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D098",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "stock_packs"
+      ],
+      "value": 3,
+      "expect": {
+        "chosen_quote_id": "ZERO-SHORT",
+        "chosen_total": 1500
+      },
+      "why": "기준0이 이미 무료배송을 만들었으므로 구매재고만 추가 확보하면 저가안이 실제 선택된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D099",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        1,
+        "stock_packs"
+      ],
+      "value": 3,
+      "expect": {
+        "chosen_quote_id": "GIFT-FREE",
+        "chosen_total": 0
+      },
+      "why": "상품과 배송이 모두 무료인 후보의 실제 세 포장 재고를 확보하면 0원 대안이 승인된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D100",
+    "test_number": 1,
+    "mutation": {
+      "path": [
+        "quotes",
+        0,
+        "stock_packs"
+      ],
+      "value": 3,
+      "expect": {
+        "chosen_quote_id": "FINAL-STOCK",
+        "chosen_total": 1500
+      },
+      "why": "마지막 올림 포장 재고를 추가하면 최저 상품총액안이 선택된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  },
+  {
+    "case_id": "D100",
+    "test_number": 2,
+    "mutation": {
+      "path": [
+        "quotes",
+        1,
+        "free_shipping_at"
+      ],
+      "value": 3301,
+      "expect": {
+        "chosen_quote_id": "FINAL-FLAT",
+        "chosen_total": 3500
+      },
+      "why": "상품 세금포함 총액 바로 위 기준이면 무료배송이 사라져 정액 대안이 선택된다."
+    },
+    "independent_answer_matches_engine": true,
+    "expected_values_passed": true,
+    "changes_requested_answer": true
+  }
+]

@@ -14,7 +14,7 @@ def main(argv=None):
     authored = commands.add_parser(
         "build-authored", help="Render independently written cases, without generating their facts"
     )
-    authored.add_argument("--batch", type=int, default=1)
+    authored.add_argument("--batch", type=int, choices=(1, 2), default=1)
     authored.add_argument("--output", type=Path)
     authored.add_argument(
         "--case-file", help="Preview only: choose a source filename such as preview.json"
@@ -57,8 +57,8 @@ def main(argv=None):
         "export-hf", help="Create an upload-ready Hugging Face export, without uploading"
     )
     which = export.add_mutually_exclusive_group()
-    which.add_argument("--batch", type=int)
-    which.add_argument("--upto", type=int)
+    which.add_argument("--batch", type=int, choices=(1, 2))
+    which.add_argument("--upto", type=int, choices=(1, 2))
     export.add_argument("--data-root", type=Path, default=Path("data"))
     export.add_argument("--output", type=Path)
     args = parser.parse_args(argv)

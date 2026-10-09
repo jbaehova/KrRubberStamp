@@ -12,6 +12,13 @@ from .io import write_json
 from .registry import DOMAINS, PERIODS, calculate
 from .tasks import canary_for, make_schema, scenario_hash
 
+AUTHORIZED_BATCHES = (1, 2)
+
+
+def check_batch(batch):
+    if type(batch) is not int or batch not in AUTHORIZED_BATCHES:
+        raise ValueError("Select one of the two authorized 1,200-case batches")
+
 
 def authored_root():
     checkout = Path(__file__).resolve().parents[1] / "authored"
@@ -85,6 +92,7 @@ def project_answer(answer, fields):
 
 
 def load_cases(batch=1, source_root=None, file_name=None, domain=None):
+    check_batch(batch)
     source_root = Path(source_root) if source_root else authored_root()
     result, seen = [], set()
     for path in sorted((source_root / f"batch_{batch}").glob("*/*.json")):
@@ -126,8 +134,7 @@ def _build_authored_at(output, *, batch=1, preview=False, file_name=None, domain
     from render.authored import render_authored
     from validate import validate_task
 
-    if type(batch) is not int or not 1 <= batch <= 4:
-        raise ValueError("Select one of the four authorized 1,200-case batches")
+    check_batch(batch)
     if (file_name or domain) and not preview:
         raise ValueError("A source-file or domain subset is only permitted for a preview")
     if domain and domain not in DOMAINS:

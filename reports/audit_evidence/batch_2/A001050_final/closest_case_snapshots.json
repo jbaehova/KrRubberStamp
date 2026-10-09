@@ -1,0 +1,1718 @@
+[
+  {
+    "case_id": "A001",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "첫 연말정산 환급액을 급여대장에 반영하기",
+    "instruction": "가상하늘빛 제작소의 급여 담당자입니다. 가상이도윤 직원은 첫 연말정산이라 연금저축 납입액을 환급액과 혼동하고 있어요. 총지급액에서 비과세 금액을 뺀 총급여와 연금계좌 세액공제액을 확인한 뒤, 소득세와 지방소득세의 결정세액 및 기납부세액을 각각 작성해 주세요. 다음 급여에 반영할 두 세금의 차감징수세액과 합계도 필요합니다. 답안 스키마에 맞춰 환급액은 음수로 표시해 주세요.",
+    "answer_fields": [
+      "total_salary",
+      "pension_account_credit",
+      "final_national_tax",
+      "final_local_tax",
+      "paid_national_tax",
+      "paid_local_tax",
+      "settlement_national_tax",
+      "settlement_local_tax",
+      "settlement_total"
+    ],
+    "work_goal": "연금저축 납입액 자체가 아니라 세액공제를 적용한 결정세액과 원천징수 누계의 차이를 급여대장에 반영한다.",
+    "design_rationale": "부양가족과 개별 지출이 없는 직원의 급여 누계와 연금저축 증빙을 대조하는 기본 정산이다. 문제의 업무 목적은 직원 안내와 환급 전표이며, 연금저축 납입액을 그대로 환급액으로 옮기는 오류를 드러낸다.",
+    "exceptions": [],
+    "facts": {
+      "scenario_id": "가상하늘빛 제작소 가상이도윤 2025 정산",
+      "reference_year": 2025,
+      "employee_name": "가상이도윤",
+      "scope_note": "국내 거주자로 이 회사의 근로소득만 있다. 다른 소득과 전 근무지 급여가 없으며 이월 공제와 세액감면을 신청하지 않았다.",
+      "calculation_notes": [
+        "회사의 기납부세액은 2025년 1월부터 12월까지 실제 원천징수한 누계이다.",
+        "결정세액과 차감징수세액은 원 단위로 기록한다. 지방소득세 결정세액은 소득세 결정세액의 10%에서 원 미만을 버린다. 환급이면 차감징수세액을 음수로 쓴다."
+      ],
+      "annual_gross": 39600000,
+      "non_taxable": 2400000,
+      "employee_age": 26,
+      "employee_sex": "male",
+      "employee_disabled": false,
+      "marital_status": "single",
+      "household_head": true,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "deduction_choice": "itemized",
+      "public_pension_paid": 1674000,
+      "social_insurance": {
+        "health": 1337340,
+        "long_term_care": 173160,
+        "employment": 334800
+      },
+      "pension_accounts": {
+        "pension_savings": 3600000,
+        "irp": 0
+      },
+      "paid_national_tax": 1682400,
+      "paid_local_tax": 168240,
+      "dependents": [],
+      "cards": [],
+      "insurance": [],
+      "medical": [],
+      "education": [],
+      "donations": [],
+      "rent": {},
+      "housing_mortgage": {}
+    },
+    "documents": [
+      {
+        "filename": "01_급여와원천징수누계.xlsx",
+        "format": "xlsx",
+        "title": "가상하늘빛 제작소 2025 급여 마감대장",
+        "note": "총지급액에는 비과세 식대가 포함되어 있다. 아래 공적연금과 사회보험 금액은 근로자 본인 부담액이다. 세금 두 항목은 정산 전 실제 원천징수 누계이다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "public_pension_paid",
+          "social_insurance",
+          "paid_national_tax",
+          "paid_local_tax"
+        ]
+      },
+      {
+        "filename": "02_직원공제신청서.hwpx",
+        "format": "hwpx",
+        "title": "가상이도윤 공제 신청 확인서",
+        "note": "직원이 특별소득공제를 신청했다. 부양가족과 카드 사용액을 비롯한 별도 지출 공제 자료는 제출하지 않았다는 확인을 함께 받았다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "calculation_notes",
+          "employee_age",
+          "employee_sex",
+          "employee_disabled",
+          "marital_status",
+          "household_head",
+          "employment_start",
+          "employment_end",
+          "deduction_choice",
+          "dependents",
+          "cards",
+          "insurance",
+          "medical",
+          "education",
+          "donations",
+          "rent",
+          "housing_mortgage"
+        ]
+      },
+      {
+        "filename": "03_연금저축납입증명.pdf",
+        "format": "pdf",
+        "title": "가상이도윤 연금계좌 납입증명",
+        "note": "연금저축의 본인 납입액이며 중도 해지나 반환액은 없다. IRP 계좌에는 이번 귀속연도 납입액이 없다.",
+        "fields": [
+          "pension_accounts"
+        ]
+      }
+    ],
+    "source_path": "authored/batch_1/A_yearend/preview.json",
+    "case_sha256": "94348a7840a196dbe59d6e24bb9929d4194cf5575d74d33c01b9268f82efea5e"
+  },
+  {
+    "case_id": "A004",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "비과세 식대를 총급여에서 분리한 정산 전표",
+    "instruction": "가상오름공방에서 가상김아람의 정산 전표를 입력합니다. 지급총액에 포함된 식대를 분리해 총급여와 근로소득금액을 구하고, 소득세 결정세액과 지방소득세 결정세액을 확인해 주세요. 두 기납부세액을 차감한 정산 합계도 필요합니다. 환급은 음수로 적어 주세요.",
+    "work_goal": "지급총액을 과세 급여로 오인하지 않고 정산 전표 금액을 확정한다.",
+    "design_rationale": "지출 공제보다 급여 정의와 두 세금의 원천징수 대조를 먼저 확인하는 기초 업무다.",
+    "exceptions": [],
+    "facts": {
+      "scenario_id": "가상오름공방 식대 구분",
+      "reference_year": 2025,
+      "employee_name": "가상김아람",
+      "scope_note": "국내 거주자로 이 회사 근로소득만 있다. 별도 기재가 없는 공적연금과 사회보험 및 지출 항목은 공제를 신청하지 않았다. 가족과 지출 공제를 신청하지 않았다. 결정세액은 원 단위이며 지방세는 소득세의 10% 원 미만 버림이다.",
+      "annual_gross": 32400000,
+      "non_taxable": 2400000,
+      "employee_age": 28,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "deduction_choice": "itemized",
+      "public_pension_paid": 1350000,
+      "social_insurance": {
+        "health": 1078500,
+        "long_term_care": 139500,
+        "employment": 270000
+      },
+      "paid_national_tax": 812340,
+      "paid_local_tax": 81230
+    },
+    "documents": [
+      {
+        "filename": "01_급여마감.xlsx",
+        "format": "xlsx",
+        "title": "가상김아람 급여 마감",
+        "note": "식대는 지급총액에 포함된 비과세 지급액이다. 공적연금과 사회보험은 본인 부담 누계다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "public_pension_paid",
+          "social_insurance",
+          "paid_national_tax",
+          "paid_local_tax"
+        ]
+      },
+      {
+        "filename": "02_정산신청.hwpx",
+        "format": "hwpx",
+        "title": "가상김아람 정산 신청",
+        "note": "직원 인사기록과 미신청 공제 확인을 함께 보관한다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end",
+          "deduction_choice"
+        ]
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "salary_income",
+      "final_national_tax",
+      "final_local_tax",
+      "settlement_total"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_004_053.json",
+    "case_sha256": "5bef7fc5700c8f4aab49ecf33c53adfdd4295e941eb2571564971f0e44fc2ee1"
+  },
+  {
+    "case_id": "A009",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "작은 병원비도 전액 공제되는지 확인하기",
+    "instruction": "가상결고운사무소에서 가상최유나의 병원비 문의를 받았습니다. 영수증 금액 전부에 공제율을 곱하기 전에 총급여 기준을 적용해 의료비 세액공제액을 계산해 주세요. 총급여와 소득세 결정세액도 적어 주세요.",
+    "work_goal": "의료비 지출액과 실제 세액공제액의 차이를 급여 담당자가 확인한다.",
+    "design_rationale": "본인 진료비라도 총급여의 3% 기준 아래면 공제가 발생하지 않는 점을 묻는다.",
+    "exceptions": [],
+    "facts": {
+      "scenario_id": "가상결고운사무소 소액 진료",
+      "reference_year": 2025,
+      "employee_name": "가상최유나",
+      "scope_note": "국내 거주자로 이 회사 근로소득만 있다. 별도 기재가 없는 공적연금과 사회보험 및 지출 항목은 공제를 신청하지 않았다. 다른 공제는 없다. 본인 치료비이고 보전받은 금액 없이 직원이 결제했다.",
+      "annual_gross": 58800000,
+      "non_taxable": 2400000,
+      "employee_age": 29,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "medical": [
+        {
+          "person_id": "self",
+          "kind": "ordinary",
+          "paid_by_self": true,
+          "amount": 980000,
+          "reimbursed": 0,
+          "date": "2025-10-06",
+          "excluded": false
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_급여와신청.xlsx",
+        "format": "xlsx",
+        "title": "가상최유나 급여 및 공제 신청",
+        "note": "직원은 이 영수증 외 공제 자료를 제출하지 않았다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_진료비.pdf",
+        "format": "pdf",
+        "title": "가상최유나 외래 진료비",
+        "note": "직원이 전액 결제한 외래 치료비이다. 실손보험 지급이 없다.",
+        "fields": [
+          "medical"
+        ]
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "medical_credit",
+      "final_national_tax"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_004_053.json",
+    "case_sha256": "9ecd131ec5b666364de8c3c087cb06db74102d549fb377b23e4e473fefa6847a"
+  },
+  {
+    "case_id": "A013",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "큰 공익 기부금의 구간별 세액공제",
+    "instruction": "가상연결설계의 가상서진원이 공익단체에 낸 기부금으로 직원 안내문을 만듭니다. 기부금 전부에 하나의 공제율을 적용하지 않도록 기부금 세액공제액을 확인해 주세요. 근로소득금액과 소득세 결정세액도 적어 주세요.",
+    "work_goal": "기부금 공제 한도와 세액공제율 구간을 적용한 안내 금액을 작성한다.",
+    "design_rationale": "급여 대비 공제 한도 이내인 큰 공익 기부금에 1천만원 초과 구간이 생기는 사례다.",
+    "exceptions": [],
+    "facts": {
+      "scenario_id": "가상연결설계 공익 기부",
+      "reference_year": 2025,
+      "employee_name": "가상서진원",
+      "scope_note": "국내 거주자로 이 회사 근로소득만 있다. 별도 기재가 없는 공적연금과 사회보험 및 지출 항목은 공제를 신청하지 않았다. 이월 기부금과 정치자금 및 고향사랑 기부금은 없다. 다른 공제는 신청하지 않았다.",
+      "annual_gross": 110400000,
+      "non_taxable": 2400000,
+      "employee_age": 52,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "donations": [
+        {
+          "person_id": "self",
+          "kind": "public",
+          "eligible_organization": true,
+          "amount": 12600000
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_급여와범위.xlsx",
+        "format": "xlsx",
+        "title": "가상서진원 소득 기초",
+        "note": "회사 근로소득만 있는 직원의 연간 급여 합계이다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_공익기부영수증.pdf",
+        "format": "pdf",
+        "title": "가상서진원 공익단체 기부 확인",
+        "note": "세법상 공제 가능한 공익단체가 발급했다. 직원 본인의 올해 기부이며 반환액은 없다.",
+        "fields": [
+          "donations"
+        ]
+      }
+    ],
+    "answer_fields": [
+      "salary_income",
+      "donation_credit",
+      "final_national_tax"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_004_053.json",
+    "case_sha256": "0c9b2660af54b9b103cc8b1bf573f1d414bb2324fa51ffb5d65cc02b1e9b16ec"
+  },
+  {
+    "case_id": "A014",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "대중교통과 시장 사용액의 추가 한도 확인",
+    "instruction": "가상여울유통의 가상배도연 카드 공제 등록을 마감합니다. 일반 사용액과 시장 및 교통 합계를 중복하지 말고 카드 소득공제액을 계산해 주세요. 총급여와 과세표준도 함께 확인해 주세요.",
+    "work_goal": "구분 집계된 카드 사용액의 기본 한도와 추가 한도를 적용한다.",
+    "design_rationale": "일반 사용액으로 기본 한도에 도달한 뒤 전통시장과 대중교통 지출이 추가 한도에 영향을 주는 카드 중심 업무다.",
+    "exceptions": [],
+    "facts": {
+      "scenario_id": "가상여울유통 카드 한도",
+      "reference_year": 2025,
+      "employee_name": "가상배도연",
+      "scope_note": "국내 거주자로 이 회사 근로소득만 있다. 별도 기재가 없는 공적연금과 사회보험 및 지출 항목은 공제를 신청하지 않았다. 가족과 다른 지출 공제는 없다. 카드 묶음은 연중 사용액이고 분류 사이에 중복이 없다.",
+      "annual_gross": 50400000,
+      "non_taxable": 2400000,
+      "employee_age": 39,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "cards": [
+        {
+          "person_id": "self",
+          "category": "credit",
+          "payment_method": "credit",
+          "amount": 31000000,
+          "date": "2025-12-31",
+          "excluded": false
+        },
+        {
+          "person_id": "self",
+          "category": "market",
+          "payment_method": "debit",
+          "amount": 4100000,
+          "date": "2025-12-31",
+          "excluded": false
+        },
+        {
+          "person_id": "self",
+          "category": "transit",
+          "payment_method": "debit",
+          "amount": 1700000,
+          "date": "2025-12-31",
+          "excluded": false
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_직원기초.hwpx",
+        "format": "hwpx",
+        "title": "가상배도연 정산 기초 확인",
+        "note": "전체 재직 기간과 다른 공제 미신청을 확인한다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_일반카드.xlsx",
+        "format": "xlsx",
+        "title": "가상배도연 일반 카드 사용",
+        "note": "전통시장 및 대중교통 금액을 제외한 일반 신용카드 사용액이다.",
+        "fields": [
+          "cards.0"
+        ]
+      },
+      {
+        "filename": "03_시장교통.xlsx",
+        "format": "xlsx",
+        "title": "가상배도연 전통시장 및 대중교통",
+        "note": "일반 카드 사용액에 포함하지 않은 별도 분류 집계이다.",
+        "fields": [
+          "cards.1",
+          "cards.2"
+        ]
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "credit_card_deduction",
+      "tax_base"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_004_053.json",
+    "case_sha256": "4bb7739fb3d9ef1d85d6c86242762555864cda5dd9d79165961f9741e6d97761"
+  },
+  {
+    "case_id": "A030",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "오천오백만원을 조금 넘는 급여의 연금 공제율",
+    "instruction": "가상온새미로랩의 가상우다은이 작년과 같은 연금 공제율을 예상합니다. 올해 총급여를 먼저 확정한 뒤 연금저축과 IRP 세액공제액을 구해 주세요. 소득세 결정세액도 작성해 주세요.",
+    "work_goal": "공제율 기준을 지급총액이나 전년 급여가 아닌 올해 총급여로 판단한다.",
+    "design_rationale": "총급여가 5천5백만원을 조금 초과해 계좌 납입액이 같아도 공제율이 달라진다.",
+    "exceptions": [
+      "올해 총급여가 연금계좌 공제율의 오천오백만원 기준을 초과한다."
+    ],
+    "facts": {
+      "scenario_id": "가상온새미로랩 연금 공제율 경계",
+      "reference_year": 2025,
+      "employee_name": "가상우다은",
+      "scope_note": "국내 거주자로 이 회사 근로소득만 있다. 별도 기재가 없는 공적연금과 사회보험 및 지출 항목은 공제를 신청하지 않았다. 다른 공제는 없다. 계좌 금액은 본인 납입이고 회사 퇴직금은 없다.",
+      "annual_gross": 57410000,
+      "non_taxable": 2400000,
+      "employee_age": 39,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "pension_accounts": {
+        "pension_savings": 4800000,
+        "irp": 1700000
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_직원.hwpx",
+        "format": "hwpx",
+        "title": "가상우다은 정산 신청",
+        "note": "전체 재직과 다른 공제 미신청을 확인했다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_급여.xlsx",
+        "format": "xlsx",
+        "title": "가상우다은 급여 확정",
+        "note": "올해 지급총액과 비과세 누계이다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ]
+      },
+      {
+        "filename": "03_연금저축.pdf",
+        "format": "pdf",
+        "title": "가상우다은 연금저축 납입",
+        "note": "반환 없는 본인 납입액이다.",
+        "fields": [
+          "pension_accounts.pension_savings"
+        ]
+      },
+      {
+        "filename": "04_IRP.pdf",
+        "format": "pdf",
+        "title": "가상우다은 IRP 납입",
+        "note": "개인형 퇴직연금 본인 납입액이다.",
+        "fields": [
+          "pension_accounts.irp"
+        ]
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "pension_account_credit",
+      "final_national_tax"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_004_053.json",
+    "case_sha256": "d20ce550630cb7734bd4b91b5f6168515ceff32e9a5e198296090fdd3248a5de"
+  },
+  {
+    "case_id": "A037",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "월세 주택 조건이 맞아도 급여 기준을 넘는 경우",
+    "instruction": "가상늘품기술의 가상강지완 월세 자료를 확인합니다. 주택과 주소 요건이 모두 맞지만 급여 마감에서 상여가 추가되었습니다. 총급여를 확정해 월세 세액공제액과 최종 소득세를 적어 주세요.",
+    "work_goal": "주택 증빙 확인 후에도 급여 기준을 다시 대조해 월세 공제 적용을 확정한다.",
+    "design_rationale": "주소 불일치와 달리 모든 계약 요건을 충족하지만 총급여 초과로 공제가 달라진다.",
+    "exceptions": [
+      "상여를 포함한 총급여가 월세 세액공제의 팔천만원 기준을 초과한다."
+    ],
+    "facts": {
+      "scenario_id": "가상늘품기술 월세 급여 초과",
+      "reference_year": 2025,
+      "employee_name": "가상강지완",
+      "scope_note": "국내 거주자로 이 회사 근로소득만 있다. 별도 기재가 없는 공적연금과 사회보험 및 지출 항목은 공제를 신청하지 않았다. 다른 공제는 없다. 월세를 카드 공제에 중복 신청하지 않았다.",
+      "annual_gross": 84200000,
+      "non_taxable": 2400000,
+      "employee_age": 38,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "rent": {
+        "homeless_household": true,
+        "household_head": true,
+        "address_matches": true,
+        "eligible_contract_holder": true,
+        "area_sqm": 61,
+        "standard_value": 280000000,
+        "payments": [
+          {
+            "amount": 10800000,
+            "date": "2025-12-31"
+          }
+        ]
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_직원.hwpx",
+        "format": "hwpx",
+        "title": "가상강지완 신청 및 주소 확인",
+        "note": "계약 주소와 주민등록 주소가 일치하고 다른 공제는 없다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end",
+          "rent.address_matches"
+        ]
+      },
+      {
+        "filename": "02_상여포함급여.xlsx",
+        "format": "xlsx",
+        "title": "가상강지완 상여 포함 급여",
+        "note": "연말 상여를 포함해 확정한 지급총액이다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ]
+      },
+      {
+        "filename": "03_주택계약.pdf",
+        "format": "pdf",
+        "title": "가상강지완 임대차 요건",
+        "note": "직원 명의 계약이고 무주택 세대주이며 주택 면적과 기준시가를 확인했다.",
+        "fields": [
+          "rent.homeless_household",
+          "rent.household_head",
+          "rent.eligible_contract_holder",
+          "rent.area_sqm",
+          "rent.standard_value"
+        ]
+      },
+      {
+        "filename": "04_월세이체.xlsx",
+        "format": "xlsx",
+        "title": "가상강지완 월세 이체",
+        "note": "관리비와 보증금을 제외한 월세 연간 납입액이다.",
+        "fields": [
+          "rent.payments"
+        ]
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "rent_credit",
+      "final_national_tax"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_004_053.json",
+    "case_sha256": "e340276bdaba345a05bbbbbadcfff1b8f3b25cb977b761de32fae6d39676ec80"
+  },
+  {
+    "case_id": "A062",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "세 명의 취학 자녀를 자녀세액공제 대장에 등록",
+    "instruction": "가상연두방송은 가상한결준의 가족 명세를 확인했습니다. 세 자녀 모두 소득이 없고 공제는 직원에게 배정되었습니다. 부양가족 수와 기본공제액 및 자녀세액공제액을 계산해 주세요. 출생이나 입양이 있었던 해는 아니므로 해당 공제를 추가하지 마세요.",
+    "work_goal": "연령이 충족되는 세 자녀를 자녀세액공제 대장에 반영한다.",
+    "design_rationale": "한 아이의 입학이나 신생아 출생이 아닌 다자녀의 일반 자녀 공제 등록이다. 인원당 단일 금액을 곱하는 입력 오류를 확인한다.",
+    "exceptions": [],
+    "facts": {
+      "scenario_id": "가상연두방송 세 취학 자녀 등록",
+      "reference_year": 2025,
+      "employee_name": "가상한결준",
+      "scope_note": "국내 거주 근로소득자다. 세 자녀를 실제 부양하며 배우자는 자기 공제를 신청한다. 2025년 출생과 입양은 없고 다른 공제 및 감면과 이월은 없다.",
+      "annual_gross": 64200000,
+      "non_taxable": 2400000,
+      "employee_age": 45,
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "first",
+          "name": "가상한보람",
+          "relation": "child",
+          "age": 18,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        },
+        {
+          "person_id": "second",
+          "name": "가상한해나",
+          "relation": "child",
+          "age": 14,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        },
+        {
+          "person_id": "third",
+          "name": "가상한겨레",
+          "relation": "child",
+          "age": 10,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_직원급여확인.xlsx",
+        "format": "xlsx",
+        "title": "가상한결준 급여 및 정산 기초",
+        "note": "부양가족 등록에 앞서 직원과 귀속연도를 확인하는 급여 자료다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_자녀공제배정.hwpx",
+        "format": "hwpx",
+        "title": "가상한결준 세 자녀 부양 명세",
+        "note": "세 자녀의 연말 나이와 무소득 확인 및 공제 배정을 기록한다.",
+        "fields": [
+          "dependents",
+          "scope_note"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "basic_deduction",
+      "child_credit"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_054_103.json",
+    "case_sha256": "36f2581b66ca5a83113dee2fc14855677a848893d6d01705de5794d2ec4d9c15"
+  },
+  {
+    "case_id": "A088",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "지방세 원천징수 정정액을 포함한 환급 전표 마감",
+    "instruction": "가상섬진제과는 가상마유안의 정산 환급 전표를 만듭니다. 연중 지방소득세 원천징수 오류가 별도로 정정되어 기납부 지방세는 국세의 단순한 십분의 일이 아닙니다. 결정세액과 기납부세액을 국세 및 지방세로 각각 기록한 뒤 두 차감징수세액 및 정산 합계를 구해 주세요. 환급은 음수로 적습니다.",
+    "work_goal": "실제 납부 누계를 각각 대조해 두 세금의 정산 전표를 마감한다.",
+    "design_rationale": "결정 지방세 산식과 실제 원천징수 누계가 같은 관계라고 가정하면 오류가 생긴다. 별도 정정 전표와 급여 누계의 대조가 업무 중심이다.",
+    "exceptions": [
+      "지방소득세 기납부 누계에는 국세와 별도로 처리한 원천징수 정정이 반영되어 있다."
+    ],
+    "facts": {
+      "scenario_id": "가상섬진제과 지방세 정정 마감",
+      "reference_year": 2025,
+      "employee_name": "가상마유안",
+      "scope_note": "국내 거주자로 근로소득만 있다. 아래 국세 및 지방세 납부 누계는 환급 전 정정까지 마친 실제 납부액이다. 다른 가족과 지출 공제 및 감면과 이월은 없다. 결정세액은 원 단위이며 지방세 결정세액은 국세의 십분의 일에서 원 미만을 버린다.",
+      "annual_gross": 34900000,
+      "non_taxable": 1900000,
+      "employee_age": 28,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "paid_national_tax": 1642000,
+      "paid_local_tax": 170500
+    },
+    "documents": [
+      {
+        "filename": "01_직원정산범위.hwpx",
+        "format": "hwpx",
+        "title": "가상마유안 정산 범위 확인",
+        "note": "직원 재직과 미신청 공제 및 정정 완료 상태를 확인한다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_지급누계.xlsx",
+        "format": "xlsx",
+        "title": "가상마유안 연간 지급액",
+        "note": "지급 누계는 세금 정정의 영향을 받지 않는다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_국세납부누계.pdf",
+        "format": "pdf",
+        "title": "가상마유안 소득세 실제 납부 누계",
+        "note": "연간 원천징수 소득세의 확정 누계다.",
+        "fields": [
+          "paid_national_tax"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_지방세정정확인.xlsx",
+        "format": "xlsx",
+        "title": "가상마유안 지방소득세 정정 후 누계",
+        "note": "별도 지방세 정정이 반영된 최종 납부액이다. 국세 납부액을 나눠 대신 계산하지 않는다.",
+        "fields": [
+          "paid_local_tax"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "final_national_tax",
+      "final_local_tax",
+      "paid_national_tax",
+      "paid_local_tax",
+      "settlement_national_tax",
+      "settlement_local_tax",
+      "settlement_total"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_054_103.json",
+    "case_sha256": "a922ec7de1756226def0e4e3631da6fc762e04186bd4d4435d76f7f05c1a5229"
+  },
+  {
+    "case_id": "A108",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "월세와 본인 치료비의 정산 반영액을 직원 안내문에 적기",
+    "instruction": "가상대숲보수의 가상길나온에게 주거비와 치료비 정산 결과를 안내합니다. 월세 이체 내역과 본인 진료 영수증을 반영해 월세 및 의료비 세액공제액을 각각 구해 주세요. 산출세액과 소득세 결정세액도 적어 실제 납부한 비용을 환급액으로 오해하지 않게 안내하려 합니다.",
+    "work_goal": "성격이 다른 생활비 증빙의 정산 효과를 구분해 직원에게 안내한다.",
+    "design_rationale": "정상 월세 납부와 보전금 없는 본인 치료비가 함께 제출됐다. 월세는 급여에 따른 공제율을 사용하고 의료비는 급여 기준액 차감이 먼저 필요하다.",
+    "exceptions": [],
+    "facts": {
+      "scenario_id": "대숲보수 주거와 치료 정산 안내",
+      "reference_year": 2025,
+      "employee_name": "가상길나온",
+      "scope_note": "국내 거주 근로소득자다. 무주택 세대주로 주소가 같은 본인 명의 임차 주택에 거주한다. 월세와 병원비는 재직 중 본인이 냈고 보험 보전 및 다른 공제와 감면과 이월은 없다. 월세에 관리비는 없다.",
+      "annual_gross": 49000000,
+      "non_taxable": 1000000,
+      "employee_age": 29,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "rent": {
+        "homeless_household": true,
+        "household_head": true,
+        "head_claims_housing": false,
+        "address_matches": true,
+        "eligible_contract_holder": true,
+        "area_sqm": 45,
+        "standard_value": 213000000,
+        "payments": [
+          {
+            "amount": 6960000,
+            "date": "2025-12-31"
+          }
+        ]
+      },
+      "medical": [
+        {
+          "person_id": "self",
+          "kind": "ordinary",
+          "amount": 3650000,
+          "reimbursed": 0,
+          "paid_by_self": true,
+          "date": "2025-07-17"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_급여와신청.hwpx",
+        "format": "hwpx",
+        "title": "가상길나온 급여 및 비용 부담 확인",
+        "note": "월세와 치료비를 본인이 실제 부담했으며 주택과 세대 확인은 완료했다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_임차주택과이체.xlsx",
+        "format": "xlsx",
+        "title": "가상길나온 임차 주택 및 월세 이체",
+        "note": "확인된 임차 주택 정보와 연간 월세 실제 이체액이다. 모든 월세 이체는 재직 중 이루어졌다.",
+        "fields": [
+          "rent"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_본인진료영수증.pdf",
+        "format": "pdf",
+        "title": "가상길나온 치료비 납부 영수증",
+        "note": "직원 본인의 치료 목적 진료비이며 보전금은 없다.",
+        "fields": [
+          "medical"
+        ],
+        "template_variant": 3
+      }
+    ],
+    "answer_fields": [
+      "rent_credit",
+      "medical_credit",
+      "computed_tax",
+      "final_national_tax"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_104_153.json",
+    "case_sha256": "24e39ce155ccbb3e54d2cadb8ab22ad55fdc362e69bf2f914a74f951da092beb"
+  },
+  {
+    "case_id": "A109",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "일반 카드의 결제수단별 사용액을 정산 기초에 반영",
+    "instruction": "가상민들레물류의 가상소진후 카드 자료를 입력합니다. 신용카드와 체크카드 명세가 따로 왔습니다. 총급여와 카드 소득공제액을 구하고 근로소득금액 및 반영 후 과세표준을 적어 주세요. 두 명세의 결제액에 같은 공제율을 곱하지 말아 주세요.",
+    "work_goal": "별도로 도착한 두 결제수단 명세를 합산 기준액에 맞춰 정산 기초로 옮긴다.",
+    "design_rationale": "일반 신용카드 사용액만으로 급여 기준을 채우지 못해 체크카드 일부도 기준액 차감에 쓰인다. 기본 한도에 이르지 않는 사용액으로 차감 순서의 영향이 그대로 답에 남는다.",
+    "exceptions": [],
+    "facts": {
+      "scenario_id": "민들레물류 일반 카드 대조",
+      "reference_year": 2025,
+      "employee_name": "가상소진후",
+      "scope_note": "국내 거주자로 근로소득만 있다. 카드 사용은 전부 본인 명의이며 재직 중의 일반 소비다. 두 명세는 중복이 없고 공제 제외 항목이나 다른 지출 및 가족 공제와 이월과 감면은 없다.",
+      "annual_gross": 41400000,
+      "non_taxable": 1400000,
+      "employee_age": 30,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "cards": [
+        {
+          "person_id": "self",
+          "category": "credit",
+          "payment_method": "credit",
+          "amount": 9000000,
+          "date": "2025-12-31"
+        },
+        {
+          "person_id": "self",
+          "category": "debit",
+          "payment_method": "debit",
+          "amount": 7000000,
+          "date": "2025-12-31"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_지급기초.hwpx",
+        "format": "hwpx",
+        "title": "가상소진후 지급 및 카드 제출 범위",
+        "note": "직원 명의의 일반 소비만 제출되었으며 연간 재직 기록과 비과세 지급액을 확인했다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_신용카드명세.xlsx",
+        "format": "xlsx",
+        "title": "가상소진후 신용카드 일반 소비",
+        "note": "체크카드 사용액을 포함하지 않은 별도 신용카드 명세다.",
+        "fields": [
+          "cards.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_체크카드명세.xlsx",
+        "format": "xlsx",
+        "title": "가상소진후 체크카드 일반 소비",
+        "note": "신용카드 명세와 중복되지 않는 체크카드 사용액이다.",
+        "fields": [
+          "cards.1"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "credit_card_deduction",
+      "salary_income",
+      "tax_base"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_104_153.json",
+    "case_sha256": "aaeeeb8b1cbe604638130ba3324f60961c5d9e3b3f6976a10daca288eb7796ad"
+  },
+  {
+    "case_id": "A130",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "비과세 포함 지급액으로 잘못 분류한 문화비 재확인",
+    "instruction": "가상베고니아사진의 가상경지온 카드 접수 화면은 총지급액만 보고 문화비를 일반 신용카드로 옮겼습니다. 급여대장의 비과세 지급액을 확인해 총급여를 구하고 문화비 및 일반 신용과 체크 사용액을 반영한 카드 소득공제액을 계산해 주세요. 과세표준도 다시 적습니다.",
+    "work_goal": "카드 문화비 급여 기준에 총지급액을 사용한 접수 오류를 수정한다.",
+    "design_rationale": "총지급액은 칠천만원을 넘지만 비과세를 제외한 총급여는 칠천만원이다. 문화비가 일반 신용으로 재분류되면 기본 한도 아래의 실제 공제액이 바뀐다.",
+    "exceptions": [
+      "접수 화면이 총급여 대신 비과세 포함 지급총액으로 문화비 급여 기준을 판단했다."
+    ],
+    "facts": {
+      "scenario_id": "베고니아사진 문화비 지급 정의 재확인",
+      "reference_year": 2025,
+      "employee_name": "가상경지온",
+      "scope_note": "국내 거주자로 근로소득만 있다. 모든 카드 지출은 재직 중 본인 명의의 공제 대상 소비이고 중복이 없다. 문화비는 등록 사업자의 적격 도서와 공연비이며 다른 공제 및 감면과 이월은 없다.",
+      "annual_gross": 72400000,
+      "non_taxable": 2400000,
+      "employee_age": 35,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "cards": [
+        {
+          "person_id": "self",
+          "category": "credit",
+          "payment_method": "credit",
+          "amount": 18000000,
+          "date": "2025-12-31"
+        },
+        {
+          "person_id": "self",
+          "category": "debit",
+          "payment_method": "debit",
+          "amount": 1800000,
+          "date": "2025-12-31"
+        },
+        {
+          "person_id": "self",
+          "category": "culture",
+          "payment_method": "credit",
+          "amount": 1800000,
+          "date": "2025-12-31"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_직원확인.hwpx",
+        "format": "hwpx",
+        "title": "가상경지온 카드 제출 범위 확인",
+        "note": "적격 문화비 등록 사업자의 거래이며 소비 묶음은 중복되지 않는다.",
+        "fields": [
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_총지급과비과세.xlsx",
+        "format": "xlsx",
+        "title": "가상경지온 지급총액 및 비과세 구분",
+        "note": "문화비 급여 기준에 사용할 총급여를 이 지급 자료로 계산한다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "03_일반카드.xlsx",
+        "format": "xlsx",
+        "title": "가상경지온 일반 신용 및 체크 사용",
+        "note": "문화비를 뺀 일반 소비 명세다.",
+        "fields": [
+          "cards.0",
+          "cards.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "04_문화비.pdf",
+        "format": "pdf",
+        "title": "가상경지온 적격 도서와 공연비",
+        "note": "일반 신용 명세와 중복되지 않는 적격 문화비를 신용카드로 결제했다.",
+        "fields": [
+          "cards.2"
+        ],
+        "template_variant": 2
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "credit_card_deduction",
+      "tax_base"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_104_153.json",
+    "case_sha256": "e99aa87105f718c05e61b0d2db43c6b50af94b9352454edc7fa7f19d1ae7d0f4"
+  },
+  {
+    "case_id": "A189",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "비과세 지급액 때문에 달라진 월세와 연금 공제율 안내",
+    "instruction": "가상범부채부품의 가상심루온은 총지급액으로 공제율을 안내받았습니다. 급여대장의 비과세액을 분리한 총급여를 확인해 월세와 개인 연금계좌의 세액공제액을 다시 계산해 주세요. 총급여와 결정 국세도 적습니다.",
+    "work_goal": "총지급액과 세법상 총급여를 구별해 두 세액공제의 공제율을 확정한다.",
+    "design_rationale": "총지급과 총급여가 두 공제율의 같은 기준을 사이에 둔다. 정상 월세와 연금 납입 증명을 유지하면서 급여 분류를 바로잡아야 한다.",
+    "exceptions": [
+      "비과세 지급액을 포함한 금액으로 공제율을 안내함"
+    ],
+    "facts": {
+      "source_contract": "yearend_evidence_v1",
+      "scenario_id": "범부채부품 비과세와 공제율 정정",
+      "reference_year": 2025,
+      "employee_name": "가상심루온",
+      "scope_note": "국내 거주 근로소득자다. 임차 계약 명의자는 본인이며 직원은 세대주다. 연말 세대에 보유 주택이 없다. 월세와 개인 연금 납입은 본인 부담이다. 총지급에는 적격 비과세 식대가 포함됐다. 가족과 다른 공제 및 감면과 이월은 없다.",
+      "annual_gross": 57400000,
+      "non_taxable": 2400000,
+      "employee_age": 37,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "rent": {
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "head_claims_housing": false,
+        "eligible_contract_holder": true,
+        "contract_address": "가상시 장미길 89 102호",
+        "resident_registration_address": "가상시 장미길 89 102호",
+        "area_sqm": 52,
+        "standard_value": 210000000,
+        "payments": [
+          {
+            "date": "2025-12-24",
+            "amount": 7200000
+          }
+        ]
+      },
+      "pension_accounts": {
+        "pension_savings": 4700000,
+        "irp": 1600000
+      }
+    },
+    "documents": [
+      {
+        "filename": "01_급여비과세.xlsx",
+        "format": "xlsx",
+        "title": "가상심루온 총지급과 비과세 누계",
+        "note": "총지급에 포함된 비과세액을 분리했다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_월세계약.pdf",
+        "format": "pdf",
+        "title": "가상심루온 임차 및 납부 확인",
+        "note": "임차 계약 정보와 실제 월세 납부액이다.",
+        "fields": [
+          "rent.contract_address",
+          "rent.eligible_contract_holder",
+          "rent.area_sqm",
+          "rent.standard_value",
+          "rent.payments"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_세대연금.hwpx",
+        "format": "hwpx",
+        "title": "연말 세대와 개인 연금 납입",
+        "note": "실제 거주지 및 세대 주택 목록과 개인 계좌 기록이다.",
+        "fields": [
+          "rent.household_homes_at_year_end",
+          "rent.household_head",
+          "rent.head_claims_housing",
+          "rent.resident_registration_address",
+          "pension_accounts"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "04_신청확인.pdf",
+        "format": "pdf",
+        "title": "범부채부품 정산 신청 확인",
+        "note": "직원의 적용 기간과 제출 범위다.",
+        "fields": [
+          "source_contract",
+          "scenario_id",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "rent_credit",
+      "pension_account_credit",
+      "final_national_tax"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_154_203.json",
+    "case_sha256": "397e23e38f95756247378fab805c541fe04482d8803a194401d67bbb81407619"
+  },
+  {
+    "case_id": "A207",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "근로소득이 낮은 직원의 공익 기부와 결정세액 확인",
+    "instruction": "가상종이달작업장의 가상오도윤에게 연말정산 결과를 알려 주세요. 지정 공익단체 기부금 세액공제와 근로소득 세액공제를 계산한 다음 결정세액이 얼마인지 적으면 됩니다.",
+    "work_goal": "발생한 세액공제와 실제 결정세액의 영점 제한을 구분해 안내한다.",
+    "design_rationale": "기부금 공제액은 계산되지만 산출세액보다 전체 세액공제가 크다. 공제액을 음수 세금으로 바꾸지 않고 결정세액에서 영점을 적용한다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상오도윤",
+      "reference_year": 2025,
+      "scope_note": "국내 거주자로 근로소득만 있다. 가족 공제와 이월 기부는 없다. 적격 공익단체의 본인 기부금 특별공제를 신청했다.",
+      "annual_gross": 21600000,
+      "non_taxable": 1200000,
+      "employee_age": 24,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "donations": [
+        {
+          "person_id": "self",
+          "date": "2025-09-09",
+          "amount": 2800000,
+          "kind": "public",
+          "eligible_organization": true
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_기부확인.pdf",
+        "format": "pdf",
+        "title": "종이달작업장 직원 공익 기부 증명",
+        "note": "본인 부담의 적격 공익 기부이며 이월이 없다.",
+        "fields": [
+          "donations"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_급여접수.xlsx",
+        "format": "xlsx",
+        "title": "가상오도윤 연말 접수",
+        "note": "기부 특별공제 신청과 급여 범위를 확인했다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "computed_tax",
+      "employment_credit",
+      "donation_credit",
+      "final_national_tax"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_204_253.json",
+    "case_sha256": "f4191d2ea1cb510e4f7c208509ea5784c26130f486ceabfd70391b7c1c92c5ed"
+  },
+  {
+    "case_id": "A254",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "두 회사에서 원천징수한 세금을 하나의 연간 정산에 반영",
+    "instruction": "가상등잔유통의 가상문하람이 이전 회사 원천징수영수증과 현재 회사 마감표를 함께 냈습니다. 합산 급여 확인서에 확정된 총급여를 사용해 국세 결정세액을 계산하고 두 회사 원천징수 누계에 대한 국세 및 지방세 정산액을 전표에 적어 주세요.",
+    "work_goal": "이직 직원의 확정 연간 급여와 두 회사 합산 기납부액으로 환급 전표를 작성한다.",
+    "design_rationale": "자료는 직장별로 도착하지만 제출된 합산 확인서의 급여는 이미 두 회사 금액을 포함한다. 원천징수 누계도 연간 확인액이므로 어느 한 회사 자료를 다시 더하지 않는다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상문하람",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자다. 이전 회사 1월부터 5월 급여와 현재 회사 6월부터 12월 급여를 합산 완료했다. 합산 급여 및 기납부액에 중복이 없고 다른 공제 신청은 없다.",
+      "annual_gross": 48360000,
+      "non_taxable": 2400000,
+      "employee_age": 31,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "public_pension_paid": 2013700,
+      "paid_national_tax": 2689000,
+      "paid_local_tax": 268900
+    },
+    "documents": [
+      {
+        "filename": "01_이직합산확인.xlsx",
+        "format": "xlsx",
+        "title": "두 회사 연간 급여 합산 확정표",
+        "note": "급여와 원천징수액은 전 직장과 현 직장 합산 누계다.",
+        "fields": [
+          "annual_gross",
+          "non_taxable",
+          "paid_national_tax",
+          "paid_local_tax"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "02_재직연금.pdf",
+        "format": "pdf",
+        "title": "문하람 연간 재직 및 연금 확인",
+        "note": "이직 사이 근로 공백 없이 연간 근무했고 공적연금은 본인 부담 납부액이다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end",
+          "public_pension_paid"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "final_national_tax",
+      "settlement_national_tax",
+      "settlement_local_tax"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_254_300.json",
+    "case_sha256": "4d516f61436d9376abc2fceb56cb3406b733f305ca446b6a7ee1b54d7cd2882a"
+  },
+  {
+    "case_id": "A256",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "가족 기본공제 없는 기혼 여성의 부녀자 항목 등록",
+    "instruction": "가상솔방울악기의 가상백가온은 배우자가 별도로 정산해 가족 기본공제를 신청하지 않았습니다. 직원 본인의 근로소득금액을 확인하고 부녀자 추가공제와 과세표준을 승인란에 써 주세요.",
+    "work_goal": "가족 기본공제 인원이 없더라도 기혼 여성 본인의 소득 요건을 확인해 추가공제를 등록한다.",
+    "design_rationale": "부녀자 공제의 기혼 요건은 배우자 기본공제 신청과 다르다. 급여총액을 소득금액으로 바로 대입하면 신청을 잘못 거절할 수 있어 계산 단계가 요청에 포함된다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상백가온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 여성 근로자이며 혼인 상태다. 가족 기본공제는 신청하지 않았고 특별공제 신청도 없다. 배우자는 자기 직장에서 별도로 정산한다.",
+      "annual_gross": 43200000,
+      "non_taxable": 2400000,
+      "employee_age": 39,
+      "employee_sex": "female",
+      "marital_status": "married",
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31"
+    },
+    "documents": [
+      {
+        "filename": "01_혼인신청.hwpx",
+        "format": "hwpx",
+        "title": "백가온 본인 추가공제 신청",
+        "note": "배우자 가족 공제를 신청하지 않는 기혼 여성의 본인 신청서다.",
+        "fields": [
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employee_sex",
+          "marital_status"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_연간근로소득.xlsx",
+        "format": "xlsx",
+        "title": "솔방울악기 연간 근로소득 확인",
+        "note": "비과세 지급액을 총지급액과 분리하여 기록했다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "salary_income",
+      "eligible_dependents",
+      "additional_deduction",
+      "tax_base"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_254_300.json",
+    "case_sha256": "ad84fca0b11cece865a0476b73b80d81533cc575ca437cccb457ba69491d43fe"
+  },
+  {
+    "case_id": "A267",
+    "domain": "A_yearend",
+    "difficulty": "easy",
+    "title": "칠천만 원 이하 급여의 문화비와 시장비 사용액 등록",
+    "instruction": "가상별자리아카이브의 가상홍시율에게 카드 정산 결과를 보내 주세요. 일반 신용 사용과 공제 대상 문화비 및 시장 사용액을 확인해 카드 소득공제액을 계산하고 과세표준과 국세 산출세액을 적어 주세요.",
+    "work_goal": "공제 대상 문화비와 시장비를 일반 신용 사용과 별도 소비 항목으로 등록한다.",
+    "design_rationale": "총급여가 문화비 적용 기준 이하인 정상 신청이다. 신용카드 결제라도 문화비 및 시장 소비의 별도 분류와 추가 한도 계산을 유지한다.",
+    "exceptions": [],
+    "facts": {
+      "employee_name": "가상홍시율",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족과 특별공제 신청은 없다. 모든 카드는 본인 소비이고 재직 기간 사용액이다. 문화비는 등록된 제공업체의 공제 대상 공연과 도서 구입이며 시장 소비도 적격 전통시장 사용으로 확인했다.",
+      "annual_gross": 69400000,
+      "non_taxable": 2400000,
+      "employee_age": 36,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-17",
+          "amount": 18000000,
+          "category": "credit",
+          "payment_method": "credit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-18",
+          "amount": 4200000,
+          "category": "culture",
+          "payment_method": "credit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-19",
+          "amount": 3600000,
+          "category": "market",
+          "payment_method": "credit"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_소비분류표.xlsx",
+        "format": "xlsx",
+        "title": "홍시율 일반 문화 시장 사용액 확정",
+        "note": "세 사용액은 서로 겹치지 않는 적격 소비 누계다.",
+        "fields": [
+          "cards"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "02_급여접수.pdf",
+        "format": "pdf",
+        "title": "별자리아카이브 연말 신청 범위",
+        "note": "별도 특별공제 신청 없이 본인 카드 사용만 접수했다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 4
+      }
+    ],
+    "answer_fields": [
+      "credit_card_deduction",
+      "tax_base",
+      "computed_tax"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_254_300.json",
+    "case_sha256": "6121c7fefa29e6dd27464efcfad7a74b5dc7cd9c0ab37b87713555dbd7fbe2dd"
+  },
+  {
+    "case_id": "A281",
+    "domain": "A_yearend",
+    "difficulty": "medium",
+    "title": "문화비 적용 급여 기준을 넘긴 두 결제수단의 사용액 정리",
+    "instruction": "가상물결센서의 가상공시후 카드 자료를 마감해 주세요. 문화비 제공업체 결제라도 총급여 기준을 확인해 신용 결제와 직불 결제를 각각 재분류하고 교통 사용액과 함께 카드 공제 및 과세표준을 계산해 주세요.",
+    "work_goal": "문화비 기준을 넘는 고액 총급여에서 문화 소비를 원래 결제수단으로 되돌린다.",
+    "design_rationale": "문화 업체 표시만으로 모든 금액을 같은 공제율에 넣으면 안 된다. 같은 소비 유형이어도 신용과 직불이라는 원자료 결제수단의 차이가 공제 결과에 남는다.",
+    "exceptions": [
+      "총급여가 칠천만 원을 초과하므로 문화비 우대 분류 대신 원래 결제수단을 적용한다."
+    ],
+    "facts": {
+      "employee_name": "가상공시후",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자이며 가족과 특별공제 신청은 없다. 본인 재직 기간 사용액만 있으며 소비 항목 간 중복은 없다. 문화 업체 소비는 적격 업체 결제지만 직원 급여 기준에 따른 재분류가 필요하다.",
+      "annual_gross": 75600000,
+      "non_taxable": 2400000,
+      "employee_age": 40,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-04",
+          "amount": 16400000,
+          "category": "credit",
+          "payment_method": "credit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-05",
+          "amount": 4200000,
+          "category": "culture",
+          "payment_method": "credit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-06",
+          "amount": 5100000,
+          "category": "culture",
+          "payment_method": "debit"
+        },
+        {
+          "person_id": "self",
+          "date": "2025-12-07",
+          "amount": 1600000,
+          "category": "transit",
+          "payment_method": "debit"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_일반교통소비.xlsx",
+        "format": "xlsx",
+        "title": "일반 신용 및 대중교통 사용",
+        "note": "문화 소비를 제외한 일반 신용과 적격 대중교통 사용이다.",
+        "fields": [
+          "cards.0",
+          "cards.3"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "02_문화신용.pdf",
+        "format": "pdf",
+        "title": "문화 제공업체 신용카드 결제",
+        "note": "원래 결제수단은 신용카드다.",
+        "fields": [
+          "cards.1"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "03_문화직불.hwpx",
+        "format": "hwpx",
+        "title": "문화 제공업체 직불카드 결제",
+        "note": "원래 결제수단은 직불카드이며 신용 결제 건과 별도다.",
+        "fields": [
+          "cards.2"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_급여사용자.xlsx",
+        "format": "xlsx",
+        "title": "물결센서 직원과 연간 급여 확정",
+        "note": "비과세를 제외한 총급여로 문화비 기준을 판단한다.",
+        "fields": [
+          "employee_name",
+          "reference_year",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 0
+      }
+    ],
+    "answer_fields": [
+      "total_salary",
+      "credit_card_deduction",
+      "tax_base"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_254_300.json",
+    "case_sha256": "173bcb4670f3bbfea80ef24e036484d015920e1a9a34e6ec029fa79a6ff10d62"
+  },
+  {
+    "case_id": "A294",
+    "domain": "A_yearend",
+    "difficulty": "hard",
+    "title": "같은 세대 장애인 동생의 학비와 형제 카드 및 회사 부담비 정리",
+    "instruction": "가상돌담축의 가상임소온은 장애인 동생과 함께 삽니다. 동생의 가족 요건과 교육 및 전용보험을 확인하고 형제 카드 사용은 본인 카드와 구분해 주세요. 직원 대학원비 중 회사 직접 부담액도 나누어 가족 공제와 교육비 및 보험과 카드 공제액을 적어 주세요.",
+    "work_goal": "동일 세대 장애인 동생의 가족 혜택과 형제 카드 제한 및 직원 비용의 회사 부담을 분리한다.",
+    "design_rationale": "장애인 동생은 성년이어도 인적공제 나이 예외를 적용할 수 있다. 이 자격이 형제 카드 사용 제한을 바꾸지 않으며 직원 명의 학교 비용도 실제 납부 주체를 다시 읽는다.",
+    "exceptions": [
+      "성년 장애인 동생은 나이 제한 예외로 기본공제에 포함한다.",
+      "형제자매 카드 사용액은 직원의 카드 공제에서 제외한다.",
+      "회사가 직접 부담한 직원 수업료는 직원 교육비에 포함하지 않는다."
+    ],
+    "facts": {
+      "employee_name": "가상임소온",
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로자와 무소득 장애인 동생은 연중 주민등록상 같은 세대로 실제 동거했으며 직원이 부양한다. 동생 신청은 본인으로 확정했다. 동생 학부와 전용보험은 직원 자비다. 본인 대학원 첫 학기는 회사 직접 부담으로 과세 급여나 환수금이 아니고 둘째 학기는 자비다. 특별공제를 신청했다.",
+      "annual_gross": 63400000,
+      "non_taxable": 2400000,
+      "employee_age": 32,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "sibling",
+          "relation": "sibling",
+          "age": 23,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": true
+        }
+      ],
+      "education": [
+        {
+          "person_id": "sibling",
+          "date": "2025-02-17",
+          "amount": 5400000,
+          "level": "university",
+          "paid_by_self": true
+        },
+        {
+          "person_id": "self",
+          "date": "2025-03-03",
+          "amount": 3600000,
+          "level": "graduate",
+          "paid_by_self": false
+        },
+        {
+          "person_id": "self",
+          "date": "2025-09-03",
+          "amount": 3900000,
+          "level": "graduate",
+          "paid_by_self": true
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "sibling",
+          "date": "2025-05-27",
+          "amount": 970000,
+          "kind": "disabled",
+          "paid_by_self": true
+        }
+      ],
+      "cards": [
+        {
+          "person_id": "self",
+          "date": "2025-12-08",
+          "amount": 17600000,
+          "category": "debit",
+          "payment_method": "debit"
+        },
+        {
+          "person_id": "sibling",
+          "date": "2025-12-09",
+          "amount": 4100000,
+          "category": "debit",
+          "payment_method": "debit"
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_동거장애확인.hwpx",
+        "format": "hwpx",
+        "title": "임소온과 장애인 동생의 동일 세대",
+        "note": "연중 실제 동거한 같은 세대의 무소득 장애인 동생을 직원이 부양한다.",
+        "fields": [
+          "dependents",
+          "scope_note"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "02_동생학부.pdf",
+        "format": "pdf",
+        "title": "동생 학부 수업료 직원 납부",
+        "note": "동생 학부 수업료를 직원이 실제 부담했다.",
+        "fields": [
+          "education.0"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "03_회사대학원.xlsx",
+        "format": "xlsx",
+        "title": "본인 대학원 회사 직접 납부",
+        "note": "직원 부담이 없으며 회사가 학교에 직접 지급했다.",
+        "fields": [
+          "education.1"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "04_본인대학원.pdf",
+        "format": "pdf",
+        "title": "본인 대학원 자비 납부",
+        "note": "둘째 학기는 직원 본인이 직접 냈다.",
+        "fields": [
+          "education.2"
+        ],
+        "template_variant": 1
+      },
+      {
+        "filename": "05_동생보험.hwpx",
+        "format": "hwpx",
+        "title": "동생 장애인 전용 보장성보험",
+        "note": "전용 상품 및 실제 피보험자의 장애 요건을 모두 확인했다.",
+        "fields": [
+          "insurance"
+        ],
+        "template_variant": 3
+      },
+      {
+        "filename": "06_직원카드.xlsx",
+        "format": "xlsx",
+        "title": "임소온 본인 직불 사용액",
+        "note": "동생의 카드 사용을 포함하지 않은 본인 소비 누계다.",
+        "fields": [
+          "cards.0"
+        ],
+        "template_variant": 2
+      },
+      {
+        "filename": "07_동생카드.pdf",
+        "format": "pdf",
+        "title": "동생 명의 카드 사용 누계",
+        "note": "장애인 동생 자신의 카드 명의로 지출했다.",
+        "fields": [
+          "cards.1"
+        ],
+        "template_variant": 0
+      },
+      {
+        "filename": "08_연간급여.xlsx",
+        "format": "xlsx",
+        "title": "돌담축 급여와 비과세 확정",
+        "note": "연간 총지급과 비과세를 분리해 확정했다.",
+        "fields": [
+          "reference_year",
+          "annual_gross",
+          "non_taxable"
+        ],
+        "template_variant": 4
+      },
+      {
+        "filename": "09_직원등록.pdf",
+        "format": "pdf",
+        "title": "임소온 재직과 신청자 등록",
+        "note": "가족 학비와 보험 및 본인 학비를 특별공제로 신청했다.",
+        "fields": [
+          "employee_name",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ],
+        "template_variant": 1
+      }
+    ],
+    "answer_fields": [
+      "eligible_dependents",
+      "additional_deduction",
+      "education_credit",
+      "insurance_credit",
+      "credit_card_deduction"
+    ],
+    "source_path": "authored/batch_1/A_yearend/cases_254_300.json",
+    "case_sha256": "82587ae24a46eeb7eae7412e74c36a04df9d691372a3d7fd4c272f48840c8161"
+  }
+]
