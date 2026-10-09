@@ -6,6 +6,14 @@ import hashlib
 import random
 
 LABELS = {
+    "supplies": "완료한 실제 공급 원장",
+    "payments": "해당 공급의 당일 실제 결제",
+    "payment_id": "결제 식별번호",
+    "method": "실제 결제수단",
+    "evidence_documents": "개별 발급 증빙 원본",
+    "document_type": "발급한 증빙 종류",
+    "stated_vat": "증빙에 따로 적힌 세액",
+    "processing_policy": "실제 공급과 지급 및 증빙 연결 기준",
     "domain": "분야",
     "reference_period": "기준 기간",
     "synthetic_id": "가상 자료 묶음 번호",

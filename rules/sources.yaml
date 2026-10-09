@@ -44,15 +44,17 @@ rules:
   verification_note: p162 공식 사례495000원과660000원 및 p217 종합사례. 공식 종합사례 회귀검증. 개별 규칙의 모든
     조합을 공식 사례로 검증한 것은 아님.
 - rule_id: A_EVIDENCE_RECONCILIATION
-  description: 계약과 주민등록 주소 대조, 진료 목적과 카드 청구 명목 및 취학기관 종류, 연말 세대원 주택 목록과 기부단체 지정기간
-    연결에서 한정된 엔진 사실 복원
-  source: 2025 국세청 원천징수의무자 신고안내(월세 주소 요건, 관리비 및 미용 비용 제외, 취학 학원비, 세대원2주택) https://webtv.nts.go.kr/comm/nttFileDownload.do?fileKey=88c482e8d69eb1653515871654a4ab42;
+  description: 임대차 계약자 식별번호와 인적관계 명부 및 기존 기본공제 가족 자료 연결, 계약과 주민등록 주소 대조, 진료 목적과 카드
+    청구 명목 및 취학기관 종류, 연말 세대원 주택 목록과 기부단체 지정기간 연결에서 한정된 엔진 사실 복원
+  source: 2025 국세청 원천징수의무자 신고안내(월세 계약자 및 주소 요건, 관리비 및 미용 비용 제외, 취학 학원비, 세대원2주택) https://webtv.nts.go.kr/comm/nttFileDownload.do?fileKey=88c482e8d69eb1653515871654a4ab42;
     특별세액공제 안내 https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7874&mi=6594;
     가상 원자료 연결 계약 DATA_SPEC.md
   effective_period: 2025-01-01/2025-12-31
   verified: false
-  verification_note: 기초 법률 요건 확인. 합성 원자료 연결 자체의 독립 공식 수치 예시는 없음. 자유문장 법률 판단이나 주택 취득
-    및 차입의 전 요건 검증을 지원하지 않는다.
+  verification_note: 기초 법률 요건 확인. 2025 안내 책자203쪽(PDF221쪽)에 2017년부터 근로자의 기본공제대상자가 체결한
+    임대차 계약도 공제 가능함을 명시. 계약자 원자료 연결은 기존 기본공제 판정을 재사용하며 본인 식별번호와 이름도 대조한다. 2026-10-09
+    공식 원문을 재확인. 합성 원자료 연결 자체의 독립 공식 수치 예시는 없음. 자유문장 법률 판단이나 주택 취득 및 차입의 전 요건 검증을 지원하지
+    않는다.
 - rule_id: A_FINAL
   description: 산출세액에서 세액공제 차감. 결정세액 음수 배제. 원 미만 절사
   source: 소득세법 제137조; 2025 국세청 신고안내 p219 https://webtv.nts.go.kr/comm/nttFileDownload.do?fileKey=88c482e8d69eb1653515871654a4ab42
@@ -97,6 +99,16 @@ rules:
   verified: true
   verification_note: p173 혼합의료비 문턱 산식, p218 실제 공제950700원. 공식 종합사례 회귀검증. 개별 규칙의 모든
     조합을 공식 사례로 검증한 것은 아님.
+- rule_id: A_PAY_STATEMENT_RECONCILIATION
+  description: 가상 근로자의 사용자별 지급기간 원천증명서에서 발급본 수정차수와 직원 식별번호를 대조하고 급여 및 비과세와 국세 및 지방세
+    기납부액을 합산하여 기존 2025 계산 엔진에 전달
+  source: 합성 내부 확인 규약 yearend_pay_statement_v1; 구현 및 범위 reports/yearend_pay_statement_contract.md;
+    세율과 공제 계산은 기존 A_yearend 엔진의 개별 출처를 재사용
+  effective_period: 2025-01-01/2025-12-31
+  verified: false
+  verification_note: 동일 사용자와 동일 지급기간의 발급본 중 최고 수정차수를 채택하는 절차는 문항에 명시하는 합성 내부 확인 규약이며
+    정부의 증명서 우선순위 규정이라고 주장하지 않는다. 복수 사용자 지급액과 독립된 국세 및 지방세 원천징수액 대조는 독립 수기 회귀검증이다.
+    새 세율이나 공제 규칙 및 공식 숫자 예시는 추가하지 않는다.
 - rule_id: A_PENSION_CREDIT
   description: 연금저축 600만원과 IRP 포함 총 900만원 한도, 총급여 5500만원 이하 15% 초과 12%
   source: 소득세법 제59조의3; 국세청 https://j.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7875&mi=6439;
@@ -317,6 +329,15 @@ rules:
   verified: true
   verification_notes: 국세청 구 자녀공제2명 사례와 선택 비율3개 결과를1~2월 날짜로 회귀 검증. 개정 자녀공제 시행일의 증거
     한계는 B.CHILD_CREDIT 참조.
+- rule_id: B_PAYROLL_BANK_RECONCILIATION
+  description: 합성 회사의 완전한 월 급여명세를 직원 ID 및 급여 ID로 은행 이체 원장에 연결한다. 기준일 이내 실행 이체만 합산하며
+    실수령액에서 지급 누계를 차감한 잔액은 음수를 허용한다.
+  source: payroll_bank_reconciliation_v1 합성 회사 내부 대조 규약. 기존 B 급여 엔진의 법정 계산 및 근태 복원
+    경로를 재사용하며 새로운 세법 규칙을 정하지 않는다.
+  effective_period: 2026 개별 집필 자료의 합성 은행 대조 계약
+  verified: false
+  verification_notes: 공공기관의 공식 대조 규약이 아니다. 동일 직원의 같은 보험 부과월 명세 중복 및 명세상 지급일과 다른 날의
+    실행 이체는 범위 밖으로 거절한다. 부분 지급과 초과 지급은 동일 지급일의 현금 대조이며 분할 지급일 원천징수나 체납 판정은 지원하지 않는다.
 - rule_id: COMMON_FLOOR_WON
   description: 원 미만 절사 유틸. 개별 엔진은 법규에 따라 별도 호출
   source: 국고금 관리법 제47조 및 개별 도메인 sources.yaml에 적시한 원 미만 계산 규칙
@@ -335,6 +356,14 @@ rules:
   effective_period: 2025-2026
   verified: false
   verification_note: 중간 세액과 징수 또는 환급 단수처리를 혼동하지 않도록 적용 단계가 필요함
+- rule_id: C_DOCUMENT_RECONCILIATION
+  description: 확정 공급과 같은 날 실제 지급 및 개별 발급 증빙을 연결해 부분 매출 발급액과 전체 적격 매입 증빙을 복원
+  source: reports/vat_document_reconciliation_contract.md의 vat_document_reconciliation_v1
+    업무 자료 계약
+  effective_period: 2026-01-01/2026-06-30
+  verified: false
+  verification_note: 정부 법규나 공식 수치 예제가 아닌 구조화된 원자료 연결 규약이다. 실제 공급 전체 세액은 한 번 집계하며 매출의
+    서로 다른 지급 발급액만 합산한다. 매입의 부분 공제와 다른 날 지급 및 지연 발급은 제외하고 기존 VAT 법규를 적용한다.
 - rule_id: D.aggregate
   description: 정규화 업체별 합산, 품목별 공급가액 기준 개당 최저 단가 비교, 동률은 업체명 오름차순
   source: DATA_SPEC.md 집계 요구 및 입력 문서 comparison_basis 명시 규약
@@ -363,6 +392,14 @@ rules:
   verified: false
   verification_note: 정수 및 유리수 수기 검산과 날짜별 수량 보존 및 중복 불변성 검사. 부가세 신고나 수정세금계산서의 법률 판단을
     수행하는 규칙이 아님
+- rule_id: D.procurement_comparison
+  description: 필요한 낱개 수를 위한 포장 구매와 최소 주문 및 상품과 배송비의 합계를 비교하고 견적 효력과 재고 및 달력 납기 조건을
+    대조
+  source: DATA_SPEC.md extract_procurement_v1 및 입력 문서 processing_policy의 합성 구매 약정
+  effective_period: not-applicable
+  verified: false
+  verification_note: 사적 구매 약정의 정수 수기 검산과 경계 회귀 검사. 실제 세금 신고나 매입세액 공제 자격의 법률 판단을 수행하지
+    않음
 - rule_id: D.vat_split
   description: 부가세 포함 총액의 공급가액은 total*10//11, 세액은 총액과 공급가액의 차이
   source: 부가가치세법 제29조와 제30조. 입력 문서의 부가세 포함 여부에 따른 데이터셋 원 단위 분리 사양

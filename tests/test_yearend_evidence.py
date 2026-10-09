@@ -249,3 +249,168 @@ def test_raw_yearend_sources_survive_physical_document_roundtrip(tmp_path):
     restored = restore_scenario(tmp_path)
     assert restored == row["facts"]
     assert answer(restored)["rent_credit"] == 0
+
+
+def rent_holder_facts():
+    raw = case("A019")["facts"]
+    raw["rent"].pop("eligible_contract_holder")
+    raw["rent"]["resident_registration_address"] = raw["rent"]["contract_address"]
+    raw["rent"]["contract_holder_person_id"] = "self"
+    raw["rent"]["identity_records"] = [
+        {"person_id": "self", "name": raw["employee_name"], "relation": "self"}
+    ]
+    return raw
+
+
+def test_rent_holder_is_joined_without_mutating_raw_source():
+    raw = rent_holder_facts()
+    original = deepcopy(raw)
+    result, trace = calculate("A_yearend", raw)
+    assert result["rent_credit"] == 1_326_000
+    assert raw == original
+    assert trace[0]["inputs"] == original
+    assert trace[0]["output"] == {
+        "rent.eligible_contract_holder": True,
+        "rent.address_matches": True,
+    }
+    normalized = interpret(raw)
+    assert "contract_holder_person_id" not in normalized["rent"]
+    assert "identity_records" not in normalized["rent"]
+
+
+def test_rent_self_name_normalization_does_not_replace_identity_check():
+    raw = rent_holder_facts()
+    raw["employee_name"] = "가상 Ａ 직원"
+    raw["rent"]["identity_records"][0]["name"] = "가상a직원"
+    assert answer(raw)["rent_credit"] == 1_326_000
+    raw["rent"]["identity_records"][0]["name"] = "다른직원"
+    with pytest.raises(ValueError, match="conflicts with employee"):
+        interpret(raw)
+
+
+def test_spouse_contract_uses_existing_basic_deduction_income_condition():
+    raw = rent_holder_facts()
+    raw["dependents"] = [
+        {
+            "person_id": "spouse-1",
+            "relation": "spouse",
+            "age": 35,
+            "income_amount": 1_000_000,
+            "supported": True,
+            "assigned_claimant": "self",
+        }
+    ]
+    raw["rent"]["identity_records"].append(
+        {"person_id": "spouse-1", "name": "가상배우자", "relation": "spouse"}
+    )
+    raw["rent"]["contract_holder_person_id"] = "spouse-1"
+    assert answer(raw)["rent_credit"] == 1_326_000
+    raw["dependents"][0]["income_amount"] = 1_000_001
+    assert answer(raw)["rent_credit"] == 0
+    raw["dependents"][0].update(earned_income_only=True, gross_salary=5_000_000)
+    assert answer(raw)["rent_credit"] == 1_326_000
+    raw["dependents"][0]["assigned_claimant"] = "other"
+    assert answer(raw)["rent_credit"] == 0
+
+
+def test_family_holder_still_needs_existing_basic_deduction_age_condition():
+    raw = rent_holder_facts()
+    raw["dependents"] = [
+        {
+            "person_id": "parent-1",
+            "relation": "parent",
+            "age": 59,
+            "income_amount": 0,
+            "supported": True,
+            "assigned_claimant": "self",
+        }
+    ]
+    raw["rent"]["identity_records"].append(
+        {"person_id": "parent-1", "name": "가상부모", "relation": "parent"}
+    )
+    raw["rent"]["contract_holder_person_id"] = "parent-1"
+    assert answer(raw)["rent_credit"] == 0
+    raw["dependents"][0]["age"] = 60
+    assert answer(raw)["rent_credit"] == 1_326_000
+
+
+@pytest.mark.parametrize("relation", ["friend", "housemate", "colleague", "unrelated"])
+def test_outsider_holder_never_becomes_basic_deduction_family(relation):
+    raw = rent_holder_facts()
+    raw["rent"]["identity_records"].append(
+        {"person_id": "outside-1", "name": "가상동거인", "relation": relation}
+    )
+    raw["rent"]["contract_holder_person_id"] = "outside-1"
+    assert answer(raw)["rent_credit"] == 0
+    raw["rent"]["contract_holder_person_id"] = "self"
+    assert answer(raw)["rent_credit"] == 1_326_000
+
+
+@pytest.mark.parametrize(
+    "mutate,message",
+    [
+        (lambda s: s["rent"].pop("identity_records"), "holder and identities"),
+        (lambda s: s["rent"].pop("contract_holder_person_id"), "holder and identities"),
+        (lambda s: s["rent"].update(eligible_contract_holder=False), "compiled holder"),
+        (lambda s: s["rent"].update(contract_holder_person_id="missing"), "Unknown rent"),
+        (lambda s: s["rent"].update(contract_holder_person_id=""), "nonempty"),
+        (lambda s: s["rent"].update(identity_records=[]), "nonempty list"),
+        (lambda s: s["rent"].update(identity_records={}), "nonempty list"),
+        (
+            lambda s: s["rent"]["identity_records"].append(
+                deepcopy(s["rent"]["identity_records"][0])
+            ),
+            "Duplicate rent",
+        ),
+        (
+            lambda s: s["rent"]["identity_records"][0].update(person_id="not-self"),
+            "conflicts with employee",
+        ),
+        (
+            lambda s: s["rent"]["identity_records"][0].update(relation="friend"),
+            "outsider identity conflicts",
+        ),
+        (
+            lambda s: s["rent"]["identity_records"][0].update(extra="unknown"),
+            "requires exactly",
+        ),
+        (
+            lambda s: s["rent"]["identity_records"][0].update(relation="tenant"),
+            "Unsupported rent",
+        ),
+        (
+            lambda s: s["rent"]["identity_records"][0].update(name=" "),
+            "nonempty",
+        ),
+        (
+            lambda s: s["rent"]["identity_records"].append(
+                {"person_id": "missing-family", "name": "가상배우자", "relation": "spouse"}
+            ),
+            "conflicts with dependent",
+        ),
+    ],
+)
+def test_invalid_or_precompiled_rent_holder_sources_are_rejected(mutate, message):
+    raw = rent_holder_facts()
+    mutate(raw)
+    with pytest.raises(ValueError, match=message):
+        interpret(raw)
+
+
+def test_rent_identity_relation_must_match_dependent_identity():
+    raw = rent_holder_facts()
+    raw["dependents"] = [{"person_id": "family-1", "relation": "parent", "age": 65}]
+    raw["rent"]["identity_records"].append(
+        {"person_id": "family-1", "name": "가상가족", "relation": "spouse"}
+    )
+    with pytest.raises(ValueError, match="conflicts with dependent"):
+        interpret(raw)
+    raw["rent"]["identity_records"][-1]["relation"] = "friend"
+    with pytest.raises(ValueError, match="outsider identity conflicts"):
+        interpret(raw)
+
+
+def test_legacy_rent_trace_does_not_gain_an_absent_holder_branch():
+    raw = case("A019")["facts"]
+    _, trace = calculate("A_yearend", raw)
+    assert trace[0]["output"] == {"rent.address_matches": False}

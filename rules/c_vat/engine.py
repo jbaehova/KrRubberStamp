@@ -87,8 +87,24 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
     for transaction_id, rows in sorted(grouped.items()):
         row = rows[0]
         split = _split(row)
+        for item in rows:
+            if "issued_receipt_gross" in item:
+                issued = _money(item["issued_receipt_gross"], "issued_receipt_gross")
+                if item["direction"] != "sale" or issued > split[2]:
+                    raise ValueError("Issued receipt gross exceeds or mismatches the supply")
+            if "documented_input_vat" in item:
+                documented = _money(item["documented_input_vat"], "documented_input_vat")
+                if item["direction"] != "purchase" or documented not in {0, split[1]}:
+                    raise ValueError("Only full or absent documentary input VAT is supported")
         for other in rows[1:]:
-            if _split(other) != split or any(other[k] != row[k] for k in agree):
+            if (
+                _split(other) != split
+                or any(other[k] != row[k] for k in agree)
+                or any(
+                    other.get(k) != row.get(k)
+                    for k in ("issued_receipt_gross", "documented_input_vat")
+                )
+            ):
                 raise ValueError(f"conflicting duplicate facts: {transaction_id}")
         evidence = {r["evidence"] for r in rows}
         invoice = any(r["invoice_issued"] for r in rows) or "tax_invoice" in evidence
@@ -125,17 +141,21 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
             output_vat += vat
             record("VAT_OUTPUT_10", {"supply_base": base}, vat)
             qualifies = bool(evidence & {"card_receipt", "cash_receipt"}) and not invoice
+            issued_gross = row.get("issued_receipt_gross", gross)
             if qualifies:
-                receipt_base += gross
+                receipt_base += issued_gross
+            receipt_inputs = {
+                "transaction_id": transaction_id,
+                "evidence": sorted(evidence),
+                "invoice_issued": invoice,
+                "counterparty_consumer": row["counterparty_consumer"],
+            }
+            if "issued_receipt_gross" in row:
+                receipt_inputs["issued_receipt_gross"] = issued_gross
             record(
                 "VAT_RECEIPT_BASE",
-                {
-                    "transaction_id": transaction_id,
-                    "evidence": sorted(evidence),
-                    "invoice_issued": invoice,
-                    "counterparty_consumer": row["counterparty_consumer"],
-                },
-                {"eligible_gross": gross if qualifies else 0},
+                receipt_inputs,
+                {"eligible_gross": issued_gross if qualifies else 0},
             )
             continue
 
@@ -157,21 +177,26 @@ def calculate(scenario: dict) -> tuple[dict, list[dict]]:
             blocked_rule = "VAT_INPUT_EVIDENCE"
         elif not row["supplier_general"] or not row["vat_separately_stated"]:
             blocked_rule = "VAT_INPUT_EVIDENCE"
-        if blocked_rule:
-            noncreditable += vat
+        documented = row.get("documented_input_vat", vat)
+        deducted = 0 if blocked_rule else documented
+        excluded = vat - deducted
+        noncreditable += excluded
+        evidence_inputs = {
+            "transaction_id": transaction_id,
+            "purpose": row["purpose"],
+            "business_related": row["business_related"],
+            "evidence": sorted(evidence),
+            "supplier_general": row["supplier_general"],
+            "vat_separately_stated": row["vat_separately_stated"],
+            "vehicle_subject_excise": row["vehicle_subject_excise"],
+            "vehicle_direct_business": row["vehicle_direct_business"],
+        }
+        if "documented_input_vat" in row:
+            evidence_inputs["documented_input_vat"] = documented
         record(
             blocked_rule or "VAT_INPUT_EVIDENCE",
-            {
-                "transaction_id": transaction_id,
-                "purpose": row["purpose"],
-                "business_related": row["business_related"],
-                "evidence": sorted(evidence),
-                "supplier_general": row["supplier_general"],
-                "vat_separately_stated": row["vat_separately_stated"],
-                "vehicle_subject_excise": row["vehicle_subject_excise"],
-                "vehicle_direct_business": row["vehicle_direct_business"],
-            },
-            {"deductible": 0 if blocked_rule else vat, "noncreditable": vat if blocked_rule else 0},
+            evidence_inputs,
+            {"deductible": deducted, "noncreditable": excluded},
         )
 
     deductible = input_vat - noncreditable

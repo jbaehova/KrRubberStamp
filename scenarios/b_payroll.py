@@ -32,6 +32,15 @@ INSTRUCTIONS = [
 
 
 LABELS = {
+    "processing_policy": "급여명세와 실제 이체 대조 기준",
+    "as_of_date": "이체 대조 기준일",
+    "payrolls": "완전한 월 급여 원자료",
+    "payroll_id": "월 급여명세 식별번호",
+    "employee_id": "직원 식별번호",
+    "facts": "계약과 근태 및 보험 원자료",
+    "transfers": "은행 이체 원장",
+    "transfer_id": "은행 이체 식별번호",
+    "amount": "이체 금액",
     "employee_name": "가상 직원 표시명",
     "company_name": "가상 사업장 표시명",
     "employee_age": "직원 만 나이",

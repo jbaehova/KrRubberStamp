@@ -8,6 +8,8 @@ from copy import deepcopy
 from datetime import date
 import unicodedata
 
+from .engine import basic_eligible
+
 CONTRACT = "yearend_evidence_v1"
 RULE_ID = "A_EVIDENCE_RECONCILIATION"
 
@@ -27,6 +29,54 @@ def _date(value, field):
 
 def _address(value):
     return "".join(unicodedata.normalize("NFKC", _text(value, "address")).split())
+
+
+def _person_name(value):
+    return "".join(unicodedata.normalize("NFKC", value).split()).casefold()
+
+
+def _rent_contract_holder(rent, source):
+    holder = _text(rent["contract_holder_person_id"], "contract holder person_id")
+    records = rent["identity_records"]
+    if not isinstance(records, list) or not records:
+        raise ValueError("Rent identity records must be a nonempty list")
+    relatives = {"spouse", "parent", "child", "grandchild", "sibling"}
+    outsiders = {"friend", "housemate", "colleague", "unrelated"}
+    dependents = {}
+    for person in source.get("dependents", []):
+        identity = _text(person.get("person_id"), "dependent person_id")
+        if identity == "self" or identity in dependents:
+            raise ValueError("Ambiguous dependent person identity")
+        dependents[identity] = person
+    eligible = {}
+    for record in records:
+        if not isinstance(record, dict) or set(record) != {"person_id", "name", "relation"}:
+            raise ValueError("Rent identity record requires exactly person_id, name and relation")
+        identity = _text(record["person_id"], "identity person_id")
+        name = _text(record["name"], "identity name")
+        relation = _text(record["relation"], "identity relation")
+        if identity in eligible:
+            raise ValueError("Duplicate rent person identity")
+        if relation == "self":
+            if identity != "self" or _person_name(name) != _person_name(
+                _text(source.get("employee_name"), "employee_name")
+            ):
+                raise ValueError("Rent self identity conflicts with employee identity")
+            eligible[identity] = True
+        elif relation in relatives:
+            person = dependents.get(identity)
+            if person is None or person["relation"] != relation:
+                raise ValueError("Rent family identity conflicts with dependent reference")
+            eligible[identity] = basic_eligible(person)
+        elif relation in outsiders:
+            if identity == "self" or identity in dependents:
+                raise ValueError("Rent outsider identity conflicts with employee or dependent")
+            eligible[identity] = False
+        else:
+            raise ValueError("Unsupported rent identity relation")
+    if holder not in eligible:
+        raise ValueError("Unknown rent contract holder reference")
+    return eligible[holder]
 
 
 def _receipts(source, normalized, group, field, mapping):
@@ -66,6 +116,16 @@ def interpret(source: dict) -> dict:
     normalized.pop("source_contract")
     branches = 0
     rent = source.get("rent", {})
+    holder_fields = {"contract_holder_person_id", "identity_records"}
+    if holder_fields & rent.keys():
+        if not holder_fields <= rent.keys() or "eligible_contract_holder" in rent:
+            raise ValueError(
+                "Raw rent needs holder and identities without a compiled holder status"
+            )
+        normalized["rent"]["eligible_contract_holder"] = _rent_contract_holder(rent, source)
+        for field in holder_fields:
+            normalized["rent"].pop(field)
+        branches += 1
     address_fields = {"contract_address", "resident_registration_address"}
     if address_fields & rent.keys():
         if not address_fields <= rent.keys() or "address_matches" in rent:
@@ -204,6 +264,8 @@ def interpret(source: dict) -> dict:
 
 def derivation_trace(source: dict, normalized: dict) -> dict:
     outcomes = {}
+    if "contract_holder_person_id" in source.get("rent", {}):
+        outcomes["rent.eligible_contract_holder"] = normalized["rent"]["eligible_contract_holder"]
     if "contract_address" in source.get("rent", {}):
         outcomes["rent.address_matches"] = normalized["rent"]["address_matches"]
     if "household_homes_at_year_end" in source.get("rent", {}):
