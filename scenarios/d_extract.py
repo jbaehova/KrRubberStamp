@@ -3,6 +3,10 @@ import hashlib
 import random
 
 LABELS = {
+    "vendors": "선택 공급사의 배송 계정",
+    "vendor_id": "공급사 식별번호",
+    "offers": "품목별 독립 견적 원본",
+    "item_id": "별도 구매 요청 품목 식별번호",
     "documents": "거래 자료",
     "document_id": "문서 번호",
     "vendor": "업체명",

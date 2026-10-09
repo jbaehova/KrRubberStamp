@@ -20,6 +20,7 @@ SUPPORT_REPORTS = (
     "extract_fulfillment_contract.md",
     "extract_fulfillment_legacy_integrity.json",
     "extract_procurement_contract.md",
+    "extract_cart_procurement_contract.md",
     "yearend_holder_contract.md",
     "expansion_contracts_legacy_integrity.json",
     "expansion_contracts_integration.md",
@@ -603,6 +604,9 @@ def _write_export(tasks, manifests, evidence, rules, document_root, batches, out
             shutil.copy2(item["path"], output / "reports" / item["path"].name)
         for path in sorted((document_root / "reports").glob(f"authored_batch_{batch}_*.md")):
             shutil.copy2(path, output / "reports" / path.name)
+        acceptance = document_root / "reports" / f"authoring_acceptance_batch_{batch}.json"
+        if acceptance.is_file():
+            shutil.copy2(acceptance, output / "reports" / acceptance.name)
         audit_path = document_root / "reports" / "audit_evidence" / f"batch_{batch}"
         if audit_path.is_dir():
             shutil.copytree(audit_path, output / "reports" / "audit_evidence" / f"batch_{batch}")

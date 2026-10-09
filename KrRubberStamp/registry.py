@@ -50,6 +50,10 @@ def calculate(domain: str, scenario: dict):
         answer, trace = import_module("rules.c_vat.engine").calculate(normalized)
         return answer, [derivation_trace(scenario, normalized), *trace]
     if domain == "D_extract" and "source_contract" in scenario:
+        from rules.d_extract.cart_procurement import CONTRACT as CART, calculate as compare_cart
+
+        if scenario["source_contract"] == CART:
+            return compare_cart(scenario)
         from rules.d_extract.procurement import CONTRACT as PROCUREMENT, calculate as compare_quotes
 
         if scenario["source_contract"] == PROCUREMENT:

@@ -146,6 +146,8 @@ def _label(path: list[str | int], domain: str) -> str:
     except (ImportError, AttributeError, TypeError):
         pass
     parts = [f"{x + 1}번" if isinstance(x, int) else str(labels.get(x, x)) for x in path]
+    if domain == "D_extract" and path and path[0] == "vendors" and path[-1] == "name":
+        parts[-1] = "업체명"
     return " / ".join(parts) or "자료"
 
 

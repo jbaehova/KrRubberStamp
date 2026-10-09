@@ -125,3 +125,62 @@ def test_revision_pinned_download_detects_remote_corruption(tmp_path):
         publishing.verify_remote(
             Hub(), replace(plan, files=names[:-1]), "fixture/KrRubberStamp-4.8K"
         )
+
+
+@pytest.fixture
+def reviewed_manuscript(tmp_path):
+    source = "authored/batch_2/D_extract/cases_001_050.json"
+    path = tmp_path / source
+    path.parent.mkdir(parents=True)
+    path.write_text('[{"case_id":"D001"}]\n')
+    ledger = {
+        "batch": 2,
+        "accepted_chunks": [
+            {
+                "source_file": source,
+                "ids": ["D001"],
+                "accepted_cases": 1,
+                "source_sha256": publishing.sha256(path),
+            }
+        ],
+    }
+    acceptance = tmp_path / "reports/authoring_acceptance_batch_2.json"
+    acceptance.parent.mkdir()
+    acceptance.write_text(json.dumps(ledger))
+    records = [
+        {
+            "batch": 2,
+            "case": {"case_id": "D001"},
+            "task": {"authorship": {"source_file": source.removeprefix("authored/")}},
+        }
+    ]
+    return tmp_path, path, acceptance, ledger, records
+
+
+def test_reviewed_manuscript_hash_and_ids_pass(reviewed_manuscript):
+    folder, _, _, _, records = reviewed_manuscript
+    publishing.check_editorial_acceptances(folder, records)
+
+
+def test_changed_manuscript_cannot_reuse_review(reviewed_manuscript):
+    folder, path, _, _, records = reviewed_manuscript
+    path.write_text('[{"case_id":"D001","unreviewed":"change"}]\n')
+    with pytest.raises(ValueError, match="changed after"):
+        publishing.check_editorial_acceptances(folder, records)
+
+
+@pytest.mark.parametrize("change", ["missing", "duplicate", "wrong_ids", "wrong_count"])
+def test_unreviewed_or_ambiguous_expansion_is_rejected(reviewed_manuscript, change):
+    folder, _, acceptance, ledger, records = reviewed_manuscript
+    chunks = ledger["accepted_chunks"]
+    if change == "missing":
+        chunks.clear()
+    elif change == "duplicate":
+        chunks.append(dict(chunks[0]))
+    elif change == "wrong_ids":
+        chunks[0]["ids"] = ["D999"]
+    else:
+        chunks[0]["accepted_cases"] = True
+    acceptance.write_text(json.dumps(ledger))
+    with pytest.raises(ValueError):
+        publishing.check_editorial_acceptances(folder, records)

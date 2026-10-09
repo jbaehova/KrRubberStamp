@@ -88,6 +88,36 @@ def inventory(folder):
     return tuple(files)
 
 
+def check_editorial_acceptances(folder, records):
+    """Require the frozen manuscript hashes that passed expansion review."""
+    for batch in sorted({row["batch"] for row in records if row["batch"] > 1}):
+        reviewed = read_json(artifact(folder, f"reports/authoring_acceptance_batch_{batch}.json"))
+        if reviewed.get("batch") != batch or not isinstance(reviewed.get("accepted_chunks"), list):
+            raise ValueError("Malformed editorial acceptance record")
+        expected = {}
+        for row in records:
+            if row["batch"] == batch:
+                source = "authored/" + row["task"]["authorship"]["source_file"]
+                expected.setdefault(source, set()).add(row["case"]["case_id"])
+        seen = set()
+        for chunk in reviewed["accepted_chunks"]:
+            source, ids = chunk.get("source_file"), chunk.get("ids")
+            if source not in expected or source in seen or not isinstance(ids, list):
+                raise ValueError("Editorial acceptance contains duplicate or unknown manuscripts")
+            if (
+                len(set(ids)) != len(ids)
+                or set(ids) != expected[source]
+                or type(chunk.get("accepted_cases")) is not int
+                or chunk["accepted_cases"] != len(ids)
+            ):
+                raise ValueError("Editorial acceptance does not cover the current case identities")
+            if sha256(artifact(folder, source)) != chunk.get("source_sha256"):
+                raise ValueError("Manuscript changed after its editorial review")
+            seen.add(source)
+        if seen != set(expected):
+            raise ValueError("Expansion manuscripts are still awaiting editorial review")
+
+
 def preflight(folder):
     """Reject partial exports, stale upstream cases and mismatching public artifacts."""
     folder = Path(folder).resolve()
@@ -113,6 +143,7 @@ def preflight(folder):
     records, _ = collect_authored_tasks(folder / "data", BATCHES)
     if len(records) != ROWS or task_set_sha256(records) != manifest.get("task_set_sha256"):
         raise ValueError("Export task identities differ from the current authored release")
+    check_editorial_acceptances(folder, records)
     for batch in BATCHES:
         evidence = checked_measurements(folder / "reports", records, batch)
         for label, item in evidence.items():

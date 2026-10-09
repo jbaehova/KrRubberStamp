@@ -39,3 +39,5 @@ uv run --with 'huggingface-hub>=2.2.0' python scripts/publish_hf.py exports/upto
 - `tests/test_publish_hf.py` 경계 테스트 8개 통과. 불완전 문항 수와 미리보기를 차단한다. 필수 artifact 누락과 현재 원고 identity 변경을 차단한다. dry-run에서 원격 쓰기를 하지 않으며 숨김 파일과 symlink를 거부한다. revision 고정 다운로드의 원격 손상과 전체 inventory 불일치를 탐지한다.
 - 기존 `exports/upto_1`을 실행 입력으로 주었을 때 4,800문항 요건으로 차단됨을 확인했다.
 - 실제 Hub 생성 및 업로드는 실행하지 않았으며 실제 인증은 현재 불가능하다. 네트워크 업로드 mock 테스트도 원격 부작용을 일으키지 않는다.
+
+Batch 2부터 Batch 4까지는 `authoring_acceptance_batch_N.json`에 의미 검토를 마친 원고별 SHA256과 문항 ID를 기록한다. 게시 preflight가 내보낸 원고의 실제 바이트 및 현재 문항 ID를 대조하므로, 검토 뒤 변경된 원고나 검토가 아직 끝나지 않은 원고는 게시할 수 없다. 이 기록은 root의 개별 집필 및 중복 검토 인계이며 사람 전문가 검수 완료를 뜻하지 않는다.

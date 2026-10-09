@@ -1,0 +1,1251 @@
+{
+  "source_sha256": "4953af89dff42deafb1bf82dfadb12e8dd6fb9db1c7958e61989b36875e40ea5",
+  "probe_count": 13,
+  "probes": [
+    {
+      "case_id": "D039",
+      "path": "orders.1.vendor",
+      "value": "가상다른냉각공급",
+      "expected": "change",
+      "observed": "change",
+      "rationale": "법인 통합 대신 실제 다른 공급처로 후속 계약을 바꾸면 현물 총액은 그대로여도 공급처 잔액 배열이 분리된다.",
+      "requested_changed_fields": [
+        "vendor_balances"
+      ],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "COOL-FIX",
+            "line_id": "F",
+            "item": "패널고정편",
+            "base_unit": "개",
+            "ordered_units": 10,
+            "received_units": 0,
+            "returned_units": 0,
+            "net_units": 0,
+            "outstanding_units": 10,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          },
+          {
+            "order_id": "COOL-PANEL",
+            "line_id": "P",
+            "item": "냉각패널",
+            "base_unit": "개",
+            "ordered_units": 12,
+            "received_units": 9,
+            "returned_units": 2,
+            "net_units": 7,
+            "outstanding_units": 5,
+            "supply": 70004,
+            "vat": 7001,
+            "total": 77005
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상냉각패널",
+            "supply": 70004,
+            "vat": 7001,
+            "total": 77005,
+            "paid": 50000,
+            "balance": 27005
+          }
+        ],
+        "balance_total": 27005
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "COOL-FIX",
+            "line_id": "F",
+            "item": "패널고정편",
+            "base_unit": "개",
+            "ordered_units": 10,
+            "received_units": 0,
+            "returned_units": 0,
+            "net_units": 0,
+            "outstanding_units": 10,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          },
+          {
+            "order_id": "COOL-PANEL",
+            "line_id": "P",
+            "item": "냉각패널",
+            "base_unit": "개",
+            "ordered_units": 12,
+            "received_units": 9,
+            "returned_units": 2,
+            "net_units": 7,
+            "outstanding_units": 5,
+            "supply": 70004,
+            "vat": 7001,
+            "total": 77005
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상냉각패널",
+            "supply": 70004,
+            "vat": 7001,
+            "total": 77005,
+            "paid": 40000,
+            "balance": 37005
+          },
+          {
+            "vendor": "가상다른냉각공급",
+            "supply": 0,
+            "vat": 0,
+            "total": 0,
+            "paid": 10000,
+            "balance": -10000
+          }
+        ],
+        "balance_total": 27005
+      }
+    },
+    {
+      "case_id": "D040",
+      "path": "orders.2.kind",
+      "value": "order",
+      "expected": "change",
+      "observed": "change",
+      "rationale": "제안이 실제 주문이 되면 0인수 행과 업체 계정을 남긴다.",
+      "requested_changed_fields": [
+        "line_settlements",
+        "vendor_balances"
+      ],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "OUTPUT-CURRENT",
+            "line_id": "C",
+            "item": "출력헤드c",
+            "base_unit": "개",
+            "ordered_units": 2,
+            "received_units": 2,
+            "returned_units": 0,
+            "net_units": 2,
+            "outstanding_units": 0,
+            "supply": 120000,
+            "vat": 12000,
+            "total": 132000
+          },
+          {
+            "order_id": "OUTPUT-FUTURE",
+            "line_id": "F",
+            "item": "출력헤드f",
+            "base_unit": "개",
+            "ordered_units": 3,
+            "received_units": 0,
+            "returned_units": 0,
+            "net_units": 0,
+            "outstanding_units": 3,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          }
+        ],
+        "payment_total": 50000,
+        "vendor_balances": [
+          {
+            "vendor": "가상출력부품",
+            "supply": 120000,
+            "vat": 12000,
+            "total": 132000,
+            "paid": 50000,
+            "balance": 82000
+          }
+        ]
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "OUTPUT-CURRENT",
+            "line_id": "C",
+            "item": "출력헤드c",
+            "base_unit": "개",
+            "ordered_units": 2,
+            "received_units": 2,
+            "returned_units": 0,
+            "net_units": 2,
+            "outstanding_units": 0,
+            "supply": 120000,
+            "vat": 12000,
+            "total": 132000
+          },
+          {
+            "order_id": "OUTPUT-FUTURE",
+            "line_id": "F",
+            "item": "출력헤드f",
+            "base_unit": "개",
+            "ordered_units": 3,
+            "received_units": 0,
+            "returned_units": 0,
+            "net_units": 0,
+            "outstanding_units": 3,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          },
+          {
+            "order_id": "OUTPUT-QUOTE",
+            "line_id": "Q",
+            "item": "출력헤드f",
+            "base_unit": "개",
+            "ordered_units": 3,
+            "received_units": 0,
+            "returned_units": 0,
+            "net_units": 0,
+            "outstanding_units": 3,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          }
+        ],
+        "payment_total": 50000,
+        "vendor_balances": [
+          {
+            "vendor": "가상출력부품",
+            "supply": 120000,
+            "vat": 12000,
+            "total": 132000,
+            "paid": 50000,
+            "balance": 82000
+          },
+          {
+            "vendor": "가상출력제안",
+            "supply": 0,
+            "vat": 0,
+            "total": 0,
+            "paid": 0,
+            "balance": 0
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "D040",
+      "path": "cutoff_date",
+      "value": "2026-05-06",
+      "expected": "change",
+      "observed": "change",
+      "rationale": "마감을 실제 미래 인수 및 지급 뒤로 옮기면 미래 order의 인수와 실행 현금만 들어오고 quote 예정 지급은 제외된다.",
+      "requested_changed_fields": [
+        "line_settlements",
+        "payment_total",
+        "vendor_balances"
+      ],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "OUTPUT-CURRENT",
+            "line_id": "C",
+            "item": "출력헤드c",
+            "base_unit": "개",
+            "ordered_units": 2,
+            "received_units": 2,
+            "returned_units": 0,
+            "net_units": 2,
+            "outstanding_units": 0,
+            "supply": 120000,
+            "vat": 12000,
+            "total": 132000
+          },
+          {
+            "order_id": "OUTPUT-FUTURE",
+            "line_id": "F",
+            "item": "출력헤드f",
+            "base_unit": "개",
+            "ordered_units": 3,
+            "received_units": 0,
+            "returned_units": 0,
+            "net_units": 0,
+            "outstanding_units": 3,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          }
+        ],
+        "payment_total": 50000,
+        "vendor_balances": [
+          {
+            "vendor": "가상출력부품",
+            "supply": 120000,
+            "vat": 12000,
+            "total": 132000,
+            "paid": 50000,
+            "balance": 82000
+          }
+        ]
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "OUTPUT-CURRENT",
+            "line_id": "C",
+            "item": "출력헤드c",
+            "base_unit": "개",
+            "ordered_units": 2,
+            "received_units": 2,
+            "returned_units": 0,
+            "net_units": 2,
+            "outstanding_units": 0,
+            "supply": 120000,
+            "vat": 12000,
+            "total": 132000
+          },
+          {
+            "order_id": "OUTPUT-FUTURE",
+            "line_id": "F",
+            "item": "출력헤드f",
+            "base_unit": "개",
+            "ordered_units": 3,
+            "received_units": 3,
+            "returned_units": 0,
+            "net_units": 3,
+            "outstanding_units": 0,
+            "supply": 210000,
+            "vat": 21000,
+            "total": 231000
+          }
+        ],
+        "payment_total": 110000,
+        "vendor_balances": [
+          {
+            "vendor": "가상출력부품",
+            "supply": 330000,
+            "vat": 33000,
+            "total": 363000,
+            "paid": 110000,
+            "balance": 253000
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "D041",
+      "path": "orders.1.lines.0.base_unit",
+      "value": "m",
+      "expected": "change",
+      "observed": "change",
+      "rationale": "두 주문의 같은 품목을 실제 같은 기초단위 약정으로 바꾸면 품목 수량 합산만 달라지고 주문별 반환 귀속은 유지된다.",
+      "requested_changed_fields": [
+        "line_settlements",
+        "item_quantities"
+      ],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "TAPE-METERS",
+            "line_id": "01",
+            "item": "보호테이프",
+            "base_unit": "m",
+            "ordered_units": 40,
+            "received_units": 30,
+            "returned_units": 4,
+            "net_units": 26,
+            "outstanding_units": 14,
+            "supply": 20800,
+            "vat": 2080,
+            "total": 22880
+          },
+          {
+            "order_id": "TAPE-ROLLS",
+            "line_id": "01",
+            "item": "보호테이프",
+            "base_unit": "롤",
+            "ordered_units": 10,
+            "received_units": 8,
+            "returned_units": 1,
+            "net_units": 7,
+            "outstanding_units": 3,
+            "supply": 25200,
+            "vat": 2520,
+            "total": 27720
+          }
+        ],
+        "item_quantities": [
+          {
+            "item": "보호테이프",
+            "base_unit": "m",
+            "net_units": 26
+          },
+          {
+            "item": "보호테이프",
+            "base_unit": "롤",
+            "net_units": 7
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상길이테이프",
+            "supply": 20800,
+            "vat": 2080,
+            "total": 22880,
+            "paid": 10000,
+            "balance": 12880
+          },
+          {
+            "vendor": "가상롤테이프",
+            "supply": 25200,
+            "vat": 2520,
+            "total": 27720,
+            "paid": 0,
+            "balance": 27720
+          }
+        ]
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "TAPE-METERS",
+            "line_id": "01",
+            "item": "보호테이프",
+            "base_unit": "m",
+            "ordered_units": 40,
+            "received_units": 30,
+            "returned_units": 4,
+            "net_units": 26,
+            "outstanding_units": 14,
+            "supply": 20800,
+            "vat": 2080,
+            "total": 22880
+          },
+          {
+            "order_id": "TAPE-ROLLS",
+            "line_id": "01",
+            "item": "보호테이프",
+            "base_unit": "m",
+            "ordered_units": 10,
+            "received_units": 8,
+            "returned_units": 1,
+            "net_units": 7,
+            "outstanding_units": 3,
+            "supply": 25200,
+            "vat": 2520,
+            "total": 27720
+          }
+        ],
+        "item_quantities": [
+          {
+            "item": "보호테이프",
+            "base_unit": "m",
+            "net_units": 33
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상길이테이프",
+            "supply": 20800,
+            "vat": 2080,
+            "total": 22880,
+            "paid": 10000,
+            "balance": 12880
+          },
+          {
+            "vendor": "가상롤테이프",
+            "supply": 25200,
+            "vat": 2520,
+            "total": 27720,
+            "paid": 0,
+            "balance": 27720
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "D042",
+      "path": "remove_event",
+      "value": 2,
+      "expected": "invariant",
+      "observed": "invariant",
+      "rationale": "입고 사본 한 건을 제거해도 당일 입고와 반환의 순량은 같다.",
+      "requested_changed_fields": [],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "DUST-CAPS",
+            "line_id": "C",
+            "item": "방진캡",
+            "base_unit": "개",
+            "ordered_units": 12,
+            "received_units": 7,
+            "returned_units": 2,
+            "net_units": 5,
+            "outstanding_units": 7,
+            "supply": 7500,
+            "vat": 750,
+            "total": 8250
+          },
+          {
+            "order_id": "DUST-RINGS",
+            "line_id": "R",
+            "item": "방진고정링",
+            "base_unit": "개",
+            "ordered_units": 8,
+            "received_units": 8,
+            "returned_units": 0,
+            "net_units": 8,
+            "outstanding_units": 0,
+            "supply": 8000,
+            "vat": 800,
+            "total": 8800
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상고정링",
+            "supply": 8000,
+            "vat": 800,
+            "total": 8800,
+            "paid": 0,
+            "balance": 8800
+          },
+          {
+            "vendor": "가상방진캡",
+            "supply": 7500,
+            "vat": 750,
+            "total": 8250,
+            "paid": 5000,
+            "balance": 3250
+          }
+        ]
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "DUST-CAPS",
+            "line_id": "C",
+            "item": "방진캡",
+            "base_unit": "개",
+            "ordered_units": 12,
+            "received_units": 7,
+            "returned_units": 2,
+            "net_units": 5,
+            "outstanding_units": 7,
+            "supply": 7500,
+            "vat": 750,
+            "total": 8250
+          },
+          {
+            "order_id": "DUST-RINGS",
+            "line_id": "R",
+            "item": "방진고정링",
+            "base_unit": "개",
+            "ordered_units": 8,
+            "received_units": 8,
+            "returned_units": 0,
+            "net_units": 8,
+            "outstanding_units": 0,
+            "supply": 8000,
+            "vat": 800,
+            "total": 8800
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상고정링",
+            "supply": 8000,
+            "vat": 800,
+            "total": 8800,
+            "paid": 0,
+            "balance": 8800
+          },
+          {
+            "vendor": "가상방진캡",
+            "supply": 7500,
+            "vat": 750,
+            "total": 8250,
+            "paid": 5000,
+            "balance": 3250
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "D043",
+      "path": "events.1.units",
+      "value": 2,
+      "expected": "change",
+      "observed": "change",
+      "rationale": "부분 반환을 늘리면 포함 행의 분수 정산액이 변한다.",
+      "requested_changed_fields": [
+        "line_settlements",
+        "grand_total",
+        "balance_total"
+      ],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "REPAIR-CAP",
+            "line_id": "C",
+            "item": "교체캡",
+            "base_unit": "개",
+            "ordered_units": 6,
+            "received_units": 6,
+            "returned_units": 1,
+            "net_units": 5,
+            "outstanding_units": 1,
+            "supply": 33343,
+            "vat": 3335,
+            "total": 36678
+          },
+          {
+            "order_id": "REPAIR-PIN",
+            "line_id": "P",
+            "item": "교체핀",
+            "base_unit": "개",
+            "ordered_units": 14,
+            "received_units": 12,
+            "returned_units": 3,
+            "net_units": 9,
+            "outstanding_units": 5,
+            "supply": 2706,
+            "vat": 270,
+            "total": 2976
+          }
+        ],
+        "grand_total": 39654,
+        "balance_total": 19654
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "REPAIR-CAP",
+            "line_id": "C",
+            "item": "교체캡",
+            "base_unit": "개",
+            "ordered_units": 6,
+            "received_units": 6,
+            "returned_units": 2,
+            "net_units": 4,
+            "outstanding_units": 2,
+            "supply": 26674,
+            "vat": 2668,
+            "total": 29342
+          },
+          {
+            "order_id": "REPAIR-PIN",
+            "line_id": "P",
+            "item": "교체핀",
+            "base_unit": "개",
+            "ordered_units": 14,
+            "received_units": 12,
+            "returned_units": 3,
+            "net_units": 9,
+            "outstanding_units": 5,
+            "supply": 2706,
+            "vat": 270,
+            "total": 2976
+          }
+        ],
+        "grand_total": 32318,
+        "balance_total": 12318
+      }
+    },
+    {
+      "case_id": "D043",
+      "path": "orders.0.lines.0.price_includes_vat",
+      "value": false,
+      "expected": "change",
+      "observed": "change",
+      "rationale": "본체 행의 표시 약정을 별도로 바꾸면 단가 비율 이후 행별 세액 경로만 달라진다.",
+      "requested_changed_fields": [
+        "line_settlements",
+        "grand_total",
+        "balance_total"
+      ],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "REPAIR-CAP",
+            "line_id": "C",
+            "item": "교체캡",
+            "base_unit": "개",
+            "ordered_units": 6,
+            "received_units": 6,
+            "returned_units": 1,
+            "net_units": 5,
+            "outstanding_units": 1,
+            "supply": 33343,
+            "vat": 3335,
+            "total": 36678
+          },
+          {
+            "order_id": "REPAIR-PIN",
+            "line_id": "P",
+            "item": "교체핀",
+            "base_unit": "개",
+            "ordered_units": 14,
+            "received_units": 12,
+            "returned_units": 3,
+            "net_units": 9,
+            "outstanding_units": 5,
+            "supply": 2706,
+            "vat": 270,
+            "total": 2976
+          }
+        ],
+        "grand_total": 39654,
+        "balance_total": 19654
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "REPAIR-CAP",
+            "line_id": "C",
+            "item": "교체캡",
+            "base_unit": "개",
+            "ordered_units": 6,
+            "received_units": 6,
+            "returned_units": 1,
+            "net_units": 5,
+            "outstanding_units": 1,
+            "supply": 36678,
+            "vat": 3667,
+            "total": 40345
+          },
+          {
+            "order_id": "REPAIR-PIN",
+            "line_id": "P",
+            "item": "교체핀",
+            "base_unit": "개",
+            "ordered_units": 14,
+            "received_units": 12,
+            "returned_units": 3,
+            "net_units": 9,
+            "outstanding_units": 5,
+            "supply": 2706,
+            "vat": 270,
+            "total": 2976
+          }
+        ],
+        "grand_total": 43321,
+        "balance_total": 23321
+      }
+    },
+    {
+      "case_id": "D044",
+      "path": "orders.1.vendor",
+      "value": "가상다른분말공급",
+      "expected": "change",
+      "observed": "change",
+      "rationale": "다른 실제 공급처로 변경하면 단위별 재고는 그대로이고 분말 업체별 현금 계정이 분리된다.",
+      "requested_changed_fields": [
+        "vendor_balances"
+      ],
+      "before": {
+        "item_quantities": [
+          {
+            "item": "흡착분말",
+            "base_unit": "g",
+            "net_units": 130
+          },
+          {
+            "item": "흡착분말",
+            "base_unit": "봉",
+            "net_units": 6
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상흡착분말",
+            "supply": 56500,
+            "vat": 5650,
+            "total": 62150,
+            "paid": 20000,
+            "balance": 42150
+          }
+        ],
+        "payment_total": 20000
+      },
+      "after": {
+        "item_quantities": [
+          {
+            "item": "흡착분말",
+            "base_unit": "g",
+            "net_units": 130
+          },
+          {
+            "item": "흡착분말",
+            "base_unit": "봉",
+            "net_units": 6
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상다른분말공급",
+            "supply": 24000,
+            "vat": 2400,
+            "total": 26400,
+            "paid": 0,
+            "balance": 26400
+          },
+          {
+            "vendor": "가상흡착분말",
+            "supply": 32500,
+            "vat": 3250,
+            "total": 35750,
+            "paid": 20000,
+            "balance": 15750
+          }
+        ],
+        "payment_total": 20000
+      }
+    },
+    {
+      "case_id": "D046",
+      "path": "events.1.event_id",
+      "value": "RUBBER-IN-A",
+      "expected": "change",
+      "observed": "change",
+      "rationale": "날짜와 내용까지 같은 두 입고가 실제 같은 사건 ID의 사본이라면 한 번만 들어온다.",
+      "requested_changed_fields": [
+        "line_settlements",
+        "balance_total"
+      ],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "RUBBER-LOTS",
+            "line_id": "R",
+            "item": "고무마개",
+            "base_unit": "개",
+            "ordered_units": 40,
+            "received_units": 24,
+            "returned_units": 4,
+            "net_units": 20,
+            "outstanding_units": 20,
+            "supply": 12000,
+            "vat": 1200,
+            "total": 13200
+          }
+        ],
+        "payment_total": 5000,
+        "balance_total": 8200
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "RUBBER-LOTS",
+            "line_id": "R",
+            "item": "고무마개",
+            "base_unit": "개",
+            "ordered_units": 40,
+            "received_units": 12,
+            "returned_units": 4,
+            "net_units": 8,
+            "outstanding_units": 32,
+            "supply": 4800,
+            "vat": 480,
+            "total": 5280
+          }
+        ],
+        "payment_total": 5000,
+        "balance_total": 280
+      }
+    },
+    {
+      "case_id": "D046",
+      "path": "remove_event",
+      "value": 3,
+      "expected": "invariant",
+      "observed": "invariant",
+      "rationale": "반환 사본을 제거해도 순량은 그대로이다.",
+      "requested_changed_fields": [],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "RUBBER-LOTS",
+            "line_id": "R",
+            "item": "고무마개",
+            "base_unit": "개",
+            "ordered_units": 40,
+            "received_units": 24,
+            "returned_units": 4,
+            "net_units": 20,
+            "outstanding_units": 20,
+            "supply": 12000,
+            "vat": 1200,
+            "total": 13200
+          }
+        ],
+        "payment_total": 5000,
+        "balance_total": 8200
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "RUBBER-LOTS",
+            "line_id": "R",
+            "item": "고무마개",
+            "base_unit": "개",
+            "ordered_units": 40,
+            "received_units": 24,
+            "returned_units": 4,
+            "net_units": 20,
+            "outstanding_units": 20,
+            "supply": 12000,
+            "vat": 1200,
+            "total": 13200
+          }
+        ],
+        "payment_total": 5000,
+        "balance_total": 8200
+      }
+    },
+    {
+      "case_id": "D046",
+      "path": "payments.1.status",
+      "value": "executed",
+      "expected": "change",
+      "observed": "change",
+      "rationale": "이번 기간 결재가 실제 실행으로 바뀌면 지급 합계와 잔액만 바뀐다.",
+      "requested_changed_fields": [
+        "payment_total",
+        "balance_total"
+      ],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "RUBBER-LOTS",
+            "line_id": "R",
+            "item": "고무마개",
+            "base_unit": "개",
+            "ordered_units": 40,
+            "received_units": 24,
+            "returned_units": 4,
+            "net_units": 20,
+            "outstanding_units": 20,
+            "supply": 12000,
+            "vat": 1200,
+            "total": 13200
+          }
+        ],
+        "payment_total": 5000,
+        "balance_total": 8200
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "RUBBER-LOTS",
+            "line_id": "R",
+            "item": "고무마개",
+            "base_unit": "개",
+            "ordered_units": 40,
+            "received_units": 24,
+            "returned_units": 4,
+            "net_units": 20,
+            "outstanding_units": 20,
+            "supply": 12000,
+            "vat": 1200,
+            "total": 13200
+          }
+        ],
+        "payment_total": 15000,
+        "balance_total": -1800
+      }
+    },
+    {
+      "case_id": "D047",
+      "path": "payments.0.amount",
+      "value": 0,
+      "expected": "change",
+      "observed": "change",
+      "rationale": "미인수 실제 계약에 실행 계약금이 없으면 해당 음수 잔액은 0이고 실제 재고는 같다.",
+      "requested_changed_fields": [
+        "vendor_balances"
+      ],
+      "before": {
+        "item_quantities": [
+          {
+            "item": "실험차단판",
+            "base_unit": "개",
+            "net_units": 0
+          },
+          {
+            "item": "차단판받침",
+            "base_unit": "개",
+            "net_units": 2
+          },
+          {
+            "item": "차단판안전핀",
+            "base_unit": "개",
+            "net_units": 6
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상차단부속",
+            "supply": 20000,
+            "vat": 2000,
+            "total": 22000,
+            "paid": 0,
+            "balance": 22000
+          },
+          {
+            "vendor": "가상차단판제작",
+            "supply": 0,
+            "vat": 0,
+            "total": 0,
+            "paid": 25000,
+            "balance": -25000
+          }
+        ],
+        "line_settlements": [
+          {
+            "order_id": "BLOCK-ASSEMBLY",
+            "line_id": "BODY",
+            "item": "차단판받침",
+            "base_unit": "개",
+            "ordered_units": 2,
+            "received_units": 2,
+            "returned_units": 0,
+            "net_units": 2,
+            "outstanding_units": 0,
+            "supply": 20000,
+            "vat": 2000,
+            "total": 22000
+          },
+          {
+            "order_id": "BLOCK-ASSEMBLY",
+            "line_id": "FREE",
+            "item": "차단판안전핀",
+            "base_unit": "개",
+            "ordered_units": 6,
+            "received_units": 6,
+            "returned_units": 0,
+            "net_units": 6,
+            "outstanding_units": 0,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          },
+          {
+            "order_id": "BLOCK-WAIT",
+            "line_id": "W",
+            "item": "실험차단판",
+            "base_unit": "개",
+            "ordered_units": 4,
+            "received_units": 0,
+            "returned_units": 0,
+            "net_units": 0,
+            "outstanding_units": 4,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          }
+        ]
+      },
+      "after": {
+        "item_quantities": [
+          {
+            "item": "실험차단판",
+            "base_unit": "개",
+            "net_units": 0
+          },
+          {
+            "item": "차단판받침",
+            "base_unit": "개",
+            "net_units": 2
+          },
+          {
+            "item": "차단판안전핀",
+            "base_unit": "개",
+            "net_units": 6
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상차단부속",
+            "supply": 20000,
+            "vat": 2000,
+            "total": 22000,
+            "paid": 0,
+            "balance": 22000
+          },
+          {
+            "vendor": "가상차단판제작",
+            "supply": 0,
+            "vat": 0,
+            "total": 0,
+            "paid": 0,
+            "balance": 0
+          }
+        ],
+        "line_settlements": [
+          {
+            "order_id": "BLOCK-ASSEMBLY",
+            "line_id": "BODY",
+            "item": "차단판받침",
+            "base_unit": "개",
+            "ordered_units": 2,
+            "received_units": 2,
+            "returned_units": 0,
+            "net_units": 2,
+            "outstanding_units": 0,
+            "supply": 20000,
+            "vat": 2000,
+            "total": 22000
+          },
+          {
+            "order_id": "BLOCK-ASSEMBLY",
+            "line_id": "FREE",
+            "item": "차단판안전핀",
+            "base_unit": "개",
+            "ordered_units": 6,
+            "received_units": 6,
+            "returned_units": 0,
+            "net_units": 6,
+            "outstanding_units": 0,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          },
+          {
+            "order_id": "BLOCK-WAIT",
+            "line_id": "W",
+            "item": "실험차단판",
+            "base_unit": "개",
+            "ordered_units": 4,
+            "received_units": 0,
+            "returned_units": 0,
+            "net_units": 0,
+            "outstanding_units": 4,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "D049",
+      "path": "events.1.units",
+      "value": 1,
+      "expected": "change",
+      "observed": "change",
+      "rationale": "기존 창이 전량이 아니라 일부 반환이면 기존 주문의 순재고와 이행량만 남는다.",
+      "requested_changed_fields": [
+        "line_settlements",
+        "item_quantities",
+        "vendor_balances",
+        "balance_total"
+      ],
+      "before": {
+        "line_settlements": [
+          {
+            "order_id": "WINDOW-NEW",
+            "line_id": "W",
+            "item": "관측창-b",
+            "base_unit": "개",
+            "ordered_units": 2,
+            "received_units": 0,
+            "returned_units": 0,
+            "net_units": 0,
+            "outstanding_units": 2,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          },
+          {
+            "order_id": "WINDOW-OLD",
+            "line_id": "W",
+            "item": "관측창-a",
+            "base_unit": "개",
+            "ordered_units": 2,
+            "received_units": 2,
+            "returned_units": 2,
+            "net_units": 0,
+            "outstanding_units": 2,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          }
+        ],
+        "item_quantities": [
+          {
+            "item": "관측창-a",
+            "base_unit": "개",
+            "net_units": 0
+          },
+          {
+            "item": "관측창-b",
+            "base_unit": "개",
+            "net_units": 0
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상관측창",
+            "supply": 0,
+            "vat": 0,
+            "total": 0,
+            "paid": 50000,
+            "balance": -50000
+          }
+        ],
+        "balance_total": -50000
+      },
+      "after": {
+        "line_settlements": [
+          {
+            "order_id": "WINDOW-NEW",
+            "line_id": "W",
+            "item": "관측창-b",
+            "base_unit": "개",
+            "ordered_units": 2,
+            "received_units": 0,
+            "returned_units": 0,
+            "net_units": 0,
+            "outstanding_units": 2,
+            "supply": 0,
+            "vat": 0,
+            "total": 0
+          },
+          {
+            "order_id": "WINDOW-OLD",
+            "line_id": "W",
+            "item": "관측창-a",
+            "base_unit": "개",
+            "ordered_units": 2,
+            "received_units": 2,
+            "returned_units": 1,
+            "net_units": 1,
+            "outstanding_units": 1,
+            "supply": 40000,
+            "vat": 4000,
+            "total": 44000
+          }
+        ],
+        "item_quantities": [
+          {
+            "item": "관측창-a",
+            "base_unit": "개",
+            "net_units": 1
+          },
+          {
+            "item": "관측창-b",
+            "base_unit": "개",
+            "net_units": 0
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상관측창",
+            "supply": 40000,
+            "vat": 4000,
+            "total": 44000,
+            "paid": 50000,
+            "balance": -6000
+          }
+        ],
+        "balance_total": -6000
+      }
+    }
+  ]
+}

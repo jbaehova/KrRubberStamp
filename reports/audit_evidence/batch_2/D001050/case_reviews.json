@@ -1,0 +1,929 @@
+{
+  "source_file": "authored/batch_2/D_extract/cases_001_050.json",
+  "source_sha256": "4953af89dff42deafb1bf82dfadb12e8dd6fb9db1c7958e61989b36875e40ea5",
+  "scope_count": 50,
+  "semantic_pass": 49,
+  "rewrite_required": [
+    "D012"
+  ],
+  "case_reviews": [
+    {
+      "case_id": "D001",
+      "case_sha256": "f17f8f31ced207d663b4fe306a6eab97e6f3ce005dc259ea802554af8edc5493",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D284",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "발주된 수량과 실제 도착한 구매를 가격 장부에서 구분한다.",
+      "actual_difference_or_rewrite_reason": "포장 발주와 낱장 인수의 키를 연결해 발주 75장과 인수 62장의 미이행 13장을 보고한다. 기존은 전체 원문 인수 여부를 골랐고 부분 수량을 보고하지 않는다. D009와 산술은 겹치나 이 사례의 중심은 납품 대기 수량이다.",
+      "requested_fields": [
+        "line_settlements"
+      ],
+      "documents": 2,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D002",
+      "case_sha256": "974e5184309214a6890014c4b91ab7fe90e40bdfdb17077f7f6c86ab49bcc33d",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D103",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "자료의 행 순서 대신 연결 번호를 써서 실제 센서 부품 지출과 가격을 확인한다.",
+      "actual_difference_or_rewrite_reason": "같은 01 행번호를 다른 주문 ID와 결합해 각각의 납품 진도에 귀속한다. 기존 표지/별첨 참조 연결과 달리 주문별 인수량과 미인수량이 바뀐다.",
+      "requested_fields": [
+        "line_settlements"
+      ],
+      "documents": 2,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D003",
+      "case_sha256": "36c8f548f37544ee9f610893b5992f2becadab1e61b80232046ea258800530a3",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D128",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_104_153.json",
+      "closest_batch_1_goal": "공백 차이는 통합하되 규격 문자가 다른 실제 품목은 분리한다.",
+      "actual_difference_or_rewrite_reason": "동일 품명이어도 kg와 봉의 재고를 분리한다. 기존 규격 문자와 가격 후보 구별에서 지원하지 않던 기초단위별 실제 수량 집계다.",
+      "requested_fields": [
+        "item_quantities"
+      ],
+      "documents": 2,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D004",
+      "case_sha256": "7460c50e091c974c9fa9848970a9eeefee69046f7da832ee463fd63110fbfc25",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D055",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "날짜순 구매 자료를 판매처별 지급 표로 바꾼다.",
+      "actual_difference_or_rewrite_reason": "원계약 인수대금을 두 은행 실행 ID와 연결해 공급처 잔액을 만든다. 기존 업체별 물품비에는 실행 지급 차감이 없다. D012는 이 완결 구조를 반복한다.",
+      "requested_fields": [
+        "vendor_balances",
+        "payment_total"
+      ],
+      "documents": 3,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D005",
+      "case_sha256": "5e5211fc00c85826b1074851125b1cc5764ae9ccf52d94a72ee48eb7710b9cb2",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D285",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "원 미만 처리를 각 품목 행에서 적용해 병입 자재 세액을 계산한다.",
+      "actual_difference_or_rewrite_reason": "1001×5÷3의 최종 버림과 낱개 단가 선버림이 달라진다. 기존 행 세액 버림과 달리 인수 비율 산술이 세액 앞에 있다.",
+      "requested_fields": [
+        "grand_total"
+      ],
+      "documents": 2,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D006",
+      "case_sha256": "5f8b1f9e624b46002d92c1cba5ed65272605d0f271fd18f177f9c1de49632190",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D128",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_104_153.json",
+      "closest_batch_1_goal": "공백 차이는 통합하되 규격 문자가 다른 실제 품목은 분리한다.",
+      "actual_difference_or_rewrite_reason": "가격이 다른 두 발주 행의 실제 인수 8개와 3개를 하나의 품목 재고 11개로 합친다. 기존은 정규화 품목의 최저 단가 후보였다. 다음 D063과 재고 합산 골격이 겹친다.",
+      "requested_fields": [
+        "item_quantities"
+      ],
+      "documents": 2,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D007",
+      "case_sha256": "eee24c1e805426c550941aee613c8ee6e01b180fe9203e9e13acf85e42efe8fc",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D055",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "날짜순 구매 자료를 판매처별 지급 표로 바꾼다.",
+      "actual_difference_or_rewrite_reason": "두 주문 중 일부만 현물이 들어와도 요청은 실행 현금 18000이다. 인수 수량 변경의 의도 불변을 확인한다. 단순 물품 원가 합계를 요청한 기존과 목적이 다르다.",
+      "requested_fields": [
+        "payment_total"
+      ],
+      "documents": 3,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D008",
+      "case_sha256": "e9fbb95abb443d70db15c9907d92d067ff82abfef435222d0b42300532733a48",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D285",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "원 미만 처리를 각 품목 행에서 적용해 병입 자재 세액을 계산한다.",
+      "actual_difference_or_rewrite_reason": "포장가격 11003에 3/4 인수 비율을 먼저 적용한 8252에서 다시 공급가액을 분리한다. 발주 전체 금액이나 낱개 선버림을 쓰는 오류를 구별한다.",
+      "requested_fields": [
+        "line_settlements"
+      ],
+      "documents": 2,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D009",
+      "case_sha256": "95efc35a596316e7173a1afaf7876b337b84a1519907f7d8323abad9696721ef",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D161",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_154_203.json",
+      "closest_batch_1_goal": "하나의 구매를 세금 제외 사업비와 지급액 두 칸으로 옮긴다.",
+      "actual_difference_or_rewrite_reason": "포장 길이와 17m 실인수로 미지급 청구액을 정한다. D001과 같은 부분 인수 비율 산술이므로 향후 같은 사례를 더 늘리지 않는다. 현재 목적은 현금 지급 의무이고 D001의 중심은 이행 수량으로 구별한다.",
+      "requested_fields": [
+        "vendor_balances"
+      ],
+      "documents": 2,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D010",
+      "case_sha256": "7f838c8be823c9143fda2f6e1852bff230eb7a1003819627f8a2de0956ed974d",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D101",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "청구 접수와 실제 인수를 구별한 촬영 비품 보고서를 작성한다.",
+      "actual_difference_or_rewrite_reason": "미인수 상태에서도 실행 계약금은 현금 계정에 남아 잔액 -200000이 된다. 기존 미인수 원문 제외로 표현할 수 없는 지급 대조다.",
+      "requested_fields": [
+        "balance_total"
+      ],
+      "documents": 2,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D011",
+      "case_sha256": "484d7fd81f3a38b45bb8440cde011f63a9e8e255dfeb369b5a28c8af36cc2b10",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D277",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "한 주문에 나뉜 품목 별첨을 빠짐없이 같은 청구처에 연결한다.",
+      "actual_difference_or_rewrite_reason": "본체와 볼트의 서로 다른 인수 행을 대조해 본체 0과 볼트 2의 미인수량을 각각 남긴다. 조립비율 문구 자체를 수정해도 정답은 불변이므로 조립 가능 개수를 계산하는 계약이라고 설명하면 안 된다. 다음 D052와 같은 두 부속 이행 구조다.",
+      "requested_fields": [
+        "line_settlements"
+      ],
+      "documents": 2,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D012",
+      "case_sha256": "6cdba638020de2e206f344f0660340fddf7814fe55d8dfb010b734c0ce3a6abf",
+      "difficulty": "easy",
+      "status": "rewrite_required",
+      "severity": "high",
+      "closest_batch_1_id": "D066",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "포함 단가로 적힌 관찰 장비 소모품의 실제 결제액을 확인한다.",
+      "actual_difference_or_rewrite_reason": "D004와 동일하게 전량 인수 대금에서 실행 선지급을 차감한 양수 잔액을 요청한다. 송금 건수와 가격 포함 여부 및 출력 필드 축소는 업무 관계를 새로 만들지 않는다. 재집필 필요.",
+      "requested_fields": [
+        "balance_total"
+      ],
+      "documents": 3,
+      "rewrite_direction": "실인수 대금에서 실행 선금을 빼는 원고를 재사용하지 말고 현재 49개 및 7개 snapshot과 다른 원자료 선택/귀속 관계로 직접 재집필한다. 단순 품명, 지급 건수, 가격 포함 표시 또는 요청 필드 교체는 불충분하다."
+    },
+    {
+      "case_id": "D013",
+      "case_sha256": "cd81c058b2c7306081aa48924c0f5bca7e78b128ed79114250af903a588c6990",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D283",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "같은 주문의 모든 별첨을 모아 비용과 원본 수 및 청구처별 지급을 확정한다.",
+      "actual_difference_or_rewrite_reason": "두 공급처의 실행 지급 배열을 주문 참조로 귀속해 잔액을 구한다. 기존 별첨 업체 귀속과 달리 현금 지급을 별도로 연결한다. 배열 뒤집힘만 새로운 의미라고 주장하지 않는다. 다음 D064와 같은 완결 구조다.",
+      "requested_fields": [
+        "vendor_balances"
+      ],
+      "documents": 3,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D014",
+      "case_sha256": "f263679312ebc1b9a0d46884fe141646e4c073862db55d52820462742601e6f0",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D300",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "업체와 품목의 표기를 통일하면서 실제 구입 가격 및 세액을 함께 마감한다.",
+      "actual_difference_or_rewrite_reason": "같은 두 주문을 현물은 품목/단위에, 현금은 공급처에 모으는 서로 다른 합산 키가 요청 답에 함께 나타난다. 기존 가격 후보와 공급처 원가의 병렬 집계보다 현금 귀속이 추가된다.",
+      "requested_fields": [
+        "item_quantities",
+        "vendor_balances"
+      ],
+      "documents": 3,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D015",
+      "case_sha256": "6160a4f3ea087d8acd668b0fa3af17ffbc0f8ab5715ddcda64ef7c1dda280d9f",
+      "difficulty": "easy",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D284",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "발주된 수량과 실제 도착한 구매를 가격 장부에서 구분한다.",
+      "actual_difference_or_rewrite_reason": "입고가 없어도 실제 주문 행과 0재고 행을 남긴다. 기존은 미인수 문서를 구매 집계에서 제외했다. 추가 발주만 바꾸면 미이행 수량만 늘어난다.",
+      "requested_fields": [
+        "line_settlements",
+        "item_quantities"
+      ],
+      "documents": 2,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D016",
+      "case_sha256": "deea2def574c18c6f9108719a457246ad17378e116f6adcd30920ff256b0dc89",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D084",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "취소된 주문서를 제외해 실제 대관실 판매처별 지급액을 확인한다.",
+      "actual_difference_or_rewrite_reason": "실인수 뒤 한 포장을 반환해 수량과 대금 및 지급 잔액을 줄인다. 기존 출고 전 취소는 실제 인수 수량 차감이 아니었다.",
+      "requested_fields": [
+        "line_settlements",
+        "vendor_balances"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D017",
+      "case_sha256": "23c5f8e229fc2f77a0210a7c13ff8bd366f88972e22e20a827673fc5d7459622",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D284",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "발주된 수량과 실제 도착한 구매를 가격 장부에서 구분한다.",
+      "actual_difference_or_rewrite_reason": "마감 뒤 반품을 이번 순량에서 제외한다. 마감 당일로 반품일을 옮긴 유효 반사실에서 요청 재고와 행 금액이 변한다.",
+      "requested_fields": [
+        "item_quantities",
+        "line_settlements"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D018",
+      "case_sha256": "8168d6ec48266b699815041b702158513793d59ed593b8a6902faea03eb5a7b1",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D284",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "발주된 수량과 실제 도착한 구매를 가격 장부에서 구분한다.",
+      "actual_difference_or_rewrite_reason": "분할 인수 중 나중 입고만 마감 뒤여서 미이행량이 남는다. 미래 반품인 D017과 달리 실제 인수 누적의 시간 선택이다.",
+      "requested_fields": [
+        "line_settlements"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D019",
+      "case_sha256": "340988957ba505b082253f92b387bd25268960f3dd5c0f8a22d1bc4dc85e735b",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D101",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "청구 접수와 실제 인수를 구별한 촬영 비품 보고서를 작성한다.",
+      "actual_difference_or_rewrite_reason": "executed도 지급일이 마감 뒤이면 제외한다. 원문 인수 여부가 아니라 현금 실행 날짜가 업체 잔액을 결정한다.",
+      "requested_fields": [
+        "vendor_balances",
+        "payment_total"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D020",
+      "case_sha256": "086b6e3bd5312d5c2c5d130025f006f7fc605a9de35a71aac95f61dec415171a",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D101",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "청구 접수와 실제 인수를 구별한 촬영 비품 보고서를 작성한다.",
+      "actual_difference_or_rewrite_reason": "마감 전 planned 잔금은 실제 현금으로 차감하지 않는다. 실행 여부의 실제 변경은 인수대금을 유지하고 현금 계정만 바꾼다.",
+      "requested_fields": [
+        "vendor_balances",
+        "balance_total"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D021",
+      "case_sha256": "ba6920aa4a381bc11fa4d24cb41026b40fee6b1d54603dedac7e87e78a0c5107",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D291",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "현장과 장부의 중복 수령 확인을 같은 현물 구매에 연결한다.",
+      "actual_difference_or_rewrite_reason": "수령 이벤트의 같은 ID와 내용 사본을 한 번만 합친다. 기존 원문 중복 제거와 달리 부분 인수의 실제 수량이 집계된다.",
+      "requested_fields": [
+        "item_quantities",
+        "line_settlements"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D022",
+      "case_sha256": "f9e30aa358844b3fdda1ac4e441946f83c01b99c84bdedeba6e69183f9d0a6d2",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D286",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "재발행 고정핀 자료를 지급 계정에 한 번만 반영한다.",
+      "actual_difference_or_rewrite_reason": "은행 실행 지급 사본을 한 번만 차감한다. 거래 원가 원문 사본인 기존과 현금 식별 단위가 다르다.",
+      "requested_fields": [
+        "vendor_balances",
+        "payment_total"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D023",
+      "case_sha256": "be4cff08a270cda7aeb23419009eac870488afe8eb5bb9949b66d676a52cd42e",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D281",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "비슷한 품목이 반복된 제안 자료에서 실제로 발주하고 인수한 구매만 원가 장부에 등록한다.",
+      "actual_difference_or_rewrite_reason": "실제 주문이 전혀 없는 견적 A/B와 예정 지급을 빈 행 및 빈 공급처 계정으로 보고한다. 두 제안과 지급검토 및 정책 문서가 서로 다른 사실을 담는다. 한 quote를 order로 바꾸면 0인수 행과 계정이 생긴다.",
+      "requested_fields": [
+        "line_settlements",
+        "vendor_balances",
+        "payment_total"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D024",
+      "case_sha256": "c5deb0af513c08244f8413058d88b0ea181e34027ba08074ca026efa97d33101",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D284",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "발주된 수량과 실제 도착한 구매를 가격 장부에서 구분한다.",
+      "actual_difference_or_rewrite_reason": "실제 인수가 발주 수량을 넘은 경우 음수 미인수량을 유지한다. 이행량 초과를 원문 인수 여부 선택으로 대체할 수 없다.",
+      "requested_fields": [
+        "line_settlements",
+        "item_quantities"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D025",
+      "case_sha256": "1ef89d927a2088ed226f0e497f6bc1c47f266b23ccd71ed65874d72b36fd9e3e",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D101",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "청구 접수와 실제 인수를 구별한 촬영 비품 보고서를 작성한다.",
+      "actual_difference_or_rewrite_reason": "부분 인수 대금보다 실행 선지급이 커져 업체 잔액이 음수다. D010의 무인수와 달리 인수 청구가 존재한다. 상한 0으로 자르면 회수 계정을 잃는다.",
+      "requested_fields": [
+        "vendor_balances",
+        "balance_total"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D026",
+      "case_sha256": "e972304139517e677936c2a18406d9e64b7689bb57b2c1ae0396cb1e7698c739",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D084",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "취소된 주문서를 제외해 실제 대관실 판매처별 지급액을 확인한다.",
+      "actual_difference_or_rewrite_reason": "이미 인수한 물량을 모두 반환해 순량 0을 만들고 실행 계약금을 보존한다. 출고 전 취소 및 무인수와 달리 received/returned 이력과 원주문 행이 남는다.",
+      "requested_fields": [
+        "line_settlements",
+        "vendor_balances"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D027",
+      "case_sha256": "610b2f2df4a75093f7889b7cba7dddecd8720657cf155d6f24a3ec7727de50d4",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D201",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_154_203.json",
+      "closest_batch_1_goal": "각 첨부의 실제 단가를 보존하고 포함 가격을 공급가액으로 비교해 인수 이력을 정리한다.",
+      "actual_difference_or_rewrite_reason": "0원 PIN은 실제 인수 재고 4개와 미인수 2개로 유지된다. 금액을 1000으로 바꿔도 재고는 그대로이고 요청 행 total만 0에서 732가 된다. 무상 여부가 금액과 현물의 다른 처리를 요구하므로 장식 예외로 판정하지 않는다.",
+      "requested_fields": [
+        "item_quantities",
+        "line_settlements"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D028",
+      "case_sha256": "b6d33ee90c54f38443ff5dfef25a3728ac511545da32e8e37fc0104d3409bd5b",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D020",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_004_053.json",
+      "closest_batch_1_goal": "표기가 다른 동일 법인의 지출을 합쳐 텃밭 운영비 장부를 정리한다.",
+      "actual_difference_or_rewrite_reason": "법인 표기가 다른 실제 주문의 인수와 첫 주문 현금을 같은 공급처 계정에서 대조한다. 기존 업체명 통합에는 실행 지급 차감이 없었다.",
+      "requested_fields": [
+        "vendor_balances",
+        "balance_total"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D029",
+      "case_sha256": "68d1e604247e541518049f32e88b8f873beeb38b36a4b131ab11ac9970a75698",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D072",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "담당자마다 다르게 적은 웹캠 고정 부품을 통합해 재구매 기준을 만든다.",
+      "actual_difference_or_rewrite_reason": "전각/반각 품명을 같은 기초단위 재고 키로 묶는다. 기존 최저가 후보 정규화와 달리 인수 수량 13개가 답이다. D006은 이미 같은 이름인 가격별 행을 합치고 이 사례는 문자 표기의 키 충돌을 해소한다.",
+      "requested_fields": [
+        "item_quantities"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D030",
+      "case_sha256": "fb5ee4261b21f5ce40552bbde6208e3f97f82781f85f7a04fb2069eefbf3851f",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D284",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "발주된 수량과 실제 도착한 구매를 가격 장부에서 구분한다.",
+      "actual_difference_or_rewrite_reason": "미래 날짜의 실제 발주 행을 0인수 및 미이행 상태로 남긴다. 이번 인수 대상으로 골라 더하거나 자료 자체를 삭제하는 오류를 구별한다.",
+      "requested_fields": [
+        "line_settlements"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D031",
+      "case_sha256": "a0cc68ba902ef39f90f0935e2214ee233cf53b70db28f572ada9a93d4bd79cc4",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D084",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "취소된 주문서를 제외해 실제 대관실 판매처별 지급액을 확인한다.",
+      "actual_difference_or_rewrite_reason": "반품서가 먼저 왔어도 같은 날 실제 인수를 먼저 적용하는 사적 수불 약정이다. 인수 전날로 반품일을 옮기는 거절 사례와 정상 당일 처리를 구별한다.",
+      "requested_fields": [
+        "line_settlements",
+        "grand_total"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D032",
+      "case_sha256": "23e9c0e6f0310947980371cb2146f11f17aa8dcf65ddb0f1c1701cac37c7c6ae",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D280",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "같은 수량과 단가의 독립 구매를 중복 증빙으로 잘못 제거하지 않는다.",
+      "actual_difference_or_rewrite_reason": "날짜와 수량이 같은 실제 입고 두 사건을 서로 다른 ID로 보존한다. 기존 독립 원문 건수와 달리 같은 주문의 수량 누적이 변한다.",
+      "requested_fields": [
+        "item_quantities",
+        "line_settlements"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D033",
+      "case_sha256": "da269f1103c68e5aaaf9d5064ee8d68f1f8372cb321ad5bb973b7aefa902ba0d",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D060",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "금액이 같은 별도 작업대 구매를 빠뜨리지 않고 장비비를 마감한다.",
+      "actual_difference_or_rewrite_reason": "같은 날짜와 금액의 두 실행 이체를 서로 다른 지급 ID로 각각 차감한다. 기존 독립 구매 원문의 합산과 현금 ID가 다르다. 다음 D062와 동일한 중심 판단이다.",
+      "requested_fields": [
+        "payment_total",
+        "vendor_balances"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D034",
+      "case_sha256": "08fcb71c80dc19586843c7d376a61446399917f33d89e292f81629b7ded7e676",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D101",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_054_103.json",
+      "closest_batch_1_goal": "청구 접수와 실제 인수를 구별한 촬영 비품 보고서를 작성한다.",
+      "actual_difference_or_rewrite_reason": "현물 인수는 다음 기간이고 실행 계약금은 이번 기간이라 마감 대금 0과 현금 80000을 함께 보고한다. D010과 음수 결론이 같지만 제공된 실제 미래 입고의 시간 제외를 판단한다.",
+      "requested_fields": [
+        "vendor_balances",
+        "payment_total",
+        "grand_total"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D035",
+      "case_sha256": "092d8919f7ec14de777e267c76e646a8c6358a4df022189574b9b33493264af5",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D283",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "같은 주문의 모든 별첨을 모아 비용과 원본 수 및 청구처별 지급을 확정한다.",
+      "actual_difference_or_rewrite_reason": "같은 품목과 행번호를 가진 두 주문의 반품이 두 번째에만 귀속된다. 전체 재고를 합치기 전에 원주문별 이행과 가격 비율이 따로 계산된다.",
+      "requested_fields": [
+        "line_settlements",
+        "item_quantities"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D036",
+      "case_sha256": "0039041dda86487bec0bd5d93e6d76f640e1d11f160998a9d0b169348016f3b9",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D147",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_104_153.json",
+      "closest_batch_1_goal": "업체 이름 정리와 실제 구매 범위 선택을 독립적으로 적용한다.",
+      "actual_difference_or_rewrite_reason": "기존 계약 현물과 새 미인수 계약 선금이 같은 업체 계정에서 대조된다. 주문별 0인수 행 유지와 공급처 현금 합산의 관계를 요청 답에서 확인한다.",
+      "requested_fields": [
+        "vendor_balances",
+        "line_settlements"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D037",
+      "case_sha256": "f5ecf11710111484b9c8cd1e727f5db1be4776fe2e85172583fd199ebf86eee5",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D276",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "품목표의 표지 참조에서 부가세 포함 조건을 찾아 실제 소모품 원가와 세액을 정한다.",
+      "actual_difference_or_rewrite_reason": "동일 주문 두 행의 서로 다른 VAT 표시를 부분 인수 비율 이후 적용한다. 기존 표지 공통 가격조건 상속과 다르다. 다음 D060의 명칭/숫자 교체 구조와 중복한다.",
+      "requested_fields": [
+        "line_settlements",
+        "grand_total"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D038",
+      "case_sha256": "8fd9922020b5280b3d270aa1d0c60f84d47586ea799ac4f8f2262811567b4c1c",
+      "difficulty": "medium",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D011",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_004_053.json",
+      "closest_batch_1_goal": "안전용품 두 판매처에 지급할 금액과 전체 집행액을 확인한다.",
+      "actual_difference_or_rewrite_reason": "개별 공급처의 회수 -11000과 지급 11000은 전체 0으로 상쇄되지만 각 부호를 보존한다. 전체 잔액만 쓰면 업무를 놓치므로 vendor_balances를 함께 요청한다.",
+      "requested_fields": [
+        "vendor_balances",
+        "balance_total"
+      ],
+      "documents": 4,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D039",
+      "case_sha256": "6e377948a5431fe1be5de992371daddeecb69e29c10de3d8fbfad0b006e28f99",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D290",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "서로 다른 법인 표기와 세금 조건을 통일해 판매대 업체 계정을 닫는다.",
+      "actual_difference_or_rewrite_reason": "반품한 첫 주문의 부분 인수 정산과 미래 부속 입고 제외 및 동일 업체 두 계약 선금을 결합한다. 세 관계가 같은 공급처 잔액에 작동한다.",
+      "requested_fields": [
+        "line_settlements",
+        "vendor_balances",
+        "balance_total"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D040",
+      "case_sha256": "8be072e739ebeb0227b388079bf933c245d0802dcce94033183c910e9cf9f359",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D281",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "비슷한 품목이 반복된 제안 자료에서 실제로 발주하고 인수한 구매만 원가 장부에 등록한다.",
+      "actual_difference_or_rewrite_reason": "미인수라도 quote는 제거하고 미래 order는 0행으로 남긴다. 미래 실행과 견적 planned 지급은 서로 다른 근거로 제외한다. 마감 확장 및 quote→order 반사실로 각각 확인한다.",
+      "requested_fields": [
+        "line_settlements",
+        "payment_total",
+        "vendor_balances"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D041",
+      "case_sha256": "04322221781f1e7aeea5f5dc00dadabc8de6913c7ecac89cd059da183f198c97",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D128",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_104_153.json",
+      "closest_batch_1_goal": "공백 차이는 통합하되 규격 문자가 다른 실제 품목은 분리한다.",
+      "actual_difference_or_rewrite_reason": "같은 행번호와 품명이어도 주문별 반품 귀속 및 m/롤 단위별 재고 분리를 동시에 지킨다. 기초단위 분리와 현금 공급처 키는 서로 다르다.",
+      "requested_fields": [
+        "line_settlements",
+        "item_quantities",
+        "vendor_balances"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D042",
+      "case_sha256": "e1573eed70d4bfa118c56bc39f3bc0c30b2e3cffd666d9124ecec80d5e9cb9c4",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D291",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "현장과 장부의 중복 수령 확인을 같은 현물 구매에 연결한다.",
+      "actual_difference_or_rewrite_reason": "배열상 반품 우선과 같은 날 인수 우선 처리 및 동일 인수 사본 제거가 결합된다. 당일 반환은 정상이며 전날 반환은 거절하고 사본 제거는 불변이다.",
+      "requested_fields": [
+        "line_settlements",
+        "vendor_balances"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D043",
+      "case_sha256": "494c2f37a50f8b6a4c528bf05db5926eb65ab0cb0a719c59199f5daae1b40a65",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D285",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "원 미만 처리를 각 품목 행에서 적용해 병입 자재 세액을 계산한다.",
+      "actual_difference_or_rewrite_reason": "낱개 반품으로 생긴 분수 포장 비율을 먼저 버린 뒤 포함/별도 행별 산술을 적용한다. 예정 현금은 수량 정산과 독립으로 제외한다. 각 관계의 독립 변경을 추가 재현했다.",
+      "requested_fields": [
+        "line_settlements",
+        "grand_total",
+        "balance_total"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D044",
+      "case_sha256": "1bce552832591b7596226e94c958670173bad387a64094cd47b909db6e5f5ad8",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D294",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "재발급 원문을 한 번만 계산하면서 위생품별 세금 조건을 반영한다.",
+      "actual_difference_or_rewrite_reason": "분말의 g/봉 재고는 나누고 같은 법인 두 주문 현금은 합치며 계약금 사본은 제거한다. 재고 키와 업체 키 및 지급 ID를 서로 다른 수준에서 다룬다.",
+      "requested_fields": [
+        "item_quantities",
+        "vendor_balances",
+        "payment_total"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D045",
+      "case_sha256": "edbbc19b393533d24f16ce972ceb4342b7ac5265b03b12220b2d6f15be2a2a1f",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D287",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "급식 시작 전에 받은 물품만 각 가격 조건으로 결산한다.",
+      "actual_difference_or_rewrite_reason": "손잡이는 과납 후 반환해도 초과가 남고 볼트는 미래 반환을 제외한다. 실제 과납과 다른 반환 시점이 각 행의 미이행 부호에 작동한다.",
+      "requested_fields": [
+        "line_settlements",
+        "vendor_balances"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D046",
+      "case_sha256": "a398cbf11bdcd1619c6be931deea45071f79961b98db4b99da988183d9fd3a52",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D275",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "같은 외형의 영수증을 내용만으로 합치거나 전부 새 구매로 세지 않고 원문 번호로 지급 장부를 확정한다.",
+      "actual_difference_or_rewrite_reason": "서로 다른 입고 ID는 합치고 같은 반환 ID 사본은 한 번만 빼며 미래 입고와 planned 현금을 제외한다. 동일 외형을 무조건 합치거나 제거하는 방식이 통하지 않는다.",
+      "requested_fields": [
+        "line_settlements",
+        "payment_total",
+        "balance_total"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D047",
+      "case_sha256": "4d65e64501d11a9d50271fdd006b2baa22e2351aac1dac2ff5070ca083416cd5",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D201",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_154_203.json",
+      "closest_batch_1_goal": "각 첨부의 실제 단가를 보존하고 포함 가격을 공급가액으로 비교해 인수 이력을 정리한다.",
+      "actual_difference_or_rewrite_reason": "제안 물량 제거와 미인수 실제 계약금 유지 및 실제 무상 부속 재고 유지가 현물/현금 분리에서 함께 작동한다. 각각의 독립 반사실을 확인했다.",
+      "requested_fields": [
+        "item_quantities",
+        "vendor_balances",
+        "line_settlements"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D048",
+      "case_sha256": "861841c0ac557fa0b19aa621cf77e8759a265244787b801df0f1b0f1e4e84274",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D011",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_004_053.json",
+      "closest_batch_1_goal": "안전용품 두 판매처에 지급할 금액과 전체 집행액을 확인한다.",
+      "actual_difference_or_rewrite_reason": "반품으로 첫 업체 회수 잔액이 생기고 다른 업체는 planned 지급이어서 실제 지급 의무가 남는다. 두 개별 계정 부호와 전체 잔액을 함께 보고한다. 첫 문장은 지지대 반품과 완충재 인수로 명확히 다듬으면 좋다.",
+      "requested_fields": [
+        "vendor_balances",
+        "balance_total",
+        "grand_total"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D049",
+      "case_sha256": "45eb0d98e0f17b8b0cc2ae90ad77a5590b09fbc088994954a8e086dedffe1e61",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D289",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "재발행 자료와 미도착 주문을 현재 취득 계정에서 구분한다.",
+      "actual_difference_or_rewrite_reason": "전량반품된 기존 주문과 미래 인수인 새 주문의 서로 다른 0재고 원인 및 두 실행 계약금을 함께 남긴다. 마감 확장과 기존 반환 축소 및 계약금 실행 취소 반사실을 확인했다.",
+      "requested_fields": [
+        "line_settlements",
+        "item_quantities",
+        "vendor_balances",
+        "balance_total"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    },
+    {
+      "case_id": "D050",
+      "case_sha256": "f6cda11e9e0f26225c32a23319e1c1725743c0f212ead5eb8301ac52da9e723a",
+      "difficulty": "hard",
+      "status": "pass_with_scope_limits",
+      "severity": "none",
+      "closest_batch_1_id": "D275",
+      "closest_batch_1_source": "authored/batch_1/D_extract/cases_254_300.json",
+      "closest_batch_1_goal": "같은 외형의 영수증을 내용만으로 합치거나 전부 새 구매로 세지 않고 원문 번호로 지급 장부를 확정한다.",
+      "actual_difference_or_rewrite_reason": "영문 O/숫자 0 주문과 행 키는 원문 그대로 유지하고 반품은 한 주문에만 귀속한다. 비슷한 독립 지급 ID도 각각 차감하며 행별 포함/별도 비율 정산을 종합한다.",
+      "requested_fields": [
+        "line_settlements",
+        "item_quantities",
+        "vendor_balances",
+        "grand_total",
+        "payment_total",
+        "balance_total"
+      ],
+      "documents": 9,
+      "rewrite_direction": null
+    }
+  ],
+  "snapshot_file_sha256": "255e89214b428a4ec96a9c5f9670e2eb343907b02c45129c5f145a782ab62b05",
+  "snapshot_comparisons": [
+    {
+      "snapshot_case_id": "D052",
+      "snapshot_case_sha256": "d68ed6d761351d3b15a92ac8377ad816fb1b0869451d868d52a41f7b8d09b626",
+      "closest_current_id": "D011",
+      "severity": "high",
+      "status": "rewrite_snapshot_required",
+      "reason": "한 주문의 서로 다른 본체/부속 2행을 각각 인수에 연결한 이행 표다. 부분 인수량과 VAT 표시 및 item_quantities 추가는 완결 업무를 새로 만들지 않는다.",
+      "source_edit_performed": false
+    },
+    {
+      "snapshot_case_id": "D053",
+      "snapshot_case_sha256": "cafe63ebcf353a803d2c06937cadb8af461a480f025a8cbb57e176332cbdb651",
+      "closest_current_id": "D012",
+      "severity": "high",
+      "status": "rewrite_snapshot_required",
+      "reason": "실인수 비율로 구한 한 계약 대금에서 실행 선금을 차감한다. 전량/부분 인수 비율은 숫자 차이이며 D004도 같은 현금 대조다.",
+      "source_edit_performed": false
+    },
+    {
+      "snapshot_case_id": "D056",
+      "snapshot_case_sha256": "766afaef2f1f9e22f0111b97b9264468b0a0a310af832f97cba7eefa8919d3f2",
+      "closest_current_id": "D001",
+      "severity": "high",
+      "status": "rewrite_snapshot_required",
+      "reason": "한 계약 행의 실제 인수 수량을 합쳐 발주량과 대조한다. 입고 이벤트를 1건에서 2건으로 늘렸을 뿐 선택이나 식별의 다른 판단이 없고 balance_total 추가도 새 업무가 아니다.",
+      "source_edit_performed": false
+    },
+    {
+      "snapshot_case_id": "D060",
+      "snapshot_case_sha256": "8445102a7a3753313ae58942e69448501a7ba39b4243b0ea7e26a65939dea179",
+      "closest_current_id": "D037",
+      "severity": "high",
+      "status": "rewrite_snapshot_required",
+      "reason": "한 실제 주문의 두 서로 다른 품목 행에 포함/별도 약정을 적용해 부분 인수 행 정산과 전체액을 보고한다. D037과 동일 요청 필드 및 관계다.",
+      "source_edit_performed": false
+    },
+    {
+      "snapshot_case_id": "D062",
+      "snapshot_case_sha256": "a79b3ea9bb504ca64385485e8f6264d9d3ef4be2c21df84720baa68d5d267495",
+      "closest_current_id": "D033",
+      "severity": "high",
+      "status": "rewrite_snapshot_required",
+      "reason": "같은 금액의 서로 다른 실행 지급 ID 두 건을 보존해 실제 지급 합계와 인수대금 차감 잔액을 구한다. 날짜 차이와 balance_total/vendor_balances 교체는 같은 완결 관계를 반복한다.",
+      "source_edit_performed": false
+    },
+    {
+      "snapshot_case_id": "D063",
+      "snapshot_case_sha256": "ed9ed6ad920d95db4445c649b2d184e57cba787cdc16b5039b9236eb3d5067f5",
+      "closest_current_id": "D006",
+      "severity": "high",
+      "status": "rewrite_snapshot_required",
+      "reason": "같은 품목의 다른 가격 두 행 인수량을 하나의 재고로 합친다. 공백 표기와 VAT 표시 및 line_settlements 추가가 이 중심 합산 판단을 바꾸지 않는다.",
+      "source_edit_performed": false
+    },
+    {
+      "snapshot_case_id": "D064",
+      "snapshot_case_sha256": "06f26f79dac7752b25add8953181d6fcdc453ec37e9019610e15f3baf7ed45d7",
+      "closest_current_id": "D013",
+      "severity": "high",
+      "status": "rewrite_snapshot_required",
+      "reason": "두 업체의 주문별 인수에 실행 선금을 귀속해 업체별 잔액을 구한다. 한 행 포함 가격과 grand_total 추가는 원주문 현금 귀속 업무를 새로 만들지 않는다.",
+      "source_edit_performed": false
+    }
+  ],
+  "model_api_calls": 0
+}

@@ -1,0 +1,361 @@
+{
+  "source_sha256": "819ae6c3208a51228d8d77c232de8e6e67e65c132dbf5435c23386ae3d999d68",
+  "before_sha256": "4953af89dff42deafb1bf82dfadb12e8dd6fb9db1c7958e61989b36875e40ea5",
+  "entire_case_unchanged": [
+    "D001",
+    "D002",
+    "D003",
+    "D004",
+    "D005",
+    "D006",
+    "D007",
+    "D008",
+    "D009",
+    "D010",
+    "D011",
+    "D013",
+    "D014",
+    "D015",
+    "D016",
+    "D017",
+    "D018",
+    "D019",
+    "D020",
+    "D021",
+    "D022",
+    "D023",
+    "D024",
+    "D025",
+    "D026",
+    "D027",
+    "D028",
+    "D029",
+    "D030",
+    "D031",
+    "D032",
+    "D033",
+    "D034",
+    "D035",
+    "D036",
+    "D037",
+    "D038",
+    "D039",
+    "D040",
+    "D041",
+    "D042",
+    "D043",
+    "D044",
+    "D045",
+    "D046",
+    "D047",
+    "D049",
+    "D050"
+  ],
+  "entire_case_unchanged_count": 48,
+  "D048_only_instruction_changed": true,
+  "other_49_facts_documents_answer_fields_unchanged": true,
+  "manual_arithmetic": {
+    "south": "8800*7//4=15400; 15400*10//11=14000; 15400-14000=1400; 15400-3000=12400",
+    "north": "6600*5//3=11000; 11000*10//11=10000; 11000-10000=1000; 11000-7000=4000",
+    "inventory": "7+5=12"
+  },
+  "manual_answer": {
+    "item_quantities": [
+      {
+        "item": "선반패드40mm",
+        "base_unit": "개",
+        "net_units": 12
+      }
+    ],
+    "vendor_balances": [
+      {
+        "vendor": "가상남부완충",
+        "supply": 14000,
+        "vat": 1400,
+        "total": 15400,
+        "paid": 3000,
+        "balance": 12400
+      },
+      {
+        "vendor": "가상북부자재",
+        "supply": 10000,
+        "vat": 1000,
+        "total": 11000,
+        "paid": 7000,
+        "balance": 4000
+      }
+    ]
+  },
+  "causal_counterfactuals": [
+    {
+      "label": "공급처가 하나로 바뀌는 실제 거래처 변경",
+      "path": [
+        "orders",
+        1,
+        "vendor"
+      ],
+      "value": "가상남부완충",
+      "before": {
+        "item_quantities": [
+          {
+            "item": "선반패드40mm",
+            "base_unit": "개",
+            "net_units": 12
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상남부완충",
+            "supply": 14000,
+            "vat": 1400,
+            "total": 15400,
+            "paid": 3000,
+            "balance": 12400
+          },
+          {
+            "vendor": "가상북부자재",
+            "supply": 10000,
+            "vat": 1000,
+            "total": 11000,
+            "paid": 7000,
+            "balance": 4000
+          }
+        ]
+      },
+      "after": {
+        "item_quantities": [
+          {
+            "item": "선반패드40mm",
+            "base_unit": "개",
+            "net_units": 12
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상남부완충",
+            "supply": 24000,
+            "vat": 2400,
+            "total": 26400,
+            "paid": 10000,
+            "balance": 16400
+          }
+        ]
+      },
+      "invariant": "item_quantities",
+      "changed": "vendor_balances"
+    },
+    {
+      "label": "품목이 별도 규격으로 바뀌는 실제 납품 변경",
+      "path": [
+        "orders",
+        1,
+        "lines",
+        0,
+        "item"
+      ],
+      "value": "선반패드50mm",
+      "before": {
+        "item_quantities": [
+          {
+            "item": "선반패드40mm",
+            "base_unit": "개",
+            "net_units": 12
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상남부완충",
+            "supply": 14000,
+            "vat": 1400,
+            "total": 15400,
+            "paid": 3000,
+            "balance": 12400
+          },
+          {
+            "vendor": "가상북부자재",
+            "supply": 10000,
+            "vat": 1000,
+            "total": 11000,
+            "paid": 7000,
+            "balance": 4000
+          }
+        ]
+      },
+      "after": {
+        "item_quantities": [
+          {
+            "item": "선반패드40mm",
+            "base_unit": "개",
+            "net_units": 7
+          },
+          {
+            "item": "선반패드50mm",
+            "base_unit": "개",
+            "net_units": 5
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상남부완충",
+            "supply": 14000,
+            "vat": 1400,
+            "total": 15400,
+            "paid": 3000,
+            "balance": 12400
+          },
+          {
+            "vendor": "가상북부자재",
+            "supply": 10000,
+            "vat": 1000,
+            "total": 11000,
+            "paid": 7000,
+            "balance": 4000
+          }
+        ]
+      },
+      "invariant": "vendor_balances",
+      "changed": "item_quantities"
+    },
+    {
+      "label": "실제 두 번째 입고가 한 개 늘어남",
+      "path": [
+        "events",
+        1,
+        "units"
+      ],
+      "value": 6,
+      "before": {
+        "item_quantities": [
+          {
+            "item": "선반패드40mm",
+            "base_unit": "개",
+            "net_units": 12
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상남부완충",
+            "supply": 14000,
+            "vat": 1400,
+            "total": 15400,
+            "paid": 3000,
+            "balance": 12400
+          },
+          {
+            "vendor": "가상북부자재",
+            "supply": 10000,
+            "vat": 1000,
+            "total": 11000,
+            "paid": 7000,
+            "balance": 4000
+          }
+        ]
+      },
+      "after": {
+        "item_quantities": [
+          {
+            "item": "선반패드40mm",
+            "base_unit": "개",
+            "net_units": 13
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상남부완충",
+            "supply": 14000,
+            "vat": 1400,
+            "total": 15400,
+            "paid": 3000,
+            "balance": 12400
+          },
+          {
+            "vendor": "가상북부자재",
+            "supply": 12000,
+            "vat": 1200,
+            "total": 13200,
+            "paid": 7000,
+            "balance": 6200
+          }
+        ]
+      },
+      "invariant": null,
+      "changed": null
+    },
+    {
+      "label": "두 번째 실행 지급액이 실제로 늘어남",
+      "path": [
+        "payments",
+        1,
+        "amount"
+      ],
+      "value": 8000,
+      "before": {
+        "item_quantities": [
+          {
+            "item": "선반패드40mm",
+            "base_unit": "개",
+            "net_units": 12
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상남부완충",
+            "supply": 14000,
+            "vat": 1400,
+            "total": 15400,
+            "paid": 3000,
+            "balance": 12400
+          },
+          {
+            "vendor": "가상북부자재",
+            "supply": 10000,
+            "vat": 1000,
+            "total": 11000,
+            "paid": 7000,
+            "balance": 4000
+          }
+        ]
+      },
+      "after": {
+        "item_quantities": [
+          {
+            "item": "선반패드40mm",
+            "base_unit": "개",
+            "net_units": 12
+          }
+        ],
+        "vendor_balances": [
+          {
+            "vendor": "가상남부완충",
+            "supply": 14000,
+            "vat": 1400,
+            "total": 15400,
+            "paid": 3000,
+            "balance": 12400
+          },
+          {
+            "vendor": "가상북부자재",
+            "supply": 10000,
+            "vat": 1000,
+            "total": 11000,
+            "paid": 8000,
+            "balance": 3000
+          }
+        ]
+      },
+      "invariant": "item_quantities",
+      "changed": "vendor_balances"
+    }
+  ],
+  "legacy_exact_duplicates": 0,
+  "model_api_calls": 0,
+  "D012_case_sha256": "67d82e9d053fd3f1fd2f6756cacd9fc7081cdc17a9ee71c15ca20ceadc521c0f",
+  "visual_review": {
+    "pdf_pages": [
+      "D012_order_page_1.png",
+      "D012_order_page_2.png"
+    ],
+    "passed": true,
+    "observations": "Both source vendors, same item, separate pack sizes and VAT flags are legible. No clipped text. Second page carries remaining second-order facts."
+  }
+}
