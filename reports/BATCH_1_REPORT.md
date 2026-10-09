@@ -78,7 +78,7 @@ oracle은 실제 입력 문서를 추출 맵의 위치로 읽고 엔진을 적�
 
 ## 공식 예시와 미검증 규칙
 
-현재 규칙 출처 73개 중 verified: true는 30개이며 verified: false는 43개입니다. 공식 법령 확인과 독립 공식 수치 예시 회귀 검증을 구분합니다.
+현재 규칙 출처 75개 중 verified: true는 30개이며 verified: false는 45개입니다. 공식 법령 확인과 독립 공식 수치 예시 회귀 검증을 구분합니다.
 
 원문 출처: [sources.yaml](../rules/sources.yaml)
 
@@ -108,8 +108,9 @@ oracle은 실제 입력 문서를 추출 맵의 위치로 읽고 엔진을 적�
 - `COMMON_FLOOR_WON`: 원 미만 절사 유틸. 개별 엔진은 법규에 따라 별도 호출
 - `COMMON_TEXT_NORMALIZATION`: 정답 문자열 NFKC와 공백 제거 및 casefold 비교
 - `COMMON_TRUNCATE_TEN`: 양수와 음수 금액의 10원 미만을 0 방향으로 절사
-- `C_DOCUMENT_LIFECYCLE_SELECTION`: 최종 확인된 원본 효력 기록으로 취소 원본을 제외하고 유효 대체 원본과 실제 공급 및 지급을 대조하는 합성 인계 규약
+- `C_DOCUMENT_LIFECYCLE_SELECTION`: 최종 확인된 원본 효력과 대체 참조를 대조하여 유효 원본만 기존 공급 및 지급 증빙 계산에 연결
 - `C_DOCUMENT_RECONCILIATION`: 확정 공급과 같은 날 실제 지급 및 개별 발급 증빙을 연결해 부분 매출 발급액과 전체 적격 매입 증빙을 복원
+- `C_VAT_BANK_RECONCILIATION`: 서로 다른 납세자의 독립 신고 계산과 실제 납부 또는 환급 은행 실행을 등록번호별로 대조
 - `D.aggregate`: 정규화 업체별 합산, 품목별 공급가액 기준 개당 최저 단가 비교, 동률은 업체명 오름차순
 - `D.cart_procurement_comparison`: 품목별 한 견적을 선택하는 전체 장바구니 조합에서 공급사 ID별 상품 합계와 무료배송 기준 및 일회 배송비를 계산하여 최종 구매비를 비교
 - `D.deduplicate`: 동일 문서 번호 자료는 내용이 같을 때 한 번만 합산, 내용이 다르면 오류
@@ -118,6 +119,7 @@ oracle은 실제 입력 문서를 추출 맵의 위치로 읽고 엔진을 적�
 - `D.procurement_comparison`: 필요한 낱개 수를 위한 포장 구매와 최소 주문 및 상품과 배송비의 합계를 비교하고 견적 효력과 재고 및 달력 납기 조건을 대조
 - `D.vat_split`: 부가세 포함 총액의 공급가액은 total*10//11, 세액은 총액과 공급가액의 차이
 - `D.vendor_normalize`: NFKC와 공백 제거 및 법인 접두어 제거로 가상 업체명을 통합
+- `D_INVENTORY_SNAPSHOTS`: 날짜별 실제 재고와 지정 창고 주문 예약 및 가용 수량과 부족 수량을 대조
 - `VAT_ACTIVITY_EVIDENCE`: 개별 집필 활동 기록의 실제 참여자와 장소 및 증빙번호를 연결해 엔진용 매입 사실을 복원
 - `VAT_ASSESSMENT_VALIDITY`: 예정고지액의 최소 50만원과 천원 미만 절사 및 예정신고와 고지 결정의 중복을 검사
 - `VAT_CREDIT_ANNUAL_LIMIT`: 2026년 신용카드 등 발행세액공제 연간 한도 1000만원에서 이미 공제한 금액을 차감

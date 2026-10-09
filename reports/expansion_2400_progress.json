@@ -16,7 +16,9 @@
     "Optional whole-month payroll and bank reconciliation contract",
     "Optional supply and partial issued-document reconciliation contract",
     "Optional cross-item vendor cart and shared freight contract",
-    "Optional already-confirmed document original lifecycle selection contract"
+    "Optional already-confirmed document original lifecycle selection contract",
+    "vat_bank_reconciliation_contract",
+    "inventory_snapshots_contract"
   ],
   "current_frontier": [
     {
@@ -31,8 +33,8 @@
       "downstream_unlock": "Independent handoff verification and semantic review; then the next ready 50-case domain interval",
       "outcome": {
         "accepted_cases": 50,
-        "source_sha256": "b0c28c7a111fc585edfe15a09d464db0938a2032ddb7719a707ed59a58961834",
-        "physical_validation_passed": 50
+        "physical_validation_passed": 50,
+        "source_sha256": "b0c28c7a111fc585edfe15a09d464db0938a2032ddb7719a707ed59a58961834"
       },
       "owner": "root",
       "planned_cases": 50,
@@ -59,9 +61,9 @@
       "downstream_unlock": "Independent handoff verification and semantic review; then the next ready 50-case domain interval",
       "outcome": {
         "accepted_cases": 50,
-        "source_sha256": "3df0c5bdc4f05744c4176c89b7cf7d380efd423812aa0f198359eb048b20b73b",
         "physical_validation_passed": 50,
-        "premise_corrected_cases": 7
+        "premise_corrected_cases": 7,
+        "source_sha256": "3df0c5bdc4f05744c4176c89b7cf7d380efd423812aa0f198359eb048b20b73b"
       },
       "owner": "root",
       "planned_cases": 50,
@@ -87,7 +89,15 @@
       "domain": "C_vat",
       "downstream_unlock": "Independent handoff verification and semantic review; then the next ready 50-case domain interval",
       "outcome": {
+        "accepted_cases": 0,
+        "cross_chunk_final_relationships_frozen": "C051087 except already-closed finalC055/C061 corrections",
         "editorial_keep_candidates": 38,
+        "held_ids": [
+          "C011",
+          "C015"
+        ],
+        "new_optional_contract_dependency": "vat_bank_reconciliation_v1",
+        "pending_final_ten_rewrites": 10,
         "rewrite_ids": [
           "C001",
           "C003",
@@ -101,11 +111,9 @@
           "C033",
           "C034",
           "C043"
-        ],
-        "accepted_cases": 0,
-        "cross_chunk_final_relationships_frozen": "C051087 except already-closed finalC055/C061 corrections"
+        ]
       },
-      "owner": "rewrite_batch2_vat_final_twelve",
+      "owner": "root",
       "planned_cases": 50,
       "required_handoff_evidence": [
         "Atomic complete literal manuscript and SHA256",
@@ -115,7 +123,7 @@
         "Nearest prior-case relationship review",
         "Explicit write-lock return"
       ],
-      "state": "twelve_individual_rewrites_and_frozen_cross_chunk_collision_resolution",
+      "state": "root_replace_two_after_bounded_partial_handoff",
       "write_lock": "authored/batch_2/C_vat/cases_001_050.json"
     },
     {
@@ -132,8 +140,8 @@
       "note": "All 50 initial drafts held outside acceptance; the author found repeated complete decision structures against Batch1 and is individually rewriting them.",
       "outcome": {
         "accepted_cases": 50,
-        "source_sha256": "819ae6c3208a51228d8d77c232de8e6e67e65c132dbf5435c23386ae3d999d68",
-        "physical_validation_passed": 50
+        "physical_validation_passed": 50,
+        "source_sha256": "819ae6c3208a51228d8d77c232de8e6e67e65c132dbf5435c23386ae3d999d68"
       },
       "owner": "root",
       "planned_cases": 50,
@@ -150,6 +158,7 @@
     },
     {
       "case_file": "authored/batch_2/D_extract/cases_051_100.json",
+      "contract": "44 extract_procurement_v1 + six extract_cart_procurement_v1",
       "dependency": "Integrated procurement contract and frozen prior manuscripts",
       "difficulty_counts": {
         "easy": 15,
@@ -160,8 +169,8 @@
       "downstream_unlock": "Independent handoff verification and semantic review; then the next ready 50-case domain interval",
       "outcome": {
         "accepted_cases": 50,
-        "source_sha256": "90b8c07e858746f327544205e5fb97045ee736b5817e10a80043178c85991cf3",
-        "physical_validation_passed": 50
+        "physical_validation_passed": 50,
+        "source_sha256": "90b8c07e858746f327544205e5fb97045ee736b5817e10a80043178c85991cf3"
       },
       "owner": "root",
       "planned_cases": 50,
@@ -174,222 +183,292 @@
         "Explicit write-lock return"
       ],
       "state": "accepted_manuscript_chunk",
-      "write_lock": null,
-      "contract": "44 extract_procurement_v1 + six extract_cart_procurement_v1"
+      "write_lock": null
     },
     {
-      "node": "cart_procurement_contract",
-      "owner": "root",
-      "write_lock": null,
-      "state": "integrated_and_verified",
       "dependency": "Frozen single-item procurement arithmetic",
       "downstream_unlock": "Root integration then meaningful cross-item direct authorship/replacements",
+      "node": "cart_procurement_contract",
+      "outcome": {
+        "all_tests_passed": 908,
+        "legacy_D300_unchanged": true,
+        "new_module_tests_passed": 159,
+        "root_three_format_source_and_freight_cell_test_passed": true
+      },
+      "owner": "root",
       "required_handoff_evidence": [
         "Exact bounded contract and manual global-cart proof",
         "D tests and Ruff",
         "Legacy D300 gold/trace unchanged",
         "Explicit lock return"
       ],
-      "outcome": {
-        "new_module_tests_passed": 159,
-        "root_three_format_source_and_freight_cell_test_passed": true,
-        "all_tests_passed": 908,
-        "legacy_D300_unchanged": true
-      }
+      "state": "integrated_and_verified",
+      "write_lock": null
     },
     {
       "case_file": "authored/batch_2/A_yearend/cases_051_100.json",
-      "domain": "A_yearend",
-      "owner": "root",
-      "write_lock": null,
-      "planned_cases": 50,
+      "dependency": "Frozen A1 and rewritten A2 first50 plus validated source contracts",
       "difficulty_counts": {
         "easy": 15,
-        "medium": 22,
-        "hard": 13
+        "hard": 13,
+        "medium": 22
       },
-      "dependency": "Frozen A1 and rewritten A2 first50 plus validated source contracts",
+      "domain": "A_yearend",
       "downstream_unlock": "Independent technical and semantic review then next ready interval",
-      "state": "accepted_manuscript_chunk",
       "outcome": {
+        "A077_nontax_premise_corrected": true,
         "accepted_cases": 50,
-        "source_sha256": "c10a455de000694c1f534f4ea1df687f3c2a2620b32d502097d08c208bb31eae",
         "physical_validation_passed": 50,
         "rewritten_cases": 5,
-        "title_fixed_cases": 2,
-        "A077_nontax_premise_corrected": true
+        "source_sha256": "c10a455de000694c1f534f4ea1df687f3c2a2620b32d502097d08c208bb31eae",
+        "title_fixed_cases": 2
       },
+      "owner": "root",
+      "planned_cases": 50,
       "required_handoff_evidence": [
         "50 complete literal case objects and source hash",
         "Actual source render and full physical validation",
         "Per-case causal counterfactual and nearest relationship comparison",
         "Explicit lock return"
-      ]
+      ],
+      "state": "accepted_manuscript_chunk",
+      "write_lock": null
     },
     {
       "case_file": "authored/batch_2/D_extract/cases_101_150.json",
-      "domain": "D_extract",
-      "owner": "root",
-      "write_lock": null,
-      "planned_cases": 50,
+      "dependency": "Frozen first100 and validated optional source contracts",
       "difficulty_counts": {
         "easy": 15,
-        "medium": 23,
-        "hard": 12
+        "hard": 12,
+        "medium": 23
       },
-      "dependency": "Frozen first100 and validated optional source contracts",
+      "domain": "D_extract",
       "downstream_unlock": "Independent whole-chunk physical and semantic verification",
-      "state": "accepted_manuscript_chunk",
       "outcome": {
         "accepted_cases": 50,
-        "source_sha256": "884fd3f88469b03e5bf171fbdda745118db9970e7c9dd6813afd3a59ee61f054",
-        "physical_validation_passed": 50,
+        "direct_rewrite_cases": 4,
         "independent_keep_cases": 46,
-        "direct_rewrite_cases": 4
+        "physical_validation_passed": 50,
+        "source_sha256": "884fd3f88469b03e5bf171fbdda745118db9970e7c9dd6813afd3a59ee61f054"
       },
+      "owner": "root",
+      "planned_cases": 50,
       "required_handoff_evidence": [
         "Literal50source and difficulty/sourcehash",
         "EachcasecausalCF/manualsamplearith",
         "Actualsource50render+validate",
         "All prior nearestrelations comparison",
         "Explicit lock return"
-      ]
+      ],
+      "state": "accepted_manuscript_chunk",
+      "write_lock": null
     },
     {
-      "node": "scope_2400_publication",
-      "owner": "root",
-      "write_lock": null,
-      "state": "integrated_and_verified",
       "dependency": "Explicit final user scope 2400 only",
       "downstream_unlock": "Only B1+2 accepted for final publication",
+      "node": "scope_2400_publication",
+      "outcome": {
+        "batches": [
+          1,
+          2
+        ],
+        "legacy_B1_task_set_unchanged": true,
+        "root_full_test_suite_passed": true,
+        "root_full_tests_passed": 932,
+        "target": 2400,
+        "targeted_tests_passed": 53
+      },
+      "owner": "root",
       "required_handoff_evidence": [
         "2400 rows and [1,2] hard guards",
         "Targeted tests and Ruff",
         "Changed paths and lock return"
       ],
-      "outcome": {
-        "target": 2400,
-        "batches": [
-          1,
-          2
-        ],
-        "targeted_tests_passed": 53,
-        "root_full_test_suite_passed": true,
-        "legacy_B1_task_set_unchanged": true,
-        "root_full_tests_passed": 932
-      }
+      "state": "integrated_and_verified",
+      "write_lock": null
     },
     {
       "case_file": "authored/batch_2/B_payroll/cases_051_100.json",
-      "domain": "B_payroll",
-      "owner": "audit_batch2_payroll_051100",
-      "write_lock": null,
-      "state": "independent_editorial_review",
-      "planned_cases": 50,
+      "dependency": "Frozen previous350 source cases and validated contracts",
       "difficulty_counts": {
         "easy": 15,
-        "medium": 22,
-        "hard": 13
+        "hard": 13,
+        "medium": 22
       },
-      "dependency": "Frozen previous350 source cases and validated contracts",
+      "domain": "B_payroll",
       "downstream_unlock": "Independent editorial and technical review",
       "outcome": {
+        "accepted_cases": 0,
         "author_cases": 50,
-        "source_sha256": "283884fb2b96695e7074f30f28fd188ebf8d6d477908e45cc8f4ab390bb3122f",
-        "accepted_cases": 0
+        "editorial_keep_candidates": 43,
+        "rewrite_ids": [
+          "B061",
+          "B065",
+          "B068",
+          "B074",
+          "B076",
+          "B079",
+          "B082"
+        ],
+        "source_sha256": "283884fb2b96695e7074f30f28fd188ebf8d6d477908e45cc8f4ab390bb3122f"
       },
+      "owner": "rewrite_batch2_payroll_051100_seven",
+      "planned_cases": 50,
       "required_handoff_evidence": [
         "50 complete literal objects and sourceSHA",
         "Actualrender/validate50",
         "Per-case CF and nearestrelationship review",
         "Lock return"
-      ]
+      ],
+      "state": "seven_individual_rewrites_after_independent_audit",
+      "write_lock": "authored/batch_2/B_payroll/cases_051_100.json"
     },
     {
-      "node": "vat_document_lifecycle_contract",
-      "owner": "root",
-      "write_lock": null,
-      "state": "integrated_and_verified",
       "dependency": "Approved bounded lifecycle proposal for existing actual supplies and payments",
       "downstream_unlock": "Root routing and physical integration then C051100 authorship",
+      "node": "vat_document_lifecycle_contract",
+      "outcome": {
+        "legacy_B1_1200_unchanged": true,
+        "new_module_tests": 56,
+        "root_all_tests_passed": 991,
+        "root_three_format_actual_source_tests": 3
+      },
+      "owner": "root",
       "required_handoff_evidence": [
         "Exactrawschema and selection constraints",
         "Independent manual examples and tests",
         "Legacy C300 unchanged",
         "Lockreturn"
       ],
-      "outcome": {
-        "new_module_tests": 56,
-        "root_three_format_actual_source_tests": 3,
-        "root_all_tests_passed": 991,
-        "legacy_B1_1200_unchanged": true
-      }
+      "state": "integrated_and_verified",
+      "write_lock": null
     },
     {
       "case_file": "authored/batch_2/C_vat/cases_051_100.json",
-      "domain": "C_vat",
-      "owner": "batch2_vat_051100",
-      "write_lock": "authored/batch_2/C_vat/cases_051_100.json",
-      "state": "individual_authoring_with_integrated_lifecycle_contract",
-      "planned_cases": 50,
+      "dependency": "Bounded lifecycle module and frozen prior350 relationships",
       "difficulty_counts": {
         "easy": 15,
-        "medium": 22,
-        "hard": 13
+        "hard": 13,
+        "medium": 22
       },
-      "dependency": "Bounded lifecycle module and frozen prior350 relationships",
+      "domain": "C_vat",
       "downstream_unlock": "Wholechunk literalmanuscript and independentreview",
+      "outcome": null,
+      "owner": "audit_batch2_vat_051100",
+      "planned_cases": 50,
       "required_handoff_evidence": [
         "Literal50sourceSHA/difficulty",
         "Actualrender+validate50",
         "PercasecausalCF and nearestrelations",
         "Lockreturn"
       ],
-      "outcome": null
+      "state": "independent_semantic_and_full_answer_audit",
+      "write_lock": null
     },
     {
       "case_file": "authored/batch_2/A_yearend/cases_101_150.json",
-      "domain": "A_yearend",
-      "owner": "batch2_yearend_101150",
-      "write_lock": "authored/batch_2/A_yearend/cases_101_150.json",
-      "planned_cases": 50,
+      "dependency": "Frozen prior400 relationships and validated contracts; A077 correction reserved by root",
       "difficulty_counts": {
         "easy": 15,
-        "medium": 23,
-        "hard": 12
+        "hard": 12,
+        "medium": 23
       },
-      "dependency": "Frozen prior400 relationships and validated contracts; A077 correction reserved by root",
+      "domain": "A_yearend",
       "downstream_unlock": "Independent wholechunk technical and semantic review",
-      "state": "individual_authoring",
       "outcome": null,
+      "owner": "batch2_yearend_101150",
+      "planned_cases": 50,
       "required_handoff_evidence": [
         "Literal50/sourceSHA/difficulty",
         "Actualrender and validate50",
         "Per-case causal counterfactual and nearest workflow review",
         "Explicit lock return"
-      ]
+      ],
+      "state": "individual_authoring",
+      "write_lock": "authored/batch_2/A_yearend/cases_101_150.json"
     },
     {
       "case_file": "authored/batch_2/D_extract/cases_151_200.json",
-      "domain": "D_extract",
-      "owner": "batch2_extract_151200",
-      "write_lock": "authored/batch_2/D_extract/cases_151_200.json",
-      "planned_cases": 50,
+      "contract": "10 cart procurement and 40 literal inventory workflows",
+      "dependency": "Frozen prior450 and current bounded contracts",
       "difficulty_counts": {
         "easy": 15,
-        "medium": 22,
-        "hard": 13
+        "hard": 13,
+        "medium": 22
       },
-      "dependency": "Frozen prior450 and current bounded contracts",
+      "domain": "D_extract",
       "downstream_unlock": "Independent technical and semantic whole-chunk review",
-      "state": "individual_authoring",
       "outcome": null,
+      "owner": "batch2_extract_151200",
+      "planned_cases": 50,
       "required_handoff_evidence": [
         "Literal50/sourceSHA/difficulty",
         "Actual50render/restoration/provenance",
         "Per-case causal CF and full nearest workflow comparison",
         "Explicit lock return"
-      ]
+      ],
+      "state": "individual_authoring",
+      "write_lock": "authored/batch_2/D_extract/cases_151_200.json"
+    },
+    {
+      "dependency": "Existing unchanged raw VAT calculation contracts; real new cash/filing reconciliation workflow",
+      "downstream_unlock": "Root integration and direct C011/C015 replacements; future C intervals",
+      "node": "vat_bank_reconciliation_contract",
+      "outcome": {
+        "legacy_B1_1200_unchanged": true,
+        "root_actual_three_format_tests_passed": 3,
+        "root_all_tests_passed": 1165
+      },
+      "owner": "root",
+      "required_handoff_evidence": [
+        "Strict independent-taxpayer bank source schema and manual full expectations",
+        "Tests/Ruff and C300 unchanged",
+        "Root actual source integration reserved",
+        "All write locks returned"
+      ],
+      "state": "integrated_and_verified",
+      "write_lock": null
+    },
+    {
+      "dependency": "Bounded private quantity proposal tmp/inventory_snapshots_contract/root_proposal.md",
+      "downstream_unlock": "After implementation and root integration, remaining D151200 literal authorship and later D intervals",
+      "node": "inventory_snapshots_contract",
+      "outcome": {
+        "legacy_B1_1200_unchanged": true,
+        "root_actual_three_format_tests_passed": 3,
+        "root_all_tests_passed": 1165
+      },
+      "owner": "root",
+      "required_handoff_evidence": [
+        "Raw complete inventory/orders/movements quantity schema",
+        "Manual snapshot/transfer/return/reservation proofs",
+        "Tests and unchanged legacyD300",
+        "Root actual source integration and lock return"
+      ],
+      "state": "integrated_and_verified",
+      "write_lock": null
+    },
+    {
+      "case_file": "authored/batch_2/B_payroll/cases_101_150.json",
+      "dependency": "Frozen prior350 and original B051100 plus frozen seven candidate rewrites",
+      "difficulty_counts": {
+        "easy": 15,
+        "hard": 12,
+        "medium": 23
+      },
+      "domain": "B_payroll",
+      "downstream_unlock": "Independent full-answer and actual-source semantic audit",
+      "outcome": null,
+      "owner": "batch2_payroll_101150",
+      "planned_cases": 50,
+      "required_handoff_evidence": [
+        "Literal50/sourceSHA/difficulty",
+        "Actual50source/restoration/provenance",
+        "Eachcase causal counterfactual and whole prior relationship comparison",
+        "Explicit lock return"
+      ],
+      "state": "individual_authoring",
+      "write_lock": "authored/batch_2/B_payroll/cases_101_150.json"
     }
   ],
   "infrastructure_ci": {
@@ -403,17 +482,17 @@
     "hugging_face_dataset_name": "KrRubberStamp-2.4K",
     "uploaded": false
   },
+  "released_authored_cases": 1200,
+  "root_integration": {
+    "owner": "root",
+    "source_count": 75,
+    "state": "routing_physical_source_and_legacy_checks_complete",
+    "verified_source_count": 30
+  },
   "scope_note": "Final user scope: exactly 2,400 individually authored cases in Batch 1 and Batch 2. Batch 3 and Batch 4 do not exist. Complete verification and authorized Hugging Face publication, then stop.",
   "target_batches": [
     1,
     2
   ],
-  "target_cases": 2400,
-  "root_integration": {
-    "owner": "root",
-    "state": "routing_physical_source_and_legacy_checks_complete",
-    "source_count": 73,
-    "verified_source_count": 30
-  },
-  "released_authored_cases": 1200
+  "target_cases": 2400
 }

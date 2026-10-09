@@ -28,6 +28,8 @@ SUPPORT_REPORTS = (
     "payroll_bank_reconciliation_contract.md",
     "vat_document_reconciliation_contract.md",
     "vat_document_lifecycle_contract.md",
+    "vat_bank_reconciliation_contract.md",
+    "inventory_snapshots_contract.md",
     "authored_vat_204300_editorial.md",
     "audit_evidence/vat_204300/C243_baseline_page_1.png",
     "audit_evidence/vat_204300/C272_post_tire_page_1.png",

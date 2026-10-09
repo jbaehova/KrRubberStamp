@@ -35,6 +35,10 @@ def calculate(domain: str, scenario: dict):
         answer, trace = import_module("rules.b_payroll.engine").calculate(normalized)
         return answer, [derivation_trace(scenario, normalized), *trace]
     if domain == "C_vat" and "source_contract" in scenario:
+        from rules.c_vat.bank_reconciliation import CONTRACT as BANK, calculate as reconcile_cash
+
+        if scenario["source_contract"] == BANK:
+            return reconcile_cash(scenario)
         from rules.c_vat.document_lifecycle import (
             CONTRACT as LIFECYCLE,
             calculate as select_originals,
@@ -57,6 +61,13 @@ def calculate(domain: str, scenario: dict):
         answer, trace = import_module("rules.c_vat.engine").calculate(normalized)
         return answer, [derivation_trace(scenario, normalized), *trace]
     if domain == "D_extract" and "source_contract" in scenario:
+        from rules.d_extract.inventory_snapshots import (
+            CONTRACT as INVENTORY,
+            calculate as inventory,
+        )
+
+        if scenario["source_contract"] == INVENTORY:
+            return inventory(scenario)
         from rules.d_extract.cart_procurement import CONTRACT as CART, calculate as compare_cart
 
         if scenario["source_contract"] == CART:
