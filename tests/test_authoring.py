@@ -119,6 +119,16 @@ def test_new_batch_recovers_its_own_manuscript(editorial_source, tmp_path, batch
     assert validate_task(task_path.parent)["passed"]
 
 
+def test_batch_two_requires_the_final_450_case_quota(editorial_source, tmp_path):
+    source, _ = editorial_source
+    target = source.parents[2] / "batch_2/D_extract/editorial.json"
+    target.parent.mkdir(parents=True)
+    source.rename(target)
+    with pytest.raises(ValueError, match="450 individually authored"):
+        authoring.build_authored(tmp_path / "release", batch=2)
+    assert not (tmp_path / "release").exists()
+
+
 @pytest.mark.parametrize("batch", [0, 3, 4, 5, True])
 def test_unrequested_batch_is_not_published(editorial_source, tmp_path, batch):
     output = tmp_path / "unrequested"

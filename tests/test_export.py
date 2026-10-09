@@ -13,6 +13,44 @@ from harness import run_fake, stage_task
 from validate import validate_batch
 
 
+def test_final_export_name_preserves_1650_instead_of_rounding_to_16k():
+    assert export._dataset_name(1650, preview=False) == "KrRubberStamp-1.65K"
+    assert export._dataset_name(1200, preview=False) == "KrRubberStamp-1.2K"
+    assert export._dataset_name(1, preview=True) == "KrRubberStamp-preview-1"
+
+
+def test_final_card_reports_actual_unequal_domain_totals():
+    counts = {
+        f"{domain}/{difficulty}": amount
+        for domain, values in {
+            "A_yearend": (120, 180, 100),
+            "B_payroll": (120, 180, 100),
+            "C_vat": (120, 180, 100),
+            "D_extract": (135, 203, 112),
+        }.items()
+        for difficulty, amount in zip(("easy", "medium", "hard"), values, strict=True)
+    }
+    card = export._dataset_card(
+        {
+            "dataset_name": "KrRubberStamp-1.65K",
+            "batches": [1, 2],
+            "rows": 1650,
+            "preview": False,
+            "counts": counts,
+            "document_formats": {},
+            "layout_variants_used": {},
+            "rule_sources": {"total": 78, "verified": 30, "unverified": 48},
+            "measurements": {},
+            "canary": "fixture-canary",
+            "jsonl_sha256": "fixture-fingerprint",
+        }
+    )
+    assert "| A_yearend | 120 | 180 | 100 | 400 |" in card
+    assert "| D_extract | 135 | 203 | 112 | 450 |" in card
+    assert "각 배치는 분야별 300문항" not in card
+    assert "1,650문항" in card
+
+
 @pytest.mark.parametrize("batches", [[3], [4], [1, 2, 3], [1, 2, 3, 4], [True]])
 def test_export_rejects_batches_outside_final_scope_before_reading_data(tmp_path, batches):
     output = tmp_path / "export"

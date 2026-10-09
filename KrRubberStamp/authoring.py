@@ -1,6 +1,5 @@
 """Build individually written cases without generating their facts or wording."""
 
-from collections import Counter
 from pathlib import Path
 import json
 import re
@@ -10,14 +9,13 @@ import yaml
 
 from .io import write_json
 from .registry import DOMAINS, PERIODS, calculate
+from .release_scope import AUTHORIZED_BATCHES as AUTHORIZED_BATCHES
+from .release_scope import batch_counts, check_completed_cases
 from .tasks import canary_for, make_schema, scenario_hash
-
-AUTHORIZED_BATCHES = (1, 2)
 
 
 def check_batch(batch):
-    if type(batch) is not int or batch not in AUTHORIZED_BATCHES:
-        raise ValueError("Select one of the two authorized 1,200-case batches")
+    batch_counts(batch)
 
 
 def authored_root():
@@ -142,15 +140,8 @@ def _build_authored_at(output, *, batch=1, preview=False, file_name=None, domain
     cases = load_cases(batch, file_name=file_name, domain=domain)
     if not cases:
         raise ValueError("No individually authored cases found")
-    counts = Counter((case["domain"], case["difficulty"]) for case, _ in cases)
-    if not preview and any(
-        counts[domain, difficulty] != expected
-        for domain in DOMAINS
-        for difficulty, expected in (("easy", 90), ("medium", 135), ("hard", 75))
-    ):
-        raise ValueError(
-            "Release requires 300 individually authored cases per domain with 90/135/75 difficulty counts; use --preview for an incomplete editorial set"
-        )
+    if not preview:
+        check_completed_cases(batch, (case for case, _ in cases))
     instructions = [case["instruction"] for case, _ in cases]
     if len(set(instructions)) != len(instructions):
         raise ValueError("Repeated authored instructions require editorial revision")

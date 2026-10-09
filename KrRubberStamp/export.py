@@ -12,11 +12,13 @@ import yaml
 from . import authoring
 from .io import json_bytes, read_json, write_json
 from .registry import DOMAINS, PERIODS, calculate
+from .release_scope import FINAL_DATASET_NAME, FINAL_ROWS, check_completed_cases
 from .tasks import canary_for, make_schema, scenario_hash
 
 DIFFICULTIES = (("easy", 90), ("medium", 135), ("hard", 75))
 SUPPORT_REPORTS = (
     "EXPANSION_DIVERSITY_GUIDE.md",
+    "final_1650_release_scope.md",
     "extract_fulfillment_contract.md",
     "extract_fulfillment_legacy_integrity.json",
     "extract_procurement_contract.md",
@@ -26,10 +28,12 @@ SUPPORT_REPORTS = (
     "expansion_contracts_integration.md",
     "yearend_pay_statement_contract.md",
     "payroll_bank_reconciliation_contract.md",
+    "payroll_statement_revision_contract.md",
     "vat_document_reconciliation_contract.md",
     "vat_document_lifecycle_contract.md",
     "vat_bank_reconciliation_contract.md",
     "vat_batch_allocation_contract.md",
+    "vat_itemized_activity_contract.md",
     "inventory_snapshots_contract.md",
     "authored_vat_204300_editorial.md",
     "audit_evidence/vat_204300/C243_baseline_page_1.png",
@@ -319,18 +323,8 @@ def collect_authored_tasks(data_root, batches, *, allow_preview=False, batch_dir
             or manifest.get("accepted") != len(records)
         ):
             raise ValueError("Manifest does not describe the selected task set")
-        counts = Counter(
-            (record["task"]["domain"], record["task"]["difficulty"]) for record in records
-        )
-        if not allow_preview and (
-            len(records) != 1200
-            or any(
-                counts[domain, difficulty] != n
-                for domain in DOMAINS
-                for difficulty, n in DIFFICULTIES
-            )
-        ):
-            raise ValueError("Release requires 300 authored cases per domain with 90/135/75 counts")
+        if not allow_preview:
+            check_completed_cases(batch, (record["case"] for record in records))
         manifests[batch] = manifest
         tasks.extend(records)
     instructions = [record["case"]["instruction"] for record in tasks]
@@ -476,11 +470,17 @@ def export_hf(
     return result
 
 
+def _dataset_name(n, *, preview):
+    if not preview and n == FINAL_ROWS:
+        return FINAL_DATASET_NAME
+    size = f"{n / 1000:.1f}K" if n >= 1000 else str(n)
+    return f"KrRubberStamp-{'preview-' if preview else ''}{size}"
+
+
 def _write_export(tasks, manifests, evidence, rules, document_root, batches, output, *, preview):
     (output / "data").mkdir()
     n = len(tasks)
-    size = f"{n / 1000:.1f}K" if n >= 1000 else str(n)
-    name = f"KrRubberStamp-{'preview-' if preview else ''}{size}"
+    name = _dataset_name(n, preview=preview)
     source_records = defaultdict(dict)
     counts = Counter()
     formats = Counter()
@@ -636,7 +636,7 @@ def _dataset_card(summary, *, repo_id=None):
     status = (
         "편집 검토용 미완성 미리보기입니다. 완성된 Batch 1 배포본이 아닙니다."
         if summary["preview"]
-        else f"{len(summary['batches'])}개 배치의 개별 집필 문항입니다. 각 배치는 분야별 300문항이며 누적 분야별 문항 수는 {summary['rows'] // 4:,}개입니다."
+        else f"{len(summary['batches'])}개 배치의 개별 집필 문항입니다. 분야별 문항 수와 난이도는 아래 표에 기록합니다. 최종 공개 범위는 Batch 1의 1,200문항과 Batch 2의 450문항을 합한 1,650문항입니다."
     )
     lines = [
         "---",

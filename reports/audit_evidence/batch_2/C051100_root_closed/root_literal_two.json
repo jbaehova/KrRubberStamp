@@ -1,0 +1,232 @@
+[
+  {
+    "case_id": "C062",
+    "domain": "C_vat",
+    "difficulty": "easy",
+    "title": "개당 할인과 행 할인 및 상품 전체 할인 뒤 과세 배송 합산",
+    "instruction": "가상포개소매는 정상 완료 주문의 청구 행을 보냈습니다. 개당 할인은 수량에 곱하고 행 전체 할인은 한 번만 빼 주세요. 상품 전체 할인에는 배송을 넣지 않습니다. 확정 청구와 카드 발행 기초를 연결해 tax_base, output_vat, receipt_credit를 answer.json에 정리해 주세요.",
+    "work_goal": "서로 다른 할인 단위와 상품 및 배송 범위를 복원해 한 완료 판매의 과세 공급액과 카드 발행 모수를 계산한다.",
+    "design_rationale": "첫 행에는 개당500원 할인과 별도 행 전체2000원 할인이 있고 두 번째 행에는 할인이 없다. 두 상품행 합계에 전체10000원 할인을 적용한 뒤 별도로 과세 배송15000원을 더한다. 할인 단위를 섞거나 배송까지 상품 할인 범위로 다루면 현재 실제 공급액과 발행 공제가 함께 틀린다. scalar 거래액에 이름과 금액만 바꾸는 문제가 아니라 확정 청구의 세 가격 단위를 원천에서 구한다.",
+    "exceptions": [],
+    "answer_fields": [
+      "tax_base",
+      "output_vat",
+      "receipt_credit"
+    ],
+    "facts": {
+      "source_contract": "vat_itemized_activity_evidence_v1",
+      "billing_policy": "가상포개소매의 확정 청구 약정이다. 모든 단가는 부가세 제외 공급가다. 수량에 개당 할인 후 단가를 곱하고 해당 행 전체 할인을 한 번 뺀다. 상품행 합계에서 상품 전체 할인을 뺀 뒤 같은 공급자의 과세 배송 공급가를 더한다. 상품 전체 할인은 배송에 적용하지 않는다. 견적이나 부가세 포함 단가 및 단위 변환은 없고 고객이 완납한 실제 카드 발급은 이 청구 전체를 대상으로 한다.",
+      "taxpayer_type": "general",
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "business_name": "가상포개소매",
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 86000000,
+      "receipt_credit_previously_claimed": 0,
+      "prepaid_assessed_vat": 0,
+      "scope_note": "국내 소비자 대상 일반과세 소매의 완료 주문 한 건이다. 두 상품과 같은 공급자의 과세 배송은 하나의 적격 전체 카드 전표로 정상 발행됐다. 전자는 발행하지 않았고 다른 거래 및 선납과 공제는 없다. 제시된 세액은 신고 계산 원단위의 요청 값이며 별도의 국고 현금 납입액을 요청하지 않는다.",
+      "operations": [],
+      "activities": [],
+      "transactions": [
+        {
+          "transaction_id": "포개주문",
+          "document_id": "포개완납카드",
+          "direction": "sale",
+          "date": "2026-06-15",
+          "description": "소비자에게 인도한 포개함과 받침 및 과세 배송",
+          "taxable": true,
+          "evidence": "card_receipt",
+          "invoice_issued": false,
+          "vat_separately_stated": true,
+          "counterparty_consumer": true,
+          "supplier_general": true,
+          "invoice_lines": [
+            {
+              "line_id": "포개함행",
+              "description": "포개함8개와 개당 할인 및 행 전체 할인",
+              "quantity": 8,
+              "unit_supply_price": 12500,
+              "unit_discount": 500,
+              "line_discount": 2000
+            },
+            {
+              "line_id": "받침행",
+              "description": "별도 할인 없는 받침2개",
+              "quantity": 2,
+              "unit_supply_price": 18000,
+              "unit_discount": 0,
+              "line_discount": 0
+            }
+          ],
+          "document_discount": 10000,
+          "freight_supply": 15000
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_청구행.xlsx",
+        "format": "xlsx",
+        "title": "포개소매의 확정 상품행과 세 할인 단위",
+        "note": "개당 할인과 행 전체 할인 및 상품 전체 할인은 서로 다른 적용 단위다.",
+        "fields": [
+          "transactions",
+          "billing_policy"
+        ]
+      },
+      {
+        "filename": "02_신고발행.pdf",
+        "format": "pdf",
+        "title": "정상 완료 카드 판매와 신고 기초",
+        "note": "소비자 상대 개인사업자의 카드 발행은 배송 포함 실제 전체 청구이며 전자는 없다.",
+        "fields": [
+          "source_contract",
+          "taxpayer_type",
+          "period_start",
+          "period_end",
+          "business_name",
+          "business_type",
+          "consumer_facing_business",
+          "prior_year_site_supply_base",
+          "receipt_credit_previously_claimed",
+          "prepaid_assessed_vat",
+          "scope_note",
+          "operations",
+          "activities"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "C065",
+    "domain": "C_vat",
+    "difficulty": "easy",
+    "title": "무상 부속품과 상품 할인 및 같은 공급자의 과세 배송",
+    "instruction": "가상조립선반은 제작용 받침과 가격을 전액 할인한 부속 덮개를 함께 인수했습니다. 부속 수량이 있다고 대금을 추가하지 말고 확정 청구 행에서 실제 공급가를 복원해 주세요. 전체 상품 할인과 별도 과세 배송을 반영하고 작업 인수 및 적격 전자를 연결해 input_vat, deductible_input_vat, refund_vat를 answer.json에 써 주세요.",
+    "work_goal": "실제 인수 수량과 대가가 있는 상품 범위를 구별하고 상품 할인 뒤 배송이 포함된 전체 적격 매입을 계산한다.",
+    "design_rationale": "제작용 받침4개는 대가가 있고 덮개2개는 개당 가격 전액 할인으로 무상 동봉됐다. 상품 전체 할인은 대가 있는 상품행 합계에서 차감하지만 배송12000원은 과세 대가로 남는다. 인수 수량을 대금 수량으로 일괄 환산하거나 무상 덮개를 배송과 함께 영으로 제외하면 실제 매입세액이 달라진다. 적격 전체 전자는 실제 같은 회사 제작 인수 한 건을 덮는다.",
+    "exceptions": [],
+    "answer_fields": [
+      "input_vat",
+      "deductible_input_vat",
+      "refund_vat"
+    ],
+    "facts": {
+      "source_contract": "vat_itemized_activity_evidence_v1",
+      "billing_policy": "가상 공급자의 확정 상품 청구 원본이다. 공급가 단가에서 개당 할인을 뺀 뒤 수량을 곱하고 행 전체 할인을 뺀다. 두 상품행 합계에서 상품 전체 할인10000원을 한 번 빼고 같은 공급자의 과세 배송 공급가12000원을 더한다. 덮개는 개당 가격 전액 할인으로 추가 대가 없이 동봉했고 다른 기부나 사적 제공은 없다. 가격과 할인은 부가세 제외 공급가 기준이다.",
+      "taxpayer_type": "general",
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "business_name": "가상조립선반",
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 156000000,
+      "receipt_credit_previously_claimed": 0,
+      "prepaid_assessed_vat": 0,
+      "scope_note": "일반과세 공급자가 국내 과세 선반 제작 전용 받침과 무상 동봉 덮개를 같은 작업장에 전량 인도했다. 같은 공급자의 과세 배송도 전체 전자 청구에 포함됐다. 적격 전체 전자를 정상 수령하고 원본 보관 및 필요한 수령명세 요건을 충족한다. 별개 판매와 다른 구매 및 공제는 없다.",
+      "operations": [
+        {
+          "operation_id": "선반제작",
+          "description": "국내 과세 조립 선반 제작",
+          "output_taxable": true
+        }
+      ],
+      "activities": [
+        {
+          "activity_id": "받침인수",
+          "transaction_id": "받침덮개인수",
+          "document_ids": [
+            "받침전체전자"
+          ],
+          "date": "2026-04-14",
+          "action": "delivery",
+          "location": {
+            "name": "선반 제작 작업장",
+            "kind": "worksite"
+          },
+          "participants": [
+            {
+              "name": "가상한선반",
+              "role": "employee",
+              "organization": "가상조립선반"
+            }
+          ],
+          "operation_id": "선반제작",
+          "description": "직원이 받침4개와 무상 동봉 덮개2개를 제작 작업장에 전량 인수했다."
+        }
+      ],
+      "transactions": [
+        {
+          "transaction_id": "받침덮개인수",
+          "document_id": "받침전체전자",
+          "direction": "purchase",
+          "date": "2026-04-14",
+          "description": "제작 전용 받침과 무상 덮개 및 과세 배송의 전체 청구",
+          "taxable": true,
+          "evidence": "tax_invoice",
+          "invoice_issued": true,
+          "vat_separately_stated": true,
+          "counterparty_consumer": false,
+          "supplier_general": true,
+          "activity_id": "받침인수",
+          "vehicle_subject_excise": false,
+          "vehicle_direct_business": false,
+          "invoice_lines": [
+            {
+              "line_id": "받침행",
+              "description": "과세 제작용 받침4개",
+              "quantity": 4,
+              "unit_supply_price": 32000,
+              "unit_discount": 0,
+              "line_discount": 0
+            },
+            {
+              "line_id": "덮개행",
+              "description": "가격 전액 할인한 동봉 덮개2개",
+              "quantity": 2,
+              "unit_supply_price": 5000,
+              "unit_discount": 5000,
+              "line_discount": 0
+            }
+          ],
+          "document_discount": 10000,
+          "freight_supply": 12000
+        }
+      ]
+    },
+    "documents": [
+      {
+        "filename": "01_상품배송.pdf",
+        "format": "pdf",
+        "title": "대가 있는 받침과 무상 덮개의 확정 전체 청구",
+        "note": "무상 부속도 실제 인수품이지만 개당 가격 전액 할인이 있고 배송은 별개 과세 대가다.",
+        "fields": [
+          "source_contract",
+          "billing_policy",
+          "transactions"
+        ]
+      },
+      {
+        "filename": "02_작업인수.hwpx",
+        "format": "hwpx",
+        "title": "회사 제작 전용 실제 인수와 전자 보관",
+        "note": "활동과 전자 원본은 같은 국내 과세 제작용 공급 전체에 연결한다.",
+        "fields": [
+          "taxpayer_type",
+          "period_start",
+          "period_end",
+          "business_name",
+          "business_type",
+          "consumer_facing_business",
+          "prior_year_site_supply_base",
+          "receipt_credit_previously_claimed",
+          "prepaid_assessed_vat",
+          "scope_note",
+          "operations",
+          "activities"
+        ]
+      }
+    ]
+  }
+]

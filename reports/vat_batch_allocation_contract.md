@@ -17,3 +17,5 @@ allocation_instructions는1~60개 원본이다. 각 행은 instruction_id, execu
 정수 산술과 원금 보존 및 신고별 잔액은 사적 장부 대조 규약이다. 새 정부 법률이나 법정 납부기한을 추가하지 않는다. trace에는 정렬한 실행 및 구성 지시와 기존 은행 대조 및 하위 신고 계산을 남긴다. 답과 trace 및 호출자 원본 사이의 가변 객체를 공유하지 않는다.
 
 직접 쓴 두 전체 수기 예시와 엄격한 오류 및 보존 경계를 포함한 새31개 시험이 통과했다. PDF와 XLSX 및 HWPX 실제 분배 셀을 수정한3개 시험에서도 신고와 은행 실행 합계를 유지한 채 두 등록별 잔액이 각각5,000원 및-5,000원으로 바뀌었다. 추출 맵과 gold 및 trace 바이트는 유지했다. 테스트 예시는 `tests/fixtures/vat_batch_allocation.yaml`에 있고 공개 문항 수량을 생성하는 도구가 아니다. 공식 수치 예시가 없는 사적 규약이므로 verified는 false다.
+
+The child payable_vat and refund_vat values are integer-won filing calculations. National treasury collection/payment discards fractions below ten won under [National Treasury Management Act Article 47](https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1031453583), a separate step outside the unchanged VAT engine. Signed balance here is a private comparison with actual bank cash, not a statutory arrears amount or an adjudicated refund entitlement.

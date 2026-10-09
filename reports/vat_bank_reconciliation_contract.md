@@ -67,3 +67,5 @@ uv run pytest tests/test_vat_bank_reconciliation.py tests/test_vat_document_reco
 Result: **95 passed**, comprising 94 new contract tests and the frozen Batch1 VAT regression over all 300 existing answers and traces. Ruff check and formatting pass for the two new Python files. Actual document rendering is reserved for root integration and is not claimed by this module handoff.
 
 No dataset cases, generated benchmark factories, model APIs, old VAT engines, or root-owned integration files were changed by this worker.
+
+The child payable_vat and refund_vat values are integer-won filing calculations. National treasury collection/payment discards fractions below ten won under [National Treasury Management Act Article 47](https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1031453583), a separate step outside the unchanged VAT engine. Signed balance here is a private comparison with actual bank cash, not a statutory arrears amount or an adjudicated refund entitlement.

@@ -118,6 +118,18 @@ FALLBACK_LABELS = {
     "instruction_id": "구성 지시 식별번호",
     "bank_fee": "은행 수수료",
     "facts": "신고 계산 원자료",
+    "statement_records": "완전한 월 급여명세 개정 원본",
+    "statement_scope": "명세의 적용 범위",
+    "scope": "계산 적용 범위",
+    "issued_on": "원본 작성일",
+    "billing_policy": "확정 청구가격 계산 조건",
+    "invoice_lines": "청구서의 실제 품목 행",
+    "line_id": "품목 행 식별번호",
+    "unit_supply_price": "할인 전 개당 공급가액",
+    "unit_discount": "개당 할인 공급가액",
+    "line_discount": "품목 행 할인 공급가액",
+    "document_discount": "청구서 전체 상품 할인 공급가액",
+    "freight_supply": "같은 공급자의 별도 운송 공급가액",
     "filings": "독립 납세자 신고 원자료",
     "filing_id": "신고 접수 번호",
     "taxpayer_id": "독립 납세자 식별번호",
@@ -178,6 +190,15 @@ def _label(path: list[str | int], domain: str) -> str:
     parts = [f"{x + 1}번" if isinstance(x, int) else str(labels.get(x, x)) for x in path]
     if domain == "D_extract" and path and path[0] == "vendors" and path[-1] == "name":
         parts[-1] = "업체명"
+    if path and "bank_executions" in path:
+        parts[-1] = {
+            "status": "은행 실행 상태",
+            "direction": "입출금 방향",
+            "date": "은행 실행일",
+            "amount": "은행 실행 총액",
+        }.get(path[-1], parts[-1])
+    if domain == "B_payroll" and path and path[-1] == "facts":
+        parts[-1] = "월 급여 계산 원자료"
     return " / ".join(parts) or "자료"
 
 

@@ -1,0 +1,566 @@
+{
+  "source_sha256": "892d03dd8611d05c4a247b08ca774d5bfacfb0a59289cf63625ed756b75499a7",
+  "checks": [
+    {
+      "case_id": "C051",
+      "label": "취소 전표의 자체 정확 세액 분리가 맞는 오기 변경은 현재 모수 불변",
+      "edits": [
+        [
+          [
+            "evidence_documents",
+            0,
+            "amount"
+          ],
+          660000
+        ]
+      ],
+      "before": {
+        "output_vat": 100000,
+        "receipt_credit": 5720
+      },
+      "after": {
+        "output_vat": 100000,
+        "receipt_credit": 5720
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C051",
+      "label": "유효 전표가 실제 지급과 어긋나면 임의 공제하지 않고 거절",
+      "edits": [
+        [
+          [
+            "evidence_documents",
+            1,
+            "amount"
+          ],
+          550000
+        ]
+      ],
+      "expected": "ValueError",
+      "actual_error": "Document amount or transaction conflicts with its payment",
+      "passed": true
+    },
+    {
+      "case_id": "C055",
+      "label": "정정된 공구도 원본의 미표시 카드로만 최종 확정됐다면 별개 고정대와 함께 불공제",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            1,
+            "state"
+          ],
+          "revoked"
+        ],
+        [
+          [
+            "document_status_records",
+            1,
+            "replaces_document_id"
+          ],
+          null
+        ],
+        [
+          [
+            "document_status_records",
+            0,
+            "state"
+          ],
+          "valid"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 20000,
+        "noncreditable_vat": 20000
+      },
+      "after": {
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 40000
+      },
+      "requested_answer_changed": true,
+      "passed": true
+    },
+    {
+      "case_id": "C057",
+      "label": "유효 근거를 전체 전자로 바꿔도 전체 매입 공제액은 같다",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            0,
+            "state"
+          ],
+          "valid"
+        ],
+        [
+          [
+            "document_status_records",
+            1,
+            "state"
+          ],
+          "revoked"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 90000,
+        "noncreditable_vat": 0
+      },
+      "after": {
+        "deductible_input_vat": 90000,
+        "noncreditable_vat": 0
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C062",
+      "label": "유효 근거를 적격 전체 카드로 바꿔도 전체 매입 공제액은 같다",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            0,
+            "state"
+          ],
+          "valid"
+        ],
+        [
+          [
+            "document_status_records",
+            1,
+            "state"
+          ],
+          "revoked"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 70000,
+        "refund_vat": 70000
+      },
+      "after": {
+        "deductible_input_vat": 70000,
+        "refund_vat": 70000
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C063",
+      "label": "판매 전체 전자를 유효로 해도 음수 납부 한도에서 요청 둘은 모두 그대로",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            1,
+            "state"
+          ],
+          "valid"
+        ]
+      ],
+      "before": {
+        "receipt_credit": 0,
+        "refund_vat": 10000
+      },
+      "after": {
+        "receipt_credit": 0,
+        "refund_vat": 10000
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C065",
+      "label": "판매 전체 전자를 유효로 해도 영 납부 한도에서 요청 둘은 모두 그대로",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            1,
+            "state"
+          ],
+          "valid"
+        ]
+      ],
+      "before": {
+        "receipt_credit": 0,
+        "net_vat": 0
+      },
+      "after": {
+        "receipt_credit": 0,
+        "net_vat": 0
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C066",
+      "label": "양수 납부 한도에서는 판매 전체 전자 유효가 발급 공제와 납부를 바꾼다",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            1,
+            "state"
+          ],
+          "valid"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 96000,
+        "receipt_credit": 4000,
+        "payable_vat": 0
+      },
+      "after": {
+        "deductible_input_vat": 96000,
+        "receipt_credit": 0,
+        "payable_vat": 4000
+      },
+      "requested_answer_changed": true,
+      "passed": true
+    },
+    {
+      "case_id": "C072",
+      "label": "비대상 공식 차종 대신 일반 개별소비세 승용차면 같은 정정 카드를 공제할 수 없다",
+      "edits": [
+        [
+          [
+            "vehicle_registry",
+            0,
+            "registration_class"
+          ],
+          "excise_passenger"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 40000,
+        "noncreditable_vat": 0
+      },
+      "after": {
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 40000
+      },
+      "requested_answer_changed": true,
+      "passed": true
+    },
+    {
+      "case_id": "C076",
+      "label": "고객 건물 장소의 조직 표지 변경은 실제 직원 식대 공제를 바꾸지 않는다",
+      "edits": [
+        [
+          [
+            "activities",
+            0,
+            "location",
+            "organization"
+          ],
+          "가상다른고객센터"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 15000,
+        "noncreditable_vat": 0
+      },
+      "after": {
+        "deductible_input_vat": 15000,
+        "noncreditable_vat": 0
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C076",
+      "label": "실제 참석자 한 명이 다른 조직 고객이면 원본 정정만으로 공제할 수 없다",
+      "edits": [
+        [
+          [
+            "activities",
+            0,
+            "participants",
+            1,
+            "role"
+          ],
+          "customer"
+        ],
+        [
+          [
+            "activities",
+            0,
+            "participants",
+            1,
+            "organization"
+          ],
+          "가상고객센터"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 15000,
+        "noncreditable_vat": 0
+      },
+      "after": {
+        "deductible_input_vat": 0,
+        "noncreditable_vat": 15000
+      },
+      "requested_answer_changed": true,
+      "passed": true
+    },
+    {
+      "case_id": "C077",
+      "label": "허가 종료 뒤인 처리일을 늦춰도 실제 정비일의 차량 자격은 불변",
+      "edits": [
+        [
+          [
+            "processing_date"
+          ],
+          "2026-07-20"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 80000,
+        "noncreditable_vat": 0
+      },
+      "after": {
+        "deductible_input_vat": 80000,
+        "noncreditable_vat": 0
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C078",
+      "label": "간이기간 구매가 최종 미표시 카드만 남아도 공급자 제한 때문에 결과는 그대로",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            1,
+            "state"
+          ],
+          "revoked"
+        ],
+        [
+          [
+            "document_status_records",
+            1,
+            "replaces_document_id"
+          ],
+          null
+        ],
+        [
+          [
+            "document_status_records",
+            0,
+            "state"
+          ],
+          "valid"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 50000,
+        "noncreditable_vat": 30000
+      },
+      "after": {
+        "deductible_input_vat": 50000,
+        "noncreditable_vat": 30000
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C081",
+      "label": "현재 카드로 취소 오기금액을 복원하면 전체 실제 실행과 어긋나며 부분공제 문제가 아닌 자료계약 오류",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            1,
+            "state"
+          ],
+          "revoked"
+        ],
+        [
+          [
+            "document_status_records",
+            1,
+            "replaces_document_id"
+          ],
+          null
+        ],
+        [
+          [
+            "document_status_records",
+            0,
+            "state"
+          ],
+          "valid"
+        ]
+      ],
+      "expected": "ValueError",
+      "actual_error": "Document amount or transaction conflicts with its payment",
+      "passed": true
+    },
+    {
+      "case_id": "C088",
+      "label": "둘째 전자 취소는 현재 연간캡에 가려져 요청 결과 불변",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            3,
+            "state"
+          ],
+          "revoked"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 0,
+        "receipt_credit": 3000,
+        "payable_vat": 147000
+      },
+      "after": {
+        "deductible_input_vat": 0,
+        "receipt_credit": 3000,
+        "payable_vat": 147000
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C092",
+      "label": "둘째 전자 취소는 현재 연간캡에 가려져 요청 결과 불변",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            3,
+            "state"
+          ],
+          "revoked"
+        ]
+      ],
+      "before": {
+        "receipt_credit": 3000,
+        "payable_vat": 127000
+      },
+      "after": {
+        "receipt_credit": 3000,
+        "payable_vat": 127000
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C092",
+      "label": "같은 현재 지급 및 발급의 합법적인 증가도 현재 연간캡에 가려진다",
+      "edits": [
+        [
+          [
+            "payments",
+            0,
+            "amount"
+          ],
+          440000
+        ],
+        [
+          [
+            "evidence_documents",
+            0,
+            "amount"
+          ],
+          440000
+        ]
+      ],
+      "before": {
+        "receipt_credit": 3000,
+        "payable_vat": 127000
+      },
+      "after": {
+        "receipt_credit": 3000,
+        "payable_vat": 127000
+      },
+      "requested_answer_changed": false,
+      "passed": true
+    },
+    {
+      "case_id": "C093",
+      "label": "고지 실제 납부를 제외하면 원본 선택과 토지제한을 보존해도 환급은 없어진다",
+      "edits": [
+        [
+          [
+            "prepaid_assessed_vat"
+          ],
+          0
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 480000,
+        "receipt_credit": 7150,
+        "refund_vat": 487150
+      },
+      "after": {
+        "deductible_input_vat": 480000,
+        "receipt_credit": 7150,
+        "refund_vat": 0
+      },
+      "requested_answer_changed": true,
+      "passed": true
+    },
+    {
+      "case_id": "C098",
+      "label": "둘째 전체 전자 취소는 율에서 연간 제한으로 지배조건을 바꾼다",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            3,
+            "state"
+          ],
+          "revoked"
+        ]
+      ],
+      "before": {
+        "output_vat": 150000,
+        "receipt_credit": 5720,
+        "payable_vat": 144280
+      },
+      "after": {
+        "output_vat": 150000,
+        "receipt_credit": 6000,
+        "payable_vat": 144000
+      },
+      "requested_answer_changed": true,
+      "passed": true
+    },
+    {
+      "case_id": "C100",
+      "label": "첫 판매 전체 전자 유효는 회사 장비와 고객식사 사용을 보존해도 요청 공제를 없앤다",
+      "edits": [
+        [
+          [
+            "document_status_records",
+            1,
+            "state"
+          ],
+          "valid"
+        ]
+      ],
+      "before": {
+        "deductible_input_vat": 148000,
+        "noncreditable_vat": 10000,
+        "receipt_credit": 2000
+      },
+      "after": {
+        "deductible_input_vat": 148000,
+        "noncreditable_vat": 10000,
+        "receipt_credit": 0
+      },
+      "requested_answer_changed": true,
+      "passed": true
+    }
+  ],
+  "new_check_count": 20,
+  "changes": 7,
+  "invariances": 11,
+  "rejections": 2
+}

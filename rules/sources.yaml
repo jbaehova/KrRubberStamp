@@ -338,6 +338,14 @@ rules:
   verified: false
   verification_notes: 공공기관의 공식 대조 규약이 아니다. 동일 직원의 같은 보험 부과월 명세 중복 및 명세상 지급일과 다른 날의
     실행 이체는 범위 밖으로 거절한다. 부분 지급과 초과 지급은 동일 지급일의 현금 대조이며 분할 지급일 원천징수나 체납 판정은 지원하지 않는다.
+- rule_id: B_PAYROLL_STATEMENT_REVISION
+  description: 직원과 보험 부과월별 완전한 명세 중 최종 승인 개정본을 선택하여 기존 급여 및 은행 대조에 연결
+  source: reports/payroll_statement_revision_contract.md의 payroll_statement_revision_v1
+    합성 회사 원본 처리 계약
+  effective_period: 2026 개별 집필 자료 계약
+  verified: false
+  verification_notes: 사적 문서 선택 규약이며 법정 급여 계산을 변경하지 않는다. 초안과 폐기본도 전체 원시 근태 및 급여 조건을
+    검증하고 동일 직원 및 부과월에서 가장 높은 승인 개정만 사용한다. 기존 은행 대조의 같은 실제 지급일 조건을 유지한다.
 - rule_id: COMMON_FLOOR_WON
   description: 원 미만 절사 유틸. 개별 엔진은 법규에 따라 별도 호출
   source: 국고금 관리법 제47조 및 개별 도메인 sources.yaml에 적시한 원 미만 계산 규칙
@@ -389,6 +397,14 @@ rules:
   verification_note: 기존 부가세 계산을 바꾸지 않는 업무 자료 계약이다. 별도 납세자의 잔액을 상계하지 않고 예정고지 납부는 하위
     계산에 이미 반영되어 은행 정산에서 다시 빼지 않는다. 부호 있는 잔액은 사적 대조 차이이며 새로운 법적 권리나 신고 및 납부 기한을 주장하지
     않는다.
+- rule_id: C_VAT_ITEMIZED_ACTIVITY
+  description: 확정 청구서의 개당 할인과 품목 행 할인 및 문서 할인과 운송료로 실제 공급가액을 복원
+  source: reports/vat_itemized_activity_contract.md의 vat_itemized_activity_evidence_v1
+    사적 청구가격 계약
+  effective_period: 2026-01-01/2026-06-30
+  verified: false
+  verification_note: 문항에 명시된 확정 가격 조건을 계산하는 업무 자료 규약이다. 정부의 법규나 공식 숫자 사례가 아니며 기존 활동
+    증빙 연결과 부가세 계산은 유지한다. 국내 10% 과세와 정수 원 단위 분리가 가능한 최종 공급가액만 지원한다.
 - rule_id: D.aggregate
   description: 정규화 업체별 합산, 품목별 공급가액 기준 개당 최저 단가 비교, 동률은 업체명 오름차순
   source: DATA_SPEC.md 집계 요구 및 입력 문서 comparison_basis 명시 규약

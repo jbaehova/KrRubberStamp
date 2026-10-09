@@ -1,0 +1,108 @@
+- example: 개당 할인과 행 할인 및 상품 전체 할인 뒤 과세 배송 추가
+  facts:
+    source_contract: vat_itemized_activity_evidence_v1
+    billing_policy: 확정 상품행은 정수수량에 공급가 단가에서개당할인을뺀가격을곱하고해당행전체할인을뺀다. 모든상품행을합친뒤문서전체상품할인을빼고동일공급자의과세배송공급가를더한다. 배송에는상품할인을적용하지않고VAT는최종문서공급가의10%로한번구한다.
+    taxpayer_type: general
+    period_start: '2026-01-01'
+    period_end: '2026-06-30'
+    business_name: 가상접이소품
+    business_type: individual
+    consumer_facing_business: true
+    prior_year_site_supply_base: 120000000
+    receipt_credit_previously_claimed: 0
+    prepaid_assessed_vat: 0
+    scope_note: 국내 소비자 상대 개인 소매 납세자의 확정 인도 청구다. 청구서 행 가격은 모두 세액 별도 공급가이며 동일 업체 배송까지 전체 카드 전표를 정상 발급했다. 별도 전자나 매입은 없고 할인은 모두 확정 청구 금액 조건이다.
+    operations: []
+    activities: []
+    transactions:
+      - transaction_id: 접이인도
+        document_id: 접이카드
+        direction: sale
+        date: '2026-06-16'
+        description: 소품과 덮개 전량 배송 완료
+        taxable: true
+        evidence: card_receipt
+        invoice_issued: false
+        vat_separately_stated: false
+        counterparty_consumer: true
+        invoice_lines:
+          - {line_id: 접이소품, description: 접이 소품 세 개, quantity: 3, unit_supply_price: 100000, unit_discount: 10000, line_discount: 20000}
+          - {line_id: 보호덮개, description: 보호 덮개 두 개, quantity: 2, unit_supply_price: 50000, unit_discount: 0, line_discount: 0}
+        document_discount: 20000
+        freight_supply: 20000
+  manual_expected: {tax_base: 350000, output_vat: 35000, input_vat: 0, noncreditable_vat: 0, deductible_input_vat: 0, receipt_credit: 5005, prepaid_vat: 0, net_vat: 29995, payable_vat: 29995, refund_vat: 0, unique_transaction_count: 1}
+  manual_lines:
+    - {transaction_id: 접이인도, line_supplies: [250000, 100000], merchandise_supply: 350000, document_discount: 20000, freight_supply: 20000, final_supply: 350000, final_vat: 35000, final_gross: 385000}
+  manual_reasoning: 3×(100000-10000)-20000=250000이고덮개는2×50000=100000이다. 상품총350000에서문서할인20000을뺀뒤배송20000을더해공급가350000/VAT35000/총액385000이다. 발행공제385000×13÷1000=5005이고순세금29995이다. 문서할인을개당할인처럼수량배하지않으며배송을별도한장매입처럼차감하지않는다.
+- example: 현재 인수 할인 재고와 선지급한 다음 기간 재고 구분
+  facts:
+    source_contract: vat_itemized_activity_evidence_v1
+    billing_policy: 실제 확정 인수와 완료 인도의 상품행을 수량×(공급가단가-개당할인)-행전체할인으로 계산한다. 상품행합계에서문서상품할인을빼고동일공급자의과세배송공급가를더한다. 배송은문서상품할인을공유하지않는다. 실제공급일은청구가격계산과독립적으로현재신고포함을정한다.
+    taxpayer_type: general
+    period_start: '2026-01-01'
+    period_end: '2026-06-30'
+    business_name: 가상담은매장
+    business_type: individual
+    consumer_facing_business: true
+    prior_year_site_supply_base: 90000000
+    receipt_credit_previously_claimed: 0
+    prepaid_assessed_vat: 0
+    scope_note: 할인은 납품 시 이미 확정된 사적 청구 조건이다. 국내 과세 판매에 전량 사용하는 재고이며 공통면세나 사적사용은 없다.7월 재고는6월 선지급했어도 실제 인수는7월5일이고 공급시기 특례나 조기 전자 발급은 없다. 그 적격 전자는7월 실제 인수일의 원본이다.
+    operations: [{operation_id: 매장판매, description: 국내 과세 소매 재고 판매, output_taxable: true}]
+    activities:
+      - {activity_id: 현재수령, transaction_id: 현재재고, document_ids: [현재전자], date: '2026-06-10', action: delivery, location: {name: 담은 판매창고, kind: worksite, organization: 가상담은매장}, participants: [{name: 가상해인, role: employee, organization: 가상담은매장}], operation_id: 매장판매, description: 직원이 할인 확정 재고를 현재 인수}
+      - {activity_id: 다음수령, transaction_id: 다음재고, document_ids: [다음전자], date: '2026-07-05', action: delivery, location: {name: 담은 판매창고, kind: worksite, organization: 가상담은매장}, participants: [{name: 가상해인, role: employee, organization: 가상담은매장}], operation_id: 매장판매, description: 선지급 주문의 실제 다음 기간 재고 인수}
+    transactions:
+      - transaction_id: 소비자인도
+        document_id: 담은카드
+        direction: sale
+        date: '2026-06-28'
+        description: 소비자 수납함 전량 인도
+        taxable: true
+        evidence: card_receipt
+        invoice_issued: false
+        vat_separately_stated: false
+        counterparty_consumer: true
+        invoice_lines: [{line_id: 수납함, description: 수납함 세 개, quantity: 3, unit_supply_price: 100000, unit_discount: 0, line_discount: 0}]
+        document_discount: 0
+        freight_supply: 0
+      - transaction_id: 현재재고
+        document_id: 현재전자
+        direction: purchase
+        date: '2026-06-10'
+        description: 할인 조건이 확정된 소매 판매 재고
+        taxable: true
+        evidence: tax_invoice
+        invoice_issued: true
+        vat_separately_stated: true
+        counterparty_consumer: false
+        supplier_general: true
+        vehicle_subject_excise: false
+        vehicle_direct_business: false
+        activity_id: 현재수령
+        invoice_lines: [{line_id: 현재재고행, description: 현재 판매 재고 여섯 개, quantity: 6, unit_supply_price: 22000, unit_discount: 2000, line_discount: 10000}]
+        document_discount: 5000
+        freight_supply: 10000
+      - transaction_id: 다음재고
+        document_id: 다음전자
+        direction: purchase
+        date: '2026-07-05'
+        description: 실제7월5일 인수한 선지급 재고
+        taxable: true
+        evidence: tax_invoice
+        invoice_issued: true
+        vat_separately_stated: true
+        counterparty_consumer: false
+        supplier_general: true
+        vehicle_subject_excise: false
+        vehicle_direct_business: false
+        activity_id: 다음수령
+        invoice_lines: [{line_id: 다음재고행, description: 다음 기간 판매 재고 네 개, quantity: 4, unit_supply_price: 50000, unit_discount: 0, line_discount: 0}]
+        document_discount: 0
+        freight_supply: 0
+  manual_expected: {tax_base: 300000, output_vat: 30000, input_vat: 11500, noncreditable_vat: 0, deductible_input_vat: 11500, receipt_credit: 4290, prepaid_vat: 0, net_vat: 14210, payable_vat: 14210, refund_vat: 0, unique_transaction_count: 2}
+  manual_lines:
+    - {transaction_id: 소비자인도, line_supplies: [300000], merchandise_supply: 300000, document_discount: 0, freight_supply: 0, final_supply: 300000, final_vat: 30000, final_gross: 330000}
+    - {transaction_id: 현재재고, line_supplies: [110000], merchandise_supply: 110000, document_discount: 5000, freight_supply: 10000, final_supply: 115000, final_vat: 11500, final_gross: 126500}
+    - {transaction_id: 다음재고, line_supplies: [200000], merchandise_supply: 200000, document_discount: 0, freight_supply: 0, final_supply: 200000, final_vat: 20000, final_gross: 220000}
+  manual_reasoning: 현재재고행은6×(22000-2000)-10000=110000이다. 문서할인5000후배송10000을더하면공급가115000과VAT11500이현재공제다. 다음재고VAT20000은7월실제인수라현재엔진에서제외한다. 현재판매VAT30000에서11500을차감하고카드330000의1.3%4290을차감해14210이다. 선지급금액으로공급시점을현재로변경하거나배송할인을이중차감하면틀린다.

@@ -17,6 +17,7 @@ from KrRubberStamp.export import (
 )
 from KrRubberStamp.io import read_json
 from KrRubberStamp.registry import DOMAINS
+from KrRubberStamp.release_scope import batch_rows
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -149,7 +150,7 @@ def build_reports(
         f"# KrRubberStamp {'개별 집필 미리보기' if preview else f'Batch {batch}'} 보고서",
         "",
         (
-            f"미완성 원고의 편집 검토 결과입니다. Batch {batch}의 1,200문항 완성을 의미하지 않습니다."
+            f"미완성 원고의 편집 검토 결과입니다. Batch {batch}의 {batch_rows(batch):,}문항 완성을 의미하지 않습니다."
             if preview
             else f"이번 보고서는 개별 집필을 완료한 Batch {batch}만 대상으로 합니다."
         ),
@@ -270,7 +271,7 @@ def build_reports(
         lines += [f"- [{label}]({_link(path, output)})" for label, path in available]
         lines += [
             "",
-            "각 기록의 명시된 범위에서 질문과 원자료 및 문서 관계를 직접 읽고, 조건을 바꾸어 요청 답의 변화 또는 불변성을 확인했습니다. 발견한 법률 전제와 날짜 모순 및 의미 중복을 교정했습니다. 이 기록을 전체 1,200문항의 전문가 승인으로 확대하지 않습니다.",
+            f"각 기록의 명시된 범위에서 질문과 원자료 및 문서 관계를 직접 읽고, 조건을 바꾸어 요청 답의 변화 또는 불변성을 확인했습니다. 발견한 법률 전제와 날짜 모순 및 의미 중복을 교정했습니다. 이 기록을 전체 {batch_rows(batch):,}문항의 전문가 승인으로 확대하지 않습니다.",
             "",
         ]
     lines += [
@@ -299,7 +300,7 @@ def build_reports(
         (
             "미완성 미리보기는 완성 배포본의 파일명과 내보내기 이름으로 게시할 수 없습니다."
             if preview
-            else f"uv run krt export-hf --batch {batch}은 이 배치 1,200문항의 JSONL과 입력 파일, 공개 정답 및 집필 원고 스냅샷과 데이터카드를 만듭니다. 누적 배포에는 --upto {batch}를 사용합니다. 내보내기 자체는 Hugging Face 업로드를 수행하지 않습니다."
+            else f"uv run krt export-hf --batch {batch}은 이 배치 {batch_rows(batch):,}문항의 JSONL과 입력 파일, 공개 정답 및 집필 원고 스냅샷과 데이터카드를 만듭니다. 누적 배포에는 --upto {batch}를 사용합니다. 내보내기 자체는 Hugging Face 업로드를 수행하지 않습니다."
         ),
         "",
         "각 문항과 데이터카드에 카나리아 GUID를 제공합니다. 카나리아 인지만으로 모델의 학습 포함을 확정할 수는 없습니다. 하네스는 입력 문서와 지시문 및 답안 스키마만 제공하며 공개 원고와 정답, trace와 추출 맵 및 카나리아 메타데이터를 모델에 제공하지 않습니다.",

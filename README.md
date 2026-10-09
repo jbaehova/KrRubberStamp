@@ -4,7 +4,7 @@ Korean office rubber stamp, as an AI benchmark dataset: auto-graded tasks on yea
 
 한국 사무 실무의 서류 업무를 한 문항씩 직접 설계한 공개 벤치마크입니다. Batch 1은 연말정산과 급여, 부가세 및 문서 추출 분야의 총 1,200문항입니다. 각 사례의 업무 목적을 정하고 사실과 증빙의 연결 관계를 작성한 뒤, 규칙 엔진으로 정답과 계산 과정을 확정했습니다. 이름과 금액만 바꾼 자동 생성 자료는 공개 평가본에서 제외했습니다.
 
-사용자의 최종 지시에 따라 이 프로젝트는 총 2,400문항으로 끝냅니다. 기존 Batch 1의 1,200문항에 Batch 2의 1,200문항을 추가 집필합니다. Batch 3과 Batch 4는 없습니다. 현재 완료된 공개본은 아래 Batch 1의 1,200문항입니다. 최종 검증 후 Hugging Face에 `KrRubberStamp-2.4K`로 게시하며 GitHub에서는 규칙 엔진과 채점기 및 재현 코드를 관리합니다.
+최종 공개 범위는 정확히 1,650문항입니다. 기존 Batch 1의 1,200문항에 Batch 2의 450문항을 추가합니다. 연말정산과 급여 및 부가세는 각각 100문항, 문서 추출은 150문항을 추가합니다. Batch 3과 Batch 4는 없습니다. 현재 완료된 공개본은 아래 Batch 1의 1,200문항입니다. 최종 검증 후 Hugging Face에 `KrRubberStamp-1.65K`로 게시하며 GitHub에서는 규칙 엔진과 채점기 및 재현 코드를 관리합니다.
 
 공개 문항 전체와 정답을 내려받아 평가하거나 학습에 사용할 수 있습니다. 새로운 시드의 자동 변형 자료가 필요하면 아래 보조 생성기를 실행하세요. 그 출력은 직접 집필한 Batch 1과 별도의 자료입니다.
 
@@ -12,6 +12,18 @@ Korean office rubber stamp, as an AI benchmark dataset: auto-graded tasks on yea
 uv sync --frozen
 uv run krt generate --seed 987654 --n 1200 --output data/generated_seed_987654
 ```
+
+## 최종 공개 구성
+
+| 분야 | Batch 1 | Batch 2 추가 | 최종 합계 |
+|---|---:|---:|---:|
+| `A_yearend` | 300 | 100 | 400 |
+| `B_payroll` | 300 | 100 | 400 |
+| `C_vat` | 300 | 100 | 400 |
+| `D_extract` | 300 | 150 | 450 |
+| 합계 | 1,200 | 450 | 1,650 |
+
+Batch 2의 연말정산과 급여 및 부가세는 분야별 easy 30개, medium 45개, hard 25개입니다. 문서 추출은 이미 집필한 150개를 유지하며 easy 45개, medium 68개, hard 37개입니다. 최종 난이도 합계는 easy 495개, medium 743개, hard 412개입니다.
 
 ## Batch 1
 
@@ -60,7 +72,7 @@ uv run krt harness --data data/batch_1 --solver null --answers answers/null --re
 
 [`authored/batch_1/`](authored/batch_1/)에는 1,200개의 개별 집필 원본이 있습니다. 각 원본은 업무 요청과 사실값을 담고 있으며 답안 필드와 증빙 배치를 명시합니다. 빌더는 문항 내용이나 숫자를 새로 생성하지 않습니다. 누락된 사실을 채우거나 문서 수를 맞추기 위해 내용을 자동으로 나누지도 않습니다.
 
-새로운 출력 경로를 지정해 정답과 입력 문서를 다시 만들 수 있습니다. 기존 파일이 들어 있는 출력 경로는 덮어쓰지 않습니다. 분야별 300문항과 난이도 비율이 맞지 않거나 검증을 통과하지 못하면 최종 배치를 게시하지 않습니다.
+새로운 출력 경로를 지정해 정답과 입력 문서를 다시 만들 수 있습니다. 기존 파일이 들어 있는 출력 경로는 덮어쓰지 않습니다. 배치별로 정한 분야 수량과 난이도 수량 및 문항 ID 범위가 맞지 않거나 검증을 통과하지 못하면 최종 배치를 게시하지 않습니다. Batch 1은 분야별 300개이며 Batch 2는 A와 B 및 C가 각각 100개, D가 150개입니다.
 
 ```sh
 uv run krt build-authored --batch 1 --output data/batch_1_rebuilt
@@ -78,9 +90,20 @@ uv run --with datasets python scripts/export_authored_verification.py exports/up
 
 `exports/upto_1/`에 `KrRubberStamp-1.2K`의 데이터셋 카드와 JSONL을 만들고 입력 문서 및 집필 원본을 함께 복사합니다. 두 번째 명령은 로컬 JSONL을 Hugging Face Datasets로 읽고 자료 참조와 원본 해시를 확인합니다. 업로드는 하지 않습니다. 모든 문항과 정답을 공개하며 비공개 분할은 없습니다. 각 문항과 데이터셋 카드에는 학습 데이터 오염을 확인하기 위한 카나리아 문자열이 있습니다.
 
+최종 공개본은 두 배치를 모두 검증한 후 다음 명령으로 준비하고 게시합니다. 게시 스크립트는 정확히 1,650문항과 배치 [1, 2] 및 현재 원고의 검토 SHA256을 확인합니다.
+
+```sh
+uv run krt export-hf --upto 2
+uv run --with datasets python scripts/export_authored_verification.py exports/upto_2
+uv run --with 'huggingface-hub>=2.2.0' python scripts/publish_hf.py exports/upto_2
+uv run --with 'huggingface-hub>=2.2.0' python scripts/publish_hf.py exports/upto_2 --publish
+```
+
+첫 게시 명령은 로컬 검증이며 마지막 명령이 승인된 Hugging Face 공개 업로드를 수행합니다. Hugging Face 인증은 기존 로컬 로그인 정보를 사용합니다.
+
 ## 규칙과 검증 범위
 
-[`rules/sources.yaml`](rules/sources.yaml)은 76개 규칙의 출처를 기록합니다. 이 중 30개는 공식 수치 예시로 확인했고, 나머지 46개는 `verified: false`로 공개합니다. [미검증 규칙](reports/unverified_rules.md)과 [DATA_SPEC.md](DATA_SPEC.md)에서 근거와 계산 범위를 확인할 수 있습니다.
+[`rules/sources.yaml`](rules/sources.yaml)은 78개 규칙의 출처를 기록합니다. 이 중 30개는 공식 수치 예시로 확인했고, 나머지 48개는 `verified: false`로 공개합니다. [미검증 규칙](reports/unverified_rules.md)과 [DATA_SPEC.md](DATA_SPEC.md)에서 근거와 계산 범위를 확인할 수 있습니다.
 
 PDF와 XLSX 및 HWPX와 PNG를 지원합니다. PNG는 PDF 원본의 보관 사본이므로 스캔만 읽는 OCR 평가를 보장하지 않습니다. HWPX는 ZIP 구조와 XML 추출을 검사했으며 한컴 실제 앱 호환성은 별도 검수 대상입니다. 모델 코드 실행용 Docker 명령은 테스트했지만 이 구축 환경에서 실제 Docker 엔진 실행은 확인하지 못했습니다.
 

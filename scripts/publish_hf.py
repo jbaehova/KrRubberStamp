@@ -1,4 +1,4 @@
-"""Publish only the complete, verified 2,400-case export with explicit --publish.
+"""Publish only the complete, verified 1,650-case export with explicit --publish.
 
 Dry-run is entirely local. Authentication comes from huggingface_hub's existing
 login, never from arguments or copied credentials. Re-run a failed publish with
@@ -21,11 +21,12 @@ from KrRubberStamp.export import (
     task_set_sha256,
 )
 from KrRubberStamp.io import read_json
+from KrRubberStamp.release_scope import AUTHORIZED_BATCHES, FINAL_DATASET_NAME, FINAL_ROWS
 from KrRubberStamp.tasks import scenario_hash
 
-DATASET_NAME = "KrRubberStamp-2.4K"
-BATCHES = [1, 2]
-ROWS = 2400
+DATASET_NAME = FINAL_DATASET_NAME
+BATCHES = list(AUTHORIZED_BATCHES)
+ROWS = FINAL_ROWS
 ROOT_FILES = {
     "README.md",
     "export_manifest.json",
@@ -66,7 +67,7 @@ def artifact(folder, relative):
     return target
 
 
-def inventory(folder):
+def inventory(folder, *, declared_case_files=None):
     files = []
     for path in sorted(folder.rglob("*")):
         relative = path.relative_to(folder)
@@ -88,6 +89,12 @@ def inventory(folder):
             batch_directory = re.fullmatch(r"batch_([0-9]+)", relative.parts[1])
             if batch_directory and int(batch_directory[1]) not in BATCHES:
                 raise ValueError("Only Batch 1 and Batch 2 artifacts may be published")
+        if (
+            declared_case_files is not None
+            and relative.parts[0] in {"data", "authored"}
+            and relative.as_posix() not in declared_case_files
+        ):
+            raise ValueError(f"Unreferenced case artifact cannot be published: {relative}")
         files.append(relative.as_posix())
     return tuple(files)
 
@@ -117,6 +124,15 @@ def check_editorial_acceptances(folder, records):
                 raise ValueError("Editorial acceptance does not cover the current case identities")
             if sha256(artifact(folder, source)) != chunk.get("source_sha256"):
                 raise ValueError("Manuscript changed after its editorial review")
+            source_cases = read_json(artifact(folder, source))
+            if (
+                not isinstance(source_cases, list)
+                or len(source_cases) != len(ids)
+                or {case["case_id"] for case in source_cases} != set(ids)
+            ):
+                raise ValueError(
+                    "Reviewed manuscript includes cases outside its accepted identities"
+                )
             seen.add(source)
         if seen != set(expected):
             raise ValueError("Expansion manuscripts are still awaiting editorial review")
@@ -127,13 +143,15 @@ def preflight(folder):
     folder = Path(folder).resolve()
     manifest = read_json(artifact(folder, "export_manifest.json"))
     if (
-        manifest.get("rows") != ROWS
+        type(manifest.get("rows")) is not int
+        or manifest.get("rows") != ROWS
         or manifest.get("dataset_name") != DATASET_NAME
         or manifest.get("batches") != BATCHES
+        or any(type(batch) is not int for batch in manifest.get("batches", []))
         or manifest.get("preview") is not False
         or manifest.get("authorship") != "individually_written"
     ):
-        raise ValueError("Publishing requires the complete individually written 2,400-case export")
+        raise ValueError("Publishing requires the complete individually written 1,650-case export")
     for relative in sorted(ROOT_FILES | {"data/train.jsonl", "rules/sources.yaml"}):
         artifact(folder, relative)
     if sha256(folder / "data/train.jsonl") != manifest.get("jsonl_sha256"):
@@ -163,6 +181,10 @@ def preflight(folder):
     by_id = {record["task"]["task_id"]: record for record in records}
     seen, counts, samples = set(), Counter(), {}
     source_cache = {}
+    declared_case_files = {
+        "data/train.jsonl",
+        *(f"data/batch_{batch}/manifest.json" for batch in BATCHES),
+    }
     for line in (folder / "data/train.jsonl").read_text(encoding="utf-8").splitlines():
         row = json.loads(line)
         task_id = row["task_id"]
@@ -193,6 +215,7 @@ def preflight(folder):
             if row.get(key) != f"{base}/{filename}":
                 raise ValueError("JSONL artifact path differs from the task identity")
             artifact(folder, row[key])
+            declared_case_files.add(row[key])
         for key in ("answer_schema", "gold", "trace"):
             if not isinstance(row.get(key), str):
                 raise ValueError("Heterogeneous answer fields must remain JSON strings")
@@ -212,10 +235,12 @@ def preflight(folder):
             raise ValueError("JSONL input document list differs from task.yaml")
         for item in row["input_files"]:
             artifact(folder, item["path"])
+            declared_case_files.add(item["path"])
             samples.setdefault((batch, task["domain"], item["format"]), item["path"])
         source = f"authored/{task['authorship']['source_file']}"
         if row.get("authored_source_path") != source:
             raise ValueError("JSONL authored source path differs")
+        declared_case_files.add(source)
         if source not in source_cache:
             cases = read_json(artifact(folder, source))
             source_cache[source] = {item["case_id"]: item for item in cases}
@@ -227,7 +252,12 @@ def preflight(folder):
         counts[f"{task['domain']}/{task['difficulty']}"] += 1
     if len(seen) != ROWS or dict(counts) != manifest.get("counts"):
         raise ValueError("JSONL rows or category counts differ from the release manifest")
-    return PublishPlan(folder, inventory(folder), tuple(sorted(samples.values())), manifest)
+    return PublishPlan(
+        folder,
+        inventory(folder, declared_case_files=declared_case_files),
+        tuple(sorted(samples.values())),
+        manifest,
+    )
 
 
 def verify_remote(api, plan, repo_id):
@@ -294,7 +324,7 @@ def publish(plan, api):
             *[f"**/{part}/*" for part in sorted(IGNORED_PARTS)],
             *[f"**/{name}" for name in sorted(SECRET_NAMES)],
         ],
-        commit_message="Publish individually written KrRubberStamp 2.4K benchmark",
+        commit_message="Publish individually written KrRubberStamp 1.65K benchmark",
     )
     result = verify_remote(api, plan, repo_id)
     result.update(

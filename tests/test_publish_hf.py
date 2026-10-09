@@ -13,8 +13,8 @@ from scripts import publish_hf as publishing
 @pytest.fixture
 def minimum_export(tmp_path):
     manifest = {
-        "rows": 2400,
-        "dataset_name": "KrRubberStamp-2.4K",
+        "rows": 1650,
+        "dataset_name": "KrRubberStamp-1.65K",
         "batches": [1, 2],
         "preview": False,
         "authorship": "individually_written",
@@ -25,7 +25,7 @@ def minimum_export(tmp_path):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("fixture\n", encoding="utf-8")
     (tmp_path / "data/train.jsonl").write_bytes(b"\n")
-    (tmp_path / "README.md").write_text("KrRubberStamp-2.4K data/train.jsonl\n")
+    (tmp_path / "README.md").write_text("KrRubberStamp-1.65K data/train.jsonl\n")
     (tmp_path / "export_manifest.json").write_text(json.dumps(manifest))
     return tmp_path, manifest
 
@@ -34,6 +34,10 @@ def minimum_export(tmp_path):
     "override",
     [
         {"rows": 1200},
+        {"rows": 1800},
+        {"rows": 2400},
+        {"rows": 1650.0},
+        {"batches": [True, 2]},
         {"rows": 3600},
         {"rows": 4800},
         {"preview": True},
@@ -81,7 +85,7 @@ def test_dry_run_does_not_authenticate_or_publish(minimum_export, monkeypatch, c
     assert publishing.main([str(folder)]) == 0
     result = json.loads(capsys.readouterr().out)
     assert result["dry_run"] is True and result["uploaded"] is False
-    assert result["rows"] == 2400 and result["dataset_name"] == "KrRubberStamp-2.4K"
+    assert result["rows"] == 1650 and result["dataset_name"] == "KrRubberStamp-1.65K"
 
 
 def test_private_files_and_symlink_inputs_cannot_enter_export(tmp_path):
@@ -104,6 +108,18 @@ def test_unrequested_batch_artifacts_cannot_enter_export(tmp_path, directory):
     path.write_text("[]\n")
     with pytest.raises(ValueError, match="Only Batch 1 and Batch 2"):
         publishing.inventory(tmp_path)
+
+
+@pytest.mark.parametrize(
+    "relative",
+    ["authored/batch_2/D_extract/cases_151_200.json", "data/batch_2/D_extract/B2_D151/extra.pdf"],
+)
+def test_unreferenced_case_artifact_cannot_hide_beside_1650_rows(tmp_path, relative):
+    path = tmp_path / relative
+    path.parent.mkdir(parents=True)
+    path.write_text("fixture\n")
+    with pytest.raises(ValueError, match="Unreferenced case artifact"):
+        publishing.inventory(tmp_path, declared_case_files={"data/train.jsonl"})
 
 
 def test_default_publish_folder_is_final_two_batch_export(monkeypatch):
@@ -142,19 +158,19 @@ def test_revision_pinned_download_detects_remote_corruption(tmp_path):
             assert kwargs["revision"] == revision
             return tmp_path / kwargs["filename"]
 
-    result = publishing.verify_remote(Hub(), plan, "fixture/KrRubberStamp-2.4K")
+    result = publishing.verify_remote(Hub(), plan, "fixture/KrRubberStamp-1.65K")
     assert result["revision"] == revision and result["downloaded_files_checked"] == len(names)
-    assert result["rows"] == 2400
+    assert result["rows"] == 1650
     bad = tmp_path / "bad"
     bad.write_bytes(b"corrupt")
     hub = Hub()
     original = hub.hf_hub_download
     hub.hf_hub_download = lambda **kw: bad if kw["filename"] == names[-1] else original(**kw)
     with pytest.raises(ValueError, match="Downloaded release artifact differs"):
-        publishing.verify_remote(hub, plan, "fixture/KrRubberStamp-2.4K")
+        publishing.verify_remote(hub, plan, "fixture/KrRubberStamp-1.65K")
     with pytest.raises(ValueError, match="Remote files differ"):
         publishing.verify_remote(
-            Hub(), replace(plan, files=names[:-1]), "fixture/KrRubberStamp-2.4K"
+            Hub(), replace(plan, files=names[:-1]), "fixture/KrRubberStamp-1.65K"
         )
 
 
@@ -197,6 +213,15 @@ def test_changed_manuscript_cannot_reuse_review(reviewed_manuscript):
     folder, path, _, _, records = reviewed_manuscript
     path.write_text('[{"case_id":"D001","unreviewed":"change"}]\n')
     with pytest.raises(ValueError, match="changed after"):
+        publishing.check_editorial_acceptances(folder, records)
+
+
+def test_review_hash_cannot_cover_an_extra_unpublished_case(reviewed_manuscript):
+    folder, path, acceptance, ledger, records = reviewed_manuscript
+    path.write_text('[{"case_id":"D001"},{"case_id":"D151"}]\n')
+    ledger["accepted_chunks"][0]["source_sha256"] = publishing.sha256(path)
+    acceptance.write_text(json.dumps(ledger))
+    with pytest.raises(ValueError, match="outside its accepted identities"):
         publishing.check_editorial_acceptances(folder, records)
 
 

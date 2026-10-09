@@ -25,6 +25,13 @@ def calculate(domain: str, scenario: dict):
         answer, trace = import_module("rules.a_yearend.engine").calculate(normalized)
         return answer, [derivation_trace(scenario, normalized), *trace]
     if domain == "B_payroll" and "source_contract" in scenario:
+        from rules.b_payroll.statement_revisions import (
+            CONTRACT as REVISIONS,
+            calculate as select_month,
+        )
+
+        if scenario["source_contract"] == REVISIONS:
+            return select_month(scenario)
         from rules.b_payroll.bank_reconciliation import CONTRACT, calculate as reconcile_bank
 
         if scenario["source_contract"] == CONTRACT:
@@ -35,6 +42,10 @@ def calculate(domain: str, scenario: dict):
         answer, trace = import_module("rules.b_payroll.engine").calculate(normalized)
         return answer, [derivation_trace(scenario, normalized), *trace]
     if domain == "C_vat" and "source_contract" in scenario:
+        from rules.c_vat.itemized_activity import CONTRACT as ITEMIZED, calculate as price_items
+
+        if scenario["source_contract"] == ITEMIZED:
+            return price_items(scenario)
         from rules.c_vat.batch_allocation import CONTRACT as ALLOCATION, calculate as allocate_batch
 
         if scenario["source_contract"] == ALLOCATION:

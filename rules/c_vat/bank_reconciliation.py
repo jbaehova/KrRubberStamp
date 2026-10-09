@@ -8,7 +8,7 @@ from collections import defaultdict
 from copy import deepcopy
 from datetime import date
 
-from . import document_lifecycle, document_reconciliation, engine, evidence
+from . import document_lifecycle, document_reconciliation, engine, evidence, itemized_activity
 
 CONTRACT = "vat_bank_reconciliation_v1"
 RULE_ID = "C_VAT_BANK_RECONCILIATION"
@@ -26,7 +26,12 @@ TRANSFER_FIELDS = {
     "kind",
     "amount",
 }
-CHILD_CONTRACTS = {evidence.CONTRACT, document_reconciliation.CONTRACT, document_lifecycle.CONTRACT}
+CHILD_CONTRACTS = {
+    evidence.CONTRACT,
+    document_reconciliation.CONTRACT,
+    document_lifecycle.CONTRACT,
+    itemized_activity.CONTRACT,
+}
 CHILD_REQUIRED = {
     "source_contract",
     "taxpayer_type",
@@ -185,12 +190,14 @@ def _child(facts, business, cutoff):
     contract = _text(facts.get("source_contract"), "child source_contract")
     if contract not in CHILD_CONTRACTS:
         raise ValueError("Unsupported or nested VAT child source contract")
-    if contract == evidence.CONTRACT:
+    if contract in {evidence.CONTRACT, itemized_activity.CONTRACT}:
         specific = {"transactions"}
     else:
         specific = {"supplies", "payments", "evidence_documents", "scope_note"}
     if contract == document_lifecycle.CONTRACT:
         specific |= {"processing_date", "document_status_records"}
+    if contract == itemized_activity.CONTRACT:
+        specific |= {"billing_policy"}
     required = CHILD_REQUIRED | specific
     if not required <= facts.keys() or set(facts) - required - CHILD_OPTIONAL:
         raise ValueError("VAT child source has unknown or missing fields")
@@ -230,6 +237,10 @@ def _child(facts, business, cutoff):
         raise ValueError("Lifecycle processing_date is after the bank cutoff")
     if contract == evidence.CONTRACT:
         _activity_rows(facts["transactions"])
+    if contract == itemized_activity.CONTRACT:
+        # The strict itemized validator owns the complete raw child, including
+        # invoice prices. No derived engine ledger is accepted as parent input.
+        return itemized_activity.calculate(deepcopy(facts))
     # Import only after the allowlist check. Registry can route this optional
     # parent without permitting a child to recurse into another bank contract.
     from KrRubberStamp.registry import calculate as calculate_child
