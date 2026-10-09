@@ -1,0 +1,5828 @@
+[
+  {
+    "case_id": "A051",
+    "mutations": [
+      [
+        "pay_statements.1.gross_pay",
+        13000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "HAN",
+      "processing_policy": "직원 번호가 일치하는 발급본을 사용자와 지급기간별로 합산한다. 같은 기간은 최고 발급 수정본을 쓰고 초안은 제외한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상한결",
+        "employee_age": 38,
+        "employee_sex": "female",
+        "marital_status": "married",
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "HAN-A",
+          "employer_id": "가상도예",
+          "employee_id": "HAN",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 28000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1600000,
+          "withheld_local_tax": 160000
+        },
+        {
+          "statement_id": "HAN-B",
+          "employer_id": "가상수업",
+          "employee_id": "HAN",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 13000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 110000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 49000000,
+        "after": 39000000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": 599500,
+        "after": -986700
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 12200000,
+        "after": 11100000
+      },
+      {
+        "field": "employer_totals.1.gross_pay",
+        "before": 23000000,
+        "after": 13000000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 35300000,
+        "after": 25900000
+      },
+      {
+        "field": "tax_calculation.additional_deduction",
+        "before": 0,
+        "after": 500000
+      },
+      {
+        "field": "tax_calculation.employment_credit",
+        "before": 660000,
+        "after": 692000
+      },
+      {
+        "field": "annual_gross",
+        "before": 51000000,
+        "after": 41000000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 324500,
+        "after": 180300
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 790000,
+        "after": 822000
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 36800000,
+        "after": 27900000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 3245000,
+        "after": 1803000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 54500,
+        "after": -89700
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": 545000,
+        "after": -897000
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 4035000,
+        "after": 2625000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A052",
+    "mutations": [
+      [
+        "calculation_facts.employee_disabled",
+        false
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "ONY",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급 수정본을 채택하여 연간 금액을 합산한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상온유",
+        "employee_age": 72,
+        "employee_disabled": false,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "ONY-L",
+          "employer_id": "가상지도",
+          "employee_id": "ONY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 22000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 650000,
+          "withheld_local_tax": 65000
+        },
+        {
+          "statement_id": "ONY-R",
+          "employer_id": "가상검수",
+          "employee_id": "ONY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 13000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 300000,
+          "withheld_local_tax": 30000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -368500,
+        "after": -38500
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 18300000,
+        "after": 20300000
+      },
+      {
+        "field": "tax_calculation.additional_deduction",
+        "before": 3000000,
+        "after": 1000000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 61500,
+        "after": 91500
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 615000,
+        "after": 915000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -33500,
+        "after": -3500
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -335000,
+        "after": -35000
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 1485000,
+        "after": 1785000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A053",
+    "mutations": [
+      [
+        "pay_statements.1.gross_pay",
+        100000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "TAE",
+      "processing_policy": "같은 직원의 사용자별 지급기간 발급본을 합산하며 동일 사용자 기간은 최고 발급 수정본 하나를 사용한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상태산",
+        "employee_age": 49,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "TAE-RESEARCH",
+          "employer_id": "가상연구",
+          "employee_id": "TAE",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 260000000,
+          "non_taxable_pay": 2400000,
+          "withheld_national_tax": 65000000,
+          "withheld_local_tax": 6500000
+        },
+        {
+          "statement_id": "TAE-DESIGN",
+          "employer_id": "가상설계",
+          "employee_id": "TAE",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 100000000,
+          "non_taxable_pay": 0,
+          "withheld_national_tax": 40000000,
+          "withheld_local_tax": 4000000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 437600000,
+        "after": 357600000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": 38687000,
+        "after": 3530120
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 20000000,
+        "after": 19902000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 416100000,
+        "after": 336198000
+      },
+      {
+        "field": "annual_gross",
+        "before": 440000000,
+        "after": 360000000
+      },
+      {
+        "field": "employer_totals.0.gross_pay",
+        "before": 180000000,
+        "after": 100000000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 14017000,
+        "after": 10820920
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 417600000,
+        "after": 337698000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 140170000,
+        "after": 108209200
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 3517000,
+        "after": 320920
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": 35170000,
+        "after": 3209200
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 140500000,
+        "after": 108539200
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A054",
+    "mutations": [
+      [
+        "pay_statements.1.withheld_national_tax",
+        2600000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "SY054",
+      "processing_policy": "각 사용자와 같은 지급기간의 최고 발급차수를 선택한다. 국세와 지방세는 각각 실제 징수액으로 합산하며 합산 징수 총액으로 서로 대체하지 않는다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상선율",
+        "employee_age": 37,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "deduction_choice": "standard",
+        "scope_note": "국내 거주 근로소득자이고 두 국내 사용자에게 병행 근무했다. 각 사용자에게 받은 연간 발급본 및 최종 정정본이 모두 제출됐다. 정정 효력은 확정돼 있고 미발급이나 귀속 충돌은 없다. 특별 신청이나 가족 신청은 없다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "SY-L-1",
+          "employer_id": "가상수선실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2400000,
+          "withheld_local_tax": 170000
+        },
+        {
+          "statement_id": "SY-L-3",
+          "employer_id": "가상수선실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 3,
+          "status": "issued",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2600000,
+          "withheld_local_tax": 170000
+        },
+        {
+          "statement_id": "SY-R-1",
+          "employer_id": "가상직물실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 23000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 180000
+        },
+        {
+          "statement_id": "SY-R-2",
+          "employer_id": "가상직물실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 23000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 80000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": {
+      "settlement_national_tax": -312500,
+      "settlement_local_tax": 88750
+    },
+    "passed": true
+  },
+  {
+    "case_id": "A055",
+    "mutations": [
+      [
+        "calculation_facts.education.0.amount",
+        14000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "ARI",
+      "processing_policy": "같은 직원의 각 사용자 지급기간 발급본을 연간 합산한다. 같은 사용자 기간은 최고 발급 수정차수로 선택한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상아림",
+        "employee_age": 30,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "education": [
+          {
+            "person_id": "self",
+            "level": "graduate",
+            "amount": 14000000,
+            "date": "2025-03-15"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "ARI-ONE",
+          "employer_id": "가상낮공방",
+          "employee_id": "ARI",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 31000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1000000,
+          "withheld_local_tax": 100000
+        },
+        {
+          "statement_id": "ARI-TWO",
+          "employer_id": "가상밤학교",
+          "employee_id": "ARI",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1000000,
+          "withheld_local_tax": 100000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": 440000,
+        "after": 770000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 240000,
+        "after": 270000
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 3060000,
+        "after": 2760000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 2400000,
+        "after": 2700000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 40000,
+        "after": 70000
+      },
+      {
+        "field": "tax_calculation.education_credit",
+        "before": 2400000,
+        "after": 2100000
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": 400000,
+        "after": 700000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A056",
+    "mutations": [
+      [
+        "calculation_facts.medical.0.amount",
+        2000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "SEH",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급본을 합쳐 연간 원천 금액을 확정한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상세하",
+        "employee_age": 35,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "medical": [
+          {
+            "person_id": "self",
+            "kind": "ordinary",
+            "amount": 2000000,
+            "date": "2025-02-20"
+          },
+          {
+            "person_id": "self",
+            "kind": "infertility",
+            "amount": 3600000,
+            "date": "2025-09-12"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "SEH-A",
+          "employer_id": "가상현장",
+          "employee_id": "SEH",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 48000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 2200000,
+          "withheld_local_tax": 220000
+        },
+        {
+          "statement_id": "SEH-B",
+          "employer_id": "가상설문",
+          "employee_id": "SEH",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 22000000,
+          "non_taxable_pay": 0,
+          "withheld_national_tax": 900000,
+          "withheld_local_tax": 90000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": 2602600,
+        "after": 2437600
+      },
+      {
+        "field": "tax_calculation.medical_credit",
+        "before": 918000,
+        "after": 1068000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 546600,
+        "after": 531600
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 1578000,
+        "after": 1728000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 5466000,
+        "after": 5316000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 236600,
+        "after": 221600
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": 2366000,
+        "after": 2216000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A057",
+    "mutations": [
+      [
+        "pay_statements.2.employee_id",
+        "BM057"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "BM057",
+      "processing_policy": "대상 직원 번호로 귀속을 확인한 뒤 사용자 및 지급기간별 최고 발급본을 선택한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상보민",
+        "employee_age": 29,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "scope_note": "이 검증에서는 RV-9도 BM057 직원의 발급본이며 다른 사람의 자료가 아니다. 나머지 주거 및 재직 사실은 원래 자료와 같다.",
+        "rent": {
+          "contract_holder_person_id": "self",
+          "identity_records": [
+            {
+              "person_id": "self",
+              "name": "가상보민",
+              "relation": "self"
+            }
+          ],
+          "contract_address": "가상버들길 21 502호",
+          "resident_registration_address": "가상버들길21 502호",
+          "household_homes_at_year_end": [],
+          "household_head": true,
+          "area_sqm": 55,
+          "standard_value": 260000000,
+          "payments": [
+            {
+              "amount": 8400000,
+              "date": "2025-12-05"
+            }
+          ]
+        }
+      },
+      "pay_statements": [
+        {
+          "statement_id": "BM-1",
+          "employer_id": "가상분류소",
+          "employee_id": "BM057",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 57000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 3500000,
+          "withheld_local_tax": 350000
+        },
+        {
+          "statement_id": "BM-2",
+          "employer_id": "가상분류소",
+          "employee_id": "BM057",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 55000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 3400000,
+          "withheld_local_tax": 340000
+        },
+        {
+          "statement_id": "RV-9",
+          "employer_id": "가상분류소",
+          "employee_id": "BM057",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 9,
+          "status": "issued",
+          "gross_pay": 91000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 10000000,
+          "withheld_local_tax": 1000000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": {
+      "total_salary": 90000000,
+      "rent_credit": 0,
+      "final_national_tax": 11560000
+    },
+    "passed": true
+  },
+  {
+    "case_id": "A058",
+    "mutations": [
+      [
+        "dependents.0.income_amount",
+        2000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상주하",
+      "employee_age": 40,
+      "annual_gross": 54000000,
+      "non_taxable": 2000000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "sp",
+          "relation": "spouse",
+          "age": 39,
+          "income_amount": 2000000,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "sp",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상주하",
+            "relation": "self"
+          },
+          {
+            "person_id": "sp",
+            "name": "가상주하배",
+            "relation": "spouse"
+          }
+        ],
+        "contract_address": "가상여울길 26 201호",
+        "resident_registration_address": "가상여울길26 201호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 54,
+        "standard_value": 220000000,
+        "payments": [
+          {
+            "amount": 6600000,
+            "date": "2025-11-30"
+          }
+        ]
+      },
+      "insurance": [
+        {
+          "person_id": "sp",
+          "kind": "general",
+          "amount": 800000,
+          "date": "2025-05-08"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "final_national_tax",
+        "before": 2359500,
+        "after": 3802500
+      },
+      {
+        "field": "rent_credit",
+        "before": 1122000,
+        "after": 0
+      },
+      {
+        "field": "basic_deduction",
+        "before": 3000000,
+        "after": 1500000
+      },
+      {
+        "field": "insurance_credit",
+        "before": 96000,
+        "after": 0
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A059",
+    "mutations": [
+      [
+        "calculation_facts.public_pension_paid",
+        500000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "JAI",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급 원천증명서를 선택하고 연간 금액을 합산한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상재인",
+        "employee_age": 29,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "public_pension_paid": 500000,
+        "pension_accounts": {
+          "pension_savings": 3000000,
+          "irp": 0
+        },
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "JAI-S",
+          "employer_id": "가상초기",
+          "employee_id": "JAI",
+          "period_start": "2025-01-01",
+          "period_end": "2025-04-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 7000000,
+          "non_taxable_pay": 400000,
+          "withheld_national_tax": 80000,
+          "withheld_local_tax": 8000
+        },
+        {
+          "statement_id": "JAI-E",
+          "employer_id": "가상후기",
+          "employee_id": "JAI",
+          "period_start": "2025-05-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 15000000,
+          "non_taxable_pay": 800000,
+          "withheld_national_tax": 220000,
+          "withheld_local_tax": 22000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 9430000,
+        "after": 10430000
+      },
+      {
+        "field": "tax_calculation.employment_credit",
+        "before": 311190,
+        "after": 344190
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 891190,
+        "after": 924190
+      },
+      {
+        "field": "tax_calculation.pension_deduction",
+        "before": 1500000,
+        "after": 500000
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 565800,
+        "after": 625800
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A060",
+    "mutations": [
+      [
+        "pay_statements.2.gross_pay",
+        29000000
+      ],
+      [
+        "pay_statements.3.gross_pay",
+        29000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "SB060",
+      "processing_policy": "내용까지 같은 발급번호 재전송은 한 번 취급하고 대상 직원의 사용자 및 지급기간별 최고 발급본을 선택한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상새봄",
+        "employee_age": 41,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "deduction_choice": "standard",
+        "scope_note": "이 검증의 두 하반기 최신 행은 모두 지급총액 2900만원으로 동일한 번호와 내용의 재전송이다. 상반기는 별도 기간의 지급이며 나머지 사실은 같다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "SB-FIRST",
+          "employer_id": "가상인화소",
+          "employee_id": "SB060",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 28000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1200000,
+          "withheld_local_tax": 120000
+        },
+        {
+          "statement_id": "SB-SECOND-1",
+          "employer_id": "가상인화소",
+          "employee_id": "SB060",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 26000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1050000,
+          "withheld_local_tax": 105000
+        },
+        {
+          "statement_id": "SB-SECOND-2",
+          "employer_id": "가상인화소",
+          "employee_id": "SB060",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 29000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1500000,
+          "withheld_local_tax": 150000
+        },
+        {
+          "statement_id": "SB-SECOND-2",
+          "employer_id": "가상인화소",
+          "employee_id": "SB060",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 29000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1500000,
+          "withheld_local_tax": 150000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": {
+      "total_salary": 55000000,
+      "tax_base": 41000000,
+      "final_national_tax": 4100000
+    },
+    "passed": true
+  },
+  {
+    "case_id": "A061",
+    "mutations": [
+      [
+        "dependents.0.age",
+        65
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상유건",
+      "employee_age": 43,
+      "annual_gross": 62400000,
+      "non_taxable": 2400000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "dad",
+          "relation": "parent",
+          "age": 65,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "dad",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상유건",
+            "relation": "self"
+          },
+          {
+            "person_id": "dad",
+            "name": "가상유건부",
+            "relation": "parent"
+          }
+        ],
+        "contract_address": "가상동산길 5 103호",
+        "resident_registration_address": "가상동산길5 103호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 70,
+        "standard_value": 300000000,
+        "payments": [
+          {
+            "amount": 9000000,
+            "date": "2025-12-05"
+          }
+        ]
+      },
+      "medical": [
+        {
+          "person_id": "dad",
+          "kind": "ordinary",
+          "amount": 10500000,
+          "date": "2025-07-11"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "medical_credit",
+        "before": 1050000,
+        "after": 1305000
+      },
+      {
+        "field": "final_national_tax",
+        "before": 2317500,
+        "after": 2062500
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A062",
+    "mutations": [
+      [
+        "calculation_facts.medical.0.amount",
+        6000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "EUN",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급 원천증명서만 연간 합산한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상은재",
+        "employee_age": 41,
+        "marital_status": "married",
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "dependents": [
+          {
+            "person_id": "sp",
+            "relation": "spouse",
+            "age": 40,
+            "income_amount": 12600000,
+            "earned_income_only": true,
+            "gross_salary": 21000000,
+            "supported": true,
+            "assigned_claimant": "self"
+          }
+        ],
+        "medical": [
+          {
+            "person_id": "sp",
+            "kind": "ordinary",
+            "amount": 6000000,
+            "date": "2025-08-09"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "EUN-ONE",
+          "employer_id": "가상본업",
+          "employee_id": "EUN",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 42000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 2200000,
+          "withheld_local_tax": 220000
+        },
+        {
+          "statement_id": "EUN-TWO",
+          "employer_id": "가상겸업",
+          "employee_id": "EUN",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 22000000,
+          "non_taxable_pay": 0,
+          "withheld_national_tax": 900000,
+          "withheld_local_tax": 90000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": 1822150,
+        "after": 1657150
+      },
+      {
+        "field": "tax_calculation.medical_credit",
+        "before": 471000,
+        "after": 621000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 475650,
+        "after": 460650
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 1131000,
+        "after": 1281000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 4756500,
+        "after": 4606500
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 165650,
+        "after": 150650
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": 1656500,
+        "after": 1506500
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A063",
+    "mutations": [
+      [
+        "calculation_facts.donations.0.amount",
+        20000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "DOH",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급본을 합산한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상도하",
+        "employee_age": 37,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "social_insurance": {
+          "health": 2000000,
+          "employment": 500000
+        },
+        "donations": [
+          {
+            "person_id": "self",
+            "kind": "political",
+            "amount": 20000000,
+            "date": "2025-11-02"
+          }
+        ],
+        "deduction_choice": "itemized",
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "DOH-A",
+          "employer_id": "가상검사",
+          "employee_id": "DOH",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 26000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1400000,
+          "withheld_local_tax": 140000
+        },
+        {
+          "statement_id": "DOH-B",
+          "employer_id": "가상교습",
+          "employee_id": "DOH",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 16000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 600000,
+          "withheld_local_tax": 60000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 4659909,
+        "after": 3759909
+      },
+      {
+        "field": "tax_calculation.political_credit",
+        "before": 3975909,
+        "after": 3075909
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A064",
+    "mutations": [
+      [
+        "calculation_facts.dependents.1.age",
+        7
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "ROU",
+      "processing_policy": "대상 직원의 각 사용자 지급기간 최고 발급 증명서를 연간 합산한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상로운",
+        "employee_age": 39,
+        "marital_status": "married",
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "dependents": [
+          {
+            "person_id": "c1",
+            "relation": "child",
+            "age": 11,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self"
+          },
+          {
+            "person_id": "c2",
+            "relation": "child",
+            "age": 7,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self"
+          }
+        ],
+        "education": [
+          {
+            "person_id": "c1",
+            "level": "school",
+            "amount": 2800000,
+            "date": "2025-03-10"
+          },
+          {
+            "person_id": "c2",
+            "level": "school",
+            "amount": 2900000,
+            "date": "2025-03-12"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "ROU-H1",
+          "employer_id": "가상전임",
+          "employee_id": "ROU",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 25000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 110000
+        },
+        {
+          "statement_id": "ROU-H2",
+          "employer_id": "가상후임",
+          "employee_id": "ROU",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 25000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 110000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -904750,
+        "after": -574750
+      },
+      {
+        "field": "tax_calculation.child_credit",
+        "before": 550000,
+        "after": 250000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 137750,
+        "after": 167750
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 2065000,
+        "after": 1765000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 1377500,
+        "after": 1677500
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -82250,
+        "after": -52250
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -822500,
+        "after": -522500
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A065",
+    "mutations": [
+      [
+        "calculation_facts.employment_end",
+        "2025-11-30"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "CA065",
+      "processing_policy": "대상 직원의 발급 원천을 선택한다. 지출의 재직 적격 기간은 인사부가 확인한 employment_start와 employment_end이며 원천 지급기간에서 추정하지 않는다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상초아",
+        "employee_age": 35,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-11-30",
+        "deduction_choice": "itemized",
+        "scope_note": "이 검증에서는 직원이 11월 30일 실제 퇴직했으므로 12월 10일의 본인 학비는 퇴직 후 납부다. 원천 지급기간과 실제 재직기간을 각각 변경된 원자료대로 따른다.",
+        "education": [
+          {
+            "person_id": "self",
+            "level": "graduate",
+            "institution_type": "graduate_school",
+            "amount": 6000000,
+            "date": "2025-12-10",
+            "paid_by_self": true
+          }
+        ]
+      },
+      "pay_statements": [
+        {
+          "statement_id": "CA-JAN-NOV",
+          "employer_id": "가상문서관",
+          "employee_id": "CA065",
+          "period_start": "2025-01-01",
+          "period_end": "2025-11-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 51000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 3000000,
+          "withheld_local_tax": 300000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": {
+      "education_credit": 0,
+      "final_national_tax": 3517500
+    },
+    "passed": true
+  },
+  {
+    "case_id": "A066",
+    "mutations": [
+      [
+        "pay_statements.1.gross_pay",
+        32000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "CHA",
+      "processing_policy": "직원과 사용자 및 지급기간이 같은 발급본 중 최고 수정차수를 채택한다. 초안과 다른 직원은 제외한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상채린",
+        "employee_age": 34,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "medical": [
+          {
+            "person_id": "self",
+            "kind": "ordinary",
+            "amount": 9000000,
+            "date": "2025-08-12"
+          }
+        ],
+        "cards": [
+          {
+            "person_id": "self",
+            "category": "credit",
+            "amount": 9000000,
+            "date": "2025-08-12"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "CHA-1",
+          "employer_id": "가상동판",
+          "employee_id": "CHA",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 32000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1400000,
+          "withheld_local_tax": 140000
+        },
+        {
+          "statement_id": "CHA-2",
+          "employer_id": "가상동판",
+          "employee_id": "CHA",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 32000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1800000,
+          "withheld_local_tax": 180000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 40000000,
+        "after": 30000000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -909150,
+        "after": -1980000
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 11250000,
+        "after": 9750000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 27250000,
+        "after": 18525000
+      },
+      {
+        "field": "tax_calculation.medical_credit",
+        "before": 1170000,
+        "after": 1215000
+      },
+      {
+        "field": "tax_calculation.employment_credit",
+        "before": 684000,
+        "after": 740000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 97350,
+        "after": 0
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 1854000,
+        "after": 1955000
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 28750000,
+        "after": 20250000
+      },
+      {
+        "field": "tax_calculation.credit_card_deduction",
+        "before": 0,
+        "after": 225000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 973500,
+        "after": 0
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -82650,
+        "after": -180000
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -826500,
+        "after": -1800000
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 2827500,
+        "after": 1518750
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A067",
+    "mutations": [
+      [
+        "calculation_facts.education.0.amount",
+        8000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "NAY",
+      "processing_policy": "대상 직원 번호가 일치하는 사용자 및 지급기간별 최고 발급본을 선택하고 다른 직원은 제외한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상나영",
+        "employee_age": 28,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "education": [
+          {
+            "person_id": "self",
+            "level": "graduate",
+            "amount": 8000000,
+            "date": "2025-03-05"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "NAY-OWN",
+          "employer_id": "가상제도",
+          "employee_id": "NAY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 900000,
+          "withheld_local_tax": 90000
+        },
+        {
+          "statement_id": "NAY-COWORKER",
+          "employer_id": "가상제도",
+          "employee_id": "OTHER",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 60000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 5000000,
+          "withheld_local_tax": 500000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 2213625,
+        "after": 1913625
+      },
+      {
+        "field": "tax_calculation.education_credit",
+        "before": 1500000,
+        "after": 1200000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A068",
+    "mutations": [
+      [
+        "pay_statements.1.status",
+        "issued"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "YEW",
+      "processing_policy": "대상 직원과 사용자 및 지급기간의 발급본 중 최고 수정차수를 사용하며 초안은 차수가 높아도 제외한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상예원",
+        "employee_age": 32,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "dependents": [
+          {
+            "person_id": "baby",
+            "relation": "child",
+            "age": 0,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self",
+            "birth_order_this_year": 1
+          }
+        ],
+        "medical": [
+          {
+            "person_id": "self",
+            "kind": "ordinary",
+            "amount": 1800000,
+            "date": "2025-04-10"
+          },
+          {
+            "person_id": "baby",
+            "kind": "premature",
+            "amount": 4000000,
+            "date": "2025-10-11"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+        "marital_status": "married"
+      },
+      "pay_statements": [
+        {
+          "statement_id": "YEW-ISSUED",
+          "employer_id": "가상산실",
+          "employee_id": "YEW",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 52000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 2800000,
+          "withheld_local_tax": 280000
+        },
+        {
+          "statement_id": "YEW-DRAFT",
+          "employer_id": "가상산실",
+          "employee_id": "YEW",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 5,
+          "status": "issued",
+          "gross_pay": 82000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 6000000,
+          "withheld_local_tax": 600000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 50000000,
+        "after": 80000000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -717750,
+        "after": 2134000
+      },
+      {
+        "field": "tax_calculation.paid_local_tax",
+        "before": 280000,
+        "after": 600000
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 12250000,
+        "after": 13750000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 34750000,
+        "after": 63250000
+      },
+      {
+        "field": "tax_calculation.medical_credit",
+        "before": 845000,
+        "after": 680000
+      },
+      {
+        "field": "tax_calculation.employment_credit",
+        "before": 660000,
+        "after": 500000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 214750,
+        "after": 794000
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 1805000,
+        "after": 1480000
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 37750000,
+        "after": 66250000
+      },
+      {
+        "field": "tax_calculation.paid_national_tax",
+        "before": 2800000,
+        "after": 6000000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 2147500,
+        "after": 7940000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -65250,
+        "after": 194000
+      },
+      {
+        "field": "excluded_statement_ids.0",
+        "before": "YEW-DRAFT",
+        "after": "YEW-ISSUED"
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -652500,
+        "after": 1940000
+      },
+      {
+        "field": "used_statement_ids.0",
+        "before": "YEW-ISSUED",
+        "after": "YEW-DRAFT"
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 3952500,
+        "after": 9420000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A069",
+    "mutations": [
+      [
+        "pay_statements.1.status",
+        "draft"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "WOO",
+      "processing_policy": "같은 직원과 사용자 및 지급기간의 최고 발급 수정차수 하나를 선택한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상우림",
+        "employee_age": 45,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "public_pension_paid": 3400000,
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "WOO-OLD",
+          "employer_id": "가상합금",
+          "employee_id": "WOO",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 71000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 6200000,
+          "withheld_local_tax": 620000
+        },
+        {
+          "statement_id": "WOO-NEW",
+          "employer_id": "가상합금",
+          "employee_id": "WOO",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "draft",
+          "gross_pay": 74000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 6600000,
+          "withheld_local_tax": 660000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 72000000,
+        "after": 69000000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -99000,
+        "after": -587400
+      },
+      {
+        "field": "tax_calculation.paid_local_tax",
+        "before": 660000,
+        "after": 620000
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 13350000,
+        "after": 13200000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 53750000,
+        "after": 50900000
+      },
+      {
+        "field": "tax_calculation.employment_credit",
+        "before": 500000,
+        "after": 660000
+      },
+      {
+        "field": "annual_gross",
+        "before": 74000000,
+        "after": 71000000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 651000,
+        "after": 566600
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 630000,
+        "after": 790000
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 58650000,
+        "after": 55800000
+      },
+      {
+        "field": "tax_calculation.paid_national_tax",
+        "before": 6600000,
+        "after": 6200000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 6510000,
+        "after": 5666000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -9000,
+        "after": -53400
+      },
+      {
+        "field": "excluded_statement_ids.0",
+        "before": "WOO-OLD",
+        "after": "WOO-NEW"
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -90000,
+        "after": -534000
+      },
+      {
+        "field": "used_statement_ids.0",
+        "before": "WOO-NEW",
+        "after": "WOO-OLD"
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 7140000,
+        "after": 6456000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A070",
+    "mutations": [
+      [
+        "pay_statements.1.statement_id",
+        "SIO-INDEPENDENT"
+      ],
+      [
+        "pay_statements.1.employer_id",
+        "가상별도연삭"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "SIO",
+      "processing_policy": "같은 증명서 번호의 동일본 재제출은 한 번만 센다. 다른 사용자나 기간 증명서를 금액만 보고 제거하지 않는다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상시온",
+        "employee_age": 26,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "public_pension_paid": 1300000,
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "SIO-ANNUAL",
+          "employer_id": "가상연삭",
+          "employee_id": "SIO",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 18000000,
+          "non_taxable_pay": 1200000,
+          "withheld_national_tax": 220000,
+          "withheld_local_tax": 22000
+        },
+        {
+          "statement_id": "SIO-INDEPENDENT",
+          "employer_id": "가상별도연삭",
+          "employee_id": "SIO",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 18000000,
+          "non_taxable_pay": 1200000,
+          "withheld_national_tax": 220000,
+          "withheld_local_tax": 22000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 16800000,
+        "after": 33600000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -199969,
+        "after": 562430
+      },
+      {
+        "field": "tax_calculation.paid_local_tax",
+        "before": 22000,
+        "after": 44000
+      },
+      {
+        "field": "used_statement_ids.1",
+        "before": null,
+        "after": "SIO-INDEPENDENT"
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 7770000,
+        "after": 10290000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 6230000,
+        "after": 20510000
+      },
+      {
+        "field": "tax_calculation.employment_credit",
+        "before": 205590,
+        "after": 735200
+      },
+      {
+        "field": "annual_gross",
+        "before": 18000000,
+        "after": 36000000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 3821,
+        "after": 95130
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 335590,
+        "after": 865200
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 9030000,
+        "after": 23310000
+      },
+      {
+        "field": "tax_calculation.paid_national_tax",
+        "before": 220000,
+        "after": 440000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 38210,
+        "after": 951300
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -18179,
+        "after": 51130
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -181790,
+        "after": 511300
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 373800,
+        "after": 1816500
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A071",
+    "mutations": [
+      [
+        "pay_statements.1.status",
+        "draft"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "YUN",
+      "processing_policy": "대상 직원의 사용자와 지급기간별 최고 발급 수정본을 선택한 뒤 서로 다른 지급을 합산한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상유나",
+        "employee_age": 33,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "public_pension_paid": 2600000,
+        "social_insurance": {
+          "health": 1700000,
+          "employment": 380000
+        },
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "YUN-P1",
+          "employer_id": "가상원전",
+          "employee_id": "YUN",
+          "period_start": "2025-01-01",
+          "period_end": "2025-03-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 12000000,
+          "non_taxable_pay": 600000,
+          "withheld_national_tax": 500000,
+          "withheld_local_tax": 50000
+        },
+        {
+          "statement_id": "YUN-P3",
+          "employer_id": "가상원전",
+          "employee_id": "YUN",
+          "period_start": "2025-01-01",
+          "period_end": "2025-03-31",
+          "revision": 3,
+          "status": "draft",
+          "gross_pay": 14000000,
+          "non_taxable_pay": 600000,
+          "withheld_national_tax": 650000,
+          "withheld_local_tax": 65000
+        },
+        {
+          "statement_id": "YUN-Q1",
+          "employer_id": "가상후전",
+          "employee_id": "YUN",
+          "period_start": "2025-04-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 36000000,
+          "non_taxable_pay": 1800000,
+          "withheld_national_tax": 2000000,
+          "withheld_local_tax": 200000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 47600000,
+        "after": 45600000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -194150,
+        "after": -342650
+      },
+      {
+        "field": "tax_calculation.paid_local_tax",
+        "before": 265000,
+        "after": 250000
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 12130000,
+        "after": 12030000
+      },
+      {
+        "field": "employer_totals.0.withheld_local_tax",
+        "before": 65000,
+        "after": 50000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 29290000,
+        "after": 27390000
+      },
+      {
+        "field": "employer_totals.0.gross_pay",
+        "before": 14000000,
+        "after": 12000000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 247350,
+        "after": 218850
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 35470000,
+        "after": 33570000
+      },
+      {
+        "field": "tax_calculation.paid_national_tax",
+        "before": 2650000,
+        "after": 2500000
+      },
+      {
+        "field": "employer_totals.0.withheld_national_tax",
+        "before": 650000,
+        "after": 500000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 2473500,
+        "after": 2188500
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -17650,
+        "after": -31150
+      },
+      {
+        "field": "excluded_statement_ids.0",
+        "before": "YUN-P1",
+        "after": "YUN-P3"
+      },
+      {
+        "field": "used_statement_ids.0",
+        "before": "YUN-P3",
+        "after": "YUN-P1"
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -176500,
+        "after": -311500
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 3133500,
+        "after": 2848500
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A072",
+    "mutations": [
+      [
+        "pay_statements.1.gross_pay",
+        50000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "SUB",
+      "processing_policy": "대상 직원 번호가 일치하는 사용자 및 지급기간 최고 발급본만 합산한다. 다른 직원 발급본은 제외한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상수빈",
+        "employee_age": 36,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "dependents": [
+          {
+            "person_id": "sp",
+            "relation": "spouse",
+            "age": 35,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self"
+          }
+        ],
+        "rent": {
+          "contract_holder_person_id": "sp",
+          "identity_records": [
+            {
+              "person_id": "self",
+              "name": "가상수빈",
+              "relation": "self"
+            },
+            {
+              "person_id": "sp",
+              "name": "가상수빈배",
+              "relation": "spouse"
+            }
+          ],
+          "contract_address": "가상도담길 8 202호",
+          "resident_registration_address": "가상도담길8 202호",
+          "household_homes_at_year_end": [],
+          "household_head": true,
+          "area_sqm": 62,
+          "standard_value": 240000000,
+          "payments": [
+            {
+              "amount": 7800000,
+              "date": "2025-12-10"
+            }
+          ]
+        },
+        "scope_note": "국내 거주 근로소득자이고 무주택 세대주다. 배우자는 무소득이며 실제 부양과 기본공제 배정을 본인으로 확인했다. 월세를 직원이 자비 부담했다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "SUB-OWN",
+          "employer_id": "가상강관",
+          "employee_id": "SUB",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 55000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 3100000,
+          "withheld_local_tax": 310000
+        },
+        {
+          "statement_id": "SUB-OTHER",
+          "employer_id": "가상강관",
+          "employee_id": "OTHER",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 50000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1700000,
+          "withheld_local_tax": 170000
+        }
+      ]
+    },
+    "requested_answer_changed": false,
+    "expected_fields": [],
+    "passed": true
+  },
+  {
+    "case_id": "A073",
+    "mutations": [
+      [
+        "pay_statements.1.gross_pay",
+        42000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "HAR",
+      "processing_policy": "같은 직원 및 사용자와 기간의 최고 발급 수정차수 하나를 사용한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상하린",
+        "employee_age": 39,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "donations": [
+          {
+            "person_id": "self",
+            "kind": "political",
+            "amount": 16000000,
+            "date": "2025-04-02"
+          },
+          {
+            "person_id": "self",
+            "kind": "hometown",
+            "amount": 12000000,
+            "date": "2025-12-02"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "HAR-OLD",
+          "employer_id": "가상반죽",
+          "employee_id": "HAR",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 42000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1900000,
+          "withheld_local_tax": 190000
+        },
+        {
+          "statement_id": "HAR-NEW",
+          "employer_id": "가상반죽",
+          "employee_id": "HAR",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 42000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1200000,
+          "withheld_local_tax": 120000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 30000000,
+        "after": 40000000
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 9750000,
+        "after": 11250000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 18750000,
+        "after": 27250000
+      },
+      {
+        "field": "tax_calculation.employment_credit",
+        "before": 740000,
+        "after": 684000
+      },
+      {
+        "field": "annual_gross",
+        "before": 32000000,
+        "after": 42000000
+      },
+      {
+        "field": "tax_calculation.hometown_credit",
+        "before": 713409,
+        "after": 1875909
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 4059318,
+        "after": 5165818
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 20250000,
+        "after": 28750000
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 1552500,
+        "after": 2827500
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A074",
+    "mutations": [
+      [
+        "pay_statements.2.status",
+        "issued"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "RAH",
+      "processing_policy": "사용자와 지급기간별 최고 발급 차수만 채택하고 초안은 제외한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상라희",
+        "employee_age": 35,
+        "employee_sex": "female",
+        "marital_status": "married",
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "RAH-H1",
+          "employer_id": "가상직조",
+          "employee_id": "RAH",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 18000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 550000,
+          "withheld_local_tax": 55000
+        },
+        {
+          "statement_id": "RAH-H2",
+          "employer_id": "가상직조",
+          "employee_id": "RAH",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 22000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 800000,
+          "withheld_local_tax": 80000
+        },
+        {
+          "statement_id": "RAH-DRAFT",
+          "employer_id": "가상직조",
+          "employee_id": "RAH",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 7,
+          "status": "issued",
+          "gross_pay": 45000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2500000,
+          "withheld_local_tax": 250000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 38000000,
+        "after": 61000000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": 349250,
+        "after": 2095500
+      },
+      {
+        "field": "tax_calculation.paid_local_tax",
+        "before": 135000,
+        "after": 305000
+      },
+      {
+        "field": "used_statement_ids.1",
+        "before": "RAH-H2",
+        "after": "RAH-H1"
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 10950000,
+        "after": 12800000
+      },
+      {
+        "field": "employer_totals.0.withheld_local_tax",
+        "before": 135000,
+        "after": 305000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 25050000,
+        "after": 46700000
+      },
+      {
+        "field": "tax_calculation.additional_deduction",
+        "before": 500000,
+        "after": 0
+      },
+      {
+        "field": "tax_calculation.employment_credit",
+        "before": 700000,
+        "after": 660000
+      },
+      {
+        "field": "employer_totals.0.gross_pay",
+        "before": 40000000,
+        "after": 63000000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 166750,
+        "after": 495500
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 830000,
+        "after": 790000
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 27050000,
+        "after": 48200000
+      },
+      {
+        "field": "tax_calculation.paid_national_tax",
+        "before": 1350000,
+        "after": 3050000
+      },
+      {
+        "field": "employer_totals.0.withheld_national_tax",
+        "before": 1350000,
+        "after": 3050000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 1667500,
+        "after": 4955000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 31750,
+        "after": 190500
+      },
+      {
+        "field": "excluded_statement_ids.0",
+        "before": "RAH-DRAFT",
+        "after": "RAH-H2"
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": 317500,
+        "after": 1905000
+      },
+      {
+        "field": "used_statement_ids.0",
+        "before": "RAH-H1",
+        "after": "RAH-DRAFT"
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 2497500,
+        "after": 5745000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A075",
+    "mutations": [
+      [
+        "dependents.0.age",
+        20
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상진서",
+      "employee_age": 47,
+      "annual_gross": 58000000,
+      "non_taxable": 2400000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "student",
+          "relation": "child",
+          "age": 20,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "student",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상진서",
+            "relation": "self"
+          },
+          {
+            "person_id": "student",
+            "name": "가상진서자",
+            "relation": "child"
+          }
+        ],
+        "contract_address": "가상잔디길 41 302호",
+        "resident_registration_address": "가상잔디길41 302호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 57,
+        "standard_value": 280000000,
+        "payments": [
+          {
+            "amount": 7800000,
+            "date": "2025-12-11"
+          }
+        ]
+      },
+      "education": [
+        {
+          "person_id": "student",
+          "level": "university",
+          "amount": 7200000,
+          "date": "2025-02-28"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "final_national_tax",
+        "before": 3235500,
+        "after": 1440500
+      },
+      {
+        "field": "eligible_dependents",
+        "before": 0,
+        "after": 1
+      },
+      {
+        "field": "rent_credit",
+        "before": 0,
+        "after": 1170000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A076",
+    "mutations": [
+      [
+        "dependents.0.income_amount",
+        1200000
+      ],
+      [
+        "dependents.0.gross_salary",
+        4000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상도윤",
+      "employee_age": 42,
+      "annual_gross": 63400000,
+      "non_taxable": 2400000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "sp",
+          "relation": "spouse",
+          "age": 41,
+          "income_amount": 1200000,
+          "earned_income_only": true,
+          "gross_salary": 4000000,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "sp",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상도윤",
+            "relation": "self"
+          },
+          {
+            "person_id": "sp",
+            "name": "가상도윤배",
+            "relation": "spouse"
+          }
+        ],
+        "contract_address": "가상아람길 7 502호",
+        "resident_registration_address": "가상아람길7 502호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 67,
+        "standard_value": 320000000,
+        "payments": [
+          {
+            "amount": 7200000,
+            "date": "2025-12-09"
+          }
+        ]
+      },
+      "medical": [
+        {
+          "person_id": "sp",
+          "kind": "ordinary",
+          "amount": 4900000,
+          "date": "2025-06-21"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "final_national_tax",
+        "before": 4624500,
+        "after": 3319500
+      },
+      {
+        "field": "eligible_dependents",
+        "before": 0,
+        "after": 1
+      },
+      {
+        "field": "rent_credit",
+        "before": 0,
+        "after": 1080000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A077",
+    "mutations": [
+      [
+        "pay_statements.1.gross_pay",
+        53000000
+      ],
+      [
+        "pay_statements.1.non_taxable_pay",
+        4000000
+      ],
+      [
+        "calculation_facts.education.0.scholarship",
+        3000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "NR077",
+      "processing_policy": "동일 사용자와 연간 지급기간의 최고 발급본을 선택한다. 비과세 학자금은 지급총액과 비과세액에 함께 포함되며 같은 학자금은 교육비 공제 원액에서 제외한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상나린",
+        "employee_age": 31,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "deduction_choice": "itemized",
+        "scope_note": "이 검증에서는 요건을 충족한 같은 대학원 비과세 학자금이 300만원이다. 최종 지급총액 5300만원과 비과세액 400만원에 함께 포함된다. 본인 적격 대학원 수업료 800만원 중 같은 비과세 학자금 300만원을 제외하며 그 밖의 사실은 동일하다.",
+        "education": [
+          {
+            "person_id": "self",
+            "level": "graduate",
+            "institution_type": "graduate_school",
+            "amount": 8000000,
+            "scholarship": 3000000,
+            "date": "2025-04-04",
+            "paid_by_self": true
+          }
+        ]
+      },
+      "pay_statements": [
+        {
+          "statement_id": "NR-ANNUAL-1",
+          "employer_id": "가상표지사",
+          "employee_id": "NR077",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 50000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 3000000,
+          "withheld_local_tax": 300000
+        },
+        {
+          "statement_id": "NR-ANNUAL-2",
+          "employer_id": "가상표지사",
+          "employee_id": "NR077",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 53000000,
+          "non_taxable_pay": 4000000,
+          "withheld_national_tax": 3000000,
+          "withheld_local_tax": 300000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": {
+      "total_salary": 49000000,
+      "education_credit": 750000,
+      "final_national_tax": 2625000
+    },
+    "passed": true
+  },
+  {
+    "case_id": "A078",
+    "mutations": [
+      [
+        "dependents.0.income_amount",
+        500000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상민하",
+      "employee_age": 39,
+      "annual_gross": 68000000,
+      "non_taxable": 2000000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "dad",
+          "relation": "parent",
+          "age": 58,
+          "income_amount": 500000,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": true
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "dad",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상민하",
+            "relation": "self"
+          },
+          {
+            "person_id": "dad",
+            "name": "가상민하부",
+            "relation": "parent"
+          }
+        ],
+        "contract_address": "가상햇살길 32 202호",
+        "resident_registration_address": "가상햇살길32 202호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 68,
+        "standard_value": 310000000,
+        "payments": [
+          {
+            "amount": 8500000,
+            "date": "2025-12-08"
+          }
+        ]
+      },
+      "education": [
+        {
+          "person_id": "dad",
+          "level": "special_disabled",
+          "institution_type": "qualified_special_education",
+          "amount": 5200000,
+          "date": "2025-05-23"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "eligible_dependents",
+        "before": 0,
+        "after": 1
+      },
+      {
+        "field": "rent_credit",
+        "before": 0,
+        "after": 1275000
+      },
+      {
+        "field": "additional_deduction",
+        "before": 0,
+        "after": 2000000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A079",
+    "mutations": [
+      [
+        "dependents.0.relation",
+        "child"
+      ],
+      [
+        "rent.identity_records.1.relation",
+        "child"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상준호",
+      "employee_age": 30,
+      "annual_gross": 54000000,
+      "non_taxable": 2000000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "sib",
+          "relation": "child",
+          "age": 19,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "sib",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상준호",
+            "relation": "self"
+          },
+          {
+            "person_id": "sib",
+            "name": "가상준호제",
+            "relation": "child"
+          }
+        ],
+        "contract_address": "가상하늘길 29 303호",
+        "resident_registration_address": "가상하늘길29 303호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 53,
+        "standard_value": 230000000,
+        "payments": [
+          {
+            "amount": 6200000,
+            "date": "2025-12-03"
+          }
+        ]
+      },
+      "cards": [
+        {
+          "person_id": "self",
+          "category": "credit",
+          "amount": 11000000,
+          "date": "2025-10-01"
+        },
+        {
+          "person_id": "sib",
+          "category": "debit",
+          "amount": 8000000,
+          "date": "2025-11-01"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_base",
+        "before": 36650000,
+        "after": 33850000
+      },
+      {
+        "field": "credit_card_deduction",
+        "before": 0,
+        "after": 1800000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A080",
+    "mutations": [
+      [
+        "dependents.0.age",
+        60
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상서진",
+      "employee_age": 33,
+      "annual_gross": 46000000,
+      "non_taxable": 2000000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "mom",
+          "relation": "parent",
+          "age": 60,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "mom",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상서진",
+            "relation": "self"
+          },
+          {
+            "person_id": "mom",
+            "name": "가상서진모",
+            "relation": "parent"
+          }
+        ],
+        "contract_address": "가상새봄길 17 201호",
+        "resident_registration_address": "가상새봄길17 201호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 55,
+        "standard_value": 250000000,
+        "payments": [
+          {
+            "amount": 7500000,
+            "date": "2025-12-01"
+          }
+        ]
+      },
+      "cards": [
+        {
+          "person_id": "self",
+          "category": "credit",
+          "amount": 10000000,
+          "date": "2025-10-05"
+        },
+        {
+          "person_id": "mom",
+          "category": "debit",
+          "amount": 6000000,
+          "date": "2025-11-10"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "eligible_dependents",
+        "before": 0,
+        "after": 1
+      },
+      {
+        "field": "rent_credit",
+        "before": 0,
+        "after": 1275000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A081",
+    "mutations": [
+      [
+        "insurance.0.paid_by_self",
+        true
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상태희",
+      "employee_age": 41,
+      "annual_gross": 60000000,
+      "non_taxable": 2000000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "dad",
+          "relation": "parent",
+          "age": 67,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "dad",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상태희",
+            "relation": "self"
+          },
+          {
+            "person_id": "dad",
+            "name": "가상태희부",
+            "relation": "parent"
+          }
+        ],
+        "contract_address": "가상산들길 4 304호",
+        "resident_registration_address": "가상산들길4 304호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 59,
+        "standard_value": 260000000,
+        "payments": [
+          {
+            "amount": 8200000,
+            "date": "2025-12-07"
+          }
+        ]
+      },
+      "insurance": [
+        {
+          "person_id": "dad",
+          "kind": "general",
+          "amount": 950000,
+          "date": "2025-05-07",
+          "paid_by_self": true
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "final_national_tax",
+        "before": 3202500,
+        "after": 3088500
+      },
+      {
+        "field": "insurance_credit",
+        "before": 0,
+        "after": 114000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A082",
+    "mutations": [
+      [
+        "education.0.level",
+        "university"
+      ],
+      [
+        "education.0.institution_type",
+        "university"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상지율",
+      "employee_age": 50,
+      "annual_gross": 70000000,
+      "non_taxable": 2000000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "adult",
+          "relation": "child",
+          "age": 24,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": true
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "adult",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상지율",
+            "relation": "self"
+          },
+          {
+            "person_id": "adult",
+            "name": "가상지율자",
+            "relation": "child"
+          }
+        ],
+        "contract_address": "가상소담길 24 501호",
+        "resident_registration_address": "가상소담길24 501호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 75,
+        "standard_value": 350000000,
+        "payments": [
+          {
+            "amount": 8600000,
+            "date": "2025-12-03"
+          }
+        ]
+      },
+      "education": [
+        {
+          "person_id": "adult",
+          "level": "university",
+          "institution_type": "university",
+          "amount": 7000000,
+          "date": "2025-03-11"
+        },
+        {
+          "person_id": "adult",
+          "level": "special_disabled",
+          "institution_type": "qualified_special_education",
+          "amount": 3800000,
+          "date": "2025-06-11"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "education_credit",
+        "before": 570000,
+        "after": 1620000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A083",
+    "mutations": [
+      [
+        "rent.resident_registration_address",
+        "가상솔길 9 301호"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상수호",
+      "employee_age": 37,
+      "annual_gross": 54000000,
+      "non_taxable": 2400000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "dad",
+          "relation": "parent",
+          "age": 64,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "dad",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상수호",
+            "relation": "self"
+          },
+          {
+            "person_id": "dad",
+            "name": "가상수호부",
+            "relation": "parent"
+          }
+        ],
+        "contract_address": "가상솔길 9 301호",
+        "resident_registration_address": "가상솔길 9 301호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 65,
+        "standard_value": 280000000,
+        "payments": [
+          {
+            "amount": 8000000,
+            "date": "2025-12-13"
+          }
+        ]
+      },
+      "insurance": [
+        {
+          "person_id": "dad",
+          "kind": "general",
+          "amount": 870000,
+          "date": "2025-04-12"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "final_national_tax",
+        "before": 3416100,
+        "after": 2056100
+      },
+      {
+        "field": "rent_credit",
+        "before": 0,
+        "after": 1360000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A084",
+    "mutations": [
+      [
+        "rent.household_homes_at_year_end",
+        []
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상태민",
+      "employee_age": 43,
+      "annual_gross": 61000000,
+      "non_taxable": 2000000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "sp",
+          "relation": "spouse",
+          "age": 41,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self"
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "sp",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상태민",
+            "relation": "self"
+          },
+          {
+            "person_id": "sp",
+            "name": "가상태민배",
+            "relation": "spouse"
+          }
+        ],
+        "contract_address": "가상단풍길 8 401호",
+        "resident_registration_address": "가상단풍길8 401호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 66,
+        "standard_value": 290000000,
+        "payments": [
+          {
+            "amount": 8800000,
+            "date": "2025-12-04"
+          }
+        ]
+      },
+      "insurance": [
+        {
+          "person_id": "sp",
+          "kind": "general",
+          "amount": 920000,
+          "date": "2025-07-22"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "rent_credit",
+        "before": 0,
+        "after": 1320000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A085",
+    "mutations": [
+      [
+        "calculation_facts.cards.2.amount",
+        20000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "IHY",
+      "processing_policy": "직원과 사용자 및 지급기간별 최고 발급본을 합산한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상이현",
+        "employee_age": 30,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "dependents": [
+          {
+            "person_id": "sib",
+            "relation": "sibling",
+            "age": 18,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self"
+          }
+        ],
+        "cards": [
+          {
+            "person_id": "self",
+            "category": "credit",
+            "amount": 18500000,
+            "date": "2025-10-10"
+          },
+          {
+            "person_id": "self",
+            "category": "culture",
+            "payment_method": "credit",
+            "amount": 6000000,
+            "date": "2025-11-10"
+          },
+          {
+            "person_id": "sib",
+            "category": "debit",
+            "amount": 20000000,
+            "date": "2025-12-10"
+          }
+        ],
+        "scope_note": "국내 거주 근로소득자이고 두 사용자를 병행했다. 같은 세대 무소득 동생을 실제 부양하고 본인 공제 배정이다. 문화비는 적격 문화 업체 신용결제이며 세 카드 묶음은 중복되지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "IHY-A",
+          "employer_id": "가상서점",
+          "employee_id": "IHY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 54000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 3000000,
+          "withheld_local_tax": 300000
+        },
+        {
+          "statement_id": "IHY-B",
+          "employer_id": "가상수리",
+          "employee_id": "IHY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 22000000,
+          "non_taxable_pay": 0,
+          "withheld_national_tax": 800000,
+          "withheld_local_tax": 80000
+        }
+      ]
+    },
+    "requested_answer_changed": false,
+    "expected_fields": [],
+    "passed": true
+  },
+  {
+    "case_id": "A086",
+    "mutations": [
+      [
+        "pay_statements.1.gross_pay",
+        53000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "NAR",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급본을 선택하고 다른 사용자의 유효 지급은 합산한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상나래",
+        "employee_age": 48,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "housing_mortgage": {
+          "requirements_met": true,
+          "borrowed_date": "2020-04-01",
+          "term_years": 20,
+          "fixed_rate": true,
+          "non_deferred": true,
+          "interest_paid": 22000000
+        },
+        "cards": [
+          {
+            "person_id": "self",
+            "category": "debit",
+            "amount": 47000000,
+            "date": "2025-11-10"
+          },
+          {
+            "person_id": "self",
+            "category": "transit",
+            "amount": 10000000,
+            "date": "2025-12-10"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "NAR-A1",
+          "employer_id": "가상인쇄",
+          "employee_id": "NAR",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 40000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2000000,
+          "withheld_local_tax": 200000
+        },
+        {
+          "statement_id": "NAR-A4",
+          "employer_id": "가상인쇄",
+          "employee_id": "NAR",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 4,
+          "status": "issued",
+          "gross_pay": 53000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2500000,
+          "withheld_local_tax": 250000
+        },
+        {
+          "statement_id": "NAR-B1",
+          "employer_id": "가상교정",
+          "employee_id": "NAR",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 22000000,
+          "non_taxable_pay": 0,
+          "withheld_national_tax": 800000,
+          "withheld_local_tax": 80000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 68000000,
+        "after": 74000000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -1064250,
+        "after": 134750
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 13150000,
+        "after": 13450000
+      },
+      {
+        "field": "employer_totals.1.gross_pay",
+        "before": 47000000,
+        "after": 53000000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 28350000,
+        "after": 34550000
+      },
+      {
+        "field": "tax_calculation.employment_credit",
+        "before": 660000,
+        "after": 500000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 233250,
+        "after": 342250
+      },
+      {
+        "field": "tax_calculation.income_deduction_limit_excess",
+        "before": 1000000,
+        "after": 0
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 660000,
+        "after": 500000
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 54850000,
+        "after": 60550000
+      },
+      {
+        "field": "tax_calculation.credit_card_deduction",
+        "before": 6000000,
+        "after": 4500000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 2332500,
+        "after": 3422500
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -96750,
+        "after": 12250
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -967500,
+        "after": 122500
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 2992500,
+        "after": 3922500
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A087",
+    "mutations": [
+      [
+        "dependents.0.disabled",
+        false
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상윤재",
+      "employee_age": 32,
+      "annual_gross": 52000000,
+      "non_taxable": 2000000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다.",
+      "dependents": [
+        {
+          "person_id": "adult",
+          "relation": "child",
+          "age": 24,
+          "income_amount": 0,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": false
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "adult",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상윤재",
+            "relation": "self"
+          },
+          {
+            "person_id": "adult",
+            "name": "가상윤재자",
+            "relation": "child"
+          }
+        ],
+        "contract_address": "가상초록길 18 304호",
+        "resident_registration_address": "가상초록길18 304호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 57,
+        "standard_value": 250000000,
+        "payments": [
+          {
+            "amount": 6800000,
+            "date": "2025-12-07"
+          }
+        ]
+      },
+      "insurance": [
+        {
+          "person_id": "adult",
+          "kind": "disabled",
+          "amount": 880000,
+          "date": "2025-05-17"
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "eligible_dependents",
+        "before": 1,
+        "after": 0
+      },
+      {
+        "field": "rent_credit",
+        "before": 1156000,
+        "after": 0
+      },
+      {
+        "field": "additional_deduction",
+        "before": 3000000,
+        "after": 0
+      },
+      {
+        "field": "insurance_credit",
+        "before": 132000,
+        "after": 0
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A088",
+    "mutations": [
+      [
+        "pay_statements.3.gross_pay",
+        60000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "GAO",
+      "processing_policy": "대상 직원의 사용자와 지급기간별 최고 발급 수정본을 채택한다. 다른 직원과 초안은 제외하고 동일 번호의 동일본은 한 번만 반영한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상가온",
+        "employee_age": 36,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "medical": [
+          {
+            "person_id": "self",
+            "kind": "ordinary",
+            "amount": 6500000,
+            "date": "2025-04-15"
+          },
+          {
+            "person_id": "self",
+            "kind": "ordinary",
+            "amount": 4500000,
+            "date": "2025-10-15"
+          }
+        ],
+        "cards": [
+          {
+            "person_id": "self",
+            "category": "credit",
+            "amount": 6500000,
+            "date": "2025-04-15"
+          },
+          {
+            "person_id": "self",
+            "category": "debit",
+            "amount": 4500000,
+            "date": "2025-10-15"
+          }
+        ],
+        "scope_note": "국내 거주 근로소득자다. 한 사용자에서 연중 계속 근무했다. 각 진료와 대응 카드 행은 같은 실제 자비 결제를 두 공제항목에 등록한 것이며 다른 소비나 보전금은 없다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "GAO-H1-OLD",
+          "employer_id": "가상선반",
+          "employee_id": "GAO",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 16000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 500000,
+          "withheld_local_tax": 50000
+        },
+        {
+          "statement_id": "GAO-H1-NEW",
+          "employer_id": "가상선반",
+          "employee_id": "GAO",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 3,
+          "status": "issued",
+          "gross_pay": 22000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 900000,
+          "withheld_local_tax": 90000
+        },
+        {
+          "statement_id": "GAO-H2",
+          "employer_id": "가상선반",
+          "employee_id": "GAO",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 24000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 110000
+        },
+        {
+          "statement_id": "GAO-OTHER",
+          "employer_id": "가상선반",
+          "employee_id": "OTHER",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 8,
+          "status": "issued",
+          "gross_pay": 60000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 3000000,
+          "withheld_local_tax": 300000
+        }
+      ]
+    },
+    "requested_answer_changed": false,
+    "expected_fields": [],
+    "passed": true
+  },
+  {
+    "case_id": "A089",
+    "mutations": [
+      [
+        "pay_statements.1.non_taxable_pay",
+        1000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "DOY",
+      "processing_policy": "대상 직원의 사용자와 기간별 최고 발급본을 쓰고 초안은 제외한다. 다른 사용자 증명서는 차수가 달라도 합산한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상도연",
+        "employee_age": 37,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "public_pension_paid": 2900000,
+        "pension_accounts": {
+          "pension_savings": 4000000,
+          "irp": 1000000
+        },
+        "dependents": [
+          {
+            "person_id": "sp",
+            "relation": "spouse",
+            "age": 36,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self"
+          }
+        ],
+        "rent": {
+          "contract_holder_person_id": "sp",
+          "identity_records": [
+            {
+              "person_id": "self",
+              "name": "가상도연",
+              "relation": "self"
+            },
+            {
+              "person_id": "sp",
+              "name": "가상도연배",
+              "relation": "spouse"
+            }
+          ],
+          "contract_address": "가상모래길 14 203호",
+          "resident_registration_address": "가상모래길14 203호",
+          "household_homes_at_year_end": [],
+          "household_head": true,
+          "area_sqm": 63,
+          "standard_value": 260000000,
+          "payments": [
+            {
+              "amount": 8200000,
+              "date": "2025-12-15"
+            }
+          ]
+        },
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "DOY-A1",
+          "employer_id": "가상직기",
+          "employee_id": "DOY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 39000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1900000,
+          "withheld_local_tax": 190000
+        },
+        {
+          "statement_id": "DOY-A2",
+          "employer_id": "가상직기",
+          "employee_id": "DOY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 39000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1900000,
+          "withheld_local_tax": 190000
+        },
+        {
+          "statement_id": "DOY-B1",
+          "employer_id": "가상봉제",
+          "employee_id": "DOY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 19000000,
+          "non_taxable_pay": 0,
+          "withheld_national_tax": 600000,
+          "withheld_local_tax": 60000
+        },
+        {
+          "statement_id": "DOY-B9",
+          "employer_id": "가상봉제",
+          "employee_id": "DOY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 9,
+          "status": "draft",
+          "gross_pay": 24000000,
+          "non_taxable_pay": 0,
+          "withheld_national_tax": 1200000,
+          "withheld_local_tax": 120000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 55000000,
+        "after": 57000000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -1181400,
+        "after": -522500
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 12500000,
+        "after": 12600000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 36600000,
+        "after": 38500000
+      },
+      {
+        "field": "tax_calculation.rent_credit",
+        "before": 1394000,
+        "after": 1230000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 142600,
+        "after": 202500
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 2804000,
+        "after": 2490000
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 42500000,
+        "after": 44400000
+      },
+      {
+        "field": "tax_calculation.pension_account_credit",
+        "before": 750000,
+        "after": 600000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 1426000,
+        "after": 2025000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -107400,
+        "after": -47500
+      },
+      {
+        "field": "non_taxable",
+        "before": 3000000,
+        "after": 1000000
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -1074000,
+        "after": -475000
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 4230000,
+        "after": 4515000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A090",
+    "mutations": [
+      [
+        "calculation_facts.insurance.0.paid_by_self",
+        false
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "SYU",
+      "processing_policy": "증명서 번호와 내용이 모두 같은 재제출은 한 번만 반영하고 사용자와 기간별 최고 발급본을 합산한다. 금액만 같은 독립 증명서는 제거하지 않는다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상서율",
+        "employee_age": 34,
+        "marital_status": "married",
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "dependents": [
+          {
+            "person_id": "baby",
+            "relation": "child",
+            "age": 0,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self",
+            "birth_order_this_year": 1
+          }
+        ],
+        "medical": [
+          {
+            "person_id": "self",
+            "kind": "ordinary",
+            "amount": 1200000,
+            "date": "2025-03-05"
+          },
+          {
+            "person_id": "baby",
+            "kind": "premature",
+            "amount": 2700000,
+            "date": "2025-07-19"
+          }
+        ],
+        "insurance": [
+          {
+            "person_id": "self",
+            "kind": "general",
+            "amount": 600000,
+            "date": "2025-05-10",
+            "paid_by_self": false
+          },
+          {
+            "person_id": "self",
+            "kind": "general",
+            "amount": 900000,
+            "date": "2025-05-20",
+            "paid_by_self": false
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "SYU-A",
+          "employer_id": "가상배합",
+          "employee_id": "SYU",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 24000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 700000,
+          "withheld_local_tax": 70000
+        },
+        {
+          "statement_id": "SYU-A",
+          "employer_id": "가상배합",
+          "employee_id": "SYU",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 24000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 700000,
+          "withheld_local_tax": 70000
+        },
+        {
+          "statement_id": "SYU-B",
+          "employer_id": "가상성형",
+          "employee_id": "SYU",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 24000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 700000,
+          "withheld_local_tax": 70000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": 491150,
+        "after": 570350
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 184650,
+        "after": 191850
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 1536000,
+        "after": 1464000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 1846500,
+        "after": 1918500
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 44650,
+        "after": 51850
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": 446500,
+        "after": 518500
+      },
+      {
+        "field": "tax_calculation.insurance_credit",
+        "before": 72000,
+        "after": 0
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A091",
+    "mutations": [
+      [
+        "calculation_facts.dependents.0.age",
+        20
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "TAO",
+      "processing_policy": "대상 직원과 사용자 및 지급기간의 최고 발급본을 채택하고 다른 직원 및 초안은 제외한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상태오",
+        "employee_age": 48,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "dependents": [
+          {
+            "person_id": "adult",
+            "relation": "child",
+            "age": 20,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self"
+          }
+        ],
+        "rent": {
+          "contract_holder_person_id": "adult",
+          "identity_records": [
+            {
+              "person_id": "self",
+              "name": "가상태오",
+              "relation": "self"
+            },
+            {
+              "person_id": "adult",
+              "name": "가상태오자",
+              "relation": "child"
+            }
+          ],
+          "contract_address": "가상한빛길 23 402호",
+          "resident_registration_address": "가상한빛길23 402호",
+          "household_homes_at_year_end": [],
+          "household_head": true,
+          "area_sqm": 65,
+          "standard_value": 280000000,
+          "payments": [
+            {
+              "amount": 8400000,
+              "date": "2025-12-05"
+            }
+          ]
+        },
+        "medical": [
+          {
+            "person_id": "adult",
+            "kind": "ordinary",
+            "amount": 6500000,
+            "date": "2025-07-08"
+          }
+        ],
+        "cards": [
+          {
+            "person_id": "self",
+            "category": "credit",
+            "amount": 10000000,
+            "date": "2025-10-08"
+          },
+          {
+            "person_id": "adult",
+            "category": "debit",
+            "amount": 8500000,
+            "date": "2025-11-08"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "TAO-A",
+          "employer_id": "가상운반",
+          "employee_id": "TAO",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 42000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 2200000,
+          "withheld_local_tax": 220000
+        },
+        {
+          "statement_id": "TAO-B",
+          "employer_id": "가상배달",
+          "employee_id": "TAO",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 16000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 400000,
+          "withheld_local_tax": 40000
+        },
+        {
+          "statement_id": "TAO-DRAFT",
+          "employer_id": "가상배달",
+          "employee_id": "TAO",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 3,
+          "status": "draft",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1500000,
+          "withheld_local_tax": 150000
+        },
+        {
+          "statement_id": "TAO-OTHER",
+          "employer_id": "가상운반",
+          "employee_id": "OTHER",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 9,
+          "status": "issued",
+          "gross_pay": 70000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 5000000,
+          "withheld_local_tax": 500000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": 757625,
+        "after": -1500675
+      },
+      {
+        "field": "tax_calculation.child_credit",
+        "before": 0,
+        "after": 250000
+      },
+      {
+        "field": "tax_calculation.basic_deduction",
+        "before": 1500000,
+        "after": 3000000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 39575000,
+        "after": 37075000
+      },
+      {
+        "field": "tax_calculation.additional_deduction",
+        "before": 0,
+        "after": 1000000
+      },
+      {
+        "field": "tax_calculation.rent_credit",
+        "before": 0,
+        "after": 1428000
+      },
+      {
+        "field": "tax_calculation.eligible_dependents",
+        "before": 0,
+        "after": 1
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 328875,
+        "after": 123575
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 1387500,
+        "after": 3065500
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 3288750,
+        "after": 1235750
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 68875,
+        "after": -136425
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": 688750,
+        "after": -1364250
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 4676250,
+        "after": 4301250
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A092",
+    "mutations": [
+      [
+        "calculation_facts.deduction_choice",
+        "itemized"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "AYU",
+      "processing_policy": "직원과 사용자 및 지급기간별 최고 발급본을 채택하고 초안은 제외한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상아윤",
+        "employee_age": 40,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "deduction_choice": "itemized",
+        "special_deductions_requested": true,
+        "insurance": [
+          {
+            "person_id": "self",
+            "kind": "general",
+            "amount": 850000,
+            "date": "2025-04-09"
+          }
+        ],
+        "education": [
+          {
+            "person_id": "self",
+            "level": "graduate",
+            "amount": 6000000,
+            "date": "2025-03-09"
+          }
+        ],
+        "cards": [
+          {
+            "person_id": "self",
+            "category": "credit",
+            "amount": 17500000,
+            "date": "2025-10-09"
+          },
+          {
+            "person_id": "self",
+            "category": "culture",
+            "payment_method": "credit",
+            "amount": 5000000,
+            "date": "2025-11-09"
+          },
+          {
+            "person_id": "self",
+            "category": "transit",
+            "amount": 2000000,
+            "date": "2025-12-09"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "AYU-H1-OLD",
+          "employer_id": "가상목각",
+          "employee_id": "AYU",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 38000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2800000,
+          "withheld_local_tax": 280000
+        },
+        {
+          "statement_id": "AYU-H1-NEW",
+          "employer_id": "가상목각",
+          "employee_id": "AYU",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 38000000,
+          "non_taxable_pay": 3000000,
+          "withheld_national_tax": 2800000,
+          "withheld_local_tax": 280000
+        },
+        {
+          "statement_id": "AYU-H2",
+          "employer_id": "가상목각",
+          "employee_id": "AYU",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 36000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2400000,
+          "withheld_local_tax": 240000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": 1053800,
+        "after": 94600
+      },
+      {
+        "field": "tax_calculation.standard_credit",
+        "before": 130000,
+        "after": 0
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 615800,
+        "after": 528600
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 790000,
+        "after": 1662000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 6158000,
+        "after": 5286000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 95800,
+        "after": 8600
+      },
+      {
+        "field": "tax_calculation.education_credit",
+        "before": 0,
+        "after": 900000
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": 958000,
+        "after": 86000
+      },
+      {
+        "field": "tax_calculation.insurance_credit",
+        "before": 0,
+        "after": 102000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A093",
+    "mutations": [
+      [
+        "calculation_facts.employment_end",
+        "2025-10-31"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "WJU",
+      "processing_policy": "대상 직원의 사용자와 지급기간별 최고 발급본을 선택한다. 증명서 기간으로 새 재직기간을 추론하지 않는다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상우주",
+        "employee_age": 39,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-10-31",
+        "insurance": [
+          {
+            "person_id": "self",
+            "kind": "general",
+            "amount": 480000,
+            "date": "2025-08-30"
+          },
+          {
+            "person_id": "self",
+            "kind": "general",
+            "amount": 520000,
+            "date": "2025-10-01"
+          }
+        ],
+        "medical": [
+          {
+            "person_id": "self",
+            "kind": "ordinary",
+            "amount": 2600000,
+            "date": "2025-09-30"
+          },
+          {
+            "person_id": "self",
+            "kind": "ordinary",
+            "amount": 3400000,
+            "date": "2025-10-02"
+          }
+        ],
+        "pension_accounts": {
+          "pension_savings": 2700000,
+          "irp": 0
+        },
+        "donations": [
+          {
+            "person_id": "self",
+            "kind": "political",
+            "amount": 200000,
+            "date": "2025-11-10"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "WJU-H1-OLD",
+          "employer_id": "가상조형",
+          "employee_id": "WJU",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 18000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 700000,
+          "withheld_local_tax": 70000
+        },
+        {
+          "statement_id": "WJU-H1-NEW",
+          "employer_id": "가상조형",
+          "employee_id": "WJU",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 24000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 110000
+        },
+        {
+          "statement_id": "WJU-Q3",
+          "employer_id": "가상조형",
+          "employee_id": "WJU",
+          "period_start": "2025-07-01",
+          "period_end": "2025-09-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 12000000,
+          "non_taxable_pay": 600000,
+          "withheld_national_tax": 600000,
+          "withheld_local_tax": 60000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -1230910,
+        "after": -1860550
+      },
+      {
+        "field": "tax_calculation.medical_credit",
+        "before": 235200,
+        "after": 745200
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 58099,
+        "after": 859
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 1532509,
+        "after": 2104909
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 580991,
+        "after": 8591
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -111901,
+        "after": -169141
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -1119009,
+        "after": -1691409
+      },
+      {
+        "field": "tax_calculation.insurance_credit",
+        "before": 57600,
+        "after": 120000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A094",
+    "mutations": [
+      [
+        "calculation_facts.donations.2.date",
+        "2025-06-30"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "HYW",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급본을 사용하고 초안은 제외한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상현우",
+        "employee_age": 38,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "organization_designations": [
+          {
+            "organization_id": "STAT",
+            "kind": "statutory",
+            "valid_from": "2025-01-01",
+            "valid_to": "2025-12-31"
+          },
+          {
+            "organization_id": "PUB",
+            "kind": "public",
+            "valid_from": "2025-01-01",
+            "valid_to": "2025-12-31"
+          },
+          {
+            "organization_id": "REL",
+            "kind": "religious",
+            "valid_from": "2025-01-01",
+            "valid_to": "2025-06-30"
+          }
+        ],
+        "donations": [
+          {
+            "person_id": "self",
+            "kind": "statutory",
+            "organization_id": "STAT",
+            "amount": 10000000,
+            "date": "2025-03-03"
+          },
+          {
+            "person_id": "self",
+            "kind": "public",
+            "organization_id": "PUB",
+            "amount": 1000000,
+            "date": "2025-07-03"
+          },
+          {
+            "person_id": "self",
+            "kind": "religious",
+            "organization_id": "REL",
+            "amount": 5000000,
+            "date": "2025-06-30"
+          }
+        ],
+        "medical": [
+          {
+            "person_id": "self",
+            "kind": "ordinary",
+            "amount": 3000000,
+            "date": "2025-10-03"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "HYW-H1",
+          "employer_id": "가상조립",
+          "employee_id": "HYW",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 18000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 600000,
+          "withheld_local_tax": 60000
+        },
+        {
+          "statement_id": "HYW-H2",
+          "employer_id": "가상유통",
+          "employee_id": "HYW",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 23000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 900000,
+          "withheld_local_tax": 90000
+        },
+        {
+          "statement_id": "HYW-DRAFT",
+          "employer_id": "가상유통",
+          "employee_id": "HYW",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 4,
+          "status": "draft",
+          "gross_pay": 40000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2500000,
+          "withheld_local_tax": 250000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 2766500,
+        "after": 3303500
+      },
+      {
+        "field": "tax_calculation.donation_credit",
+        "before": 1800000,
+        "after": 2337000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A095",
+    "mutations": [
+      [
+        "calculation_facts.dependents.0.income_amount",
+        500000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "SEY",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급본을 합산한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상세윤",
+        "employee_age": 40,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "dependents": [
+          {
+            "person_id": "sp",
+            "relation": "spouse",
+            "age": 39,
+            "income_amount": 500000,
+            "supported": true,
+            "assigned_claimant": "self"
+          }
+        ],
+        "rent": {
+          "contract_holder_person_id": "sp",
+          "identity_records": [
+            {
+              "person_id": "self",
+              "name": "가상세윤",
+              "relation": "self"
+            },
+            {
+              "person_id": "sp",
+              "name": "가상세윤배",
+              "relation": "spouse"
+            }
+          ],
+          "contract_address": "가상연꽃길 15 302호",
+          "resident_registration_address": "가상연꽃길15 302호",
+          "household_homes_at_year_end": [],
+          "household_head": true,
+          "area_sqm": 62,
+          "standard_value": 270000000,
+          "payments": [
+            {
+              "amount": 7800000,
+              "date": "2025-12-08"
+            }
+          ]
+        },
+        "education": [
+          {
+            "person_id": "sp",
+            "level": "university",
+            "institution_type": "university",
+            "amount": 6000000,
+            "date": "2025-02-18"
+          },
+          {
+            "person_id": "sp",
+            "level": "graduate",
+            "institution_type": "graduate_school",
+            "amount": 5500000,
+            "date": "2025-08-18"
+          }
+        ],
+        "medical": [
+          {
+            "person_id": "sp",
+            "kind": "ordinary",
+            "amount": 5300000,
+            "date": "2025-06-18"
+          }
+        ],
+        "public_pension_paid": 2500000,
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "SEY-A",
+          "employer_id": "가상섬유",
+          "employee_id": "SEY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 45000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 2600000,
+          "withheld_local_tax": 260000
+        },
+        {
+          "statement_id": "SEY-B",
+          "employer_id": "가상측정",
+          "employee_id": "SEY",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 18000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 600000,
+          "withheld_local_tax": 60000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": 926750,
+        "after": -1597750
+      },
+      {
+        "field": "tax_calculation.basic_deduction",
+        "before": 1500000,
+        "after": 3000000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 43250000,
+        "after": 41750000
+      },
+      {
+        "field": "tax_calculation.rent_credit",
+        "before": 0,
+        "after": 1170000
+      },
+      {
+        "field": "tax_calculation.eligible_dependents",
+        "before": 0,
+        "after": 1
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 404250,
+        "after": 174750
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 1185000,
+        "after": 3255000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 4042500,
+        "after": 1747500
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 84250,
+        "after": -145250
+      },
+      {
+        "field": "tax_calculation.education_credit",
+        "before": 0,
+        "after": 900000
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": 842500,
+        "after": -1452500
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 5227500,
+        "after": 5002500
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A096",
+    "mutations": [
+      [
+        "calculation_facts.housing_mortgage.interest_payments.1.date",
+        "2025-10-31"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "JIH",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급본을 선택한다. 재직기간은 선언된 실제 시작일과 종료일로 판단한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상지후",
+        "employee_age": 49,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-10-31",
+        "housing_mortgage": {
+          "requirements_met": true,
+          "borrowed_date": "2019-03-04",
+          "term_years": 20,
+          "fixed_rate": true,
+          "non_deferred": true,
+          "interest_payments": [
+            {
+              "date": "2025-10-30",
+              "amount": 19500000
+            },
+            {
+              "date": "2025-10-31",
+              "amount": 4000000
+            }
+          ]
+        },
+        "cards": [
+          {
+            "person_id": "self",
+            "category": "debit",
+            "amount": 47000000,
+            "date": "2025-09-30"
+          },
+          {
+            "person_id": "self",
+            "category": "transit",
+            "amount": 10000000,
+            "date": "2025-10-30"
+          },
+          {
+            "person_id": "self",
+            "category": "debit",
+            "amount": 8000000,
+            "date": "2025-11-02"
+          }
+        ],
+        "insurance": [
+          {
+            "person_id": "self",
+            "kind": "general",
+            "amount": 990000,
+            "date": "2025-09-10",
+            "paid_by_self": false
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "JIH-OLD",
+          "employer_id": "가상분석",
+          "employee_id": "JIH",
+          "period_start": "2025-01-01",
+          "period_end": "2025-10-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 62000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 5000000,
+          "withheld_local_tax": 500000
+        },
+        {
+          "statement_id": "JIH-NEW",
+          "employer_id": "가상분석",
+          "employee_id": "JIH",
+          "period_start": "2025-01-01",
+          "period_end": "2025-10-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 71000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 6200000,
+          "withheld_local_tax": 620000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.housing_income_deduction",
+        "before": 19500000,
+        "after": 20000000
+      },
+      {
+        "field": "tax_calculation.income_deduction_limit_excess",
+        "before": 500000,
+        "after": 1000000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A097",
+    "mutations": [
+      [
+        "calculation_facts.dependents.1.assigned_claimant",
+        "self"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "HAJ",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급본을 선택하고 세목별 원천징수는 각각 실제 금액을 합산한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상해준",
+        "employee_age": 35,
+        "marital_status": "married",
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "dependents": [
+          {
+            "person_id": "t1",
+            "relation": "child",
+            "age": 0,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self",
+            "birth_order_this_year": 1
+          },
+          {
+            "person_id": "t2",
+            "relation": "child",
+            "age": 0,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self",
+            "birth_order_this_year": 2
+          }
+        ],
+        "insurance": [
+          {
+            "person_id": "t1",
+            "kind": "general",
+            "amount": 500000,
+            "date": "2025-08-10"
+          },
+          {
+            "person_id": "t2",
+            "kind": "general",
+            "amount": 500000,
+            "date": "2025-08-10"
+          }
+        ],
+        "medical": [
+          {
+            "person_id": "t1",
+            "kind": "ordinary",
+            "amount": 3500000,
+            "date": "2025-09-10"
+          },
+          {
+            "person_id": "t2",
+            "kind": "ordinary",
+            "amount": 3500000,
+            "date": "2025-09-10"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "HAJ-H1-OLD",
+          "employer_id": "가상병합",
+          "employee_id": "HAJ",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 23000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1000000,
+          "withheld_local_tax": 100000
+        },
+        {
+          "statement_id": "HAJ-H1-NEW",
+          "employer_id": "가상병합",
+          "employee_id": "HAJ",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 23000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1000000,
+          "withheld_local_tax": 60000
+        },
+        {
+          "statement_id": "HAJ-H2",
+          "employer_id": "가상병합",
+          "employee_id": "HAJ",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 25000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1200000,
+          "withheld_local_tax": 120000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -131050,
+        "after": -1572050
+      },
+      {
+        "field": "tax_calculation.child_credit",
+        "before": 300000,
+        "after": 800000
+      },
+      {
+        "field": "tax_calculation.basic_deduction",
+        "before": 3000000,
+        "after": 4500000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 30950000,
+        "after": 29450000
+      },
+      {
+        "field": "tax_calculation.medical_credit",
+        "before": 318000,
+        "after": 843000
+      },
+      {
+        "field": "tax_calculation.eligible_dependents",
+        "before": 1,
+        "after": 2
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 204450,
+        "after": 73450
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 1338000,
+        "after": 2423000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 2044500,
+        "after": 734500
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": 24450,
+        "after": -106550
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -155500,
+        "after": -1465500
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 3382500,
+        "after": 3157500
+      },
+      {
+        "field": "tax_calculation.insurance_credit",
+        "before": 60000,
+        "after": 120000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A098",
+    "mutations": [
+      [
+        "calculation_facts.rent.household_homes_at_year_end",
+        []
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "LOW",
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급본을 연간 합산한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상로운",
+        "employee_age": 42,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "dependents": [
+          {
+            "person_id": "dad",
+            "relation": "parent",
+            "age": 64,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self"
+          },
+          {
+            "person_id": "mom",
+            "relation": "parent",
+            "age": 68,
+            "income_amount": 0,
+            "supported": true,
+            "assigned_claimant": "self"
+          }
+        ],
+        "rent": {
+          "contract_holder_person_id": "self",
+          "identity_records": [
+            {
+              "person_id": "self",
+              "name": "가 상 로 운",
+              "relation": "self"
+            },
+            {
+              "person_id": "dad",
+              "name": "가상로운부",
+              "relation": "parent"
+            }
+          ],
+          "contract_address": "가상햇무리길 11 302호",
+          "resident_registration_address": "가상햇무리길11 302호",
+          "household_homes_at_year_end": [],
+          "household_head": true,
+          "area_sqm": 67,
+          "standard_value": 300000000,
+          "payments": [
+            {
+              "amount": 7800000,
+              "date": "2025-12-10"
+            }
+          ]
+        },
+        "medical": [
+          {
+            "person_id": "dad",
+            "kind": "ordinary",
+            "amount": 11000000,
+            "reimbursed": 1000000,
+            "date": "2025-04-10"
+          },
+          {
+            "person_id": "mom",
+            "kind": "ordinary",
+            "amount": 9000000,
+            "date": "2025-05-10"
+          }
+        ],
+        "insurance": [
+          {
+            "person_id": "self",
+            "kind": "general",
+            "amount": 750000,
+            "date": "2025-07-10"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "LOW-A",
+          "employer_id": "가상광학",
+          "employee_id": "LOW",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 53000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 3500000,
+          "withheld_local_tax": 350000
+        },
+        {
+          "statement_id": "LOW-B",
+          "employer_id": "가상촬영",
+          "employee_id": "LOW",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 20000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 800000,
+          "withheld_local_tax": 80000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -737000,
+        "after": -2024000
+      },
+      {
+        "field": "tax_calculation.rent_credit",
+        "before": 0,
+        "after": 1170000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 363000,
+        "after": 246000
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 3150000,
+        "after": 4320000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 3630000,
+        "after": 2460000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -67000,
+        "after": -184000
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -670000,
+        "after": -1840000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A099",
+    "mutations": [
+      [
+        "dependents.0.income_amount",
+        500000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_evidence_v1",
+      "reference_year": 2025,
+      "employee_name": "가상태린",
+      "employee_age": 36,
+      "annual_gross": 65000000,
+      "non_taxable": 2000000,
+      "employment_start": "2025-01-01",
+      "employment_end": "2025-12-31",
+      "dependents": [
+        {
+          "person_id": "sib",
+          "relation": "sibling",
+          "age": 27,
+          "income_amount": 500000,
+          "supported": true,
+          "assigned_claimant": "self",
+          "disabled": true
+        }
+      ],
+      "rent": {
+        "contract_holder_person_id": "sib",
+        "identity_records": [
+          {
+            "person_id": "self",
+            "name": "가상태린",
+            "relation": "self"
+          },
+          {
+            "person_id": "sib",
+            "name": "가상태린제",
+            "relation": "sibling"
+          }
+        ],
+        "contract_address": "가상우물길 3 203호",
+        "resident_registration_address": "가상우물길3 203호",
+        "household_homes_at_year_end": [],
+        "household_head": true,
+        "area_sqm": 68,
+        "standard_value": 310000000,
+        "payments": [
+          {
+            "amount": 8200000,
+            "date": "2025-12-06"
+          }
+        ]
+      },
+      "education": [
+        {
+          "person_id": "sib",
+          "level": "special_disabled",
+          "institution_type": "qualified_special_education",
+          "amount": 5100000,
+          "date": "2025-04-06"
+        },
+        {
+          "person_id": "sib",
+          "level": "university",
+          "institution_type": "university",
+          "amount": 6800000,
+          "date": "2025-03-06"
+        }
+      ],
+      "insurance": [
+        {
+          "person_id": "sib",
+          "kind": "disabled",
+          "amount": 900000,
+          "date": "2025-05-06"
+        }
+      ],
+      "cards": [
+        {
+          "person_id": "sib",
+          "category": "debit",
+          "amount": 9000000,
+          "date": "2025-10-06"
+        },
+        {
+          "person_id": "self",
+          "category": "credit",
+          "amount": 18000000,
+          "date": "2025-11-06"
+        }
+      ],
+      "medical": [
+        {
+          "person_id": "sib",
+          "kind": "ordinary",
+          "amount": 4500000,
+          "date": "2025-07-06"
+        }
+      ],
+      "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "rent_credit",
+        "before": 0,
+        "after": 1230000
+      },
+      {
+        "field": "insurance_credit",
+        "before": 0,
+        "after": 135000
+      },
+      {
+        "field": "eligible_dependents",
+        "before": 0,
+        "after": 1
+      },
+      {
+        "field": "additional_deduction",
+        "before": 0,
+        "after": 2000000
+      },
+      {
+        "field": "education_credit",
+        "before": 765000,
+        "after": 1785000
+      }
+    ],
+    "passed": true
+  },
+  {
+    "case_id": "A100",
+    "mutations": [
+      [
+        "pay_statements.1.non_taxable_pay",
+        3000000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "LUA",
+      "processing_policy": "대상 직원의 사용자와 지급기간별 최고 발급본을 선택하며 같은 증명서 번호의 동일 내용 재제출은 한 번만 합산한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상루아",
+        "employee_age": 34,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "rent": {
+          "contract_holder_person_id": "self",
+          "identity_records": [
+            {
+              "person_id": "self",
+              "name": "가상루아",
+              "relation": "self"
+            }
+          ],
+          "contract_address": "가상윤슬길 28 301호",
+          "resident_registration_address": "가상윤슬길28 301호",
+          "household_homes_at_year_end": [],
+          "household_head": true,
+          "area_sqm": 56,
+          "standard_value": 250000000,
+          "payments": [
+            {
+              "amount": 8500000,
+              "date": "2025-12-09"
+            }
+          ]
+        },
+        "pension_accounts": {
+          "pension_savings": 5000000,
+          "irp": 2000000
+        },
+        "medical": [
+          {
+            "person_id": "self",
+            "kind": "ordinary",
+            "amount": 4300000,
+            "date": "2025-07-09"
+          }
+        ],
+        "cards": [
+          {
+            "person_id": "self",
+            "category": "credit",
+            "amount": 12000000,
+            "date": "2025-10-09"
+          },
+          {
+            "person_id": "self",
+            "category": "debit",
+            "amount": 5000000,
+            "date": "2025-11-09"
+          }
+        ],
+        "scope_note": "이 반사실 검증에서는 아래 원자료 수정값을 따른다. 근로소득만 있으며 각 지출의 부담 및 가족 신청 전제는 수정한 행과 나머지 원자료 그대로다. 증명서 지급기간으로 연속 재직을 추론하지 않는다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "LUA-H1-OLD",
+          "employer_id": "가상원단",
+          "employee_id": "LUA",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 21000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 900000,
+          "withheld_local_tax": 90000
+        },
+        {
+          "statement_id": "LUA-H1-NEW",
+          "employer_id": "가상원단",
+          "employee_id": "LUA",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 28000000,
+          "non_taxable_pay": 3000000,
+          "withheld_national_tax": 1300000,
+          "withheld_local_tax": 130000
+        },
+        {
+          "statement_id": "LUA-H2",
+          "employer_id": "가상원단",
+          "employee_id": "LUA",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1500000,
+          "withheld_local_tax": 150000
+        },
+        {
+          "statement_id": "LUA-H2",
+          "employer_id": "가상원단",
+          "employee_id": "LUA",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1500000,
+          "withheld_local_tax": 150000
+        }
+      ]
+    },
+    "requested_answer_changed": true,
+    "expected_fields": [
+      {
+        "field": "tax_calculation.total_salary",
+        "before": 56000000,
+        "after": 54000000
+      },
+      {
+        "field": "tax_calculation.settlement_total",
+        "before": -1177550,
+        "after": -1943700
+      },
+      {
+        "field": "employer_totals.0.non_taxable_pay",
+        "before": 2000000,
+        "after": 4000000
+      },
+      {
+        "field": "tax_calculation.salary_deduction",
+        "before": 12550000,
+        "after": 12450000
+      },
+      {
+        "field": "tax_calculation.tax_base",
+        "before": 41050000,
+        "after": 39000000
+      },
+      {
+        "field": "tax_calculation.medical_credit",
+        "before": 393000,
+        "after": 402000
+      },
+      {
+        "field": "tax_calculation.rent_credit",
+        "before": 1275000,
+        "after": 1445000
+      },
+      {
+        "field": "tax_calculation.final_local_tax",
+        "before": 172950,
+        "after": 103300
+      },
+      {
+        "field": "tax_calculation.total_tax_credits",
+        "before": 3168000,
+        "after": 3557000
+      },
+      {
+        "field": "tax_calculation.salary_income",
+        "before": 43450000,
+        "after": 41550000
+      },
+      {
+        "field": "tax_calculation.credit_card_deduction",
+        "before": 900000,
+        "after": 1050000
+      },
+      {
+        "field": "tax_calculation.pension_account_credit",
+        "before": 840000,
+        "after": 1050000
+      },
+      {
+        "field": "tax_calculation.final_national_tax",
+        "before": 1729500,
+        "after": 1033000
+      },
+      {
+        "field": "tax_calculation.settlement_local_tax",
+        "before": -107050,
+        "after": -176700
+      },
+      {
+        "field": "tax_calculation.settlement_national_tax",
+        "before": -1070500,
+        "after": -1767000
+      },
+      {
+        "field": "tax_calculation.computed_tax",
+        "before": 4897500,
+        "after": 4590000
+      }
+    ],
+    "passed": true
+  }
+]

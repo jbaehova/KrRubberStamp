@@ -1,0 +1,477 @@
+[
+  {
+    "case_id": "A054",
+    "mutations": [
+      [
+        "pay_statements.3.withheld_local_tax",
+        180000
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "SY054",
+      "processing_policy": "각 사용자와 같은 지급기간의 최고 발급차수를 선택한다. 국세와 지방세는 각각 실제 징수액으로 합산하며 합산 징수 총액으로 서로 대체하지 않는다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상선율",
+        "employee_age": 37,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "deduction_choice": "standard",
+        "scope_note": "국내 거주 근로소득자이고 두 국내 사용자에게 병행 근무했다. 각 사용자에게 받은 연간 발급본 및 최종 정정본이 모두 제출됐다. 정정 효력은 확정돼 있고 미발급이나 귀속 충돌은 없다. 특별 신청이나 가족 신청은 없다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "SY-L-1",
+          "employer_id": "가상수선실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2400000,
+          "withheld_local_tax": 170000
+        },
+        {
+          "statement_id": "SY-L-3",
+          "employer_id": "가상수선실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 3,
+          "status": "issued",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2500000,
+          "withheld_local_tax": 170000
+        },
+        {
+          "statement_id": "SY-R-1",
+          "employer_id": "가상직물실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 23000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 180000
+        },
+        {
+          "statement_id": "SY-R-2",
+          "employer_id": "가상직물실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 23000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 180000
+        }
+      ]
+    },
+    "expected_fields": {
+      "settlement_national_tax": -212500,
+      "settlement_local_tax": -11250
+    },
+    "passed": true
+  },
+  {
+    "case_id": "A054",
+    "mutations": [
+      [
+        "pay_statements.1.status",
+        "draft"
+      ],
+      [
+        "pay_statements.3.status",
+        "draft"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "SY054",
+      "processing_policy": "각 사용자와 같은 지급기간의 최고 발급차수를 선택한다. 국세와 지방세는 각각 실제 징수액으로 합산하며 합산 징수 총액으로 서로 대체하지 않는다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상선율",
+        "employee_age": 37,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "deduction_choice": "standard",
+        "scope_note": "국내 거주 근로소득자이고 두 국내 사용자에게 병행 근무했다. 각 사용자에게 받은 연간 발급본 및 최종 정정본이 모두 제출됐다. 정정 효력은 확정돼 있고 미발급이나 귀속 충돌은 없다. 특별 신청이나 가족 신청은 없다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "SY-L-1",
+          "employer_id": "가상수선실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2400000,
+          "withheld_local_tax": 170000
+        },
+        {
+          "statement_id": "SY-L-3",
+          "employer_id": "가상수선실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 3,
+          "status": "draft",
+          "gross_pay": 30000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 2500000,
+          "withheld_local_tax": 170000
+        },
+        {
+          "statement_id": "SY-R-1",
+          "employer_id": "가상직물실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 23000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 180000
+        },
+        {
+          "statement_id": "SY-R-2",
+          "employer_id": "가상직물실",
+          "employee_id": "SY054",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "draft",
+          "gross_pay": 23000000,
+          "non_taxable_pay": 2000000,
+          "withheld_national_tax": 1100000,
+          "withheld_local_tax": 80000
+        }
+      ]
+    },
+    "expected_fields": {
+      "paid_national_tax": 3500000,
+      "paid_local_tax": 350000,
+      "settlement_total": -123750
+    },
+    "passed": true
+  },
+  {
+    "case_id": "A057",
+    "mutations": [
+      [
+        "pay_statements.1.status",
+        "draft"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "BM057",
+      "processing_policy": "대상 직원 번호로 귀속을 확인한 뒤 사용자 및 지급기간별 최고 발급본을 선택한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상보민",
+        "employee_age": 29,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "scope_note": "국내 거주 무주택 세대주이고 본인이 계약해 동일 주소에 거주하며 모든 월세를 자비 납부했다. 사용자가 직원 번호로 구분한 정상 공동 발급 묶음을 제공했다. BM057은 접수 직원이며 RV057은 다른 직원이다. 모두 확정된 발급 기록으로 귀속 분쟁은 없다.",
+        "rent": {
+          "contract_holder_person_id": "self",
+          "identity_records": [
+            {
+              "person_id": "self",
+              "name": "가상보민",
+              "relation": "self"
+            }
+          ],
+          "contract_address": "가상버들길 21 502호",
+          "resident_registration_address": "가상버들길21 502호",
+          "household_homes_at_year_end": [],
+          "household_head": true,
+          "area_sqm": 55,
+          "standard_value": 260000000,
+          "payments": [
+            {
+              "amount": 8400000,
+              "date": "2025-12-05"
+            }
+          ]
+        }
+      },
+      "pay_statements": [
+        {
+          "statement_id": "BM-1",
+          "employer_id": "가상분류소",
+          "employee_id": "BM057",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 57000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 3500000,
+          "withheld_local_tax": 350000
+        },
+        {
+          "statement_id": "BM-2",
+          "employer_id": "가상분류소",
+          "employee_id": "BM057",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "draft",
+          "gross_pay": 55000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 3400000,
+          "withheld_local_tax": 340000
+        },
+        {
+          "statement_id": "RV-9",
+          "employer_id": "가상분류소",
+          "employee_id": "RV057",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 9,
+          "status": "issued",
+          "gross_pay": 91000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 10000000,
+          "withheld_local_tax": 1000000
+        }
+      ]
+    },
+    "expected_fields": {
+      "total_salary": 56000000,
+      "rent_credit": 1260000
+    },
+    "passed": true
+  },
+  {
+    "case_id": "A060",
+    "mutations": [
+      [
+        "pay_statements.2.status",
+        "draft"
+      ],
+      [
+        "pay_statements.3.status",
+        "draft"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "SB060",
+      "processing_policy": "내용까지 같은 발급번호 재전송은 한 번 취급하고 대상 직원의 사용자 및 지급기간별 최고 발급본을 선택한다.",
+      "calculation_facts": {
+        "reference_year": 2025,
+        "employee_name": "가상새봄",
+        "employee_age": 41,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "deduction_choice": "standard",
+        "scope_note": "국내 거주 근로소득자이고 한 사용자에게 연속 근무했다. 상반기와 하반기는 겹치지 않는 실제 지급이다. 사용자가 확정 하반기 최신본을 같은 발급번호와 동일 내용으로 재전송했다. 특별 신청과 부양가족 신청은 없다."
+      },
+      "pay_statements": [
+        {
+          "statement_id": "SB-FIRST",
+          "employer_id": "가상인화소",
+          "employee_id": "SB060",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 28000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1200000,
+          "withheld_local_tax": 120000
+        },
+        {
+          "statement_id": "SB-SECOND-1",
+          "employer_id": "가상인화소",
+          "employee_id": "SB060",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 26000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1050000,
+          "withheld_local_tax": 105000
+        },
+        {
+          "statement_id": "SB-SECOND-2",
+          "employer_id": "가상인화소",
+          "employee_id": "SB060",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "draft",
+          "gross_pay": 28000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1500000,
+          "withheld_local_tax": 150000
+        },
+        {
+          "statement_id": "SB-SECOND-2",
+          "employer_id": "가상인화소",
+          "employee_id": "SB060",
+          "period_start": "2025-07-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "draft",
+          "gross_pay": 28000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 1500000,
+          "withheld_local_tax": 150000
+        }
+      ]
+    },
+    "expected_fields": {
+      "total_salary": 52000000
+    },
+    "passed": true
+  },
+  {
+    "case_id": "A065",
+    "mutations": [
+      [
+        "pay_statements.0.period_end",
+        "2025-12-31"
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "CA065",
+      "processing_policy": "대상 직원의 발급 원천을 선택한다. 지출의 재직 적격 기간은 인사부가 확인한 employment_start와 employment_end이며 원천 지급기간에서 추정하지 않는다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상초아",
+        "employee_age": 35,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "deduction_choice": "itemized",
+        "scope_note": "국내 거주 근로소득자이고 1월부터 11월까지 근로 급여를 받았다. 12월은 급여가 없는 승인 무급휴직으로 근로관계는 12월 31일까지 계속됐다. 인사부가 명시한 재직기간을 따른다. 본인 적격 대학원 수업료를 12월 10일 자비 납부했고 회사 지원이나 장학금은 없다.",
+        "education": [
+          {
+            "person_id": "self",
+            "level": "graduate",
+            "institution_type": "graduate_school",
+            "amount": 6000000,
+            "date": "2025-12-10",
+            "paid_by_self": true
+          }
+        ]
+      },
+      "pay_statements": [
+        {
+          "statement_id": "CA-JAN-NOV",
+          "employer_id": "가상문서관",
+          "employee_id": "CA065",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 51000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 3000000,
+          "withheld_local_tax": 300000
+        }
+      ]
+    },
+    "expected_fields": {
+      "education_credit": 900000
+    },
+    "passed": true
+  },
+  {
+    "case_id": "A077",
+    "mutations": [
+      [
+        "pay_statements.1.gross_pay",
+        50000000
+      ],
+      [
+        "pay_statements.1.non_taxable_pay",
+        1000000
+      ],
+      [
+        "calculation_facts.education.0.scholarship",
+        0
+      ]
+    ],
+    "counterfactual_facts": {
+      "source_contract": "yearend_pay_statement_v1",
+      "employee_id": "NR077",
+      "processing_policy": "동일 사용자와 연간 지급기간의 최고 발급본을 선택한다. 비과세 학자금은 지급총액과 비과세액에 함께 포함되며 같은 학자금은 교육비 공제 원액에서 제외한다.",
+      "calculation_facts": {
+        "source_contract": "yearend_evidence_v1",
+        "reference_year": 2025,
+        "employee_name": "가상나린",
+        "employee_age": 31,
+        "employment_start": "2025-01-01",
+        "employment_end": "2025-12-31",
+        "deduction_choice": "itemized",
+        "scope_note": "회사 지원이 없는 검증이며 직원 자비 선납 800만원 전액이 실제 부담이다. 최종 급여 지급총액은 5000만원이다.",
+        "education": [
+          {
+            "person_id": "self",
+            "level": "graduate",
+            "institution_type": "graduate_school",
+            "amount": 8000000,
+            "scholarship": 0,
+            "date": "2025-04-04",
+            "paid_by_self": true
+          }
+        ]
+      },
+      "pay_statements": [
+        {
+          "statement_id": "NR-ANNUAL-1",
+          "employer_id": "가상표지사",
+          "employee_id": "NR077",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 1,
+          "status": "issued",
+          "gross_pay": 50000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 3000000,
+          "withheld_local_tax": 300000
+        },
+        {
+          "statement_id": "NR-ANNUAL-2",
+          "employer_id": "가상표지사",
+          "employee_id": "NR077",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "revision": 2,
+          "status": "issued",
+          "gross_pay": 50000000,
+          "non_taxable_pay": 1000000,
+          "withheld_national_tax": 3000000,
+          "withheld_local_tax": 300000
+        }
+      ]
+    },
+    "expected_fields": {
+      "total_salary": 49000000,
+      "education_credit": 1200000,
+      "final_national_tax": 2175000
+    },
+    "passed": true
+  }
+]
