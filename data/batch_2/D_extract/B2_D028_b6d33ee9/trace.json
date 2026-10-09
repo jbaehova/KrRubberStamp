@@ -1,0 +1,173 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-07-10",
+      "events": [
+        {
+          "date": "2026-07-05",
+          "event_id": "FRAME-I-IN",
+          "kind": "received",
+          "line_id": "F",
+          "order_id": "FRAME-INITIAL",
+          "units": 3
+        },
+        {
+          "date": "2026-07-07",
+          "event_id": "FRAME-N-IN",
+          "kind": "received",
+          "line_id": "F",
+          "order_id": "FRAME-NEXT",
+          "units": 2
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-06-30",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "검수프레임",
+              "line_id": "F",
+              "ordered_packages": 2,
+              "package_price": 48000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "FRAME-INITIAL",
+          "vendor": "주식회사 가상검수프레임"
+        },
+        {
+          "date": "2026-07-02",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "검수프레임",
+              "line_id": "F",
+              "ordered_packages": 1,
+              "package_price": 48000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "FRAME-NEXT",
+          "vendor": "㈜가상검수프레임"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 40000,
+          "date": "2026-07-01",
+          "order_id": "FRAME-INITIAL",
+          "payment_id": "FRAME-I-PAY",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "모든 업체는 가상이다. 업체명은 NFKC와 공백 및 법인 표기 제거 후 소문자로 정리한다. 마감까지 순인수량의 포장비율 공급가격을 마지막에 버리고 세액은 행 공급가액 10%를 버린다. 주문에 연결한 실행 지급을 동일 업체 대금에서 차감한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "FRAME-I-IN",
+        "FRAME-N-IN"
+      ],
+      "accepted_payment_ids": [
+        "FRAME-I-PAY"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "FRAME-I-IN",
+          "net_units_after_event": 3
+        },
+        {
+          "event_id": "FRAME-N-IN",
+          "net_units_after_event": 2
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 72000,
+          "line_id": "F",
+          "order_id": "FRAME-INITIAL",
+          "package_price_times_net_units": 144000,
+          "price_includes_vat": false,
+          "supply": 72000,
+          "total": 79200,
+          "units_per_package": 2,
+          "vat": 7200
+        },
+        {
+          "amount_after_floor": 48000,
+          "line_id": "F",
+          "order_id": "FRAME-NEXT",
+          "package_price_times_net_units": 96000,
+          "price_includes_vat": false,
+          "supply": 48000,
+          "total": 52800,
+          "units_per_package": 2,
+          "vat": 4800
+        }
+      ],
+      "settlement": {
+        "balance_total": 92000,
+        "grand_total": 132000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "검수프레임",
+            "net_units": 5
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "검수프레임",
+            "line_id": "F",
+            "net_units": 3,
+            "order_id": "FRAME-INITIAL",
+            "ordered_units": 4,
+            "outstanding_units": 1,
+            "received_units": 3,
+            "returned_units": 0,
+            "supply": 72000,
+            "total": 79200,
+            "vat": 7200
+          },
+          {
+            "base_unit": "개",
+            "item": "검수프레임",
+            "line_id": "F",
+            "net_units": 2,
+            "order_id": "FRAME-NEXT",
+            "ordered_units": 2,
+            "outstanding_units": 0,
+            "received_units": 2,
+            "returned_units": 0,
+            "supply": 48000,
+            "total": 52800,
+            "vat": 4800
+          }
+        ],
+        "payment_total": 40000,
+        "vendor_balances": [
+          {
+            "balance": 92000,
+            "paid": 40000,
+            "supply": 120000,
+            "total": 132000,
+            "vat": 12000,
+            "vendor": "가상검수프레임"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

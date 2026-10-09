@@ -1,0 +1,257 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "service",
+          "activity_id": "가족설치",
+          "date": "2026-05-07",
+          "description": "대표 가족 주택에 가구를 설치했다.",
+          "document_ids": [
+            "가족전자",
+            "가족현영"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "대표 가족 주택"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상문가족",
+              "organization": "대표가구",
+              "role": "household_member"
+            },
+            {
+              "name": "가상문대표",
+              "organization": "가상무늬공방",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "가족가구"
+        }
+      ],
+      "business_name": "가상무늬공방",
+      "evidence_documents": [
+        {
+          "amount": 1500000,
+          "date": "2026-05-07",
+          "document_id": "가족전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 150000,
+          "transaction_id": "가족가구",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 550000,
+          "date": "2026-05-07",
+          "document_id": "가족현영",
+          "document_type": "cash_receipt",
+          "includes_vat": true,
+          "payment_id": "가족현금",
+          "stated_vat": 50000,
+          "transaction_id": "가족가구",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [],
+      "payments": [
+        {
+          "amount": 550000,
+          "date": "2026-05-07",
+          "includes_vat": true,
+          "method": "cash",
+          "payment_id": "가족현금",
+          "transaction_id": "가족가구"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "가족설치",
+          "amount": 1650000,
+          "counterparty_consumer": false,
+          "date": "2026-05-07",
+          "description": "가족 주택 가구 설치 전체",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "가족가구",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "가족전자",
+          "가족현영"
+        ],
+        "documented_input_vat": 150000,
+        "eligible_input_document_ids": [
+          "가족전자"
+        ],
+        "gross": 1650000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 550000,
+        "paid_gross": 550000,
+        "purchase_activity_facts": {
+          "business_related": false,
+          "purpose": "private",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 1500000,
+        "transaction_id": "가족가구",
+        "unissued_receipt_gross": 1100000,
+        "unpaid_gross": 1100000,
+        "vat": 150000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가족전자",
+        "가족현영"
+      ],
+      "evidence": [
+        "cash_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "가족가구"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-07",
+      "transaction_id": "가족가구"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1650000,
+      "includes_vat": true,
+      "transaction_id": "가족가구"
+    },
+    "output": {
+      "gross": 1650000,
+      "supply_base": 1500000,
+      "vat": 150000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "documented_input_vat": 150000,
+      "evidence": [
+        "cash_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "가족가구",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 150000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 43000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 150000,
+      "net_vat": 0,
+      "noncreditable_vat": 150000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

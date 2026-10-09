@@ -1,0 +1,60 @@
+task_id: B2_D019_34098895
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 경고등을 받은 금액에서 이번 마감까지 실행한 지급만 차감해 잔액을 보고하세요. 실행 상태라고 해도 마감 이후 날짜면 이번 지급액에
+  넣지 않습니다. answer.json에는 vendor_balances와 payment_total을 작성하세요.
+input_files:
+- path: inputs/01_경고등계약.pdf
+  format: pdf
+- path: inputs/02_계약금.xlsx
+  format: xlsx
+- path: inputs/03_잔금.hwpx
+  format: hwpx
+- path: inputs/04_경고등마감.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    payment_total:
+      type: integer
+  required:
+  - vendor_balances
+  - payment_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8dfe66d8-a921-592d-82d5-948c61e5cbc3
+scenario_seed: 3749678340368565680
+scenario_hash: ab8a8da535aca85810c3b3c9e6ee82dc9a61931487616da076ac7901b5826940
+authorship:
+  method: individually_written
+  case_id: D019
+  case_sha256: 340988957ba505b082253f92b387bd25268960f3dd5c0f8a22d1bc4dc85e735b
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances
+- payment_total

@@ -1,0 +1,103 @@
+task_id: B2_D067_9987e1a5
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 도구 캡 17개의 견적에서 최소 주문과 보유 포장을 함께 확인합니다. quote_comparisons와 eligible_quote_count
+  및 chosen_quote_id를 작성해 실제 구매해야 할 포장 재고로 판단해 주세요.
+input_files:
+- path: inputs/01_캡요청.hwpx
+  format: hwpx
+- path: inputs/02_도매.xlsx
+  format: xlsx
+- path: inputs/03_도매재고.pdf
+  format: pdf
+- path: inputs/04_재고견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    eligible_quote_count:
+      type: integer
+    chosen_quote_id:
+      type: string
+  required:
+  - quote_comparisons
+  - eligible_quote_count
+  - chosen_quote_id
+  additionalProperties: false
+canary: KrRubberStamp-canary-fae70c2a-8bdd-5514-b182-a5f9e6c1f764
+scenario_seed: 11063059112608752251
+scenario_hash: c8f32b70e003ee7a2cc8b3d8dcf5673370a5af93e9058cc06ad53f569bbc9bb1
+authorship:
+  method: individually_written
+  case_id: D067
+  case_sha256: 9987e1a5f831627bd260fb7ab58e7652834146957723c8c70cbc73b05ed9c4ca
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- eligible_quote_count
+- chosen_quote_id

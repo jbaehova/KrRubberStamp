@@ -1,0 +1,39 @@
+task_id: B2_C080_ff1a12c2
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상오렌지자석은 가족 집 설치와 회사 재료 원본을 함께 보관했습니다. 실제 수령과 지급별 현재 효력을 확인하여 공제 매입세액(deductible_input_vat)
+  및 불공제세액(noncreditable_vat)을 answer.json에 보고하세요.
+input_files:
+- path: inputs/01_구매범위.pdf
+  format: pdf
+- path: inputs/02_가족수령.hwpx
+  format: hwpx
+- path: inputs/03_회사수령.pdf
+  format: pdf
+- path: inputs/04_지급원본.xlsx
+  format: xlsx
+- path: inputs/05_최종효력.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-2d872389-4e85-5357-98a6-a0bb0a948213
+scenario_seed: 18382025457277464085
+scenario_hash: cb26141919c925614f54609b868614f78382b7ef0040bbdc4d6f862a95a97b73
+authorship:
+  method: individually_written
+  case_id: C080
+  case_sha256: ff1a12c2e135ee151b83a07af813abc54b2378cdd490aa97e7188a5e3074cba7
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat

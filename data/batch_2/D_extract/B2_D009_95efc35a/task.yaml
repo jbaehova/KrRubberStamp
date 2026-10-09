@@ -1,0 +1,53 @@
+task_id: B2_D009_95efc35a
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 연결 호스 실제 인수분의 업체 청구와 잔액을 작성하세요. 발주한 모든 포장을 청구하는 것이 아니라 마감일까지 받은 기초단위
+  수량의 포장 비율로 정산합니다. 별도 공급가격의 행별 10% 세액을 버립니다. answer.json에는 vendor_balances를 정규화 업체
+  이름순으로 작성하세요.
+input_files:
+- path: inputs/01_호스약정.hwpx
+  format: hwpx
+- path: inputs/02_호스수불.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - vendor_balances
+  additionalProperties: false
+canary: KrRubberStamp-canary-2b6431c5-5b2a-5fab-b8ce-541f8fee8d12
+scenario_seed: 10804068823899248359
+scenario_hash: 29dc9a699a2a4405d2728d0b24001b4a177d1b1c734c6b30fd794d616a331de9
+authorship:
+  method: individually_written
+  case_id: D009
+  case_sha256: 95efc35a596316e7173a1afaf7876b337b84a1519907f7d8323abad9696721ef
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances

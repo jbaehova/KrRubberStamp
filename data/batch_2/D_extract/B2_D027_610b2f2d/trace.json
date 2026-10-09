@@ -1,0 +1,160 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-07-05",
+      "events": [
+        {
+          "date": "2026-07-02",
+          "event_id": "CAL-BOARD-IN",
+          "kind": "received",
+          "line_id": "BOARD",
+          "order_id": "CALIBRATION-KIT",
+          "units": 2
+        },
+        {
+          "date": "2026-07-02",
+          "event_id": "CAL-PIN-IN",
+          "kind": "received",
+          "line_id": "PIN",
+          "order_id": "CALIBRATION-KIT",
+          "units": 4
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-06-27",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "보정판",
+              "line_id": "BOARD",
+              "ordered_packages": 1,
+              "package_price": 40000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            },
+            {
+              "base_unit": "개",
+              "item": "보정핀",
+              "line_id": "PIN",
+              "ordered_packages": 1,
+              "package_price": 0,
+              "price_includes_vat": false,
+              "units_per_package": 6
+            }
+          ],
+          "order_id": "CALIBRATION-KIT",
+          "vendor": "가상보정판"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "업체는 가상이다. 실제 order의 0원 행도 주문 및 재고에 유지한다. 마감까지 순인수를 행으로 연결하고 품명 및 기초단위별로 합친다. 가격은 포장비율 대금을 마지막에 버리고 별도 세액은 10%를 버린다. 실행 지급만 반영한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "CAL-BOARD-IN",
+        "CAL-PIN-IN"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "CAL-BOARD-IN",
+          "net_units_after_event": 2
+        },
+        {
+          "event_id": "CAL-PIN-IN",
+          "net_units_after_event": 4
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 40000,
+          "line_id": "BOARD",
+          "order_id": "CALIBRATION-KIT",
+          "package_price_times_net_units": 80000,
+          "price_includes_vat": false,
+          "supply": 40000,
+          "total": 44000,
+          "units_per_package": 2,
+          "vat": 4000
+        },
+        {
+          "amount_after_floor": 0,
+          "line_id": "PIN",
+          "order_id": "CALIBRATION-KIT",
+          "package_price_times_net_units": 0,
+          "price_includes_vat": false,
+          "supply": 0,
+          "total": 0,
+          "units_per_package": 6,
+          "vat": 0
+        }
+      ],
+      "settlement": {
+        "balance_total": 44000,
+        "grand_total": 44000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "보정판",
+            "net_units": 2
+          },
+          {
+            "base_unit": "개",
+            "item": "보정핀",
+            "net_units": 4
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "보정판",
+            "line_id": "BOARD",
+            "net_units": 2,
+            "order_id": "CALIBRATION-KIT",
+            "ordered_units": 2,
+            "outstanding_units": 0,
+            "received_units": 2,
+            "returned_units": 0,
+            "supply": 40000,
+            "total": 44000,
+            "vat": 4000
+          },
+          {
+            "base_unit": "개",
+            "item": "보정핀",
+            "line_id": "PIN",
+            "net_units": 4,
+            "order_id": "CALIBRATION-KIT",
+            "ordered_units": 6,
+            "outstanding_units": 2,
+            "received_units": 4,
+            "returned_units": 0,
+            "supply": 0,
+            "total": 0,
+            "vat": 0
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 44000,
+            "paid": 0,
+            "supply": 40000,
+            "total": 44000,
+            "vat": 4000,
+            "vendor": "가상보정판"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

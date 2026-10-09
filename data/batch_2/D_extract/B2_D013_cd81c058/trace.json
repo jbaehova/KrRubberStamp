@@ -1,0 +1,194 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-03-10",
+      "events": [
+        {
+          "date": "2026-03-05",
+          "event_id": "STAND-A-IN",
+          "kind": "received",
+          "line_id": "S",
+          "order_id": "STAND-A",
+          "units": 4
+        },
+        {
+          "date": "2026-03-05",
+          "event_id": "STAND-B-IN",
+          "kind": "received",
+          "line_id": "S",
+          "order_id": "STAND-B",
+          "units": 4
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-03-01",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "태블릿거치대",
+              "line_id": "S",
+              "ordered_packages": 1,
+              "package_price": 80000,
+              "price_includes_vat": false,
+              "units_per_package": 4
+            }
+          ],
+          "order_id": "STAND-A",
+          "vendor": "가상탁상거치"
+        },
+        {
+          "date": "2026-03-02",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "계측거치대",
+              "line_id": "S",
+              "ordered_packages": 1,
+              "package_price": 120000,
+              "price_includes_vat": false,
+              "units_per_package": 4
+            }
+          ],
+          "order_id": "STAND-B",
+          "vendor": "가상작업거치"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 50000,
+          "date": "2026-03-07",
+          "order_id": "STAND-A",
+          "payment_id": "STAND-A-PAY",
+          "status": "executed"
+        },
+        {
+          "amount": 30000,
+          "date": "2026-03-06",
+          "order_id": "STAND-B",
+          "payment_id": "STAND-B-PAY",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체와 거래는 가상이다. 인수와 실행 지급은 order_id로 귀속한다. 포장가격에 순인수 비율을 곱한 뒤 버리고 별도 세액은 행 공급가액의 10%를 버린다. 마감일까지 업체별 인수대금에서 실제 지급을 뺀다. 업체명은 NFKC, 공백과 법인 표기 제거 및 소문자로 정규화한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "STAND-A-IN",
+        "STAND-B-IN"
+      ],
+      "accepted_payment_ids": [
+        "STAND-A-PAY",
+        "STAND-B-PAY"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "STAND-A-IN",
+          "net_units_after_event": 4
+        },
+        {
+          "event_id": "STAND-B-IN",
+          "net_units_after_event": 4
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 80000,
+          "line_id": "S",
+          "order_id": "STAND-A",
+          "package_price_times_net_units": 320000,
+          "price_includes_vat": false,
+          "supply": 80000,
+          "total": 88000,
+          "units_per_package": 4,
+          "vat": 8000
+        },
+        {
+          "amount_after_floor": 120000,
+          "line_id": "S",
+          "order_id": "STAND-B",
+          "package_price_times_net_units": 480000,
+          "price_includes_vat": false,
+          "supply": 120000,
+          "total": 132000,
+          "units_per_package": 4,
+          "vat": 12000
+        }
+      ],
+      "settlement": {
+        "balance_total": 140000,
+        "grand_total": 220000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "계측거치대",
+            "net_units": 4
+          },
+          {
+            "base_unit": "개",
+            "item": "태블릿거치대",
+            "net_units": 4
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "태블릿거치대",
+            "line_id": "S",
+            "net_units": 4,
+            "order_id": "STAND-A",
+            "ordered_units": 4,
+            "outstanding_units": 0,
+            "received_units": 4,
+            "returned_units": 0,
+            "supply": 80000,
+            "total": 88000,
+            "vat": 8000
+          },
+          {
+            "base_unit": "개",
+            "item": "계측거치대",
+            "line_id": "S",
+            "net_units": 4,
+            "order_id": "STAND-B",
+            "ordered_units": 4,
+            "outstanding_units": 0,
+            "received_units": 4,
+            "returned_units": 0,
+            "supply": 120000,
+            "total": 132000,
+            "vat": 12000
+          }
+        ],
+        "payment_total": 80000,
+        "vendor_balances": [
+          {
+            "balance": 102000,
+            "paid": 30000,
+            "supply": 120000,
+            "total": 132000,
+            "vat": 12000,
+            "vendor": "가상작업거치"
+          },
+          {
+            "balance": 38000,
+            "paid": 50000,
+            "supply": 80000,
+            "total": 88000,
+            "vat": 8000,
+            "vendor": "가상탁상거치"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

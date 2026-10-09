@@ -1,0 +1,363 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "재료인수",
+          "date": "2026-02-19",
+          "description": "직원이 납품품 조립 재료를 전량 인수",
+          "document_ids": [
+            "구카드",
+            "인수영수증",
+            "정정카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상풀잎제작 조립실",
+            "organization": "가상풀잎제작"
+          },
+          "operation_id": "납품제작",
+          "participants": [
+            {
+              "name": "가상직원루",
+              "organization": "가상풀잎제작",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "재료구매"
+        }
+      ],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-02-20",
+          "document_id": "구카드",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-02-19",
+          "document_id": "인수영수증",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-02-20",
+          "document_id": "정정카드",
+          "replaces_document_id": "구카드",
+          "state": "valid"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 550000,
+          "date": "2026-02-19",
+          "document_id": "구카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "재료카드",
+          "stated_vat": null,
+          "transaction_id": "재료구매",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 550000,
+          "date": "2026-02-19",
+          "document_id": "인수영수증",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "재료카드",
+          "stated_vat": null,
+          "transaction_id": "재료구매",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 550000,
+          "date": "2026-02-19",
+          "document_id": "정정카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "재료카드",
+          "stated_vat": 50000,
+          "transaction_id": "재료구매",
+          "vat_separately_stated": true
+        }
+      ],
+      "processing_date": "2026-07-13",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "구카드"
+      ],
+      "replacement_relations": [
+        {
+          "revoked_document_id": "구카드",
+          "valid_document_id": "정정카드"
+        }
+      ],
+      "selected_document_ids": [
+        "인수영수증",
+        "정정카드"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "재료인수",
+          "date": "2026-02-19",
+          "description": "직원이 납품품 조립 재료를 전량 인수",
+          "document_ids": [
+            "인수영수증",
+            "정정카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상풀잎제작 조립실",
+            "organization": "가상풀잎제작"
+          },
+          "operation_id": "납품제작",
+          "participants": [
+            {
+              "name": "가상직원루",
+              "organization": "가상풀잎제작",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "재료구매"
+        }
+      ],
+      "business_name": "가상풀잎제작",
+      "evidence_documents": [
+        {
+          "amount": 550000,
+          "date": "2026-02-19",
+          "document_id": "인수영수증",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "재료카드",
+          "stated_vat": null,
+          "transaction_id": "재료구매",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 550000,
+          "date": "2026-02-19",
+          "document_id": "정정카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "재료카드",
+          "stated_vat": 50000,
+          "transaction_id": "재료구매",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [
+        {
+          "description": "국내 과세 납품품 제작",
+          "operation_id": "납품제작",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 550000,
+          "date": "2026-02-19",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "재료카드",
+          "transaction_id": "재료구매"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "재료인수",
+          "amount": 550000,
+          "counterparty_consumer": false,
+          "date": "2026-02-19",
+          "description": "납품품 조립 재료",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "재료구매",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "인수영수증",
+          "정정카드"
+        ],
+        "documented_input_vat": 50000,
+        "eligible_input_document_ids": [
+          "정정카드"
+        ],
+        "gross": 550000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 550000,
+        "paid_gross": 550000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 500000,
+        "transaction_id": "재료구매",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 50000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "인수영수증",
+        "정정카드"
+      ],
+      "evidence": [
+        "card_receipt",
+        "receipt"
+      ],
+      "transaction_id": "재료구매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-19",
+      "transaction_id": "재료구매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 550000,
+      "includes_vat": true,
+      "transaction_id": "재료구매"
+    },
+    "output": {
+      "gross": 550000,
+      "supply_base": 500000,
+      "vat": 50000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 50000,
+      "evidence": [
+        "card_receipt",
+        "receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "재료구매",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 50000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 180000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -50000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -50000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -50000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 50000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 50000,
+      "input_vat": 50000,
+      "net_vat": -50000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 50000,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

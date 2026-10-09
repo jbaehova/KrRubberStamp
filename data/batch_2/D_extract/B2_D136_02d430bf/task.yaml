@@ -1,0 +1,128 @@
+task_id: B2_D136_02d430bf
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 커버와 고리 및 판을 삼각 취급 세 업체에서 확보합니다. 커버고리 업체의 고리는 최소 두 포장입니다. 실제 최소 상품액이 커버와
+  합쳐 배송을 면제하는 조합을 chosen_offers와 vendor_cart_totals로 작성해 주세요.
+input_files:
+- path: inputs/01_접합품요청.pdf
+  format: pdf
+- path: inputs/02_커버고리.xlsx
+  format: xlsx
+- path: inputs/03_고리판.hwpx
+  format: hwpx
+- path: inputs/04_커버판.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-089851ba-4510-5e63-a169-5e7570ce962c
+scenario_seed: 203841483654909300
+scenario_hash: 1a9236d46ca5e34288c30b23ba7a351385c1039ce83e676d68fc3efe26d4fb24
+authorship:
+  method: individually_written
+  case_id: D136
+  case_sha256: 02d430bfd7bd4d74052fd999c6a1e1610b722d3c871d4a4a6309b5d226df0664
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals

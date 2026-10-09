@@ -1,0 +1,51 @@
+task_id: B2_B091_194666cc
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상문서꽂이실은 같은 휴일 날짜를 두 달력에서 받았고 실제낮 소집 두 건 외 밤 초안도 보관합니다. 달력 반복은 같은 지정휴일이고
+  밤 초안은 실제근로가 아닙니다. 두 승인 낮 카드만 하루합산한 holiday_pay와 night_pay 및 gross_pay를 제출하세요.
+input_files:
+- path: inputs/01_월약정.pdf
+  format: pdf
+- path: inputs/02_달력.hwpx
+  format: hwpx
+- path: inputs/03_낮카드.xlsx
+  format: xlsx
+- path: inputs/04_밤초안.pdf
+  format: pdf
+- path: inputs/05_연금.xlsx
+  format: xlsx
+- path: inputs/06_건강.hwpx
+  format: hwpx
+- path: inputs/07_고용.pdf
+  format: pdf
+- path: inputs/08_등록.xlsx
+  format: xlsx
+- path: inputs/09_실행.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - holiday_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-00279b79-1e21-51cf-9e8f-5ba54baf593a
+scenario_seed: 1821256128740330511
+scenario_hash: a5946044d1c77c59689cd092bbe8452d516864093279456beac5f38bf9562f30
+authorship:
+  method: individually_written
+  case_id: B091
+  case_sha256: 194666ccb6920c0fd893607c6dc5f50dfc2a945966d9df003663d038a2947bf6
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- holiday_pay
+- night_pay
+- gross_pay

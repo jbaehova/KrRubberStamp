@@ -1,0 +1,131 @@
+task_id: B2_D058_9ab4b518
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 교육실과 기록실이 같은 이름의 보관 고리를 각 7개 요청했습니다. 약정상 부서별 item_id마다 완성 포장을 따로 배정하므로
+  두 필요량을 합쳐 포장을 줄이면 안 됩니다. chosen_offers와 vendor_cart_totals 및 grand_total을 작성해 각
+  요청의 포장 수와 잉여량을 보존해 주세요.
+input_files:
+- path: inputs/01_부서별요청.pdf
+  format: pdf
+- path: inputs/02_업체발송.xlsx
+  format: xlsx
+- path: inputs/03_부서배정견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-66fe36bd-86d0-55f8-9cc7-261025af8832
+scenario_seed: 11147734096588001940
+scenario_hash: 078dade40408757e0d19b1273e5cf8c38954cdb100ec23bc5b81788e1dba6327
+authorship:
+  method: individually_written
+  case_id: D058
+  case_sha256: 9ab4b518fda352943079f7f9637ed20969a942af9922e48b50aaef140e79a5c6
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

@@ -1,0 +1,349 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 68100000,
+      "dependents": [
+        {
+          "age": 9,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "first",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 0,
+          "assigned_claimant": "spouse",
+          "birth_order_this_year": 2,
+          "income_amount": 0,
+          "person_id": "second",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 0,
+          "assigned_claimant": "self",
+          "birth_order_this_year": 3,
+          "income_amount": 0,
+          "person_id": "third",
+          "relation": "child",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 1300000,
+          "date": "2025-03-16",
+          "level": "school",
+          "person_id": "first"
+        }
+      ],
+      "employee_age": 37,
+      "employee_name": "가상원지민",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "insurance": [
+        {
+          "amount": 340000,
+          "date": "2025-11-16",
+          "kind": "general",
+          "person_id": "second"
+        },
+        {
+          "amount": 510000,
+          "date": "2025-11-17",
+          "kind": "general",
+          "person_id": "third"
+        }
+      ],
+      "marital_status": "married",
+      "medical": [
+        {
+          "amount": 3900000,
+          "date": "2025-10-16",
+          "kind": "premature",
+          "person_id": "second"
+        },
+        {
+          "amount": 3700000,
+          "date": "2025-10-17",
+          "kind": "premature",
+          "person_id": "third"
+        },
+        {
+          "amount": 1900000,
+          "date": "2025-04-16",
+          "kind": "ordinary",
+          "person_id": "first",
+          "treatment_purpose": "cosmetic"
+        }
+      ],
+      "non_taxable": 2100000,
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로소득자로 기혼이다. 아이들은 무소득이며 실제 부양한다. 최종 부부 배정은 아이별로 다르고 올해 출생 순위는 가족 전체 등록상 둘째와 셋째다. 비용은 직원 자비다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "medical.2.excluded": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 9,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "first",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 0,
+          "assigned_claimant": "spouse",
+          "birth_order_this_year": 2,
+          "income_amount": 0,
+          "person_id": "second",
+          "relation": "child",
+          "supported": true
+        },
+        {
+          "age": 0,
+          "assigned_claimant": "self",
+          "birth_order_this_year": 3,
+          "income_amount": 0,
+          "person_id": "third",
+          "relation": "child",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 4500000,
+      "rejected": [
+        "second"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 68100000,
+      "non_taxable": 2100000
+    },
+    "output": {
+      "salary_deduction": 13050000,
+      "salary_income": 52950000,
+      "total_salary": 66000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 66000000,
+      "spending": {}
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 66000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0,
+        3
+      ],
+      "eligible_children_age_8_plus": 1
+    },
+    "output": 950000,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 340000,
+          "date": "2025-11-16",
+          "kind": "general",
+          "person_id": "second"
+        },
+        {
+          "amount": 510000,
+          "date": "2025-11-17",
+          "kind": "general",
+          "person_id": "third"
+        }
+      ],
+      "salary": 66000000
+    },
+    "output": 61200,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 3900000,
+          "date": "2025-10-16",
+          "kind": "premature",
+          "person_id": "second"
+        },
+        {
+          "amount": 3700000,
+          "date": "2025-10-17",
+          "kind": "premature",
+          "person_id": "third"
+        },
+        {
+          "amount": 1900000,
+          "date": "2025-04-16",
+          "excluded": true,
+          "kind": "ordinary",
+          "person_id": "first",
+          "treatment_purpose": "cosmetic"
+        }
+      ],
+      "salary": 66000000
+    },
+    "output": 344000,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1300000,
+          "date": "2025-03-16",
+          "level": "school",
+          "person_id": "first"
+        }
+      ],
+      "salary": 66000000
+    },
+    "output": 195000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 66000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 66000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 66000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 66000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 48450000
+    },
+    "output": 6007500,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 6007500,
+      "salary": 66000000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 195000,
+        "hometown_credit": 0,
+        "insurance_credit": 61200,
+        "medical_credit": 344000,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 6007500,
+      "total_tax_credits": 2210200
+    },
+    "output": 3797300,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 3797300
+    },
+    "output": 379730,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 379730,
+      "final_national": 3797300,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 379730,
+      "national": 3797300,
+      "total": 4177030
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

@@ -1,0 +1,92 @@
+task_id: B2_D035_092d8919
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 같은 부싱의 두 주문을 입고와 반환에 연결해 행별 이행과 전체 재고를 정리하세요. 반품은 해당 order_id와 line_id의
+  인수에서만 뺍니다. answer.json에는 line_settlements와 item_quantities를 작성하세요.
+input_files:
+- path: inputs/01_부싱두주문.pdf
+  format: pdf
+- path: inputs/02_첫부싱입고.xlsx
+  format: xlsx
+- path: inputs/03_다음부싱입고.hwpx
+  format: hwpx
+- path: inputs/04_다음부싱반품.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+  required:
+  - line_settlements
+  - item_quantities
+  additionalProperties: false
+canary: KrRubberStamp-canary-7cebca2e-2a46-5780-b705-fff57b568aad
+scenario_seed: 661335464919962846
+scenario_hash: 8a54b86799de1007e6a9efde757ec1187dc8fa7ca202640a8821f42268733803
+authorship:
+  method: individually_written
+  case_id: D035
+  case_sha256: 092d8919f7ec14de777e267c76e646a8c6358a4df022189574b9b33493264af5
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- item_quantities

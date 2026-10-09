@@ -1,0 +1,403 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "대여정비",
+          "date": "2026-02-17",
+          "description": "고객에게 직접 대여하던 차량의 정비를 인수했다.",
+          "document_ids": [
+            "대여전자",
+            "대여카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "직선 정비소"
+          },
+          "operation_id": "직접대여",
+          "participants": [
+            {
+              "name": "가상임대여",
+              "organization": "가상직선대여",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "정비대여",
+          "vehicle_id": "직선차"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "사무정비",
+          "date": "2026-04-18",
+          "description": "같은 차량을 대여 계약 사무 방문에 사용한 별도 정비를 인수했다.",
+          "document_ids": [
+            "사무전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "직선 정비소"
+          },
+          "operation_id": "사무",
+          "participants": [
+            {
+              "name": "가상임대여",
+              "organization": "가상직선대여",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "정비사무",
+          "vehicle_id": "직선차"
+        }
+      ],
+      "business_name": "가상직선대여",
+      "evidence_documents": [
+        {
+          "amount": 500000,
+          "date": "2026-02-17",
+          "document_id": "대여전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 50000,
+          "transaction_id": "정비대여",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 220000,
+          "date": "2026-02-17",
+          "document_id": "대여카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "대여승인",
+          "stated_vat": 20000,
+          "transaction_id": "정비대여",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 700000,
+          "date": "2026-04-18",
+          "document_id": "사무전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 70000,
+          "transaction_id": "정비사무",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [
+        {
+          "description": "대여 계약 사무 방문 업무",
+          "operation_id": "사무",
+          "output_taxable": true
+        },
+        {
+          "description": "허가 자동차 직접 대여",
+          "operation_id": "직접대여",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 220000,
+          "date": "2026-02-17",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "대여승인",
+          "transaction_id": "정비대여"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "대여정비",
+          "amount": 550000,
+          "counterparty_consumer": false,
+          "date": "2026-02-17",
+          "description": "직접 대여 정비 전체",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "정비대여",
+          "vehicle_id": "직선차"
+        },
+        {
+          "activity_id": "사무정비",
+          "amount": 770000,
+          "counterparty_consumer": false,
+          "date": "2026-04-18",
+          "description": "사무 사용 정비 전체",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "정비사무",
+          "vehicle_id": "직선차"
+        }
+      ],
+      "vehicle_registry": [
+        {
+          "business_license": "vehicle_rental",
+          "permitted_operation_id": "직접대여",
+          "registration_class": "excise_passenger",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-12-31",
+          "vehicle_id": "직선차"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "대여전자",
+          "대여카드"
+        ],
+        "documented_input_vat": 50000,
+        "eligible_input_document_ids": [
+          "대여전자"
+        ],
+        "gross": 550000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 220000,
+        "paid_gross": 220000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "passenger_car_maintenance",
+          "supplier_general": true,
+          "vehicle_direct_business": true,
+          "vehicle_subject_excise": true
+        },
+        "supply_base": 500000,
+        "transaction_id": "정비대여",
+        "unissued_receipt_gross": 330000,
+        "unpaid_gross": 330000,
+        "vat": 50000
+      },
+      {
+        "document_ids": [
+          "사무전자"
+        ],
+        "documented_input_vat": 70000,
+        "eligible_input_document_ids": [
+          "사무전자"
+        ],
+        "gross": 770000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 0,
+        "paid_gross": 0,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "passenger_car_maintenance",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": true
+        },
+        "supply_base": 700000,
+        "transaction_id": "정비사무",
+        "unissued_receipt_gross": 770000,
+        "unpaid_gross": 770000,
+        "vat": 70000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "대여전자",
+        "대여카드"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "정비대여"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "사무전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "정비사무"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-17",
+      "transaction_id": "정비대여"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 550000,
+      "includes_vat": true,
+      "transaction_id": "정비대여"
+    },
+    "output": {
+      "gross": 550000,
+      "supply_base": 500000,
+      "vat": 50000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 50000,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "정비대여",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 50000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-18",
+      "transaction_id": "정비사무"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 770000,
+      "includes_vat": true,
+      "transaction_id": "정비사무"
+    },
+    "output": {
+      "gross": 770000,
+      "supply_base": 700000,
+      "vat": 70000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 70000,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "정비사무",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 70000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 310000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -50000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -50000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -50000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 50000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 50000,
+      "input_vat": 120000,
+      "net_vat": -50000,
+      "noncreditable_vat": 70000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 50000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

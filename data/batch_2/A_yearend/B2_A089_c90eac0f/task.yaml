@@ -1,0 +1,162 @@
+task_id: B2_A089_c90eac0f
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상도연의 병행 사용자별 발급본을 선택하고 높은 차수 초안은 제외하세요. 선택된 비과세와 급여 합계로 월세와 연금계좌의 적용률을
+  정하고 공적연금은 별도 소득공제로 처리하여 채택 및 제외 번호와 세금 계산 객체를 제출합니다.
+input_files:
+- path: inputs/01_직기구본.pdf
+  format: pdf
+- path: inputs/02_직기수정.xlsx
+  format: xlsx
+- path: inputs/03_봉제.hwpx
+  format: hwpx
+- path: inputs/04_봉제초안.pdf
+  format: pdf
+- path: inputs/05_월세.pdf
+  format: pdf
+- path: inputs/06_가족.xlsx
+  format: xlsx
+- path: inputs/07_공적연금.hwpx
+  format: hwpx
+- path: inputs/08_사적계좌.pdf
+  format: pdf
+- path: inputs/09_접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    used_statement_ids:
+      type: array
+      items:
+        type: string
+    excluded_statement_ids:
+      type: array
+      items:
+        type: string
+    annual_gross:
+      type: integer
+    non_taxable:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - used_statement_ids
+  - excluded_statement_ids
+  - annual_gross
+  - non_taxable
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-d4594c11-fa0e-5bc6-8f8a-053902212cb3
+scenario_seed: 14487706234775056445
+scenario_hash: 9dc3eb8137e882679d7d0c4af2540a00db9b38f7a9739a43a577ae82de5efe6a
+authorship:
+  method: individually_written
+  case_id: A089
+  case_sha256: c90eac0fb5fab03d7009ed26a3a0853e99031b7b2a02fa8df2bd8dd147fb7322
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- used_statement_ids
+- excluded_statement_ids
+- annual_gross
+- non_taxable
+- tax_calculation

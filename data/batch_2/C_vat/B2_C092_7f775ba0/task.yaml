@@ -1,0 +1,47 @@
+task_id: B2_C092_7f775ba0
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상화이트리본은 두 지점 대장과 기신고 공제 및 두 주문 원본을 보냈습니다. 신고 지점의 정확한 전년 자격을 확인하고 현재
+  유효 발급을 골라 연간 잔여를 적용하여 발행 공제(receipt_credit) 및 납부액(payable_vat)을 answer.json에 쓰세요.
+input_files:
+- path: inputs/01_신고및이력.hwpx
+  format: hwpx
+- path: inputs/02_신고점옛연도.pdf
+  format: pdf
+- path: inputs/03_다른점전년.xlsx
+  format: xlsx
+- path: inputs/04_신고점전년.pdf
+  format: pdf
+- path: inputs/05_첫공급.hwpx
+  format: hwpx
+- path: inputs/06_둘공급.pdf
+  format: pdf
+- path: inputs/07_부분실행.xlsx
+  format: xlsx
+- path: inputs/08_보관원본.hwpx
+  format: hwpx
+- path: inputs/09_최종효력.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-d90e1e9f-ed94-5d7f-af07-c8c213a14df3
+scenario_seed: 9184910708378392441
+scenario_hash: 232eca61a989444ffd589f23b5b95418aba890ebbe072b92ac6dda288a6e7d49
+authorship:
+  method: individually_written
+  case_id: C092
+  case_sha256: 7f775ba022935779951a9aebf1bd2c86f13cbbfc3f5e4ade3bf24d9066483941
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- receipt_credit
+- payable_vat

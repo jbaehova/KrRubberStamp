@@ -1,0 +1,42 @@
+task_id: B2_C017_146f2abe
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상전선묶음의 가족 점포 유상 전선 납품과 같은 점포에 보낸 계산대를 확인해 주세요. 판매 계약 귀속과 대표의 사적 제공을
+  구분하여 매출세액(output_vat), 공제불가 매입세액(noncreditable_vat), 순정산세액(net_vat)을 answer.json에
+  기록해 주세요.
+input_files:
+- path: inputs/01_정산의뢰.hwpx
+  format: hwpx
+- path: inputs/02_전선납품.pdf
+  format: pdf
+- path: inputs/03_계산대전표.xlsx
+  format: xlsx
+- path: inputs/04_최종설치.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    net_vat:
+      type: integer
+  required:
+  - output_vat
+  - noncreditable_vat
+  - net_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-221c3d94-0fb6-5240-9699-98149f39384f
+scenario_seed: 1472442602591168300
+scenario_hash: 8a3071dda45ddabe85dfd3b9762865f838f40cb489e118b54a2ced8e4e750e96
+authorship:
+  method: individually_written
+  case_id: C017
+  case_sha256: 146f2abee799272c3b5fa848661220f7d2e585d5c448a8379f27a3b54c65a80d
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- output_vat
+- noncreditable_vat
+- net_vat

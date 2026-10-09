@@ -1,0 +1,118 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-02-28",
+      "events": [
+        {
+          "date": "2026-02-23",
+          "event_id": "WHEEL-IN",
+          "kind": "received",
+          "line_id": "W",
+          "order_id": "WHEEL-FEB",
+          "units": 6
+        },
+        {
+          "date": "2026-03-02",
+          "event_id": "WHEEL-RETURN",
+          "kind": "returned",
+          "line_id": "W",
+          "order_id": "WHEEL-FEB",
+          "units": 2
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-02-18",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "안내휠",
+              "line_id": "W",
+              "ordered_packages": 2,
+              "package_price": 21000,
+              "price_includes_vat": false,
+              "units_per_package": 3
+            }
+          ],
+          "order_id": "WHEEL-FEB",
+          "vendor": "가상안내휠"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "업체는 가상이다. 마감일 당일까지 입고와 반품만 순량에 반영한다. 행 대금은 포장가격 곱하기 순량 나누기 포장당수량을 마지막에 버린다. 별도 세액은 공급가액 10%를 버린다. 품명은 NFKC와 공백 제거 및 소문자를 적용하며 기초단위는 유지한다. 실행 지급만 차감한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "WHEEL-IN"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "WHEEL-IN",
+          "net_units_after_event": 6
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [
+        "WHEEL-RETURN"
+      ],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 42000,
+          "line_id": "W",
+          "order_id": "WHEEL-FEB",
+          "package_price_times_net_units": 126000,
+          "price_includes_vat": false,
+          "supply": 42000,
+          "total": 46200,
+          "units_per_package": 3,
+          "vat": 4200
+        }
+      ],
+      "settlement": {
+        "balance_total": 46200,
+        "grand_total": 46200,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "안내휠",
+            "net_units": 6
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "안내휠",
+            "line_id": "W",
+            "net_units": 6,
+            "order_id": "WHEEL-FEB",
+            "ordered_units": 6,
+            "outstanding_units": 0,
+            "received_units": 6,
+            "returned_units": 0,
+            "supply": 42000,
+            "total": 46200,
+            "vat": 4200
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 46200,
+            "paid": 0,
+            "supply": 42000,
+            "total": 46200,
+            "vat": 4200,
+            "vendor": "가상안내휠"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

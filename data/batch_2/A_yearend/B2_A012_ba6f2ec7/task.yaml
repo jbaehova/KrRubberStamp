@@ -1,0 +1,162 @@
+task_id: B2_A012_ba6f2ec7
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상겹빛도안의 가상차도겸은 반년 동안 두 근무처에서 병행 일했습니다. 임대차의 다른 요건은 확인된 자료대로 적용하고 두 사용자의
+  급여 합계에서 비과세를 뺀 금액으로 월세 신청의 급여 기준을 판단하세요. 두 사용자 합계와 월세 계산 결과를 포함한 세금 객체를 회신합니다.
+input_files:
+- path: inputs/01_주근무처.xlsx
+  format: xlsx
+- path: inputs/02_병행근무처.pdf
+  format: pdf
+- path: inputs/03_월세접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    employer_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          employer_id:
+            type: string
+          gross_pay:
+            type: integer
+          non_taxable_pay:
+            type: integer
+          withheld_national_tax:
+            type: integer
+          withheld_local_tax:
+            type: integer
+        required:
+        - employer_id
+        - gross_pay
+        - non_taxable_pay
+        - withheld_national_tax
+        - withheld_local_tax
+        additionalProperties: false
+    annual_gross:
+      type: integer
+    non_taxable:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - employer_totals
+  - annual_gross
+  - non_taxable
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-1c569655-f4fd-5117-82d9-28883388328d
+scenario_seed: 13434007647870135555
+scenario_hash: 6913fa625a148379f93d9a49cdddfd429073d0d54e845c7e1752ccc06492a9ad
+authorship:
+  method: individually_written
+  case_id: A012
+  case_sha256: ba6f2ec7812e2d03b4a2b0818db17a6c491b44be2041b8859481a214da4aa5b7
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- employer_totals
+- annual_gross
+- non_taxable
+- tax_calculation

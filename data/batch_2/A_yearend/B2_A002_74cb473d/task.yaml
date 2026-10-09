@@ -1,0 +1,45 @@
+task_id: B2_A002_74cb473d
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상잔잔자료실의 가상문이로는 단기 근무의 지급액 전부가 확인된 비과세 보전금입니다. 과세 총급여와 근로소득금액을 확정한 뒤
+  잘못 원천징수한 국세 및 지방세를 반환 전표에 적으세요. 실제 원천징수 두 금액은 비율을 다시 만들어 대체하지 않습니다.
+input_files:
+- path: inputs/01_비과세지급.pdf
+  format: pdf
+- path: inputs/02_징수잔액.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    total_salary:
+      type: integer
+    salary_income:
+      type: integer
+    final_national_tax:
+      type: integer
+    settlement_national_tax:
+      type: integer
+    settlement_local_tax:
+      type: integer
+  required:
+  - total_salary
+  - salary_income
+  - final_national_tax
+  - settlement_national_tax
+  - settlement_local_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-58eb5636-b1ba-5d0b-952d-d623485908b1
+scenario_seed: 8415898658237559691
+scenario_hash: a2c97e8d8f665ab952a2c2ba7065f57f89bcfef1f2c4916cfce2edab08377aea
+authorship:
+  method: individually_written
+  case_id: A002
+  case_sha256: 74cb473d85efb38b99bd5d8db206676a88ab252f9e699bf265e6cb76e59a0bc0
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- total_salary
+- salary_income
+- final_national_tax
+- settlement_national_tax
+- settlement_local_tax

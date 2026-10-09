@@ -1,0 +1,374 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 64800000,
+      "cards": [
+        {
+          "amount": 23000000,
+          "category": "debit",
+          "date": "2025-12-01",
+          "person_id": "mother"
+        },
+        {
+          "amount": 2600000,
+          "category": "market",
+          "date": "2025-12-02",
+          "person_id": "father"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 70,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "mother",
+          "relation": "parent",
+          "supported": true
+        },
+        {
+          "age": 74,
+          "assigned_claimant": "sibling",
+          "income_amount": 0,
+          "person_id": "father",
+          "relation": "parent",
+          "supported": true
+        }
+      ],
+      "donations": [
+        {
+          "amount": 1200000,
+          "date": "2025-10-03",
+          "kind": "public",
+          "organization_id": "PUB",
+          "person_id": "mother"
+        },
+        {
+          "amount": 1600000,
+          "date": "2025-08-01",
+          "kind": "religious",
+          "organization_id": "REL",
+          "person_id": "mother"
+        },
+        {
+          "amount": 1300000,
+          "date": "2025-10-04",
+          "kind": "public",
+          "organization_id": "PUB",
+          "person_id": "father"
+        }
+      ],
+      "employee_age": 47,
+      "employee_name": "가상하루진",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "marital_status": "married",
+      "non_taxable": 1800000,
+      "organization_designations": [
+        {
+          "kind": "public",
+          "organization_id": "PUB",
+          "valid_from": "2025-01-01",
+          "valid_to": "2025-12-31"
+        },
+        {
+          "kind": "religious",
+          "organization_id": "REL",
+          "valid_from": "2025-01-01",
+          "valid_to": "2025-07-31"
+        }
+      ],
+      "reference_year": 2025,
+      "scope_note": "국내 거주 근로소득자로 기혼이다. 부모 모두 실제 부양하고 무소득이다. 최종 형제 배정은 아래와 같고 지정 공백은 소급 인정하지 않는다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "donations.0.eligible_organization": true,
+      "donations.1.eligible_organization": false,
+      "donations.2.eligible_organization": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 70,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "mother",
+          "relation": "parent",
+          "supported": true
+        },
+        {
+          "age": 74,
+          "assigned_claimant": "sibling",
+          "income_amount": 0,
+          "person_id": "father",
+          "relation": "parent",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 1000000,
+      "basic": 3000000,
+      "rejected": [
+        "father"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 64800000,
+      "non_taxable": 1800000
+    },
+    "output": {
+      "salary_deduction": 12900000,
+      "salary_income": 50100000,
+      "total_salary": 63000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 63000000,
+      "spending": {
+        "debit": 23000000
+      }
+    },
+    "output": 2175000,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1200000,
+          "date": "2025-10-03",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "PUB",
+          "person_id": "mother"
+        },
+        {
+          "amount": 1600000,
+          "date": "2025-08-01",
+          "eligible_organization": false,
+          "kind": "religious",
+          "organization_id": "REL",
+          "person_id": "mother"
+        },
+        {
+          "amount": 1300000,
+          "date": "2025-10-04",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "PUB",
+          "person_id": "father"
+        }
+      ],
+      "salary": 63000000
+    },
+    "output": 180000,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1200000,
+          "date": "2025-10-03",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "PUB",
+          "person_id": "mother"
+        },
+        {
+          "amount": 1600000,
+          "date": "2025-08-01",
+          "eligible_organization": false,
+          "kind": "religious",
+          "organization_id": "REL",
+          "person_id": "mother"
+        },
+        {
+          "amount": 1300000,
+          "date": "2025-10-04",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "PUB",
+          "person_id": "father"
+        }
+      ],
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 1200000,
+          "date": "2025-10-03",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "PUB",
+          "person_id": "mother"
+        },
+        {
+          "amount": 1600000,
+          "date": "2025-08-01",
+          "eligible_organization": false,
+          "kind": "religious",
+          "organization_id": "REL",
+          "person_id": "mother"
+        },
+        {
+          "amount": 1300000,
+          "date": "2025-10-04",
+          "eligible_organization": true,
+          "kind": "public",
+          "organization_id": "PUB",
+          "person_id": "father"
+        }
+      ],
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 43925000
+    },
+    "output": 5328750,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 5328750,
+      "salary": 63000000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 180000,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 5328750,
+      "total_tax_credits": 840000
+    },
+    "output": 4488750,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 4488750
+    },
+    "output": 448875,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 448875,
+      "final_national": 4488750,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 448875,
+      "national": 4488750,
+      "total": 4937625
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

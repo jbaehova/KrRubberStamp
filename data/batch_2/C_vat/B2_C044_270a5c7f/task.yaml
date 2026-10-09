@@ -1,0 +1,57 @@
+task_id: B2_C044_270a5c7f
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상소형꽂이 법인의 수금 및 발급 자료를 확인해 주세요. 실제 공급일이 전년인 회수 주문을 분리하고 현재 신고 주체를 적용해
+  매출세액(output_vat), 영수증 발행세액공제(receipt_credit), 납부세액(payable_vat), 고유 거래 수(unique_transaction_count)를
+  answer.json에 써 주세요.
+input_files:
+- path: inputs/01_수금.hwpx
+  format: hwpx
+- path: inputs/02_법인주체.pdf
+  format: pdf
+- path: inputs/03_전년규모.xlsx
+  format: xlsx
+- path: inputs/04_공제이력.pdf
+  format: pdf
+- path: inputs/05_전년원본.pdf
+  format: pdf
+- path: inputs/06_카드현재.pdf
+  format: pdf
+- path: inputs/07_현금현재.xlsx
+  format: xlsx
+- path: inputs/08_기관현재.pdf
+  format: pdf
+- path: inputs/09_전년사진.png
+  format: png
+  duplicate_of: inputs/05_전년원본.pdf
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - output_vat
+  - receipt_credit
+  - payable_vat
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-21d8b2ae-5f0c-59e4-a49d-7c8ae29280ca
+scenario_seed: 2813162620213775322
+scenario_hash: 6852ad3328aef89786c4c79d31153c2145abd1a00358a6fa6b57bdf1df091918
+authorship:
+  method: individually_written
+  case_id: C044
+  case_sha256: 270a5c7f913fcbdab98a1e398d90eb00557c79532d24b8b68a07d611d8d7724d
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- output_vat
+- receipt_credit
+- payable_vat
+- unique_transaction_count

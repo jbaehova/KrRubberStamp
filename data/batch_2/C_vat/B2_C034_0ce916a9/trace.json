@@ -1,0 +1,506 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "자재인수",
+          "date": "2026-03-25",
+          "description": "시계받침 제작용 자재 전량을 인수했다.",
+          "document_ids": [
+            "매입영수",
+            "매입오기",
+            "매입확정"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "받침 제작실"
+          },
+          "operation_id": "받침소매",
+          "participants": [
+            {
+              "name": "가상류받침",
+              "organization": "가상시계받침",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "받침자재"
+        }
+      ],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-03-26",
+          "document_id": "매입영수",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-03-26",
+          "document_id": "매입오기",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-03-26",
+          "document_id": "매입확정",
+          "replaces_document_id": "매입오기",
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-04-27",
+          "document_id": "매출오기",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-04-27",
+          "document_id": "매출확정",
+          "replaces_document_id": "매출오기",
+          "state": "valid"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 550000,
+          "date": "2026-03-25",
+          "document_id": "매입영수",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "자재완납",
+          "stated_vat": null,
+          "transaction_id": "받침자재",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 440000,
+          "date": "2026-03-25",
+          "document_id": "매입오기",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "자재완납",
+          "stated_vat": 40000,
+          "transaction_id": "받침자재",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 550000,
+          "date": "2026-03-25",
+          "document_id": "매입확정",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "자재완납",
+          "stated_vat": 50000,
+          "transaction_id": "받침자재",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 440000,
+          "date": "2026-04-26",
+          "document_id": "매출오기",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "판매부분",
+          "stated_vat": 40000,
+          "transaction_id": "받침인도",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 220000,
+          "date": "2026-04-26",
+          "document_id": "매출확정",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "판매부분",
+          "stated_vat": 20000,
+          "transaction_id": "받침인도",
+          "vat_separately_stated": true
+        }
+      ],
+      "processing_date": "2026-06-30",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "매입오기",
+        "매출오기"
+      ],
+      "replacement_relations": [
+        {
+          "revoked_document_id": "매입오기",
+          "valid_document_id": "매입확정"
+        },
+        {
+          "revoked_document_id": "매출오기",
+          "valid_document_id": "매출확정"
+        }
+      ],
+      "selected_document_ids": [
+        "매입영수",
+        "매입확정",
+        "매출확정"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "자재인수",
+          "date": "2026-03-25",
+          "description": "시계받침 제작용 자재 전량을 인수했다.",
+          "document_ids": [
+            "매입영수",
+            "매입확정"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "받침 제작실"
+          },
+          "operation_id": "받침소매",
+          "participants": [
+            {
+              "name": "가상류받침",
+              "organization": "가상시계받침",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "받침자재"
+        }
+      ],
+      "business_name": "가상시계받침",
+      "evidence_documents": [
+        {
+          "amount": 550000,
+          "date": "2026-03-25",
+          "document_id": "매입영수",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "자재완납",
+          "stated_vat": null,
+          "transaction_id": "받침자재",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 550000,
+          "date": "2026-03-25",
+          "document_id": "매입확정",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "자재완납",
+          "stated_vat": 50000,
+          "transaction_id": "받침자재",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 220000,
+          "date": "2026-04-26",
+          "document_id": "매출확정",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "판매부분",
+          "stated_vat": 20000,
+          "transaction_id": "받침인도",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 시계받침 제작 소매",
+          "operation_id": "받침소매",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 550000,
+          "date": "2026-03-25",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "자재완납",
+          "transaction_id": "받침자재"
+        },
+        {
+          "amount": 220000,
+          "date": "2026-04-26",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "판매부분",
+          "transaction_id": "받침인도"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "amount": 1100000,
+          "counterparty_consumer": true,
+          "date": "2026-04-26",
+          "description": "시계받침 주문 전체 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "받침인도"
+        },
+        {
+          "activity_id": "자재인수",
+          "amount": 550000,
+          "counterparty_consumer": false,
+          "date": "2026-03-25",
+          "description": "시계받침 자재 전량 인수",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "받침자재",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "매출확정"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 1100000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 220000,
+        "paid_gross": 220000,
+        "supply_base": 1000000,
+        "transaction_id": "받침인도",
+        "unissued_receipt_gross": 880000,
+        "unpaid_gross": 880000,
+        "vat": 100000
+      },
+      {
+        "document_ids": [
+          "매입영수",
+          "매입확정"
+        ],
+        "documented_input_vat": 50000,
+        "eligible_input_document_ids": [
+          "매입확정"
+        ],
+        "gross": 550000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 550000,
+        "paid_gross": 550000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 500000,
+        "transaction_id": "받침자재",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 50000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "매출확정"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "받침인도"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "매입영수",
+        "매입확정"
+      ],
+      "evidence": [
+        "card_receipt",
+        "receipt"
+      ],
+      "transaction_id": "받침자재"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-26",
+      "transaction_id": "받침인도"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "받침인도"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1000000
+    },
+    "output": 100000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 220000,
+      "transaction_id": "받침인도"
+    },
+    "output": {
+      "eligible_gross": 220000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-25",
+      "transaction_id": "받침자재"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 550000,
+      "includes_vat": true,
+      "transaction_id": "받침자재"
+    },
+    "output": {
+      "gross": 550000,
+      "supply_base": 500000,
+      "vat": 50000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 50000,
+      "evidence": [
+        "card_receipt",
+        "receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "받침자재",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 50000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 140000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 220000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 2860
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 2860,
+      "liability_before_credit": 50000
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 47140,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 47140,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 50000,
+      "output_vat": 100000,
+      "prepaid_vat": 0,
+      "receipt_credit": 2860
+    },
+    "output": {
+      "deductible_input_vat": 50000,
+      "input_vat": 50000,
+      "net_vat": 47140,
+      "noncreditable_vat": 0,
+      "output_vat": 100000,
+      "payable_vat": 47140,
+      "prepaid_vat": 0,
+      "receipt_credit": 2860,
+      "refund_vat": 0,
+      "tax_base": 1000000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

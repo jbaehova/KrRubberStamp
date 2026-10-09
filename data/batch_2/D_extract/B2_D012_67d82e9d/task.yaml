@@ -1,0 +1,74 @@
+task_id: B2_D012_67d82e9d
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 두 공급처에서 받은 같은 규격의 선반패드를 창고에서는 하나의 재고로 등록하고 지급 대장에서는 공급처별로 정산하세요. 인수 기록을
+  원주문에 연결해 기초단위 개의 수량을 합칩니다. 같은 품목이라는 이유로 업체 대금이나 송금을 합쳐 하나의 업체 계정으로 만들지 않습니다. 각 주문의
+  포함 포장가격으로 실인수 대금을 구하고 그 주문에 실행한 지급을 해당 업체에서만 차감하세요. answer.json에는 item_quantities와
+  vendor_balances를 각각 품목 및 업체 이름순으로 작성합니다.
+input_files:
+- path: inputs/01_선반패드두공급약정.pdf
+  format: pdf
+- path: inputs/02_선반패드입고.xlsx
+  format: xlsx
+- path: inputs/03_선반패드송금.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - item_quantities
+  - vendor_balances
+  additionalProperties: false
+canary: KrRubberStamp-canary-1c4ee026-136a-58b2-8cd1-80459f6ab83a
+scenario_seed: 7482782032808891377
+scenario_hash: b95f186ceac74b62ff6a51184e5efea888a5812652a89dabee9d86f61c895473
+authorship:
+  method: individually_written
+  case_id: D012
+  case_sha256: 67d82e9d053fd3f1fd2f6756cacd9fc7081cdc17a9ee71c15ca20ceadc521c0f
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- item_quantities
+- vendor_balances

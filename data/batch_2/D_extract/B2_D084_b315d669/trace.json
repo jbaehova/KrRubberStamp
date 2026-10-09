@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "개",
+      "item": "소형마개",
+      "latest_delivery_date": "2026-09-29",
+      "order_date": "2026-09-21",
+      "processing_policy": "합성 사적 구매: 필요/포장수량 올림과 최소포장수 중 큰 값 구매. 상품 및 운임 각각 포함가는 10/11 버림 공급가액과 차액 세액, 별도가는 각 공급가액의 10% 원 미만 버림 세액. 합산 뒤 세액을 다시 버리지 않는다. 상품 세금포함 총액만 무료배송 기준 비교. 효력/재고/달력납기 충족 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 1,
+          "pack_price": 63,
+          "pack_units": 3,
+          "price_includes_vat": true,
+          "quote_id": "SMALL-INCLUDED",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-09-01",
+          "valid_until": "2026-09-30",
+          "vendor": "가상가마개"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 1,
+          "pack_price": 39,
+          "pack_units": 3,
+          "price_includes_vat": false,
+          "quote_id": "SMALL-SEPARATE",
+          "shipping_price": 19,
+          "shipping_price_includes_vat": false,
+          "stock_packs": 10,
+          "valid_from": "2026-09-01",
+          "valid_until": "2026-09-30",
+          "vendor": "가상나마개"
+        }
+      ],
+      "required_units": 2,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "개",
+      "comparison": {
+        "chosen_leftover_units": 1,
+        "chosen_quote_id": "SMALL-SEPARATE",
+        "chosen_total": 62,
+        "chosen_vendor": "가상나마개",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-09-23",
+            "eligible": true,
+            "leftover_units": 1,
+            "merchandise_supply": 57,
+            "merchandise_total": 63,
+            "merchandise_vat": 6,
+            "obtained_units": 3,
+            "packs": 1,
+            "quote_id": "SMALL-INCLUDED",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 57,
+            "total": 63,
+            "valid_on_order": true,
+            "vat": 6,
+            "vendor": "가상가마개"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-09-23",
+            "eligible": true,
+            "leftover_units": 1,
+            "merchandise_supply": 39,
+            "merchandise_total": 42,
+            "merchandise_vat": 3,
+            "obtained_units": 3,
+            "packs": 1,
+            "quote_id": "SMALL-SEPARATE",
+            "shipping_supply": 19,
+            "shipping_total": 20,
+            "shipping_vat": 1,
+            "stock_sufficient": true,
+            "supply": 58,
+            "total": 62,
+            "valid_on_order": true,
+            "vat": 4,
+            "vendor": "가상나마개"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 63,
+          "minimum_packs": 1,
+          "pack_units": 3,
+          "packs_after_minimum": 1,
+          "price_includes_vat": true,
+          "quote_id": "SMALL-INCLUDED",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 63
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 39,
+          "minimum_packs": 1,
+          "pack_units": 3,
+          "packs_after_minimum": 1,
+          "price_includes_vat": false,
+          "quote_id": "SMALL-SEPARATE",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 19,
+          "shipping_free": false,
+          "shipping_price_includes_vat": false,
+          "shipping_threshold_basis": 42
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "소형마개",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          62,
+          "가상나마개",
+          "SMALL-SEPARATE"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            62,
+            "가상나마개",
+            "SMALL-SEPARATE"
+          ],
+          [
+            63,
+            "가상가마개",
+            "SMALL-INCLUDED"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

@@ -1,0 +1,113 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-08-31",
+      "events": [
+        {
+          "date": "2026-09-03",
+          "event_id": "SHIELD-IN",
+          "kind": "received",
+          "line_id": "S",
+          "order_id": "SHIELD-SEP",
+          "units": 2
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-08-20",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "측정차폐함",
+              "line_id": "S",
+              "ordered_packages": 1,
+              "package_price": 220000,
+              "price_includes_vat": true,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "SHIELD-SEP",
+          "vendor": "가상차폐함"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 80000,
+          "date": "2026-08-22",
+          "order_id": "SHIELD-SEP",
+          "payment_id": "SHIELD-DEP",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 마감일까지 입고와 반품만 순량에 반영하며 실행 지급은 별도 날짜로 판단한다. 포장가격의 순인수 비율을 마지막에 버리고 포함 가격은 행 금액의 10/11을 버린 공급가액과 차액 세액이다. 업체별 대금에서 실행 지급을 차감하고 부호를 유지한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [],
+      "accepted_payment_ids": [
+        "SHIELD-DEP"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [],
+      "excluded_after_cutoff_event_ids": [
+        "SHIELD-IN"
+      ],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 0,
+          "line_id": "S",
+          "order_id": "SHIELD-SEP",
+          "package_price_times_net_units": 0,
+          "price_includes_vat": true,
+          "supply": 0,
+          "total": 0,
+          "units_per_package": 2,
+          "vat": 0
+        }
+      ],
+      "settlement": {
+        "balance_total": -80000,
+        "grand_total": 0,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "측정차폐함",
+            "net_units": 0
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "측정차폐함",
+            "line_id": "S",
+            "net_units": 0,
+            "order_id": "SHIELD-SEP",
+            "ordered_units": 2,
+            "outstanding_units": 2,
+            "received_units": 0,
+            "returned_units": 0,
+            "supply": 0,
+            "total": 0,
+            "vat": 0
+          }
+        ],
+        "payment_total": 80000,
+        "vendor_balances": [
+          {
+            "balance": -80000,
+            "paid": 80000,
+            "supply": 0,
+            "total": 0,
+            "vat": 0,
+            "vendor": "가상차폐함"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

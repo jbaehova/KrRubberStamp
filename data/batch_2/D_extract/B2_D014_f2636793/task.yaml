@@ -1,0 +1,73 @@
+task_id: B2_D014_f2636793
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 실험용 집게의 두 주문을 정산하세요. 실제 인수는 정규화 품명과 기초단위별로 합치고 실행 지급은 주문의 공급처에 귀속해 합칩니다.
+  answer.json에는 item_quantities와 vendor_balances를 각각 이름순으로 작성하세요. 행별 약정 금액과 별도 10%
+  세액은 원 미만 버립니다.
+input_files:
+- path: inputs/01_집게약정.pdf
+  format: pdf
+- path: inputs/02_집게인수.xlsx
+  format: xlsx
+- path: inputs/03_집게선지급.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - item_quantities
+  - vendor_balances
+  additionalProperties: false
+canary: KrRubberStamp-canary-f2f0ee6d-acc8-5a6d-b0f7-205f7cbf6261
+scenario_seed: 17465917661248209337
+scenario_hash: bd7f13389a2e3c9810858d36279f49a2d2886d00e8e2c36bfa114eacc05ee238
+authorship:
+  method: individually_written
+  case_id: D014
+  case_sha256: f263679312ebc1b9a0d46884fe141646e4c073862db55d52820462742601e6f0
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- item_quantities
+- vendor_balances

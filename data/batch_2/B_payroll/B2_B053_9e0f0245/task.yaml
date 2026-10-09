@@ -1,0 +1,119 @@
+task_id: B2_B053_9e0f0245
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상표본실은 화요일 두 담당자를 각 세 시간 불렀습니다. 한 담당자의 약정 주휴일은 화요일이고 다른 담당자의 주휴일은 일요일입니다.
+  담당자가 확정한 소집 집계와 지정 휴무 근거에 따라 두 완전 월 명세의 holiday_pay와 overtime_pay를 구분하고 실행 현금까지
+  대조해 payroll_calculations를 제출하세요.
+input_files:
+- path: inputs/01_개별약정.pdf
+  format: pdf
+- path: inputs/02_지급.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    payroll_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          calculation:
+            type: object
+            properties:
+              effective_payment_date:
+                type: string
+              ordinary_monthly_wage:
+                type: integer
+              ordinary_hourly_wage_floor:
+                type: integer
+              base_pay:
+                type: integer
+              fixed_allowance:
+                type: integer
+              meal_allowance:
+                type: integer
+              variable_allowance:
+                type: integer
+              overtime_pay:
+                type: integer
+              night_pay:
+                type: integer
+              holiday_pay:
+                type: integer
+              weekly_holiday_pay:
+                type: integer
+              paid_holiday_pay:
+                type: integer
+              gross_pay:
+                type: integer
+              taxable_pay:
+                type: integer
+              non_taxable_pay:
+                type: integer
+              pension_base_income:
+                type: integer
+              national_pension:
+                type: integer
+              health_insurance:
+                type: integer
+              long_term_care:
+                type: integer
+              employment_insurance:
+                type: integer
+              income_tax:
+                type: integer
+              local_income_tax:
+                type: integer
+              total_deductions:
+                type: integer
+              net_pay:
+                type: integer
+            required:
+            - effective_payment_date
+            - ordinary_monthly_wage
+            - ordinary_hourly_wage_floor
+            - base_pay
+            - fixed_allowance
+            - meal_allowance
+            - variable_allowance
+            - overtime_pay
+            - night_pay
+            - holiday_pay
+            - weekly_holiday_pay
+            - paid_holiday_pay
+            - gross_pay
+            - taxable_pay
+            - non_taxable_pay
+            - pension_base_income
+            - national_pension
+            - health_insurance
+            - long_term_care
+            - employment_insurance
+            - income_tax
+            - local_income_tax
+            - total_deductions
+            - net_pay
+            additionalProperties: false
+        required:
+        - payroll_id
+        - employee_id
+        - calculation
+        additionalProperties: false
+  required:
+  - payroll_calculations
+  additionalProperties: false
+canary: KrRubberStamp-canary-bb682842-f872-5f9f-8c8d-a82655a56b64
+scenario_seed: 11389324482031226562
+scenario_hash: bb2c38d8f5df34c880afffe95fc08bcaad45d44d118d759c42b0a4182d2724f6
+authorship:
+  method: individually_written
+  case_id: B053
+  case_sha256: 9e0f0245ef218ec23bf6acf17a94a37851d6aee0a4dd43a0a3b9a02aebdd37aa
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- payroll_calculations

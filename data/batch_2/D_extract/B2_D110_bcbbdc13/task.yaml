@@ -1,0 +1,85 @@
+task_id: B2_D110_bcbbdc13
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 전용 받침과 전용 고정대를 각각 주문하고 공용 덮개를 한 업체에 배정합니다. 완성 조합이 같은 총액이면 품목ID순 업체 비교
+  튜플을 사용합니다. chosen_offers와 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_설치품요청.pdf
+  format: pdf
+- path: inputs/02_가람견적.xlsx
+  format: xlsx
+- path: inputs/03_나루견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-1b7f0ec7-aa6f-5af2-8f00-cca397c8c085
+scenario_seed: 13599705474433052777
+scenario_hash: 788bf49c3c2d0d572800fe259e74f940d909c0d93485616095dc58ac4c193c89
+authorship:
+  method: individually_written
+  case_id: D110
+  case_sha256: bcbbdc131d847069541cb21ee52b59b06b38c98dbb0ed4be551928188fddb7b2
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- grand_total

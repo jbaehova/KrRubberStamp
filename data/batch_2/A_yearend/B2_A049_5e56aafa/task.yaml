@@ -1,0 +1,59 @@
+task_id: B2_A049_5e56aafa
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상반씩한출생의 가상원지민은 기존 첫 자녀와 올해 태어난 둘째 및 셋째 쌍둥이를 부양합니다. 부부의 최종 아이별 배정을 반영해
+  자녀세액공제와 기본공제액을 구하고 아이들의 일반보험 및 치료비와 학교 교육비를 각각 마감하세요.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_큰아이.hwpx
+  format: hwpx
+- path: inputs/03_쌍둥이.hwpx
+  format: hwpx
+- path: inputs/04_둘째보험.pdf
+  format: pdf
+- path: inputs/05_셋째보험.pdf
+  format: pdf
+- path: inputs/06_둘째치료.pdf
+  format: pdf
+- path: inputs/07_셋째치료.pdf
+  format: pdf
+- path: inputs/08_미용.pdf
+  format: pdf
+- path: inputs/09_학교.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    child_credit:
+      type: integer
+    basic_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    education_credit:
+      type: integer
+  required:
+  - child_credit
+  - basic_deduction
+  - insurance_credit
+  - medical_credit
+  - education_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-2cbce0fb-b63e-5fd0-bb97-7c1d961591e9
+scenario_seed: 6797808682039537547
+scenario_hash: a0005f4d9eb7bab62bac54d6618bbf165814cd69955cce1f7cfcdd7ab116763c
+authorship:
+  method: individually_written
+  case_id: A049
+  case_sha256: 5e56aafae0086f8b187e5e85c4935a6de0d140b8e389da4168d8f6af039b903c
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- child_credit
+- basic_deduction
+- insurance_credit
+- medical_credit
+- education_credit

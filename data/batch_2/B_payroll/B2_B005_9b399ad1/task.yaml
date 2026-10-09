@@ -1,0 +1,123 @@
+task_id: B2_B005_9b399ad1
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상문화접수는 단시간 직원의 한 달 전체 근무와 개근 주를 마감했습니다. 출근 카드의 실제 근로와 주휴를 함께 계산하여 월
+  명세를 만들고 같은 지급일의 한 실행 이체와 대조해 주세요. payroll_calculations와 balance_total을 요청합니다. 주휴를
+  별도 명세로 원천징수하지 않습니다.
+input_files:
+- path: inputs/01_근로와개근.hwpx
+  format: hwpx
+- path: inputs/02_실행확인.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    payroll_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          calculation:
+            type: object
+            properties:
+              effective_payment_date:
+                type: string
+              ordinary_monthly_wage:
+                type: integer
+              ordinary_hourly_wage_floor:
+                type: integer
+              base_pay:
+                type: integer
+              fixed_allowance:
+                type: integer
+              meal_allowance:
+                type: integer
+              variable_allowance:
+                type: integer
+              overtime_pay:
+                type: integer
+              night_pay:
+                type: integer
+              holiday_pay:
+                type: integer
+              weekly_holiday_pay:
+                type: integer
+              paid_holiday_pay:
+                type: integer
+              gross_pay:
+                type: integer
+              taxable_pay:
+                type: integer
+              non_taxable_pay:
+                type: integer
+              pension_base_income:
+                type: integer
+              national_pension:
+                type: integer
+              health_insurance:
+                type: integer
+              long_term_care:
+                type: integer
+              employment_insurance:
+                type: integer
+              income_tax:
+                type: integer
+              local_income_tax:
+                type: integer
+              total_deductions:
+                type: integer
+              net_pay:
+                type: integer
+            required:
+            - effective_payment_date
+            - ordinary_monthly_wage
+            - ordinary_hourly_wage_floor
+            - base_pay
+            - fixed_allowance
+            - meal_allowance
+            - variable_allowance
+            - overtime_pay
+            - night_pay
+            - holiday_pay
+            - weekly_holiday_pay
+            - paid_holiday_pay
+            - gross_pay
+            - taxable_pay
+            - non_taxable_pay
+            - pension_base_income
+            - national_pension
+            - health_insurance
+            - long_term_care
+            - employment_insurance
+            - income_tax
+            - local_income_tax
+            - total_deductions
+            - net_pay
+            additionalProperties: false
+        required:
+        - payroll_id
+        - employee_id
+        - calculation
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - payroll_calculations
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-cf2104e1-ddc3-582f-b523-6b86110eb27b
+scenario_seed: 11185141373934349629
+scenario_hash: ede9a3fba63e0a67c9bcfd2fa3850c650bd4fb71ba28881321e0a47ed5d3ea40
+authorship:
+  method: individually_written
+  case_id: B005
+  case_sha256: 9b399ad173e1ad3d7c26f0b4b73d68a55273679c22807ca3639a9dc0898ed4a3
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- payroll_calculations
+- balance_total

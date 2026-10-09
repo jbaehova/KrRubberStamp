@@ -1,0 +1,42 @@
+task_id: B2_A027_8d65af94
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상옥로하의 임대차 계약서에 적힌 계약자 번호를 세대 자료의 인적관계 명부와 대조해 2025년 월세 세액공제를 심사하세요.
+  주민등록 주소와 주택 조건 및 직원이 낸 월세도 함께 확인합니다. 본인 보장성보험 납부액을 별도로 검토하고 월세 공제액과 보험료 공제액 및 최종
+  소득세를 제출하세요.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_임대차계약.pdf
+  format: pdf
+- path: inputs/03_세대관계.hwpx
+  format: hwpx
+- path: inputs/04_본인보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    rent_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - rent_credit
+  - insurance_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-5e20767f-5f14-58dc-959e-2b371956175e
+scenario_seed: 10188742783564824681
+scenario_hash: 81a839cfefec741b0fb8de673cbb0ab5a5093d909bab6319e320acc7412b7267
+authorship:
+  method: individually_written
+  case_id: A027
+  case_sha256: 8d65af945234c0698341a3487e9c4d2794b36e85253620775ada60655ef998e6
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- rent_credit
+- insurance_credit
+- final_national_tax

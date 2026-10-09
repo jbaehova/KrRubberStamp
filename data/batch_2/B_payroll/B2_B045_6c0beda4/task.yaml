@@ -1,0 +1,56 @@
+task_id: B2_B045_6c0beda4
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상생활사필름실 가상율의2월 근로분을3월2일에 지급했습니다. 현금 식대 중20만원 초과분은 과세이며 완료금은 당월 변동 지급입니다.
+  승인된 한 자녀 공제와80퍼센트 신청을 순서대로 적용하고 최종 소득세1천원 미만 부징수까지 검토해 taxable_pay, income_tax,
+  local_income_tax, net_pay를 작성해 주세요.
+input_files:
+- path: inputs/01_월급.pdf
+  format: pdf
+- path: inputs/02_식비.hwpx
+  format: hwpx
+- path: inputs/03_완료금.pdf
+  format: pdf
+- path: inputs/04_지급이력.xlsx
+  format: xlsx
+- path: inputs/05_정상근태.xlsx
+  format: xlsx
+- path: inputs/06_가족신청.hwpx
+  format: hwpx
+- path: inputs/07_연금.pdf
+  format: pdf
+- path: inputs/08_건강.pdf
+  format: pdf
+- path: inputs/09_고용.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-eb5496c4-898b-5bc4-894e-78cf53616428
+scenario_seed: 7785577671459714590
+scenario_hash: 7afd07c7911f4ee188a1a510a691dd0a9a69689997e74411b2c5737a342ca209
+authorship:
+  method: individually_written
+  case_id: B045
+  case_sha256: 6c0beda47691b61eeb90c6e1abd97ebb4727a05f337b2962a741b58b34ea1a96
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- taxable_pay
+- income_tax
+- local_income_tax
+- net_pay

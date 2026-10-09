@@ -1,0 +1,52 @@
+task_id: B2_C090_bd7d5a3f
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상체리수납의 카드 모음에는 소비자 수금 및 고객 식대가 있고 가족 설치는 전자 원본으로 남았습니다. 원본 효력과 실제 사용을
+  거래별로 연결하여 불공제세액(noncreditable_vat)과 발행 공제(receipt_credit) 및 순정산액(net_vat)을 answer.json에
+  회신하세요.
+input_files:
+- path: inputs/01_소매범위.pdf
+  format: pdf
+- path: inputs/02_상품인도.hwpx
+  format: hwpx
+- path: inputs/03_상담참석.pdf
+  format: pdf
+- path: inputs/04_가족설치.hwpx
+  format: hwpx
+- path: inputs/05_실제수금.xlsx
+  format: xlsx
+- path: inputs/06_판매발급.pdf
+  format: pdf
+- path: inputs/07_식대카드.xlsx
+  format: xlsx
+- path: inputs/08_설치전자.hwpx
+  format: hwpx
+- path: inputs/09_효력확정.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    net_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - receipt_credit
+  - net_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-cdb8c54c-fe4f-5c25-aeff-350061c6c181
+scenario_seed: 13654168872963927880
+scenario_hash: 6f55dc6620fb8ee6b2bcf3da70d665a4fc60c2ba872197556df12aee30e0e4ef
+authorship:
+  method: individually_written
+  case_id: C090
+  case_sha256: bd7d5a3f4035ef4895663b9217e7ced9b9f33be20a7b1ee699603146a278a8a4
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- noncreditable_vat
+- receipt_credit
+- net_vat

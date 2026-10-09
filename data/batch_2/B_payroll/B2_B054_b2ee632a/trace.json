@@ -1,0 +1,577 @@
+[
+  {
+    "inputs": {
+      "as_of_date": "2026-12-24",
+      "payrolls": [
+        {
+          "employee_id": "TRANS-ONE",
+          "facts": {
+            "base_salary": 0,
+            "company_name": "가상전사실",
+            "eligible_children": 0,
+            "employee_name": "가상오름",
+            "employer_provides_meals": false,
+            "employment_due": true,
+            "employment_notified_income": 864000,
+            "family_count": 1,
+            "fixed_allowance": 0,
+            "health_due": false,
+            "health_notified_income": 0,
+            "holiday_shifts": [],
+            "hourly_rate": 15000,
+            "insurance_assessment_month": "2026-12",
+            "meal_allowance": 0,
+            "monthly_divisor_hours": 209,
+            "night_minutes": 0,
+            "overtime_minutes": 0,
+            "pay_basis": "hourly",
+            "payment_date": "2026-12-24",
+            "pension_due": false,
+            "pension_notified_income": 0,
+            "qualifying_weeks": 3,
+            "regular_minutes": 2880,
+            "scope": "계속근로자 완전12월 명세. 새 주화목 각8시간 약정,12월1일부터21일까지 세주 실제개근48시간. 이후주는 노사확정 휴무로 소정근로의무없음. 계약은 모든 지정일요일 주휴일까지 계속. 기관 연금건강 미부과 고용부과 확정. 다른근로없음.",
+            "variable_allowance": 0,
+            "weekly_holiday_included": false,
+            "weekly_hours": 16,
+            "withholding_percent": 100,
+            "workplace_employee_count": 7
+          },
+          "payroll_id": "TRANS-DEC"
+        },
+        {
+          "employee_id": "TRANS-ONE",
+          "facts": {
+            "base_salary": 0,
+            "company_name": "가상전사실",
+            "eligible_children": 0,
+            "employee_name": "가상오름",
+            "employer_provides_meals": false,
+            "employment_due": true,
+            "employment_notified_income": 864000,
+            "family_count": 1,
+            "fixed_allowance": 0,
+            "health_due": false,
+            "health_notified_income": 0,
+            "holiday_shifts": [],
+            "hourly_rate": 12000,
+            "insurance_assessment_month": "2026-11",
+            "meal_allowance": 0,
+            "monthly_divisor_hours": 209,
+            "night_minutes": 0,
+            "overtime_minutes": 0,
+            "pay_basis": "hourly",
+            "payment_date": "2026-11-30",
+            "pension_due": false,
+            "pension_notified_income": 0,
+            "qualifying_weeks": 4,
+            "regular_minutes": 3600,
+            "scope": "계속근로자 완전11월 명세. 주월수금 각5시간 약정,11월2일부터29일까지 네 주 실제개근60시간.30일 부분주는 노사확정 휴무로 근로의무 없음. 계약은 다음달까지 계속하여 지정일요일 주휴를포함. 기관 연금건강 미부과 고용부과 확정. 공휴일 소정일없음.",
+            "variable_allowance": 0,
+            "weekly_holiday_included": false,
+            "weekly_hours": 15,
+            "withholding_percent": 100,
+            "workplace_employee_count": 7
+          },
+          "payroll_id": "TRANS-NOV"
+        }
+      ],
+      "processing_policy": "완전한 두 달 명세를 각각 계산한다. 단가와 소정 일수는 각 월 계약의 확정값이다. 은행 현금도 각 지급일 명세별로 대조한다.",
+      "source_contract": "payroll_bank_reconciliation_v1",
+      "transfers": [
+        {
+          "amount": 800000,
+          "date": "2026-12-24",
+          "employee_id": "TRANS-ONE",
+          "payroll_id": "TRANS-DEC",
+          "status": "executed",
+          "transfer_id": "TRANS-DEC-PAID"
+        },
+        {
+          "amount": 800000,
+          "date": "2026-11-30",
+          "employee_id": "TRANS-ONE",
+          "payroll_id": "TRANS-NOV",
+          "status": "executed",
+          "transfer_id": "TRANS-NOV-PAID"
+        }
+      ]
+    },
+    "output": {
+      "accepted_transfer_ids": [
+        "TRANS-DEC-PAID",
+        "TRANS-NOV-PAID"
+      ],
+      "cash_by_payroll": [
+        {
+          "paid": 800000,
+          "payroll_id": "TRANS-DEC"
+        },
+        {
+          "paid": 800000,
+          "payroll_id": "TRANS-NOV"
+        }
+      ],
+      "deduplicated_transfer_ids": [],
+      "excluded_transfer_ids": [],
+      "payroll_derivations": [
+        {
+          "payroll_id": "TRANS-DEC",
+          "trace": [
+            {
+              "inputs": {
+                "base_salary": 0,
+                "fixed_allowance": 0,
+                "hourly_rate": 15000,
+                "meal_allowance": 0,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "hourly",
+                "regular_minutes": 2880
+              },
+              "output": {
+                "hourly_exact_denominator": 1,
+                "hourly_exact_numerator": 15000,
+                "ordinary_monthly_wage": 0
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": false,
+                "qualifying_weeks": 3,
+                "weekly_hours": 16
+              },
+              "output": {
+                "weekly_holiday_entitlement": 144000,
+                "weekly_holiday_pay": 144000
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 0
+              },
+              "output": 0,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 720000,
+                "fixed_allowance": 0,
+                "holiday_pay": 0,
+                "meal_allowance": 0,
+                "night_pay": 0,
+                "overtime_pay": 0,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 144000
+              },
+              "output": {
+                "gross_pay": 864000,
+                "taxable_pay": 864000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": false,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-12",
+                "month": 12,
+                "notified_income": 0
+              },
+              "output": {
+                "national_pension": 0,
+                "pension_base_income": 410000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": false,
+                "employee_rate": "0.03595",
+                "notified_income": 0
+              },
+              "output": 0,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 0,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 0,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 864000
+              },
+              "output": 7770,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 1,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  860000,
+                  865000
+                ],
+                "taxable_pay": 864000
+              },
+              "output": 0,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 0,
+                "payment_date": "2026-12-24"
+              },
+              "output": 0,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 0,
+                "child_credit": 0,
+                "eligible_children": 0,
+                "family_count": 1,
+                "payment_date": "2026-12-24",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  860000,
+                  865000
+                ],
+                "table_tax_before_children_floor_won": 0,
+                "taxable_pay": 864000,
+                "withholding_percent": 100
+              },
+              "output": 0,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 0,
+                "rate": "0.1"
+              },
+              "output": 0,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 7770,
+                "gross_pay": 864000
+              },
+              "output": 856230,
+              "rule_id": "B.NET"
+            }
+          ]
+        },
+        {
+          "payroll_id": "TRANS-NOV",
+          "trace": [
+            {
+              "inputs": {
+                "base_salary": 0,
+                "fixed_allowance": 0,
+                "hourly_rate": 12000,
+                "meal_allowance": 0,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "hourly",
+                "regular_minutes": 3600
+              },
+              "output": {
+                "hourly_exact_denominator": 1,
+                "hourly_exact_numerator": 12000,
+                "ordinary_monthly_wage": 0
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": false,
+                "qualifying_weeks": 4,
+                "weekly_hours": 15
+              },
+              "output": {
+                "weekly_holiday_entitlement": 144000,
+                "weekly_holiday_pay": 144000
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 0
+              },
+              "output": 0,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 720000,
+                "fixed_allowance": 0,
+                "holiday_pay": 0,
+                "meal_allowance": 0,
+                "night_pay": 0,
+                "overtime_pay": 0,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 144000
+              },
+              "output": {
+                "gross_pay": 864000,
+                "taxable_pay": 864000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": false,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-11",
+                "month": 11,
+                "notified_income": 0
+              },
+              "output": {
+                "national_pension": 0,
+                "pension_base_income": 410000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": false,
+                "employee_rate": "0.03595",
+                "notified_income": 0
+              },
+              "output": 0,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 0,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 0,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 864000
+              },
+              "output": 7770,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 1,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  860000,
+                  865000
+                ],
+                "taxable_pay": 864000
+              },
+              "output": 0,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 0,
+                "payment_date": "2026-11-30"
+              },
+              "output": 0,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 0,
+                "child_credit": 0,
+                "eligible_children": 0,
+                "family_count": 1,
+                "payment_date": "2026-11-30",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  860000,
+                  865000
+                ],
+                "table_tax_before_children_floor_won": 0,
+                "taxable_pay": 864000,
+                "withholding_percent": 100
+              },
+              "output": 0,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 0,
+                "rate": "0.1"
+              },
+              "output": 0,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 7770,
+                "gross_pay": 864000
+              },
+              "output": 856230,
+              "rule_id": "B.NET"
+            }
+          ]
+        }
+      ],
+      "settlement": {
+        "balance_total": 112460,
+        "deductions_total": 15540,
+        "employee_settlements": [
+          {
+            "balance": 56230,
+            "effective_payment_date": "2026-12-24",
+            "employee_id": "TRANS-ONE",
+            "gross_pay": 864000,
+            "insurance_assessment_month": "2026-12",
+            "net_pay": 856230,
+            "paid": 800000,
+            "payroll_id": "TRANS-DEC",
+            "total_deductions": 7770
+          },
+          {
+            "balance": 56230,
+            "effective_payment_date": "2026-11-30",
+            "employee_id": "TRANS-ONE",
+            "gross_pay": 864000,
+            "insurance_assessment_month": "2026-11",
+            "net_pay": 856230,
+            "paid": 800000,
+            "payroll_id": "TRANS-NOV",
+            "total_deductions": 7770
+          }
+        ],
+        "gross_total": 1728000,
+        "net_total": 1712460,
+        "paid_total": 1600000,
+        "payroll_calculations": [
+          {
+            "calculation": {
+              "base_pay": 720000,
+              "effective_payment_date": "2026-12-24",
+              "employment_insurance": 7770,
+              "fixed_allowance": 0,
+              "gross_pay": 864000,
+              "health_insurance": 0,
+              "holiday_pay": 0,
+              "income_tax": 0,
+              "local_income_tax": 0,
+              "long_term_care": 0,
+              "meal_allowance": 0,
+              "national_pension": 0,
+              "net_pay": 856230,
+              "night_pay": 0,
+              "non_taxable_pay": 0,
+              "ordinary_hourly_wage_floor": 15000,
+              "ordinary_monthly_wage": 0,
+              "overtime_pay": 0,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 410000,
+              "taxable_pay": 864000,
+              "total_deductions": 7770,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 144000
+            },
+            "employee_id": "TRANS-ONE",
+            "payroll_id": "TRANS-DEC"
+          },
+          {
+            "calculation": {
+              "base_pay": 720000,
+              "effective_payment_date": "2026-11-30",
+              "employment_insurance": 7770,
+              "fixed_allowance": 0,
+              "gross_pay": 864000,
+              "health_insurance": 0,
+              "holiday_pay": 0,
+              "income_tax": 0,
+              "local_income_tax": 0,
+              "long_term_care": 0,
+              "meal_allowance": 0,
+              "national_pension": 0,
+              "net_pay": 856230,
+              "night_pay": 0,
+              "non_taxable_pay": 0,
+              "ordinary_hourly_wage_floor": 12000,
+              "ordinary_monthly_wage": 0,
+              "overtime_pay": 0,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 410000,
+              "taxable_pay": 864000,
+              "total_deductions": 7770,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 144000
+            },
+            "employee_id": "TRANS-ONE",
+            "payroll_id": "TRANS-NOV"
+          }
+        ]
+      }
+    },
+    "rule_id": "B_PAYROLL_BANK_RECONCILIATION"
+  }
+]

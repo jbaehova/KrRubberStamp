@@ -1,0 +1,45 @@
+task_id: B2_A076_fe4e0b0b
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상도윤의 배우자 계약자 번호를 가족 소득 자료와 대조하세요. 월세 계약 명의의 기본공제 자격과 직원이 낸 배우자 진료비 요건을
+  따로 판단하여 기본공제 및 월세와 의료비 공제액을 제출합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_월세.pdf
+  format: pdf
+- path: inputs/03_배우자.hwpx
+  format: hwpx
+- path: inputs/04_진료.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    rent_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - rent_credit
+  - medical_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-6d332d6d-2324-5430-9f03-ed3c82d86e69
+scenario_seed: 18324596078161959554
+scenario_hash: 235760694e063781fd80ba2e7c9bd7f89e1f011096d2d3daa94fff7bbbe91625
+authorship:
+  method: individually_written
+  case_id: A076
+  case_sha256: fe4e0b0b935c1a820071ea0b4fa4503c37ec7616785aed33c409459693b12e6a
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- eligible_dependents
+- rent_credit
+- medical_credit
+- final_national_tax

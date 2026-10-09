@@ -1,0 +1,56 @@
+task_id: B2_C042_c1066235
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상마름수선은 현재 완료 판매에서 카드와 현금영수증 일부를 받았고 미래 판매에도 카드 일부를 받았습니다. 현재 자재의 세액
+  미표시 전체 카드와 각 공급일을 연결하여 매출세액(output_vat)과 공제가능 매입세액(deductible_input_vat) 및 발행세액공제(receipt_credit)와
+  납부세액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_신고.hwpx
+  format: hwpx
+- path: inputs/02_현재공급.pdf
+  format: pdf
+- path: inputs/03_미래공급.pdf
+  format: pdf
+- path: inputs/04_자재인수.hwpx
+  format: hwpx
+- path: inputs/05_현재수금.xlsx
+  format: xlsx
+- path: inputs/06_기타지급.xlsx
+  format: xlsx
+- path: inputs/07_현재원본.pdf
+  format: pdf
+- path: inputs/08_미래원본.pdf
+  format: pdf
+- path: inputs/09_자재원본.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - output_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-b7d25d20-1485-5ee3-b0b5-239c8c0e846f
+scenario_seed: 13908912479078193898
+scenario_hash: 654b1ae5db9441a38b452c6833f59de3ae5726ce109dd34a339a0381d9ea9a47
+authorship:
+  method: individually_written
+  case_id: C042
+  case_sha256: c106623507741aea8670aae20a5eba6af9d91a1048e7f2d53554bd78cd1012bb
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- output_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

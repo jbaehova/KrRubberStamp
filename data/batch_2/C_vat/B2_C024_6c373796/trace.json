@@ -1,0 +1,258 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "자재인수",
+          "date": "2026-02-12",
+          "description": "설치용 조명 자재 전량을 인수했다.",
+          "document_ids": [
+            "조명전자",
+            "조명카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "빛설치 자재실"
+          },
+          "operation_id": "설치",
+          "participants": [
+            {
+              "name": "가상최자재",
+              "organization": "가상빛설치",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "조명자재"
+        }
+      ],
+      "business_name": "가상빛설치",
+      "evidence_documents": [
+        {
+          "amount": 1100000,
+          "date": "2026-02-12",
+          "document_id": "조명전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 110000,
+          "transaction_id": "조명자재",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 1210000,
+          "date": "2026-02-12",
+          "document_id": "조명카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "조명승인",
+          "stated_vat": null,
+          "transaction_id": "조명자재",
+          "vat_separately_stated": false
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 조명 유상 설치",
+          "operation_id": "설치",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 1210000,
+          "date": "2026-02-12",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "조명승인",
+          "transaction_id": "조명자재"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "자재인수",
+          "amount": 1210000,
+          "counterparty_consumer": false,
+          "date": "2026-02-12",
+          "description": "설치 자재 전체 인수",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "조명자재",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "조명전자",
+          "조명카드"
+        ],
+        "documented_input_vat": 110000,
+        "eligible_input_document_ids": [
+          "조명전자"
+        ],
+        "gross": 1210000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 1210000,
+        "paid_gross": 1210000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 1100000,
+        "transaction_id": "조명자재",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 110000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "조명전자",
+        "조명카드"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "조명자재"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-12",
+      "transaction_id": "조명자재"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1210000,
+      "includes_vat": true,
+      "transaction_id": "조명자재"
+    },
+    "output": {
+      "gross": 1210000,
+      "supply_base": 1100000,
+      "vat": 110000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 110000,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "조명자재",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 110000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 150000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -110000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -110000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -110000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 110000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 110000,
+      "input_vat": 110000,
+      "net_vat": -110000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 110000,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

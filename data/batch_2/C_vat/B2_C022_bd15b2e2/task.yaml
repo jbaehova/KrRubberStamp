@@ -1,0 +1,42 @@
+task_id: B2_C022_bd15b2e2
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상구멍가공은 드릴날 전량을 인수하고 카드와 현금으로 일부씩 지급했으며 나머지는 미지급입니다. 전체 전자와 부분 카드 원본을
+  인수에 연결하여 공제가능 매입세액(deductible_input_vat)과 매입세액(input_vat) 및 고유 거래 수(unique_transaction_count)를
+  answer.json에 작성해 주세요.
+input_files:
+- path: inputs/01_인수.hwpx
+  format: hwpx
+- path: inputs/02_실행지급.xlsx
+  format: xlsx
+- path: inputs/03_부분카드.pdf
+  format: pdf
+- path: inputs/04_전체전자.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    input_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - deductible_input_vat
+  - input_vat
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-9ce72175-5728-5f69-95ec-991a70b2be15
+scenario_seed: 13624992934007639134
+scenario_hash: 7041c4bdf8611792617d2976cae32b733ddf3cf1ad8a88762be206a603fc1b28
+authorship:
+  method: individually_written
+  case_id: C022
+  case_sha256: bd15b2e29abb8c5ed8f4b7a04afdf1c5d574fc6cb311765d8bf61b2df57b1884
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- deductible_input_vat
+- input_vat
+- unique_transaction_count

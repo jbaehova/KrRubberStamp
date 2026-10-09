@@ -1,0 +1,155 @@
+task_id: B2_B054_b2ee632a
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상전사실의 한 직원은11월과12월 완전 월 명세를 각각 받습니다.12월 재계약 시급이 인상됐지만 그달 소정근로 일수가 줄어
+  기본 근로 임금은 우연히 같습니다. 각 월의 주휴 약정과 개근 집계까지 반영하여 payroll_calculations 및 employee_settlements를
+  제출하세요. 실제 시간급이나 주휴 대가를 다른 달에서 복사하지 마세요.
+input_files:
+- path: inputs/01_월별집계.pdf
+  format: pdf
+- path: inputs/02_두달송금.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    payroll_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          calculation:
+            type: object
+            properties:
+              effective_payment_date:
+                type: string
+              ordinary_monthly_wage:
+                type: integer
+              ordinary_hourly_wage_floor:
+                type: integer
+              base_pay:
+                type: integer
+              fixed_allowance:
+                type: integer
+              meal_allowance:
+                type: integer
+              variable_allowance:
+                type: integer
+              overtime_pay:
+                type: integer
+              night_pay:
+                type: integer
+              holiday_pay:
+                type: integer
+              weekly_holiday_pay:
+                type: integer
+              paid_holiday_pay:
+                type: integer
+              gross_pay:
+                type: integer
+              taxable_pay:
+                type: integer
+              non_taxable_pay:
+                type: integer
+              pension_base_income:
+                type: integer
+              national_pension:
+                type: integer
+              health_insurance:
+                type: integer
+              long_term_care:
+                type: integer
+              employment_insurance:
+                type: integer
+              income_tax:
+                type: integer
+              local_income_tax:
+                type: integer
+              total_deductions:
+                type: integer
+              net_pay:
+                type: integer
+            required:
+            - effective_payment_date
+            - ordinary_monthly_wage
+            - ordinary_hourly_wage_floor
+            - base_pay
+            - fixed_allowance
+            - meal_allowance
+            - variable_allowance
+            - overtime_pay
+            - night_pay
+            - holiday_pay
+            - weekly_holiday_pay
+            - paid_holiday_pay
+            - gross_pay
+            - taxable_pay
+            - non_taxable_pay
+            - pension_base_income
+            - national_pension
+            - health_insurance
+            - long_term_care
+            - employment_insurance
+            - income_tax
+            - local_income_tax
+            - total_deductions
+            - net_pay
+            additionalProperties: false
+        required:
+        - payroll_id
+        - employee_id
+        - calculation
+        additionalProperties: false
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - payroll_calculations
+  - employee_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-e792a7a8-e94c-5e8b-95e3-9f47eb29b83c
+scenario_seed: 12893351817657258772
+scenario_hash: d24f193404c7694ed104208a1d45b057fd43bbe640a31a81c53f3e93558a8613
+authorship:
+  method: individually_written
+  case_id: B054
+  case_sha256: b2ee632a8f9913141f0e2325376f413acf9c77657a95908923d754e0595fc003
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- payroll_calculations
+- employee_settlements

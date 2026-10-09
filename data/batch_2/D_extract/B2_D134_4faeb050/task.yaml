@@ -1,0 +1,182 @@
+task_id: B2_D134_4faeb050
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 전용 기록판과 공용 롤을 연말 주문합니다. 기록판은 다음 해 납기 당일 도착하고 동봉 롤은 그보다 하루 늦습니다. chosen_offers와
+  offer_comparisons 및 vendor_cart_totals를 작성해 주세요.
+input_files:
+- path: inputs/01_연말약정.pdf
+  format: pdf
+- path: inputs/02_연말필요량.xlsx
+  format: xlsx
+- path: inputs/03_기록공방.hwpx
+  format: hwpx
+- path: inputs/04_롤창고.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - chosen_offers
+  - offer_comparisons
+  - vendor_cart_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-956b914f-4b83-5e8c-9551-1f3c0bc1bb11
+scenario_seed: 5741720433690245335
+scenario_hash: 650db0aee67213dbfed2034a3fe7a5493c83b5eb892d02727e1669e7a0cab9ac
+authorship:
+  method: individually_written
+  case_id: D134
+  case_sha256: 4faeb05041b578d710a46ebfea60eb65847152f89f8e44ed41934f5f29a47859
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- offer_comparisons
+- vendor_cart_totals

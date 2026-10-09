@@ -1,0 +1,74 @@
+task_id: B2_D030_fb5ee426
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 모듈 발주 현황의 마감 스냅샷을 작성하세요. 이미 받은 주문의 실수량과 마감 뒤 발주 원문의 0 인수 행을 함께 남깁니다.
+  미래 주문이라고 자료 자체를 없애지 않습니다. answer.json에는 line_settlements를 주문 및 행번호순으로 작성하세요.
+input_files:
+- path: inputs/01_현재모듈.pdf
+  format: pdf
+- path: inputs/02_미래모듈.hwpx
+  format: hwpx
+- path: inputs/03_모듈수령.xlsx
+  format: xlsx
+- path: inputs/04_모듈대기.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-5406c61c-4569-5e62-a36f-671a38d39c78
+scenario_seed: 18113165603645814222
+scenario_hash: 98bc2b197cf38af9c5586d9ce9eb5da16d8d9211c5d4c16b0ed6dd583fb804f5
+authorship:
+  method: individually_written
+  case_id: D030
+  case_sha256: fb5ee4261b21f5ce40552bbde6208e3f97f82781f85f7a04fb2069eefbf3851f
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements

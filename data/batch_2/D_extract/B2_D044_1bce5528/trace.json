@@ -1,0 +1,200 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-08-31",
+      "events": [
+        {
+          "date": "2026-08-20",
+          "event_id": "POWDER-B-IN",
+          "kind": "received",
+          "line_id": "B",
+          "order_id": "POWDER-BAGS",
+          "units": 6
+        },
+        {
+          "date": "2026-08-18",
+          "event_id": "POWDER-G-IN",
+          "kind": "received",
+          "line_id": "G",
+          "order_id": "POWDER-GRAMS",
+          "units": 160
+        },
+        {
+          "date": "2026-08-22",
+          "event_id": "POWDER-G-OUT",
+          "kind": "returned",
+          "line_id": "G",
+          "order_id": "POWDER-GRAMS",
+          "units": 30
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-08-12",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "봉",
+              "item": "흡착분말",
+              "line_id": "B",
+              "ordered_packages": 1,
+              "package_price": 32000,
+              "price_includes_vat": false,
+              "units_per_package": 8
+            }
+          ],
+          "order_id": "POWDER-BAGS",
+          "vendor": "㈜가상흡착분말"
+        },
+        {
+          "date": "2026-08-10",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "g",
+              "item": "흡착분말",
+              "line_id": "G",
+              "ordered_packages": 2,
+              "package_price": 25000,
+              "price_includes_vat": false,
+              "units_per_package": 100
+            }
+          ],
+          "order_id": "POWDER-GRAMS",
+          "vendor": "주식회사 가상흡착분말"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 20000,
+          "date": "2026-08-11",
+          "order_id": "POWDER-GRAMS",
+          "payment_id": "POWDER-DEP",
+          "status": "executed"
+        },
+        {
+          "amount": 20000,
+          "date": "2026-08-11",
+          "order_id": "POWDER-GRAMS",
+          "payment_id": "POWDER-DEP",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 기초단위가 다른 순량은 합치지 않는다. 업체명은 NFKC와 공백 및 법인 표기 제거 후 소문자로 합친다. 마감까지 입고에서 반품을 빼고 포장가격의 순량 비율은 마지막에 버린다. 별도 세액은 10%를 버린다. 동일 지급 ID와 내용은 한 번만 차감한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "POWDER-B-IN",
+        "POWDER-G-IN",
+        "POWDER-G-OUT"
+      ],
+      "accepted_payment_ids": [
+        "POWDER-DEP"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [
+        "POWDER-DEP"
+      ],
+      "event_timeline": [
+        {
+          "event_id": "POWDER-G-IN",
+          "net_units_after_event": 160
+        },
+        {
+          "event_id": "POWDER-B-IN",
+          "net_units_after_event": 6
+        },
+        {
+          "event_id": "POWDER-G-OUT",
+          "net_units_after_event": 130
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 24000,
+          "line_id": "B",
+          "order_id": "POWDER-BAGS",
+          "package_price_times_net_units": 192000,
+          "price_includes_vat": false,
+          "supply": 24000,
+          "total": 26400,
+          "units_per_package": 8,
+          "vat": 2400
+        },
+        {
+          "amount_after_floor": 32500,
+          "line_id": "G",
+          "order_id": "POWDER-GRAMS",
+          "package_price_times_net_units": 3250000,
+          "price_includes_vat": false,
+          "supply": 32500,
+          "total": 35750,
+          "units_per_package": 100,
+          "vat": 3250
+        }
+      ],
+      "settlement": {
+        "balance_total": 42150,
+        "grand_total": 62150,
+        "item_quantities": [
+          {
+            "base_unit": "g",
+            "item": "흡착분말",
+            "net_units": 130
+          },
+          {
+            "base_unit": "봉",
+            "item": "흡착분말",
+            "net_units": 6
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "봉",
+            "item": "흡착분말",
+            "line_id": "B",
+            "net_units": 6,
+            "order_id": "POWDER-BAGS",
+            "ordered_units": 8,
+            "outstanding_units": 2,
+            "received_units": 6,
+            "returned_units": 0,
+            "supply": 24000,
+            "total": 26400,
+            "vat": 2400
+          },
+          {
+            "base_unit": "g",
+            "item": "흡착분말",
+            "line_id": "G",
+            "net_units": 130,
+            "order_id": "POWDER-GRAMS",
+            "ordered_units": 200,
+            "outstanding_units": 70,
+            "received_units": 160,
+            "returned_units": 30,
+            "supply": 32500,
+            "total": 35750,
+            "vat": 3250
+          }
+        ],
+        "payment_total": 20000,
+        "vendor_balances": [
+          {
+            "balance": 42150,
+            "paid": 20000,
+            "supply": 56500,
+            "total": 62150,
+            "vat": 5650,
+            "vendor": "가상흡착분말"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

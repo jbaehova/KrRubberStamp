@@ -1,0 +1,168 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-02-10",
+      "events": [
+        {
+          "date": "2026-02-08",
+          "event_id": "FILM-IN",
+          "kind": "received",
+          "line_id": "F",
+          "order_id": "FILM-FIRST",
+          "units": 12
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-02-03",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "장",
+              "item": "투광필름",
+              "line_id": "F",
+              "ordered_packages": 2,
+              "package_price": 18000,
+              "price_includes_vat": false,
+              "units_per_package": 10
+            }
+          ],
+          "order_id": "FILM-FIRST",
+          "vendor": "가상투광필름"
+        },
+        {
+          "date": "2026-02-05",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "장",
+              "item": "투광필름",
+              "line_id": "F",
+              "ordered_packages": 1,
+              "package_price": 18000,
+              "price_includes_vat": false,
+              "units_per_package": 10
+            }
+          ],
+          "order_id": "FILM-SECOND",
+          "vendor": "가상투광필름"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 12000,
+          "date": "2026-02-04",
+          "order_id": "FILM-FIRST",
+          "payment_id": "FILM-P1",
+          "status": "executed"
+        },
+        {
+          "amount": 6000,
+          "date": "2026-02-06",
+          "order_id": "FILM-SECOND",
+          "payment_id": "FILM-P2",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체와 거래는 가상이다. 마감일까지 실행된 지급만 현금 집행에 넣는다. 입고는 주문과 행번호로 연결한다. 포장 대금의 순인수 비율을 마지막에 버리고 별도 세액은 10%를 버린다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "FILM-IN"
+      ],
+      "accepted_payment_ids": [
+        "FILM-P1",
+        "FILM-P2"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "FILM-IN",
+          "net_units_after_event": 12
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 21600,
+          "line_id": "F",
+          "order_id": "FILM-FIRST",
+          "package_price_times_net_units": 216000,
+          "price_includes_vat": false,
+          "supply": 21600,
+          "total": 23760,
+          "units_per_package": 10,
+          "vat": 2160
+        },
+        {
+          "amount_after_floor": 0,
+          "line_id": "F",
+          "order_id": "FILM-SECOND",
+          "package_price_times_net_units": 0,
+          "price_includes_vat": false,
+          "supply": 0,
+          "total": 0,
+          "units_per_package": 10,
+          "vat": 0
+        }
+      ],
+      "settlement": {
+        "balance_total": 5760,
+        "grand_total": 23760,
+        "item_quantities": [
+          {
+            "base_unit": "장",
+            "item": "투광필름",
+            "net_units": 12
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "장",
+            "item": "투광필름",
+            "line_id": "F",
+            "net_units": 12,
+            "order_id": "FILM-FIRST",
+            "ordered_units": 20,
+            "outstanding_units": 8,
+            "received_units": 12,
+            "returned_units": 0,
+            "supply": 21600,
+            "total": 23760,
+            "vat": 2160
+          },
+          {
+            "base_unit": "장",
+            "item": "투광필름",
+            "line_id": "F",
+            "net_units": 0,
+            "order_id": "FILM-SECOND",
+            "ordered_units": 10,
+            "outstanding_units": 10,
+            "received_units": 0,
+            "returned_units": 0,
+            "supply": 0,
+            "total": 0,
+            "vat": 0
+          }
+        ],
+        "payment_total": 18000,
+        "vendor_balances": [
+          {
+            "balance": 5760,
+            "paid": 18000,
+            "supply": 21600,
+            "total": 23760,
+            "vat": 2160,
+            "vendor": "가상투광필름"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

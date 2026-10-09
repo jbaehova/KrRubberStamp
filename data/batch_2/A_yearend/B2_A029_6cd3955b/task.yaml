@@ -1,0 +1,41 @@
+task_id: B2_A029_6cd3955b
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상살결도안의 가상문서빈은 같은 금액의 치료와 미용 청구를 각각 신용카드 및 직불카드로 납부했습니다. 목적에 따른 의료비 결과와
+  결제수단에 따른 카드 소득공제를 별도 계산해 주세요. 두 비용을 지출 두 번으로 중복 증액하지 않습니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_치료.pdf
+  format: pdf
+- path: inputs/03_미용.pdf
+  format: pdf
+- path: inputs/04_카드연결.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    medical_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - medical_credit
+  - credit_card_deduction
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-b2aaec79-fe48-5643-bdb7-32190e98124b
+scenario_seed: 7841775597042231062
+scenario_hash: 1ff6d3e4b6afacb2db4411cd3b980bdbc1d03856edd688eadb293143f9e657f1
+authorship:
+  method: individually_written
+  case_id: A029
+  case_sha256: 6cd3955ba60767169a152ce637940a5347b8050ec632a016ca68ae5653261238
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- medical_credit
+- credit_card_deduction
+- tax_base

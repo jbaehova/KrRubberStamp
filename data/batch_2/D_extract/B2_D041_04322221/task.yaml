@@ -1,0 +1,130 @@
+task_id: B2_D041_04322221
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 테이프의 두 주문을 정확한 주문 및 행번호로 수불 대조하세요. 한 주문은 m 단위이고 다른 주문은 롤 단위이므로 품목 재고를
+  섞지 않습니다. 각 반품은 그 주문의 인수에서만 빼고 실행 지급도 해당 공급처로 연결합니다. answer.json에는 line_settlements와
+  item_quantities와 vendor_balances를 작성하세요.
+input_files:
+- path: inputs/01_m표지.pdf
+  format: pdf
+- path: inputs/02_m가격.xlsx
+  format: xlsx
+- path: inputs/03_롤표지.hwpx
+  format: hwpx
+- path: inputs/04_롤가격.xlsx
+  format: xlsx
+- path: inputs/05_m입고.pdf
+  format: pdf
+- path: inputs/06_롤입고.hwpx
+  format: hwpx
+- path: inputs/07_m반품.xlsx
+  format: xlsx
+- path: inputs/08_롤반품.hwpx
+  format: hwpx
+- path: inputs/09_테이프마감.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - line_settlements
+  - item_quantities
+  - vendor_balances
+  additionalProperties: false
+canary: KrRubberStamp-canary-76bfabff-c72e-594c-b4e6-20828d24f812
+scenario_seed: 302341652131815034
+scenario_hash: 91303724d7a049528f1872136aa84ef90e82ab29c62733d591658cfa42394ed6
+authorship:
+  method: individually_written
+  case_id: D041
+  case_sha256: 04322221781f1e7aeea5f5dc00dadabc8de6913c7ecac89cd059da183f198c97
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- item_quantities
+- vendor_balances

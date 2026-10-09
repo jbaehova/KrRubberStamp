@@ -1,0 +1,151 @@
+task_id: B2_D146_886da47b
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 설비 본체와 커버를 연말 주문합니다. 현 가격 본체는 다음 해 납기 당일 도착해 적격이고 저가 커버는 다음 해부터 가격이 유효합니다.
+  chosen_offers와 offer_comparisons 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_연말설비.pdf
+  format: pdf
+- path: inputs/02_본체요청.xlsx
+  format: xlsx
+- path: inputs/03_커버요청.hwpx
+  format: hwpx
+- path: inputs/04_현점배송.pdf
+  format: pdf
+- path: inputs/05_신점배송.xlsx
+  format: xlsx
+- path: inputs/06_현본체.hwpx
+  format: hwpx
+- path: inputs/07_현커버.pdf
+  format: pdf
+- path: inputs/08_신본체.xlsx
+  format: xlsx
+- path: inputs/09_신커버.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - offer_comparisons
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-2fa32113-0d6b-5bfb-abe4-c4fe025b2b6d
+scenario_seed: 9830694413467937038
+scenario_hash: 1c3200b001b36e4d676e13e380a45eaeb3c07e5bfef0e8715e51899342f6280b
+authorship:
+  method: individually_written
+  case_id: D146
+  case_sha256: 886da47bda2c690e39039393f32b31426982daf9a98c65258e15b96aa4124c66
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- offer_comparisons
+- grand_total

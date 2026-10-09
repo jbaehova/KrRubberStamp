@@ -1,0 +1,244 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-10-10",
+      "events": [
+        {
+          "date": "2026-10-05",
+          "event_id": "BLOCK-BODY-IN",
+          "kind": "received",
+          "line_id": "BODY",
+          "order_id": "BLOCK-ASSEMBLY",
+          "units": 2
+        },
+        {
+          "date": "2026-10-05",
+          "event_id": "BLOCK-FREE-IN",
+          "kind": "received",
+          "line_id": "FREE",
+          "order_id": "BLOCK-ASSEMBLY",
+          "units": 6
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-09-29",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "차단판받침",
+              "line_id": "BODY",
+              "ordered_packages": 1,
+              "package_price": 20000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            },
+            {
+              "base_unit": "개",
+              "item": "차단판안전핀",
+              "line_id": "FREE",
+              "ordered_packages": 1,
+              "package_price": 0,
+              "price_includes_vat": false,
+              "units_per_package": 6
+            }
+          ],
+          "order_id": "BLOCK-ASSEMBLY",
+          "vendor": "가상차단부속"
+        },
+        {
+          "date": "2026-09-23",
+          "kind": "quote",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "실험차단판",
+              "line_id": "Q",
+              "ordered_packages": 4,
+              "package_price": 30000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "BLOCK-QUOTE",
+          "vendor": "가상차단제안"
+        },
+        {
+          "date": "2026-09-27",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "실험차단판",
+              "line_id": "W",
+              "ordered_packages": 2,
+              "package_price": 34000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "BLOCK-WAIT",
+          "vendor": "가상차단판제작"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 25000,
+          "date": "2026-09-28",
+          "order_id": "BLOCK-WAIT",
+          "payment_id": "BLOCK-WAIT-DEP",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "모든 업체는 가상이다. quote는 모든 정산에서 제외하고 실제 order는 인수가 없어도 행을 남긴다. 가격 0의 행도 재고에 유지한다. 마감까지 순량의 포장가격 비율을 마지막에 버리고 별도 세액은 10%를 버린다. 실행 지급은 인수 전이어도 차감하며 부호를 유지한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "BLOCK-BODY-IN",
+        "BLOCK-FREE-IN"
+      ],
+      "accepted_payment_ids": [
+        "BLOCK-WAIT-DEP"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "BLOCK-BODY-IN",
+          "net_units_after_event": 2
+        },
+        {
+          "event_id": "BLOCK-FREE-IN",
+          "net_units_after_event": 6
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [
+        "BLOCK-QUOTE"
+      ],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 20000,
+          "line_id": "BODY",
+          "order_id": "BLOCK-ASSEMBLY",
+          "package_price_times_net_units": 40000,
+          "price_includes_vat": false,
+          "supply": 20000,
+          "total": 22000,
+          "units_per_package": 2,
+          "vat": 2000
+        },
+        {
+          "amount_after_floor": 0,
+          "line_id": "FREE",
+          "order_id": "BLOCK-ASSEMBLY",
+          "package_price_times_net_units": 0,
+          "price_includes_vat": false,
+          "supply": 0,
+          "total": 0,
+          "units_per_package": 6,
+          "vat": 0
+        },
+        {
+          "amount_after_floor": 0,
+          "line_id": "W",
+          "order_id": "BLOCK-WAIT",
+          "package_price_times_net_units": 0,
+          "price_includes_vat": false,
+          "supply": 0,
+          "total": 0,
+          "units_per_package": 2,
+          "vat": 0
+        }
+      ],
+      "settlement": {
+        "balance_total": -3000,
+        "grand_total": 22000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "실험차단판",
+            "net_units": 0
+          },
+          {
+            "base_unit": "개",
+            "item": "차단판받침",
+            "net_units": 2
+          },
+          {
+            "base_unit": "개",
+            "item": "차단판안전핀",
+            "net_units": 6
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "차단판받침",
+            "line_id": "BODY",
+            "net_units": 2,
+            "order_id": "BLOCK-ASSEMBLY",
+            "ordered_units": 2,
+            "outstanding_units": 0,
+            "received_units": 2,
+            "returned_units": 0,
+            "supply": 20000,
+            "total": 22000,
+            "vat": 2000
+          },
+          {
+            "base_unit": "개",
+            "item": "차단판안전핀",
+            "line_id": "FREE",
+            "net_units": 6,
+            "order_id": "BLOCK-ASSEMBLY",
+            "ordered_units": 6,
+            "outstanding_units": 0,
+            "received_units": 6,
+            "returned_units": 0,
+            "supply": 0,
+            "total": 0,
+            "vat": 0
+          },
+          {
+            "base_unit": "개",
+            "item": "실험차단판",
+            "line_id": "W",
+            "net_units": 0,
+            "order_id": "BLOCK-WAIT",
+            "ordered_units": 4,
+            "outstanding_units": 4,
+            "received_units": 0,
+            "returned_units": 0,
+            "supply": 0,
+            "total": 0,
+            "vat": 0
+          }
+        ],
+        "payment_total": 25000,
+        "vendor_balances": [
+          {
+            "balance": 22000,
+            "paid": 0,
+            "supply": 20000,
+            "total": 22000,
+            "vat": 2000,
+            "vendor": "가상차단부속"
+          },
+          {
+            "balance": -25000,
+            "paid": 25000,
+            "supply": 0,
+            "total": 0,
+            "vat": 0,
+            "vendor": "가상차단판제작"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

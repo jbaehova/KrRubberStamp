@@ -1,0 +1,67 @@
+task_id: B2_A099_f359bcaa
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상태린의 장애인 동생 명의 임대차와 가족 소득을 대조하세요. 기본공제 가족의 명의 및 보험 요건과 특수교육의 소득 예외를
+  구분하고 형제 카드 및 치료 자료도 각 기준으로 처리하여 공제별 금액을 제출합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_동생.hwpx
+  format: hwpx
+- path: inputs/03_계약.pdf
+  format: pdf
+- path: inputs/04_특수.pdf
+  format: pdf
+- path: inputs/05_학부.xlsx
+  format: xlsx
+- path: inputs/06_보험.hwpx
+  format: hwpx
+- path: inputs/07_동생카드.pdf
+  format: pdf
+- path: inputs/08_본인카드.xlsx
+  format: xlsx
+- path: inputs/09_진료.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    additional_deduction:
+      type: integer
+    rent_credit:
+      type: integer
+    education_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    medical_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - additional_deduction
+  - rent_credit
+  - education_credit
+  - insurance_credit
+  - credit_card_deduction
+  - medical_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-8f7007e3-7823-54dc-b5d1-4656dcc0679d
+scenario_seed: 17535254062475742288
+scenario_hash: 3d8be986afbc081eb875831780c2a8254ffa8fbd67c8f04552abcefb34e921aa
+authorship:
+  method: individually_written
+  case_id: A099
+  case_sha256: f359bcaa00178c50805680314980452ca734c5260450f39357a622dc6765b79c
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- eligible_dependents
+- additional_deduction
+- rent_credit
+- education_credit
+- insurance_credit
+- credit_card_deduction
+- medical_credit

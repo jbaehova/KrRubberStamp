@@ -1,0 +1,60 @@
+task_id: B2_D020_086b6e3b
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 배기 덮개의 실인수 대금과 실제 지급을 대조하세요. planned 지급은 날짜가 마감 이전이어도 실행 현금이 아닙니다. answer.json에는
+  vendor_balances와 balance_total을 작성하세요.
+input_files:
+- path: inputs/01_덮개인수.pdf
+  format: pdf
+- path: inputs/02_실행계약금.xlsx
+  format: xlsx
+- path: inputs/03_잔금결재.hwpx
+  format: hwpx
+- path: inputs/04_덮개정산.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - vendor_balances
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-3590cc48-d6b8-5b5f-9bf9-3d5ccfb7a99b
+scenario_seed: 606699778070359388
+scenario_hash: d843301f500a8bc9a62da14c832de8fb81ecae2586291fa6e0e35b28d984cdc7
+authorship:
+  method: individually_written
+  case_id: D020
+  case_sha256: 086b6e3bd5312d5c2c5d130025f006f7fc605a9de35a71aac95f61dec415171a
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances
+- balance_total

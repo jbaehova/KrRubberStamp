@@ -1,0 +1,93 @@
+task_id: B2_D046_a398cbf1
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 고무 마개의 수불 및 지급 대조를 작성하세요. 같은 수량의 서로 다른 입고 이벤트는 모두 반영하고 동일 반환 ID의 같은 사본은
+  한 번만 뺍니다. 마감 후 입고와 planned 지급은 제외합니다. answer.json에는 line_settlements와 payment_total과
+  balance_total을 작성하세요.
+input_files:
+- path: inputs/01_마개표지.pdf
+  format: pdf
+- path: inputs/02_마개가격.xlsx
+  format: xlsx
+- path: inputs/03_첫입고.pdf
+  format: pdf
+- path: inputs/04_다음입고.hwpx
+  format: hwpx
+- path: inputs/05_반환원본.xlsx
+  format: xlsx
+- path: inputs/06_반환사본.hwpx
+  format: hwpx
+- path: inputs/07_미래입고.pdf
+  format: pdf
+- path: inputs/08_마개지급.xlsx
+  format: xlsx
+- path: inputs/09_마개대조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    payment_total:
+      type: integer
+    balance_total:
+      type: integer
+  required:
+  - line_settlements
+  - payment_total
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-2c6860c7-4585-512d-8cb5-7d0d18730dea
+scenario_seed: 11788396261057286497
+scenario_hash: 522eacc6afbc849f55030ad42367e1c923d05eaea167d04a67bfbcd35ff3fb1f
+authorship:
+  method: individually_written
+  case_id: D046
+  case_sha256: a398cbf11bdcd1619c6be931deea45071f79961b98db4b99da988183d9fd3a52
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- payment_total
+- balance_total

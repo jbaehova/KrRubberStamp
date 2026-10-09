@@ -1,0 +1,41 @@
+task_id: B2_A083_e3689ea2
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상수호의 부모 명의 임차계약과 주민등록 주소를 대조하세요. 계약자의 기본공제 자격이 확인되어도 주소 요건을 별도로 판단하고
+  같은 부모의 자비 일반보험료를 독립 처리하여 공제액을 제출합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_계약.pdf
+  format: pdf
+- path: inputs/03_주민.hwpx
+  format: hwpx
+- path: inputs/04_보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    rent_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - rent_credit
+  - insurance_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-bddc399c-7c41-52a8-8508-38c3d1890484
+scenario_seed: 16386521666821315304
+scenario_hash: 337a88f524b14e19162fec97d59fa90021afc791225484cdf18d3e91c5e5d8ca
+authorship:
+  method: individually_written
+  case_id: A083
+  case_sha256: e3689ea2ef205ae83d93d69027df7e6ef0c80c0eb7798d90cf0f6c23598488a3
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- rent_credit
+- insurance_credit
+- final_national_tax

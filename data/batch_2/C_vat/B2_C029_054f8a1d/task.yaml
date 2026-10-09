@@ -1,0 +1,42 @@
+task_id: B2_C029_054f8a1d
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상온길택시의 허가 영업 차량 정비는 일부 카드로 지급했고 전체 적격 전자를 받았습니다. 차량 실제 영업 귀속과 승객 부분
+  수금의 발급 원본을 연결하여 공제가능 매입세액(deductible_input_vat)과 발행세액공제(receipt_credit) 및 납부세액(payable_vat)을
+  answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_허가범위.hwpx
+  format: hwpx
+- path: inputs/02_실제정비.pdf
+  format: pdf
+- path: inputs/03_실행.xlsx
+  format: xlsx
+- path: inputs/04_증빙.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-c7c74df2-fa05-54b6-83b0-a44a4ce6addd
+scenario_seed: 382676350696006752
+scenario_hash: ad216b6dace6fa00bbcf377bebf4f4c2d7eabe113a775a0606b11aab86bb9815
+authorship:
+  method: individually_written
+  case_id: C029
+  case_sha256: 054f8a1d0b2da46039c9c45dd4ed7cb1d2aa3d86b83a9d063c0207525e9223e6
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- deductible_input_vat
+- receipt_credit
+- payable_vat

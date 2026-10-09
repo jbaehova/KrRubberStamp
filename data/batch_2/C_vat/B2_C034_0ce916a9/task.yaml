@@ -1,0 +1,36 @@
+task_id: B2_C034_0ce916a9
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상시계받침의 매출 카드와 매입 카드 구 원본에는 같은 금액이 잘못 적혀 있습니다. 거래 방향과 실제 지급 참조를 따라 각각의
+  유효 정정 전표를 찾아 발급 공제(receipt_credit) 및 공제 매입세액(deductible_input_vat)을 answer.json에
+  적어 주세요.
+input_files:
+- path: inputs/01_양방향공급.pdf
+  format: pdf
+- path: inputs/02_실행정정.xlsx
+  format: xlsx
+- path: inputs/03_분기확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    deductible_input_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - deductible_input_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-a1207f53-79c2-5097-9c8d-769160f1123d
+scenario_seed: 930299715649028900
+scenario_hash: de5dcc530d9720a7021d2dd6149ee17c3812ff2a09c4bb1ba814d9f3236484cc
+authorship:
+  method: individually_written
+  case_id: C034
+  case_sha256: 0ce916a995e843248e138c623fe50175d40464e932658f8d51ec3cbe9f780171
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- receipt_credit
+- deductible_input_vat

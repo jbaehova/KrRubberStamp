@@ -1,0 +1,126 @@
+task_id: B2_D109_34e00e18
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 전용 레일과 볼트를 함께 구매합니다. 레일 업체의 볼트 소포장과 대포장은 동시에 사는 상품이 아니라 하나를 고르는 대안입니다.
+  chosen_offers와 vendor_cart_totals를 작성해 주세요.
+input_files:
+- path: inputs/01_레일요청.pdf
+  format: pdf
+- path: inputs/02_레일공급.xlsx
+  format: xlsx
+- path: inputs/03_볼트창고.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-e706e7a4-1e8c-575e-870d-56f8bc54a8e8
+scenario_seed: 3810060782225826094
+scenario_hash: c2101efa4d6043d82ed4812d19f5d13726efe34bd0fce3046e6d3fc0f8bf2ee3
+authorship:
+  method: individually_written
+  case_id: D109
+  case_sha256: 34e00e184937a12ebd6b52686b3415fdc2e42aa72059923b56b70173f9f24e94
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals

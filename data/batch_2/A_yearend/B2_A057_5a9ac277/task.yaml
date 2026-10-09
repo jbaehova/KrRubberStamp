@@ -1,0 +1,147 @@
+task_id: B2_A057_5a9ac277
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 월세 접수 직원 가상보민의 번호 BM057로 원천 자료를 먼저 좁힌 뒤 해당 직원의 최종 발급차수를 고르세요. 같은 사용자와
+  같은 기간의 공동 접수본에는 다른 직원 번호가 있습니다. 본인 명의 월세의 급여 기준을 실제 직원 자료로 마감하고 발급 선택 및 전체 세금 객체를
+  제출합니다.
+input_files:
+- path: inputs/01_공동원천.pdf
+  format: pdf
+- path: inputs/02_본인주거.xlsx
+  format: xlsx
+- path: inputs/03_직원신청.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    used_statement_ids:
+      type: array
+      items:
+        type: string
+    excluded_statement_ids:
+      type: array
+      items:
+        type: string
+    annual_gross:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - used_statement_ids
+  - excluded_statement_ids
+  - annual_gross
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-b8fd57cb-e427-5eef-824b-12d2ec8201ca
+scenario_seed: 6528744428233897690
+scenario_hash: cb72946f5dc7e78b05ac1405ec5c336e99c79920bb1f2e2d8eb7ac79e4d71e49
+authorship:
+  method: individually_written
+  case_id: A057
+  case_sha256: 5a9ac2777a3136daa4156320f076be9005f52ab8edd04459ccab5816e4554ca7
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- used_statement_ids
+- excluded_statement_ids
+- annual_gross
+- tax_calculation

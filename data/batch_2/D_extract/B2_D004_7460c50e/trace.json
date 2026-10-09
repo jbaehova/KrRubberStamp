@@ -1,0 +1,126 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-01-25",
+      "events": [
+        {
+          "date": "2026-01-19",
+          "event_id": "PLATE-IN",
+          "kind": "received",
+          "line_id": "P",
+          "order_id": "PLATE-A",
+          "units": 6
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-01-15",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "인쇄판",
+              "line_id": "P",
+              "ordered_packages": 3,
+              "package_price": 80000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "PLATE-A",
+          "vendor": "가상인쇄판제작"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 100000,
+          "date": "2026-01-16",
+          "order_id": "PLATE-A",
+          "payment_id": "PLATE-DEPOSIT",
+          "status": "executed"
+        },
+        {
+          "amount": 90000,
+          "date": "2026-01-22",
+          "order_id": "PLATE-A",
+          "payment_id": "PLATE-MIDDLE",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "모든 업체는 가상이다. 마감일까지 실제 받은 수량에 포장가격 비율을 곱하고 마지막에 버린다. 별도 행 세액은 공급가액의 10%를 버린다. 업체별 인수금액에서 executed 지급을 뺀다. 업체명을 NFKC 및 공백과 법인 표기 제거 후 소문자로 정리한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "PLATE-IN"
+      ],
+      "accepted_payment_ids": [
+        "PLATE-DEPOSIT",
+        "PLATE-MIDDLE"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "PLATE-IN",
+          "net_units_after_event": 6
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 240000,
+          "line_id": "P",
+          "order_id": "PLATE-A",
+          "package_price_times_net_units": 480000,
+          "price_includes_vat": false,
+          "supply": 240000,
+          "total": 264000,
+          "units_per_package": 2,
+          "vat": 24000
+        }
+      ],
+      "settlement": {
+        "balance_total": 74000,
+        "grand_total": 264000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "인쇄판",
+            "net_units": 6
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "인쇄판",
+            "line_id": "P",
+            "net_units": 6,
+            "order_id": "PLATE-A",
+            "ordered_units": 6,
+            "outstanding_units": 0,
+            "received_units": 6,
+            "returned_units": 0,
+            "supply": 240000,
+            "total": 264000,
+            "vat": 24000
+          }
+        ],
+        "payment_total": 190000,
+        "vendor_balances": [
+          {
+            "balance": 74000,
+            "paid": 190000,
+            "supply": 240000,
+            "total": 264000,
+            "vat": 24000,
+            "vendor": "가상인쇄판제작"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

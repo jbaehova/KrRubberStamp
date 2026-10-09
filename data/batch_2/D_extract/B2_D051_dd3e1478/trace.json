@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "장",
+      "item": "보관라벨",
+      "latest_delivery_date": "2026-01-20",
+      "order_date": "2026-01-12",
+      "processing_policy": "합성 사적 구매 약정: 필요수량/포장수량을 올림하고 최소포장수 이상 구매. 상품금액과 운임은 각 포함가이면 10/11 버림 공급가액과 차액 세액, 별도가이면 10% 버림 세액 적용. 상품의 세금포함 총액만 무료배송 기준 이상일 때 운임0. 달력일 납기와 주문일 효력 및 구매포장수 재고를 모두 충족한 견적의 총액/정규화업체/견적ID 순으로 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 1,
+          "pack_price": 1100,
+          "pack_units": 10,
+          "price_includes_vat": true,
+          "quote_id": "LABEL-A",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-01-01",
+          "valid_until": "2026-01-31",
+          "vendor": "가상라벨북"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 1,
+          "pack_price": 900,
+          "pack_units": 7,
+          "price_includes_vat": true,
+          "quote_id": "LABEL-B",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-01-01",
+          "valid_until": "2026-01-31",
+          "vendor": "가상라벨남"
+        }
+      ],
+      "required_units": 13,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "장",
+      "comparison": {
+        "chosen_leftover_units": 1,
+        "chosen_quote_id": "LABEL-B",
+        "chosen_total": 1800,
+        "chosen_vendor": "가상라벨남",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-01-14",
+            "eligible": true,
+            "leftover_units": 7,
+            "merchandise_supply": 2000,
+            "merchandise_total": 2200,
+            "merchandise_vat": 200,
+            "obtained_units": 20,
+            "packs": 2,
+            "quote_id": "LABEL-A",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 2000,
+            "total": 2200,
+            "valid_on_order": true,
+            "vat": 200,
+            "vendor": "가상라벨북"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-01-14",
+            "eligible": true,
+            "leftover_units": 1,
+            "merchandise_supply": 1636,
+            "merchandise_total": 1800,
+            "merchandise_vat": 164,
+            "obtained_units": 14,
+            "packs": 2,
+            "quote_id": "LABEL-B",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 1636,
+            "total": 1800,
+            "valid_on_order": true,
+            "vat": 164,
+            "vendor": "가상라벨남"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 2200,
+          "minimum_packs": 1,
+          "pack_units": 10,
+          "packs_after_minimum": 2,
+          "price_includes_vat": true,
+          "quote_id": "LABEL-A",
+          "required_packs_before_minimum": 2,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 2200
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 1800,
+          "minimum_packs": 1,
+          "pack_units": 7,
+          "packs_after_minimum": 2,
+          "price_includes_vat": true,
+          "quote_id": "LABEL-B",
+          "required_packs_before_minimum": 2,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 1800
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "보관라벨",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          1800,
+          "가상라벨남",
+          "LABEL-B"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            1800,
+            "가상라벨남",
+            "LABEL-B"
+          ],
+          [
+            2200,
+            "가상라벨북",
+            "LABEL-A"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

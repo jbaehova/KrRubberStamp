@@ -1,0 +1,130 @@
+task_id: B2_D113_f7304f96
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 패널과 덮개 및 고리를 주문합니다. 세 업체가 각 두 품목만 취급하며 한 업체는 실제 선택한 두 품목의 합계로 운임을 면제합니다.
+  chosen_offers와 vendor_cart_totals 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_패널구성.pdf
+  format: pdf
+- path: inputs/02_덮개고리.xlsx
+  format: xlsx
+- path: inputs/03_패널대안.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-2b25af35-83f3-51c2-a6b9-ec07176bd735
+scenario_seed: 17811824033992203634
+scenario_hash: 75c2b448bcf9cea255b84547109225426cff3e18be9a1bc23dbcc93af721fe62
+authorship:
+  method: individually_written
+  case_id: D113
+  case_sha256: f7304f967bdedd728a459889e97db099dd44185b784754de243f72b449df6fb2
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

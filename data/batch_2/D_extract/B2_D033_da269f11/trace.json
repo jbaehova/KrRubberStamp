@@ -1,0 +1,126 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-08-05",
+      "events": [
+        {
+          "date": "2026-08-01",
+          "event_id": "RACK-IN",
+          "kind": "received",
+          "line_id": "R",
+          "order_id": "RACK-TRANSFER",
+          "units": 4
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-07-27",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "보관거치구",
+              "line_id": "R",
+              "ordered_packages": 1,
+              "package_price": 100000,
+              "price_includes_vat": false,
+              "units_per_package": 4
+            }
+          ],
+          "order_id": "RACK-TRANSFER",
+          "vendor": "가상보관거치"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 40000,
+          "date": "2026-08-02",
+          "order_id": "RACK-TRANSFER",
+          "payment_id": "RACK-PAY-1",
+          "status": "executed"
+        },
+        {
+          "amount": 40000,
+          "date": "2026-08-02",
+          "order_id": "RACK-TRANSFER",
+          "payment_id": "RACK-PAY-2",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "거래와 업체는 가상이다. 지급 ID가 다른 executed는 날짜 및 금액이 같아도 각각 합친다. 마감까지 인수의 포장가격 비율을 마지막에 버리고 별도 세액은 10%를 버린다. 업체별 인수대금에서 지급을 차감한다. 업체명은 NFKC 및 공백과 법인 표기 제거 후 소문자로 정리한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "RACK-IN"
+      ],
+      "accepted_payment_ids": [
+        "RACK-PAY-1",
+        "RACK-PAY-2"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "RACK-IN",
+          "net_units_after_event": 4
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 100000,
+          "line_id": "R",
+          "order_id": "RACK-TRANSFER",
+          "package_price_times_net_units": 400000,
+          "price_includes_vat": false,
+          "supply": 100000,
+          "total": 110000,
+          "units_per_package": 4,
+          "vat": 10000
+        }
+      ],
+      "settlement": {
+        "balance_total": 30000,
+        "grand_total": 110000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "보관거치구",
+            "net_units": 4
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "보관거치구",
+            "line_id": "R",
+            "net_units": 4,
+            "order_id": "RACK-TRANSFER",
+            "ordered_units": 4,
+            "outstanding_units": 0,
+            "received_units": 4,
+            "returned_units": 0,
+            "supply": 100000,
+            "total": 110000,
+            "vat": 10000
+          }
+        ],
+        "payment_total": 80000,
+        "vendor_balances": [
+          {
+            "balance": 30000,
+            "paid": 80000,
+            "supply": 100000,
+            "total": 110000,
+            "vat": 10000,
+            "vendor": "가상보관거치"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

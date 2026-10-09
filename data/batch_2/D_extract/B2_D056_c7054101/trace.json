@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "장",
+      "item": "현장라벨",
+      "latest_delivery_date": "2026-04-01",
+      "order_date": "2026-03-23",
+      "processing_policy": "합성 사적 구매: 필요/포장수량 올림과 최소포장수 중 큰 수 구매. 상품/운임 각각 포함가 10/11 버림 공급가액+차액 세액 또는 별도 10% 버림 세액. 표시 상품과 운임 0은 실제 금액0이며 미기재가 아니다. 상품 세금포함 총액만 무료배송 기준 비교. 효력/구매재고/달력납기 충족 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 0,
+          "pack_units": 10,
+          "price_includes_vat": true,
+          "quote_id": "LABEL-GIFT",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 4,
+          "valid_from": "2026-03-01",
+          "valid_until": "2026-04-30",
+          "vendor": "가상라벨제공"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 550,
+          "pack_units": 6,
+          "price_includes_vat": true,
+          "quote_id": "LABEL-SALE",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-03-01",
+          "valid_until": "2026-04-30",
+          "vendor": "가상라벨판매"
+        }
+      ],
+      "required_units": 18,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "장",
+      "comparison": {
+        "chosen_leftover_units": 2,
+        "chosen_quote_id": "LABEL-GIFT",
+        "chosen_total": 0,
+        "chosen_vendor": "가상라벨제공",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-03-26",
+            "eligible": true,
+            "leftover_units": 2,
+            "merchandise_supply": 0,
+            "merchandise_total": 0,
+            "merchandise_vat": 0,
+            "obtained_units": 20,
+            "packs": 2,
+            "quote_id": "LABEL-GIFT",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 0,
+            "total": 0,
+            "valid_on_order": true,
+            "vat": 0,
+            "vendor": "가상라벨제공"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-03-26",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 1500,
+            "merchandise_total": 1650,
+            "merchandise_vat": 150,
+            "obtained_units": 18,
+            "packs": 3,
+            "quote_id": "LABEL-SALE",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 1500,
+            "total": 1650,
+            "valid_on_order": true,
+            "vat": 150,
+            "vendor": "가상라벨판매"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 0,
+          "minimum_packs": 1,
+          "pack_units": 10,
+          "packs_after_minimum": 2,
+          "price_includes_vat": true,
+          "quote_id": "LABEL-GIFT",
+          "required_packs_before_minimum": 2,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 0
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 1650,
+          "minimum_packs": 1,
+          "pack_units": 6,
+          "packs_after_minimum": 3,
+          "price_includes_vat": true,
+          "quote_id": "LABEL-SALE",
+          "required_packs_before_minimum": 3,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 1650
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "현장라벨",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          0,
+          "가상라벨제공",
+          "LABEL-GIFT"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            0,
+            "가상라벨제공",
+            "LABEL-GIFT"
+          ],
+          [
+            1650,
+            "가상라벨판매",
+            "LABEL-SALE"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

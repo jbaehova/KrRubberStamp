@@ -1,0 +1,57 @@
+task_id: B2_A044_7e551535
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상기부분류소의 가상유담서는 특례 및 공익과 종교기부를 제출했습니다. 지정이 종료된 종교 영수증을 먼저 정리하고 실제 인정
+  기부 종류에 따라 남은 소득 한도를 적용하세요. 근로소득금액과 일반 기부 세액공제를 각각 적고 가족 공제 인원도 확인합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_아버지.hwpx
+  format: hwpx
+- path: inputs/03_특례대장.pdf
+  format: pdf
+- path: inputs/04_공익대장.pdf
+  format: pdf
+- path: inputs/05_종교대장.pdf
+  format: pdf
+- path: inputs/06_첫특례.hwpx
+  format: hwpx
+- path: inputs/07_특례.pdf
+  format: pdf
+- path: inputs/08_공익.pdf
+  format: pdf
+- path: inputs/09_종교.pdf
+  format: pdf
+- path: inputs/10_부모기부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    salary_income:
+      type: integer
+    donation_credit:
+      type: integer
+    eligible_dependents:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - salary_income
+  - donation_credit
+  - eligible_dependents
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-0100c97f-29a2-566e-824f-e614887caa46
+scenario_seed: 9103205539396463595
+scenario_hash: 98941b4482318835c00c580b5411c320770f894275461454adde48c8dd634496
+authorship:
+  method: individually_written
+  case_id: A044
+  case_sha256: 7e5515350d182bebb9a5383db7f8513a6b14c6f50490ad40e820a2b4fa458dee
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- salary_income
+- donation_credit
+- eligible_dependents
+- final_national_tax

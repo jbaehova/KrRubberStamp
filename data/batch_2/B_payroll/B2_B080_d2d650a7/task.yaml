@@ -1,0 +1,41 @@
+task_id: B2_B080_d2d650a7
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상절취실 소정카드 첫 장의 종료 시각이 정정됐습니다. 첫 승인본을 그대로 다른 카드와 합치면 같은 시간이 겹칩니다. 최고
+  승인본만 선택한 뒤 실제로 연속하지만 겹치지 않는 두 구간의 base_pay, weekly_holiday_pay 및 gross_pay를 제출하세요.
+input_files:
+- path: inputs/01_종료계약.pdf
+  format: pdf
+- path: inputs/02_정정.xlsx
+  format: xlsx
+- path: inputs/03_회신.hwpx
+  format: hwpx
+- path: inputs/04_지급.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-2dab16bb-9c04-540e-b343-fc2b1cbdc861
+scenario_seed: 15192419072848048652
+scenario_hash: 0fb9ea54d4b691ddbe6a08e51cf389d5d07e17cd9be6c3578e37f3f5ff7ac420
+authorship:
+  method: individually_written
+  case_id: B080
+  case_sha256: d2d650a763fa320c2880c162a0791f357ab60a0f492ee9597cf421190ec55ae2
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- gross_pay

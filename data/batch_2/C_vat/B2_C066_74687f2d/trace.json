@@ -1,0 +1,480 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "service",
+          "activity_id": "설비완료",
+          "date": "2026-05-09",
+          "description": "직원이 소매품 제작용 설비 설치를 완료 확인",
+          "document_ids": [
+            "설비전자",
+            "설비종이"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상대추발 작업실",
+            "organization": "가상대추발"
+          },
+          "operation_id": "발소매",
+          "participants": [
+            {
+              "name": "가상직원추",
+              "organization": "가상대추발",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "설비매입"
+        }
+      ],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-05-10",
+          "document_id": "발전자",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-05-09",
+          "document_id": "발카드본",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-05-09",
+          "document_id": "설비전자",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-05-09",
+          "document_id": "설비종이",
+          "replaces_document_id": null,
+          "state": "valid"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 1000000,
+          "date": "2026-05-09",
+          "document_id": "발전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 100000,
+          "transaction_id": "발판매",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 440000,
+          "date": "2026-05-09",
+          "document_id": "발카드본",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "발카드",
+          "stated_vat": null,
+          "transaction_id": "발판매",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 960000,
+          "date": "2026-05-09",
+          "document_id": "설비전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 96000,
+          "transaction_id": "설비매입",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 1056000,
+          "date": "2026-05-09",
+          "document_id": "설비종이",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "설비이체",
+          "stated_vat": null,
+          "transaction_id": "설비매입",
+          "vat_separately_stated": false
+        }
+      ],
+      "processing_date": "2026-07-15",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "발전자"
+      ],
+      "replacement_relations": [],
+      "selected_document_ids": [
+        "발카드본",
+        "설비전자",
+        "설비종이"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "service",
+          "activity_id": "설비완료",
+          "date": "2026-05-09",
+          "description": "직원이 소매품 제작용 설비 설치를 완료 확인",
+          "document_ids": [
+            "설비전자",
+            "설비종이"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상대추발 작업실",
+            "organization": "가상대추발"
+          },
+          "operation_id": "발소매",
+          "participants": [
+            {
+              "name": "가상직원추",
+              "organization": "가상대추발",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "설비매입"
+        }
+      ],
+      "business_name": "가상대추발",
+      "evidence_documents": [
+        {
+          "amount": 440000,
+          "date": "2026-05-09",
+          "document_id": "발카드본",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "발카드",
+          "stated_vat": null,
+          "transaction_id": "발판매",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 960000,
+          "date": "2026-05-09",
+          "document_id": "설비전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 96000,
+          "transaction_id": "설비매입",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 1056000,
+          "date": "2026-05-09",
+          "document_id": "설비종이",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "설비이체",
+          "stated_vat": null,
+          "transaction_id": "설비매입",
+          "vat_separately_stated": false
+        }
+      ],
+      "operations": [
+        {
+          "description": "국내 과세 창문발 소매",
+          "operation_id": "발소매",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 440000,
+          "date": "2026-05-09",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "발카드",
+          "transaction_id": "발판매"
+        },
+        {
+          "amount": 1056000,
+          "date": "2026-05-09",
+          "includes_vat": true,
+          "method": "bank_transfer",
+          "payment_id": "설비이체",
+          "transaction_id": "설비매입"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "amount": 1100000,
+          "counterparty_consumer": true,
+          "date": "2026-05-09",
+          "description": "창문발 소비자 주문 전체 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "발판매"
+        },
+        {
+          "activity_id": "설비완료",
+          "amount": 1056000,
+          "counterparty_consumer": false,
+          "date": "2026-05-09",
+          "description": "발 제작용 설비 설치 전체",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "설비매입",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "발카드본"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 1100000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 440000,
+        "paid_gross": 440000,
+        "supply_base": 1000000,
+        "transaction_id": "발판매",
+        "unissued_receipt_gross": 660000,
+        "unpaid_gross": 660000,
+        "vat": 100000
+      },
+      {
+        "document_ids": [
+          "설비전자",
+          "설비종이"
+        ],
+        "documented_input_vat": 96000,
+        "eligible_input_document_ids": [
+          "설비전자"
+        ],
+        "gross": 1056000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 0,
+        "paid_gross": 1056000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 960000,
+        "transaction_id": "설비매입",
+        "unissued_receipt_gross": 1056000,
+        "unpaid_gross": 0,
+        "vat": 96000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "발카드본"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "발판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "설비전자",
+        "설비종이"
+      ],
+      "evidence": [
+        "receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "설비매입"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-09",
+      "transaction_id": "발판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "발판매"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1000000
+    },
+    "output": 100000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 440000,
+      "transaction_id": "발판매"
+    },
+    "output": {
+      "eligible_gross": 440000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-09",
+      "transaction_id": "설비매입"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1056000,
+      "includes_vat": true,
+      "transaction_id": "설비매입"
+    },
+    "output": {
+      "gross": 1056000,
+      "supply_base": 960000,
+      "vat": 96000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 96000,
+      "evidence": [
+        "receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "설비매입",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 96000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 73000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 440000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 5720,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 5720
+    },
+    "output": 5720,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 5720,
+      "liability_before_credit": 4000
+    },
+    "output": 4000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 96000,
+      "output_vat": 100000,
+      "prepaid_vat": 0,
+      "receipt_credit": 4000
+    },
+    "output": {
+      "deductible_input_vat": 96000,
+      "input_vat": 96000,
+      "net_vat": 0,
+      "noncreditable_vat": 0,
+      "output_vat": 100000,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 4000,
+      "refund_vat": 0,
+      "tax_base": 1000000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

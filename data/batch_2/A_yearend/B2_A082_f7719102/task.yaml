@@ -1,0 +1,45 @@
+task_id: B2_A082_f7719102
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상지율의 장애인 자녀 명의 임대차를 가족 자료와 연결하세요. 자녀가 성년이어도 기본공제가 되는지 확인하고 가족 대학원 학비와
+  적격 특수교육 비용을 나누어 월세와 교육 공제를 제출합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_계약.pdf
+  format: pdf
+- path: inputs/03_대학원.hwpx
+  format: hwpx
+- path: inputs/04_재활.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    additional_deduction:
+      type: integer
+    rent_credit:
+      type: integer
+    education_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - additional_deduction
+  - rent_credit
+  - education_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-3a35b1f0-1807-5424-8cec-f36b58027c33
+scenario_seed: 17830191840615423597
+scenario_hash: 2497f412cf975c982592a49d1c7ceb53be17dc0683cc030c06e14527c8d8c282
+authorship:
+  method: individually_written
+  case_id: A082
+  case_sha256: f7719102b8f35e6d00a8c197f249fbdcf5f823375b451d5fa4a21cd978e7e725
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- eligible_dependents
+- additional_deduction
+- rent_credit
+- education_credit

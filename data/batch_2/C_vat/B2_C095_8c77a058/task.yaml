@@ -1,0 +1,52 @@
+task_id: B2_C095_8c77a058
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상살구모듈은 같은 공급자에게 산 네 물품을 인계합니다. 가족 수령 및 현재 회사 인수와 미래 인수를 나누고 현재 유효 원본을
+  선택하여 공제 매입세액(deductible_input_vat)과 불공제세액(noncreditable_vat) 및 고유 거래 수(unique_transaction_count)를
+  answer.json에 써 주세요.
+input_files:
+- path: inputs/01_모듈범위.pdf
+  format: pdf
+- path: inputs/02_가족수령.hwpx
+  format: hwpx
+- path: inputs/03_보조인수.pdf
+  format: pdf
+- path: inputs/04_재료인수.hwpx
+  format: hwpx
+- path: inputs/05_미래인수.pdf
+  format: pdf
+- path: inputs/06_실제실행.xlsx
+  format: xlsx
+- path: inputs/07_가족미래전자.hwpx
+  format: hwpx
+- path: inputs/08_회사카드.xlsx
+  format: xlsx
+- path: inputs/09_최종효력.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-e5f48ddd-2291-5910-9ce2-8808016cec7e
+scenario_seed: 10121734987959769508
+scenario_hash: afab54ede096fa1a9ea78cc03fe5667de82f469935723559b5a2826c863fc5b4
+authorship:
+  method: individually_written
+  case_id: C095
+  case_sha256: 8c77a05823fc19a42eff5469deb44bda509b982d90626766d21b5cbff0b1506a
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat
+- unique_transaction_count

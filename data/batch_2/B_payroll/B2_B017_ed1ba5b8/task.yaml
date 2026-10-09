@@ -1,0 +1,74 @@
+task_id: B2_B017_ed1ba5b8
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상분류실의 은행 원장에는 정상 실행과 더 큰 후속 송금 계획이 함께 있습니다. 완전 월 명세를 계산한 뒤 실행 상태만 지급
+  누계로 사용하세요. employee_settlements와 paid_total 및 balance_total을 요청합니다. 계획 금액으로 실제 미지급액을
+  지우지 않습니다.
+input_files:
+- path: inputs/01_상태정책.pdf
+  format: pdf
+- path: inputs/02_월명세.hwpx
+  format: hwpx
+- path: inputs/03_실제출금.xlsx
+  format: xlsx
+- path: inputs/04_송금요청.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    paid_total:
+      type: integer
+    balance_total:
+      type: integer
+  required:
+  - employee_settlements
+  - paid_total
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-5e6dc6fd-a4ec-5fa5-ace7-48b0e7cac219
+scenario_seed: 17085431823742509476
+scenario_hash: 62782d92bdf9496d0fca0ef2ac575937c53b58f9783622b84e6f270478c4eab3
+authorship:
+  method: individually_written
+  case_id: B017
+  case_sha256: ed1ba5b8a053a1a459e6521d337af4af5c8bc04c6fb80a8a1b3546eaf3772961
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- employee_settlements
+- paid_total
+- balance_total

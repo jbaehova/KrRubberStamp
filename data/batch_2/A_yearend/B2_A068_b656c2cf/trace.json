@@ -1,0 +1,363 @@
+[
+  {
+    "inputs": {
+      "calculation_facts": {
+        "dependents": [
+          {
+            "age": 0,
+            "assigned_claimant": "self",
+            "birth_order_this_year": 1,
+            "income_amount": 0,
+            "person_id": "baby",
+            "relation": "child",
+            "supported": true
+          }
+        ],
+        "employee_age": 32,
+        "employee_name": "가상예원",
+        "employment_end": "2025-12-31",
+        "employment_start": "2025-01-01",
+        "marital_status": "married",
+        "medical": [
+          {
+            "amount": 1800000,
+            "date": "2025-04-10",
+            "kind": "ordinary",
+            "person_id": "self"
+          },
+          {
+            "amount": 4000000,
+            "date": "2025-10-11",
+            "kind": "premature",
+            "person_id": "baby"
+          }
+        ],
+        "reference_year": 2025,
+        "scope_note": "국내 거주 근로소득자이고 혼인 중이다. 첫째 미숙아 자녀를 실제 부양하고 본인에게 공제 배정했으며 의료비는 모두 본인 자비로 보전 없이 납부했다."
+      },
+      "employee_id": "YEW",
+      "pay_statements": [
+        {
+          "employee_id": "YEW",
+          "employer_id": "가상산실",
+          "gross_pay": 82000000,
+          "non_taxable_pay": 2000000,
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "revision": 5,
+          "statement_id": "YEW-DRAFT",
+          "status": "draft",
+          "withheld_local_tax": 600000,
+          "withheld_national_tax": 6000000
+        },
+        {
+          "employee_id": "YEW",
+          "employer_id": "가상산실",
+          "gross_pay": 52000000,
+          "non_taxable_pay": 2000000,
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "revision": 1,
+          "statement_id": "YEW-ISSUED",
+          "status": "issued",
+          "withheld_local_tax": 280000,
+          "withheld_national_tax": 2800000
+        }
+      ],
+      "processing_policy": "대상 직원과 사용자 및 지급기간의 발급본 중 최고 수정차수를 사용하며 초안은 차수가 높아도 제외한다.",
+      "source_contract": "yearend_pay_statement_v1"
+    },
+    "output": {
+      "annual_gross": 52000000,
+      "employer_totals": [
+        {
+          "employer_id": "가상산실",
+          "gross_pay": 52000000,
+          "non_taxable_pay": 2000000,
+          "withheld_local_tax": 280000,
+          "withheld_national_tax": 2800000
+        }
+      ],
+      "excluded_statement_ids": [
+        "YEW-DRAFT"
+      ],
+      "non_taxable": 2000000,
+      "paid_local_tax": 280000,
+      "paid_national_tax": 2800000,
+      "tax_calculation": {
+        "additional_deduction": 0,
+        "basic_deduction": 3000000,
+        "child_credit": 300000,
+        "computed_tax": 3952500,
+        "credit_card_deduction": 0,
+        "donation_credit": 0,
+        "education_credit": 0,
+        "eligible_dependents": 1,
+        "employment_credit": 660000,
+        "final_local_tax": 214750,
+        "final_national_tax": 2147500,
+        "hometown_credit": 0,
+        "housing_income_deduction": 0,
+        "income_deduction_limit_excess": 0,
+        "insurance_credit": 0,
+        "medical_credit": 845000,
+        "paid_local_tax": 280000,
+        "paid_national_tax": 2800000,
+        "pension_account_credit": 0,
+        "pension_deduction": 0,
+        "political_credit": 0,
+        "rent_credit": 0,
+        "salary_deduction": 12250000,
+        "salary_income": 37750000,
+        "settlement_local_tax": -65250,
+        "settlement_national_tax": -652500,
+        "settlement_total": -717750,
+        "special_income_deduction": 0,
+        "standard_credit": 0,
+        "tax_base": 34750000,
+        "total_salary": 50000000,
+        "total_tax_credits": 1805000
+      },
+      "used_statement_ids": [
+        "YEW-ISSUED"
+      ]
+    },
+    "reconciliation": {
+      "annual_source_amounts": {
+        "annual_gross": 52000000,
+        "non_taxable": 2000000,
+        "paid_local_tax": 280000,
+        "paid_national_tax": 2800000
+      },
+      "duplicate_statement_ids": [],
+      "employer_totals": [
+        {
+          "employer_id": "가상산실",
+          "gross_pay": 52000000,
+          "non_taxable_pay": 2000000,
+          "withheld_local_tax": 280000,
+          "withheld_national_tax": 2800000
+        }
+      ],
+      "excluded_statement_ids": [
+        "YEW-DRAFT"
+      ],
+      "used_statement_ids": [
+        "YEW-ISSUED"
+      ]
+    },
+    "rule_id": "A_PAY_STATEMENT_RECONCILIATION",
+    "tax_derivations": [
+      {
+        "inputs": {
+          "dependents": [
+            {
+              "age": 0,
+              "assigned_claimant": "self",
+              "birth_order_this_year": 1,
+              "income_amount": 0,
+              "person_id": "baby",
+              "relation": "child",
+              "supported": true
+            }
+          ]
+        },
+        "output": {
+          "additional": 0,
+          "basic": 3000000,
+          "rejected": []
+        },
+        "rule_id": "A_PERSONAL"
+      },
+      {
+        "inputs": {
+          "annual_gross": 52000000,
+          "non_taxable": 2000000
+        },
+        "output": {
+          "salary_deduction": 12250000,
+          "salary_income": 37750000,
+          "total_salary": 50000000
+        },
+        "rule_id": "A_SALARY"
+      },
+      {
+        "inputs": {
+          "public_pension_paid": 0
+        },
+        "output": 0,
+        "rule_id": "A_PENSION_DEDUCTION"
+      },
+      {
+        "inputs": {},
+        "output": 0,
+        "rule_id": "A_SPECIAL_DEDUCTION"
+      },
+      {
+        "inputs": {},
+        "output": 0,
+        "rule_id": "A_HOUSING"
+      },
+      {
+        "inputs": {
+          "salary": 50000000,
+          "spending": {}
+        },
+        "output": 0,
+        "rule_id": "A_CARD"
+      },
+      {
+        "inputs": {
+          "accounts": {},
+          "salary": 50000000
+        },
+        "output": 0,
+        "rule_id": "A_PENSION_CREDIT"
+      },
+      {
+        "inputs": {
+          "birth_orders": [
+            1
+          ],
+          "eligible_children_age_8_plus": 0
+        },
+        "output": 300000,
+        "rule_id": "A_CHILD"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 50000000
+        },
+        "output": 0,
+        "rule_id": "A_INSURANCE_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": [
+            {
+              "amount": 1800000,
+              "date": "2025-04-10",
+              "kind": "ordinary",
+              "person_id": "self"
+            },
+            {
+              "amount": 4000000,
+              "date": "2025-10-11",
+              "kind": "premature",
+              "person_id": "baby"
+            }
+          ],
+          "salary": 50000000
+        },
+        "output": 845000,
+        "rule_id": "A_MEDICAL_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 50000000
+        },
+        "output": 0,
+        "rule_id": "A_EDUCATION_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 50000000
+        },
+        "output": 0,
+        "rule_id": "A_DONATION_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 50000000
+        },
+        "output": 0,
+        "rule_id": "A_POLITICAL_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 50000000
+        },
+        "output": 0,
+        "rule_id": "A_HOMETOWN_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 50000000
+        },
+        "output": 0,
+        "rule_id": "A_RENT_CREDIT"
+      },
+      {
+        "inputs": {
+          "tax_base": 34750000
+        },
+        "output": 3952500,
+        "rule_id": "A_TAX_BRACKETS"
+      },
+      {
+        "inputs": {
+          "computed_tax": 3952500,
+          "salary": 50000000
+        },
+        "output": 660000,
+        "rule_id": "A_EMPLOYMENT_CREDIT"
+      },
+      {
+        "inputs": {
+          "deduction_choice": "itemized",
+          "special_deductions_requested": true
+        },
+        "output": {
+          "housing_deduction_applied": 0,
+          "special_credits_applied": {
+            "donation_credit": 0,
+            "education_credit": 0,
+            "hometown_credit": 0,
+            "insurance_credit": 0,
+            "medical_credit": 845000,
+            "political_credit": 0,
+            "rent_credit": 0
+          },
+          "special_income_deduction_applied": 0,
+          "standard_credit": 0
+        },
+        "rule_id": "A_STANDARD"
+      },
+      {
+        "inputs": {
+          "computed_tax": 3952500,
+          "total_tax_credits": 1805000
+        },
+        "output": 2147500,
+        "rule_id": "A_FINAL"
+      },
+      {
+        "inputs": {
+          "final_national_tax": 2147500
+        },
+        "output": 214750,
+        "rule_id": "A_LOCAL"
+      },
+      {
+        "inputs": {
+          "final_local": 214750,
+          "final_national": 2147500,
+          "paid_local": 280000,
+          "paid_national": 2800000
+        },
+        "output": {
+          "local": -65250,
+          "national": -652500,
+          "total": -717750
+        },
+        "rule_id": "A_SETTLEMENT"
+      }
+    ]
+  }
+]

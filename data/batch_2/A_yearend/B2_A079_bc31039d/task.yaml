@@ -1,0 +1,45 @@
+task_id: B2_A079_bc31039d
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상준호의 동생 명의 임대차를 세대 및 부양 자료에 연결하세요. 동생이 가족 기본공제에 해당하는지 확인하여 월세 명의를 심사하고
+  동생 카드 사용과 본인 카드 사용을 구분하여 공제액을 제출합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_임차.pdf
+  format: pdf
+- path: inputs/03_세대.hwpx
+  format: hwpx
+- path: inputs/04_카드.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    rent_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - eligible_dependents
+  - rent_credit
+  - credit_card_deduction
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-4c7eec5e-d0f7-52e9-85d9-0fa460f84de7
+scenario_seed: 13560623927913140559
+scenario_hash: 0fa5f938b865a683637d593c51c5d2431c490245ca06cffa4536fe3ac0ab83e9
+authorship:
+  method: individually_written
+  case_id: A079
+  case_sha256: bc31039d7becd14f6bc2aed4f1567f2039e57764456aa49ff09963fc69d1116d
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- eligible_dependents
+- rent_credit
+- credit_card_deduction
+- tax_base

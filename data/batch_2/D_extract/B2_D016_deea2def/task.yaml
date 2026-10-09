@@ -1,0 +1,101 @@
+task_id: B2_D016_deea2def
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 봉인띠 인수와 실제 반품을 대조해 순인수 대금 및 실행 선지급을 반영한 업체 잔액을 작성하세요. 반품은 원주문과 행에 연결합니다.
+  answer.json에는 line_settlements와 vendor_balances를 각각 주문 및 업체순으로 작성합니다.
+input_files:
+- path: inputs/01_봉인띠계약.pdf
+  format: pdf
+- path: inputs/02_봉인띠수불.xlsx
+  format: xlsx
+- path: inputs/03_봉인띠지급.hwpx
+  format: hwpx
+- path: inputs/04_봉인띠기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - line_settlements
+  - vendor_balances
+  additionalProperties: false
+canary: KrRubberStamp-canary-c648a51e-76ac-5167-9291-62b9d1df84da
+scenario_seed: 16062701526955333830
+scenario_hash: b5d60bcd245f940a649e3b6e029b7b8d2bd8d94932b4852c696a7046b841de7f
+authorship:
+  method: individually_written
+  case_id: D016
+  case_sha256: deea2def574c18c6f9108719a457246ad17378e116f6adcd30920ff256b0dc89
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- vendor_balances

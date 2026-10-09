@@ -1,0 +1,138 @@
+task_id: B2_A005_40fd9870
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상잇는수리의 가상도유리는 이직한 두 회사의 급여 자료와 본인 치료비를 제출했습니다. 비과세 지급액을 분리한 연간 총급여로
+  의료비 최저 사용액을 계산하고 의료비 공제와 최종 세금이 든 계산 객체를 회신하세요. 병원비를 현재 회사의 급여만으로 계산하지 않습니다.
+input_files:
+- path: inputs/01_전수리급여.xlsx
+  format: xlsx
+- path: inputs/02_현수리급여.pdf
+  format: pdf
+- path: inputs/03_치료와신청.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    annual_gross:
+      type: integer
+    non_taxable:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - annual_gross
+  - non_taxable
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-24fcb58a-653b-5f4b-87d3-3fb855973871
+scenario_seed: 4683066794816830375
+scenario_hash: 12109dbd8cdddead9a59dd50e3d1be0a2524abaf44167bfeb56861028b9934d8
+authorship:
+  method: individually_written
+  case_id: A005
+  case_sha256: 40fd98701c7bfba7d96627e0a2c2f8fb4756435dc88fedd69cfba40e25190150
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- annual_gross
+- non_taxable
+- tax_calculation

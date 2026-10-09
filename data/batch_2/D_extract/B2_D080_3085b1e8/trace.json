@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "개",
+      "item": "보관씰",
+      "latest_delivery_date": "2026-05-29",
+      "order_date": "2026-05-20",
+      "processing_policy": "합성 사적 구매: 먼저 필요/포장수량 올림과 최소포장수 중 큰 수를 구매한다. 상품/배송 각각 포함가 10/11 버림 공급가액+차액 세액 또는 별도 10% 버림 세액. 최소구매 적용 후 상품 세금포함 총액만 무료배송 기준과 비교. 효력/구매재고/달력납기를 충족한 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": 4000,
+          "lead_days": 3,
+          "minimum_packs": 4,
+          "pack_price": 1000,
+          "pack_units": 10,
+          "price_includes_vat": true,
+          "quote_id": "SEAL-MIN",
+          "shipping_price": 1800,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-05-01",
+          "valid_until": "2026-05-31",
+          "vendor": "가상씰도매"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 4200,
+          "pack_units": 8,
+          "price_includes_vat": true,
+          "quote_id": "SEAL-SMALL",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-05-01",
+          "valid_until": "2026-05-31",
+          "vendor": "가상씰소매"
+        }
+      ],
+      "required_units": 7,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "개",
+      "comparison": {
+        "chosen_leftover_units": 33,
+        "chosen_quote_id": "SEAL-MIN",
+        "chosen_total": 4000,
+        "chosen_vendor": "가상씰도매",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-05-23",
+            "eligible": true,
+            "leftover_units": 33,
+            "merchandise_supply": 3636,
+            "merchandise_total": 4000,
+            "merchandise_vat": 364,
+            "obtained_units": 40,
+            "packs": 4,
+            "quote_id": "SEAL-MIN",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 3636,
+            "total": 4000,
+            "valid_on_order": true,
+            "vat": 364,
+            "vendor": "가상씰도매"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-05-23",
+            "eligible": true,
+            "leftover_units": 1,
+            "merchandise_supply": 3818,
+            "merchandise_total": 4200,
+            "merchandise_vat": 382,
+            "obtained_units": 8,
+            "packs": 1,
+            "quote_id": "SEAL-SMALL",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 3818,
+            "total": 4200,
+            "valid_on_order": true,
+            "vat": 382,
+            "vendor": "가상씰소매"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": 4000,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 4000,
+          "minimum_packs": 4,
+          "pack_units": 10,
+          "packs_after_minimum": 4,
+          "price_includes_vat": true,
+          "quote_id": "SEAL-MIN",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": true,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 4000
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 4200,
+          "minimum_packs": 1,
+          "pack_units": 8,
+          "packs_after_minimum": 1,
+          "price_includes_vat": true,
+          "quote_id": "SEAL-SMALL",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 4200
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "보관씰",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          4000,
+          "가상씰도매",
+          "SEAL-MIN"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            4000,
+            "가상씰도매",
+            "SEAL-MIN"
+          ],
+          [
+            4200,
+            "가상씰소매",
+            "SEAL-SMALL"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

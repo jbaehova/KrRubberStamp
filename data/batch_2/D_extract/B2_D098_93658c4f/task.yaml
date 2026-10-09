@@ -1,0 +1,113 @@
+task_id: B2_D098_93658c4f
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 기록 클립의 배송 기준 0 제안은 가장 싸지만 필요한 포장 재고가 부족합니다. quote_comparisons와 chosen_total
+  및 chosen_quote_id를 작성해 기준 0을 인정하되 재고 검증은 별도로 지켜 주세요.
+input_files:
+- path: inputs/01_클립계획.pdf
+  format: pdf
+- path: inputs/02_부족가격.xlsx
+  format: xlsx
+- path: inputs/03_부족기간.hwpx
+  format: hwpx
+- path: inputs/04_부족재고.pdf
+  format: pdf
+- path: inputs/05_운임가격.xlsx
+  format: xlsx
+- path: inputs/06_운임기간.hwpx
+  format: hwpx
+- path: inputs/07_운임재고.pdf
+  format: pdf
+- path: inputs/08_정기가격.xlsx
+  format: xlsx
+- path: inputs/09_정기이행.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_total:
+      type: integer
+    chosen_quote_id:
+      type: string
+  required:
+  - quote_comparisons
+  - chosen_total
+  - chosen_quote_id
+  additionalProperties: false
+canary: KrRubberStamp-canary-8d4ad165-eab6-52b3-ab4a-64a47db845c0
+scenario_seed: 10621049569709733710
+scenario_hash: cba7e45558696bf6e97f920ae2e02b025f7e8209f23618f766cb0cfca26fffb9
+authorship:
+  method: individually_written
+  case_id: D098
+  case_sha256: 93658c4f985d374e882c21c3fd6deb6cc603ae50c9d82c6cf4f29ddaf283c49c
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_total
+- chosen_quote_id

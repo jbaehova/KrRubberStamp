@@ -1,0 +1,56 @@
+task_id: B2_B100_6777a58e
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상문서계수실은 일요일 저녁부터 월요일 새벽까지 이어진 소집을 마친 뒤 월요일 오전에 새 평일 소집을 별도 승인했습니다. 첫
+  작업의 자정 뒤 시간은 시작일 휴일에 귀속되고 두 번째 카드는 월요일 평일 추가입니다. 같은 월요일 시각이 포함돼도 카드 시작일을 구분한 holiday_pay,
+  overtime_pay, night_pay와 gross_pay를 제출하세요.
+input_files:
+- path: inputs/01_사건약정.pdf
+  format: pdf
+- path: inputs/02_소정.xlsx
+  format: xlsx
+- path: inputs/03_주휴.hwpx
+  format: hwpx
+- path: inputs/04_두사건.pdf
+  format: pdf
+- path: inputs/05_연금.xlsx
+  format: xlsx
+- path: inputs/06_건강.hwpx
+  format: hwpx
+- path: inputs/07_고용.pdf
+  format: pdf
+- path: inputs/08_등록.xlsx
+  format: xlsx
+- path: inputs/09_실제지급.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - holiday_pay
+  - overtime_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-5aac11d4-5993-568f-8877-68a9e73ae223
+scenario_seed: 7455609738908071244
+scenario_hash: c0caa8184ebc6e7f42a4bfa980d2d6f9f681a78f3cd78aa852e33e3a5b85d86a
+authorship:
+  method: individually_written
+  case_id: B100
+  case_sha256: 6777a58e578ef54cd9e168ff36debc6160afcdc1e245401ead55404abe95dec4
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- holiday_pay
+- overtime_pay
+- night_pay
+- gross_pay

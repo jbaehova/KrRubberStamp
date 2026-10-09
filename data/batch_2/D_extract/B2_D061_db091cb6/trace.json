@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "개",
+      "item": "보관링",
+      "latest_delivery_date": "2026-07-17",
+      "order_date": "2026-07-08",
+      "processing_policy": "합성 사적 구매 약정: 필요수량/포장수량 올림과 최소포장수의 큰 수를 구매. 상품과 운임은 각각 포함가 10/11 버림 공급가액과 차액 세액 또는 별도 10% 버림 세액. 무료배송은 상품 세금포함 총액만 기준 이상인지 확인. 주문일 효력/구매포장재고/달력납기를 충족한 견적의 총액/정규화업체/견적ID 순 선택이며 같은 공급사의 다른 견적은 합치지 않는다. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 1300,
+          "pack_units": 12,
+          "price_includes_vat": true,
+          "quote_id": "RING-BULK",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 20,
+          "valid_from": "2026-07-01",
+          "valid_until": "2026-07-31",
+          "vendor": "가상링제작"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 600,
+          "pack_units": 5,
+          "price_includes_vat": true,
+          "quote_id": "RING-SMALL",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 20,
+          "valid_from": "2026-07-01",
+          "valid_until": "2026-07-31",
+          "vendor": "가상링제작"
+        }
+      ],
+      "required_units": 13,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "개",
+      "comparison": {
+        "chosen_leftover_units": 2,
+        "chosen_quote_id": "RING-SMALL",
+        "chosen_total": 1800,
+        "chosen_vendor": "가상링제작",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-07-11",
+            "eligible": true,
+            "leftover_units": 11,
+            "merchandise_supply": 2363,
+            "merchandise_total": 2600,
+            "merchandise_vat": 237,
+            "obtained_units": 24,
+            "packs": 2,
+            "quote_id": "RING-BULK",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 2363,
+            "total": 2600,
+            "valid_on_order": true,
+            "vat": 237,
+            "vendor": "가상링제작"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-07-11",
+            "eligible": true,
+            "leftover_units": 2,
+            "merchandise_supply": 1636,
+            "merchandise_total": 1800,
+            "merchandise_vat": 164,
+            "obtained_units": 15,
+            "packs": 3,
+            "quote_id": "RING-SMALL",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 1636,
+            "total": 1800,
+            "valid_on_order": true,
+            "vat": 164,
+            "vendor": "가상링제작"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 2600,
+          "minimum_packs": 1,
+          "pack_units": 12,
+          "packs_after_minimum": 2,
+          "price_includes_vat": true,
+          "quote_id": "RING-BULK",
+          "required_packs_before_minimum": 2,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 2600
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 1800,
+          "minimum_packs": 1,
+          "pack_units": 5,
+          "packs_after_minimum": 3,
+          "price_includes_vat": true,
+          "quote_id": "RING-SMALL",
+          "required_packs_before_minimum": 3,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 1800
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "보관링",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          1800,
+          "가상링제작",
+          "RING-SMALL"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            1800,
+            "가상링제작",
+            "RING-SMALL"
+          ],
+          [
+            2600,
+            "가상링제작",
+            "RING-BULK"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

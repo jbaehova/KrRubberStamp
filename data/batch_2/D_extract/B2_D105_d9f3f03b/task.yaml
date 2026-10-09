@@ -1,0 +1,139 @@
+task_id: B2_D105_d9f3f03b
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 전용 홀더 주문과 함께 쓰는 패드를 포장별로 비교합니다. 홀더 공급처의 패드는 더 큰 포장이지만 이미 발생하는 배송비를 공유합니다.
+  chosen_offers와 grand_total 및 offer_comparisons를 작성해 주세요.
+input_files:
+- path: inputs/01_홀더패드.pdf
+  format: pdf
+- path: inputs/02_홀더제작.xlsx
+  format: xlsx
+- path: inputs/03_소포장.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    grand_total:
+      type: integer
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+  required:
+  - chosen_offers
+  - grand_total
+  - offer_comparisons
+  additionalProperties: false
+canary: KrRubberStamp-canary-f1b885d6-a463-5405-bf95-b81d2794a00c
+scenario_seed: 15705160462098159399
+scenario_hash: 9fbc5e2d75d69f5141f89e023a3f2c9ea08a1a06c58d55e204759d9c42a4fa57
+authorship:
+  method: individually_written
+  case_id: D105
+  case_sha256: d9f3f03b13ded727357fa705c37aeee4785db3219e050b1a2e19fc0a05293f70
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- grand_total
+- offer_comparisons

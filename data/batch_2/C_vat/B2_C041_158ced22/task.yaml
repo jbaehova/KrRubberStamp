@@ -1,0 +1,52 @@
+task_id: B2_C041_158ced22
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상다층대여의 대여료 세 건과 차량 및 필지 비용을 확인해 주세요. 차량 허가 대상 업무와 실제 정비 후 사용 업무를 대조하고
+  토지 공사의 직접 대상을 읽어 공제불가 매입세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat),
+  납부세액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_대여의뢰.hwpx
+  format: hwpx
+- path: inputs/02_사업등록.pdf
+  format: pdf
+- path: inputs/03_대여1.pdf
+  format: pdf
+- path: inputs/04_대여2.xlsx
+  format: xlsx
+- path: inputs/05_대여3.pdf
+  format: pdf
+- path: inputs/06_차정비.pdf
+  format: pdf
+- path: inputs/07_토공.xlsx
+  format: xlsx
+- path: inputs/08_차실사용.pdf
+  format: pdf
+- path: inputs/09_필지검수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-2ab7721c-9d2b-5dbf-93ab-0d04713561a2
+scenario_seed: 1552876701961402155
+scenario_hash: e9bdb008034767b73aad1e61ba102f529a9d1b428db83c046a92081f2d0e9e5a
+authorship:
+  method: individually_written
+  case_id: C041
+  case_sha256: 158ced220863b72bdaa81d6d25c0946b11f68e965491a77ef165a0739f80d7e6
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- noncreditable_vat
+- deductible_input_vat
+- payable_vat

@@ -1,0 +1,103 @@
+task_id: B2_D071_9c49f0d8
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 거치 패드의 할인 견적은 도착 예정일에는 유효하지만 주문일에는 시작 전입니다. quote_comparisons와 chosen_total
+  및 chosen_quote_id를 작성해 가격 효력을 주문일에 연결해 주세요.
+input_files:
+- path: inputs/01_패드주문.hwpx
+  format: hwpx
+- path: inputs/02_할인가.xlsx
+  format: xlsx
+- path: inputs/03_할인효력.pdf
+  format: pdf
+- path: inputs/04_정규가.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_total:
+      type: integer
+    chosen_quote_id:
+      type: string
+  required:
+  - quote_comparisons
+  - chosen_total
+  - chosen_quote_id
+  additionalProperties: false
+canary: KrRubberStamp-canary-c9879845-720f-5aff-98dc-d0a06018b5c5
+scenario_seed: 11261797153807060809
+scenario_hash: 2479c862e0036538bc740f3caea09f36ff0483b158a51c9e09592decd4bbb08a
+authorship:
+  method: individually_written
+  case_id: D071
+  case_sha256: 9c49f0d8052ccf493aeb988601594c00a1c245c77347e5bf324eb88e69e9188d
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_total
+- chosen_quote_id

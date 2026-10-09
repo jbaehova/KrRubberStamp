@@ -1,0 +1,92 @@
+task_id: B2_D021_ba6920aa
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 밀봉 링의 입고 행을 이벤트 식별자로 대조해 재고와 행 정산을 작성하세요. 동일 event_id와 동일 내용이 반복된 자료는
+  한 번만 인수로 계산합니다. answer.json에는 item_quantities와 line_settlements를 작성하세요.
+input_files:
+- path: inputs/01_링주문.pdf
+  format: pdf
+- path: inputs/02_링입고원본.xlsx
+  format: xlsx
+- path: inputs/03_링입고재전달.hwpx
+  format: hwpx
+- path: inputs/04_링수불기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - item_quantities
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-3795fe5c-889a-5ca8-ba42-e4c414fef8fb
+scenario_seed: 13432303279370935233
+scenario_hash: cb6e2010094afb3a19f3ef8040755929425dbe37a6202bca19c98f7ff85d6005
+authorship:
+  method: individually_written
+  case_id: D021
+  case_sha256: ba6920aa4a381bc11fa4d24cb41026b40fee6b1d54603dedac7e87e78a0c5107
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- item_quantities
+- line_settlements

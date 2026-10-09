@@ -1,0 +1,139 @@
+task_id: B2_D057_644de538
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 시험용 색표와 숫자표를 동시에 주문합니다. 두 상품의 별도 세액은 각 선택 견적에서 먼저 버리고 그 뒤 업체 상품 총액을 합쳐
+  배송 조건을 확인하세요. chosen_offers와 vendor_cart_totals 및 supply_total과 vat_total 및 grand_total을
+  작성해 주세요.
+input_files:
+- path: inputs/01_시험표약정.pdf
+  format: pdf
+- path: inputs/02_별도두상품.xlsx
+  format: xlsx
+- path: inputs/03_포함가격.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    supply_total:
+      type: integer
+    vat_total:
+      type: integer
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - supply_total
+  - vat_total
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-bed24cfa-e76c-52aa-869b-7a5fe8045524
+scenario_seed: 7227685006961656040
+scenario_hash: 286f4d7e4876ffd8f3aaa545a115a81484e34f0b9b5fd9d66b47495250e2f7bd
+authorship:
+  method: individually_written
+  case_id: D057
+  case_sha256: 644de5384c5dc0e8a3443164aa42d3ae4fdfb7f578cfe4dbda3f6b8ed66f7897
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- supply_total
+- vat_total
+- grand_total

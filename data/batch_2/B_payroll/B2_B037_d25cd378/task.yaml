@@ -1,0 +1,158 @@
+task_id: B2_B037_d25cd378
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상포스터부스의 종료 계약은 월화목금 각각6시간 약정했지만 화요일은 무급 결근했습니다. 실제 세 카드의 기본임금과 그 주 주휴
+  자격을 계산한 뒤 두 은행 실행과 대조하세요. payroll_calculations와 employee_settlements를 요청합니다.
+input_files:
+- path: inputs/01_결근처리.pdf
+  format: pdf
+- path: inputs/02_의무와실제.hwpx
+  format: hwpx
+- path: inputs/03_첫현금.xlsx
+  format: xlsx
+- path: inputs/04_둘째현금.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    payroll_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          calculation:
+            type: object
+            properties:
+              effective_payment_date:
+                type: string
+              ordinary_monthly_wage:
+                type: integer
+              ordinary_hourly_wage_floor:
+                type: integer
+              base_pay:
+                type: integer
+              fixed_allowance:
+                type: integer
+              meal_allowance:
+                type: integer
+              variable_allowance:
+                type: integer
+              overtime_pay:
+                type: integer
+              night_pay:
+                type: integer
+              holiday_pay:
+                type: integer
+              weekly_holiday_pay:
+                type: integer
+              paid_holiday_pay:
+                type: integer
+              gross_pay:
+                type: integer
+              taxable_pay:
+                type: integer
+              non_taxable_pay:
+                type: integer
+              pension_base_income:
+                type: integer
+              national_pension:
+                type: integer
+              health_insurance:
+                type: integer
+              long_term_care:
+                type: integer
+              employment_insurance:
+                type: integer
+              income_tax:
+                type: integer
+              local_income_tax:
+                type: integer
+              total_deductions:
+                type: integer
+              net_pay:
+                type: integer
+            required:
+            - effective_payment_date
+            - ordinary_monthly_wage
+            - ordinary_hourly_wage_floor
+            - base_pay
+            - fixed_allowance
+            - meal_allowance
+            - variable_allowance
+            - overtime_pay
+            - night_pay
+            - holiday_pay
+            - weekly_holiday_pay
+            - paid_holiday_pay
+            - gross_pay
+            - taxable_pay
+            - non_taxable_pay
+            - pension_base_income
+            - national_pension
+            - health_insurance
+            - long_term_care
+            - employment_insurance
+            - income_tax
+            - local_income_tax
+            - total_deductions
+            - net_pay
+            additionalProperties: false
+        required:
+        - payroll_id
+        - employee_id
+        - calculation
+        additionalProperties: false
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - payroll_calculations
+  - employee_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-9a5746ab-8d1c-560e-9282-3699e0043eb1
+scenario_seed: 15158222959358566889
+scenario_hash: 4c6c037f894cac9b1d1027a041daf0e3602a03c64894a0b01032a3d19515776b
+authorship:
+  method: individually_written
+  case_id: B037
+  case_sha256: d25cd37846bce1e9262d557763ccadfb7bcd570270781959ec31611ac8aae086
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- payroll_calculations
+- employee_settlements

@@ -1,0 +1,160 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-09-20",
+      "events": [
+        {
+          "date": "2026-09-15",
+          "event_id": "CLEAN-BODY-IN",
+          "kind": "received",
+          "line_id": "BODY",
+          "order_id": "CONTACT-CLEANER",
+          "units": 4
+        },
+        {
+          "date": "2026-09-16",
+          "event_id": "CLEAN-BRUSH-IN",
+          "kind": "received",
+          "line_id": "BRUSH",
+          "order_id": "CONTACT-CLEANER",
+          "units": 7
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-09-10",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "접점세척본체",
+              "line_id": "BODY",
+              "ordered_packages": 2,
+              "package_price": 66007,
+              "price_includes_vat": true,
+              "units_per_package": 3
+            },
+            {
+              "base_unit": "개",
+              "item": "접점교체브러시",
+              "line_id": "BRUSH",
+              "ordered_packages": 2,
+              "package_price": 5003,
+              "price_includes_vat": false,
+              "units_per_package": 5
+            }
+          ],
+          "order_id": "CONTACT-CLEANER",
+          "vendor": "가상접점세척"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "업체는 가상이다. 각 행의 포장가격에 실제 순인수 비율을 곱한 뒤 버린다. 포함 행은 금액의 10/11을 버린 공급가액과 차액 세액이며 별도 행은 공급가액의 10%를 버린 세액이다. 마감까지 입고 및 반품과 실행 지급을 반영한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "CLEAN-BODY-IN",
+        "CLEAN-BRUSH-IN"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "CLEAN-BODY-IN",
+          "net_units_after_event": 4
+        },
+        {
+          "event_id": "CLEAN-BRUSH-IN",
+          "net_units_after_event": 7
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 88009,
+          "line_id": "BODY",
+          "order_id": "CONTACT-CLEANER",
+          "package_price_times_net_units": 264028,
+          "price_includes_vat": true,
+          "supply": 80008,
+          "total": 88009,
+          "units_per_package": 3,
+          "vat": 8001
+        },
+        {
+          "amount_after_floor": 7004,
+          "line_id": "BRUSH",
+          "order_id": "CONTACT-CLEANER",
+          "package_price_times_net_units": 35021,
+          "price_includes_vat": false,
+          "supply": 7004,
+          "total": 7704,
+          "units_per_package": 5,
+          "vat": 700
+        }
+      ],
+      "settlement": {
+        "balance_total": 95713,
+        "grand_total": 95713,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "접점교체브러시",
+            "net_units": 7
+          },
+          {
+            "base_unit": "개",
+            "item": "접점세척본체",
+            "net_units": 4
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "접점세척본체",
+            "line_id": "BODY",
+            "net_units": 4,
+            "order_id": "CONTACT-CLEANER",
+            "ordered_units": 6,
+            "outstanding_units": 2,
+            "received_units": 4,
+            "returned_units": 0,
+            "supply": 80008,
+            "total": 88009,
+            "vat": 8001
+          },
+          {
+            "base_unit": "개",
+            "item": "접점교체브러시",
+            "line_id": "BRUSH",
+            "net_units": 7,
+            "order_id": "CONTACT-CLEANER",
+            "ordered_units": 10,
+            "outstanding_units": 3,
+            "received_units": 7,
+            "returned_units": 0,
+            "supply": 7004,
+            "total": 7704,
+            "vat": 700
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 95713,
+            "paid": 0,
+            "supply": 87012,
+            "total": 95713,
+            "vat": 8701,
+            "vendor": "가상접점세척"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

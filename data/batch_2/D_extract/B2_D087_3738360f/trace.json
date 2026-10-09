@@ -1,0 +1,154 @@
+[
+  {
+    "inputs": {
+      "base_unit": "장",
+      "item": "기록봉투",
+      "latest_delivery_date": "2026-12-18",
+      "order_date": "2026-12-14",
+      "processing_policy": "합성 사적 구매: 필요/포장수량 올림과 최소포장수 중 큰 값 구매. 상품/운임 각각 포함가 10/11 버림 공급가액+차액 세액 또는 별도 10% 버림 세액. 상품 세금포함 총액만 무료배송 기준 비교. 무료배송 여부와 별도로 주문일 효력/재고/달력납기를 모두 충족한 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": 2000,
+          "lead_days": 5,
+          "minimum_packs": 1,
+          "pack_price": 2000,
+          "pack_units": 20,
+          "price_includes_vat": true,
+          "quote_id": "RECORD-BULK",
+          "shipping_price": 1000,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-12-01",
+          "valid_until": "2026-12-31",
+          "vendor": "가상봉투대량"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 1,
+          "pack_price": 750,
+          "pack_units": 6,
+          "price_includes_vat": true,
+          "quote_id": "RECORD-FAST",
+          "shipping_price": 200,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-12-01",
+          "valid_until": "2026-12-31",
+          "vendor": "가상봉투신속"
+        }
+      ],
+      "required_units": 17,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "장",
+      "comparison": {
+        "chosen_leftover_units": 1,
+        "chosen_quote_id": "RECORD-FAST",
+        "chosen_total": 2450,
+        "chosen_vendor": "가상봉투신속",
+        "eligible_quote_count": 1,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": false,
+            "delivery_date": "2026-12-19",
+            "eligible": false,
+            "leftover_units": 3,
+            "merchandise_supply": 1818,
+            "merchandise_total": 2000,
+            "merchandise_vat": 182,
+            "obtained_units": 20,
+            "packs": 1,
+            "quote_id": "RECORD-BULK",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 1818,
+            "total": 2000,
+            "valid_on_order": true,
+            "vat": 182,
+            "vendor": "가상봉투대량"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-12-16",
+            "eligible": true,
+            "leftover_units": 1,
+            "merchandise_supply": 2045,
+            "merchandise_total": 2250,
+            "merchandise_vat": 205,
+            "obtained_units": 18,
+            "packs": 3,
+            "quote_id": "RECORD-FAST",
+            "shipping_supply": 181,
+            "shipping_total": 200,
+            "shipping_vat": 19,
+            "stock_sufficient": true,
+            "supply": 2226,
+            "total": 2450,
+            "valid_on_order": true,
+            "vat": 224,
+            "vendor": "가상봉투신속"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": 2000,
+          "lead_calendar_days": 5,
+          "merchandise_amount_before_vat_split": 2000,
+          "minimum_packs": 1,
+          "pack_units": 20,
+          "packs_after_minimum": 1,
+          "price_includes_vat": true,
+          "quote_id": "RECORD-BULK",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": true,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 2000
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 2250,
+          "minimum_packs": 1,
+          "pack_units": 6,
+          "packs_after_minimum": 3,
+          "price_includes_vat": true,
+          "quote_id": "RECORD-FAST",
+          "required_packs_before_minimum": 3,
+          "shipping_amount_before_vat_split": 200,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 2250
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "기록봉투",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          2450,
+          "가상봉투신속",
+          "RECORD-FAST"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            2450,
+            "가상봉투신속",
+            "RECORD-FAST"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

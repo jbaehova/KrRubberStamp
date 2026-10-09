@@ -1,0 +1,78 @@
+task_id: B2_D031_a0cc68ba
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 쐐기의 같은 날짜 입고와 반품을 날짜별로 대조하세요. 문서 수신 순서와 달리 그날 입고를 먼저 반영한 뒤 그날 반품을 반영합니다.
+  answer.json에는 line_settlements와 grand_total을 작성하세요.
+input_files:
+- path: inputs/01_쐐기약정.pdf
+  format: pdf
+- path: inputs/02_먼저온반품.xlsx
+  format: xlsx
+- path: inputs/03_나중온입고.hwpx
+  format: hwpx
+- path: inputs/04_당일정산.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - line_settlements
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-4608a7ae-fc29-5090-b7af-712dae474fab
+scenario_seed: 11586751091809645471
+scenario_hash: 7ea41d31e83756000765f02007c64489cceb960d20836b607902d8be021b2db6
+authorship:
+  method: individually_written
+  case_id: D031
+  case_sha256: a0cc68ba902ef39f90f0935e2214ee233cf53b70db28f572ada9a93d4bd79cc4
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- grand_total

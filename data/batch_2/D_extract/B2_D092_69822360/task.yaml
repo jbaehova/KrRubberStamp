@@ -1,0 +1,113 @@
+task_id: B2_D092_69822360
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 보관 띠 견적 한 장은 재제출됐고 가장 낮은 가격의 다른 제안은 재고가 부족합니다. quote_comparisons와 eligible_quote_count
+  및 chosen_quote_id를 작성해 중복 제거와 재고 제외를 차례로 대조해 주세요.
+input_files:
+- path: inputs/01_띠요청.pdf
+  format: pdf
+- path: inputs/02_A원가격.xlsx
+  format: xlsx
+- path: inputs/03_A원조건.hwpx
+  format: hwpx
+- path: inputs/04_A제출가격.pdf
+  format: pdf
+- path: inputs/05_A제출조건.xlsx
+  format: xlsx
+- path: inputs/06_B가격.hwpx
+  format: hwpx
+- path: inputs/07_B조건.pdf
+  format: pdf
+- path: inputs/08_C가격.xlsx
+  format: xlsx
+- path: inputs/09_C조건.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    eligible_quote_count:
+      type: integer
+    chosen_quote_id:
+      type: string
+  required:
+  - quote_comparisons
+  - eligible_quote_count
+  - chosen_quote_id
+  additionalProperties: false
+canary: KrRubberStamp-canary-ed2e1ea7-5586-5c94-b613-201a77c6661f
+scenario_seed: 7602678018794451199
+scenario_hash: 0df5c1570f87e989e868676b0a09740a80a91e9204b243a918ad0acc46ba6322
+authorship:
+  method: individually_written
+  case_id: D092
+  case_sha256: 698223609be9f0ff0985052e020881eb796533221c0d139bffedf9beacee8a1d
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- eligible_quote_count
+- chosen_quote_id

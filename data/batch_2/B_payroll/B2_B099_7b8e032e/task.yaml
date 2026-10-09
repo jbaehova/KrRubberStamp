@@ -1,0 +1,56 @@
+task_id: B2_B099_7b8e032e
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상미세가공실의 시급 약정은12500.5원입니다. 시급을 먼저 정수로 바꾸면 안 됩니다. 실제 소정 밤근로 한 장은 동일 승인
+  사본이 있고 개근한 마지막 주는 주휴일까지 고용이 유지됩니다. 정확 시급으로 각 월 지급항목을 합산해 마지막에 원 단위 올림한 base_pay,
+  night_pay, weekly_holiday_pay와 net_pay를 제출하세요.
+input_files:
+- path: inputs/01_소수단가.pdf
+  format: pdf
+- path: inputs/02_첫근태.xlsx
+  format: xlsx
+- path: inputs/03_나머지근태.hwpx
+  format: hwpx
+- path: inputs/04_개근.pdf
+  format: pdf
+- path: inputs/05_연금.xlsx
+  format: xlsx
+- path: inputs/06_건강.hwpx
+  format: hwpx
+- path: inputs/07_고용.pdf
+  format: pdf
+- path: inputs/08_등록.xlsx
+  format: xlsx
+- path: inputs/09_실제지급.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    night_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - night_pay
+  - weekly_holiday_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-6d066cea-cdb6-5b68-9471-a14254843c24
+scenario_seed: 8903057011413278115
+scenario_hash: 6828572e85df7132ace4c7d4304a36109861e9a48cbf621c335f8adfff0f3052
+authorship:
+  method: individually_written
+  case_id: B099
+  case_sha256: 7b8e032e7456dda389ce59de3e0a44e64a34ddcbe0dc4c57418d29f7433e2c9b
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- base_pay
+- night_pay
+- weekly_holiday_pay
+- net_pay

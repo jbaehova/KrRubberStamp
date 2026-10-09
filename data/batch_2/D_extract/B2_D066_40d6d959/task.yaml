@@ -1,0 +1,103 @@
+task_id: B2_D066_40d6d959
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 작업 봉투 9장을 확보할 견적을 비교합니다. 한 업체는 필요한 포장 수보다 많은 최소 주문을 요구합니다. quote_comparisons와
+  chosen_quote_id 및 chosen_leftover_units를 작성해 주세요.
+input_files:
+- path: inputs/01_봉투요청.pdf
+  format: pdf
+- path: inputs/02_도매가격.xlsx
+  format: xlsx
+- path: inputs/03_도매조건.hwpx
+  format: hwpx
+- path: inputs/04_소매견적.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_quote_id:
+      type: string
+    chosen_leftover_units:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_quote_id
+  - chosen_leftover_units
+  additionalProperties: false
+canary: KrRubberStamp-canary-1ab46264-87c3-502e-a9fe-45ad3f19aca7
+scenario_seed: 4672160643316043113
+scenario_hash: 56211e8eb01ac162ac8b044ebf27075e36ca99caf4b0fa170382f68aa48bbe0e
+authorship:
+  method: individually_written
+  case_id: D066
+  case_sha256: 40d6d959d669cd69343406a15c96556cc948da2e3367ff7282de1b0b76833668
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_quote_id
+- chosen_leftover_units

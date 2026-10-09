@@ -1,0 +1,126 @@
+task_id: B2_D106_b198bce2
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 전용 지지판과 공용 핀을 주문합니다. 지지판은 한 업체에만 있고 핀을 동봉하면 그 업체의 무료배송 기준에 도달합니다. chosen_offers와
+  vendor_cart_totals를 작성해 주세요.
+input_files:
+- path: inputs/01_지지판요청.pdf
+  format: pdf
+- path: inputs/02_지지판견적.xlsx
+  format: xlsx
+- path: inputs/03_핀견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-59e90574-68d8-54a9-96c8-f13238fa8823
+scenario_seed: 12797186023995792120
+scenario_hash: 802d409791678e800290b5c3aef8e275d5f8d0be4e9d88b59e6ed473acfe1640
+authorship:
+  method: individually_written
+  case_id: D106
+  case_sha256: b198bce2ecdcdaf869440b4b80ee789baece9a91f7cebbc2201ca8d8607a25a3
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals

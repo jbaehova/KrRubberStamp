@@ -1,0 +1,127 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-06-10",
+      "events": [
+        {
+          "date": "2026-06-06",
+          "event_id": "MARKER-IN",
+          "kind": "received",
+          "line_id": "M",
+          "order_id": "MARKER-PAY",
+          "units": 12
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-06-01",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "검수마커",
+              "line_id": "M",
+              "ordered_packages": 1,
+              "package_price": 24000,
+              "price_includes_vat": false,
+              "units_per_package": 12
+            }
+          ],
+          "order_id": "MARKER-PAY",
+          "vendor": "가상검수마커"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 18000,
+          "date": "2026-06-07",
+          "order_id": "MARKER-PAY",
+          "payment_id": "MARKER-TRANSFER",
+          "status": "executed"
+        },
+        {
+          "amount": 18000,
+          "date": "2026-06-07",
+          "order_id": "MARKER-PAY",
+          "payment_id": "MARKER-TRANSFER",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 입고를 주문 및 행에 연결해 포장가격의 순인수 비율을 마지막에 버린다. 별도 세액은 공급가액 10%를 버린다. 동일 지급 ID와 내용은 한 번만 차감한다. 마감일까지 실제 실행 지급만 반영하며 업체명은 NFKC와 공백 및 법인 표기 제거와 소문자를 적용한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "MARKER-IN"
+      ],
+      "accepted_payment_ids": [
+        "MARKER-TRANSFER"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [
+        "MARKER-TRANSFER"
+      ],
+      "event_timeline": [
+        {
+          "event_id": "MARKER-IN",
+          "net_units_after_event": 12
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 24000,
+          "line_id": "M",
+          "order_id": "MARKER-PAY",
+          "package_price_times_net_units": 288000,
+          "price_includes_vat": false,
+          "supply": 24000,
+          "total": 26400,
+          "units_per_package": 12,
+          "vat": 2400
+        }
+      ],
+      "settlement": {
+        "balance_total": 8400,
+        "grand_total": 26400,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "검수마커",
+            "net_units": 12
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "검수마커",
+            "line_id": "M",
+            "net_units": 12,
+            "order_id": "MARKER-PAY",
+            "ordered_units": 12,
+            "outstanding_units": 0,
+            "received_units": 12,
+            "returned_units": 0,
+            "supply": 24000,
+            "total": 26400,
+            "vat": 2400
+          }
+        ],
+        "payment_total": 18000,
+        "vendor_balances": [
+          {
+            "balance": 8400,
+            "paid": 18000,
+            "supply": 24000,
+            "total": 26400,
+            "vat": 2400,
+            "vendor": "가상검수마커"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

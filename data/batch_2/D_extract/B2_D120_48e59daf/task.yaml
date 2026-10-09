@@ -1,0 +1,132 @@
+task_id: B2_D120_48e59daf
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 전용 케이스와 공용 패드를 주문합니다. 패드 견적이 담당자에게 두 번 전송됐지만 quote_id와 내용이 같습니다. chosen_offers와
+  vendor_cart_totals 및 feasible_cart_count를 작성해 주세요.
+input_files:
+- path: inputs/01_운반요청.pdf
+  format: pdf
+- path: inputs/02_케이스원견적.xlsx
+  format: xlsx
+- path: inputs/03_패드재전송.hwpx
+  format: hwpx
+- path: inputs/04_패드대안.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    feasible_cart_count:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - feasible_cart_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-cf28dedb-f871-5463-8916-86758cc341fe
+scenario_seed: 5252777917132734864
+scenario_hash: 7a746cc2cfbeb4d46db23f84be6ab227d5fe0e7d6124b55e6f844cfb7fb2026a
+authorship:
+  method: individually_written
+  case_id: D120
+  case_sha256: 48e59daf6ab68190736d1226c9b09a8d7f82a69099d944d41e30c27dcca55196
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- feasible_cart_count

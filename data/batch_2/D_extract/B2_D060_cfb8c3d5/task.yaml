@@ -1,0 +1,131 @@
+task_id: B2_D060_cfb8c3d5
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 명찰과 걸이줄을 함께 주문합니다. 두 새길 계정은 업체 이름을 정리하면 같지만 vendor_id가 달라 각각 자기 운임과 배송
+  기준을 적용합니다. 실제 통합 발송 업체와 비교하여 chosen_offers와 vendor_cart_totals 및 grand_total을 작성해
+  주세요.
+input_files:
+- path: inputs/01_배송계정요청.pdf
+  format: pdf
+- path: inputs/02_새길독립계정.xlsx
+  format: xlsx
+- path: inputs/03_통합업체.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-6b6be46d-1cdf-5134-a1df-c9b4b0c0fd5f
+scenario_seed: 14967928681188344784
+scenario_hash: a12b03967bffc8c2c62ef01f321e9d8c71440a5b576efa0323b50b3b7c30a720
+authorship:
+  method: individually_written
+  case_id: D060
+  case_sha256: cfb8c3d5019cc3d0cf0c1a10d0d7a0239a598848b0401eac628e58024d60d547
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

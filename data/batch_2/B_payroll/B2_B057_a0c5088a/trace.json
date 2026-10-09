@@ -1,0 +1,577 @@
+[
+  {
+    "inputs": {
+      "as_of_date": "2026-03-25",
+      "payrolls": [
+        {
+          "employee_id": "TRUST-ONE",
+          "facts": {
+            "base_salary": 4200000,
+            "company_name": "가상위탁실",
+            "eligible_children": 2,
+            "employee_name": "가상다정",
+            "employer_provides_meals": false,
+            "employment_due": true,
+            "employment_notified_income": 4200000,
+            "family_count": 3,
+            "fixed_allowance": 0,
+            "health_due": true,
+            "health_notified_income": 4200000,
+            "holiday_shifts": [],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-02",
+            "meal_allowance": 0,
+            "monthly_divisor_hours": 209,
+            "night_minutes": 0,
+            "overtime_minutes": 0,
+            "pay_basis": "monthly",
+            "payment_date": "2026-02-25",
+            "pension_due": true,
+            "pension_notified_income": 4200000,
+            "qualifying_weeks": 0,
+            "regular_minutes": 9600,
+            "scope": "2월 정상 월급 전액. 자녀 둘은 해당 공제 연령 및 소득 요건 충족으로 확정. 추가근로 없음. 가족과 신고 기초는3월도 같다.",
+            "variable_allowance": 0,
+            "weekly_holiday_included": true,
+            "weekly_hours": 40,
+            "withholding_percent": 100,
+            "workplace_employee_count": 8
+          },
+          "payroll_id": "TRUST-FEB"
+        },
+        {
+          "employee_id": "TRUST-ONE",
+          "facts": {
+            "base_salary": 4200000,
+            "company_name": "가상위탁실",
+            "eligible_children": 2,
+            "employee_name": "가상다정",
+            "employer_provides_meals": false,
+            "employment_due": true,
+            "employment_notified_income": 4200000,
+            "family_count": 3,
+            "fixed_allowance": 0,
+            "health_due": true,
+            "health_notified_income": 4200000,
+            "holiday_shifts": [],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-03",
+            "meal_allowance": 0,
+            "monthly_divisor_hours": 209,
+            "night_minutes": 0,
+            "overtime_minutes": 0,
+            "pay_basis": "monthly",
+            "payment_date": "2026-03-25",
+            "pension_due": true,
+            "pension_notified_income": 4200000,
+            "qualifying_weeks": 0,
+            "regular_minutes": 10080,
+            "scope": "3월 정상 월급 전액. 자녀 둘은 해당 공제 연령 및 소득 요건 충족으로 확정. 추가근로 없음. 급여는 각 지급일 정상 실행됐다.",
+            "variable_allowance": 0,
+            "weekly_holiday_included": true,
+            "weekly_hours": 40,
+            "withholding_percent": 100,
+            "workplace_employee_count": 8
+          },
+          "payroll_id": "TRUST-MAR"
+        }
+      ],
+      "processing_policy": "독립된2월 및3월 완전 월 명세다. 각 명세의 실제 지급일 기준 자녀 공제를 사용한다. 가족 등록은 동일하며 보험 기초는 변하지 않았다.",
+      "source_contract": "payroll_bank_reconciliation_v1",
+      "transfers": [
+        {
+          "amount": 3600000,
+          "date": "2026-02-25",
+          "employee_id": "TRUST-ONE",
+          "payroll_id": "TRUST-FEB",
+          "status": "executed",
+          "transfer_id": "TRUST-FEB-X"
+        },
+        {
+          "amount": 3600000,
+          "date": "2026-03-25",
+          "employee_id": "TRUST-ONE",
+          "payroll_id": "TRUST-MAR",
+          "status": "executed",
+          "transfer_id": "TRUST-MAR-X"
+        }
+      ]
+    },
+    "output": {
+      "accepted_transfer_ids": [
+        "TRUST-FEB-X",
+        "TRUST-MAR-X"
+      ],
+      "cash_by_payroll": [
+        {
+          "paid": 3600000,
+          "payroll_id": "TRUST-FEB"
+        },
+        {
+          "paid": 3600000,
+          "payroll_id": "TRUST-MAR"
+        }
+      ],
+      "deduplicated_transfer_ids": [],
+      "excluded_transfer_ids": [],
+      "payroll_derivations": [
+        {
+          "payroll_id": "TRUST-FEB",
+          "trace": [
+            {
+              "inputs": {
+                "base_salary": 4200000,
+                "fixed_allowance": 0,
+                "hourly_rate": 0,
+                "meal_allowance": 0,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "monthly",
+                "regular_minutes": 9600
+              },
+              "output": {
+                "hourly_exact_denominator": 209,
+                "hourly_exact_numerator": 4200000,
+                "ordinary_monthly_wage": 4200000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 40
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 0
+              },
+              "output": 0,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 4200000,
+                "fixed_allowance": 0,
+                "holiday_pay": 0,
+                "meal_allowance": 0,
+                "night_pay": 0,
+                "overtime_pay": 0,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 4200000,
+                "taxable_pay": 4200000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-02",
+                "month": 2,
+                "notified_income": 4200000
+              },
+              "output": {
+                "national_pension": 199500,
+                "pension_base_income": 4200000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 4200000
+              },
+              "output": 150990,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 150990,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 19840,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 4200000
+              },
+              "output": 37800,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 3,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  4200000,
+                  4220000
+                ],
+                "taxable_pay": 4200000
+              },
+              "output": 134040,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 2,
+                "payment_date": "2026-02-25"
+              },
+              "output": 29160,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 104880,
+                "child_credit": 29160,
+                "eligible_children": 2,
+                "family_count": 3,
+                "payment_date": "2026-02-25",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  4200000,
+                  4220000
+                ],
+                "table_tax_before_children_floor_won": 134040,
+                "taxable_pay": 4200000,
+                "withholding_percent": 100
+              },
+              "output": 104880,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 104880,
+                "rate": "0.1"
+              },
+              "output": 10480,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 523490,
+                "gross_pay": 4200000
+              },
+              "output": 3676510,
+              "rule_id": "B.NET"
+            }
+          ]
+        },
+        {
+          "payroll_id": "TRUST-MAR",
+          "trace": [
+            {
+              "inputs": {
+                "base_salary": 4200000,
+                "fixed_allowance": 0,
+                "hourly_rate": 0,
+                "meal_allowance": 0,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "monthly",
+                "regular_minutes": 10080
+              },
+              "output": {
+                "hourly_exact_denominator": 209,
+                "hourly_exact_numerator": 4200000,
+                "ordinary_monthly_wage": 4200000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 40
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 0
+              },
+              "output": 0,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 4200000,
+                "fixed_allowance": 0,
+                "holiday_pay": 0,
+                "meal_allowance": 0,
+                "night_pay": 0,
+                "overtime_pay": 0,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 4200000,
+                "taxable_pay": 4200000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-03",
+                "month": 3,
+                "notified_income": 4200000
+              },
+              "output": {
+                "national_pension": 199500,
+                "pension_base_income": 4200000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 4200000
+              },
+              "output": 150990,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 150990,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 19840,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 4200000
+              },
+              "output": 37800,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 3,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  4200000,
+                  4220000
+                ],
+                "taxable_pay": 4200000
+              },
+              "output": 134040,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 2,
+                "payment_date": "2026-03-25"
+              },
+              "output": 45830,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 88210,
+                "child_credit": 45830,
+                "eligible_children": 2,
+                "family_count": 3,
+                "payment_date": "2026-03-25",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  4200000,
+                  4220000
+                ],
+                "table_tax_before_children_floor_won": 134040,
+                "taxable_pay": 4200000,
+                "withholding_percent": 100
+              },
+              "output": 88210,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 88210,
+                "rate": "0.1"
+              },
+              "output": 8820,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 505160,
+                "gross_pay": 4200000
+              },
+              "output": 3694840,
+              "rule_id": "B.NET"
+            }
+          ]
+        }
+      ],
+      "settlement": {
+        "balance_total": 171350,
+        "deductions_total": 1028650,
+        "employee_settlements": [
+          {
+            "balance": 76510,
+            "effective_payment_date": "2026-02-25",
+            "employee_id": "TRUST-ONE",
+            "gross_pay": 4200000,
+            "insurance_assessment_month": "2026-02",
+            "net_pay": 3676510,
+            "paid": 3600000,
+            "payroll_id": "TRUST-FEB",
+            "total_deductions": 523490
+          },
+          {
+            "balance": 94840,
+            "effective_payment_date": "2026-03-25",
+            "employee_id": "TRUST-ONE",
+            "gross_pay": 4200000,
+            "insurance_assessment_month": "2026-03",
+            "net_pay": 3694840,
+            "paid": 3600000,
+            "payroll_id": "TRUST-MAR",
+            "total_deductions": 505160
+          }
+        ],
+        "gross_total": 8400000,
+        "net_total": 7371350,
+        "paid_total": 7200000,
+        "payroll_calculations": [
+          {
+            "calculation": {
+              "base_pay": 4200000,
+              "effective_payment_date": "2026-02-25",
+              "employment_insurance": 37800,
+              "fixed_allowance": 0,
+              "gross_pay": 4200000,
+              "health_insurance": 150990,
+              "holiday_pay": 0,
+              "income_tax": 104880,
+              "local_income_tax": 10480,
+              "long_term_care": 19840,
+              "meal_allowance": 0,
+              "national_pension": 199500,
+              "net_pay": 3676510,
+              "night_pay": 0,
+              "non_taxable_pay": 0,
+              "ordinary_hourly_wage_floor": 20095,
+              "ordinary_monthly_wage": 4200000,
+              "overtime_pay": 0,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 4200000,
+              "taxable_pay": 4200000,
+              "total_deductions": 523490,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "TRUST-ONE",
+            "payroll_id": "TRUST-FEB"
+          },
+          {
+            "calculation": {
+              "base_pay": 4200000,
+              "effective_payment_date": "2026-03-25",
+              "employment_insurance": 37800,
+              "fixed_allowance": 0,
+              "gross_pay": 4200000,
+              "health_insurance": 150990,
+              "holiday_pay": 0,
+              "income_tax": 88210,
+              "local_income_tax": 8820,
+              "long_term_care": 19840,
+              "meal_allowance": 0,
+              "national_pension": 199500,
+              "net_pay": 3694840,
+              "night_pay": 0,
+              "non_taxable_pay": 0,
+              "ordinary_hourly_wage_floor": 20095,
+              "ordinary_monthly_wage": 4200000,
+              "overtime_pay": 0,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 4200000,
+              "taxable_pay": 4200000,
+              "total_deductions": 505160,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "TRUST-ONE",
+            "payroll_id": "TRUST-MAR"
+          }
+        ]
+      }
+    },
+    "rule_id": "B_PAYROLL_BANK_RECONCILIATION"
+  }
+]

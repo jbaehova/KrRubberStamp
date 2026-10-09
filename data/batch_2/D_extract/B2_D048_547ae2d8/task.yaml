@@ -1,0 +1,75 @@
+task_id: B2_D048_547ae2d8
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 지지대 반품과 완충재 인수를 반영해 업체별 지급 및 회수 잔액을 보고하세요. 반환 후 줄어든 대금에서 이미 실행한 지급을 차감하고
+  다른 업체의 미지급과 개별 계정을 섞지 않습니다. answer.json에는 vendor_balances와 balance_total과 grand_total을
+  작성하세요.
+input_files:
+- path: inputs/01_지지대표지.pdf
+  format: pdf
+- path: inputs/02_지지대가격.xlsx
+  format: xlsx
+- path: inputs/03_완충재표지.hwpx
+  format: hwpx
+- path: inputs/04_완충재가격.xlsx
+  format: xlsx
+- path: inputs/05_지지대입고.pdf
+  format: pdf
+- path: inputs/06_지지대반품.hwpx
+  format: hwpx
+- path: inputs/07_완충재입고.xlsx
+  format: xlsx
+- path: inputs/08_실행예정지급.pdf
+  format: pdf
+- path: inputs/09_회수지급약정.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    balance_total:
+      type: integer
+    grand_total:
+      type: integer
+  required:
+  - vendor_balances
+  - balance_total
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8c07a822-a85f-50f0-a100-2419ff754c53
+scenario_seed: 6087427265410024519
+scenario_hash: 241f5e33ec0a1926e9250772dda1f4a9f249c483fb974c6221992dfb959ea8e6
+authorship:
+  method: individually_written
+  case_id: D048
+  case_sha256: 547ae2d866cac447b3524601c60cf775c00561e403efc772f445d4e36a22f2ec
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances
+- balance_total
+- grand_total

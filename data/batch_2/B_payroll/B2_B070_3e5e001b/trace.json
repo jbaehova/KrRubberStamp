@@ -1,0 +1,274 @@
+[
+  {
+    "inputs": {
+      "holiday_dates": [
+        "2026-11-08"
+      ],
+      "meal_service": "none",
+      "paid_holiday_records": [],
+      "payment_records": [
+        {
+          "date": "2026-11-25",
+          "revision": 1,
+          "status": "executed"
+        }
+      ],
+      "regular_schedule": {
+        "minutes_per_day": 480,
+        "unpaid_absences": [],
+        "working_days": 21
+      },
+      "source_contract": "payroll_evidence_v1",
+      "week_attendance": [],
+      "work_records": [
+        {
+          "breaks": [
+            {
+              "end": "2026-11-08 13:00",
+              "start": "2026-11-08 12:00"
+            }
+          ],
+          "category": "additional",
+          "end": "2026-11-08 14:00",
+          "record_id": "LABEL-AM",
+          "revision": 1,
+          "start": "2026-11-08 08:00",
+          "status": "approved"
+        },
+        {
+          "breaks": [
+            {
+              "end": "2026-11-09 16:30",
+              "start": "2026-11-09 16:00"
+            }
+          ],
+          "category": "additional",
+          "end": "2026-11-09 19:00",
+          "record_id": "LABEL-PM",
+          "revision": 1,
+          "start": "2026-11-09 14:00",
+          "status": "approved"
+        },
+        {
+          "breaks": [
+            {
+              "end": "2026-11-08 16:30",
+              "start": "2026-11-08 16:00"
+            }
+          ],
+          "category": "additional",
+          "end": "2026-11-08 19:00",
+          "record_id": "LABEL-PM",
+          "revision": 2,
+          "start": "2026-11-08 14:00",
+          "status": "approved"
+        }
+      ]
+    },
+    "output": {
+      "employer_provides_meals": false,
+      "holiday_shifts": [
+        {
+          "holiday_night_minutes": 0,
+          "minutes": 570
+        }
+      ],
+      "night_minutes": 0,
+      "overtime_minutes": 0,
+      "paid_holiday_minutes": 0,
+      "payment_date": "2026-11-25",
+      "qualifying_weeks": 0,
+      "regular_minutes": 10080
+    },
+    "rule_id": "B.EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "base_salary": 2508000,
+      "fixed_allowance": 0,
+      "hourly_rate": 0,
+      "meal_allowance": 0,
+      "monthly_divisor_hours": 209,
+      "pay_basis": "monthly",
+      "regular_minutes": 10080
+    },
+    "output": {
+      "hourly_exact_denominator": 1,
+      "hourly_exact_numerator": 12000,
+      "ordinary_monthly_wage": 2508000
+    },
+    "rule_id": "B.ORDINARY"
+  },
+  {
+    "inputs": {
+      "paid_holiday_minutes": 0,
+      "pay_basis": "monthly"
+    },
+    "output": 0,
+    "rule_id": "B.PAID_HOLIDAY"
+  },
+  {
+    "inputs": {
+      "overtime_minutes_excluding_holiday": 0,
+      "premium_applies": true
+    },
+    "output": 0,
+    "rule_id": "B.OVERTIME"
+  },
+  {
+    "inputs": {
+      "night_minutes_including_overlap": 0,
+      "premium_applies": true
+    },
+    "output": 0,
+    "rule_id": "B.NIGHT"
+  },
+  {
+    "inputs": {
+      "holiday_shifts": [
+        {
+          "holiday_night_minutes": 0,
+          "minutes": 570
+        }
+      ],
+      "premium_applies": true
+    },
+    "output": 180000,
+    "rule_id": "B.HOLIDAY"
+  },
+  {
+    "inputs": {
+      "already_included": true,
+      "qualifying_weeks": 0,
+      "weekly_hours": 40
+    },
+    "output": {
+      "weekly_holiday_entitlement": 0,
+      "weekly_holiday_pay": 0
+    },
+    "rule_id": "B.WEEKLY"
+  },
+  {
+    "inputs": {
+      "employer_provides_meals": false,
+      "meal_allowance": 0
+    },
+    "output": 0,
+    "rule_id": "B.MEAL_EXEMPT"
+  },
+  {
+    "inputs": {
+      "base_pay": 2508000,
+      "fixed_allowance": 0,
+      "holiday_pay": 180000,
+      "meal_allowance": 0,
+      "night_pay": 0,
+      "overtime_pay": 0,
+      "paid_holiday_pay": 0,
+      "variable_allowance": 0,
+      "weekly_holiday_pay": 0
+    },
+    "output": {
+      "gross_pay": 2688000,
+      "taxable_pay": 2688000
+    },
+    "rule_id": "B.GROSS"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.0475",
+      "insurance_assessment_month": "2026-11",
+      "month": 11,
+      "notified_income": 2508000
+    },
+    "output": {
+      "national_pension": 119130,
+      "pension_base_income": 2508000
+    },
+    "rule_id": "B.PENSION"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.03595",
+      "notified_income": 2508000
+    },
+    "output": 90160,
+    "rule_id": "B.HEALTH"
+  },
+  {
+    "inputs": {
+      "health_premium": 90160,
+      "ratio": "0.9448 / 7.19"
+    },
+    "output": 11840,
+    "rule_id": "B.LONG_TERM_CARE"
+  },
+  {
+    "inputs": {
+      "due": true,
+      "employee_rate": "0.009",
+      "notified_income": 2508000
+    },
+    "output": 22570,
+    "rule_id": "B.EMPLOYMENT"
+  },
+  {
+    "inputs": {
+      "family_count": 1,
+      "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+      "table_interval_won": [
+        2680000,
+        2690000
+      ],
+      "taxable_pay": 2688000
+    },
+    "output": 46540,
+    "rule_id": "B.TAX_TABLE"
+  },
+  {
+    "inputs": {
+      "eligible_children": 0,
+      "payment_date": "2026-11-25"
+    },
+    "output": 0,
+    "rule_id": "B.CHILD_CREDIT"
+  },
+  {
+    "inputs": {
+      "before_small_tax_waiver": 46540,
+      "child_credit": 0,
+      "eligible_children": 0,
+      "family_count": 1,
+      "payment_date": "2026-11-25",
+      "small_tax_waiver_below_won": 1000,
+      "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+      "table_interval_won": [
+        2680000,
+        2690000
+      ],
+      "table_tax_before_children_floor_won": 46540,
+      "taxable_pay": 2688000,
+      "withholding_percent": 100
+    },
+    "output": 46540,
+    "rule_id": "B.WITHHOLDING"
+  },
+  {
+    "inputs": {
+      "income_tax": 46540,
+      "rate": "0.1"
+    },
+    "output": 4650,
+    "rule_id": "B.LOCAL_TAX"
+  },
+  {
+    "inputs": {
+      "deductions": 294890,
+      "gross_pay": 2688000
+    },
+    "output": 2393110,
+    "rule_id": "B.NET"
+  }
+]

@@ -1,0 +1,71 @@
+task_id: B2_B013_dfb38bbd
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상배달준비실에는 정상 월급 직원과 한 주 종료 시급 직원이 있습니다. 서로 다른 지급 기준으로 각 완전 월 명세를 계산하고
+  직원 및 급여번호로 은행 실행을 대조해 주세요. employee_settlements와 gross_total 및 net_total을 제출합니다.
+input_files:
+- path: inputs/01_월급직.hwpx
+  format: hwpx
+- path: inputs/02_종료시급.pdf
+  format: pdf
+- path: inputs/03_공동원장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    gross_total:
+      type: integer
+    net_total:
+      type: integer
+  required:
+  - employee_settlements
+  - gross_total
+  - net_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-b944a1df-6869-57cb-9cd7-7339c864e3d2
+scenario_seed: 16119381135544971092
+scenario_hash: b0c63dd5a5cee90708ed3bc10eb0c850cd0189bafd7b62e13aaaf9e0541d5fa0
+authorship:
+  method: individually_written
+  case_id: B013
+  case_sha256: dfb38bbd174a6f5441090ce97cf6a38497aaba20e0a42fbc00173d310ecbb0b0
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- employee_settlements
+- gross_total
+- net_total

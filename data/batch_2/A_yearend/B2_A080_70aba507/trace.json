@@ -1,0 +1,287 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 46000000,
+      "cards": [
+        {
+          "amount": 10000000,
+          "category": "credit",
+          "date": "2025-10-05",
+          "person_id": "self"
+        },
+        {
+          "amount": 6000000,
+          "category": "debit",
+          "date": "2025-11-10",
+          "person_id": "mom"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 59,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "mom",
+          "relation": "parent",
+          "supported": true
+        }
+      ],
+      "employee_age": 33,
+      "employee_name": "가상서진",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "non_taxable": 2000000,
+      "reference_year": 2025,
+      "rent": {
+        "area_sqm": 55,
+        "contract_address": "가상새봄길 17 201호",
+        "contract_holder_person_id": "mom",
+        "household_head": true,
+        "household_homes_at_year_end": [],
+        "identity_records": [
+          {
+            "name": "가상서진",
+            "person_id": "self",
+            "relation": "self"
+          },
+          {
+            "name": "가상서진모",
+            "person_id": "mom",
+            "relation": "parent"
+          }
+        ],
+        "payments": [
+          {
+            "amount": 7500000,
+            "date": "2025-12-01"
+          }
+        ],
+        "resident_registration_address": "가상새봄길17 201호",
+        "standard_value": 250000000
+      },
+      "scope_note": "국내 거주 무주택 세대주이고 같은 세대 무소득 어머니를 실제 부양한다. 모든 신청 배정은 본인이다. 어머니는 장애인이 아니다. 월세는 본인 자비이고 카드 사용은 어머니 생활소비와 본인 생활소비의 별도 내역이다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "rent.address_matches": true,
+      "rent.eligible_contract_holder": false,
+      "rent.homeless_household": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 59,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "mom",
+          "relation": "parent",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 1500000,
+      "rejected": [
+        "mom"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 46000000,
+      "non_taxable": 2000000
+    },
+    "output": {
+      "salary_deduction": 11850000,
+      "salary_income": 32150000,
+      "total_salary": 44000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 44000000,
+      "spending": {
+        "credit": 10000000,
+        "debit": 6000000
+      }
+    },
+    "output": 1500000,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 44000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 44000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 44000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 44000000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 44000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 44000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 44000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {
+        "address_matches": true,
+        "area_sqm": 55,
+        "contract_address": "가상새봄길 17 201호",
+        "eligible_contract_holder": false,
+        "homeless_household": true,
+        "household_head": true,
+        "household_homes_at_year_end": [],
+        "payments": [
+          {
+            "amount": 7500000,
+            "date": "2025-12-01"
+          }
+        ],
+        "resident_registration_address": "가상새봄길17 201호",
+        "standard_value": 250000000
+      },
+      "salary": 44000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 29150000
+    },
+    "output": 3112500,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 3112500,
+      "salary": 44000000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 3112500,
+      "total_tax_credits": 660000
+    },
+    "output": 2452500,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 2452500
+    },
+    "output": 245250,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 245250,
+      "final_national": 2452500,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 245250,
+      "national": 2452500,
+      "total": 2697750
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

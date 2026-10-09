@@ -1,0 +1,70 @@
+task_id: B2_D002_974e5184
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 필터 주문의 납품 잔량을 주문별로 확인하세요. 행번호가 같아도 order_id와 line_id의 쌍으로 입고를 연결합니다.
+  answer.json에는 line_settlements를 주문번호와 행번호 오름차순으로 작성하세요. 약정의 발주 환산과 인수 가격 계산을 따릅니다.
+input_files:
+- path: inputs/01_필터주문.hwpx
+  format: hwpx
+- path: inputs/02_필터입고.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-ee3b2d81-c7a0-543f-8e72-7d4cb6bb337d
+scenario_seed: 10902741376102962342
+scenario_hash: 3ed052ade8a8b6c87a1fbdf8e849b586945674c613dfc45ec3dba5e6ce7839b3
+authorship:
+  method: individually_written
+  case_id: D002
+  case_sha256: 974e5184309214a6890014c4b91ab7fe90e40bdfdb17077f7f6c86ab49bcc33d
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements

@@ -1,0 +1,55 @@
+task_id: B2_A050_727db9a9
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상낮은과세표준의 가상진예담은 의무보험과 공적연금 및 많은 카드 사용을 제출했습니다. 월세 주택 요건을 원자료로 확인하고 카드
+  관리비와 본인 미용 청구를 제외하세요. 과세표준이 내려가더라도 의료비 문턱은 총급여로 계산해 월세 및 의료비 세액공제와 과세표준을 작성합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_연금.pdf
+  format: pdf
+- path: inputs/03_보험.hwpx
+  format: hwpx
+- path: inputs/04_계약.pdf
+  format: pdf
+- path: inputs/05_세대.hwpx
+  format: hwpx
+- path: inputs/06_직불.pdf
+  format: pdf
+- path: inputs/07_관리비.pdf
+  format: pdf
+- path: inputs/08_치료.pdf
+  format: pdf
+- path: inputs/09_미용.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    rent_credit:
+      type: integer
+    medical_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    tax_base:
+      type: integer
+  required:
+  - rent_credit
+  - medical_credit
+  - credit_card_deduction
+  - tax_base
+  additionalProperties: false
+canary: KrRubberStamp-canary-68d1d5cd-b822-5913-9f29-b322b5c4492e
+scenario_seed: 8249954230860582686
+scenario_hash: dbe4f56b54c26fb1143ff7d8eec144212b39693ee0cba8d871b313998b706854
+authorship:
+  method: individually_written
+  case_id: A050
+  case_sha256: 727db9a9afad0f1eebd0ae5145bad64cb14e7693e2f35b7d064461e68774e7d7
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- rent_credit
+- medical_credit
+- credit_card_deduction
+- tax_base

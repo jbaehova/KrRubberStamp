@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "개",
+      "item": "정리씰",
+      "latest_delivery_date": "2026-04-29",
+      "order_date": "2026-04-20",
+      "processing_policy": "합성 사적 구매: 구매포장수는 필요/포장수량 올림과 최소포장수의 큰 값으로 고정하며 무료배송을 위해 임의 추가 구매하지 않는다. 상품/운임 각각 포함가 10/11 버림 공급가액+차액 세액 또는 별도 10% 버림 세액. 실제 상품 세금포함 총액만 무료배송 기준 비교. 효력/구매재고/달력납기 충족 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": 2000,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 1000,
+          "pack_units": 5,
+          "price_includes_vat": true,
+          "quote_id": "SEAL-EXTRA",
+          "shipping_price": 1500,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-04-01",
+          "valid_until": "2026-04-30",
+          "vendor": "가상씰배송기준"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 2300,
+          "pack_units": 4,
+          "price_includes_vat": true,
+          "quote_id": "SEAL-FIXED",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-04-01",
+          "valid_until": "2026-04-30",
+          "vendor": "가상씰필요포장"
+        }
+      ],
+      "required_units": 4,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "개",
+      "comparison": {
+        "chosen_leftover_units": 0,
+        "chosen_quote_id": "SEAL-FIXED",
+        "chosen_total": 2300,
+        "chosen_vendor": "가상씰필요포장",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-04-23",
+            "eligible": true,
+            "leftover_units": 1,
+            "merchandise_supply": 909,
+            "merchandise_total": 1000,
+            "merchandise_vat": 91,
+            "obtained_units": 5,
+            "packs": 1,
+            "quote_id": "SEAL-EXTRA",
+            "shipping_supply": 1363,
+            "shipping_total": 1500,
+            "shipping_vat": 137,
+            "stock_sufficient": true,
+            "supply": 2272,
+            "total": 2500,
+            "valid_on_order": true,
+            "vat": 228,
+            "vendor": "가상씰배송기준"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-04-23",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 2090,
+            "merchandise_total": 2300,
+            "merchandise_vat": 210,
+            "obtained_units": 4,
+            "packs": 1,
+            "quote_id": "SEAL-FIXED",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 2090,
+            "total": 2300,
+            "valid_on_order": true,
+            "vat": 210,
+            "vendor": "가상씰필요포장"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": 2000,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 1000,
+          "minimum_packs": 1,
+          "pack_units": 5,
+          "packs_after_minimum": 1,
+          "price_includes_vat": true,
+          "quote_id": "SEAL-EXTRA",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 1500,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 1000
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 2300,
+          "minimum_packs": 1,
+          "pack_units": 4,
+          "packs_after_minimum": 1,
+          "price_includes_vat": true,
+          "quote_id": "SEAL-FIXED",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 2300
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "정리씰",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          2300,
+          "가상씰필요포장",
+          "SEAL-FIXED"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            2300,
+            "가상씰필요포장",
+            "SEAL-FIXED"
+          ],
+          [
+            2500,
+            "가상씰배송기준",
+            "SEAL-EXTRA"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

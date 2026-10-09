@@ -1,0 +1,55 @@
+task_id: B2_D013_cd81c058
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 서로 다른 거치대 주문의 인수와 송금을 정확한 order_id로 연결해 업체별 잔액을 정리하세요. 송금 기록 배열 순서를 주문
+  순서와 대응시키지 않습니다. answer.json에는 vendor_balances를 정규화 업체명 오름차순으로 작성합니다. 약정에 따라 공급가격의
+  행별 10% 세액을 버려 더하고 실행 지급을 차감하세요.
+input_files:
+- path: inputs/01_거치대약정.pdf
+  format: pdf
+- path: inputs/02_거치대인수.hwpx
+  format: hwpx
+- path: inputs/03_거치대송금.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - vendor_balances
+  additionalProperties: false
+canary: KrRubberStamp-canary-09b3ab97-164c-5ec1-9011-a7099e95d947
+scenario_seed: 14808328536959955040
+scenario_hash: 0af87d4a026dfe86aacd1f952263b61e9ba417375ac008c0ac4e5a6e500c0ab2
+authorship:
+  method: individually_written
+  case_id: D013
+  case_sha256: cd81c058b2c7306081aa48924c0f5bca7e78b128ed79114250af903a588c6990
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances

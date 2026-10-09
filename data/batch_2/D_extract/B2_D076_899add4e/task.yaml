@@ -1,0 +1,103 @@
+task_id: B2_D076_899add4e
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 완충 캡의 실제 도착 총액은 같지만 잉여 수량은 다릅니다. chosen_vendor와 chosen_leftover_units
+  및 quote_comparisons를 작성해 사적 약정의 동률 순서를 지켜 주세요.
+input_files:
+- path: inputs/01_동률약정.pdf
+  format: pdf
+- path: inputs/02_정확포장.xlsx
+  format: xlsx
+- path: inputs/03_잉여가격.hwpx
+  format: hwpx
+- path: inputs/04_잉여배송.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_vendor:
+      type: string
+    chosen_leftover_units:
+      type: integer
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+  required:
+  - chosen_vendor
+  - chosen_leftover_units
+  - quote_comparisons
+  additionalProperties: false
+canary: KrRubberStamp-canary-4fe9833a-7b67-5672-ab04-026e9306b695
+scenario_seed: 9915480860344999947
+scenario_hash: f9ecd0b1df3898d9bd3d1c76850aa43271947ba835e0666a6be255df47959175
+authorship:
+  method: individually_written
+  case_id: D076
+  case_sha256: 899add4eda0c600b203b981cf9db41ab034d47949a4c9509afbe5da9b6b070d5
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- chosen_vendor
+- chosen_leftover_units
+- quote_comparisons

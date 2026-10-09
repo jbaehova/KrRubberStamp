@@ -1,0 +1,92 @@
+task_id: B2_D027_610b2f2d
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 보정판과 무상 동봉 핀을 각각 실제 인수 행에 연결하세요. 가격이 0인 행도 재고와 주문 이행에서 지우지 않습니다. answer.json에는
+  item_quantities와 line_settlements를 작성하세요.
+input_files:
+- path: inputs/01_보정키트.pdf
+  format: pdf
+- path: inputs/02_보정판수령.xlsx
+  format: xlsx
+- path: inputs/03_핀수령.hwpx
+  format: hwpx
+- path: inputs/04_무상재고.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - item_quantities
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-338569a3-bdfb-504a-959d-f9b43141565e
+scenario_seed: 6992734720847466643
+scenario_hash: 13455af5f60f1350b374a95408e64bcc6bd464bfdaf5a7ea1d33200e830cf0e2
+authorship:
+  method: individually_written
+  case_id: D027
+  case_sha256: 610b2f2df4a75093f7889b7cba7dddecd8720657cf155d6f24a3ec7727de50d4
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- item_quantities
+- line_settlements

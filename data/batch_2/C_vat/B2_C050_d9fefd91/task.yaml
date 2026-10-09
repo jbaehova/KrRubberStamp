@@ -1,0 +1,57 @@
+task_id: B2_C050_d9fefd91
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상점선상자는 큰 완료 주문을 카드 부분과 미발급 현금으로 수금했고 포장 자재 두 건은 서로 다른 증빙을 갖고 있습니다. 부분
+  이체 자재의 전체 전자 및 미표시 전체 카드 자재를 각각 반입에 연결하고 기사용 공제 이력을 반영하여 불공제 매입세액(noncreditable_vat)과
+  공제가능 매입세액(deductible_input_vat) 및 발행세액공제(receipt_credit)와 납부세액(payable_vat)을 answer.json에
+  작성해 주세요.
+input_files:
+- path: inputs/01_선행신고.hwpx
+  format: hwpx
+- path: inputs/02_판매공급.pdf
+  format: pdf
+- path: inputs/03_자재공급.xlsx
+  format: xlsx
+- path: inputs/04_띠반입.hwpx
+  format: hwpx
+- path: inputs/05_종이반입.hwpx
+  format: hwpx
+- path: inputs/06_판매실행.xlsx
+  format: xlsx
+- path: inputs/07_자재실행.xlsx
+  format: xlsx
+- path: inputs/08_카드원본.pdf
+  format: pdf
+- path: inputs/09_종이전자.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-77be424c-2636-504a-937f-6b2be42b6cd7
+scenario_seed: 15708271351590761100
+scenario_hash: af242552c5742ea15f983a5850764018ebbc4210a645fe60cfe83ff28e20383c
+authorship:
+  method: individually_written
+  case_id: C050
+  case_sha256: d9fefd917b03328ce94aa0df1c302e5392039858b858422061b03238c7e15fab
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- noncreditable_vat
+- deductible_input_vat
+- receipt_credit
+- payable_vat

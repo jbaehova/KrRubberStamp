@@ -1,0 +1,577 @@
+[
+  {
+    "inputs": {
+      "as_of_date": "2026-09-25",
+      "payrolls": [
+        {
+          "employee_id": "SEAL-B",
+          "facts": {
+            "base_salary": 3100000,
+            "company_name": "가상도장실",
+            "eligible_children": 0,
+            "employee_name": "가상해온",
+            "employer_provides_meals": false,
+            "employment_due": true,
+            "employment_notified_income": 3100000,
+            "family_count": 1,
+            "fixed_allowance": 0,
+            "health_due": true,
+            "health_notified_income": 3100000,
+            "holiday_shifts": [],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-09",
+            "meal_allowance": 0,
+            "monthly_divisor_hours": 209,
+            "night_minutes": 0,
+            "overtime_minutes": 0,
+            "pay_basis": "monthly",
+            "payment_date": "2026-09-25",
+            "pension_due": true,
+            "pension_notified_income": 3000000,
+            "qualifying_weeks": 0,
+            "regular_minutes": 9600,
+            "scope": "9월 정상 월급 전액. 추가근로 없음. 세 기관 회신은 각 신고 내역에 따른 확정값이다. 다른 직원 기초나 현재 총지급액으로 대체하지 않는다.",
+            "variable_allowance": 0,
+            "weekly_holiday_included": true,
+            "weekly_hours": 40,
+            "withholding_percent": 100,
+            "workplace_employee_count": 10
+          },
+          "payroll_id": "SEAL-NEW"
+        },
+        {
+          "employee_id": "SEAL-A",
+          "facts": {
+            "base_salary": 3100000,
+            "company_name": "가상도장실",
+            "eligible_children": 0,
+            "employee_name": "가상연우",
+            "employer_provides_meals": false,
+            "employment_due": true,
+            "employment_notified_income": 2900000,
+            "family_count": 1,
+            "fixed_allowance": 0,
+            "health_due": true,
+            "health_notified_income": 2800000,
+            "holiday_shifts": [],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-09",
+            "meal_allowance": 0,
+            "monthly_divisor_hours": 209,
+            "night_minutes": 0,
+            "overtime_minutes": 0,
+            "pay_basis": "monthly",
+            "payment_date": "2026-09-25",
+            "pension_due": true,
+            "pension_notified_income": 2700000,
+            "qualifying_weeks": 0,
+            "regular_minutes": 9600,
+            "scope": "9월 정상 월급 전액. 추가근로 없음. 세 기관 부과 회신은 과거 신고 이력을 반영한 확정값이며 이번 달 임금 인상과 별개다.",
+            "variable_allowance": 0,
+            "weekly_holiday_included": true,
+            "weekly_hours": 40,
+            "withholding_percent": 100,
+            "workplace_employee_count": 10
+          },
+          "payroll_id": "SEAL-OLD"
+        }
+      ],
+      "processing_policy": "두 월 명세의 현재 임금은 같지만 기관별 확정 신고액은 다르다. 부과 기초를 현재 임금으로 재추정하지 않는다.",
+      "source_contract": "payroll_bank_reconciliation_v1",
+      "transfers": [
+        {
+          "amount": 2700000,
+          "date": "2026-09-25",
+          "employee_id": "SEAL-A",
+          "payroll_id": "SEAL-OLD",
+          "status": "executed",
+          "transfer_id": "SEAL-A-X"
+        },
+        {
+          "amount": 2700000,
+          "date": "2026-09-25",
+          "employee_id": "SEAL-B",
+          "payroll_id": "SEAL-NEW",
+          "status": "executed",
+          "transfer_id": "SEAL-B-X"
+        }
+      ]
+    },
+    "output": {
+      "accepted_transfer_ids": [
+        "SEAL-A-X",
+        "SEAL-B-X"
+      ],
+      "cash_by_payroll": [
+        {
+          "paid": 2700000,
+          "payroll_id": "SEAL-NEW"
+        },
+        {
+          "paid": 2700000,
+          "payroll_id": "SEAL-OLD"
+        }
+      ],
+      "deduplicated_transfer_ids": [],
+      "excluded_transfer_ids": [],
+      "payroll_derivations": [
+        {
+          "payroll_id": "SEAL-NEW",
+          "trace": [
+            {
+              "inputs": {
+                "base_salary": 3100000,
+                "fixed_allowance": 0,
+                "hourly_rate": 0,
+                "meal_allowance": 0,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "monthly",
+                "regular_minutes": 9600
+              },
+              "output": {
+                "hourly_exact_denominator": 209,
+                "hourly_exact_numerator": 3100000,
+                "ordinary_monthly_wage": 3100000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 40
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 0
+              },
+              "output": 0,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 3100000,
+                "fixed_allowance": 0,
+                "holiday_pay": 0,
+                "meal_allowance": 0,
+                "night_pay": 0,
+                "overtime_pay": 0,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 3100000,
+                "taxable_pay": 3100000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-09",
+                "month": 9,
+                "notified_income": 3000000
+              },
+              "output": {
+                "national_pension": 142500,
+                "pension_base_income": 3000000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 3100000
+              },
+              "output": 111440,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 111440,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 14640,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 3100000
+              },
+              "output": 27900,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 1,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  3100000,
+                  3120000
+                ],
+                "taxable_pay": 3100000
+              },
+              "output": 82900,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 0,
+                "payment_date": "2026-09-25"
+              },
+              "output": 0,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 82900,
+                "child_credit": 0,
+                "eligible_children": 0,
+                "family_count": 1,
+                "payment_date": "2026-09-25",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  3100000,
+                  3120000
+                ],
+                "table_tax_before_children_floor_won": 82900,
+                "taxable_pay": 3100000,
+                "withholding_percent": 100
+              },
+              "output": 82900,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 82900,
+                "rate": "0.1"
+              },
+              "output": 8290,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 387670,
+                "gross_pay": 3100000
+              },
+              "output": 2712330,
+              "rule_id": "B.NET"
+            }
+          ]
+        },
+        {
+          "payroll_id": "SEAL-OLD",
+          "trace": [
+            {
+              "inputs": {
+                "base_salary": 3100000,
+                "fixed_allowance": 0,
+                "hourly_rate": 0,
+                "meal_allowance": 0,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "monthly",
+                "regular_minutes": 9600
+              },
+              "output": {
+                "hourly_exact_denominator": 209,
+                "hourly_exact_numerator": 3100000,
+                "ordinary_monthly_wage": 3100000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 40
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 0
+              },
+              "output": 0,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 3100000,
+                "fixed_allowance": 0,
+                "holiday_pay": 0,
+                "meal_allowance": 0,
+                "night_pay": 0,
+                "overtime_pay": 0,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 3100000,
+                "taxable_pay": 3100000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-09",
+                "month": 9,
+                "notified_income": 2700000
+              },
+              "output": {
+                "national_pension": 128250,
+                "pension_base_income": 2700000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 2800000
+              },
+              "output": 100660,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 100660,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 13220,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 2900000
+              },
+              "output": 26100,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 1,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  3100000,
+                  3120000
+                ],
+                "taxable_pay": 3100000
+              },
+              "output": 82900,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 0,
+                "payment_date": "2026-09-25"
+              },
+              "output": 0,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 82900,
+                "child_credit": 0,
+                "eligible_children": 0,
+                "family_count": 1,
+                "payment_date": "2026-09-25",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  3100000,
+                  3120000
+                ],
+                "table_tax_before_children_floor_won": 82900,
+                "taxable_pay": 3100000,
+                "withholding_percent": 100
+              },
+              "output": 82900,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 82900,
+                "rate": "0.1"
+              },
+              "output": 8290,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 359420,
+                "gross_pay": 3100000
+              },
+              "output": 2740580,
+              "rule_id": "B.NET"
+            }
+          ]
+        }
+      ],
+      "settlement": {
+        "balance_total": 52910,
+        "deductions_total": 747090,
+        "employee_settlements": [
+          {
+            "balance": 40580,
+            "effective_payment_date": "2026-09-25",
+            "employee_id": "SEAL-A",
+            "gross_pay": 3100000,
+            "insurance_assessment_month": "2026-09",
+            "net_pay": 2740580,
+            "paid": 2700000,
+            "payroll_id": "SEAL-OLD",
+            "total_deductions": 359420
+          },
+          {
+            "balance": 12330,
+            "effective_payment_date": "2026-09-25",
+            "employee_id": "SEAL-B",
+            "gross_pay": 3100000,
+            "insurance_assessment_month": "2026-09",
+            "net_pay": 2712330,
+            "paid": 2700000,
+            "payroll_id": "SEAL-NEW",
+            "total_deductions": 387670
+          }
+        ],
+        "gross_total": 6200000,
+        "net_total": 5452910,
+        "paid_total": 5400000,
+        "payroll_calculations": [
+          {
+            "calculation": {
+              "base_pay": 3100000,
+              "effective_payment_date": "2026-09-25",
+              "employment_insurance": 27900,
+              "fixed_allowance": 0,
+              "gross_pay": 3100000,
+              "health_insurance": 111440,
+              "holiday_pay": 0,
+              "income_tax": 82900,
+              "local_income_tax": 8290,
+              "long_term_care": 14640,
+              "meal_allowance": 0,
+              "national_pension": 142500,
+              "net_pay": 2712330,
+              "night_pay": 0,
+              "non_taxable_pay": 0,
+              "ordinary_hourly_wage_floor": 14832,
+              "ordinary_monthly_wage": 3100000,
+              "overtime_pay": 0,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 3000000,
+              "taxable_pay": 3100000,
+              "total_deductions": 387670,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "SEAL-B",
+            "payroll_id": "SEAL-NEW"
+          },
+          {
+            "calculation": {
+              "base_pay": 3100000,
+              "effective_payment_date": "2026-09-25",
+              "employment_insurance": 26100,
+              "fixed_allowance": 0,
+              "gross_pay": 3100000,
+              "health_insurance": 100660,
+              "holiday_pay": 0,
+              "income_tax": 82900,
+              "local_income_tax": 8290,
+              "long_term_care": 13220,
+              "meal_allowance": 0,
+              "national_pension": 128250,
+              "net_pay": 2740580,
+              "night_pay": 0,
+              "non_taxable_pay": 0,
+              "ordinary_hourly_wage_floor": 14832,
+              "ordinary_monthly_wage": 3100000,
+              "overtime_pay": 0,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 2700000,
+              "taxable_pay": 3100000,
+              "total_deductions": 359420,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "SEAL-A",
+            "payroll_id": "SEAL-OLD"
+          }
+        ]
+      }
+    },
+    "rule_id": "B_PAYROLL_BANK_RECONCILIATION"
+  }
+]

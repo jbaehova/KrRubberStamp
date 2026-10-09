@@ -1,0 +1,168 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-01-20",
+      "events": [
+        {
+          "date": "2026-01-18",
+          "event_id": "ABSORB-B-IN",
+          "kind": "received",
+          "line_id": "BAG",
+          "order_id": "ABSORB-BAG",
+          "units": 8
+        },
+        {
+          "date": "2026-01-17",
+          "event_id": "ABSORB-K-IN",
+          "kind": "received",
+          "line_id": "BULK",
+          "order_id": "ABSORB-WEIGHT",
+          "units": 15
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-01-12",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "봉",
+              "item": "흡수재",
+              "line_id": "BAG",
+              "ordered_packages": 1,
+              "package_price": 24000,
+              "price_includes_vat": false,
+              "units_per_package": 12
+            }
+          ],
+          "order_id": "ABSORB-BAG",
+          "vendor": "가상흡수재료"
+        },
+        {
+          "date": "2026-01-11",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "kg",
+              "item": "흡수재",
+              "line_id": "BULK",
+              "ordered_packages": 2,
+              "package_price": 40000,
+              "price_includes_vat": false,
+              "units_per_package": 10
+            }
+          ],
+          "order_id": "ABSORB-WEIGHT",
+          "vendor": "가상흡수재료"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "거래와 업체는 가상이다. 입고는 주문과 행으로 연결하고 마감일까지 순인수 수량을 품명 및 기초단위별로 합친다. 단위 문자열이 다르면 합치지 않는다. 포장가격의 순인수 비율을 마지막에 버리고 별도 세액은 행 공급가액 10%를 버린다. 실행 지급만 반영한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "ABSORB-B-IN",
+        "ABSORB-K-IN"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "ABSORB-K-IN",
+          "net_units_after_event": 15
+        },
+        {
+          "event_id": "ABSORB-B-IN",
+          "net_units_after_event": 8
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 16000,
+          "line_id": "BAG",
+          "order_id": "ABSORB-BAG",
+          "package_price_times_net_units": 192000,
+          "price_includes_vat": false,
+          "supply": 16000,
+          "total": 17600,
+          "units_per_package": 12,
+          "vat": 1600
+        },
+        {
+          "amount_after_floor": 60000,
+          "line_id": "BULK",
+          "order_id": "ABSORB-WEIGHT",
+          "package_price_times_net_units": 600000,
+          "price_includes_vat": false,
+          "supply": 60000,
+          "total": 66000,
+          "units_per_package": 10,
+          "vat": 6000
+        }
+      ],
+      "settlement": {
+        "balance_total": 83600,
+        "grand_total": 83600,
+        "item_quantities": [
+          {
+            "base_unit": "kg",
+            "item": "흡수재",
+            "net_units": 15
+          },
+          {
+            "base_unit": "봉",
+            "item": "흡수재",
+            "net_units": 8
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "봉",
+            "item": "흡수재",
+            "line_id": "BAG",
+            "net_units": 8,
+            "order_id": "ABSORB-BAG",
+            "ordered_units": 12,
+            "outstanding_units": 4,
+            "received_units": 8,
+            "returned_units": 0,
+            "supply": 16000,
+            "total": 17600,
+            "vat": 1600
+          },
+          {
+            "base_unit": "kg",
+            "item": "흡수재",
+            "line_id": "BULK",
+            "net_units": 15,
+            "order_id": "ABSORB-WEIGHT",
+            "ordered_units": 20,
+            "outstanding_units": 5,
+            "received_units": 15,
+            "returned_units": 0,
+            "supply": 60000,
+            "total": 66000,
+            "vat": 6000
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 83600,
+            "paid": 0,
+            "supply": 76000,
+            "total": 83600,
+            "vat": 7600,
+            "vendor": "가상흡수재료"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

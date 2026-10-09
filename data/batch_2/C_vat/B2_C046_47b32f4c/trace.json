@@ -1,0 +1,435 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "말소정비",
+          "date": "2026-05-14",
+          "description": "허가 말소 뒤 사무 방문에 쓰는 차량의 별도 정비를 인수했다.",
+          "document_ids": [
+            "남빛미표시카드",
+            "남빛전자후"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "남빛 정비소"
+          },
+          "operation_id": "관리사무",
+          "participants": [
+            {
+              "name": "가상장대여",
+              "organization": "가상남빛대여",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "남빛정비후",
+          "vehicle_id": "남빛차"
+        },
+        {
+          "action": "vehicle_service",
+          "activity_id": "허가정비",
+          "date": "2026-03-12",
+          "description": "직접 고객 대여 중 차량 정비를 인수했다.",
+          "document_ids": [
+            "남빛부분카드",
+            "남빛전자전"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "남빛 정비소"
+          },
+          "operation_id": "대여영업",
+          "participants": [
+            {
+              "name": "가상장대여",
+              "organization": "가상남빛대여",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "남빛정비전",
+          "vehicle_id": "남빛차"
+        }
+      ],
+      "business_name": "가상남빛대여",
+      "evidence_documents": [
+        {
+          "amount": 880000,
+          "date": "2026-05-14",
+          "document_id": "남빛미표시카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "남빛전체",
+          "stated_vat": null,
+          "transaction_id": "남빛정비후",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 220000,
+          "date": "2026-03-12",
+          "document_id": "남빛부분카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "남빛부분",
+          "stated_vat": 20000,
+          "transaction_id": "남빛정비전",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 600000,
+          "date": "2026-03-12",
+          "document_id": "남빛전자전",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 60000,
+          "transaction_id": "남빛정비전",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 800000,
+          "date": "2026-05-14",
+          "document_id": "남빛전자후",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 80000,
+          "transaction_id": "남빛정비후",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [
+        {
+          "description": "대여 종료 후 차량 관리 사무",
+          "operation_id": "관리사무",
+          "output_taxable": true
+        },
+        {
+          "description": "허가 자동차 직접 대여",
+          "operation_id": "대여영업",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 220000,
+          "date": "2026-03-12",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "남빛부분",
+          "transaction_id": "남빛정비전"
+        },
+        {
+          "amount": 880000,
+          "date": "2026-05-14",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "남빛전체",
+          "transaction_id": "남빛정비후"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "허가정비",
+          "amount": 660000,
+          "counterparty_consumer": false,
+          "date": "2026-03-12",
+          "description": "대여 영업 중 정비 전체",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "남빛정비전",
+          "vehicle_id": "남빛차"
+        },
+        {
+          "activity_id": "말소정비",
+          "amount": 880000,
+          "counterparty_consumer": false,
+          "date": "2026-05-14",
+          "description": "말소 이후 정비 전체",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "남빛정비후",
+          "vehicle_id": "남빛차"
+        }
+      ],
+      "vehicle_registry": [
+        {
+          "business_license": "none",
+          "permitted_operation_id": null,
+          "registration_class": "excise_passenger",
+          "valid_from": "2026-04-01",
+          "valid_to": "2026-12-31",
+          "vehicle_id": "남빛차"
+        },
+        {
+          "business_license": "vehicle_rental",
+          "permitted_operation_id": "대여영업",
+          "registration_class": "excise_passenger",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-03-31",
+          "vehicle_id": "남빛차"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "남빛부분카드",
+          "남빛전자전"
+        ],
+        "documented_input_vat": 60000,
+        "eligible_input_document_ids": [
+          "남빛전자전"
+        ],
+        "gross": 660000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 220000,
+        "paid_gross": 220000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "passenger_car_maintenance",
+          "supplier_general": true,
+          "vehicle_direct_business": true,
+          "vehicle_subject_excise": true
+        },
+        "supply_base": 600000,
+        "transaction_id": "남빛정비전",
+        "unissued_receipt_gross": 440000,
+        "unpaid_gross": 440000,
+        "vat": 60000
+      },
+      {
+        "document_ids": [
+          "남빛미표시카드",
+          "남빛전자후"
+        ],
+        "documented_input_vat": 80000,
+        "eligible_input_document_ids": [
+          "남빛전자후"
+        ],
+        "gross": 880000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 880000,
+        "paid_gross": 880000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "passenger_car_maintenance",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": true
+        },
+        "supply_base": 800000,
+        "transaction_id": "남빛정비후",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 80000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "남빛부분카드",
+        "남빛전자전"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "남빛정비전"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "남빛미표시카드",
+        "남빛전자후"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "남빛정비후"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-12",
+      "transaction_id": "남빛정비전"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 660000,
+      "includes_vat": true,
+      "transaction_id": "남빛정비전"
+    },
+    "output": {
+      "gross": 660000,
+      "supply_base": 600000,
+      "vat": 60000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 60000,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "남빛정비전",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": true,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 60000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-14",
+      "transaction_id": "남빛정비후"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 880000,
+      "includes_vat": true,
+      "transaction_id": "남빛정비후"
+    },
+    "output": {
+      "gross": 880000,
+      "supply_base": 800000,
+      "vat": 80000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 80000,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "남빛정비후",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 80000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 217000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -60000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -60000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -60000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 60000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 60000,
+      "input_vat": 140000,
+      "net_vat": -60000,
+      "noncreditable_vat": 80000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 60000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

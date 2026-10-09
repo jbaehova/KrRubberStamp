@@ -1,0 +1,70 @@
+task_id: B2_B032_19582bc7
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상진열실의 두 직원 중 한 명에게 많이 지급했고 다른 직원에게 적게 지급했습니다. 각 완전 월 명세를 계산하고 해당 직원
+  및 급여번호의 실행만 연결해 employee_settlements와 balance_total을 작성해 주세요. 회사 합계만 보고 어느 직원의 미지급이
+  해결됐다고 판정하면 안 됩니다.
+input_files:
+- path: inputs/01_상계금지.pdf
+  format: pdf
+- path: inputs/02_직원A.hwpx
+  format: hwpx
+- path: inputs/03_직원B.hwpx
+  format: hwpx
+- path: inputs/04_상반된실행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - employee_settlements
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-3305433d-c7d9-50a7-aead-6778bc54468d
+scenario_seed: 1826257783615818180
+scenario_hash: 6c4aadeec1c7e0c36b64687a51bcbb887b70e204c4de7eae2e89c5809bc13e3c
+authorship:
+  method: individually_written
+  case_id: B032
+  case_sha256: 19582bc73cb689c4de60d52feb90bc0379f6a1866ba334f533b47706d123c42c
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- employee_settlements
+- balance_total

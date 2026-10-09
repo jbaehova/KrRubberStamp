@@ -1,0 +1,133 @@
+task_id: B2_D123_9941a97b
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 두 물품을 같은 업체에 모으는 안과 나누는 안을 비교해 주세요. 실링띠 대포장은 혼자서 무료배송에 도달하므로 잉여가 많아도
+  덮개를 외부에서 사는 안이 유리할 수 있습니다. 지난달 종료된 덮개 할인은 사용하지 말고 chosen_offers와 vendor_cart_totals
+  및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_분리구매요청.pdf
+  format: pdf
+- path: inputs/02_실링포장.xlsx
+  format: xlsx
+- path: inputs/03_덮개가격이력.hwpx
+  format: hwpx
+- path: inputs/04_덮개직송.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-4ef98eac-fa7f-50f7-8d9e-3e4e1d604cc1
+scenario_seed: 11043294110880435405
+scenario_hash: 3906c4ca066ff86c78d3842cc21fbcbb5667c63bc9d80159be2e46fdaf47b438
+authorship:
+  method: individually_written
+  case_id: D123
+  case_sha256: 9941a97be5310ccd920ca5a4ef1d03b98c8a3c9498d4bdba63e05f636095c487
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

@@ -1,0 +1,92 @@
+task_id: B2_D024_c5deb0af
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 나사못의 포장 발주와 실제 낱개 입고를 대조하세요. 주문 수량을 넘은 입고도 삭제하거나 발주량으로 자르지 않습니다. outstanding_units는
+  음수도 허용합니다. answer.json에는 line_settlements와 item_quantities를 작성하세요.
+input_files:
+- path: inputs/01_나사못주문.pdf
+  format: pdf
+- path: inputs/02_첫나사못.xlsx
+  format: xlsx
+- path: inputs/03_다음나사못.hwpx
+  format: hwpx
+- path: inputs/04_과납정산.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+  required:
+  - line_settlements
+  - item_quantities
+  additionalProperties: false
+canary: KrRubberStamp-canary-0d591fe7-323c-566c-b39b-3d841ee54445
+scenario_seed: 14258027737330223140
+scenario_hash: b1188a623d7f73c663d91834c8769ad1c7ebf4e2899097581a49d2c67f1987d5
+authorship:
+  method: individually_written
+  case_id: D024
+  case_sha256: c5deb0af513c08244f8413058d88b0ea181e34027ba08074ca026efa97d33101
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- item_quantities

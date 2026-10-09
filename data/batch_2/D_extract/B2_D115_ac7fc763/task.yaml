@@ -1,0 +1,139 @@
+task_id: B2_D115_ac7fc763
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 접착재를 kg 단위와 봉 단위로 별도 확보하고 공용 주걱도 주문합니다. 요청 단위를 변환하거나 합쳐 포장을 줄이지 말고 chosen_offers와
+  offer_comparisons 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_접착재요청.pdf
+  format: pdf
+- path: inputs/02_벌크견적.xlsx
+  format: xlsx
+- path: inputs/03_봉포장.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - offer_comparisons
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-45601952-13ba-5ec2-8cfb-87ebc9ac0dfd
+scenario_seed: 12429872724735251074
+scenario_hash: 2d1406cf1fcc03d2aeba37dffbb9611e7590ab2cf49d0eb9687453f8d3096235
+authorship:
+  method: individually_written
+  case_id: D115
+  case_sha256: ac7fc7630929528222bbfb03035f8c2c6a1db8a4cacc54ba98124e72ef76d489
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- offer_comparisons
+- grand_total

@@ -1,0 +1,127 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-05-15",
+      "events": [
+        {
+          "date": "2026-05-10",
+          "event_id": "EXHAUST-IN",
+          "kind": "received",
+          "line_id": "C",
+          "order_id": "EXHAUST-COVER",
+          "units": 4
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-05-05",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "배기덮개",
+              "line_id": "C",
+              "ordered_packages": 2,
+              "package_price": 33000,
+              "price_includes_vat": true,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "EXHAUST-COVER",
+          "vendor": "가상배기덮개"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 15000,
+          "date": "2026-05-06",
+          "order_id": "EXHAUST-COVER",
+          "payment_id": "EXHAUST-PAID",
+          "status": "executed"
+        },
+        {
+          "amount": 51000,
+          "date": "2026-05-12",
+          "order_id": "EXHAUST-COVER",
+          "payment_id": "EXHAUST-PLAN",
+          "status": "planned"
+        }
+      ],
+      "processing_policy": "모든 업체는 가상이다. 포장가격에 순인수 비율을 곱한 뒤 버리고 포함 가격은 행 금액의 10/11을 버린 공급가액과 차액 세액이다. 마감일까지 executed 지급만 차감하고 planned는 제외한다. 업체명은 NFKC, 공백 및 법인 표기 제거와 소문자를 적용한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "EXHAUST-IN"
+      ],
+      "accepted_payment_ids": [
+        "EXHAUST-PAID"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "EXHAUST-IN",
+          "net_units_after_event": 4
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [
+        "EXHAUST-PLAN"
+      ],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 66000,
+          "line_id": "C",
+          "order_id": "EXHAUST-COVER",
+          "package_price_times_net_units": 132000,
+          "price_includes_vat": true,
+          "supply": 60000,
+          "total": 66000,
+          "units_per_package": 2,
+          "vat": 6000
+        }
+      ],
+      "settlement": {
+        "balance_total": 51000,
+        "grand_total": 66000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "배기덮개",
+            "net_units": 4
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "배기덮개",
+            "line_id": "C",
+            "net_units": 4,
+            "order_id": "EXHAUST-COVER",
+            "ordered_units": 4,
+            "outstanding_units": 0,
+            "received_units": 4,
+            "returned_units": 0,
+            "supply": 60000,
+            "total": 66000,
+            "vat": 6000
+          }
+        ],
+        "payment_total": 15000,
+        "vendor_balances": [
+          {
+            "balance": 51000,
+            "paid": 15000,
+            "supply": 60000,
+            "total": 66000,
+            "vat": 6000,
+            "vendor": "가상배기덮개"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

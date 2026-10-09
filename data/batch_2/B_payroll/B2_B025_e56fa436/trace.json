@@ -1,0 +1,384 @@
+[
+  {
+    "inputs": {
+      "as_of_date": "2026-11-27",
+      "payrolls": [
+        {
+          "employee_id": "WOOD-3",
+          "facts": {
+            "base_salary": 2700000,
+            "eligible_children": 0,
+            "employment_due": true,
+            "employment_notified_income": 2800000,
+            "family_count": 2,
+            "fixed_allowance": 100000,
+            "health_due": true,
+            "health_notified_income": 2800000,
+            "holiday_dates": [],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-11",
+            "meal_allowance": 200000,
+            "meal_service": "none",
+            "monthly_divisor_hours": 209,
+            "pay_basis": "monthly",
+            "payment_records": [
+              {
+                "date": "2026-11-27",
+                "revision": 1,
+                "status": "executed"
+              }
+            ],
+            "pension_due": true,
+            "pension_notified_income": 2800000,
+            "regular_schedule": {
+              "minutes_per_day": 480,
+              "unpaid_absences": [],
+              "working_days": 21
+            },
+            "scope": "가상하진의 완전 정상 월급.11월 작업 완료금은 당월 성과에 따라 확정돼 지급하며 다개월 상여가 아니다. 카드2시간은 평일 추가근로로 확인됐다. 완료금은 소정근로 대가가 아닌 변동 항목이고 통상임금 제외가 확인된 출발 사실이다. 보험 기준은 기관 통지로 고정.",
+            "source_contract": "payroll_evidence_v1",
+            "variable_allowance": 350000,
+            "week_attendance": [],
+            "weekly_holiday_included": true,
+            "weekly_hours": 40,
+            "withholding_percent": 100,
+            "work_records": [
+              {
+                "breaks": [],
+                "category": "additional",
+                "end": "2026-11-20 20:00",
+                "record_id": "WOOD-EX",
+                "revision": 1,
+                "start": "2026-11-20 18:00",
+                "status": "approved"
+              }
+            ],
+            "workplace_employee_count": 10
+          },
+          "payroll_id": "WOOD-NOV"
+        }
+      ],
+      "processing_policy": "당월 완료금의 확정 지급과 통상임금 제외를 구분한다. 완전 월급에 승인 추가근로를 계산하고 은행 실행 합계와 비교한다.",
+      "source_contract": "payroll_bank_reconciliation_v1",
+      "transfers": [
+        {
+          "amount": 350000,
+          "date": "2026-11-27",
+          "employee_id": "WOOD-3",
+          "payroll_id": "WOOD-NOV",
+          "status": "executed",
+          "transfer_id": "WOOD-DONE"
+        },
+        {
+          "amount": 2600000,
+          "date": "2026-11-27",
+          "employee_id": "WOOD-3",
+          "payroll_id": "WOOD-NOV",
+          "status": "executed",
+          "transfer_id": "WOOD-REG"
+        }
+      ]
+    },
+    "output": {
+      "accepted_transfer_ids": [
+        "WOOD-DONE",
+        "WOOD-REG"
+      ],
+      "cash_by_payroll": [
+        {
+          "paid": 2950000,
+          "payroll_id": "WOOD-NOV"
+        }
+      ],
+      "deduplicated_transfer_ids": [],
+      "excluded_transfer_ids": [],
+      "payroll_derivations": [
+        {
+          "payroll_id": "WOOD-NOV",
+          "trace": [
+            {
+              "inputs": {
+                "holiday_dates": [],
+                "meal_service": "none",
+                "paid_holiday_records": [],
+                "payment_records": [
+                  {
+                    "date": "2026-11-27",
+                    "revision": 1,
+                    "status": "executed"
+                  }
+                ],
+                "regular_schedule": {
+                  "minutes_per_day": 480,
+                  "unpaid_absences": [],
+                  "working_days": 21
+                },
+                "source_contract": "payroll_evidence_v1",
+                "week_attendance": [],
+                "work_records": [
+                  {
+                    "breaks": [],
+                    "category": "additional",
+                    "end": "2026-11-20 20:00",
+                    "record_id": "WOOD-EX",
+                    "revision": 1,
+                    "start": "2026-11-20 18:00",
+                    "status": "approved"
+                  }
+                ]
+              },
+              "output": {
+                "employer_provides_meals": false,
+                "holiday_shifts": [],
+                "night_minutes": 0,
+                "overtime_minutes": 120,
+                "paid_holiday_minutes": 0,
+                "payment_date": "2026-11-27",
+                "qualifying_weeks": 0,
+                "regular_minutes": 10080
+              },
+              "rule_id": "B.EVIDENCE_RECONCILIATION"
+            },
+            {
+              "inputs": {
+                "base_salary": 2700000,
+                "fixed_allowance": 100000,
+                "hourly_rate": 0,
+                "meal_allowance": 200000,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "monthly",
+                "regular_minutes": 10080
+              },
+              "output": {
+                "hourly_exact_denominator": 209,
+                "hourly_exact_numerator": 3000000,
+                "ordinary_monthly_wage": 3000000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "paid_holiday_minutes": 0,
+                "pay_basis": "monthly"
+              },
+              "output": 0,
+              "rule_id": "B.PAID_HOLIDAY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 120,
+                "premium_applies": true
+              },
+              "output": 43063,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 40
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 200000
+              },
+              "output": 200000,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 2700000,
+                "fixed_allowance": 100000,
+                "holiday_pay": 0,
+                "meal_allowance": 200000,
+                "night_pay": 0,
+                "overtime_pay": 43063,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 350000,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 3393063,
+                "taxable_pay": 3193063
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-11",
+                "month": 11,
+                "notified_income": 2800000
+              },
+              "output": {
+                "national_pension": 133000,
+                "pension_base_income": 2800000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 2800000
+              },
+              "output": 100660,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 100660,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 13220,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 2800000
+              },
+              "output": 25200,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 2,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  3180000,
+                  3200000
+                ],
+                "taxable_pay": 3193063
+              },
+              "output": 72250,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 0,
+                "payment_date": "2026-11-27"
+              },
+              "output": 0,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 72250,
+                "child_credit": 0,
+                "eligible_children": 0,
+                "family_count": 2,
+                "payment_date": "2026-11-27",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  3180000,
+                  3200000
+                ],
+                "table_tax_before_children_floor_won": 72250,
+                "taxable_pay": 3193063,
+                "withholding_percent": 100
+              },
+              "output": 72250,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 72250,
+                "rate": "0.1"
+              },
+              "output": 7220,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 351550,
+                "gross_pay": 3393063
+              },
+              "output": 3041513,
+              "rule_id": "B.NET"
+            }
+          ]
+        }
+      ],
+      "settlement": {
+        "balance_total": 91513,
+        "deductions_total": 351550,
+        "employee_settlements": [
+          {
+            "balance": 91513,
+            "effective_payment_date": "2026-11-27",
+            "employee_id": "WOOD-3",
+            "gross_pay": 3393063,
+            "insurance_assessment_month": "2026-11",
+            "net_pay": 3041513,
+            "paid": 2950000,
+            "payroll_id": "WOOD-NOV",
+            "total_deductions": 351550
+          }
+        ],
+        "gross_total": 3393063,
+        "net_total": 3041513,
+        "paid_total": 2950000,
+        "payroll_calculations": [
+          {
+            "calculation": {
+              "base_pay": 2700000,
+              "effective_payment_date": "2026-11-27",
+              "employment_insurance": 25200,
+              "fixed_allowance": 100000,
+              "gross_pay": 3393063,
+              "health_insurance": 100660,
+              "holiday_pay": 0,
+              "income_tax": 72250,
+              "local_income_tax": 7220,
+              "long_term_care": 13220,
+              "meal_allowance": 200000,
+              "national_pension": 133000,
+              "net_pay": 3041513,
+              "night_pay": 0,
+              "non_taxable_pay": 200000,
+              "ordinary_hourly_wage_floor": 14354,
+              "ordinary_monthly_wage": 3000000,
+              "overtime_pay": 43063,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 2800000,
+              "taxable_pay": 3193063,
+              "total_deductions": 351550,
+              "variable_allowance": 350000,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "WOOD-3",
+            "payroll_id": "WOOD-NOV"
+          }
+        ]
+      }
+    },
+    "rule_id": "B_PAYROLL_BANK_RECONCILIATION"
+  }
+]

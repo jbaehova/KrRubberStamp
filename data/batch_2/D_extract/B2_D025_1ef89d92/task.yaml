@@ -1,0 +1,60 @@
+task_id: B2_D025_1ef89d92
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 보호문 실제 인수 대금과 선지급을 대조하세요. 인수 대금보다 지급액이 크면 업체 잔액의 음수를 그대로 보고합니다. answer.json에는
+  vendor_balances와 balance_total을 작성하세요.
+input_files:
+- path: inputs/01_보호문계약.pdf
+  format: pdf
+- path: inputs/02_보호문입고.xlsx
+  format: xlsx
+- path: inputs/03_보호문선지급.hwpx
+  format: hwpx
+- path: inputs/04_선지급대조.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - vendor_balances
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-5d9b428d-c433-52a6-b5aa-00d83769b8c9
+scenario_seed: 2231706867801819373
+scenario_hash: 2a9ceeb93b262ab5188c0cebea5d06401183126071d33419a3cb2aeb75d2e78c
+authorship:
+  method: individually_written
+  case_id: D025
+  case_sha256: 1ef89d927a2088ed226f0e497f6bc1c47f266b23ccd71ed65874d72b36fd9e3e
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances
+- balance_total

@@ -1,0 +1,373 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "출장직원식사",
+          "date": "2026-05-12",
+          "description": "고객 건물 작업 중 소속 직원들만 실제 식사",
+          "document_ids": [
+            "구현금",
+            "대체현금",
+            "식사종이"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상고객센터 작업 건물",
+            "organization": "가상고객센터"
+          },
+          "operation_id": "출장점검",
+          "participants": [
+            {
+              "name": "가상직원딸",
+              "organization": "가상산딸기점검",
+              "role": "employee"
+            },
+            {
+              "name": "가상직원산",
+              "organization": "가상산딸기점검",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "현장식사"
+        }
+      ],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-05-13",
+          "document_id": "구현금",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-05-13",
+          "document_id": "대체현금",
+          "replaces_document_id": "구현금",
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-05-12",
+          "document_id": "식사종이",
+          "replaces_document_id": null,
+          "state": "valid"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 165000,
+          "date": "2026-05-12",
+          "document_id": "구현금",
+          "document_type": "cash_receipt",
+          "includes_vat": true,
+          "payment_id": "식사현금",
+          "stated_vat": null,
+          "transaction_id": "현장식사",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 165000,
+          "date": "2026-05-12",
+          "document_id": "대체현금",
+          "document_type": "cash_receipt",
+          "includes_vat": true,
+          "payment_id": "식사현금",
+          "stated_vat": 15000,
+          "transaction_id": "현장식사",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 165000,
+          "date": "2026-05-12",
+          "document_id": "식사종이",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "식사현금",
+          "stated_vat": null,
+          "transaction_id": "현장식사",
+          "vat_separately_stated": false
+        }
+      ],
+      "processing_date": "2026-07-15",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "구현금"
+      ],
+      "replacement_relations": [
+        {
+          "revoked_document_id": "구현금",
+          "valid_document_id": "대체현금"
+        }
+      ],
+      "selected_document_ids": [
+        "대체현금",
+        "식사종이"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "출장직원식사",
+          "date": "2026-05-12",
+          "description": "고객 건물 작업 중 소속 직원들만 실제 식사",
+          "document_ids": [
+            "대체현금",
+            "식사종이"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상고객센터 작업 건물",
+            "organization": "가상고객센터"
+          },
+          "operation_id": "출장점검",
+          "participants": [
+            {
+              "name": "가상직원딸",
+              "organization": "가상산딸기점검",
+              "role": "employee"
+            },
+            {
+              "name": "가상직원산",
+              "organization": "가상산딸기점검",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "현장식사"
+        }
+      ],
+      "business_name": "가상산딸기점검",
+      "evidence_documents": [
+        {
+          "amount": 165000,
+          "date": "2026-05-12",
+          "document_id": "대체현금",
+          "document_type": "cash_receipt",
+          "includes_vat": true,
+          "payment_id": "식사현금",
+          "stated_vat": 15000,
+          "transaction_id": "현장식사",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 165000,
+          "date": "2026-05-12",
+          "document_id": "식사종이",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "식사현금",
+          "stated_vat": null,
+          "transaction_id": "현장식사",
+          "vat_separately_stated": false
+        }
+      ],
+      "operations": [
+        {
+          "description": "국내 기업 장비 과세 점검",
+          "operation_id": "출장점검",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 165000,
+          "date": "2026-05-12",
+          "includes_vat": true,
+          "method": "cash",
+          "payment_id": "식사현금",
+          "transaction_id": "현장식사"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "출장직원식사",
+          "amount": 165000,
+          "counterparty_consumer": false,
+          "date": "2026-05-12",
+          "description": "출장 작업팀 실제 직원 식사",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "현장식사",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "대체현금",
+          "식사종이"
+        ],
+        "documented_input_vat": 15000,
+        "eligible_input_document_ids": [
+          "대체현금"
+        ],
+        "gross": 165000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 165000,
+        "paid_gross": 165000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 150000,
+        "transaction_id": "현장식사",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 15000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "대체현금",
+        "식사종이"
+      ],
+      "evidence": [
+        "cash_receipt",
+        "receipt"
+      ],
+      "transaction_id": "현장식사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-12",
+      "transaction_id": "현장식사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 165000,
+      "includes_vat": true,
+      "transaction_id": "현장식사"
+    },
+    "output": {
+      "gross": 165000,
+      "supply_base": 150000,
+      "vat": 15000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 15000,
+      "evidence": [
+        "cash_receipt",
+        "receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "현장식사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 15000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 230000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -15000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -15000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -15000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 15000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 15000,
+      "input_vat": 15000,
+      "net_vat": -15000,
+      "noncreditable_vat": 0,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 15000,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,45 @@
+task_id: B2_A075_13c21c8a
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상진서의 자녀 명의 임차계약을 인적관계 명부에 연결하세요. 자녀 나이로 기본공제와 월세 명의 요건을 판단하고 자녀 학부 수업료의
+  별도 요건을 검토하여 두 공제액을 제출합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_계약.pdf
+  format: pdf
+- path: inputs/03_가족.hwpx
+  format: hwpx
+- path: inputs/04_학부.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    rent_credit:
+      type: integer
+    education_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - eligible_dependents
+  - rent_credit
+  - education_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-bbfdb4b5-f3bc-5fa3-b583-4d3418efb39c
+scenario_seed: 1423731813201265970
+scenario_hash: 4a6766a050083c197bb03cc3a825de0020d8531c38a229cc8f30ff956159f6a9
+authorship:
+  method: individually_written
+  case_id: A075
+  case_sha256: 13c21c8a7548c5323a00add1e04bba980e6b5922739936a7bf6ef0c483b91bfd
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- eligible_dependents
+- rent_credit
+- education_credit
+- final_national_tax

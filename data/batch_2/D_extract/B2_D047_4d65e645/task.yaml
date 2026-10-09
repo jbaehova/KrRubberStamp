@@ -1,0 +1,130 @@
+task_id: B2_D047_4d65e645
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 차단판 조달의 실제 재고와 업체 잔액을 정리하세요. quote의 물량은 재고에서 제외합니다. 실제 주문은 아직 미인수여도 실행
+  계약금을 유지하고 다른 주문의 무상 부속은 실제 재고에 넣습니다. answer.json에는 item_quantities와 vendor_balances와
+  line_settlements를 작성하세요.
+input_files:
+- path: inputs/01_차단판제안.pdf
+  format: pdf
+- path: inputs/02_대기주문표지.hwpx
+  format: hwpx
+- path: inputs/03_대기주문가격.xlsx
+  format: xlsx
+- path: inputs/04_조립주문표지.pdf
+  format: pdf
+- path: inputs/05_조립가격.xlsx
+  format: xlsx
+- path: inputs/06_받침인수.hwpx
+  format: hwpx
+- path: inputs/07_안전핀인수.pdf
+  format: pdf
+- path: inputs/08_차단판선지급.xlsx
+  format: xlsx
+- path: inputs/09_차단마감.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - item_quantities
+  - vendor_balances
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-e7302cb5-d2d9-5a3a-99ed-06879a294262
+scenario_seed: 5577116897625840285
+scenario_hash: d6ffead87596dcfe74af584696d23690cbe6f02f655bd6c3bb5c6db89a806840
+authorship:
+  method: individually_written
+  case_id: D047
+  case_sha256: 4d65e64501d11a9d50271fdd006b2baa22e2351aac1dac2ff5070ca083416cd5
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- item_quantities
+- vendor_balances
+- line_settlements

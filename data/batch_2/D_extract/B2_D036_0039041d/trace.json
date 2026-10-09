@@ -1,0 +1,165 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-09-15",
+      "events": [
+        {
+          "date": "2026-09-05",
+          "event_id": "PULLEY-OLD-IN",
+          "kind": "received",
+          "line_id": "P",
+          "order_id": "PULLEY-OLD",
+          "units": 2
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-09-08",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "구동풀리P2",
+              "line_id": "P",
+              "ordered_packages": 2,
+              "package_price": 110000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "PULLEY-NEW",
+          "vendor": "가상풀리기구"
+        },
+        {
+          "date": "2026-09-01",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "구동풀리P1",
+              "line_id": "P",
+              "ordered_packages": 1,
+              "package_price": 90000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "PULLEY-OLD",
+          "vendor": "가상풀리기구"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 30000,
+          "date": "2026-09-10",
+          "order_id": "PULLEY-NEW",
+          "payment_id": "PULLEY-NEW-DEP",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "가상 업체 거래이다. 인수는 주문 및 행별로 유지하고 실행 지급은 주문의 업체 계정으로 합친다. 마감까지 포장가격의 순인수 비율을 마지막에 버리고 별도 세액은 10%를 버린다. 업체명은 NFKC, 공백과 법인 표기 제거 및 소문자로 정리한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "PULLEY-OLD-IN"
+      ],
+      "accepted_payment_ids": [
+        "PULLEY-NEW-DEP"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "PULLEY-OLD-IN",
+          "net_units_after_event": 2
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 0,
+          "line_id": "P",
+          "order_id": "PULLEY-NEW",
+          "package_price_times_net_units": 0,
+          "price_includes_vat": false,
+          "supply": 0,
+          "total": 0,
+          "units_per_package": 2,
+          "vat": 0
+        },
+        {
+          "amount_after_floor": 90000,
+          "line_id": "P",
+          "order_id": "PULLEY-OLD",
+          "package_price_times_net_units": 180000,
+          "price_includes_vat": false,
+          "supply": 90000,
+          "total": 99000,
+          "units_per_package": 2,
+          "vat": 9000
+        }
+      ],
+      "settlement": {
+        "balance_total": 69000,
+        "grand_total": 99000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "구동풀리p1",
+            "net_units": 2
+          },
+          {
+            "base_unit": "개",
+            "item": "구동풀리p2",
+            "net_units": 0
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "구동풀리p2",
+            "line_id": "P",
+            "net_units": 0,
+            "order_id": "PULLEY-NEW",
+            "ordered_units": 4,
+            "outstanding_units": 4,
+            "received_units": 0,
+            "returned_units": 0,
+            "supply": 0,
+            "total": 0,
+            "vat": 0
+          },
+          {
+            "base_unit": "개",
+            "item": "구동풀리p1",
+            "line_id": "P",
+            "net_units": 2,
+            "order_id": "PULLEY-OLD",
+            "ordered_units": 2,
+            "outstanding_units": 0,
+            "received_units": 2,
+            "returned_units": 0,
+            "supply": 90000,
+            "total": 99000,
+            "vat": 9000
+          }
+        ],
+        "payment_total": 30000,
+        "vendor_balances": [
+          {
+            "balance": 69000,
+            "paid": 30000,
+            "supply": 90000,
+            "total": 99000,
+            "vat": 9000,
+            "vendor": "가상풀리기구"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

@@ -1,0 +1,693 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "미래설비인수",
+          "date": "2026-07-04",
+          "description": "6월 발주했지만 실제 7월 전량 인수한 추가 설비",
+          "document_ids": [
+            "미래부분카드",
+            "미래전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상블루베리패드 제작실",
+            "organization": "가상블루베리패드"
+          },
+          "operation_id": "패드제작소매",
+          "participants": [
+            {
+              "name": "가상직원블",
+              "organization": "가상블루베리패드",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "미래설비"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "현재설비인수",
+          "date": "2026-05-21",
+          "description": "직원이 현재 제작 설비를 전량 인수",
+          "document_ids": [
+            "설비구본",
+            "설비대체",
+            "설비종이"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상블루베리패드 제작실",
+            "organization": "가상블루베리패드"
+          },
+          "operation_id": "패드제작소매",
+          "participants": [
+            {
+              "name": "가상직원블",
+              "organization": "가상블루베리패드",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "현재설비"
+        }
+      ],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-07-04",
+          "document_id": "미래부분카드",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-07-04",
+          "document_id": "미래전자",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-05-22",
+          "document_id": "설비구본",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-05-22",
+          "document_id": "설비대체",
+          "replaces_document_id": "설비구본",
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-05-21",
+          "document_id": "설비종이",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-06-02",
+          "document_id": "카드발급",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-06-01",
+          "document_id": "현금발급",
+          "replaces_document_id": null,
+          "state": "valid"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 220000,
+          "date": "2026-07-04",
+          "document_id": "미래부분카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "미래설비부분",
+          "stated_vat": 20000,
+          "transaction_id": "미래설비",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 600000,
+          "date": "2026-07-04",
+          "document_id": "미래전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 60000,
+          "transaction_id": "미래설비",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 440000,
+          "date": "2026-05-21",
+          "document_id": "설비구본",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "현재설비완납",
+          "stated_vat": null,
+          "transaction_id": "현재설비",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 440000,
+          "date": "2026-05-21",
+          "document_id": "설비대체",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "현재설비완납",
+          "stated_vat": 40000,
+          "transaction_id": "현재설비",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 440000,
+          "date": "2026-05-21",
+          "document_id": "설비종이",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "현재설비완납",
+          "stated_vat": null,
+          "transaction_id": "현재설비",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 330000,
+          "date": "2026-06-01",
+          "document_id": "카드발급",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "판매카드",
+          "stated_vat": null,
+          "transaction_id": "패드판매",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 220000,
+          "date": "2026-06-01",
+          "document_id": "현금발급",
+          "document_type": "cash_receipt",
+          "includes_vat": true,
+          "payment_id": "판매현금",
+          "stated_vat": null,
+          "transaction_id": "패드판매",
+          "vat_separately_stated": false
+        }
+      ],
+      "processing_date": "2026-07-18",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "설비구본",
+        "카드발급"
+      ],
+      "replacement_relations": [
+        {
+          "revoked_document_id": "설비구본",
+          "valid_document_id": "설비대체"
+        }
+      ],
+      "selected_document_ids": [
+        "미래부분카드",
+        "미래전자",
+        "설비대체",
+        "설비종이",
+        "현금발급"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "미래설비인수",
+          "date": "2026-07-04",
+          "description": "6월 발주했지만 실제 7월 전량 인수한 추가 설비",
+          "document_ids": [
+            "미래부분카드",
+            "미래전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상블루베리패드 제작실",
+            "organization": "가상블루베리패드"
+          },
+          "operation_id": "패드제작소매",
+          "participants": [
+            {
+              "name": "가상직원블",
+              "organization": "가상블루베리패드",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "미래설비"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "현재설비인수",
+          "date": "2026-05-21",
+          "description": "직원이 현재 제작 설비를 전량 인수",
+          "document_ids": [
+            "설비대체",
+            "설비종이"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상블루베리패드 제작실",
+            "organization": "가상블루베리패드"
+          },
+          "operation_id": "패드제작소매",
+          "participants": [
+            {
+              "name": "가상직원블",
+              "organization": "가상블루베리패드",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "현재설비"
+        }
+      ],
+      "business_name": "가상블루베리패드",
+      "evidence_documents": [
+        {
+          "amount": 220000,
+          "date": "2026-07-04",
+          "document_id": "미래부분카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "미래설비부분",
+          "stated_vat": 20000,
+          "transaction_id": "미래설비",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 600000,
+          "date": "2026-07-04",
+          "document_id": "미래전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 60000,
+          "transaction_id": "미래설비",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 440000,
+          "date": "2026-05-21",
+          "document_id": "설비대체",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "현재설비완납",
+          "stated_vat": 40000,
+          "transaction_id": "현재설비",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 440000,
+          "date": "2026-05-21",
+          "document_id": "설비종이",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "현재설비완납",
+          "stated_vat": null,
+          "transaction_id": "현재설비",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 220000,
+          "date": "2026-06-01",
+          "document_id": "현금발급",
+          "document_type": "cash_receipt",
+          "includes_vat": true,
+          "payment_id": "판매현금",
+          "stated_vat": null,
+          "transaction_id": "패드판매",
+          "vat_separately_stated": false
+        }
+      ],
+      "operations": [
+        {
+          "description": "국내 과세 패드 제작 소매",
+          "operation_id": "패드제작소매",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 220000,
+          "date": "2026-07-04",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "미래설비부분",
+          "transaction_id": "미래설비"
+        },
+        {
+          "amount": 330000,
+          "date": "2026-06-01",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "판매카드",
+          "transaction_id": "패드판매"
+        },
+        {
+          "amount": 220000,
+          "date": "2026-06-01",
+          "includes_vat": true,
+          "method": "cash",
+          "payment_id": "판매현금",
+          "transaction_id": "패드판매"
+        },
+        {
+          "amount": 440000,
+          "date": "2026-05-21",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "현재설비완납",
+          "transaction_id": "현재설비"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "미래설비인수",
+          "amount": 660000,
+          "counterparty_consumer": false,
+          "date": "2026-07-04",
+          "description": "실제 7월 추가 설비 전량",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "미래설비",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        {
+          "amount": 1100000,
+          "counterparty_consumer": true,
+          "date": "2026-06-01",
+          "description": "소비자 패드 전체 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "패드판매"
+        },
+        {
+          "activity_id": "현재설비인수",
+          "amount": 440000,
+          "counterparty_consumer": false,
+          "date": "2026-05-21",
+          "description": "현재 제작 설비 전량",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "현재설비",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "미래부분카드",
+          "미래전자"
+        ],
+        "documented_input_vat": 60000,
+        "eligible_input_document_ids": [
+          "미래전자"
+        ],
+        "gross": 660000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 220000,
+        "paid_gross": 220000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 600000,
+        "transaction_id": "미래설비",
+        "unissued_receipt_gross": 440000,
+        "unpaid_gross": 440000,
+        "vat": 60000
+      },
+      {
+        "document_ids": [
+          "현금발급"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 1100000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 220000,
+        "paid_gross": 550000,
+        "supply_base": 1000000,
+        "transaction_id": "패드판매",
+        "unissued_receipt_gross": 880000,
+        "unpaid_gross": 550000,
+        "vat": 100000
+      },
+      {
+        "document_ids": [
+          "설비대체",
+          "설비종이"
+        ],
+        "documented_input_vat": 40000,
+        "eligible_input_document_ids": [
+          "설비대체"
+        ],
+        "gross": 440000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 440000,
+        "paid_gross": 440000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 400000,
+        "transaction_id": "현재설비",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 40000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "미래부분카드",
+        "미래전자"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "미래설비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "현금발급"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "패드판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "설비대체",
+        "설비종이"
+      ],
+      "evidence": [
+        "card_receipt",
+        "receipt"
+      ],
+      "transaction_id": "현재설비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-07-04",
+      "transaction_id": "미래설비"
+    },
+    "output": false,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-01",
+      "transaction_id": "패드판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "패드판매"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1000000
+    },
+    "output": 100000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 220000,
+      "transaction_id": "패드판매"
+    },
+    "output": {
+      "eligible_gross": 220000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-21",
+      "transaction_id": "현재설비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 440000,
+      "includes_vat": true,
+      "transaction_id": "현재설비"
+    },
+    "output": {
+      "gross": 440000,
+      "supply_base": 400000,
+      "vat": 40000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 40000,
+      "evidence": [
+        "card_receipt",
+        "receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "현재설비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 40000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 164000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 220000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 2860
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 2860,
+      "liability_before_credit": 60000
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 500000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 57140,
+      "prepaid_assessed_vat": 500000
+    },
+    "output": -442860,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 40000,
+      "output_vat": 100000,
+      "prepaid_vat": 500000,
+      "receipt_credit": 2860
+    },
+    "output": {
+      "deductible_input_vat": 40000,
+      "input_vat": 40000,
+      "net_vat": -442860,
+      "noncreditable_vat": 0,
+      "output_vat": 100000,
+      "payable_vat": 0,
+      "prepaid_vat": 500000,
+      "receipt_credit": 2860,
+      "refund_vat": 442860,
+      "tax_base": 1000000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

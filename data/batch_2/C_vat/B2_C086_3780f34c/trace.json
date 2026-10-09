@@ -1,0 +1,458 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "상담식사",
+          "date": "2026-06-11",
+          "description": "납품 상담 중 직원과 실제 고객 담당자의 식사",
+          "document_ids": [
+            "식대카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상산식당"
+          },
+          "operation_id": "스티커소매",
+          "participants": [
+            {
+              "name": "가상고객유",
+              "organization": "가상고객문구",
+              "role": "customer"
+            },
+            {
+              "name": "가상직원수",
+              "organization": "가상산수유스티커",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "상담식대"
+        }
+      ],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-06-11",
+          "document_id": "식대카드",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-06-12",
+          "document_id": "판매구본",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-06-12",
+          "document_id": "판매대체",
+          "replaces_document_id": "판매구본",
+          "state": "valid"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 1056000,
+          "date": "2026-06-11",
+          "document_id": "식대카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "식대지급",
+          "stated_vat": 96000,
+          "transaction_id": "상담식대",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 660000,
+          "date": "2026-06-11",
+          "document_id": "판매구본",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "스티커부분카드",
+          "stated_vat": null,
+          "transaction_id": "스티커판매",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 440000,
+          "date": "2026-06-11",
+          "document_id": "판매대체",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "스티커부분카드",
+          "stated_vat": null,
+          "transaction_id": "스티커판매",
+          "vat_separately_stated": false
+        }
+      ],
+      "processing_date": "2026-07-15",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "판매구본"
+      ],
+      "replacement_relations": [
+        {
+          "revoked_document_id": "판매구본",
+          "valid_document_id": "판매대체"
+        }
+      ],
+      "selected_document_ids": [
+        "식대카드",
+        "판매대체"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "상담식사",
+          "date": "2026-06-11",
+          "description": "납품 상담 중 직원과 실제 고객 담당자의 식사",
+          "document_ids": [
+            "식대카드"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상산식당"
+          },
+          "operation_id": "스티커소매",
+          "participants": [
+            {
+              "name": "가상고객유",
+              "organization": "가상고객문구",
+              "role": "customer"
+            },
+            {
+              "name": "가상직원수",
+              "organization": "가상산수유스티커",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "상담식대"
+        }
+      ],
+      "business_name": "가상산수유스티커",
+      "evidence_documents": [
+        {
+          "amount": 1056000,
+          "date": "2026-06-11",
+          "document_id": "식대카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "식대지급",
+          "stated_vat": 96000,
+          "transaction_id": "상담식대",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 440000,
+          "date": "2026-06-11",
+          "document_id": "판매대체",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "스티커부분카드",
+          "stated_vat": null,
+          "transaction_id": "스티커판매",
+          "vat_separately_stated": false
+        }
+      ],
+      "operations": [
+        {
+          "description": "국내 과세 스티커 제작 소매",
+          "operation_id": "스티커소매",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 440000,
+          "date": "2026-06-11",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "스티커부분카드",
+          "transaction_id": "스티커판매"
+        },
+        {
+          "amount": 1056000,
+          "date": "2026-06-11",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "식대지급",
+          "transaction_id": "상담식대"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "상담식사",
+          "amount": 1056000,
+          "counterparty_consumer": false,
+          "date": "2026-06-11",
+          "description": "고객 담당자 참석 상담 식사",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "상담식대",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        {
+          "amount": 1100000,
+          "counterparty_consumer": true,
+          "date": "2026-06-11",
+          "description": "소비자 스티커 전체 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "스티커판매"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "식대카드"
+        ],
+        "documented_input_vat": 96000,
+        "eligible_input_document_ids": [
+          "식대카드"
+        ],
+        "gross": 1056000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 1056000,
+        "paid_gross": 1056000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "hospitality",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 960000,
+        "transaction_id": "상담식대",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 96000
+      },
+      {
+        "document_ids": [
+          "판매대체"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 1100000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 440000,
+        "paid_gross": 440000,
+        "supply_base": 1000000,
+        "transaction_id": "스티커판매",
+        "unissued_receipt_gross": 660000,
+        "unpaid_gross": 660000,
+        "vat": 100000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "식대카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "상담식대"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "판매대체"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "스티커판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-11",
+      "transaction_id": "상담식대"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1056000,
+      "includes_vat": true,
+      "transaction_id": "상담식대"
+    },
+    "output": {
+      "gross": 1056000,
+      "supply_base": 960000,
+      "vat": 96000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 96000,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "상담식대",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 96000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-11",
+      "transaction_id": "스티커판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "스티커판매"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1000000
+    },
+    "output": 100000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 440000,
+      "transaction_id": "스티커판매"
+    },
+    "output": {
+      "eligible_gross": 440000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 118000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 440000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 5720,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 5720
+    },
+    "output": 5720,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 5720,
+      "liability_before_credit": 100000
+    },
+    "output": 5720,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 94280,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 94280,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 100000,
+      "prepaid_vat": 0,
+      "receipt_credit": 5720
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 96000,
+      "net_vat": 94280,
+      "noncreditable_vat": 96000,
+      "output_vat": 100000,
+      "payable_vat": 94280,
+      "prepaid_vat": 0,
+      "receipt_credit": 5720,
+      "refund_vat": 0,
+      "tax_base": 1000000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

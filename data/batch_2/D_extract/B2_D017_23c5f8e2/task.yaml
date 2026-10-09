@@ -1,0 +1,92 @@
+task_id: B2_D017_23c5f8e2
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 안내 휠의 이번 달 순인수 수량과 행 정산을 마감일 기준으로 작성하세요. 마감 이후 반품을 이번 달에 소급하지 않습니다. answer.json에는
+  item_quantities와 line_settlements를 품목 및 주문순으로 작성하세요.
+input_files:
+- path: inputs/01_안내휠발주.pdf
+  format: pdf
+- path: inputs/02_휠입고.xlsx
+  format: xlsx
+- path: inputs/03_휠반품.hwpx
+  format: hwpx
+- path: inputs/04_휠마감.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - item_quantities
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-a1c0e74e-7af7-500c-95f1-785130536515
+scenario_seed: 2577740011990167415
+scenario_hash: 32b760157f9e0e9f8a80dd8c281d2cc687fcdcc316a2fe7470330c6b63584bf6
+authorship:
+  method: individually_written
+  case_id: D017
+  case_sha256: 23c5f8e229fc2f77a0210a7c13ff8bd366f88972e22e20a827673fc5d7459622
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- item_quantities
+- line_settlements

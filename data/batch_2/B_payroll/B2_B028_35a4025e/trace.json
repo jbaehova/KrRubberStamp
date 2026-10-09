@@ -1,0 +1,365 @@
+[
+  {
+    "inputs": {
+      "as_of_date": "2026-02-28",
+      "payrolls": [
+        {
+          "employee_id": "OPTIC-4",
+          "facts": {
+            "base_salary": 3400000,
+            "eligible_children": 2,
+            "employment_due": true,
+            "employment_notified_income": 3500000,
+            "family_count": 4,
+            "fixed_allowance": 100000,
+            "health_due": true,
+            "health_notified_income": 3500000,
+            "holiday_dates": [],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-02",
+            "meal_allowance": 200000,
+            "meal_service": "none",
+            "monthly_divisor_hours": 209,
+            "pay_basis": "monthly",
+            "payment_records": [
+              {
+                "date": "2026-02-27",
+                "revision": 1,
+                "status": "executed"
+              },
+              {
+                "date": "2026-03-03",
+                "revision": 2,
+                "status": "approved"
+              }
+            ],
+            "pension_due": true,
+            "pension_notified_income": 3500000,
+            "scope": "가상이안의 완전2월 월급이다. 소정 주휴 포함. 추가근로 없음. 가족4명 및 적격 자녀2명 확인. 기관 부과월은2월로 확정됐다.3월 계획은 실제2월 지급 뒤 미집행으로 남은 이력이다.",
+            "source_contract": "payroll_evidence_v1",
+            "variable_allowance": 0,
+            "week_attendance": [],
+            "weekly_holiday_included": true,
+            "weekly_hours": 40,
+            "withholding_percent": 100,
+            "work_records": [],
+            "workplace_employee_count": 12
+          },
+          "payroll_id": "OPTIC-FEB"
+        }
+      ],
+      "processing_policy": "급여는 실제 실행 지급일을 승인 계획보다 우선한다. 그 지급일 세액을 계산한 뒤 같은 날 은행 실행을 모두 대조한다.",
+      "source_contract": "payroll_bank_reconciliation_v1",
+      "transfers": [
+        {
+          "amount": 2800000,
+          "date": "2026-02-27",
+          "employee_id": "OPTIC-4",
+          "payroll_id": "OPTIC-FEB",
+          "status": "executed",
+          "transfer_id": "OPTIC-ONE"
+        },
+        {
+          "amount": 300000,
+          "date": "2026-02-27",
+          "employee_id": "OPTIC-4",
+          "payroll_id": "OPTIC-FEB",
+          "status": "executed",
+          "transfer_id": "OPTIC-TWO"
+        }
+      ]
+    },
+    "output": {
+      "accepted_transfer_ids": [
+        "OPTIC-ONE",
+        "OPTIC-TWO"
+      ],
+      "cash_by_payroll": [
+        {
+          "paid": 3100000,
+          "payroll_id": "OPTIC-FEB"
+        }
+      ],
+      "deduplicated_transfer_ids": [],
+      "excluded_transfer_ids": [],
+      "payroll_derivations": [
+        {
+          "payroll_id": "OPTIC-FEB",
+          "trace": [
+            {
+              "inputs": {
+                "holiday_dates": [],
+                "meal_service": "none",
+                "paid_holiday_records": [],
+                "payment_records": [
+                  {
+                    "date": "2026-02-27",
+                    "revision": 1,
+                    "status": "executed"
+                  },
+                  {
+                    "date": "2026-03-03",
+                    "revision": 2,
+                    "status": "approved"
+                  }
+                ],
+                "regular_schedule": null,
+                "source_contract": "payroll_evidence_v1",
+                "week_attendance": [],
+                "work_records": []
+              },
+              "output": {
+                "employer_provides_meals": false,
+                "holiday_shifts": [],
+                "night_minutes": 0,
+                "overtime_minutes": 0,
+                "paid_holiday_minutes": 0,
+                "payment_date": "2026-02-27",
+                "qualifying_weeks": 0,
+                "regular_minutes": 0
+              },
+              "rule_id": "B.EVIDENCE_RECONCILIATION"
+            },
+            {
+              "inputs": {
+                "base_salary": 3400000,
+                "fixed_allowance": 100000,
+                "hourly_rate": 0,
+                "meal_allowance": 200000,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "monthly",
+                "regular_minutes": 0
+              },
+              "output": {
+                "hourly_exact_denominator": 209,
+                "hourly_exact_numerator": 3700000,
+                "ordinary_monthly_wage": 3700000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "paid_holiday_minutes": 0,
+                "pay_basis": "monthly"
+              },
+              "output": 0,
+              "rule_id": "B.PAID_HOLIDAY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 40
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 200000
+              },
+              "output": 200000,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 3400000,
+                "fixed_allowance": 100000,
+                "holiday_pay": 0,
+                "meal_allowance": 200000,
+                "night_pay": 0,
+                "overtime_pay": 0,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 3700000,
+                "taxable_pay": 3500000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-02",
+                "month": 2,
+                "notified_income": 3500000
+              },
+              "output": {
+                "national_pension": 166250,
+                "pension_base_income": 3500000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 3500000
+              },
+              "output": 125820,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 125820,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 16530,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 3500000
+              },
+              "output": 31500,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 4,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  3500000,
+                  3520000
+                ],
+                "taxable_pay": 3500000
+              },
+              "output": 49340,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 2,
+                "payment_date": "2026-02-27"
+              },
+              "output": 29160,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 20180,
+                "child_credit": 29160,
+                "eligible_children": 2,
+                "family_count": 4,
+                "payment_date": "2026-02-27",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  3500000,
+                  3520000
+                ],
+                "table_tax_before_children_floor_won": 49340,
+                "taxable_pay": 3500000,
+                "withholding_percent": 100
+              },
+              "output": 20180,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 20180,
+                "rate": "0.1"
+              },
+              "output": 2010,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 362290,
+                "gross_pay": 3700000
+              },
+              "output": 3337710,
+              "rule_id": "B.NET"
+            }
+          ]
+        }
+      ],
+      "settlement": {
+        "balance_total": 237710,
+        "deductions_total": 362290,
+        "employee_settlements": [
+          {
+            "balance": 237710,
+            "effective_payment_date": "2026-02-27",
+            "employee_id": "OPTIC-4",
+            "gross_pay": 3700000,
+            "insurance_assessment_month": "2026-02",
+            "net_pay": 3337710,
+            "paid": 3100000,
+            "payroll_id": "OPTIC-FEB",
+            "total_deductions": 362290
+          }
+        ],
+        "gross_total": 3700000,
+        "net_total": 3337710,
+        "paid_total": 3100000,
+        "payroll_calculations": [
+          {
+            "calculation": {
+              "base_pay": 3400000,
+              "effective_payment_date": "2026-02-27",
+              "employment_insurance": 31500,
+              "fixed_allowance": 100000,
+              "gross_pay": 3700000,
+              "health_insurance": 125820,
+              "holiday_pay": 0,
+              "income_tax": 20180,
+              "local_income_tax": 2010,
+              "long_term_care": 16530,
+              "meal_allowance": 200000,
+              "national_pension": 166250,
+              "net_pay": 3337710,
+              "night_pay": 0,
+              "non_taxable_pay": 200000,
+              "ordinary_hourly_wage_floor": 17703,
+              "ordinary_monthly_wage": 3700000,
+              "overtime_pay": 0,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 3500000,
+              "taxable_pay": 3500000,
+              "total_deductions": 362290,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "OPTIC-4",
+            "payroll_id": "OPTIC-FEB"
+          }
+        ]
+      }
+    },
+    "rule_id": "B_PAYROLL_BANK_RECONCILIATION"
+  }
+]

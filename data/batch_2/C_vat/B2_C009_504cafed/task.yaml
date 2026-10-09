@@ -1,0 +1,38 @@
+task_id: B2_C009_504cafed
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상음원편집이 독립 고객 두 명에게 각각 완성 음원을 전달했습니다. 첫 고객은 카드로 전액 결제했고 둘째는 절반만 현금영수증으로
+  결제했습니다. 같은 총액이라는 이유로 합치지 말고 매출세액(output_vat)과 발행세액공제(receipt_credit) 및 고유 거래 수(unique_transaction_count)를
+  answer.json에 작성해 주세요.
+input_files:
+- path: inputs/01_고객인도.pdf
+  format: pdf
+- path: inputs/02_수금발급.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - output_vat
+  - receipt_credit
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-16c8cf77-71d3-5496-8d3a-62d19ad00324
+scenario_seed: 5786193056106473320
+scenario_hash: cca32f3b0d39a48afa06a6291575b25942e465f0c33b33dfbd319f20b364fda8
+authorship:
+  method: individually_written
+  case_id: C009
+  case_sha256: 504cafed8f0ee7682b0301433fd91c4e9ae90aaa00e4891f5f01a52c2915b613
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- output_vat
+- receipt_credit
+- unique_transaction_count

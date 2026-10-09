@@ -1,0 +1,155 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-02-06",
+      "events": [
+        {
+          "date": "2026-02-04",
+          "event_id": "BALL-I-IN",
+          "kind": "received",
+          "line_id": "INITIAL",
+          "order_id": "BALL-TWO-LOTS",
+          "units": 8
+        },
+        {
+          "date": "2026-02-05",
+          "event_id": "BALL-S-IN",
+          "kind": "received",
+          "line_id": "SUPPLEMENT",
+          "order_id": "BALL-TWO-LOTS",
+          "units": 3
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-02-01",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "충격시험구",
+              "line_id": "INITIAL",
+              "ordered_packages": 2,
+              "package_price": 25000,
+              "price_includes_vat": false,
+              "units_per_package": 5
+            },
+            {
+              "base_unit": "개",
+              "item": "충격시험구",
+              "line_id": "SUPPLEMENT",
+              "ordered_packages": 1,
+              "package_price": 24000,
+              "price_includes_vat": false,
+              "units_per_package": 4
+            }
+          ],
+          "order_id": "BALL-TWO-LOTS",
+          "vendor": "가상시험구제작"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "업체는 가상이다. 입고를 주문 및 행번호로 연결하고 순인수량은 정규화 품명과 기초단위별로 합친다. 포장 대금은 순수량 비율을 곱한 뒤 버리고 별도 세액은 10%를 버린다. 마감일까지 실행 지급만 반영한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "BALL-I-IN",
+        "BALL-S-IN"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "BALL-I-IN",
+          "net_units_after_event": 8
+        },
+        {
+          "event_id": "BALL-S-IN",
+          "net_units_after_event": 3
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 40000,
+          "line_id": "INITIAL",
+          "order_id": "BALL-TWO-LOTS",
+          "package_price_times_net_units": 200000,
+          "price_includes_vat": false,
+          "supply": 40000,
+          "total": 44000,
+          "units_per_package": 5,
+          "vat": 4000
+        },
+        {
+          "amount_after_floor": 18000,
+          "line_id": "SUPPLEMENT",
+          "order_id": "BALL-TWO-LOTS",
+          "package_price_times_net_units": 72000,
+          "price_includes_vat": false,
+          "supply": 18000,
+          "total": 19800,
+          "units_per_package": 4,
+          "vat": 1800
+        }
+      ],
+      "settlement": {
+        "balance_total": 63800,
+        "grand_total": 63800,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "충격시험구",
+            "net_units": 11
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "충격시험구",
+            "line_id": "INITIAL",
+            "net_units": 8,
+            "order_id": "BALL-TWO-LOTS",
+            "ordered_units": 10,
+            "outstanding_units": 2,
+            "received_units": 8,
+            "returned_units": 0,
+            "supply": 40000,
+            "total": 44000,
+            "vat": 4000
+          },
+          {
+            "base_unit": "개",
+            "item": "충격시험구",
+            "line_id": "SUPPLEMENT",
+            "net_units": 3,
+            "order_id": "BALL-TWO-LOTS",
+            "ordered_units": 4,
+            "outstanding_units": 1,
+            "received_units": 3,
+            "returned_units": 0,
+            "supply": 18000,
+            "total": 19800,
+            "vat": 1800
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 63800,
+            "paid": 0,
+            "supply": 58000,
+            "total": 63800,
+            "vat": 5800,
+            "vendor": "가상시험구제작"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

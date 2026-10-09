@@ -1,0 +1,101 @@
+task_id: B2_D065_2ebfb0f6
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 보관 천 45m를 확보할 두 롤 견적을 비교합니다. quote_comparisons와 chosen_total 및 chosen_leftover_units를
+  작성해 상품 공급가액과 배송 공급가액을 나눠 기록하고 최종 구매비를 확인해 주세요.
+input_files:
+- path: inputs/01_길이요청.hwpx
+  format: hwpx
+- path: inputs/02_가공견적.xlsx
+  format: xlsx
+- path: inputs/03_배송견적.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_total:
+      type: integer
+    chosen_leftover_units:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_total
+  - chosen_leftover_units
+  additionalProperties: false
+canary: KrRubberStamp-canary-28c3b401-d3e8-5ac9-9b48-77efbaf66244
+scenario_seed: 3368605617757010089
+scenario_hash: ca6fdad9f92b18c055904a56ee40231fac758e461ccec1fe79c4cc671f2a9f4b
+authorship:
+  method: individually_written
+  case_id: D065
+  case_sha256: 2ebfb0f632cab8a9c3b4c24d8971b0b394ddc57a614902193d4ad1545b759818
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_total
+- chosen_leftover_units

@@ -1,0 +1,416 @@
+[
+  {
+    "inputs": {
+      "as_of_date": "2026-11-27",
+      "payrolls": [
+        {
+          "employee_id": "RECEIVE-7",
+          "facts": {
+            "base_salary": 2650000,
+            "eligible_children": 0,
+            "employment_due": true,
+            "employment_notified_income": 2800000,
+            "family_count": 2,
+            "fixed_allowance": 150000,
+            "health_due": true,
+            "health_notified_income": 2800000,
+            "holiday_dates": [
+              "2026-11-15"
+            ],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-11",
+            "meal_allowance": 200000,
+            "meal_service": "none",
+            "monthly_divisor_hours": 209,
+            "pay_basis": "monthly",
+            "payment_records": [
+              {
+                "date": "2026-11-27",
+                "revision": 1,
+                "status": "executed"
+              }
+            ],
+            "pension_due": true,
+            "pension_notified_income": 2800000,
+            "regular_schedule": {
+              "minutes_per_day": 480,
+              "unpaid_absences": [],
+              "working_days": 21
+            },
+            "scope": "가상율하의 완전 정상 월급. 소정 주휴 포함.11월15일 일요일은 약정 주휴일이다. 오전5시간 및 오후4시간 사이1시간은 근로 밖이므로 두 카드에 겹침 없음. 다른 추가근로 및 야간 없음. 월 소정 의무 정상 이행 확인.",
+            "source_contract": "payroll_evidence_v1",
+            "variable_allowance": 0,
+            "week_attendance": [],
+            "weekly_holiday_included": true,
+            "weekly_hours": 40,
+            "withholding_percent": 100,
+            "work_records": [
+              {
+                "breaks": [],
+                "category": "additional",
+                "end": "2026-11-15 13:00",
+                "record_id": "RECEIVE-AM",
+                "revision": 1,
+                "start": "2026-11-15 08:00",
+                "status": "approved"
+              },
+              {
+                "breaks": [],
+                "category": "additional",
+                "end": "2026-11-15 18:00",
+                "record_id": "RECEIVE-PM",
+                "revision": 1,
+                "start": "2026-11-15 14:00",
+                "status": "approved"
+              }
+            ],
+            "workplace_employee_count": 11
+          },
+          "payroll_id": "RECEIVE-NOV"
+        }
+      ],
+      "processing_policy": "휴일 가산은 근로 시작일별로 승인 카드 시간을 합하여 계산한다. 은행은 실행번호별로 합하고 완전 월 명세를 한 번만 공제한다.",
+      "source_contract": "payroll_bank_reconciliation_v1",
+      "transfers": [
+        {
+          "amount": 150000,
+          "date": "2026-11-27",
+          "employee_id": "RECEIVE-7",
+          "payroll_id": "RECEIVE-NOV",
+          "status": "executed",
+          "transfer_id": "RECEIVE-HOLIDAY"
+        },
+        {
+          "amount": 2500000,
+          "date": "2026-11-27",
+          "employee_id": "RECEIVE-7",
+          "payroll_id": "RECEIVE-NOV",
+          "status": "executed",
+          "transfer_id": "RECEIVE-MONTH"
+        }
+      ]
+    },
+    "output": {
+      "accepted_transfer_ids": [
+        "RECEIVE-HOLIDAY",
+        "RECEIVE-MONTH"
+      ],
+      "cash_by_payroll": [
+        {
+          "paid": 2650000,
+          "payroll_id": "RECEIVE-NOV"
+        }
+      ],
+      "deduplicated_transfer_ids": [],
+      "excluded_transfer_ids": [],
+      "payroll_derivations": [
+        {
+          "payroll_id": "RECEIVE-NOV",
+          "trace": [
+            {
+              "inputs": {
+                "holiday_dates": [
+                  "2026-11-15"
+                ],
+                "meal_service": "none",
+                "paid_holiday_records": [],
+                "payment_records": [
+                  {
+                    "date": "2026-11-27",
+                    "revision": 1,
+                    "status": "executed"
+                  }
+                ],
+                "regular_schedule": {
+                  "minutes_per_day": 480,
+                  "unpaid_absences": [],
+                  "working_days": 21
+                },
+                "source_contract": "payroll_evidence_v1",
+                "week_attendance": [],
+                "work_records": [
+                  {
+                    "breaks": [],
+                    "category": "additional",
+                    "end": "2026-11-15 13:00",
+                    "record_id": "RECEIVE-AM",
+                    "revision": 1,
+                    "start": "2026-11-15 08:00",
+                    "status": "approved"
+                  },
+                  {
+                    "breaks": [],
+                    "category": "additional",
+                    "end": "2026-11-15 18:00",
+                    "record_id": "RECEIVE-PM",
+                    "revision": 1,
+                    "start": "2026-11-15 14:00",
+                    "status": "approved"
+                  }
+                ]
+              },
+              "output": {
+                "employer_provides_meals": false,
+                "holiday_shifts": [
+                  {
+                    "holiday_night_minutes": 0,
+                    "minutes": 540
+                  }
+                ],
+                "night_minutes": 0,
+                "overtime_minutes": 0,
+                "paid_holiday_minutes": 0,
+                "payment_date": "2026-11-27",
+                "qualifying_weeks": 0,
+                "regular_minutes": 10080
+              },
+              "rule_id": "B.EVIDENCE_RECONCILIATION"
+            },
+            {
+              "inputs": {
+                "base_salary": 2650000,
+                "fixed_allowance": 150000,
+                "hourly_rate": 0,
+                "meal_allowance": 200000,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "monthly",
+                "regular_minutes": 10080
+              },
+              "output": {
+                "hourly_exact_denominator": 209,
+                "hourly_exact_numerator": 3000000,
+                "ordinary_monthly_wage": 3000000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "paid_holiday_minutes": 0,
+                "pay_basis": "monthly"
+              },
+              "output": 0,
+              "rule_id": "B.PAID_HOLIDAY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [
+                  {
+                    "holiday_night_minutes": 0,
+                    "minutes": 540
+                  }
+                ],
+                "premium_applies": true
+              },
+              "output": 200957,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 40
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 200000
+              },
+              "output": 200000,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 2650000,
+                "fixed_allowance": 150000,
+                "holiday_pay": 200957,
+                "meal_allowance": 200000,
+                "night_pay": 0,
+                "overtime_pay": 0,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 3200957,
+                "taxable_pay": 3000957
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-11",
+                "month": 11,
+                "notified_income": 2800000
+              },
+              "output": {
+                "national_pension": 133000,
+                "pension_base_income": 2800000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 2800000
+              },
+              "output": 100660,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 100660,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 13220,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 2800000
+              },
+              "output": 25200,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 2,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  3000000,
+                  3020000
+                ],
+                "taxable_pay": 3000957
+              },
+              "output": 56850,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 0,
+                "payment_date": "2026-11-27"
+              },
+              "output": 0,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 56850,
+                "child_credit": 0,
+                "eligible_children": 0,
+                "family_count": 2,
+                "payment_date": "2026-11-27",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  3000000,
+                  3020000
+                ],
+                "table_tax_before_children_floor_won": 56850,
+                "taxable_pay": 3000957,
+                "withholding_percent": 100
+              },
+              "output": 56850,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 56850,
+                "rate": "0.1"
+              },
+              "output": 5680,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 334610,
+                "gross_pay": 3200957
+              },
+              "output": 2866347,
+              "rule_id": "B.NET"
+            }
+          ]
+        }
+      ],
+      "settlement": {
+        "balance_total": 216347,
+        "deductions_total": 334610,
+        "employee_settlements": [
+          {
+            "balance": 216347,
+            "effective_payment_date": "2026-11-27",
+            "employee_id": "RECEIVE-7",
+            "gross_pay": 3200957,
+            "insurance_assessment_month": "2026-11",
+            "net_pay": 2866347,
+            "paid": 2650000,
+            "payroll_id": "RECEIVE-NOV",
+            "total_deductions": 334610
+          }
+        ],
+        "gross_total": 3200957,
+        "net_total": 2866347,
+        "paid_total": 2650000,
+        "payroll_calculations": [
+          {
+            "calculation": {
+              "base_pay": 2650000,
+              "effective_payment_date": "2026-11-27",
+              "employment_insurance": 25200,
+              "fixed_allowance": 150000,
+              "gross_pay": 3200957,
+              "health_insurance": 100660,
+              "holiday_pay": 200957,
+              "income_tax": 56850,
+              "local_income_tax": 5680,
+              "long_term_care": 13220,
+              "meal_allowance": 200000,
+              "national_pension": 133000,
+              "net_pay": 2866347,
+              "night_pay": 0,
+              "non_taxable_pay": 200000,
+              "ordinary_hourly_wage_floor": 14354,
+              "ordinary_monthly_wage": 3000000,
+              "overtime_pay": 0,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 2800000,
+              "taxable_pay": 3000957,
+              "total_deductions": 334610,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "RECEIVE-7",
+            "payroll_id": "RECEIVE-NOV"
+          }
+        ]
+      }
+    },
+    "rule_id": "B_PAYROLL_BANK_RECONCILIATION"
+  }
+]

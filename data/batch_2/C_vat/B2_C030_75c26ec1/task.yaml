@@ -1,0 +1,41 @@
+task_id: B2_C030_75c26ec1
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상솔수선의 완료 판매는 카드 일부와 미발급 현금으로 수금됐습니다. 일부만 지급한 설비의 전체 적격 전자를 연결해 매입을 차감한
+  뒤 발행세액공제(receipt_credit)와 최종세액(net_vat) 및 납부세액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_작업공급.hwpx
+  format: hwpx
+- path: inputs/02_설비활동.pdf
+  format: pdf
+- path: inputs/03_지급실행.xlsx
+  format: xlsx
+- path: inputs/04_원본.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    net_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - net_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-5121f8d9-8ef6-53cc-b123-29d9672ff2fa
+scenario_seed: 8485466424089161702
+scenario_hash: be5ee99c8e0c220d409a99afb7c7767e2aa31d4d0e44bb1f07fe6d9bbe1498de
+authorship:
+  method: individually_written
+  case_id: C030
+  case_sha256: 75c26ec13956afe60cfa59ca77192fae6c32e4183c08979e1e52fd086726a3a9
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- receipt_credit
+- net_vat
+- payable_vat

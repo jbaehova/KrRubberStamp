@@ -1,0 +1,162 @@
+task_id: B2_A054_f0dd7700
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상선율의 두 사용자별 최종 발급본을 각각 선택하세요. 한 사용자는 국세만 고쳤고 다른 사용자는 지방세만 고쳤습니다. 급여를
+  유지한 채 실제 국세와 지방세 누계를 따로 마감하고 사용자별 합계 및 전체 정산 객체를 제출합니다.
+input_files:
+- path: inputs/01_수선원천.pdf
+  format: pdf
+- path: inputs/02_직물원천.xlsx
+  format: xlsx
+- path: inputs/03_정산접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    employer_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          employer_id:
+            type: string
+          gross_pay:
+            type: integer
+          non_taxable_pay:
+            type: integer
+          withheld_national_tax:
+            type: integer
+          withheld_local_tax:
+            type: integer
+        required:
+        - employer_id
+        - gross_pay
+        - non_taxable_pay
+        - withheld_national_tax
+        - withheld_local_tax
+        additionalProperties: false
+    paid_national_tax:
+      type: integer
+    paid_local_tax:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - employer_totals
+  - paid_national_tax
+  - paid_local_tax
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-9d25e406-adf4-5a01-aea2-40f6f8aae365
+scenario_seed: 17356159383096001362
+scenario_hash: e4a2404ca86662d432ea59d3c8f9184b00eb0e2596db83730a18787daddaccd0
+authorship:
+  method: individually_written
+  case_id: A054
+  case_sha256: f0dd770086800352c6b79d590edfa8ebe59ffe30b6e63c693dde0cfca8ced145
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- employer_totals
+- paid_national_tax
+- paid_local_tax
+- tax_calculation

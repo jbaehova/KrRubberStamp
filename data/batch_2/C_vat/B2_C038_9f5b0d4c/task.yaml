@@ -1,0 +1,42 @@
+task_id: B2_C038_9f5b0d4c
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상청동패턴은 같은 공급자에게 간이 포기 전후로 자재를 받았습니다. 공식 효력 대장과 실제 공급일 및 미표시 카드의 전체 전자
+  보완을 연결하여 공제가능 매입세액(deductible_input_vat)과 불공제 매입세액(noncreditable_vat) 및 거래 수(unique_transaction_count)를
+  answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_신고.hwpx
+  format: hwpx
+- path: inputs/02_공급자대장.xlsx
+  format: xlsx
+- path: inputs/03_인수지급.pdf
+  format: pdf
+- path: inputs/04_원본.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-db93ae86-8e33-5ea4-8f18-0480cd2eea47
+scenario_seed: 11482786297726528226
+scenario_hash: 4743f0a2a56c6b4eed6625554206786132e8a2d28a6347b8a763f9c9a538a312
+authorship:
+  method: individually_written
+  case_id: C038
+  case_sha256: 9f5b0d4ca3b66ae2134db02c39a0c3cdd87538fa32b3e313739ec1ce523ce1ed
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat
+- unique_transaction_count

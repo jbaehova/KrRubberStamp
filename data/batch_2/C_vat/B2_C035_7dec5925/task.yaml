@@ -1,0 +1,42 @@
+task_id: B2_C035_7dec5925
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상격자수선은 현재 및 다음 기간의 독립 완료 주문에 같은 금액 카드 일부를 받았습니다. 승인 금액만으로 합치지 말고 실제
+  공급일과 지급 참조를 대조하여 매출세액(output_vat)과 발행세액공제(receipt_credit) 및 고유 거래 수(unique_transaction_count)를
+  answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_신고.hwpx
+  format: hwpx
+- path: inputs/02_완료공급.pdf
+  format: pdf
+- path: inputs/03_같은승인.xlsx
+  format: xlsx
+- path: inputs/04_원본.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - output_vat
+  - receipt_credit
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-9fc58aee-0b34-5197-873b-a1ee5bb8e023
+scenario_seed: 9073725364988000668
+scenario_hash: 701899e568671edd784cc9f372c4e6a2ebf25c7abfdd8427e49534de11a3f097
+authorship:
+  method: individually_written
+  case_id: C035
+  case_sha256: 7dec5925118fb99c1c50b23189c0eaf982825d2ff7178c75b417d9095753a9e4
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- output_vat
+- receipt_credit
+- unique_transaction_count

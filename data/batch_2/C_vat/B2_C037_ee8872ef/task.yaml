@@ -1,0 +1,42 @@
+task_id: B2_C037_ee8872ef
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상도트단추가 예정신고 뒤 완료한 한 대형 주문은 부분 카드와 현금영수증 및 미발급 현금으로 수금됐습니다. 현재 공급과 실제
+  발급 원본을 연결하고 앞서 사용한 연간 공제액을 반영하여 발행세액공제(receipt_credit)와 최종세액(net_vat) 및 거래 수(unique_transaction_count)를
+  answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_선행신고.hwpx
+  format: hwpx
+- path: inputs/02_전체공급.pdf
+  format: pdf
+- path: inputs/03_실행.xlsx
+  format: xlsx
+- path: inputs/04_발급원본.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    net_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - receipt_credit
+  - net_vat
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-7333cd97-67b7-595b-8f5c-740d86fd64ba
+scenario_seed: 17188114349941932491
+scenario_hash: bf1385399a2be5a652255a2ae7069f406233ebf65be60239c6046f543f4bdc44
+authorship:
+  method: individually_written
+  case_id: C037
+  case_sha256: ee8872ef4b1541cbc51fa61775a4288507b6b04021066ec4ebe3a0dad8d716a5
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- receipt_credit
+- net_vat
+- unique_transaction_count

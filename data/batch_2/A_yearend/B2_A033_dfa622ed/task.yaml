@@ -1,0 +1,169 @@
+task_id: B2_A033_dfa622ed
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상되돌린인쇄의 가상구하람이 전 직장 원천증명서의 원본과 동일 번호 재제출본 및 현 직장 자료를 보냈습니다. 같은 번호의 같은
+  내용을 한 번만 합산하고 연간 근로소득금액에 따라 일반 공익 기부의 당해 공제를 계산하세요. 사용자별 합계와 채택 번호 및 기부 계산이 든 전체
+  세금 객체를 회신합니다.
+input_files:
+- path: inputs/01_전직장원본.xlsx
+  format: xlsx
+- path: inputs/02_전직장재제출.pdf
+  format: pdf
+- path: inputs/03_현직장.hwpx
+  format: hwpx
+- path: inputs/04_기부.pdf
+  format: pdf
+- path: inputs/05_직원접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    employer_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          employer_id:
+            type: string
+          gross_pay:
+            type: integer
+          non_taxable_pay:
+            type: integer
+          withheld_national_tax:
+            type: integer
+          withheld_local_tax:
+            type: integer
+        required:
+        - employer_id
+        - gross_pay
+        - non_taxable_pay
+        - withheld_national_tax
+        - withheld_local_tax
+        additionalProperties: false
+    used_statement_ids:
+      type: array
+      items:
+        type: string
+    annual_gross:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - employer_totals
+  - used_statement_ids
+  - annual_gross
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-fa48497c-cd9c-5c52-890d-77c88de89f74
+scenario_seed: 16115606718598408545
+scenario_hash: ff27096603ba8b3e53d711c0eeb7bc3f7b2b0a621736e4120d0b8fdab47c5e0d
+authorship:
+  method: individually_written
+  case_id: A033
+  case_sha256: dfa622ed29f4e96193bec055d52f06b363d045447c73e52568e5db7dc06f90c6
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- employer_totals
+- used_statement_ids
+- annual_gross
+- tax_calculation

@@ -1,0 +1,52 @@
+task_id: B2_C093_562dd82b
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상라임받침은 새 필지 공사와 집기 구매의 원본 효력 및 예정고지 납부를 보냈습니다. 거래별 실제 사용과 현재 적격 원본을
+  선택하여 공제 매입세액(deductible_input_vat)과 발행 공제(receipt_credit) 및 환급액(refund_vat)을 answer.json에
+  회신하세요.
+input_files:
+- path: inputs/01_소매범위.pdf
+  format: pdf
+- path: inputs/02_고지납부.hwpx
+  format: hwpx
+- path: inputs/03_필지인수.pdf
+  format: pdf
+- path: inputs/04_집기인수.hwpx
+  format: hwpx
+- path: inputs/05_실제실행.xlsx
+  format: xlsx
+- path: inputs/06_판매원본.pdf
+  format: pdf
+- path: inputs/07_필지전자.xlsx
+  format: xlsx
+- path: inputs/08_집기원본.hwpx
+  format: hwpx
+- path: inputs/09_최종효력.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - receipt_credit
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-e2115259-6c54-5c1c-bd25-feebac7ca7eb
+scenario_seed: 6209857143549767652
+scenario_hash: 7f603aa2d33d1642ec332eaa641eec73a63b282f223aa908592cf5acfacbacf7
+authorship:
+  method: individually_written
+  case_id: C093
+  case_sha256: 562dd82bbb34afe45ea0d06717fba0c84de043eb203091172ddb8f7b97e590ef
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- receipt_credit
+- refund_vat

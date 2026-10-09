@@ -1,0 +1,44 @@
+task_id: B2_D023_be4cff08
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 방수함 자료로 실제 주문의 수량과 업체 잔액을 보고하세요. quote는 실제 발주가 아니므로 정산 행이나 재고 및 잔액 계정을
+  만들지 않습니다. 견적에 대한 planned 지급도 실제 지급이 아닙니다. answer.json에는 line_settlements와 vendor_balances와
+  payment_total을 작성하세요.
+input_files:
+- path: inputs/01_방수함제안A.pdf
+  format: pdf
+- path: inputs/02_방수함제안B.xlsx
+  format: xlsx
+- path: inputs/03_제안지급검토.hwpx
+  format: hwpx
+- path: inputs/04_제안처리기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items: {}
+    vendor_balances:
+      type: array
+      items: {}
+    payment_total:
+      type: integer
+  required:
+  - line_settlements
+  - vendor_balances
+  - payment_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-488be816-646e-5011-b130-d192077884e1
+scenario_seed: 13712615377986440615
+scenario_hash: 2304dd6fccb59cbb5451d015b5e15e30954859b3c6e29b37cc525ae42a2d45c0
+authorship:
+  method: individually_written
+  case_id: D023
+  case_sha256: be4cff08a270cda7aeb23419009eac870488afe8eb5bb9949b66d676a52cd42e
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- vendor_balances
+- payment_total

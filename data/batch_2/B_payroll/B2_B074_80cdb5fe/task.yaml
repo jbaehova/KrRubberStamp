@@ -1,0 +1,42 @@
+task_id: B2_B074_80cdb5fe
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상사진제본실 두 소집의 실제 시간과 근로 범주는 그대로이며 두번째 소집의 날짜만 다른 주휴일로 정정됐습니다. 현재 승인본을
+  고르면 월 휴일근로 총11시간은 같지만 한 날짜의8시간 초과는 없어집니다. 월 전체 시간에 일괄 초과가산을 적용하지 말고 holiday_pay,
+  night_pay 및 net_pay를 제출하세요.
+input_files:
+- path: inputs/01_월임금.pdf
+  format: pdf
+- path: inputs/02_소집날짜.xlsx
+  format: xlsx
+- path: inputs/03_기관.hwpx
+  format: hwpx
+- path: inputs/04_휴일지급.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - holiday_pay
+  - night_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-08cb0631-7f8d-5851-8661-577f145718f4
+scenario_seed: 9281274512285045845
+scenario_hash: 50c120f624bb29001a0ab0c63af4df6a417cb5aa9c9a0cd91c8a616ef2f03785
+authorship:
+  method: individually_written
+  case_id: B074
+  case_sha256: 80cdb5fe9fa314553ec691397e8189eb6f8960feb1d89e773e6e6acd8e7c0080
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- holiday_pay
+- night_pay
+- net_pay

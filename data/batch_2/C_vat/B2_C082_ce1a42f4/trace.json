@@ -1,0 +1,257 @@
+[
+  {
+    "inputs": {
+      "activities": [],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-05-28",
+          "document_id": "공방전자",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-05-26",
+          "document_id": "공방카드",
+          "replaces_document_id": null,
+          "state": "valid"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 800000,
+          "date": "2026-05-26",
+          "document_id": "공방전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 80000,
+          "transaction_id": "공방구매주문",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 330000,
+          "date": "2026-05-26",
+          "document_id": "공방카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "공방부분카드",
+          "stated_vat": null,
+          "transaction_id": "공방구매주문",
+          "vat_separately_stated": false
+        }
+      ],
+      "processing_date": "2026-07-15",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "공방전자"
+      ],
+      "replacement_relations": [],
+      "selected_document_ids": [
+        "공방카드"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [],
+      "business_name": "가상자두버클",
+      "evidence_documents": [
+        {
+          "amount": 330000,
+          "date": "2026-05-26",
+          "document_id": "공방카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "공방부분카드",
+          "stated_vat": null,
+          "transaction_id": "공방구매주문",
+          "vat_separately_stated": false
+        }
+      ],
+      "operations": [],
+      "payments": [
+        {
+          "amount": 330000,
+          "date": "2026-05-26",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "공방부분카드",
+          "transaction_id": "공방구매주문"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "amount": 880000,
+          "counterparty_consumer": false,
+          "date": "2026-05-26",
+          "description": "사업자 공방 손님의 소매 버클 주문 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "공방구매주문"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "공방카드"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 880000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 330000,
+        "paid_gross": 330000,
+        "supply_base": 800000,
+        "transaction_id": "공방구매주문",
+        "unissued_receipt_gross": 550000,
+        "unpaid_gross": 550000,
+        "vat": 80000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "공방카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "공방구매주문"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-26",
+      "transaction_id": "공방구매주문"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 880000,
+      "includes_vat": true,
+      "transaction_id": "공방구매주문"
+    },
+    "output": {
+      "gross": 880000,
+      "supply_base": 800000,
+      "vat": 80000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 800000
+    },
+    "output": 80000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 330000,
+      "transaction_id": "공방구매주문"
+    },
+    "output": {
+      "eligible_gross": 330000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 96000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 330000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 4290,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 4290
+    },
+    "output": 4290,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 4290,
+      "liability_before_credit": 80000
+    },
+    "output": 4290,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 75710,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 75710,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 80000,
+      "prepaid_vat": 0,
+      "receipt_credit": 4290
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 0,
+      "net_vat": 75710,
+      "noncreditable_vat": 0,
+      "output_vat": 80000,
+      "payable_vat": 75710,
+      "prepaid_vat": 0,
+      "receipt_credit": 4290,
+      "refund_vat": 0,
+      "tax_base": 800000,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

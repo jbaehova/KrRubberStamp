@@ -1,0 +1,64 @@
+task_id: B2_D034_08fcb71c
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 차폐함의 이번 마감 현물 정산과 현금 집행을 대조하세요. 마감 뒤 입고를 이번 인수금액으로 넣지 말고 이미 실행된 계약금은
+  유지합니다. answer.json에는 vendor_balances와 payment_total과 grand_total을 작성하세요.
+input_files:
+- path: inputs/01_차폐함약정.pdf
+  format: pdf
+- path: inputs/02_차폐함도착.xlsx
+  format: xlsx
+- path: inputs/03_차폐함계약금.hwpx
+  format: hwpx
+- path: inputs/04_현금현물마감.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    payment_total:
+      type: integer
+    grand_total:
+      type: integer
+  required:
+  - vendor_balances
+  - payment_total
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-c6940a01-ff43-5e42-9d40-e42869ae649b
+scenario_seed: 647593779483384152
+scenario_hash: 841d789a74558fe0369d2ab3d629e225511469ec32fed60f3375068665ab85bf
+authorship:
+  method: individually_written
+  case_id: D034
+  case_sha256: 08fcb71c80dc19586843c7d376a61446399917f33d89e292f81629b7ded7e676
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances
+- payment_total
+- grand_total

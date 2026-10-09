@@ -1,0 +1,155 @@
+task_id: B2_D139_c224a50c
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 플레이트와 패드를 함께 주문합니다. 할인 업체의 플레이트는 재고가 부족하고 패드 가격은 만료되었습니다. 각각 다른 탈락을 확인한
+  전체 offer_comparisons와 chosen_offers 및 feasible_cart_count와 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_보강약정.pdf
+  format: pdf
+- path: inputs/02_판물량.xlsx
+  format: xlsx
+- path: inputs/03_패드요청.hwpx
+  format: hwpx
+- path: inputs/04_할인배송.pdf
+  format: pdf
+- path: inputs/05_재고배송.xlsx
+  format: xlsx
+- path: inputs/06_할인판.hwpx
+  format: hwpx
+- path: inputs/07_할인패드.pdf
+  format: pdf
+- path: inputs/08_재고판.xlsx
+  format: xlsx
+- path: inputs/09_재고패드.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    feasible_cart_count:
+      type: integer
+    grand_total:
+      type: integer
+  required:
+  - offer_comparisons
+  - chosen_offers
+  - feasible_cart_count
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-a8d33d40-ca57-5f62-b8a8-a2225f937efd
+scenario_seed: 13989487813622377905
+scenario_hash: ac4823dfa263fdebb9af3a1603d69f42adb1f868d7fbe1899806fc11cc5315d2
+authorship:
+  method: individually_written
+  case_id: D139
+  case_sha256: c224a50c089e2db1457201dea22644f061d2db594617cf657f7988b00e88dad7
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- offer_comparisons
+- chosen_offers
+- feasible_cart_count
+- grand_total

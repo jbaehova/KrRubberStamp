@@ -1,0 +1,173 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-10-05",
+      "events": [
+        {
+          "date": "2026-10-01",
+          "event_id": "RUBBER-BACK",
+          "kind": "returned",
+          "line_id": "R",
+          "order_id": "RUBBER-LOTS",
+          "units": 4
+        },
+        {
+          "date": "2026-10-01",
+          "event_id": "RUBBER-BACK",
+          "kind": "returned",
+          "line_id": "R",
+          "order_id": "RUBBER-LOTS",
+          "units": 4
+        },
+        {
+          "date": "2026-09-27",
+          "event_id": "RUBBER-IN-A",
+          "kind": "received",
+          "line_id": "R",
+          "order_id": "RUBBER-LOTS",
+          "units": 12
+        },
+        {
+          "date": "2026-09-27",
+          "event_id": "RUBBER-IN-B",
+          "kind": "received",
+          "line_id": "R",
+          "order_id": "RUBBER-LOTS",
+          "units": 12
+        },
+        {
+          "date": "2026-10-07",
+          "event_id": "RUBBER-IN-FUTURE",
+          "kind": "received",
+          "line_id": "R",
+          "order_id": "RUBBER-LOTS",
+          "units": 10
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-09-22",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "고무마개",
+              "line_id": "R",
+              "ordered_packages": 4,
+              "package_price": 6000,
+              "price_includes_vat": false,
+              "units_per_package": 10
+            }
+          ],
+          "order_id": "RUBBER-LOTS",
+          "vendor": "가상고무마개"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 5000,
+          "date": "2026-09-24",
+          "order_id": "RUBBER-LOTS",
+          "payment_id": "RUBBER-PAID",
+          "status": "executed"
+        },
+        {
+          "amount": 10000,
+          "date": "2026-10-03",
+          "order_id": "RUBBER-LOTS",
+          "payment_id": "RUBBER-PLAN",
+          "status": "planned"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 이벤트 ID가 다른 입고는 각각 합치고 같은 ID 및 내용 사본은 한 번만 반영한다. 마감까지 입고 및 반환으로 순량을 구한다. 포장가격의 순량 비율은 마지막에 버리고 별도 세액은 10%를 버린다. executed 지급만 차감하며 planned는 제외한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "RUBBER-BACK",
+        "RUBBER-IN-A",
+        "RUBBER-IN-B"
+      ],
+      "accepted_payment_ids": [
+        "RUBBER-PAID"
+      ],
+      "deduplicated_event_ids": [
+        "RUBBER-BACK"
+      ],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "RUBBER-IN-A",
+          "net_units_after_event": 12
+        },
+        {
+          "event_id": "RUBBER-IN-B",
+          "net_units_after_event": 24
+        },
+        {
+          "event_id": "RUBBER-BACK",
+          "net_units_after_event": 20
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [
+        "RUBBER-IN-FUTURE"
+      ],
+      "excluded_payment_ids": [
+        "RUBBER-PLAN"
+      ],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 12000,
+          "line_id": "R",
+          "order_id": "RUBBER-LOTS",
+          "package_price_times_net_units": 120000,
+          "price_includes_vat": false,
+          "supply": 12000,
+          "total": 13200,
+          "units_per_package": 10,
+          "vat": 1200
+        }
+      ],
+      "settlement": {
+        "balance_total": 8200,
+        "grand_total": 13200,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "고무마개",
+            "net_units": 20
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "고무마개",
+            "line_id": "R",
+            "net_units": 20,
+            "order_id": "RUBBER-LOTS",
+            "ordered_units": 40,
+            "outstanding_units": 20,
+            "received_units": 24,
+            "returned_units": 4,
+            "supply": 12000,
+            "total": 13200,
+            "vat": 1200
+          }
+        ],
+        "payment_total": 5000,
+        "vendor_balances": [
+          {
+            "balance": 8200,
+            "paid": 5000,
+            "supply": 12000,
+            "total": 13200,
+            "vat": 1200,
+            "vendor": "가상고무마개"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

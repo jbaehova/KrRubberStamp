@@ -1,0 +1,92 @@
+task_id: B2_D032_23e9c0e6
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 검수 테이프의 실제 입고량을 대조하세요. 날짜와 수량이 같아도 event_id가 다르면 별도로 발생한 인수입니다. 내용 유사성으로
+  중복 제거하지 않습니다. answer.json에는 item_quantities와 line_settlements를 작성하세요.
+input_files:
+- path: inputs/01_테이프주문.pdf
+  format: pdf
+- path: inputs/02_테이프인수1.xlsx
+  format: xlsx
+- path: inputs/03_테이프인수2.hwpx
+  format: hwpx
+- path: inputs/04_테이프식별.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - item_quantities
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-71c5f91a-b914-58c0-b9a1-e450dc986db2
+scenario_seed: 2587811559005817159
+scenario_hash: fd40c515f43435aa92b29bafe45646a8ebe3bd5f23748471ad22e781030c72c7
+authorship:
+  method: individually_written
+  case_id: D032
+  case_sha256: 23e9c0e6f0310947980371cb2146f11f17aa8dcf65ddb0f1c1701cac37c7c6ae
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- item_quantities
+- line_settlements

@@ -1,0 +1,577 @@
+[
+  {
+    "inputs": {
+      "as_of_date": "2026-11-25",
+      "payrolls": [
+        {
+          "employee_id": "REG-B",
+          "facts": {
+            "base_salary": 10500000,
+            "company_name": "가상가등록실",
+            "eligible_children": 0,
+            "employee_name": "가상은율",
+            "employer_provides_meals": false,
+            "employment_due": true,
+            "employment_notified_income": 3500000,
+            "family_count": 1,
+            "fixed_allowance": 0,
+            "health_due": true,
+            "health_notified_income": 3500000,
+            "holiday_shifts": [],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-11",
+            "meal_allowance": 0,
+            "monthly_divisor_hours": 209,
+            "night_minutes": 0,
+            "overtime_minutes": 0,
+            "pay_basis": "monthly",
+            "payment_date": "2026-11-25",
+            "pension_due": true,
+            "pension_notified_income": 3500000,
+            "qualifying_weeks": 0,
+            "regular_minutes": 10080,
+            "scope": "11월재계약으로고정기본급1050만원을정상월전액지급한다. 성과금아니며통상임금전액포함. 소정주휴포함,추가근로없다. 기관기초는변경전350만원확정회신으로현재고정인상과별개이며소급정산없다.",
+            "variable_allowance": 0,
+            "weekly_holiday_included": true,
+            "weekly_hours": 40,
+            "withholding_percent": 100,
+            "workplace_employee_count": 10
+          },
+          "payroll_id": "REGISTER-FIX"
+        },
+        {
+          "employee_id": "REG-A",
+          "facts": {
+            "base_salary": 3500000,
+            "company_name": "가상가등록실",
+            "eligible_children": 0,
+            "employee_name": "가상선율",
+            "employer_provides_meals": false,
+            "employment_due": true,
+            "employment_notified_income": 3500000,
+            "family_count": 1,
+            "fixed_allowance": 0,
+            "health_due": true,
+            "health_notified_income": 3500000,
+            "holiday_shifts": [],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-11",
+            "meal_allowance": 0,
+            "monthly_divisor_hours": 209,
+            "night_minutes": 0,
+            "overtime_minutes": 0,
+            "pay_basis": "monthly",
+            "payment_date": "2026-11-25",
+            "pension_due": true,
+            "pension_notified_income": 3500000,
+            "qualifying_weeks": 0,
+            "regular_minutes": 10080,
+            "scope": "11월정상월급전액. 완료금700만원은이번한달성과에만대응하고복수월상여아니다. 통상임금제외확정. 추가근로없고소정주휴포함. 기관기초350만원은확정회신이며현재임금으로재추정하지않는다.",
+            "variable_allowance": 7000000,
+            "weekly_holiday_included": true,
+            "weekly_hours": 40,
+            "withholding_percent": 100,
+            "workplace_employee_count": 10
+          },
+          "payroll_id": "REGISTER-VAR"
+        }
+      ],
+      "processing_policy": "두 직원의 현재 과세급여는같지만 임금성격이다르다. 기관별기초는두명세에각각확정된기존신고값이며현재임금으로재추정하지않는다. 각월명세별정확통상임금및고액원천세를계산한다.",
+      "source_contract": "payroll_bank_reconciliation_v1",
+      "transfers": [
+        {
+          "amount": 9000000,
+          "date": "2026-11-25",
+          "employee_id": "REG-A",
+          "payroll_id": "REGISTER-VAR",
+          "status": "executed",
+          "transfer_id": "REG-A-X"
+        },
+        {
+          "amount": 9000000,
+          "date": "2026-11-25",
+          "employee_id": "REG-B",
+          "payroll_id": "REGISTER-FIX",
+          "status": "executed",
+          "transfer_id": "REG-B-X"
+        }
+      ]
+    },
+    "output": {
+      "accepted_transfer_ids": [
+        "REG-A-X",
+        "REG-B-X"
+      ],
+      "cash_by_payroll": [
+        {
+          "paid": 9000000,
+          "payroll_id": "REGISTER-FIX"
+        },
+        {
+          "paid": 9000000,
+          "payroll_id": "REGISTER-VAR"
+        }
+      ],
+      "deduplicated_transfer_ids": [],
+      "excluded_transfer_ids": [],
+      "payroll_derivations": [
+        {
+          "payroll_id": "REGISTER-FIX",
+          "trace": [
+            {
+              "inputs": {
+                "base_salary": 10500000,
+                "fixed_allowance": 0,
+                "hourly_rate": 0,
+                "meal_allowance": 0,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "monthly",
+                "regular_minutes": 10080
+              },
+              "output": {
+                "hourly_exact_denominator": 209,
+                "hourly_exact_numerator": 10500000,
+                "ordinary_monthly_wage": 10500000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 40
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 0
+              },
+              "output": 0,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 10500000,
+                "fixed_allowance": 0,
+                "holiday_pay": 0,
+                "meal_allowance": 0,
+                "night_pay": 0,
+                "overtime_pay": 0,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 10500000,
+                "taxable_pay": 10500000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-11",
+                "month": 11,
+                "notified_income": 3500000
+              },
+              "output": {
+                "national_pension": 166250,
+                "pension_base_income": 3500000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 3500000
+              },
+              "output": 125820,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 125820,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 16530,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 3500000
+              },
+              "output": 31500,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 1,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  10000000,
+                  14000000
+                ],
+                "taxable_pay": 10500000
+              },
+              "output": 1703900,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 0,
+                "payment_date": "2026-11-25"
+              },
+              "output": 0,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 1703900,
+                "child_credit": 0,
+                "eligible_children": 0,
+                "family_count": 1,
+                "payment_date": "2026-11-25",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  10000000,
+                  14000000
+                ],
+                "table_tax_before_children_floor_won": 1703900,
+                "taxable_pay": 10500000,
+                "withholding_percent": 100
+              },
+              "output": 1703900,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 1703900,
+                "rate": "0.1"
+              },
+              "output": 170390,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 2214390,
+                "gross_pay": 10500000
+              },
+              "output": 8285610,
+              "rule_id": "B.NET"
+            }
+          ]
+        },
+        {
+          "payroll_id": "REGISTER-VAR",
+          "trace": [
+            {
+              "inputs": {
+                "base_salary": 3500000,
+                "fixed_allowance": 0,
+                "hourly_rate": 0,
+                "meal_allowance": 0,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "monthly",
+                "regular_minutes": 10080
+              },
+              "output": {
+                "hourly_exact_denominator": 209,
+                "hourly_exact_numerator": 3500000,
+                "ordinary_monthly_wage": 3500000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 40
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 0
+              },
+              "output": 0,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 3500000,
+                "fixed_allowance": 0,
+                "holiday_pay": 0,
+                "meal_allowance": 0,
+                "night_pay": 0,
+                "overtime_pay": 0,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 7000000,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 10500000,
+                "taxable_pay": 10500000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-11",
+                "month": 11,
+                "notified_income": 3500000
+              },
+              "output": {
+                "national_pension": 166250,
+                "pension_base_income": 3500000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 3500000
+              },
+              "output": 125820,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 125820,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 16530,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 3500000
+              },
+              "output": 31500,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 1,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  10000000,
+                  14000000
+                ],
+                "taxable_pay": 10500000
+              },
+              "output": 1703900,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 0,
+                "payment_date": "2026-11-25"
+              },
+              "output": 0,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 1703900,
+                "child_credit": 0,
+                "eligible_children": 0,
+                "family_count": 1,
+                "payment_date": "2026-11-25",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  10000000,
+                  14000000
+                ],
+                "table_tax_before_children_floor_won": 1703900,
+                "taxable_pay": 10500000,
+                "withholding_percent": 100
+              },
+              "output": 1703900,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 1703900,
+                "rate": "0.1"
+              },
+              "output": 170390,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 2214390,
+                "gross_pay": 10500000
+              },
+              "output": 8285610,
+              "rule_id": "B.NET"
+            }
+          ]
+        }
+      ],
+      "settlement": {
+        "balance_total": -1428780,
+        "deductions_total": 4428780,
+        "employee_settlements": [
+          {
+            "balance": -714390,
+            "effective_payment_date": "2026-11-25",
+            "employee_id": "REG-A",
+            "gross_pay": 10500000,
+            "insurance_assessment_month": "2026-11",
+            "net_pay": 8285610,
+            "paid": 9000000,
+            "payroll_id": "REGISTER-VAR",
+            "total_deductions": 2214390
+          },
+          {
+            "balance": -714390,
+            "effective_payment_date": "2026-11-25",
+            "employee_id": "REG-B",
+            "gross_pay": 10500000,
+            "insurance_assessment_month": "2026-11",
+            "net_pay": 8285610,
+            "paid": 9000000,
+            "payroll_id": "REGISTER-FIX",
+            "total_deductions": 2214390
+          }
+        ],
+        "gross_total": 21000000,
+        "net_total": 16571220,
+        "paid_total": 18000000,
+        "payroll_calculations": [
+          {
+            "calculation": {
+              "base_pay": 10500000,
+              "effective_payment_date": "2026-11-25",
+              "employment_insurance": 31500,
+              "fixed_allowance": 0,
+              "gross_pay": 10500000,
+              "health_insurance": 125820,
+              "holiday_pay": 0,
+              "income_tax": 1703900,
+              "local_income_tax": 170390,
+              "long_term_care": 16530,
+              "meal_allowance": 0,
+              "national_pension": 166250,
+              "net_pay": 8285610,
+              "night_pay": 0,
+              "non_taxable_pay": 0,
+              "ordinary_hourly_wage_floor": 50239,
+              "ordinary_monthly_wage": 10500000,
+              "overtime_pay": 0,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 3500000,
+              "taxable_pay": 10500000,
+              "total_deductions": 2214390,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "REG-B",
+            "payroll_id": "REGISTER-FIX"
+          },
+          {
+            "calculation": {
+              "base_pay": 3500000,
+              "effective_payment_date": "2026-11-25",
+              "employment_insurance": 31500,
+              "fixed_allowance": 0,
+              "gross_pay": 10500000,
+              "health_insurance": 125820,
+              "holiday_pay": 0,
+              "income_tax": 1703900,
+              "local_income_tax": 170390,
+              "long_term_care": 16530,
+              "meal_allowance": 0,
+              "national_pension": 166250,
+              "net_pay": 8285610,
+              "night_pay": 0,
+              "non_taxable_pay": 0,
+              "ordinary_hourly_wage_floor": 16746,
+              "ordinary_monthly_wage": 3500000,
+              "overtime_pay": 0,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 3500000,
+              "taxable_pay": 10500000,
+              "total_deductions": 2214390,
+              "variable_allowance": 7000000,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "REG-A",
+            "payroll_id": "REGISTER-VAR"
+          }
+        ]
+      }
+    },
+    "rule_id": "B_PAYROLL_BANK_RECONCILIATION"
+  }
+]

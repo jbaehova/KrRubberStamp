@@ -1,0 +1,141 @@
+task_id: B2_D125_25b02c8a
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 기록봉과 마개를 동봉 주문합니다. 공동 업체의 가격은 주문 당일까지만 유효하고 도착은 이후 납기 당일입니다. offer_comparisons와
+  chosen_offers 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_기록봉약정.pdf
+  format: pdf
+- path: inputs/02_기록봉물량.xlsx
+  format: xlsx
+- path: inputs/03_기록봉공방.hwpx
+  format: hwpx
+- path: inputs/04_마개대안.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - offer_comparisons
+  - chosen_offers
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-c8896c46-28d8-5a57-ab5e-6f92eb4fdfee
+scenario_seed: 2715719548486637981
+scenario_hash: 848062dec7fcfadc65ed0919158c3ac8a285fb08899ce13c8bdf8801d43ae8b8
+authorship:
+  method: individually_written
+  case_id: D125
+  case_sha256: 25b02c8a7521599d9338896adae5603d826d173ed4575ac807ceb6198deef6e2
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- offer_comparisons
+- chosen_offers
+- grand_total

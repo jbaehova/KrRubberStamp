@@ -1,0 +1,156 @@
+task_id: B2_A085_50983e08
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상이현의 두 근무처 과세급여를 합산하세요. 본인 문화비의 결제수단별 공제 적용과 같은 세대 동생의 카드 제외를 각각 처리해
+  사용자 합계와 세금 계산 객체를 제출합니다.
+input_files:
+- path: inputs/01_서점.pdf
+  format: pdf
+- path: inputs/02_수리.xlsx
+  format: xlsx
+- path: inputs/03_카드.hwpx
+  format: hwpx
+- path: inputs/04_가족.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    employer_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          employer_id:
+            type: string
+          gross_pay:
+            type: integer
+          non_taxable_pay:
+            type: integer
+          withheld_national_tax:
+            type: integer
+          withheld_local_tax:
+            type: integer
+        required:
+        - employer_id
+        - gross_pay
+        - non_taxable_pay
+        - withheld_national_tax
+        - withheld_local_tax
+        additionalProperties: false
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - employer_totals
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-827aceb1-c8a8-5ac6-8b2d-e36ece99d457
+scenario_seed: 5807459924591768024
+scenario_hash: ae6cedf3d7a10df4f66bedfc381d34e476039d6113be1b33e3b3b0f9f9928963
+authorship:
+  method: individually_written
+  case_id: A085
+  case_sha256: 50983e083c9bf1d886d9bf6354b5c31f93e9bef5cb88d057aa49bc3b50899563
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- employer_totals
+- tax_calculation

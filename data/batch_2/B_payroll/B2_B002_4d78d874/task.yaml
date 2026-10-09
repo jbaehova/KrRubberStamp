@@ -1,0 +1,68 @@
+task_id: B2_B002_4d78d874
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상제본실에 이름이 같은 두 직원이 있습니다. 직원번호와 급여번호를 함께 사용해 두 완전한 월급을 계산하고 실행 이체를 각각
+  귀속해 주세요. employee_settlements와 paid_total을 요청합니다. 이름이 같다는 이유로 두 사람의 남은 급여를 합쳐 한
+  줄로 쓰면 안 됩니다.
+input_files:
+- path: inputs/01_직원101.hwpx
+  format: hwpx
+- path: inputs/02_직원202.pdf
+  format: pdf
+- path: inputs/03_계좌집행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    paid_total:
+      type: integer
+  required:
+  - employee_settlements
+  - paid_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-ebf5ac52-cc7b-5eb1-b186-50c958d3735e
+scenario_seed: 5582449733133865825
+scenario_hash: 6eb580689a5a4b43a61de3e43aea84dddb862c8cdc37dce59d8291101e78a458
+authorship:
+  method: individually_written
+  case_id: B002
+  case_sha256: 4d78d87487eb13617efe6b487df7267c872c2c81259c486866ea4f69290b81bf
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- employee_settlements
+- paid_total

@@ -1,0 +1,59 @@
+task_id: B2_B048_96eff0dd
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상항해기록실 가상루한의11월세후지급을종결합니다. 급식제공사실과당월완료금까지반영해과세급여를확정하고가족13명중요건충족자녀4명과80퍼센트신청을적용합니다.
+  ordinary_monthly_wage, taxable_pay, income_tax, local_income_tax와net_pay를 작성해고액경계세무및기관별통지공제를은행이체에연결해주세요.
+input_files:
+- path: inputs/01_정액계약.pdf
+  format: pdf
+- path: inputs/02_완료금.pdf
+  format: pdf
+- path: inputs/03_급식.pdf
+  format: pdf
+- path: inputs/04_가족.hwpx
+  format: hwpx
+- path: inputs/05_선택.hwpx
+  format: hwpx
+- path: inputs/06_정상근태.xlsx
+  format: xlsx
+- path: inputs/07_연금.pdf
+  format: pdf
+- path: inputs/08_건강고용.pdf
+  format: pdf
+- path: inputs/09_집행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+    local_income_tax:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - taxable_pay
+  - income_tax
+  - local_income_tax
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-ea46e8ad-9e47-55dc-b580-a41bb025813b
+scenario_seed: 10876176458668095077
+scenario_hash: 8fe3fb75703fa043a2170893aa8b56e53a49b51462a96c0fa9d0eec8182552ae
+authorship:
+  method: individually_written
+  case_id: B048
+  case_sha256: 96eff0dd5d60b665bdb9098053b52caa55b05fa05a87bb9c9fc825aed91f6a79
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- ordinary_monthly_wage
+- taxable_pay
+- income_tax
+- local_income_tax
+- net_pay

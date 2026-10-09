@@ -1,0 +1,71 @@
+task_id: B2_D001_f17f8f31
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 창고 라벨 발주를 낱장 입고와 대조하세요. 포장 수에 포장당 장수를 곱해 발주 수량을 구하고 실제 받은 장수를 빼 미인수량을
+  표시합니다. answer.json에는 line_settlements를 주문번호와 행번호 순으로 작성하세요. 약정에 따른 가격 정산도 각 행에 함께
+  남깁니다.
+input_files:
+- path: inputs/01_라벨발주.pdf
+  format: pdf
+- path: inputs/02_라벨입고.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-6c5560bb-add7-5597-8a53-0e2cc155128a
+scenario_seed: 17401784929268926422
+scenario_hash: d471873fdf11ec15a74988085ac64b1e381bc0bd4f307e780f54807736a67d0a
+authorship:
+  method: individually_written
+  case_id: D001
+  case_sha256: f17f8f31ced207d663b4fe306a6eab97e6f3ce005dc259ea802554af8edc5493
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements

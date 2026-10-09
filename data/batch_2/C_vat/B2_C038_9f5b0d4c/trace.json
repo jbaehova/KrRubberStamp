@@ -1,0 +1,410 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "간이반입",
+          "date": "2026-03-20",
+          "description": "간이 기간 첫 자재를 인수했다.",
+          "document_ids": [
+            "간이카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "청동 자재실"
+          },
+          "operation_id": "패턴",
+          "participants": [
+            {
+              "name": "가상백청동",
+              "organization": "가상청동패턴",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "간이자재"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "일반반입",
+          "date": "2026-05-17",
+          "description": "간이 포기 뒤 독립 자재를 인수했다.",
+          "document_ids": [
+            "일반전자",
+            "일반카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "청동 자재실"
+          },
+          "operation_id": "패턴",
+          "participants": [
+            {
+              "name": "가상백청동",
+              "organization": "가상청동패턴",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "일반자재"
+        }
+      ],
+      "business_name": "가상청동패턴",
+      "evidence_documents": [
+        {
+          "amount": 550000,
+          "date": "2026-03-20",
+          "document_id": "간이카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "간이지급",
+          "stated_vat": 50000,
+          "transaction_id": "간이자재",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 600000,
+          "date": "2026-05-17",
+          "document_id": "일반전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 60000,
+          "transaction_id": "일반자재",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 660000,
+          "date": "2026-05-17",
+          "document_id": "일반카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "일반지급",
+          "stated_vat": null,
+          "transaction_id": "일반자재",
+          "vat_separately_stated": false
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 청동 패턴 제작",
+          "operation_id": "패턴",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 550000,
+          "date": "2026-03-20",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "간이지급",
+          "transaction_id": "간이자재"
+        },
+        {
+          "amount": 660000,
+          "date": "2026-05-17",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "일반지급",
+          "transaction_id": "일반자재"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplier_status_records": [
+        {
+          "status": "general",
+          "supplier_id": "청동공급",
+          "valid_from": "2026-05-01",
+          "valid_to": "2026-12-31"
+        },
+        {
+          "status": "simplified_no_invoice_duty",
+          "supplier_id": "청동공급",
+          "valid_from": "2026-01-01",
+          "valid_to": "2026-04-30"
+        }
+      ],
+      "supplies": [
+        {
+          "activity_id": "간이반입",
+          "amount": 550000,
+          "counterparty_consumer": false,
+          "date": "2026-03-20",
+          "description": "간이 기간 자재 전체",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_id": "청동공급",
+          "taxable": true,
+          "transaction_id": "간이자재",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        {
+          "activity_id": "일반반입",
+          "amount": 660000,
+          "counterparty_consumer": false,
+          "date": "2026-05-17",
+          "description": "일반 전환 후 자재 전체",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_id": "청동공급",
+          "taxable": true,
+          "transaction_id": "일반자재",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "간이카드"
+        ],
+        "documented_input_vat": 50000,
+        "eligible_input_document_ids": [
+          "간이카드"
+        ],
+        "gross": 550000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 550000,
+        "paid_gross": 550000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": false,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 500000,
+        "transaction_id": "간이자재",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 50000
+      },
+      {
+        "document_ids": [
+          "일반전자",
+          "일반카드"
+        ],
+        "documented_input_vat": 60000,
+        "eligible_input_document_ids": [
+          "일반전자"
+        ],
+        "gross": 660000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 660000,
+        "paid_gross": 660000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 600000,
+        "transaction_id": "일반자재",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 60000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "간이카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "간이자재"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "일반전자",
+        "일반카드"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "일반자재"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-20",
+      "transaction_id": "간이자재"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 550000,
+      "includes_vat": true,
+      "transaction_id": "간이자재"
+    },
+    "output": {
+      "gross": 550000,
+      "supply_base": 500000,
+      "vat": 50000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 50000,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "간이자재",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 50000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-17",
+      "transaction_id": "일반자재"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 660000,
+      "includes_vat": true,
+      "transaction_id": "일반자재"
+    },
+    "output": {
+      "gross": 660000,
+      "supply_base": 600000,
+      "vat": 60000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 60000,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "일반자재",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 60000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 180000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -60000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -60000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -60000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 60000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 60000,
+      "input_vat": 110000,
+      "net_vat": -60000,
+      "noncreditable_vat": 50000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 60000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

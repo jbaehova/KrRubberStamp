@@ -1,0 +1,65 @@
+task_id: B2_B056_ec262af0
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상도장실 두 직원의 현재 임금과 근로 및 가족 조건은 같습니다. 기존 신고 이력이 달라 기관별 확정 기준액은 서로 다릅니다.
+  현재 임금을 공제 기초로 덮어쓰지 말고 기관 회신대로 각각 계산해 employee_settlements와 deductions_total을 제출하세요.
+input_files:
+- path: inputs/01_동일급여.pdf
+  format: pdf
+- path: inputs/02_동일이체.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    deductions_total:
+      type: integer
+  required:
+  - employee_settlements
+  - deductions_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-735c2d92-283c-56b5-9ed9-660484e0cdc7
+scenario_seed: 17016335453630521718
+scenario_hash: 96df93f416bb28a2bb954ba7e658d3627a9c300e16c3cf614f0455093572fe04
+authorship:
+  method: individually_written
+  case_id: B056
+  case_sha256: ec262af04c886176bc5f1aabfb9ac17b3d8312f86762af25440a4b9996dc3dd3
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- employee_settlements
+- deductions_total

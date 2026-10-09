@@ -1,0 +1,353 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 65000000,
+      "cards": [
+        {
+          "amount": 9000000,
+          "category": "debit",
+          "date": "2025-10-06",
+          "person_id": "sib"
+        },
+        {
+          "amount": 18000000,
+          "category": "credit",
+          "date": "2025-11-06",
+          "person_id": "self"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 27,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 2400000,
+          "person_id": "sib",
+          "relation": "sibling",
+          "supported": true
+        }
+      ],
+      "education": [
+        {
+          "amount": 5100000,
+          "date": "2025-04-06",
+          "institution_type": "qualified_special_education",
+          "level": "special_disabled",
+          "person_id": "sib"
+        },
+        {
+          "amount": 6800000,
+          "date": "2025-03-06",
+          "institution_type": "university",
+          "level": "university",
+          "person_id": "sib"
+        }
+      ],
+      "employee_age": 36,
+      "employee_name": "가상태린",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "insurance": [
+        {
+          "amount": 900000,
+          "date": "2025-05-06",
+          "kind": "disabled",
+          "person_id": "sib"
+        }
+      ],
+      "medical": [
+        {
+          "amount": 4500000,
+          "date": "2025-07-06",
+          "kind": "ordinary",
+          "person_id": "sib"
+        }
+      ],
+      "non_taxable": 2000000,
+      "reference_year": 2025,
+      "rent": {
+        "area_sqm": 68,
+        "contract_address": "가상우물길 3 203호",
+        "contract_holder_person_id": "sib",
+        "household_head": true,
+        "household_homes_at_year_end": [],
+        "identity_records": [
+          {
+            "name": "가상태린",
+            "person_id": "self",
+            "relation": "self"
+          },
+          {
+            "name": "가상태린제",
+            "person_id": "sib",
+            "relation": "sibling"
+          }
+        ],
+        "payments": [
+          {
+            "amount": 8200000,
+            "date": "2025-12-06"
+          }
+        ],
+        "resident_registration_address": "가상우물길3 203호",
+        "standard_value": 310000000
+      },
+      "scope_note": "국내 거주 무주택 세대주다. 동생과 같은 주민등록 세대에서 실제 동거 부양하며 본인에게 신청 배정했다. 동생은 법정 장애인으로 근로 외 소득금액이 240만원이다. 특수교육기관 및 전용 보험의 다른 요건은 확인됐고 모든 비용은 직원 자비로 보전 없이 납부했다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "education.0.excluded": false,
+      "education.1.excluded": false,
+      "rent.address_matches": true,
+      "rent.eligible_contract_holder": false,
+      "rent.homeless_household": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 27,
+          "assigned_claimant": "self",
+          "disabled": true,
+          "income_amount": 2400000,
+          "person_id": "sib",
+          "relation": "sibling",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 1500000,
+      "rejected": [
+        "sib"
+      ]
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 65000000,
+      "non_taxable": 2000000
+    },
+    "output": {
+      "salary_deduction": 12900000,
+      "salary_income": 50100000,
+      "total_salary": 63000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 63000000,
+      "spending": {
+        "credit": 18000000
+      }
+    },
+    "output": 337500,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 900000,
+          "date": "2025-05-06",
+          "kind": "disabled",
+          "person_id": "sib"
+        }
+      ],
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 4500000,
+          "date": "2025-07-06",
+          "kind": "ordinary",
+          "person_id": "sib"
+        }
+      ],
+      "salary": 63000000
+    },
+    "output": 391500,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": [
+        {
+          "amount": 5100000,
+          "date": "2025-04-06",
+          "excluded": false,
+          "institution_type": "qualified_special_education",
+          "level": "special_disabled",
+          "person_id": "sib"
+        },
+        {
+          "amount": 6800000,
+          "date": "2025-03-06",
+          "excluded": false,
+          "institution_type": "university",
+          "level": "university",
+          "person_id": "sib"
+        }
+      ],
+      "salary": 63000000
+    },
+    "output": 765000,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {
+        "address_matches": true,
+        "area_sqm": 68,
+        "contract_address": "가상우물길 3 203호",
+        "eligible_contract_holder": false,
+        "homeless_household": true,
+        "household_head": true,
+        "household_homes_at_year_end": [],
+        "payments": [
+          {
+            "amount": 8200000,
+            "date": "2025-12-06"
+          }
+        ],
+        "resident_registration_address": "가상우물길3 203호",
+        "standard_value": 310000000
+      },
+      "salary": 63000000
+    },
+    "output": 0,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 48262500
+    },
+    "output": 5979375,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 5979375,
+      "salary": 63000000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 765000,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 391500,
+        "political_credit": 0,
+        "rent_credit": 0
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 5979375,
+      "total_tax_credits": 1816500
+    },
+    "output": 4162875,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 4162875
+    },
+    "output": 416287,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 416287,
+      "final_national": 4162875,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 416287,
+      "national": 4162875,
+      "total": 4579162
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

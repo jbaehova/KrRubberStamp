@@ -1,0 +1,36 @@
+task_id: B2_C012_bd4210f2
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상소형나사점은 한 주문의 현금 부분 발급을 정정했고 별도 카드 부분 발급과 미발급 은행 수금을 함께 보냈습니다. 실제 지급
+  참조와 유효 발급 범위를 복원한 다음 합산하여 매출세액(output_vat) 및 발급 공제(receipt_credit)를 answer.json에
+  써 주세요.
+input_files:
+- path: inputs/01_나사인도.pdf
+  format: pdf
+- path: inputs/02_실행발급.xlsx
+  format: xlsx
+- path: inputs/03_부분정정.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+  required:
+  - output_vat
+  - receipt_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-457f4e2a-c955-52c2-94a7-debe04f5506c
+scenario_seed: 13637481255898263311
+scenario_hash: 74f83c8db20d85f4f3b2e3700845dd95d46fec9671514ab06207656eabdd9480
+authorship:
+  method: individually_written
+  case_id: C012
+  case_sha256: bd4210f2a0dd2f0fafa00c939397525cb5d0293867e5e9c876a71a7dec645c6a
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- output_vat
+- receipt_credit

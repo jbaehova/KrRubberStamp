@@ -1,0 +1,123 @@
+task_id: B2_B011_675f2c2d
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상포장실은 월급 직원의 약정 주휴일 낮 작업을 승인했습니다. 해당 하루 휴게를 제외한 추가 작업 대가를 완전 월급에 더한
+  뒤 공제와 이체를 대조해 주세요. payroll_calculations와 balance_total을 요청합니다. 주휴 기본임금은 정기 월급에 이미
+  들어 있습니다.
+input_files:
+- path: inputs/01_월명세근거.pdf
+  format: pdf
+- path: inputs/02_정기집행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    payroll_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          calculation:
+            type: object
+            properties:
+              effective_payment_date:
+                type: string
+              ordinary_monthly_wage:
+                type: integer
+              ordinary_hourly_wage_floor:
+                type: integer
+              base_pay:
+                type: integer
+              fixed_allowance:
+                type: integer
+              meal_allowance:
+                type: integer
+              variable_allowance:
+                type: integer
+              overtime_pay:
+                type: integer
+              night_pay:
+                type: integer
+              holiday_pay:
+                type: integer
+              weekly_holiday_pay:
+                type: integer
+              paid_holiday_pay:
+                type: integer
+              gross_pay:
+                type: integer
+              taxable_pay:
+                type: integer
+              non_taxable_pay:
+                type: integer
+              pension_base_income:
+                type: integer
+              national_pension:
+                type: integer
+              health_insurance:
+                type: integer
+              long_term_care:
+                type: integer
+              employment_insurance:
+                type: integer
+              income_tax:
+                type: integer
+              local_income_tax:
+                type: integer
+              total_deductions:
+                type: integer
+              net_pay:
+                type: integer
+            required:
+            - effective_payment_date
+            - ordinary_monthly_wage
+            - ordinary_hourly_wage_floor
+            - base_pay
+            - fixed_allowance
+            - meal_allowance
+            - variable_allowance
+            - overtime_pay
+            - night_pay
+            - holiday_pay
+            - weekly_holiday_pay
+            - paid_holiday_pay
+            - gross_pay
+            - taxable_pay
+            - non_taxable_pay
+            - pension_base_income
+            - national_pension
+            - health_insurance
+            - long_term_care
+            - employment_insurance
+            - income_tax
+            - local_income_tax
+            - total_deductions
+            - net_pay
+            additionalProperties: false
+        required:
+        - payroll_id
+        - employee_id
+        - calculation
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - payroll_calculations
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-f72a3d4f-1609-5f66-a15a-0a96ece3e1bb
+scenario_seed: 7448720882494818608
+scenario_hash: 5ed9661be569b0d944539e631172ccdad3ed518b01406d9c130ec855baadb32e
+authorship:
+  method: individually_written
+  case_id: B011
+  case_sha256: 675f2c2d7823493022b310498a6a44079270b230c6a641566110ae22c0be70b4
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- payroll_calculations
+- balance_total

@@ -1,0 +1,37 @@
+task_id: B2_C002_42e6d0ad
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상색띠인쇄의 한 완료 주문이 카드와 현금으로 나뉘어 전액 수금됐습니다. 카드 발급 원본을 실제 지급에 연결하여 매출 공급가액(tax_base)과
+  매출세액(output_vat) 및 발행세액공제(receipt_credit)를 answer.json에 작성해 주세요.
+input_files:
+- path: inputs/01_주문인도.pdf
+  format: pdf
+- path: inputs/02_수금발급.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+  required:
+  - tax_base
+  - output_vat
+  - receipt_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-7c024971-4574-5e7d-956e-2e6c0d10e9db
+scenario_seed: 4820769892916243380
+scenario_hash: 8f81f3cbe626c324a5f5c77101a7f215449a7c187d6e3d4ece84e193a2f1d8b7
+authorship:
+  method: individually_written
+  case_id: C002
+  case_sha256: 42e6d0ad132babb4fd42b5c5ea4a6f874d1151cf4a1731ed097629ddf0881845
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- tax_base
+- output_vat
+- receipt_credit

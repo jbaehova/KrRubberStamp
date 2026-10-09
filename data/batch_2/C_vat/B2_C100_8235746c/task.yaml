@@ -1,0 +1,53 @@
+task_id: B2_C100_8235746c
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상엘더공예의 현재 두 판매와 회사 장비 표시 정정 및 실제 고객 식사와 앞선 신고 자료를 검토하세요. 공제 매입세액(deductible_input_vat)과
+  불공제세액(noncreditable_vat) 및 이번 발행 공제(receipt_credit)를 answer.json에 제출하세요.
+input_files:
+- path: inputs/01_신고범위.hwpx
+  format: hwpx
+- path: inputs/02_앞선정산.pdf
+  format: pdf
+- path: inputs/03_장비인수.hwpx
+  format: hwpx
+- path: inputs/04_식사참석.pdf
+  format: pdf
+- path: inputs/05_실제실행.xlsx
+  format: xlsx
+- path: inputs/06_첫판매.pdf
+  format: pdf
+- path: inputs/07_둘판매.hwpx
+  format: hwpx
+- path: inputs/08_장비정정.xlsx
+  format: xlsx
+- path: inputs/09_식사원본.pdf
+  format: pdf
+- path: inputs/10_효력.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  - receipt_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-0c4af7d1-73c2-5a18-ae25-355311c30474
+scenario_seed: 9382533409298653719
+scenario_hash: 7ebbe9c9036edb87183176392d11fc82d8bc4453f54d5f1f2cb4b8d2274c025e
+authorship:
+  method: individually_written
+  case_id: C100
+  case_sha256: 8235746cca7b221773b8a8ed9766945750f11d27c15b89e5d3a59ccce2321c99
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat
+- receipt_credit

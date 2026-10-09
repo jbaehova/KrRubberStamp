@@ -1,0 +1,155 @@
+task_id: B2_B015_bd972409
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상예약실의 종료월 시급 명세에는 실제 소정근로와 근로자의 날 휴무 유급이 있습니다. 두 자료를 구분해 완전 월급을 계산하고
+  실제 은행 이체와 대조하세요. payroll_calculations와 employee_settlements를 요청합니다. 쉬었던 근로자의 날을
+  실제 출근 시간으로 넣지 않습니다.
+input_files:
+- path: inputs/01_근로및유급.hwpx
+  format: hwpx
+- path: inputs/02_종료월집행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    payroll_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          calculation:
+            type: object
+            properties:
+              effective_payment_date:
+                type: string
+              ordinary_monthly_wage:
+                type: integer
+              ordinary_hourly_wage_floor:
+                type: integer
+              base_pay:
+                type: integer
+              fixed_allowance:
+                type: integer
+              meal_allowance:
+                type: integer
+              variable_allowance:
+                type: integer
+              overtime_pay:
+                type: integer
+              night_pay:
+                type: integer
+              holiday_pay:
+                type: integer
+              weekly_holiday_pay:
+                type: integer
+              paid_holiday_pay:
+                type: integer
+              gross_pay:
+                type: integer
+              taxable_pay:
+                type: integer
+              non_taxable_pay:
+                type: integer
+              pension_base_income:
+                type: integer
+              national_pension:
+                type: integer
+              health_insurance:
+                type: integer
+              long_term_care:
+                type: integer
+              employment_insurance:
+                type: integer
+              income_tax:
+                type: integer
+              local_income_tax:
+                type: integer
+              total_deductions:
+                type: integer
+              net_pay:
+                type: integer
+            required:
+            - effective_payment_date
+            - ordinary_monthly_wage
+            - ordinary_hourly_wage_floor
+            - base_pay
+            - fixed_allowance
+            - meal_allowance
+            - variable_allowance
+            - overtime_pay
+            - night_pay
+            - holiday_pay
+            - weekly_holiday_pay
+            - paid_holiday_pay
+            - gross_pay
+            - taxable_pay
+            - non_taxable_pay
+            - pension_base_income
+            - national_pension
+            - health_insurance
+            - long_term_care
+            - employment_insurance
+            - income_tax
+            - local_income_tax
+            - total_deductions
+            - net_pay
+            additionalProperties: false
+        required:
+        - payroll_id
+        - employee_id
+        - calculation
+        additionalProperties: false
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - payroll_calculations
+  - employee_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-619ee505-ae44-5883-937b-bb704a26ddc3
+scenario_seed: 13661427618649765439
+scenario_hash: 8367555dd9400f830948418e05d039fe33dae758c0ef2b2715bf6ab7284036f6
+authorship:
+  method: individually_written
+  case_id: B015
+  case_sha256: bd972409ae54763f5d2bd49e1e6c720b40120f0c96ec550bbb0621b3309679f0
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- payroll_calculations
+- employee_settlements

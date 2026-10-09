@@ -1,0 +1,37 @@
+task_id: B2_C077_461c3491
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상유자대여는 차량 허가 종료 대장과 그 이전 정비의 전자 정정을 받았습니다. 실제 정비일의 차량 자격 및 현재 발급 효력을
+  대조하여 공제 매입세액(deductible_input_vat)과 불공제세액(noncreditable_vat)을 answer.json에 제출하세요.
+input_files:
+- path: inputs/01_정비완료.hwpx
+  format: hwpx
+- path: inputs/02_허가기간.pdf
+  format: pdf
+- path: inputs/03_정비정정.xlsx
+  format: xlsx
+- path: inputs/04_종료후확인.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-f17cf0b9-4bfd-5f72-873d-5a4a40f6c1c7
+scenario_seed: 5051970681488419117
+scenario_hash: b9493c15bb3a560f1a8f88cd447073d8e3f4af76756c3e7cd32c78d3dd6eec5e
+authorship:
+  method: individually_written
+  case_id: C077
+  case_sha256: 461c34917dce292d54ae63bbcbfb7551af58aec66ffa0f2ce990cc1e32bf3db1
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat

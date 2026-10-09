@@ -1,0 +1,73 @@
+task_id: B2_B019_4a54dd2c
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상인쇄준비실은 공제 전 금액을 은행에 보냈습니다. 완전한 월 명세를 계산하여 실제 실행과 비교하고 음수 잔액까지 보존해 employee_settlements와
+  deductions_total 및 balance_total을 작성해 주세요. 과다 송금을 새 세금 공제로 고치지 않습니다.
+input_files:
+- path: inputs/01_차액정책.pdf
+  format: pdf
+- path: inputs/02_지급약정.hwpx
+  format: hwpx
+- path: inputs/03_공제확인.hwpx
+  format: hwpx
+- path: inputs/04_실제출금.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    deductions_total:
+      type: integer
+    balance_total:
+      type: integer
+  required:
+  - employee_settlements
+  - deductions_total
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-a6c27a55-2bc1-527f-b7e6-cdf701d448fc
+scenario_seed: 5356149038928255636
+scenario_hash: 08b8ff2b31b622ce2808aba17c5d98f46ad58622465ce3935e8eb807f3165266
+authorship:
+  method: individually_written
+  case_id: B019
+  case_sha256: 4a54dd2c3d5e5a94907e89284e8df5fc2f2b3cfff773e1e14e53ecd424806066
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- employee_settlements
+- deductions_total
+- balance_total

@@ -1,0 +1,101 @@
+task_id: B2_D051_dd3e1478
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 라벨 13장을 확보할 두 포장 견적을 비교합니다. 개당 표시가가 아니라 실제 구매 포장 수에 따른 chosen_quote_id와
+  chosen_total 및 quote_comparisons를 작성해 주세요.
+input_files:
+- path: inputs/01_구매요청.pdf
+  format: pdf
+- path: inputs/02_북견적.xlsx
+  format: xlsx
+- path: inputs/03_남견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_quote_id:
+      type: string
+    chosen_total:
+      type: integer
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+  required:
+  - chosen_quote_id
+  - chosen_total
+  - quote_comparisons
+  additionalProperties: false
+canary: KrRubberStamp-canary-83460650-b8ef-5444-a31f-23c235a9d494
+scenario_seed: 15942202238634469726
+scenario_hash: b38af6e1160a369b95c18879a4d9c4a6bc13d0446817a39600a1e3e4d0fa70f9
+authorship:
+  method: individually_written
+  case_id: D051
+  case_sha256: dd3e14787b3ea95e374949f2c37cdcbb71c836f6c16e7a31ce7029a6b3baf3ea
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- chosen_quote_id
+- chosen_total
+- quote_comparisons

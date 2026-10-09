@@ -1,0 +1,46 @@
+task_id: B2_B066_935e5dc1
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상표지실은11월부터 정액 역할수당을 신설했지만 기관 부과 회신은 아직 기존 신고 기초입니다. 새 수당을 통상임금과 과세 임금에
+  반영하고 밤 추가 작업의 두 가산 및 기존 회신 공제를 계산한 overtime_pay, night_pay, total_deductions와 net_pay를
+  제출하세요.
+input_files:
+- path: inputs/01_역할약정.pdf
+  format: pdf
+- path: inputs/02_근태.xlsx
+  format: xlsx
+- path: inputs/03_기관.hwpx
+  format: hwpx
+- path: inputs/04_세무지급.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    total_deductions:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - total_deductions
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-7a32a3a1-1f29-5002-9cb8-5ae474a79979
+scenario_seed: 10619028057189662117
+scenario_hash: f452536bcf0e2fc0f60caddb30e0df924add10dede075f7c11860abba18b3ea6
+authorship:
+  method: individually_written
+  case_id: B066
+  case_sha256: 935e5dc188b23da51a61a9bcb5c64237b17598e266603b67b0846bbbdebdf683
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- overtime_pay
+- night_pay
+- total_deductions
+- net_pay

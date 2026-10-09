@@ -1,0 +1,101 @@
+task_id: B2_D059_5ccbd8e9
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 같은 수량의 안내 홀더 견적에서 상품과 운임의 포함 표시는 서로 다릅니다. quote_comparisons와 chosen_quote_id
+  및 chosen_total을 작성해 한 표시를 배송에 그대로 복사하지 마세요.
+input_files:
+- path: inputs/01_홀더요청.hwpx
+  format: hwpx
+- path: inputs/02_포함상품.pdf
+  format: pdf
+- path: inputs/03_별도상품.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_quote_id:
+      type: string
+    chosen_total:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_quote_id
+  - chosen_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-65be27d0-09d6-5a87-b0ad-a1c4cf169444
+scenario_seed: 6686676569021869214
+scenario_hash: a1263c0885a8480e8a183b5bf6b1e6a55ee644a042a9467f477691bb90b51f36
+authorship:
+  method: individually_written
+  case_id: D059
+  case_sha256: 5ccbd8e97879ec9ebfae9a0d24b110163c2561ff2280b0907b10159456913e9d
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_quote_id
+- chosen_total

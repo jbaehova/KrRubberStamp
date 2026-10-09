@@ -1,0 +1,189 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-03-20",
+      "events": [
+        {
+          "date": "2026-03-16",
+          "event_id": "NORTH-RECEIVED",
+          "kind": "received",
+          "line_id": "P40",
+          "order_id": "PAD-NORTH",
+          "units": 5
+        },
+        {
+          "date": "2026-03-15",
+          "event_id": "SOUTH-RECEIVED",
+          "kind": "received",
+          "line_id": "P40",
+          "order_id": "PAD-SOUTH",
+          "units": 7
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-03-11",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "선반패드40mm",
+              "line_id": "P40",
+              "ordered_packages": 2,
+              "package_price": 6600,
+              "price_includes_vat": true,
+              "units_per_package": 3
+            }
+          ],
+          "order_id": "PAD-NORTH",
+          "vendor": "가상북부자재"
+        },
+        {
+          "date": "2026-03-10",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "선반패드40mm",
+              "line_id": "P40",
+              "ordered_packages": 2,
+              "package_price": 8800,
+              "price_includes_vat": true,
+              "units_per_package": 4
+            }
+          ],
+          "order_id": "PAD-SOUTH",
+          "vendor": "가상남부완충"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 7000,
+          "date": "2026-03-13",
+          "order_id": "PAD-NORTH",
+          "payment_id": "NORTH-PAID",
+          "status": "executed"
+        },
+        {
+          "amount": 3000,
+          "date": "2026-03-12",
+          "order_id": "PAD-SOUTH",
+          "payment_id": "SOUTH-PAID",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "모든 업체와 거래는 가상이다. 마감일까지 실제 받은 수량을 원주문과 행에 연결한다. 정규화한 품명과 같은 기초단위의 재고는 공급처에 관계없이 합친다. 행 대금은 포함 포장가격 곱하기 순인수량을 포장당수량으로 나눈 뒤 버린다. 공급가액은 행 대금의 10/11을 버리고 차액을 세액으로 둔다. 실행 지급은 원주문의 업체에만 귀속하여 해당 인수대금에서 뺀다. 업체명은 NFKC, 공백과 법인 표기 제거 및 소문자로 정리한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "NORTH-RECEIVED",
+        "SOUTH-RECEIVED"
+      ],
+      "accepted_payment_ids": [
+        "NORTH-PAID",
+        "SOUTH-PAID"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "SOUTH-RECEIVED",
+          "net_units_after_event": 7
+        },
+        {
+          "event_id": "NORTH-RECEIVED",
+          "net_units_after_event": 5
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 11000,
+          "line_id": "P40",
+          "order_id": "PAD-NORTH",
+          "package_price_times_net_units": 33000,
+          "price_includes_vat": true,
+          "supply": 10000,
+          "total": 11000,
+          "units_per_package": 3,
+          "vat": 1000
+        },
+        {
+          "amount_after_floor": 15400,
+          "line_id": "P40",
+          "order_id": "PAD-SOUTH",
+          "package_price_times_net_units": 61600,
+          "price_includes_vat": true,
+          "supply": 14000,
+          "total": 15400,
+          "units_per_package": 4,
+          "vat": 1400
+        }
+      ],
+      "settlement": {
+        "balance_total": 16400,
+        "grand_total": 26400,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "선반패드40mm",
+            "net_units": 12
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "선반패드40mm",
+            "line_id": "P40",
+            "net_units": 5,
+            "order_id": "PAD-NORTH",
+            "ordered_units": 6,
+            "outstanding_units": 1,
+            "received_units": 5,
+            "returned_units": 0,
+            "supply": 10000,
+            "total": 11000,
+            "vat": 1000
+          },
+          {
+            "base_unit": "개",
+            "item": "선반패드40mm",
+            "line_id": "P40",
+            "net_units": 7,
+            "order_id": "PAD-SOUTH",
+            "ordered_units": 8,
+            "outstanding_units": 1,
+            "received_units": 7,
+            "returned_units": 0,
+            "supply": 14000,
+            "total": 15400,
+            "vat": 1400
+          }
+        ],
+        "payment_total": 10000,
+        "vendor_balances": [
+          {
+            "balance": 12400,
+            "paid": 3000,
+            "supply": 14000,
+            "total": 15400,
+            "vat": 1400,
+            "vendor": "가상남부완충"
+          },
+          {
+            "balance": 4000,
+            "paid": 7000,
+            "supply": 10000,
+            "total": 11000,
+            "vat": 1000,
+            "vendor": "가상북부자재"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

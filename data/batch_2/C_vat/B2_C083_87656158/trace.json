@@ -1,0 +1,445 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "ground_work",
+          "activity_id": "필지완료",
+          "date": "2026-04-23",
+          "description": "새 필지 토지 자체의 최초 성토 및 평탄화를 완료 인수",
+          "document_ids": [
+            "공사전자"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "가상금귤화분 새 필지",
+            "organization": "가상금귤화분"
+          },
+          "operation_id": "화분소매",
+          "participants": [
+            {
+              "name": "가상직원귤",
+              "organization": "가상금귤화분",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "평탄화공사"
+        }
+      ],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-04-23",
+          "document_id": "공사전자",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-04-23",
+          "document_id": "카드발급",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-04-24",
+          "document_id": "현금발급",
+          "replaces_document_id": null,
+          "state": "revoked"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 700000,
+          "date": "2026-04-23",
+          "document_id": "공사전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 70000,
+          "transaction_id": "평탄화공사",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 110000,
+          "date": "2026-04-23",
+          "document_id": "카드발급",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "화분카드",
+          "stated_vat": null,
+          "transaction_id": "화분판매",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 440000,
+          "date": "2026-04-23",
+          "document_id": "현금발급",
+          "document_type": "cash_receipt",
+          "includes_vat": true,
+          "payment_id": "화분현금",
+          "stated_vat": null,
+          "transaction_id": "화분판매",
+          "vat_separately_stated": false
+        }
+      ],
+      "processing_date": "2026-07-15",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "현금발급"
+      ],
+      "replacement_relations": [],
+      "selected_document_ids": [
+        "공사전자",
+        "카드발급"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "ground_work",
+          "activity_id": "필지완료",
+          "date": "2026-04-23",
+          "description": "새 필지 토지 자체의 최초 성토 및 평탄화를 완료 인수",
+          "document_ids": [
+            "공사전자"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "가상금귤화분 새 필지",
+            "organization": "가상금귤화분"
+          },
+          "operation_id": "화분소매",
+          "participants": [
+            {
+              "name": "가상직원귤",
+              "organization": "가상금귤화분",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "평탄화공사"
+        }
+      ],
+      "business_name": "가상금귤화분",
+      "evidence_documents": [
+        {
+          "amount": 700000,
+          "date": "2026-04-23",
+          "document_id": "공사전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 70000,
+          "transaction_id": "평탄화공사",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 110000,
+          "date": "2026-04-23",
+          "document_id": "카드발급",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "화분카드",
+          "stated_vat": null,
+          "transaction_id": "화분판매",
+          "vat_separately_stated": false
+        }
+      ],
+      "operations": [
+        {
+          "description": "국내 과세 화분 소매",
+          "operation_id": "화분소매",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 110000,
+          "date": "2026-04-23",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "화분카드",
+          "transaction_id": "화분판매"
+        },
+        {
+          "amount": 440000,
+          "date": "2026-04-23",
+          "includes_vat": true,
+          "method": "cash",
+          "payment_id": "화분현금",
+          "transaction_id": "화분판매"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "필지완료",
+          "amount": 770000,
+          "counterparty_consumer": false,
+          "date": "2026-04-23",
+          "description": "토지 자체 성토 및 평탄화 공사",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "평탄화공사",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        {
+          "amount": 550000,
+          "counterparty_consumer": true,
+          "date": "2026-04-23",
+          "description": "소비자 화분 전체 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "화분판매"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "공사전자"
+        ],
+        "documented_input_vat": 70000,
+        "eligible_input_document_ids": [
+          "공사전자"
+        ],
+        "gross": 770000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 0,
+        "paid_gross": 0,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "land",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 700000,
+        "transaction_id": "평탄화공사",
+        "unissued_receipt_gross": 770000,
+        "unpaid_gross": 770000,
+        "vat": 70000
+      },
+      {
+        "document_ids": [
+          "카드발급"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 550000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 110000,
+        "paid_gross": 550000,
+        "supply_base": 500000,
+        "transaction_id": "화분판매",
+        "unissued_receipt_gross": 440000,
+        "unpaid_gross": 0,
+        "vat": 50000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "공사전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "평탄화공사"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "카드발급"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "화분판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-23",
+      "transaction_id": "평탄화공사"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 770000,
+      "includes_vat": true,
+      "transaction_id": "평탄화공사"
+    },
+    "output": {
+      "gross": 770000,
+      "supply_base": 700000,
+      "vat": 70000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 70000,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "평탄화공사",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 70000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-23",
+      "transaction_id": "화분판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 550000,
+      "includes_vat": true,
+      "transaction_id": "화분판매"
+    },
+    "output": {
+      "gross": 550000,
+      "supply_base": 500000,
+      "vat": 50000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 500000
+    },
+    "output": 50000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 110000,
+      "transaction_id": "화분판매"
+    },
+    "output": {
+      "eligible_gross": 110000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 84000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 110000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 1430,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 1430
+    },
+    "output": 1430,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 1430,
+      "liability_before_credit": 50000
+    },
+    "output": 1430,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 48570,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 48570,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 50000,
+      "prepaid_vat": 0,
+      "receipt_credit": 1430
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 70000,
+      "net_vat": 48570,
+      "noncreditable_vat": 70000,
+      "output_vat": 50000,
+      "payable_vat": 48570,
+      "prepaid_vat": 0,
+      "receipt_credit": 1430,
+      "refund_vat": 0,
+      "tax_base": 500000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

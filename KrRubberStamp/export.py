@@ -477,6 +477,21 @@ def _dataset_name(n, *, preview):
     return f"KrRubberStamp-{'preview-' if preview else ''}{size}"
 
 
+def _write_source_snapshot(source, cases, target, *, preview):
+    """Keep reviewed source bytes, while previews may contain a proper subset."""
+    original = read_json(source)
+    by_id = {case["case_id"]: case for case in original}
+    if len(by_id) != len(original) or any(by_id.get(key) != case for key, case in cases.items()):
+        raise ValueError("Exported cases differ from their current source manuscript")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if set(by_id) == set(cases):
+        shutil.copy2(source, target)
+    elif preview:
+        write_json(target, [cases[key] for key in sorted(cases)])
+    else:
+        raise ValueError("Completed exports must preserve the entire reviewed source manuscript")
+
+
 def _write_export(tasks, manifests, evidence, rules, document_root, batches, output, *, preview):
     (output / "data").mkdir()
     n = len(tasks)
@@ -549,7 +564,12 @@ def _write_export(tasks, manifests, evidence, rules, document_root, batches, out
                 if document["format"] != "png"
             )
     for source, cases in source_records.items():
-        write_json(output / "authored" / source, [cases[key] for key in sorted(cases)])
+        _write_source_snapshot(
+            authoring.authored_root() / source,
+            cases,
+            output / "authored" / source,
+            preview=preview,
+        )
     for batch, manifest in manifests.items():
         write_json(output / "data" / f"batch_{batch}" / "manifest.json", manifest)
     fingerprint = digest.hexdigest()

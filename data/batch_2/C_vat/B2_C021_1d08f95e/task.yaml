@@ -1,0 +1,46 @@
+task_id: B2_C021_1d08f95e
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상양각제작은 간이 공급자의 전체 자재 카드와 소비자 주문의 부분 발급을 함께 인계했습니다. 공급 방향과 실제 지급 및 원본을
+  연결하여 불공제 매입세액(noncreditable_vat)과 발행세액공제(receipt_credit) 및 납부세액(payable_vat)과 거래
+  수(unique_transaction_count)를 answer.json에 작성해 주세요.
+input_files:
+- path: inputs/01_자격범위.hwpx
+  format: hwpx
+- path: inputs/02_자재인수.pdf
+  format: pdf
+- path: inputs/03_지급원본.xlsx
+  format: xlsx
+- path: inputs/04_일반영수증.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - noncreditable_vat
+  - receipt_credit
+  - payable_vat
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-7eb27c8a-b1c2-56ad-9707-84a30a749c01
+scenario_seed: 2092196212036672250
+scenario_hash: 7107014fbe0c2ef11f94b4f363bd058ba6a984bebbfb95d69b1313f002466bc2
+authorship:
+  method: individually_written
+  case_id: C021
+  case_sha256: 1d08f95eb2dd1afa0bf9c75f87eeded855b1ad5db25402a224ccd25cadc668a4
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- noncreditable_vat
+- receipt_credit
+- payable_vat
+- unique_transaction_count

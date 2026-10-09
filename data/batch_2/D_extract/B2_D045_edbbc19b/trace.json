@@ -1,0 +1,193 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-09-30",
+      "events": [
+        {
+          "date": "2026-10-02",
+          "event_id": "ADJUST-B-BACK",
+          "kind": "returned",
+          "line_id": "BOLT",
+          "order_id": "ADJUST-HANDLE",
+          "units": 3
+        },
+        {
+          "date": "2026-09-18",
+          "event_id": "ADJUST-B-IN",
+          "kind": "received",
+          "line_id": "BOLT",
+          "order_id": "ADJUST-HANDLE",
+          "units": 12
+        },
+        {
+          "date": "2026-09-22",
+          "event_id": "ADJUST-H-BACK",
+          "kind": "returned",
+          "line_id": "HANDLE",
+          "order_id": "ADJUST-HANDLE",
+          "units": 2
+        },
+        {
+          "date": "2026-09-17",
+          "event_id": "ADJUST-H-IN",
+          "kind": "received",
+          "line_id": "HANDLE",
+          "order_id": "ADJUST-HANDLE",
+          "units": 12
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-09-10",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "조절볼트",
+              "line_id": "BOLT",
+              "ordered_packages": 2,
+              "package_price": 6000,
+              "price_includes_vat": false,
+              "units_per_package": 6
+            },
+            {
+              "base_unit": "개",
+              "item": "조절손잡이",
+              "line_id": "HANDLE",
+              "ordered_packages": 2,
+              "package_price": 24000,
+              "price_includes_vat": false,
+              "units_per_package": 4
+            }
+          ],
+          "order_id": "ADJUST-HANDLE",
+          "vendor": "가상조절손잡이"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 30000,
+          "date": "2026-09-11",
+          "order_id": "ADJUST-HANDLE",
+          "payment_id": "ADJUST-DEP",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 실제 인수는 발주량으로 자르지 않고 마감까지 반품만 뺀다. 미인수량은 발주량에서 순량을 빼며 음수도 남긴다. 포장가격의 순량 비율은 마지막에 버리고 별도 세액은 10%를 버린다. 실행 지급만 마감까지 차감한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "ADJUST-B-IN",
+        "ADJUST-H-BACK",
+        "ADJUST-H-IN"
+      ],
+      "accepted_payment_ids": [
+        "ADJUST-DEP"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "ADJUST-H-IN",
+          "net_units_after_event": 12
+        },
+        {
+          "event_id": "ADJUST-B-IN",
+          "net_units_after_event": 12
+        },
+        {
+          "event_id": "ADJUST-H-BACK",
+          "net_units_after_event": 10
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [
+        "ADJUST-B-BACK"
+      ],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 12000,
+          "line_id": "BOLT",
+          "order_id": "ADJUST-HANDLE",
+          "package_price_times_net_units": 72000,
+          "price_includes_vat": false,
+          "supply": 12000,
+          "total": 13200,
+          "units_per_package": 6,
+          "vat": 1200
+        },
+        {
+          "amount_after_floor": 60000,
+          "line_id": "HANDLE",
+          "order_id": "ADJUST-HANDLE",
+          "package_price_times_net_units": 240000,
+          "price_includes_vat": false,
+          "supply": 60000,
+          "total": 66000,
+          "units_per_package": 4,
+          "vat": 6000
+        }
+      ],
+      "settlement": {
+        "balance_total": 49200,
+        "grand_total": 79200,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "조절볼트",
+            "net_units": 12
+          },
+          {
+            "base_unit": "개",
+            "item": "조절손잡이",
+            "net_units": 10
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "조절볼트",
+            "line_id": "BOLT",
+            "net_units": 12,
+            "order_id": "ADJUST-HANDLE",
+            "ordered_units": 12,
+            "outstanding_units": 0,
+            "received_units": 12,
+            "returned_units": 0,
+            "supply": 12000,
+            "total": 13200,
+            "vat": 1200
+          },
+          {
+            "base_unit": "개",
+            "item": "조절손잡이",
+            "line_id": "HANDLE",
+            "net_units": 10,
+            "order_id": "ADJUST-HANDLE",
+            "ordered_units": 8,
+            "outstanding_units": -2,
+            "received_units": 12,
+            "returned_units": 2,
+            "supply": 60000,
+            "total": 66000,
+            "vat": 6000
+          }
+        ],
+        "payment_total": 30000,
+        "vendor_balances": [
+          {
+            "balance": 49200,
+            "paid": 30000,
+            "supply": 72000,
+            "total": 79200,
+            "vat": 7200,
+            "vendor": "가상조절손잡이"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

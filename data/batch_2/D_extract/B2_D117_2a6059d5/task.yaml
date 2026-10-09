@@ -1,0 +1,128 @@
+task_id: B2_D117_2a6059d5
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 지지대와 고리 및 태그를 공동 주문합니다. 지지대 업체의 고리가 필요한 온전한 포장 수를 충족하지 못합니다. 나머지 공용품만
+  그 계정에 붙여도 운임 문턱에 못 미치므로 전체 chosen_offers와 vendor_cart_totals를 다시 비교해 주세요.
+input_files:
+- path: inputs/01_지지대약정.pdf
+  format: pdf
+- path: inputs/02_고리태그요청.xlsx
+  format: xlsx
+- path: inputs/03_지지대공방.hwpx
+  format: hwpx
+- path: inputs/04_설치소모품.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-71ce6318-0259-529a-8b9a-e25f4970dfca
+scenario_seed: 3053539320348234234
+scenario_hash: b86773bcff386caa5f597dee0ee4caca971a3d717ca4e7c1c3ff60b05893aed6
+authorship:
+  method: individually_written
+  case_id: D117
+  case_sha256: 2a6059d5610b51fa1a6377205c47dfd5e19dabc01be01472271438cbf87aaa13
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals

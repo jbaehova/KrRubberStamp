@@ -1,0 +1,130 @@
+task_id: B2_D101_d2a2fc5e
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 케이블과 고리 및 태그를 함께 구매합니다. 업체마다 취급하지 않는 품목이 있으므로 실제 가능한 전체 조합에서 chosen_offers와
+  vendor_cart_totals 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_세품목요청.pdf
+  format: pdf
+- path: inputs/02_북중견적.xlsx
+  format: xlsx
+- path: inputs/03_남견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8ff75388-38d9-5ce1-b8a9-8742be27d78e
+scenario_seed: 15177971176492684133
+scenario_hash: b287ddae9a83d3a32ccfda3a3d37db17e68e42ff994459bc063e98acae64e17a
+authorship:
+  method: individually_written
+  case_id: D101
+  case_sha256: d2a2fc5e61f6d365ae28587abdf282e16c55a222926f8005d3c0766967697387
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

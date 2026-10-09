@@ -1,0 +1,692 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "회사자재인수",
+          "date": "2026-06-09",
+          "description": "과세 전시 소품 제작 자재 전량 인수",
+          "document_ids": [
+            "자재구본",
+            "자재대체",
+            "자재종이"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상페블전시점 전시실",
+            "organization": "가상페블전시점"
+          },
+          "operation_id": "전시소매",
+          "participants": [
+            {
+              "name": "가상직원블",
+              "organization": "가상페블전시점",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "전시자재"
+        },
+        {
+          "action": "service",
+          "activity_id": "가족주택설치",
+          "date": "2026-05-19",
+          "description": "사업장과 별개 가족 주택에만 사용하는 소품 설치",
+          "document_ids": [
+            "가족전자"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "가상대표 가족 주택",
+            "organization": "가상대표가족"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상가족페",
+              "organization": "가상대표가족",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "가족소품"
+        }
+      ],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-05-19",
+          "document_id": "가족전자",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-06-11",
+          "document_id": "자재구본",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-06-11",
+          "document_id": "자재대체",
+          "replaces_document_id": "자재구본",
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-06-09",
+          "document_id": "자재종이",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-06-23",
+          "document_id": "판매전자",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-06-22",
+          "document_id": "판매카드",
+          "replaces_document_id": null,
+          "state": "valid"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 100000,
+          "date": "2026-05-19",
+          "document_id": "가족전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 10000,
+          "transaction_id": "가족소품",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 1056000,
+          "date": "2026-06-09",
+          "document_id": "자재구본",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "자재전체",
+          "stated_vat": null,
+          "transaction_id": "전시자재",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 1056000,
+          "date": "2026-06-09",
+          "document_id": "자재대체",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "자재전체",
+          "stated_vat": 96000,
+          "transaction_id": "전시자재",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 1056000,
+          "date": "2026-06-09",
+          "document_id": "자재종이",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "자재전체",
+          "stated_vat": null,
+          "transaction_id": "전시자재",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 1000000,
+          "date": "2026-06-22",
+          "document_id": "판매전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 100000,
+          "transaction_id": "전시판매",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 440000,
+          "date": "2026-06-22",
+          "document_id": "판매카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "판매부분",
+          "stated_vat": null,
+          "transaction_id": "전시판매",
+          "vat_separately_stated": false
+        }
+      ],
+      "processing_date": "2026-07-18",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "자재구본",
+        "판매전자"
+      ],
+      "replacement_relations": [
+        {
+          "revoked_document_id": "자재구본",
+          "valid_document_id": "자재대체"
+        }
+      ],
+      "selected_document_ids": [
+        "가족전자",
+        "자재대체",
+        "자재종이",
+        "판매카드"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "회사자재인수",
+          "date": "2026-06-09",
+          "description": "과세 전시 소품 제작 자재 전량 인수",
+          "document_ids": [
+            "자재대체",
+            "자재종이"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상페블전시점 전시실",
+            "organization": "가상페블전시점"
+          },
+          "operation_id": "전시소매",
+          "participants": [
+            {
+              "name": "가상직원블",
+              "organization": "가상페블전시점",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "전시자재"
+        },
+        {
+          "action": "service",
+          "activity_id": "가족주택설치",
+          "date": "2026-05-19",
+          "description": "사업장과 별개 가족 주택에만 사용하는 소품 설치",
+          "document_ids": [
+            "가족전자"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "가상대표 가족 주택",
+            "organization": "가상대표가족"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상가족페",
+              "organization": "가상대표가족",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "가족소품"
+        }
+      ],
+      "business_name": "가상페블전시점",
+      "evidence_documents": [
+        {
+          "amount": 100000,
+          "date": "2026-05-19",
+          "document_id": "가족전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 10000,
+          "transaction_id": "가족소품",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 1056000,
+          "date": "2026-06-09",
+          "document_id": "자재대체",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "자재전체",
+          "stated_vat": 96000,
+          "transaction_id": "전시자재",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 1056000,
+          "date": "2026-06-09",
+          "document_id": "자재종이",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "자재전체",
+          "stated_vat": null,
+          "transaction_id": "전시자재",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 440000,
+          "date": "2026-06-22",
+          "document_id": "판매카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "판매부분",
+          "stated_vat": null,
+          "transaction_id": "전시판매",
+          "vat_separately_stated": false
+        }
+      ],
+      "filing_site_id": "페블신고점",
+      "operations": [
+        {
+          "description": "국내 과세 전시 소품 소매",
+          "operation_id": "전시소매",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 1056000,
+          "date": "2026-06-09",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "자재전체",
+          "transaction_id": "전시자재"
+        },
+        {
+          "amount": 440000,
+          "date": "2026-06-22",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "판매부분",
+          "transaction_id": "전시판매"
+        }
+      ],
+      "site_year_records": [
+        {
+          "site_id": "페블별도점",
+          "site_name": "가상페블별도점",
+          "supply_base": 1200000000,
+          "year": 2025
+        },
+        {
+          "site_id": "페블신고점",
+          "site_name": "가상페블전시점",
+          "supply_base": 800000000,
+          "year": 2025
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "가족주택설치",
+          "amount": 110000,
+          "counterparty_consumer": false,
+          "date": "2026-05-19",
+          "description": "가족 주택 사적 전용 소품",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "가족소품",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        {
+          "activity_id": "회사자재인수",
+          "amount": 1056000,
+          "counterparty_consumer": false,
+          "date": "2026-06-09",
+          "description": "회사 과세 전시 제작 자재",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "전시자재",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        {
+          "amount": 1100000,
+          "counterparty_consumer": true,
+          "date": "2026-06-22",
+          "description": "소비자 전시 소품 전체 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "전시판매"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "가족전자"
+        ],
+        "documented_input_vat": 10000,
+        "eligible_input_document_ids": [
+          "가족전자"
+        ],
+        "gross": 110000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 0,
+        "paid_gross": 0,
+        "purchase_activity_facts": {
+          "business_related": false,
+          "purpose": "private",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 100000,
+        "transaction_id": "가족소품",
+        "unissued_receipt_gross": 110000,
+        "unpaid_gross": 110000,
+        "vat": 10000
+      },
+      {
+        "document_ids": [
+          "자재대체",
+          "자재종이"
+        ],
+        "documented_input_vat": 96000,
+        "eligible_input_document_ids": [
+          "자재대체"
+        ],
+        "gross": 1056000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 1056000,
+        "paid_gross": 1056000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 960000,
+        "transaction_id": "전시자재",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 96000
+      },
+      {
+        "document_ids": [
+          "판매카드"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 1100000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 440000,
+        "paid_gross": 440000,
+        "supply_base": 1000000,
+        "transaction_id": "전시판매",
+        "unissued_receipt_gross": 660000,
+        "unpaid_gross": 660000,
+        "vat": 100000
+      }
+    ],
+    "prior_year_site_supply_base": 800000000,
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "가족전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "가족소품"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "자재대체",
+        "자재종이"
+      ],
+      "evidence": [
+        "card_receipt",
+        "receipt"
+      ],
+      "transaction_id": "전시자재"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "판매카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "전시판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-19",
+      "transaction_id": "가족소품"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 110000,
+      "includes_vat": true,
+      "transaction_id": "가족소품"
+    },
+    "output": {
+      "gross": 110000,
+      "supply_base": 100000,
+      "vat": 10000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "documented_input_vat": 10000,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "가족소품",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 10000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-09",
+      "transaction_id": "전시자재"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1056000,
+      "includes_vat": true,
+      "transaction_id": "전시자재"
+    },
+    "output": {
+      "gross": 1056000,
+      "supply_base": 960000,
+      "vat": 96000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 96000,
+      "evidence": [
+        "card_receipt",
+        "receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "전시자재",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 96000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-22",
+      "transaction_id": "전시판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "전시판매"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1000000
+    },
+    "output": 100000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 440000,
+      "transaction_id": "전시판매"
+    },
+    "output": {
+      "eligible_gross": 440000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 800000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 440000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 5720,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 5720
+    },
+    "output": 5720,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 5720,
+      "liability_before_credit": 4000
+    },
+    "output": 4000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 500000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 500000
+    },
+    "output": -500000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 96000,
+      "output_vat": 100000,
+      "prepaid_vat": 500000,
+      "receipt_credit": 4000
+    },
+    "output": {
+      "deductible_input_vat": 96000,
+      "input_vat": 106000,
+      "net_vat": -500000,
+      "noncreditable_vat": 10000,
+      "output_vat": 100000,
+      "payable_vat": 0,
+      "prepaid_vat": 500000,
+      "receipt_credit": 4000,
+      "refund_vat": 500000,
+      "tax_base": 1000000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

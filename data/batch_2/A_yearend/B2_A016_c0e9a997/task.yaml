@@ -1,0 +1,37 @@
+task_id: B2_A016_c0e9a997
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상새순실험의 가상도인솔은 난임 시술 영수증에 연결된 보전금을 받았습니다. 일반 본인 진료비부터 총급여 문턱을 적용하고 보전
+  후 난임 비용에 해당 공제율을 적용해 의료비 세액공제를 작성하세요. 결정 국세도 함께 적습니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_일반진료.pdf
+  format: pdf
+- path: inputs/03_난임시술.pdf
+  format: pdf
+- path: inputs/04_보전금.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    medical_credit:
+      type: integer
+    final_national_tax:
+      type: integer
+  required:
+  - medical_credit
+  - final_national_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-3ee5f63b-f913-5cfe-8b1c-0a9a8db2cc36
+scenario_seed: 13900828190979079457
+scenario_hash: 69e0a4a75d0cb61594ff84d82caa97724fa323e7fc37cc142db00293518033fa
+authorship:
+  method: individually_written
+  case_id: A016
+  case_sha256: c0e9a997070b3d213ce315a62f6390dc74287baa3acd53c9f02329ed12f9ff05
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- medical_credit
+- final_national_tax

@@ -1,0 +1,130 @@
+task_id: B2_D111_e7714277
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 전용 거치대와 종이띠 및 고리를 주문합니다. 공용품 하나만 동봉하면 운임이 남고 둘을 같이 붙여야 전용품 공급처의 무료배송
+  조건을 채웁니다. chosen_offers와 vendor_cart_totals 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_보관품요청.pdf
+  format: pdf
+- path: inputs/02_거치대공방.xlsx
+  format: xlsx
+- path: inputs/03_소모품점.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-60b12609-36aa-5610-a81d-a1d56373d461
+scenario_seed: 16677183978096304262
+scenario_hash: c33b2d91008d4a2a278688e1d22907f6996481ee3134be2c3f03504cd1a4d7dd
+authorship:
+  method: individually_written
+  case_id: D111
+  case_sha256: e7714277f44420865ace4b3f3dc53c38dea328ae3d9b0089d007a78a8ecbc86a
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

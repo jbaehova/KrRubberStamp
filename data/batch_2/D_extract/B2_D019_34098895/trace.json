@@ -1,0 +1,127 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-04-30",
+      "events": [
+        {
+          "date": "2026-04-23",
+          "event_id": "LAMP-IN",
+          "kind": "received",
+          "line_id": "L",
+          "order_id": "LAMP-APR",
+          "units": 5
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-04-18",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "경고등",
+              "line_id": "L",
+              "ordered_packages": 1,
+              "package_price": 100000,
+              "price_includes_vat": false,
+              "units_per_package": 5
+            }
+          ],
+          "order_id": "LAMP-APR",
+          "vendor": "가상경고등"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 30000,
+          "date": "2026-04-20",
+          "order_id": "LAMP-APR",
+          "payment_id": "LAMP-DEP",
+          "status": "executed"
+        },
+        {
+          "amount": 80000,
+          "date": "2026-05-02",
+          "order_id": "LAMP-APR",
+          "payment_id": "LAMP-FINAL",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "가상 거래이다. 순인수량에 포장가격 비율을 곱해 마지막에 버리고 별도 행 세액은 공급가액 10%를 버린다. executed라도 마감일 이후 지급은 이번 스냅샷에서 제외한다. 업체명은 NFKC와 공백 및 법인 표기 제거 후 소문자로 정규화한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "LAMP-IN"
+      ],
+      "accepted_payment_ids": [
+        "LAMP-DEP"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "LAMP-IN",
+          "net_units_after_event": 5
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [
+        "LAMP-FINAL"
+      ],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 100000,
+          "line_id": "L",
+          "order_id": "LAMP-APR",
+          "package_price_times_net_units": 500000,
+          "price_includes_vat": false,
+          "supply": 100000,
+          "total": 110000,
+          "units_per_package": 5,
+          "vat": 10000
+        }
+      ],
+      "settlement": {
+        "balance_total": 80000,
+        "grand_total": 110000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "경고등",
+            "net_units": 5
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "경고등",
+            "line_id": "L",
+            "net_units": 5,
+            "order_id": "LAMP-APR",
+            "ordered_units": 5,
+            "outstanding_units": 0,
+            "received_units": 5,
+            "returned_units": 0,
+            "supply": 100000,
+            "total": 110000,
+            "vat": 10000
+          }
+        ],
+        "payment_total": 30000,
+        "vendor_balances": [
+          {
+            "balance": 80000,
+            "paid": 30000,
+            "supply": 100000,
+            "total": 110000,
+            "vat": 10000,
+            "vendor": "가상경고등"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

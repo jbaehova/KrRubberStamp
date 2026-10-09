@@ -1,0 +1,103 @@
+task_id: B2_D085_821e1526
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 점검 스티커 견적 한 곳은 상품을 무상 제공하지만 무료배송 기준은 별도로 있습니다. quote_comparisons와 chosen_vendor
+  및 chosen_total을 작성해 상품 0원이 배송 0원이라고 가정하지 마세요.
+input_files:
+- path: inputs/01_스티커요청.pdf
+  format: pdf
+- path: inputs/02_무상상품.xlsx
+  format: xlsx
+- path: inputs/03_무상배송.hwpx
+  format: hwpx
+- path: inputs/04_유상견적.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_vendor:
+      type: string
+    chosen_total:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_vendor
+  - chosen_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-9c172bbb-a864-57ac-9e12-b69037eef403
+scenario_seed: 9375954728054841514
+scenario_hash: 794cde6c4a94089283f67e1e82aea7b48a9c563b845a251866aa8fc5bc30e71c
+authorship:
+  method: individually_written
+  case_id: D085
+  case_sha256: 821e152633da60aa9367b9099fe90562a1f2cf190a172edf50637730b65430a1
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_vendor
+- chosen_total

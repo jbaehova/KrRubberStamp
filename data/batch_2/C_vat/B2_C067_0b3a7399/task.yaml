@@ -1,0 +1,37 @@
+task_id: B2_C067_0b3a7399
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상석류소품은 전자 정정 주문과 현금 발급 주문을 구별해 인계했습니다. 유효 대체 전자의 범위와 앞선 적법한 Q1 예정신고
+  공제 이력을 확인하여 발행 공제(receipt_credit)와 납부액(payable_vat)을 answer.json에 회신하세요.
+input_files:
+- path: inputs/01_기신고이력.hwpx
+  format: hwpx
+- path: inputs/02_현재공급.xlsx
+  format: xlsx
+- path: inputs/03_원본정정.pdf
+  format: pdf
+- path: inputs/04_최종확인.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-080b1b7e-7641-5d75-b2d0-9573d501ea52
+scenario_seed: 809086185857496308
+scenario_hash: 9391e633d6d2d8814c08a5cd9c7e373f300c1b0e2703a930187b0bdb8e50788a
+authorship:
+  method: individually_written
+  case_id: C067
+  case_sha256: 0b3a73996cb634f4487493767d51be2a1ca2c1835ad09bb16785b1cff6fd78ab
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- receipt_credit
+- payable_vat

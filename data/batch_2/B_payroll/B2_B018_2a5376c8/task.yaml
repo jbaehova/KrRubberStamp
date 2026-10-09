@@ -1,0 +1,73 @@
+task_id: B2_B018_2a5376c8
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상전시장 원장은 서로 다른 정상 지급일의 두 완전 월 명세를 담습니다. 기준일 뒤에 지급된 직원의 행은 현금 누계에서 제외하되
+  그 직원 명세의 실수령액은 계산해 주세요. employee_settlements와 net_total 및 paid_total을 요청합니다.
+input_files:
+- path: inputs/01_마감정책.pdf
+  format: pdf
+- path: inputs/02_직원1.hwpx
+  format: hwpx
+- path: inputs/03_직원2.hwpx
+  format: hwpx
+- path: inputs/04_일괄원장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    net_total:
+      type: integer
+    paid_total:
+      type: integer
+  required:
+  - employee_settlements
+  - net_total
+  - paid_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-4f0d65ec-e33c-524d-b616-b6d6361404c3
+scenario_seed: 3049911977565813324
+scenario_hash: fe12bc26a1ea0821e3c00ba503d32eadd9a25ebf609a1cbf696704d92f40d332
+authorship:
+  method: individually_written
+  case_id: B018
+  case_sha256: 2a5376c8d304fa4c4ef7bc900f09c170bcfc0d2b1994f2739f1dcebf8a421f65
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- employee_settlements
+- net_total
+- paid_total

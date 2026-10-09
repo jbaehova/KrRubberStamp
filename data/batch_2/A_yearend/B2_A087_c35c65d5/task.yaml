@@ -1,0 +1,45 @@
+task_id: B2_A087_c35c65d5
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상윤재의 성년 장애인 자녀 명의 임대차를 인적관계 명부에 연결하세요. 자녀의 기본공제 나이 예외와 장애인 전용 보장성보험의
+  피보험자 요건을 함께 검토하여 기본공제 및 추가공제와 월세 및 보험료 공제액을 제출합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_임차.pdf
+  format: pdf
+- path: inputs/03_세대.hwpx
+  format: hwpx
+- path: inputs/04_전용보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    additional_deduction:
+      type: integer
+    rent_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - additional_deduction
+  - rent_credit
+  - insurance_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-27e475c6-747e-5a42-ab38-1d5272b062ee
+scenario_seed: 14077238504094415041
+scenario_hash: 99d8bcbebbed03a2bb180fe699956313adc9ad1f51d15c7147e08cac8d3c4566
+authorship:
+  method: individually_written
+  case_id: A087
+  case_sha256: c35c65d5c6ffb8c11f72545ece4706999d68bc4e58c2f21e7a5377c6364977b8
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- eligible_dependents
+- additional_deduction
+- rent_credit
+- insurance_credit

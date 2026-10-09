@@ -1,0 +1,286 @@
+[
+  {
+    "inputs": {
+      "annual_gross": 54000000,
+      "cards": [
+        {
+          "amount": 11000000,
+          "category": "credit",
+          "date": "2025-10-01",
+          "person_id": "self"
+        },
+        {
+          "amount": 8000000,
+          "category": "debit",
+          "date": "2025-11-01",
+          "person_id": "sib"
+        }
+      ],
+      "dependents": [
+        {
+          "age": 19,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "sib",
+          "relation": "sibling",
+          "supported": true
+        }
+      ],
+      "employee_age": 30,
+      "employee_name": "가상준호",
+      "employment_end": "2025-12-31",
+      "employment_start": "2025-01-01",
+      "non_taxable": 2000000,
+      "reference_year": 2025,
+      "rent": {
+        "area_sqm": 53,
+        "contract_address": "가상하늘길 29 303호",
+        "contract_holder_person_id": "sib",
+        "household_head": true,
+        "household_homes_at_year_end": [],
+        "identity_records": [
+          {
+            "name": "가상준호",
+            "person_id": "self",
+            "relation": "self"
+          },
+          {
+            "name": "가상준호제",
+            "person_id": "sib",
+            "relation": "sibling"
+          }
+        ],
+        "payments": [
+          {
+            "amount": 6200000,
+            "date": "2025-12-03"
+          }
+        ],
+        "resident_registration_address": "가상하늘길29 303호",
+        "standard_value": 230000000
+      },
+      "scope_note": "국내 거주 무주택 세대주다. 같은 주민등록 세대의 무소득 19세 동생을 실제 부양하며 본인에게 공제 배정했다. 월세는 직원 자비이고 카드 묶음은 서로 중복되지 않는다.",
+      "source_contract": "yearend_evidence_v1"
+    },
+    "output": {
+      "rent.address_matches": true,
+      "rent.eligible_contract_holder": true,
+      "rent.homeless_household": true
+    },
+    "rule_id": "A_EVIDENCE_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "dependents": [
+        {
+          "age": 19,
+          "assigned_claimant": "self",
+          "income_amount": 0,
+          "person_id": "sib",
+          "relation": "sibling",
+          "supported": true
+        }
+      ]
+    },
+    "output": {
+      "additional": 0,
+      "basic": 3000000,
+      "rejected": []
+    },
+    "rule_id": "A_PERSONAL"
+  },
+  {
+    "inputs": {
+      "annual_gross": 54000000,
+      "non_taxable": 2000000
+    },
+    "output": {
+      "salary_deduction": 12350000,
+      "salary_income": 39650000,
+      "total_salary": 52000000
+    },
+    "rule_id": "A_SALARY"
+  },
+  {
+    "inputs": {
+      "public_pension_paid": 0
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_SPECIAL_DEDUCTION"
+  },
+  {
+    "inputs": {},
+    "output": 0,
+    "rule_id": "A_HOUSING"
+  },
+  {
+    "inputs": {
+      "salary": 52000000,
+      "spending": {
+        "credit": 11000000
+      }
+    },
+    "output": 0,
+    "rule_id": "A_CARD"
+  },
+  {
+    "inputs": {
+      "accounts": {},
+      "salary": 52000000
+    },
+    "output": 0,
+    "rule_id": "A_PENSION_CREDIT"
+  },
+  {
+    "inputs": {
+      "birth_orders": [
+        0
+      ],
+      "eligible_children_age_8_plus": 0
+    },
+    "output": 0,
+    "rule_id": "A_CHILD"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 52000000
+    },
+    "output": 0,
+    "rule_id": "A_INSURANCE_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 52000000
+    },
+    "output": 0,
+    "rule_id": "A_MEDICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 52000000
+    },
+    "output": 0,
+    "rule_id": "A_EDUCATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 52000000
+    },
+    "output": 0,
+    "rule_id": "A_DONATION_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 52000000
+    },
+    "output": 0,
+    "rule_id": "A_POLITICAL_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {},
+      "salary": 52000000
+    },
+    "output": 0,
+    "rule_id": "A_HOMETOWN_CREDIT"
+  },
+  {
+    "inputs": {
+      "expenses": {
+        "address_matches": true,
+        "area_sqm": 53,
+        "contract_address": "가상하늘길 29 303호",
+        "eligible_contract_holder": true,
+        "homeless_household": true,
+        "household_head": true,
+        "household_homes_at_year_end": [],
+        "payments": [
+          {
+            "amount": 6200000,
+            "date": "2025-12-03"
+          }
+        ],
+        "resident_registration_address": "가상하늘길29 303호",
+        "standard_value": 230000000
+      },
+      "salary": 52000000
+    },
+    "output": 1054000,
+    "rule_id": "A_RENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "tax_base": 36650000
+    },
+    "output": 4237500,
+    "rule_id": "A_TAX_BRACKETS"
+  },
+  {
+    "inputs": {
+      "computed_tax": 4237500,
+      "salary": 52000000
+    },
+    "output": 660000,
+    "rule_id": "A_EMPLOYMENT_CREDIT"
+  },
+  {
+    "inputs": {
+      "deduction_choice": "itemized",
+      "special_deductions_requested": true
+    },
+    "output": {
+      "housing_deduction_applied": 0,
+      "special_credits_applied": {
+        "donation_credit": 0,
+        "education_credit": 0,
+        "hometown_credit": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "political_credit": 0,
+        "rent_credit": 1054000
+      },
+      "special_income_deduction_applied": 0,
+      "standard_credit": 0
+    },
+    "rule_id": "A_STANDARD"
+  },
+  {
+    "inputs": {
+      "computed_tax": 4237500,
+      "total_tax_credits": 1714000
+    },
+    "output": 2523500,
+    "rule_id": "A_FINAL"
+  },
+  {
+    "inputs": {
+      "final_national_tax": 2523500
+    },
+    "output": 252350,
+    "rule_id": "A_LOCAL"
+  },
+  {
+    "inputs": {
+      "final_local": 252350,
+      "final_national": 2523500,
+      "paid_local": 0,
+      "paid_national": 0
+    },
+    "output": {
+      "local": 252350,
+      "national": 2523500,
+      "total": 2775850
+    },
+    "rule_id": "A_SETTLEMENT"
+  }
+]

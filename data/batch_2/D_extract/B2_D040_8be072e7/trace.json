@@ -1,0 +1,211 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-04-30",
+      "events": [
+        {
+          "date": "2026-04-22",
+          "event_id": "OUTPUT-C-IN",
+          "kind": "received",
+          "line_id": "C",
+          "order_id": "OUTPUT-CURRENT",
+          "units": 2
+        },
+        {
+          "date": "2026-05-06",
+          "event_id": "OUTPUT-F-IN",
+          "kind": "received",
+          "line_id": "F",
+          "order_id": "OUTPUT-FUTURE",
+          "units": 3
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-04-15",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "출력헤드C",
+              "line_id": "C",
+              "ordered_packages": 1,
+              "package_price": 120000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "OUTPUT-CURRENT",
+          "vendor": "가상출력부품"
+        },
+        {
+          "date": "2026-05-02",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "출력헤드F",
+              "line_id": "F",
+              "ordered_packages": 1,
+              "package_price": 210000,
+              "price_includes_vat": false,
+              "units_per_package": 3
+            }
+          ],
+          "order_id": "OUTPUT-FUTURE",
+          "vendor": "가상출력부품"
+        },
+        {
+          "date": "2026-04-10",
+          "kind": "quote",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "출력헤드F",
+              "line_id": "Q",
+              "ordered_packages": 1,
+              "package_price": 180000,
+              "price_includes_vat": false,
+              "units_per_package": 3
+            }
+          ],
+          "order_id": "OUTPUT-QUOTE",
+          "vendor": "가상출력제안"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 50000,
+          "date": "2026-04-18",
+          "order_id": "OUTPUT-CURRENT",
+          "payment_id": "OUTPUT-C-PAID",
+          "status": "executed"
+        },
+        {
+          "amount": 60000,
+          "date": "2026-05-03",
+          "order_id": "OUTPUT-FUTURE",
+          "payment_id": "OUTPUT-F-PAID",
+          "status": "executed"
+        },
+        {
+          "amount": 70000,
+          "date": "2026-04-12",
+          "order_id": "OUTPUT-QUOTE",
+          "payment_id": "OUTPUT-Q-PLAN",
+          "status": "planned"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. quote는 모든 정산에서 제외하고 실제 order 행은 미래 발주라도 유지한다. 마감까지 실제 입고와 반품 및 executed 지급만 계산한다. 포장가격의 순인수 비율을 마지막에 버리고 별도 세액은 10%를 버린다. 업체명은 NFKC, 공백과 법인 표기 제거 및 소문자로 정리한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "OUTPUT-C-IN"
+      ],
+      "accepted_payment_ids": [
+        "OUTPUT-C-PAID"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "OUTPUT-C-IN",
+          "net_units_after_event": 2
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [
+        "OUTPUT-F-IN"
+      ],
+      "excluded_payment_ids": [
+        "OUTPUT-F-PAID",
+        "OUTPUT-Q-PLAN"
+      ],
+      "excluded_quote_order_ids": [
+        "OUTPUT-QUOTE"
+      ],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 120000,
+          "line_id": "C",
+          "order_id": "OUTPUT-CURRENT",
+          "package_price_times_net_units": 240000,
+          "price_includes_vat": false,
+          "supply": 120000,
+          "total": 132000,
+          "units_per_package": 2,
+          "vat": 12000
+        },
+        {
+          "amount_after_floor": 0,
+          "line_id": "F",
+          "order_id": "OUTPUT-FUTURE",
+          "package_price_times_net_units": 0,
+          "price_includes_vat": false,
+          "supply": 0,
+          "total": 0,
+          "units_per_package": 3,
+          "vat": 0
+        }
+      ],
+      "settlement": {
+        "balance_total": 82000,
+        "grand_total": 132000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "출력헤드c",
+            "net_units": 2
+          },
+          {
+            "base_unit": "개",
+            "item": "출력헤드f",
+            "net_units": 0
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "출력헤드c",
+            "line_id": "C",
+            "net_units": 2,
+            "order_id": "OUTPUT-CURRENT",
+            "ordered_units": 2,
+            "outstanding_units": 0,
+            "received_units": 2,
+            "returned_units": 0,
+            "supply": 120000,
+            "total": 132000,
+            "vat": 12000
+          },
+          {
+            "base_unit": "개",
+            "item": "출력헤드f",
+            "line_id": "F",
+            "net_units": 0,
+            "order_id": "OUTPUT-FUTURE",
+            "ordered_units": 3,
+            "outstanding_units": 3,
+            "received_units": 0,
+            "returned_units": 0,
+            "supply": 0,
+            "total": 0,
+            "vat": 0
+          }
+        ],
+        "payment_total": 50000,
+        "vendor_balances": [
+          {
+            "balance": 82000,
+            "paid": 50000,
+            "supply": 120000,
+            "total": 132000,
+            "vat": 12000,
+            "vendor": "가상출력부품"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

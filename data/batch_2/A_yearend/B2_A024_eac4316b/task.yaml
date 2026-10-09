@@ -1,0 +1,176 @@
+task_id: B2_A024_eac4316b
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상발급등대의 가상송시우가 같은 사용자의 두 지급기간 발급본과 상반기 정정 초안을 제출했습니다. 최고 수정차수라는 이유로 초안의
+  원천징수액을 환급 계산에 넣지 말고 발급본만 합산하세요. 사용자별 합계와 채택 및 제외 번호, 국세 및 지방세 기납부액과 최종 정산 객체를 회신합니다.
+input_files:
+- path: inputs/01_상반기발급.pdf
+  format: pdf
+- path: inputs/02_정정초안.xlsx
+  format: xlsx
+- path: inputs/03_하반기발급.hwpx
+  format: hwpx
+- path: inputs/04_발급접수.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    employer_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          employer_id:
+            type: string
+          gross_pay:
+            type: integer
+          non_taxable_pay:
+            type: integer
+          withheld_national_tax:
+            type: integer
+          withheld_local_tax:
+            type: integer
+        required:
+        - employer_id
+        - gross_pay
+        - non_taxable_pay
+        - withheld_national_tax
+        - withheld_local_tax
+        additionalProperties: false
+    used_statement_ids:
+      type: array
+      items:
+        type: string
+    excluded_statement_ids:
+      type: array
+      items:
+        type: string
+    paid_national_tax:
+      type: integer
+    paid_local_tax:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - employer_totals
+  - used_statement_ids
+  - excluded_statement_ids
+  - paid_national_tax
+  - paid_local_tax
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-f473954e-4c73-586c-b769-750418a429e6
+scenario_seed: 16916700436636134053
+scenario_hash: df5e9f5e33bb7e15ce4b27108a6d83a2c181b42399bbb505e7e9538420717352
+authorship:
+  method: individually_written
+  case_id: A024
+  case_sha256: eac4316b29646aa5ba23ad2a122d8fcade24cd4de278e0ef54e1d127a3726348
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- employer_totals
+- used_statement_ids
+- excluded_statement_ids
+- paid_national_tax
+- paid_local_tax
+- tax_calculation

@@ -1,0 +1,36 @@
+task_id: B2_C001_755b8eb9
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상작업핀점은 한 완료 주문의 현금과 카드 부분 발급을 각각 정정받았습니다. 구 원본 두 장에는 같은 숫자가 적혀 있지만 실제
+  지급은 다릅니다. 각 지급에 붙은 최종 대체 원본을 확인해 매출세액(output_vat) 및 발급 공제(receipt_credit)를 answer.json에
+  회신하세요.
+input_files:
+- path: inputs/01_핀인도.pdf
+  format: pdf
+- path: inputs/02_두발급원본.xlsx
+  format: xlsx
+- path: inputs/03_지급별정정.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+  required:
+  - output_vat
+  - receipt_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-7ca5422d-dd17-59fe-85b7-dddbba5b7546
+scenario_seed: 8456509653297496569
+scenario_hash: 62b2fabbcde29be139eb1fed24c07e76b365e0e4e2e6716836dd11b3bbb408d2
+authorship:
+  method: individually_written
+  case_id: C001
+  case_sha256: 755b8eb9a47581f9a64cf2592a8be40f4fa683ad2c15be2d9a57c7143665a0ea
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- output_vat
+- receipt_credit

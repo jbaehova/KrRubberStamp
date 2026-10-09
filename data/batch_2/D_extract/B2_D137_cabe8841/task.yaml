@@ -1,0 +1,133 @@
+task_id: B2_D137_cabe8841
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 세 부속품은 통합센터에서 모두 받을 수도 있고 전문점별로 받을 수도 있습니다. 모든 유효 조합의 비용이 같아도 계정 수가 적다는
+  이유로 통합 주문을 먼저 고르면 안 됩니다. 아직 시작하지 않은 필터 전문점 견적을 제외하고 chosen_offers와 vendor_cart_totals
+  및 feasible_cart_count를 작성해 주세요.
+input_files:
+- path: inputs/01_세품목요청.pdf
+  format: pdf
+- path: inputs/02_필터전문점.xlsx
+  format: xlsx
+- path: inputs/03_두전문점.hwpx
+  format: hwpx
+- path: inputs/04_통합센터.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    feasible_cart_count:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - feasible_cart_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-55892d6d-04f9-5816-8aad-b167c7e14e5e
+scenario_seed: 14609264056564284312
+scenario_hash: b0eee16a465ff48a99e767b7a7bc29db1e3e495e800021488c5757281f90c9db
+authorship:
+  method: individually_written
+  case_id: D137
+  case_sha256: cabe884199657b98405920fc751b2004ca8dc8850d6ee5d01c4ec6b3398b270e
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- feasible_cart_count

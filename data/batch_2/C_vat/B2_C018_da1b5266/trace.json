@@ -1,0 +1,385 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "교육반입",
+          "date": "2026-04-14",
+          "description": "수업 전용 종이를 별도 면세 교육실에 인수했다.",
+          "document_ids": [
+            "교육전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "인가 교육실"
+          },
+          "operation_id": "교육",
+          "participants": [
+            {
+              "name": "가상김반입",
+              "organization": "가상주문제본",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "교육지"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "제본반입",
+          "date": "2026-04-14",
+          "description": "제본용 종이를 과세 작업장에 인수했다.",
+          "document_ids": [
+            "제본전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "제본 작업장"
+          },
+          "operation_id": "제본",
+          "participants": [
+            {
+              "name": "가상김반입",
+              "organization": "가상주문제본",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "제본지"
+        }
+      ],
+      "business_name": "가상주문제본",
+      "evidence_documents": [
+        {
+          "amount": 600000,
+          "date": "2026-04-14",
+          "document_id": "교육전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 60000,
+          "transaction_id": "교육지",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 1000000,
+          "date": "2026-04-14",
+          "document_id": "제본전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 100000,
+          "transaction_id": "제본지",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 주문 유상 제본",
+          "operation_id": "제본",
+          "output_taxable": true
+        },
+        {
+          "description": "인가된 면세 교육 전용 수업",
+          "operation_id": "교육",
+          "output_taxable": false
+        }
+      ],
+      "payments": [
+        {
+          "amount": 660000,
+          "date": "2026-04-14",
+          "includes_vat": true,
+          "method": "bank_transfer",
+          "payment_id": "교육완납",
+          "transaction_id": "교육지"
+        },
+        {
+          "amount": 330000,
+          "date": "2026-04-14",
+          "includes_vat": true,
+          "method": "bank_transfer",
+          "payment_id": "제본부분",
+          "transaction_id": "제본지"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "교육반입",
+          "amount": 600000,
+          "counterparty_consumer": false,
+          "date": "2026-04-14",
+          "description": "면세 수업 전용 종이 전체",
+          "direction": "purchase",
+          "includes_vat": false,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "교육지",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        {
+          "activity_id": "제본반입",
+          "amount": 1000000,
+          "counterparty_consumer": false,
+          "date": "2026-04-14",
+          "description": "제본용 종이 전체",
+          "direction": "purchase",
+          "includes_vat": false,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "제본지",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "교육전자"
+        ],
+        "documented_input_vat": 60000,
+        "eligible_input_document_ids": [
+          "교육전자"
+        ],
+        "gross": 660000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 0,
+        "paid_gross": 660000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "exempt_business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 600000,
+        "transaction_id": "교육지",
+        "unissued_receipt_gross": 660000,
+        "unpaid_gross": 0,
+        "vat": 60000
+      },
+      {
+        "document_ids": [
+          "제본전자"
+        ],
+        "documented_input_vat": 100000,
+        "eligible_input_document_ids": [
+          "제본전자"
+        ],
+        "gross": 1100000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 0,
+        "paid_gross": 330000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 1000000,
+        "transaction_id": "제본지",
+        "unissued_receipt_gross": 1100000,
+        "unpaid_gross": 770000,
+        "vat": 100000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "교육전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "교육지"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "제본전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "제본지"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-14",
+      "transaction_id": "교육지"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 600000,
+      "includes_vat": false,
+      "transaction_id": "교육지"
+    },
+    "output": {
+      "gross": 660000,
+      "supply_base": 600000,
+      "vat": 60000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 60000,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "exempt_business",
+      "supplier_general": true,
+      "transaction_id": "교육지",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 60000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-14",
+      "transaction_id": "제본지"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1000000,
+      "includes_vat": false,
+      "transaction_id": "제본지"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 100000,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "제본지",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 100000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 130000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": -100000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -100000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -100000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 100000,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 100000,
+      "input_vat": 160000,
+      "net_vat": -100000,
+      "noncreditable_vat": 60000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 100000,
+      "tax_base": 0,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

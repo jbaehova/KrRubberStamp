@@ -1,0 +1,108 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-01-10",
+      "events": [
+        {
+          "date": "2026-01-08",
+          "event_id": "LABEL-RECEIVE",
+          "kind": "received",
+          "line_id": "STOCK",
+          "order_id": "LABEL-FIVE",
+          "units": 62
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-01-05",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "장",
+              "item": "창고라벨",
+              "line_id": "STOCK",
+              "ordered_packages": 5,
+              "package_price": 3000,
+              "price_includes_vat": false,
+              "units_per_package": 15
+            }
+          ],
+          "order_id": "LABEL-FIVE",
+          "vendor": "가상창고라벨"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "업체와 거래는 가상이다. 포장발주는 포장수 곱하기 포장당 기초수량이다. 마감일까지 입고와 반품을 대조하고 순입고의 포장가격 곱하기 기초수량 나누기 포장당수량을 마지막에 버린다. 별도 가격 세액은 행 공급가액의 10%를 버린다. 실행 지급만 차감한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "LABEL-RECEIVE"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "LABEL-RECEIVE",
+          "net_units_after_event": 62
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 12400,
+          "line_id": "STOCK",
+          "order_id": "LABEL-FIVE",
+          "package_price_times_net_units": 186000,
+          "price_includes_vat": false,
+          "supply": 12400,
+          "total": 13640,
+          "units_per_package": 15,
+          "vat": 1240
+        }
+      ],
+      "settlement": {
+        "balance_total": 13640,
+        "grand_total": 13640,
+        "item_quantities": [
+          {
+            "base_unit": "장",
+            "item": "창고라벨",
+            "net_units": 62
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "장",
+            "item": "창고라벨",
+            "line_id": "STOCK",
+            "net_units": 62,
+            "order_id": "LABEL-FIVE",
+            "ordered_units": 75,
+            "outstanding_units": 13,
+            "received_units": 62,
+            "returned_units": 0,
+            "supply": 12400,
+            "total": 13640,
+            "vat": 1240
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 13640,
+            "paid": 0,
+            "supply": 12400,
+            "total": 13640,
+            "vat": 1240,
+            "vendor": "가상창고라벨"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

@@ -1,0 +1,138 @@
+task_id: B2_A052_f32f35c8
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상온유의 두 근무처 지급액을 연간으로 합치세요. 직원 본인의 나이와 장애 증명에 따른 추가공제를 적용하고 산출세액과 근로소득세액공제를
+  구별해 전체 세금 계산 객체를 제출합니다.
+input_files:
+- path: inputs/01_지도.xlsx
+  format: xlsx
+- path: inputs/02_검수.pdf
+  format: pdf
+- path: inputs/03_본인자격.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    annual_gross:
+      type: integer
+    non_taxable:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - annual_gross
+  - non_taxable
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-b44f2973-e462-5db3-bc79-e9362ce3033b
+scenario_seed: 17523283810442743283
+scenario_hash: 879e278d45b18a9fd7af6015e54d77640bc41ba112deda6c732aba28cb2771a2
+authorship:
+  method: individually_written
+  case_id: A052
+  case_sha256: f32f35c883cb0df39fb650441867be491282e0b4e4b11acb3f20ff735760c5dc
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- annual_gross
+- non_taxable
+- tax_calculation

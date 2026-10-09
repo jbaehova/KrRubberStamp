@@ -1,0 +1,46 @@
+task_id: B2_B073_cdb01368
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상간지실의 밤 카드 날짜가 실제 월요일로 최종 정정됐습니다. 시각과 휴게는 같고 지정 주휴일은 직전 일요일입니다. 최종 승인
+  날짜로 지급을 다시 분류하여 overtime_pay, holiday_pay, night_pay와 gross_pay를 제출하세요. 야간 시간까지
+  달라졌다고 추정하지 마세요.
+input_files:
+- path: inputs/01_임금.pdf
+  format: pdf
+- path: inputs/02_정정.xlsx
+  format: xlsx
+- path: inputs/03_기관.hwpx
+  format: hwpx
+- path: inputs/04_세무.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - holiday_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-01bb2d04-d6d6-5091-9269-c0011452c21d
+scenario_seed: 14821367714482853031
+scenario_hash: 1415577575a48cb1375341d524c111fdd9f82f59a8008b10845e95c0daede436
+authorship:
+  method: individually_written
+  case_id: B073
+  case_sha256: cdb01368cb3194a70b663a757dd1cd8f43f9b1869ee6ba80080088a4896477df
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- overtime_pay
+- holiday_pay
+- night_pay
+- gross_pay

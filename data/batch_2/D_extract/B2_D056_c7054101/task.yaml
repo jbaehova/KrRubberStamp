@@ -1,0 +1,101 @@
+task_id: B2_D056_c7054101
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 현장 라벨의 두 공급 제안은 필요한 포장 재고와 납기를 충족합니다. 하나는 상품과 배송을 모두 무상 제안했습니다. quote_comparisons와
+  chosen_quote_id 및 chosen_total을 작성해 금액 0을 미기재로 버리지 마세요.
+input_files:
+- path: inputs/01_라벨요청.pdf
+  format: pdf
+- path: inputs/02_무상제안.xlsx
+  format: xlsx
+- path: inputs/03_유상제안.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_quote_id:
+      type: string
+    chosen_total:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_quote_id
+  - chosen_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-30a07434-fa83-5587-8539-5107d77529ef
+scenario_seed: 14340940060990206065
+scenario_hash: d35db477bc18d2996d19096bd124ec55d13b8fc3225e4d1a7f13dca5139b438b
+authorship:
+  method: individually_written
+  case_id: D056
+  case_sha256: c7054101007d70719f0523f28a486d6941fdabe521ff1581249cb033325046a5
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_quote_id
+- chosen_total

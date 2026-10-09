@@ -1,0 +1,41 @@
+task_id: B2_A084_02ad0529
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상태민의 배우자 명의 임대차와 연말 세대 주택 목록을 대조하세요. 가족 계약자 자격과 세대 무주택 요건을 각각 확인하고 배우자
+  자비 보험료를 별도로 처리해 월세 및 보험 공제액을 제출합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_임차.pdf
+  format: pdf
+- path: inputs/03_주택.hwpx
+  format: hwpx
+- path: inputs/04_보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    rent_credit:
+      type: integer
+    insurance_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - rent_credit
+  - insurance_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-9a90774e-c4aa-5d27-89ac-8da7032f78c6
+scenario_seed: 192816033186720467
+scenario_hash: eac4cc061920bc2ed48774b2f3ef3a2935b9d04fa66c9447a62eb610c5d4f9b5
+authorship:
+  method: individually_written
+  case_id: A084
+  case_sha256: 02ad05291d182ad386edbbe127da24ec1dbde2be33a25b92b1d0fab9cefd72b6
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- eligible_dependents
+- rent_credit
+- insurance_credit

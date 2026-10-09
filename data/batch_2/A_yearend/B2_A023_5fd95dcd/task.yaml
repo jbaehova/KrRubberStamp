@@ -1,0 +1,153 @@
+task_id: B2_A023_5fd95dcd
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상정정음반의 가상임다빈은 연간 원천증명서의 비과세액이 정정된 발급본과 이전 발급본 및 문화비 사용명세를 제출했습니다. 같은
+  사용자와 같은 지급기간의 최고 발급 수정차수로 급여를 복원하여 문화비 적용을 계산하세요. 채택 및 제외 증명서 번호와 연간 지급액 및 비과세,
+  카드 공제가 든 세금 계산 객체를 회신합니다.
+input_files:
+- path: inputs/01_이전원천.pdf
+  format: pdf
+- path: inputs/02_정정원천.xlsx
+  format: xlsx
+- path: inputs/03_접수규약.hwpx
+  format: hwpx
+- path: inputs/04_문화카드.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    used_statement_ids:
+      type: array
+      items:
+        type: string
+    excluded_statement_ids:
+      type: array
+      items:
+        type: string
+    annual_gross:
+      type: integer
+    non_taxable:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - used_statement_ids
+  - excluded_statement_ids
+  - annual_gross
+  - non_taxable
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-e7add86b-0c4e-5272-a22c-d292229b84ac
+scenario_seed: 6906654641774426563
+scenario_hash: e3be11e6acdb7da345b2723ae681b39d3a58a88e28cd29c78e9ef9ed1f6f6d7f
+authorship:
+  method: individually_written
+  case_id: A023
+  case_sha256: 5fd95dcdbd4479c376aee7e559dcb572f83f51607205be07c2d4286ffd7e9e0e
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- used_statement_ids
+- excluded_statement_ids
+- annual_gross
+- non_taxable
+- tax_calculation

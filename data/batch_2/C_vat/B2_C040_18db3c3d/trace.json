@@ -1,0 +1,578 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "빔-집인수",
+          "date": "2026-03-02",
+          "description": "가족 생활 수납용 판재를 대표 집에 인도했다.",
+          "document_ids": [
+            "빔-집카드"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "대표 가족 주택"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상조가족",
+              "organization": "가상가족주택",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "빔-판재집"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "빔-간이인수",
+          "date": "2026-03-03",
+          "description": "받침 제작에만 쓸 완충 폼을 공정실에서 인수했다.",
+          "document_ids": [
+            "빔-폼카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "빔받침 공정실"
+          },
+          "operation_id": "빔-생산",
+          "participants": [
+            {
+              "name": "가상우공정",
+              "organization": "가상빔받침",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "빔-폼간이"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "빔-적격인수",
+          "date": "2026-03-04",
+          "description": "받침 제작 전용 고정핀을 별도 발주로 인수했다.",
+          "document_ids": [
+            "빔-핀전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "빔받침 공정실"
+          },
+          "operation_id": "빔-생산",
+          "participants": [
+            {
+              "name": "가상우공정",
+              "organization": "가상빔받침",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "빔-핀일반"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 받침제품 제작",
+          "operation_id": "빔-생산",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "빔-집인수",
+          "date": "2026-03-02",
+          "document_id": "빔-집카드",
+          "transaction_id": "빔-판재집"
+        },
+        {
+          "activity_id": "빔-간이인수",
+          "date": "2026-03-03",
+          "document_id": "빔-폼카드",
+          "transaction_id": "빔-폼간이"
+        },
+        {
+          "activity_id": "빔-적격인수",
+          "date": "2026-03-04",
+          "document_id": "빔-핀전자",
+          "transaction_id": "빔-핀일반"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "supplier_status_records": [
+        {
+          "status": "general",
+          "supplier_id": "빔-공급일반",
+          "valid_from": "2025-01-01",
+          "valid_to": "2026-12-31"
+        },
+        {
+          "status": "simplified_no_invoice_duty",
+          "supplier_id": "빔-공급간이",
+          "valid_from": "2025-07-01",
+          "valid_to": "2026-12-31"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": false,
+        "document_id": "빔-집카드",
+        "purpose": "private",
+        "transaction_id": "빔-판재집"
+      },
+      {
+        "business_related": true,
+        "document_id": "빔-폼카드",
+        "purpose": "business",
+        "transaction_id": "빔-폼간이"
+      },
+      {
+        "business_related": true,
+        "document_id": "빔-핀전자",
+        "purpose": "business",
+        "transaction_id": "빔-핀일반"
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "빔-공급일반",
+        "transaction_id": "빔-판재집"
+      },
+      {
+        "supplier_general": false,
+        "supplier_id": "빔-공급간이",
+        "transaction_id": "빔-폼간이"
+      },
+      {
+        "supplier_general": true,
+        "supplier_id": "빔-공급일반",
+        "transaction_id": "빔-핀일반"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "빔-전자1"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "빔-납품1"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "빔-전자2"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "빔-납품2"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "빔-전자3"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "빔-납품3"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "빔-집카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "빔-판재집"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "빔-폼카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "빔-폼간이"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "빔-핀전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "빔-핀일반"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-01",
+      "transaction_id": "빔-납품1"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2300000,
+      "includes_vat": false,
+      "transaction_id": "빔-납품1"
+    },
+    "output": {
+      "gross": 2530000,
+      "supply_base": 2300000,
+      "vat": 230000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 2300000
+    },
+    "output": 230000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "빔-납품1"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-01",
+      "transaction_id": "빔-납품2"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1540000,
+      "includes_vat": true,
+      "transaction_id": "빔-납품2"
+    },
+    "output": {
+      "gross": 1540000,
+      "supply_base": 1400000,
+      "vat": 140000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1400000
+    },
+    "output": 140000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "빔-납품2"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-01",
+      "transaction_id": "빔-납품3"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3100000,
+      "includes_vat": false,
+      "transaction_id": "빔-납품3"
+    },
+    "output": {
+      "gross": 3410000,
+      "supply_base": 3100000,
+      "vat": 310000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 3100000
+    },
+    "output": 310000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "빔-납품3"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-02",
+      "transaction_id": "빔-판재집"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 242000,
+      "includes_vat": true,
+      "transaction_id": "빔-판재집"
+    },
+    "output": {
+      "gross": 242000,
+      "supply_base": 220000,
+      "vat": 22000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "빔-판재집",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 22000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-03",
+      "transaction_id": "빔-폼간이"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 363000,
+      "includes_vat": true,
+      "transaction_id": "빔-폼간이"
+    },
+    "output": {
+      "gross": 363000,
+      "supply_base": 330000,
+      "vat": 33000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "빔-폼간이",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 33000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-04",
+      "transaction_id": "빔-핀일반"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 460000,
+      "includes_vat": false,
+      "transaction_id": "빔-핀일반"
+    },
+    "output": {
+      "gross": 506000,
+      "supply_base": 460000,
+      "vat": 46000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "빔-핀일반",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 46000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 218000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 634000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 634000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 634000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 46000,
+      "output_vat": 680000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 46000,
+      "input_vat": 101000,
+      "net_vat": 634000,
+      "noncreditable_vat": 55000,
+      "output_vat": 680000,
+      "payable_vat": 634000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 6800000,
+      "unique_transaction_count": 6
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

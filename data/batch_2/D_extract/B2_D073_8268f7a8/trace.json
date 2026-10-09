@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "장",
+      "item": "현장표찰",
+      "latest_delivery_date": "2026-08-17",
+      "order_date": "2026-08-14",
+      "processing_policy": "합성 사적 구매: 필요/포장수량 올림과 최소포장수 중 큰 값 구매. 상품/운임 각각 포함가 10/11 버림 공급가액과 차액 세액 또는 별도 10% 버림 세액. 상품 세금포함 총액만 무료배송 기준 비교. 배송일은 주문일+달력일수로 주말 포함. 주문일 효력/구매포장재고/최종납기를 충족한 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 1,
+          "minimum_packs": 1,
+          "pack_price": 550,
+          "pack_units": 4,
+          "price_includes_vat": true,
+          "quote_id": "SIGN-ONE",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-08-01",
+          "valid_until": "2026-08-31",
+          "vendor": "가상표찰긴급"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 880,
+          "pack_units": 8,
+          "price_includes_vat": true,
+          "quote_id": "SIGN-THREE",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-08-01",
+          "valid_until": "2026-08-31",
+          "vendor": "가상표찰정기"
+        }
+      ],
+      "required_units": 16,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "장",
+      "comparison": {
+        "chosen_leftover_units": 0,
+        "chosen_quote_id": "SIGN-THREE",
+        "chosen_total": 1760,
+        "chosen_vendor": "가상표찰정기",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-08-15",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 2000,
+            "merchandise_total": 2200,
+            "merchandise_vat": 200,
+            "obtained_units": 16,
+            "packs": 4,
+            "quote_id": "SIGN-ONE",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 2000,
+            "total": 2200,
+            "valid_on_order": true,
+            "vat": 200,
+            "vendor": "가상표찰긴급"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-08-17",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 1600,
+            "merchandise_total": 1760,
+            "merchandise_vat": 160,
+            "obtained_units": 16,
+            "packs": 2,
+            "quote_id": "SIGN-THREE",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 1600,
+            "total": 1760,
+            "valid_on_order": true,
+            "vat": 160,
+            "vendor": "가상표찰정기"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 1,
+          "merchandise_amount_before_vat_split": 2200,
+          "minimum_packs": 1,
+          "pack_units": 4,
+          "packs_after_minimum": 4,
+          "price_includes_vat": true,
+          "quote_id": "SIGN-ONE",
+          "required_packs_before_minimum": 4,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 2200
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 1760,
+          "minimum_packs": 1,
+          "pack_units": 8,
+          "packs_after_minimum": 2,
+          "price_includes_vat": true,
+          "quote_id": "SIGN-THREE",
+          "required_packs_before_minimum": 2,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 1760
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "현장표찰",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          1760,
+          "가상표찰정기",
+          "SIGN-THREE"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            1760,
+            "가상표찰정기",
+            "SIGN-THREE"
+          ],
+          [
+            2200,
+            "가상표찰긴급",
+            "SIGN-ONE"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

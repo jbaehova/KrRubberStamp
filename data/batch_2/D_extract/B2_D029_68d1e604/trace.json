@@ -1,0 +1,171 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-07-15",
+      "events": [
+        {
+          "date": "2026-07-12",
+          "event_id": "CAP-N-IN",
+          "kind": "received",
+          "line_id": "C",
+          "order_id": "CAP-NARROW",
+          "units": 6
+        },
+        {
+          "date": "2026-07-10",
+          "event_id": "CAP-W-IN",
+          "kind": "received",
+          "line_id": "C",
+          "order_id": "CAP-WIDE",
+          "units": 7
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-07-07",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "표본캡C1",
+              "line_id": "C",
+              "ordered_packages": 1,
+              "package_price": 8800,
+              "price_includes_vat": false,
+              "units_per_package": 8
+            }
+          ],
+          "order_id": "CAP-NARROW",
+          "vendor": "가상실험캡"
+        },
+        {
+          "date": "2026-07-05",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "표본캡Ｃ１",
+              "line_id": "C",
+              "ordered_packages": 2,
+              "package_price": 5500,
+              "price_includes_vat": false,
+              "units_per_package": 5
+            }
+          ],
+          "order_id": "CAP-WIDE",
+          "vendor": "가상표본캡"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "업체는 가상이다. 마감까지 입고와 반품을 주문 및 행에 연결하고 NFKC와 공백 제거 및 소문자화한 품명과 기초단위별로 순량을 합친다. 포장가격의 순량 비율을 마지막에 버리고 별도 세액은 10%를 버린다. 실행 지급만 반영한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "CAP-N-IN",
+        "CAP-W-IN"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "CAP-W-IN",
+          "net_units_after_event": 7
+        },
+        {
+          "event_id": "CAP-N-IN",
+          "net_units_after_event": 6
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 6600,
+          "line_id": "C",
+          "order_id": "CAP-NARROW",
+          "package_price_times_net_units": 52800,
+          "price_includes_vat": false,
+          "supply": 6600,
+          "total": 7260,
+          "units_per_package": 8,
+          "vat": 660
+        },
+        {
+          "amount_after_floor": 7700,
+          "line_id": "C",
+          "order_id": "CAP-WIDE",
+          "package_price_times_net_units": 38500,
+          "price_includes_vat": false,
+          "supply": 7700,
+          "total": 8470,
+          "units_per_package": 5,
+          "vat": 770
+        }
+      ],
+      "settlement": {
+        "balance_total": 15730,
+        "grand_total": 15730,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "표본캡c1",
+            "net_units": 13
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "표본캡c1",
+            "line_id": "C",
+            "net_units": 6,
+            "order_id": "CAP-NARROW",
+            "ordered_units": 8,
+            "outstanding_units": 2,
+            "received_units": 6,
+            "returned_units": 0,
+            "supply": 6600,
+            "total": 7260,
+            "vat": 660
+          },
+          {
+            "base_unit": "개",
+            "item": "표본캡c1",
+            "line_id": "C",
+            "net_units": 7,
+            "order_id": "CAP-WIDE",
+            "ordered_units": 10,
+            "outstanding_units": 3,
+            "received_units": 7,
+            "returned_units": 0,
+            "supply": 7700,
+            "total": 8470,
+            "vat": 770
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 7260,
+            "paid": 0,
+            "supply": 6600,
+            "total": 7260,
+            "vat": 660,
+            "vendor": "가상실험캡"
+          },
+          {
+            "balance": 8470,
+            "paid": 0,
+            "supply": 7700,
+            "total": 8470,
+            "vat": 770,
+            "vendor": "가상표본캡"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

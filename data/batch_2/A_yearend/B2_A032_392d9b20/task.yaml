@@ -1,0 +1,149 @@
+task_id: B2_A032_392d9b20
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상공유서가의 가상최해봄은 부양 어머니와 부녀자 공제를 신청했는데 같은 사용자에서 다른 직원의 원천증명서도 함께 보냈습니다.
+  직원 번호로 증명서를 먼저 구분하고 해봄의 근로소득금액에 따라 인적공제를 계산하세요. 채택 및 제외 번호와 연간 급여 및 전체 세금 계산 객체를
+  회신합니다.
+input_files:
+- path: inputs/01_본인원천.pdf
+  format: pdf
+- path: inputs/02_다른직원.xlsx
+  format: xlsx
+- path: inputs/03_인사접수.hwpx
+  format: hwpx
+- path: inputs/04_어머니부양.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    used_statement_ids:
+      type: array
+      items:
+        type: string
+    excluded_statement_ids:
+      type: array
+      items:
+        type: string
+    annual_gross:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - used_statement_ids
+  - excluded_statement_ids
+  - annual_gross
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-5e58e36f-8996-5451-9d4a-883e10413e4c
+scenario_seed: 4120119796700990324
+scenario_hash: d20a7ace0e98a783e7c54d671c0da30ee6da85bfdce4b7bb47469e6f9c4b6de8
+authorship:
+  method: individually_written
+  case_id: A032
+  case_sha256: 392d9b20326acb743df84ee8cd65edb89a7323e58874334b8732cc7e02119604
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- used_statement_ids
+- excluded_statement_ids
+- annual_gross
+- tax_calculation

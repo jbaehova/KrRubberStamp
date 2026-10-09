@@ -1,0 +1,138 @@
+task_id: B2_C051_80006710
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상윤곽디자인의 반기 공급은 전자 세금계산서 한 건으로 확정됐습니다. 은행은 실제 납부 실행과 그 뒤 이미 확인된 반환 실행을
+  별도로 보내왔습니다. 신고세액을 먼저 계산하고 양방향 은행 실행의 순유출을 대조하여 filing_calculations와 registration_settlements
+  및 paid_total과 received_total을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_완료및발급.pdf
+  format: pdf
+- path: inputs/02_납부실행.xlsx
+  format: xlsx
+- path: inputs/03_확정반환.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    filing_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          filing_id:
+            type: string
+          taxpayer_id:
+            type: string
+          registration_id:
+            type: string
+          business_name:
+            type: string
+          calculation:
+            type: object
+            properties:
+              tax_base:
+                type: integer
+              output_vat:
+                type: integer
+              input_vat:
+                type: integer
+              noncreditable_vat:
+                type: integer
+              deductible_input_vat:
+                type: integer
+              receipt_credit:
+                type: integer
+              prepaid_vat:
+                type: integer
+              net_vat:
+                type: integer
+              payable_vat:
+                type: integer
+              refund_vat:
+                type: integer
+              unique_transaction_count:
+                type: integer
+            required:
+            - tax_base
+            - output_vat
+            - input_vat
+            - noncreditable_vat
+            - deductible_input_vat
+            - receipt_credit
+            - prepaid_vat
+            - net_vat
+            - payable_vat
+            - refund_vat
+            - unique_transaction_count
+            additionalProperties: false
+        required:
+        - filing_id
+        - taxpayer_id
+        - registration_id
+        - business_name
+        - calculation
+        additionalProperties: false
+    registration_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          filing_id:
+            type: string
+          taxpayer_id:
+            type: string
+          registration_id:
+            type: string
+          business_name:
+            type: string
+          tax_due:
+            type: integer
+          payable_vat:
+            type: integer
+          refund_vat:
+            type: integer
+          paid:
+            type: integer
+          received:
+            type: integer
+          net_outflow:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - filing_id
+        - taxpayer_id
+        - registration_id
+        - business_name
+        - tax_due
+        - payable_vat
+        - refund_vat
+        - paid
+        - received
+        - net_outflow
+        - balance
+        additionalProperties: false
+    paid_total:
+      type: integer
+    received_total:
+      type: integer
+  required:
+  - filing_calculations
+  - registration_settlements
+  - paid_total
+  - received_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-5b765382-9944-5966-bf27-cbfb09f8a7e0
+scenario_seed: 9223485358205313168
+scenario_hash: f02cf55f3d3a745ff46a0470b79b7c027cbb004fdb5f3364bcd730e4e370115a
+authorship:
+  method: individually_written
+  case_id: C051
+  case_sha256: 80006710aed820905cd582f339bf340b17c52cfb8008a8d3f8b0fcd993929237
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- filing_calculations
+- registration_settlements
+- paid_total
+- received_total

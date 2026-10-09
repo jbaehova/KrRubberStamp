@@ -1,0 +1,240 @@
+[
+  {
+    "inputs": {
+      "activities": [],
+      "billing_policy": "가상포개소매의 확정 청구 약정이다. 모든 단가는 부가세 제외 공급가다. 수량에 개당 할인 후 단가를 곱하고 해당 행 전체 할인을 한 번 뺀다. 상품행 합계에서 상품 전체 할인을 뺀 뒤 같은 공급자의 과세 배송 공급가를 더한다. 상품 전체 할인은 배송에 적용하지 않는다. 견적이나 부가세 포함 단가 및 단위 변환은 없고 고객이 완납한 실제 카드 발급은 이 청구 전체를 대상으로 한다.",
+      "business_name": "가상포개소매",
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "operations": [],
+      "period_end": "2026-06-30",
+      "period_start": "2026-01-01",
+      "prepaid_assessed_vat": 0,
+      "prior_year_site_supply_base": 86000000,
+      "receipt_credit_previously_claimed": 0,
+      "scope_note": "국내 소비자 대상 일반과세 소매의 완료 주문 한 건이다. 두 상품과 같은 공급자의 과세 배송은 하나의 적격 전체 카드 전표로 정상 발행됐다. 전자는 발행하지 않았고 다른 거래 및 선납과 공제는 없다. 제시된 세액은 신고 계산 원단위의 요청 값이며 별도의 국고 현금 납입액을 요청하지 않는다.",
+      "source_contract": "vat_itemized_activity_evidence_v1",
+      "taxpayer_type": "general",
+      "transactions": [
+        {
+          "counterparty_consumer": true,
+          "date": "2026-06-15",
+          "description": "소비자에게 인도한 포개함과 받침 및 과세 배송",
+          "direction": "sale",
+          "document_discount": 10000,
+          "document_id": "포개완납카드",
+          "evidence": "card_receipt",
+          "freight_supply": 15000,
+          "invoice_issued": false,
+          "invoice_lines": [
+            {
+              "description": "별도 할인 없는 받침2개",
+              "line_discount": 0,
+              "line_id": "받침행",
+              "quantity": 2,
+              "unit_discount": 0,
+              "unit_supply_price": 18000
+            },
+            {
+              "description": "포개함8개와 개당 할인 및 행 전체 할인",
+              "line_discount": 2000,
+              "line_id": "포개함행",
+              "quantity": 8,
+              "unit_discount": 500,
+              "unit_supply_price": 12500
+            }
+          ],
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "포개주문",
+          "vat_separately_stated": true
+        }
+      ]
+    },
+    "output": {
+      "deduplicated_document_ids": [],
+      "invoice_amounts": [
+        {
+          "document_discount": 10000,
+          "document_id": "포개완납카드",
+          "final_gross": 148500,
+          "final_supply": 135000,
+          "final_vat": 13500,
+          "freight_supply": 15000,
+          "lines": [
+            {
+              "after_unit_discount": 36000,
+              "line_discount": 0,
+              "line_id": "받침행",
+              "line_principal": 36000,
+              "line_supply": 36000,
+              "quantity": 2,
+              "unit_discount": 0,
+              "unit_supply_price": 18000
+            },
+            {
+              "after_unit_discount": 96000,
+              "line_discount": 2000,
+              "line_id": "포개함행",
+              "line_principal": 100000,
+              "line_supply": 94000,
+              "quantity": 8,
+              "unit_discount": 500,
+              "unit_supply_price": 12500
+            }
+          ],
+          "merchandise_supply": 130000,
+          "transaction_id": "포개주문"
+        }
+      ]
+    },
+    "rule_id": "C_VAT_ITEMIZED_ACTIVITY"
+  },
+  {
+    "inputs": {
+      "activities": [],
+      "operations": [],
+      "purchase_links": [],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "포개완납카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "포개주문"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-15",
+      "transaction_id": "포개주문"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 135000,
+      "includes_vat": false,
+      "transaction_id": "포개주문"
+    },
+    "output": {
+      "gross": 148500,
+      "supply_base": 135000,
+      "vat": 13500
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 135000
+    },
+    "output": 13500,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "포개주문"
+    },
+    "output": {
+      "eligible_gross": 148500
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 86000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 148500,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 1930,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 1930
+    },
+    "output": 1930,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 1930,
+      "liability_before_credit": 13500
+    },
+    "output": 1930,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 11570,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 11570,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 13500,
+      "prepaid_vat": 0,
+      "receipt_credit": 1930
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 0,
+      "net_vat": 11570,
+      "noncreditable_vat": 0,
+      "output_vat": 13500,
+      "payable_vat": 11570,
+      "prepaid_vat": 0,
+      "receipt_credit": 1930,
+      "refund_vat": 0,
+      "tax_base": 135000,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

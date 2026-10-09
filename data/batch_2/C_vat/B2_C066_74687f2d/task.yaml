@@ -1,0 +1,41 @@
+task_id: B2_C066_74687f2d
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상대추발은 판매 전자 취소와 설비 인수를 함께 마감합니다. 현재 유효 원본을 연결하여 공제 매입세액(deductible_input_vat)과
+  발행 공제(receipt_credit) 및 납부액(payable_vat)을 answer.json에 보고하세요.
+input_files:
+- path: inputs/01_소매공급.pdf
+  format: pdf
+- path: inputs/02_설비인수.hwpx
+  format: hwpx
+- path: inputs/03_실행및원본.xlsx
+  format: xlsx
+- path: inputs/04_효력확정.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-538d5877-9e3d-5640-aad2-e24b5f9c9496
+scenario_seed: 8388094140195012939
+scenario_hash: eaf2cfda174dba33c495c130cf85f16e4f2f55050d4b5e6d1d92f3245e6e0b84
+authorship:
+  method: individually_written
+  case_id: C066
+  case_sha256: 74687f2db0dc014b1b23877707b6accc28d36b2af4642b4992d119f64cc4f78b
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- receipt_credit
+- payable_vat

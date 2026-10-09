@@ -1,0 +1,89 @@
+task_id: B2_D015_6160a4f3
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 방진 커버 발주의 납품 대기 현황을 확인하세요. 입고가 없는 주문도 행을 지우지 말고 주문 수량과 미인수량을 남깁니다. answer.json에는
+  line_settlements와 item_quantities를 정해진 주문 및 품목 순서로 작성하세요. 실제 인수 재고가 없는 행은 0 수량으로
+  보고합니다.
+input_files:
+- path: inputs/01_커버발주.pdf
+  format: pdf
+- path: inputs/02_커버진행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+  required:
+  - line_settlements
+  - item_quantities
+  additionalProperties: false
+canary: KrRubberStamp-canary-9aeb54f1-b56e-5d89-aff9-f9804aa3b472
+scenario_seed: 7016789586953665930
+scenario_hash: 125e7d0ccff42833b888290be9c626f1aeddaceaa83b64e739f11461c17ad8d5
+authorship:
+  method: individually_written
+  case_id: D015
+  case_sha256: 6160a4f3ea087d8acd668b0fa3af17ffbc0f8ab5715ddcda64ef7c1dda280d9f
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- item_quantities

@@ -1,0 +1,480 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "재고수령",
+          "date": "2026-06-17",
+          "description": "판매 재고 전량을 직원이 창고에서 수령",
+          "document_ids": [
+            "재고전자",
+            "재고종이"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상여울끈 창고",
+            "organization": "가상여울끈"
+          },
+          "operation_id": "끈소매",
+          "participants": [
+            {
+              "name": "가상직원여",
+              "organization": "가상여울끈",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "끈재고"
+        }
+      ],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-06-17",
+          "document_id": "재고전자",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-06-17",
+          "document_id": "재고종이",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-06-17",
+          "document_id": "판매발급",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-06-18",
+          "document_id": "판매전자",
+          "replaces_document_id": null,
+          "state": "revoked"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 600000,
+          "date": "2026-06-17",
+          "document_id": "재고전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 60000,
+          "transaction_id": "끈재고",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 660000,
+          "date": "2026-06-17",
+          "document_id": "재고종이",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "재고이체",
+          "stated_vat": null,
+          "transaction_id": "끈재고",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 220000,
+          "date": "2026-06-17",
+          "document_id": "판매발급",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "판매카드",
+          "stated_vat": null,
+          "transaction_id": "끈판매",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 500000,
+          "date": "2026-06-17",
+          "document_id": "판매전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 50000,
+          "transaction_id": "끈판매",
+          "vat_separately_stated": true
+        }
+      ],
+      "processing_date": "2026-07-15",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "판매전자"
+      ],
+      "replacement_relations": [],
+      "selected_document_ids": [
+        "재고전자",
+        "재고종이",
+        "판매발급"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "재고수령",
+          "date": "2026-06-17",
+          "description": "판매 재고 전량을 직원이 창고에서 수령",
+          "document_ids": [
+            "재고전자",
+            "재고종이"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상여울끈 창고",
+            "organization": "가상여울끈"
+          },
+          "operation_id": "끈소매",
+          "participants": [
+            {
+              "name": "가상직원여",
+              "organization": "가상여울끈",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "끈재고"
+        }
+      ],
+      "business_name": "가상여울끈",
+      "evidence_documents": [
+        {
+          "amount": 600000,
+          "date": "2026-06-17",
+          "document_id": "재고전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 60000,
+          "transaction_id": "끈재고",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 660000,
+          "date": "2026-06-17",
+          "document_id": "재고종이",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "재고이체",
+          "stated_vat": null,
+          "transaction_id": "끈재고",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 220000,
+          "date": "2026-06-17",
+          "document_id": "판매발급",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "판매카드",
+          "stated_vat": null,
+          "transaction_id": "끈판매",
+          "vat_separately_stated": false
+        }
+      ],
+      "operations": [
+        {
+          "description": "국내 소비자 끈 소매",
+          "operation_id": "끈소매",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 660000,
+          "date": "2026-06-17",
+          "includes_vat": true,
+          "method": "bank_transfer",
+          "payment_id": "재고이체",
+          "transaction_id": "끈재고"
+        },
+        {
+          "amount": 220000,
+          "date": "2026-06-17",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "판매카드",
+          "transaction_id": "끈판매"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "재고수령",
+          "amount": 660000,
+          "counterparty_consumer": false,
+          "date": "2026-06-17",
+          "description": "판매용 끈 재고 전량 인수",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "끈재고",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        {
+          "amount": 550000,
+          "counterparty_consumer": true,
+          "date": "2026-06-17",
+          "description": "소비자 끈 판매 완료",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "끈판매"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "재고전자",
+          "재고종이"
+        ],
+        "documented_input_vat": 60000,
+        "eligible_input_document_ids": [
+          "재고전자"
+        ],
+        "gross": 660000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 0,
+        "paid_gross": 660000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 600000,
+        "transaction_id": "끈재고",
+        "unissued_receipt_gross": 660000,
+        "unpaid_gross": 0,
+        "vat": 60000
+      },
+      {
+        "document_ids": [
+          "판매발급"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 550000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 220000,
+        "paid_gross": 220000,
+        "supply_base": 500000,
+        "transaction_id": "끈판매",
+        "unissued_receipt_gross": 330000,
+        "unpaid_gross": 330000,
+        "vat": 50000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "재고전자",
+        "재고종이"
+      ],
+      "evidence": [
+        "receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "끈재고"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "판매발급"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "끈판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-17",
+      "transaction_id": "끈재고"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 660000,
+      "includes_vat": true,
+      "transaction_id": "끈재고"
+    },
+    "output": {
+      "gross": 660000,
+      "supply_base": 600000,
+      "vat": 60000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 60000,
+      "evidence": [
+        "receipt",
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "끈재고",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 60000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-17",
+      "transaction_id": "끈판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 550000,
+      "includes_vat": true,
+      "transaction_id": "끈판매"
+    },
+    "output": {
+      "gross": 550000,
+      "supply_base": 500000,
+      "vat": 50000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 500000
+    },
+    "output": 50000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 220000,
+      "transaction_id": "끈판매"
+    },
+    "output": {
+      "eligible_gross": 220000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 61000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 220000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 2860
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 2860,
+      "liability_before_credit": -10000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": -10000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": -10000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 60000,
+      "output_vat": 50000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 60000,
+      "input_vat": 60000,
+      "net_vat": -10000,
+      "noncreditable_vat": 0,
+      "output_vat": 50000,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 10000,
+      "tax_base": 500000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

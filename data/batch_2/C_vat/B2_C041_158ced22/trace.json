@@ -1,0 +1,478 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "vehicle_service",
+          "activity_id": "다층-직원이동",
+          "date": "2026-04-19",
+          "description": "이번 정비 기간 차는 케이스 제작 직원의 현장 이동에 전용했고 고객 대여에는 쓰지 않았다.",
+          "document_ids": [
+            "다층-차전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "가상층정비실"
+          },
+          "operation_id": "다층-케이스",
+          "participants": [
+            {
+              "name": "가상차제작",
+              "organization": "가상다층대여",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "다층-차정비",
+          "vehicle_id": "가상차-다층4"
+        },
+        {
+          "action": "ground_work",
+          "activity_id": "다층-필지",
+          "date": "2026-04-20",
+          "description": "새 대여 차량 야적 필지의 첫 토지 평탄화만 수행했다. 건물 작업은 없다.",
+          "document_ids": [
+            "다층-토공전자"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "가상필지-다층차고"
+          },
+          "operation_id": "다층-대여",
+          "participants": [
+            {
+              "name": "가상류대여",
+              "organization": "가상다층대여",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "다층-토공"
+        }
+      ],
+      "operations": [
+        {
+          "description": "허가 자동차 유상 대여",
+          "operation_id": "다층-대여",
+          "output_taxable": true
+        },
+        {
+          "description": "별도 기업 케이스 제작",
+          "operation_id": "다층-케이스",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "다층-직원이동",
+          "date": "2026-04-19",
+          "document_id": "다층-차전자",
+          "transaction_id": "다층-차정비"
+        },
+        {
+          "activity_id": "다층-필지",
+          "date": "2026-04-20",
+          "document_id": "다층-토공전자",
+          "transaction_id": "다층-토공"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1",
+      "vehicle_registry": [
+        {
+          "business_license": "vehicle_rental",
+          "permitted_operation_id": "다층-대여",
+          "registration_class": "excise_passenger",
+          "vehicle_id": "가상차-다층4"
+        }
+      ]
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "다층-차전자",
+        "purpose": "passenger_car_maintenance",
+        "transaction_id": "다층-차정비"
+      },
+      {
+        "business_related": true,
+        "document_id": "다층-토공전자",
+        "purpose": "land",
+        "transaction_id": "다층-토공"
+      },
+      {
+        "transaction_id": "다층-차정비",
+        "vehicle_direct_business": false,
+        "vehicle_id": "가상차-다층4",
+        "vehicle_subject_excise": true
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "다층-전자1"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "다층-대여1"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "다층-전자2"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "다층-대여2"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "다층-전자3"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "다층-대여3"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "다층-차전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "다층-차정비"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "다층-토공전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "다층-토공"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-01",
+      "transaction_id": "다층-대여1"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3100000,
+      "includes_vat": false,
+      "transaction_id": "다층-대여1"
+    },
+    "output": {
+      "gross": 3410000,
+      "supply_base": 3100000,
+      "vat": 310000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 3100000
+    },
+    "output": 310000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "다층-대여1"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-01",
+      "transaction_id": "다층-대여2"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2420000,
+      "includes_vat": true,
+      "transaction_id": "다층-대여2"
+    },
+    "output": {
+      "gross": 2420000,
+      "supply_base": 2200000,
+      "vat": 220000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 2200000
+    },
+    "output": 220000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "다층-대여2"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-01",
+      "transaction_id": "다층-대여3"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 4100000,
+      "includes_vat": false,
+      "transaction_id": "다층-대여3"
+    },
+    "output": {
+      "gross": 4510000,
+      "supply_base": 4100000,
+      "vat": 410000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 4100000
+    },
+    "output": 410000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "다층-대여3"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-19",
+      "transaction_id": "다층-차정비"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 792000,
+      "includes_vat": true,
+      "transaction_id": "다층-차정비"
+    },
+    "output": {
+      "gross": 792000,
+      "supply_base": 720000,
+      "vat": 72000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "passenger_car_maintenance",
+      "supplier_general": true,
+      "transaction_id": "다층-차정비",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": true
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 72000
+    },
+    "rule_id": "VAT_PASSENGER_CAR"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-20",
+      "transaction_id": "다층-토공"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1900000,
+      "includes_vat": false,
+      "transaction_id": "다층-토공"
+    },
+    "output": {
+      "gross": 2090000,
+      "supply_base": 1900000,
+      "vat": 190000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "다층-토공",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 190000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 335000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 940000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 940000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 940000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 940000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 262000,
+      "net_vat": 940000,
+      "noncreditable_vat": 262000,
+      "output_vat": 940000,
+      "payable_vat": 940000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 9400000,
+      "unique_transaction_count": 5
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

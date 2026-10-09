@@ -1,0 +1,121 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-07-31",
+      "events": [
+        {
+          "date": "2026-07-28",
+          "event_id": "TAPE-ARRIVAL-1",
+          "kind": "received",
+          "line_id": "T",
+          "order_id": "TAPE-TWO-ARRIVALS",
+          "units": 15
+        },
+        {
+          "date": "2026-07-28",
+          "event_id": "TAPE-ARRIVAL-2",
+          "kind": "received",
+          "line_id": "T",
+          "order_id": "TAPE-TWO-ARRIVALS",
+          "units": 15
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-07-22",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "검수테이프",
+              "line_id": "T",
+              "ordered_packages": 4,
+              "package_price": 24000,
+              "price_includes_vat": false,
+              "units_per_package": 10
+            }
+          ],
+          "order_id": "TAPE-TWO-ARRIVALS",
+          "vendor": "가상검수테이프"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "업체는 가상이다. 이벤트 ID가 다른 입고는 내용이 비슷해도 각각 합친다. 마감까지 순량을 주문 및 행에 연결한다. 포장가격 비율의 대금은 마지막에 버리고 별도 세액은 10%를 버린다. 실행 지급만 계산한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "TAPE-ARRIVAL-1",
+        "TAPE-ARRIVAL-2"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "TAPE-ARRIVAL-1",
+          "net_units_after_event": 15
+        },
+        {
+          "event_id": "TAPE-ARRIVAL-2",
+          "net_units_after_event": 30
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 72000,
+          "line_id": "T",
+          "order_id": "TAPE-TWO-ARRIVALS",
+          "package_price_times_net_units": 720000,
+          "price_includes_vat": false,
+          "supply": 72000,
+          "total": 79200,
+          "units_per_package": 10,
+          "vat": 7200
+        }
+      ],
+      "settlement": {
+        "balance_total": 79200,
+        "grand_total": 79200,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "검수테이프",
+            "net_units": 30
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "검수테이프",
+            "line_id": "T",
+            "net_units": 30,
+            "order_id": "TAPE-TWO-ARRIVALS",
+            "ordered_units": 40,
+            "outstanding_units": 10,
+            "received_units": 30,
+            "returned_units": 0,
+            "supply": 72000,
+            "total": 79200,
+            "vat": 7200
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 79200,
+            "paid": 0,
+            "supply": 72000,
+            "total": 79200,
+            "vat": 7200,
+            "vendor": "가상검수테이프"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

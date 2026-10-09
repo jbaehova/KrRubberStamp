@@ -1,0 +1,56 @@
+task_id: B2_C091_192c7213
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상키위명패의 원본 묶음에는 현재 주문과 다음 달 주문 및 재료 구매가 있습니다. 효력과 실제 공급 기간 및 구매 표시를 대조하여
+  매출세액(output_vat)과 불공제세액(noncreditable_vat) 및 발행 공제(receipt_credit)를 answer.json에
+  보고하세요.
+input_files:
+- path: inputs/01_마감범위.pdf
+  format: pdf
+- path: inputs/02_첫인도.hwpx
+  format: hwpx
+- path: inputs/03_둘인도.pdf
+  format: pdf
+- path: inputs/04_셋인도.hwpx
+  format: hwpx
+- path: inputs/05_미래인도.pdf
+  format: pdf
+- path: inputs/06_재료인수.hwpx
+  format: hwpx
+- path: inputs/07_실제실행.xlsx
+  format: xlsx
+- path: inputs/08_현재발급.pdf
+  format: pdf
+- path: inputs/09_미래발급.xlsx
+  format: xlsx
+- path: inputs/10_재료카드.hwpx
+  format: hwpx
+- path: inputs/11_최종효력.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+  required:
+  - output_vat
+  - noncreditable_vat
+  - receipt_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-9ef7d2a6-f314-5c45-b472-424fdb075ca0
+scenario_seed: 1813950177692450823
+scenario_hash: 460ba233b0ceea2a185bf0ee207b2e0484dcc904862b312bd5e598fad4baa887
+authorship:
+  method: individually_written
+  case_id: C091
+  case_sha256: 192c72136d9d80078ad1188fea27ecab37c1aa1368cdd3f2779b4a50b8d44285
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- output_vat
+- noncreditable_vat
+- receipt_credit

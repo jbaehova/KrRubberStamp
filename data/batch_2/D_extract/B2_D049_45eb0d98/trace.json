@@ -1,0 +1,196 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-10-20",
+      "events": [
+        {
+          "date": "2026-10-23",
+          "event_id": "WINDOW-NEW-IN",
+          "kind": "received",
+          "line_id": "W",
+          "order_id": "WINDOW-NEW",
+          "units": 2
+        },
+        {
+          "date": "2026-10-09",
+          "event_id": "WINDOW-OLD-BACK",
+          "kind": "returned",
+          "line_id": "W",
+          "order_id": "WINDOW-OLD",
+          "units": 2
+        },
+        {
+          "date": "2026-10-05",
+          "event_id": "WINDOW-OLD-IN",
+          "kind": "received",
+          "line_id": "W",
+          "order_id": "WINDOW-OLD",
+          "units": 2
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-10-12",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "관측창-B",
+              "line_id": "W",
+              "ordered_packages": 1,
+              "package_price": 100000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "WINDOW-NEW",
+          "vendor": "가상관측창"
+        },
+        {
+          "date": "2026-10-01",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "관측창-A",
+              "line_id": "W",
+              "ordered_packages": 1,
+              "package_price": 80000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "WINDOW-OLD",
+          "vendor": "가상관측창"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 30000,
+          "date": "2026-10-13",
+          "order_id": "WINDOW-NEW",
+          "payment_id": "WINDOW-NEW-DEP",
+          "status": "executed"
+        },
+        {
+          "amount": 20000,
+          "date": "2026-10-02",
+          "order_id": "WINDOW-OLD",
+          "payment_id": "WINDOW-OLD-DEP",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "모든 업체는 가상이다. 실제 order 행은 순량 0이어도 유지한다. 마감까지 실제 입고와 반환만 순량에 반영한다. 포장가격의 순량 비율을 마지막에 버리고 별도 세액은 10%를 버린다. 실행 지급은 인수 여부와 별개로 마감일까지 차감한다. 음수 잔액을 유지한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "WINDOW-OLD-BACK",
+        "WINDOW-OLD-IN"
+      ],
+      "accepted_payment_ids": [
+        "WINDOW-NEW-DEP",
+        "WINDOW-OLD-DEP"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "WINDOW-OLD-IN",
+          "net_units_after_event": 2
+        },
+        {
+          "event_id": "WINDOW-OLD-BACK",
+          "net_units_after_event": 0
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [
+        "WINDOW-NEW-IN"
+      ],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 0,
+          "line_id": "W",
+          "order_id": "WINDOW-NEW",
+          "package_price_times_net_units": 0,
+          "price_includes_vat": false,
+          "supply": 0,
+          "total": 0,
+          "units_per_package": 2,
+          "vat": 0
+        },
+        {
+          "amount_after_floor": 0,
+          "line_id": "W",
+          "order_id": "WINDOW-OLD",
+          "package_price_times_net_units": 0,
+          "price_includes_vat": false,
+          "supply": 0,
+          "total": 0,
+          "units_per_package": 2,
+          "vat": 0
+        }
+      ],
+      "settlement": {
+        "balance_total": -50000,
+        "grand_total": 0,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "관측창-a",
+            "net_units": 0
+          },
+          {
+            "base_unit": "개",
+            "item": "관측창-b",
+            "net_units": 0
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "관측창-b",
+            "line_id": "W",
+            "net_units": 0,
+            "order_id": "WINDOW-NEW",
+            "ordered_units": 2,
+            "outstanding_units": 2,
+            "received_units": 0,
+            "returned_units": 0,
+            "supply": 0,
+            "total": 0,
+            "vat": 0
+          },
+          {
+            "base_unit": "개",
+            "item": "관측창-a",
+            "line_id": "W",
+            "net_units": 0,
+            "order_id": "WINDOW-OLD",
+            "ordered_units": 2,
+            "outstanding_units": 2,
+            "received_units": 2,
+            "returned_units": 2,
+            "supply": 0,
+            "total": 0,
+            "vat": 0
+          }
+        ],
+        "payment_total": 50000,
+        "vendor_balances": [
+          {
+            "balance": -50000,
+            "paid": 50000,
+            "supply": 0,
+            "total": 0,
+            "vat": 0,
+            "vendor": "가상관측창"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

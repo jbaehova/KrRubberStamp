@@ -1,0 +1,113 @@
+task_id: B2_D090_edafa3c2
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 실험판의 저가안은 만료됐고 적격 두 안은 총액과 정규화 법인명이 같습니다. quote_comparisons와 chosen_quote_id
+  및 chosen_leftover_units를 작성해 ID 동률 순서를 적용해 주세요.
+input_files:
+- path: inputs/01_실험판요청.pdf
+  format: pdf
+- path: inputs/02_이전가격.xlsx
+  format: xlsx
+- path: inputs/03_이전조건.hwpx
+  format: hwpx
+- path: inputs/04_Z가격.pdf
+  format: pdf
+- path: inputs/05_Z조건.xlsx
+  format: xlsx
+- path: inputs/06_A가격.hwpx
+  format: hwpx
+- path: inputs/07_A조건.pdf
+  format: pdf
+- path: inputs/08_직판가격.xlsx
+  format: xlsx
+- path: inputs/09_직판조건.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_quote_id:
+      type: string
+    chosen_leftover_units:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_quote_id
+  - chosen_leftover_units
+  additionalProperties: false
+canary: KrRubberStamp-canary-3b6fdf20-63eb-576f-84a0-28102fb61381
+scenario_seed: 17127087964666718727
+scenario_hash: 544a09db4f69aeb8fb0eafdea55223fb3d6a64468908f43d059c5adf6820aab3
+authorship:
+  method: individually_written
+  case_id: D090
+  case_sha256: edafa3c2bad3ea074b8321c8ddff2a4bc4a692a011e55b47cf4da7c247151cc9
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_quote_id
+- chosen_leftover_units

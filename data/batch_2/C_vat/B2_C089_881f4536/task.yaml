@@ -1,0 +1,52 @@
+task_id: B2_C089_881f4536
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상레몬밤대여는 같은 차량의 두 정비와 새로 전달받은 매출 자료를 인계합니다. 실제 공급일 및 허가 기간과 원본 효력을 각각
+  연결하여 공제 매입세액(deductible_input_vat)과 불공제세액(noncreditable_vat) 및 순정산액(net_vat)을 answer.json에
+  정리하세요.
+input_files:
+- path: inputs/01_대여범위.hwpx
+  format: hwpx
+- path: inputs/02_매출완료.pdf
+  format: pdf
+- path: inputs/03_허가대장.xlsx
+  format: xlsx
+- path: inputs/04_봄인수.hwpx
+  format: hwpx
+- path: inputs/05_여름인수.pdf
+  format: pdf
+- path: inputs/06_두실행.xlsx
+  format: xlsx
+- path: inputs/07_봄정정.pdf
+  format: pdf
+- path: inputs/08_여름전자.hwpx
+  format: hwpx
+- path: inputs/09_최종효력.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    net_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  - net_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-fe7f6481-233e-5240-ac82-5b0dc7fd3725
+scenario_seed: 9808634614746487232
+scenario_hash: 5c176fffb2903320a4ce0c29d0133cc01572b897fdc3b0287a9723304c7703f6
+authorship:
+  method: individually_written
+  case_id: C089
+  case_sha256: 881f4536b79099c0f856e41816a7fee01eaad6dee963f2e05c9d0644b60f707c
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat
+- net_vat

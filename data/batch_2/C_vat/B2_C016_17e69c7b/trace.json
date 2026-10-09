@@ -1,0 +1,345 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "구획-야식",
+          "date": "2026-04-17",
+          "description": "설치 완료를 협의한 구매 담당자와 회사 직원이 작업 후 함께 저녁을 먹었다.",
+          "document_ids": [
+            "구획-카드88"
+          ],
+          "location": {
+            "kind": "restaurant",
+            "name": "가상역앞식당"
+          },
+          "operation_id": "구획-설치",
+          "participants": [
+            {
+              "name": "가상김설치",
+              "organization": "가상구획표",
+              "role": "employee"
+            },
+            {
+              "name": "가상정구매",
+              "organization": "가상고객공정",
+              "role": "customer"
+            }
+          ],
+          "transaction_id": "구획-식당"
+        },
+        {
+          "action": "service",
+          "activity_id": "구획-외주검수",
+          "date": "2026-04-17",
+          "description": "고객 공정실에서 완료한 외주 절단을 회사 직원이 검수했다. 구획표 설치 계약에만 직접 사용했다.",
+          "document_ids": [
+            "구획-외주전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "고객 공정 구획 설치현장"
+          },
+          "operation_id": "구획-설치",
+          "participants": [
+            {
+              "name": "가상김설치",
+              "organization": "가상구획표",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "구획-절단외주"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 공정실 구획표 설치",
+          "operation_id": "구획-설치",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "구획-야식",
+          "date": "2026-04-17",
+          "document_id": "구획-카드88",
+          "transaction_id": "구획-식당"
+        },
+        {
+          "activity_id": "구획-외주검수",
+          "date": "2026-04-17",
+          "document_id": "구획-외주전자",
+          "transaction_id": "구획-절단외주"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "구획-카드88",
+        "purpose": "hospitality",
+        "transaction_id": "구획-식당"
+      },
+      {
+        "business_related": true,
+        "document_id": "구획-외주전자",
+        "purpose": "business",
+        "transaction_id": "구획-절단외주"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "구획-전자87"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "구획-공정완료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "구획-카드88"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "구획-식당"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "구획-외주전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "구획-절단외주"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-17",
+      "transaction_id": "구획-공정완료"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 4900000,
+      "includes_vat": false,
+      "transaction_id": "구획-공정완료"
+    },
+    "output": {
+      "gross": 5390000,
+      "supply_base": 4900000,
+      "vat": 490000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 4900000
+    },
+    "output": 490000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "구획-공정완료"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-17",
+      "transaction_id": "구획-식당"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 143000,
+      "includes_vat": true,
+      "transaction_id": "구획-식당"
+    },
+    "output": {
+      "gross": 143000,
+      "supply_base": 130000,
+      "vat": 13000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "hospitality",
+      "supplier_general": true,
+      "transaction_id": "구획-식당",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 13000
+    },
+    "rule_id": "VAT_HOSPITALITY"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-17",
+      "transaction_id": "구획-절단외주"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 820000,
+      "includes_vat": false,
+      "transaction_id": "구획-절단외주"
+    },
+    "output": {
+      "gross": 902000,
+      "supply_base": 820000,
+      "vat": 82000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "구획-절단외주",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 82000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 280000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 408000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 408000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 408000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 82000,
+      "output_vat": 490000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 82000,
+      "input_vat": 95000,
+      "net_vat": 408000,
+      "noncreditable_vat": 13000,
+      "output_vat": 490000,
+      "payable_vat": 408000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 4900000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

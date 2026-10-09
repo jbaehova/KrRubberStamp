@@ -1,0 +1,134 @@
+task_id: B2_D049_45eb0d98
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 관측 창의 두 계약을 마감 대조하세요. 기존 계약은 인수 후 전량 반환했고 새 계약 입고는 기준일 뒤입니다. 현물 순량이 0이라는
+  이유로 두 계약 행이나 이미 실행한 선지급을 지우지 않습니다. answer.json에는 line_settlements와 item_quantities와
+  vendor_balances와 balance_total을 작성하세요.
+input_files:
+- path: inputs/01_기존창표지.pdf
+  format: pdf
+- path: inputs/02_기존창가격.xlsx
+  format: xlsx
+- path: inputs/03_새창표지.hwpx
+  format: hwpx
+- path: inputs/04_새창가격.xlsx
+  format: xlsx
+- path: inputs/05_기존창인수.pdf
+  format: pdf
+- path: inputs/06_기존창반환.hwpx
+  format: hwpx
+- path: inputs/07_새창도착.xlsx
+  format: xlsx
+- path: inputs/08_두계약금.pdf
+  format: pdf
+- path: inputs/09_관측창마감.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - line_settlements
+  - item_quantities
+  - vendor_balances
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-df076a5c-2fbb-5dc3-87ad-647228efa185
+scenario_seed: 5038135558404144011
+scenario_hash: fb2558d94e990b489ac4fe997305789d6eb0d544cf70063de7e3d965319087c4
+authorship:
+  method: individually_written
+  case_id: D049
+  case_sha256: 45eb0d98e0f17b8b0cc2ae90ad77a5590b09fbc088994954a8e086dedffe1e61
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- item_quantities
+- vendor_balances
+- balance_total

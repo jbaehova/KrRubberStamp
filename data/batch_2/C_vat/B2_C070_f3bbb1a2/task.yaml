@@ -1,0 +1,37 @@
+task_id: B2_C070_f3bbb1a2
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상복숭아매듭은 부분 수금 전표를 금액 정정받았습니다. 취소 원본을 제외한 실제 유효 발급 대금과 앞선 공제 이력을 맞춰 발행
+  공제(receipt_credit) 및 납부액(payable_vat)을 answer.json에 적으세요.
+input_files:
+- path: inputs/01_이전확정.hwpx
+  format: hwpx
+- path: inputs/02_완료공급.pdf
+  format: pdf
+- path: inputs/03_원본및지급.xlsx
+  format: xlsx
+- path: inputs/04_정정효력.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-f1b40378-f8a7-5861-b1cc-e406f9119833
+scenario_seed: 17562826483038763970
+scenario_hash: d49fcb0ef4b5e52062d0e61c58e1a6c1de4e8d4f6fc29ff11746c6160db375af
+authorship:
+  method: individually_written
+  case_id: C070
+  case_sha256: f3bbb1a26d593bc2e66a2c1635aa8856cb29cd570e540df4258a772b1d581c75
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- receipt_credit
+- payable_vat

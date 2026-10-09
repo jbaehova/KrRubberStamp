@@ -1,0 +1,56 @@
+task_id: B2_C047_21e54baa
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상포개교구의 기관 납품 세 건과 세 구매를 정리해 주세요. 강의 녹화 용역의 전용 업무와 판매 촬영 용역을 구분하고 아직
+  다음 달에 인도한 설비를 공급일로 분리해 공제가능 매입세액(deductible_input_vat), 공제불가 매입세액(noncreditable_vat),
+  납부액(payable_vat), 고유 거래 수(unique_transaction_count)를 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_업무.hwpx
+  format: hwpx
+- path: inputs/02_기관1.pdf
+  format: pdf
+- path: inputs/03_기관2.xlsx
+  format: xlsx
+- path: inputs/04_기관3.pdf
+  format: pdf
+- path: inputs/05_녹화.pdf
+  format: pdf
+- path: inputs/06_촬영.xlsx
+  format: xlsx
+- path: inputs/07_절곡기.pdf
+  format: pdf
+- path: inputs/08_영상사용.pdf
+  format: pdf
+- path: inputs/09_설비인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    payable_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  - payable_vat
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-17693f4b-5420-5661-9085-3955fb0114c8
+scenario_seed: 2442441569631942102
+scenario_hash: 8a12e1e646c85ef5b2d6d8d06dc5d42351543ac62f72df3b9d7b795ab8103081
+authorship:
+  method: individually_written
+  case_id: C047
+  case_sha256: 21e54baabe8f35d6234a2105e3b3d68a5bff07dba079bef0c7ca6ea7556838bb
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat
+- payable_vat
+- unique_transaction_count

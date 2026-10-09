@@ -1,0 +1,41 @@
+task_id: B2_A080_70aba507
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상서진의 어머니 명의 임대차를 가족 나이와 소득 자료에 연결하세요. 월세 가족 명의와 어머니 카드 공제의 나이 요건을 구별하고
+  기본공제 및 월세와 카드 공제액을 제출합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_계약.pdf
+  format: pdf
+- path: inputs/03_부양.hwpx
+  format: hwpx
+- path: inputs/04_카드.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    rent_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+  required:
+  - eligible_dependents
+  - rent_credit
+  - credit_card_deduction
+  additionalProperties: false
+canary: KrRubberStamp-canary-778fd10f-cc9a-5a4e-bcd0-7ca15dee90a9
+scenario_seed: 8118764205170413574
+scenario_hash: 52c59295143c749c09e4489c49cd17fe37bb4eb4f9eaab229d68ebe5e5f38699
+authorship:
+  method: individually_written
+  case_id: A080
+  case_sha256: 70aba5079056d006d3f0b7cd2a771b51f6ce81617cbd5ed72c1763d71a74f851
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- eligible_dependents
+- rent_credit
+- credit_card_deduction

@@ -1,0 +1,41 @@
+task_id: B2_C087_040e481b
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상레드베리핀은 공급자 등록 대장과 소비자 발급 금액 정정을 보냈습니다. 실제 구매일의 공급자 자격 및 현재 판매 원본을 확인하여
+  불공제세액(noncreditable_vat)과 발행 공제(receipt_credit) 및 순정산액(net_vat)을 answer.json에 회신하세요.
+input_files:
+- path: inputs/01_제작소매.hwpx
+  format: hwpx
+- path: inputs/02_공급자등록.pdf
+  format: pdf
+- path: inputs/03_실행발급.xlsx
+  format: xlsx
+- path: inputs/04_효력확인.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    net_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - receipt_credit
+  - net_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-8056c1a6-e0d7-5a9c-910c-727bef81d7b6
+scenario_seed: 292250306627772317
+scenario_hash: 5c911acea7045cfcd88c7038a0120c06e9e58f35312e54deeeb8fdef8626fb48
+authorship:
+  method: individually_written
+  case_id: C087
+  case_sha256: 040e481b000c1f9df1f4890b4943213e16941f46e48bb54c3384015d4b59d2a0
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- noncreditable_vat
+- receipt_credit
+- net_vat

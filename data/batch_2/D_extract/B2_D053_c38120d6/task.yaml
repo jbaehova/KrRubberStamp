@@ -1,0 +1,99 @@
+task_id: B2_D053_c38120d6
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 시험판은 지정 공급사의 제안 한 건으로 구매합니다. 19장을 확보할 quote_comparisons와 chosen_total
+  및 chosen_leftover_units를 작성해 필요한 포장 수와 남는 장수를 승인서에 넣어 주세요.
+input_files:
+- path: inputs/01_지정요청.pdf
+  format: pdf
+- path: inputs/02_지정견적.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_total:
+      type: integer
+    chosen_leftover_units:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_total
+  - chosen_leftover_units
+  additionalProperties: false
+canary: KrRubberStamp-canary-254ba949-0d7e-5bc0-915d-57f790ba2326
+scenario_seed: 14087577214702901542
+scenario_hash: b824b6488628b055f793e6f48e5c862024ad484a33c3aff70f8a1a89f0d5247d
+authorship:
+  method: individually_written
+  case_id: D053
+  case_sha256: c38120d66c40d9269a345e5f5b812366ac1011ab9c6092dfc8069fc84e5e5695
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_total
+- chosen_leftover_units

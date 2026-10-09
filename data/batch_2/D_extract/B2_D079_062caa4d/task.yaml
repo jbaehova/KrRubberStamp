@@ -1,0 +1,103 @@
+task_id: B2_D079_062caa4d
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 두 클립 견적의 배송 조건은 하나가 기준 0, 다른 하나가 기준 없음입니다. quote_comparisons와 chosen_quote_id
+  및 chosen_total을 작성해 0을 비어 있는 조건으로 처리하지 마세요.
+input_files:
+- path: inputs/01_클립약정.hwpx
+  format: hwpx
+- path: inputs/02_정기상품.xlsx
+  format: xlsx
+- path: inputs/03_기준0.pdf
+  format: pdf
+- path: inputs/04_별송견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_quote_id:
+      type: string
+    chosen_total:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_quote_id
+  - chosen_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-b569c5db-fc33-5135-92e3-7acf432e0f71
+scenario_seed: 444917712839673971
+scenario_hash: 34a48bdcd11fc2a6611317528174b02a55e1c8074584b360306d20dcb08c94f3
+authorship:
+  method: individually_written
+  case_id: D079
+  case_sha256: 062caa4d74168873ff4873e1c2cf83c6959a3ee790e9aa003dac9c5b3bd6db26
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_quote_id
+- chosen_total

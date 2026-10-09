@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "m",
+      "item": "보관천",
+      "latest_delivery_date": "2026-08-21",
+      "order_date": "2026-08-10",
+      "processing_policy": "합성 사적 구매 약정: 필요길이/롤길이를 올림하고 최소포장수 이상 구매. 상품과 운임 각각 포함가는 10/11 버림 공급가액과 차액 세액, 별도가는 10% 버림 세액이다. 상품 세금포함 총액만 무료배송 기준과 비교. 주문일 효력/구매포장재고/달력납기를 모두 충족한 최종총액/정규화업체/견적ID 순 선택. 임의 단위변환 및 세무 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 4,
+          "minimum_packs": 1,
+          "pack_price": 10000,
+          "pack_units": 20,
+          "price_includes_vat": false,
+          "quote_id": "CLOTH-20",
+          "shipping_price": 1100,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-08-01",
+          "valid_until": "2026-08-31",
+          "vendor": "가상천가공"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 4,
+          "minimum_packs": 1,
+          "pack_price": 16500,
+          "pack_units": 30,
+          "price_includes_vat": true,
+          "quote_id": "CLOTH-30",
+          "shipping_price": 500,
+          "shipping_price_includes_vat": false,
+          "stock_packs": 10,
+          "valid_from": "2026-08-01",
+          "valid_until": "2026-08-31",
+          "vendor": "가상천배송"
+        }
+      ],
+      "required_units": 45,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "m",
+      "comparison": {
+        "chosen_leftover_units": 15,
+        "chosen_quote_id": "CLOTH-30",
+        "chosen_total": 33550,
+        "chosen_vendor": "가상천배송",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-08-14",
+            "eligible": true,
+            "leftover_units": 15,
+            "merchandise_supply": 30000,
+            "merchandise_total": 33000,
+            "merchandise_vat": 3000,
+            "obtained_units": 60,
+            "packs": 3,
+            "quote_id": "CLOTH-20",
+            "shipping_supply": 1000,
+            "shipping_total": 1100,
+            "shipping_vat": 100,
+            "stock_sufficient": true,
+            "supply": 31000,
+            "total": 34100,
+            "valid_on_order": true,
+            "vat": 3100,
+            "vendor": "가상천가공"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-08-14",
+            "eligible": true,
+            "leftover_units": 15,
+            "merchandise_supply": 30000,
+            "merchandise_total": 33000,
+            "merchandise_vat": 3000,
+            "obtained_units": 60,
+            "packs": 2,
+            "quote_id": "CLOTH-30",
+            "shipping_supply": 500,
+            "shipping_total": 550,
+            "shipping_vat": 50,
+            "stock_sufficient": true,
+            "supply": 30500,
+            "total": 33550,
+            "valid_on_order": true,
+            "vat": 3050,
+            "vendor": "가상천배송"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 4,
+          "merchandise_amount_before_vat_split": 30000,
+          "minimum_packs": 1,
+          "pack_units": 20,
+          "packs_after_minimum": 3,
+          "price_includes_vat": false,
+          "quote_id": "CLOTH-20",
+          "required_packs_before_minimum": 3,
+          "shipping_amount_before_vat_split": 1100,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 33000
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 4,
+          "merchandise_amount_before_vat_split": 33000,
+          "minimum_packs": 1,
+          "pack_units": 30,
+          "packs_after_minimum": 2,
+          "price_includes_vat": true,
+          "quote_id": "CLOTH-30",
+          "required_packs_before_minimum": 2,
+          "shipping_amount_before_vat_split": 500,
+          "shipping_free": false,
+          "shipping_price_includes_vat": false,
+          "shipping_threshold_basis": 33000
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "보관천",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          33550,
+          "가상천배송",
+          "CLOTH-30"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            33550,
+            "가상천배송",
+            "CLOTH-30"
+          ],
+          [
+            34100,
+            "가상천가공",
+            "CLOTH-20"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

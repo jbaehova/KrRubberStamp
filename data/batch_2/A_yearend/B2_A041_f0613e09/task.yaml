@@ -1,0 +1,59 @@
+task_id: B2_A041_f0613e09
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상세갈래편집의 가상공혜리는 무소득 어머니와 독립 아버지 및 19세 동생 자료를 함께 받았습니다. 사람별 실제 부양과 관계를
+  적용해 기본공제 및 추가공제액을 구하고 보험료 세액공제와 카드 소득공제를 마감하세요.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_어머니.hwpx
+  format: hwpx
+- path: inputs/03_아버지.hwpx
+  format: hwpx
+- path: inputs/04_동생.hwpx
+  format: hwpx
+- path: inputs/05_어머니카드.pdf
+  format: pdf
+- path: inputs/06_아버지카드.pdf
+  format: pdf
+- path: inputs/07_동생교통.pdf
+  format: pdf
+- path: inputs/08_부모보험.pdf
+  format: pdf
+- path: inputs/09_동생보험.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    basic_deduction:
+      type: integer
+    additional_deduction:
+      type: integer
+    insurance_credit:
+      type: integer
+    credit_card_deduction:
+      type: integer
+  required:
+  - eligible_dependents
+  - basic_deduction
+  - additional_deduction
+  - insurance_credit
+  - credit_card_deduction
+  additionalProperties: false
+canary: KrRubberStamp-canary-a809b45a-0f18-5476-88f3-8cf51bf776aa
+scenario_seed: 17321193852539979623
+scenario_hash: 33458895e0c2a400041c5a23c10e496662da1d8741592bd6a2b3b964f55b4ddc
+authorship:
+  method: individually_written
+  case_id: A041
+  case_sha256: f0613e098a534767efce5b5a5bd06a3bbbafe52553ec8b83eed1f5657abb8d10
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- eligible_dependents
+- basic_deduction
+- additional_deduction
+- insurance_credit
+- credit_card_deduction

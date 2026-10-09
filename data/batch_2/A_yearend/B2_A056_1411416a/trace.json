@@ -1,0 +1,351 @@
+[
+  {
+    "inputs": {
+      "calculation_facts": {
+        "employee_age": 35,
+        "employee_name": "가상세하",
+        "employment_end": "2025-12-31",
+        "employment_start": "2025-01-01",
+        "medical": [
+          {
+            "amount": 1500000,
+            "date": "2025-02-20",
+            "kind": "ordinary",
+            "person_id": "self"
+          },
+          {
+            "amount": 3600000,
+            "date": "2025-09-12",
+            "kind": "infertility",
+            "person_id": "self"
+          }
+        ],
+        "reference_year": 2025,
+        "scope_note": "국내 거주 근로소득자이고 두 국내 직장을 병행한다. 본인 치료비와 적격 난임시술비는 모두 본인 자비로 납부했으며 보전이나 제외 지출이 없다."
+      },
+      "employee_id": "SEH",
+      "pay_statements": [
+        {
+          "employee_id": "SEH",
+          "employer_id": "가상현장",
+          "gross_pay": 48000000,
+          "non_taxable_pay": 2000000,
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "revision": 1,
+          "statement_id": "SEH-A",
+          "status": "issued",
+          "withheld_local_tax": 220000,
+          "withheld_national_tax": 2200000
+        },
+        {
+          "employee_id": "SEH",
+          "employer_id": "가상설문",
+          "gross_pay": 22000000,
+          "non_taxable_pay": 0,
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "revision": 1,
+          "statement_id": "SEH-B",
+          "status": "issued",
+          "withheld_local_tax": 90000,
+          "withheld_national_tax": 900000
+        }
+      ],
+      "processing_policy": "대상 직원의 사용자 및 지급기간별 최고 발급본을 합쳐 연간 원천 금액을 확정한다.",
+      "source_contract": "yearend_pay_statement_v1"
+    },
+    "output": {
+      "annual_gross": 70000000,
+      "employer_totals": [
+        {
+          "employer_id": "가상설문",
+          "gross_pay": 22000000,
+          "non_taxable_pay": 0,
+          "withheld_local_tax": 90000,
+          "withheld_national_tax": 900000
+        },
+        {
+          "employer_id": "가상현장",
+          "gross_pay": 48000000,
+          "non_taxable_pay": 2000000,
+          "withheld_local_tax": 220000,
+          "withheld_national_tax": 2200000
+        }
+      ],
+      "excluded_statement_ids": [],
+      "non_taxable": 2000000,
+      "paid_local_tax": 310000,
+      "paid_national_tax": 3100000,
+      "tax_calculation": {
+        "additional_deduction": 0,
+        "basic_deduction": 1500000,
+        "child_credit": 0,
+        "computed_tax": 7044000,
+        "credit_card_deduction": 0,
+        "donation_credit": 0,
+        "education_credit": 0,
+        "eligible_dependents": 0,
+        "employment_credit": 660000,
+        "final_local_tax": 546600,
+        "final_national_tax": 5466000,
+        "hometown_credit": 0,
+        "housing_income_deduction": 0,
+        "income_deduction_limit_excess": 0,
+        "insurance_credit": 0,
+        "medical_credit": 918000,
+        "paid_local_tax": 310000,
+        "paid_national_tax": 3100000,
+        "pension_account_credit": 0,
+        "pension_deduction": 0,
+        "political_credit": 0,
+        "rent_credit": 0,
+        "salary_deduction": 13150000,
+        "salary_income": 54850000,
+        "settlement_local_tax": 236600,
+        "settlement_national_tax": 2366000,
+        "settlement_total": 2602600,
+        "special_income_deduction": 0,
+        "standard_credit": 0,
+        "tax_base": 53350000,
+        "total_salary": 68000000,
+        "total_tax_credits": 1578000
+      },
+      "used_statement_ids": [
+        "SEH-A",
+        "SEH-B"
+      ]
+    },
+    "reconciliation": {
+      "annual_source_amounts": {
+        "annual_gross": 70000000,
+        "non_taxable": 2000000,
+        "paid_local_tax": 310000,
+        "paid_national_tax": 3100000
+      },
+      "duplicate_statement_ids": [],
+      "employer_totals": [
+        {
+          "employer_id": "가상설문",
+          "gross_pay": 22000000,
+          "non_taxable_pay": 0,
+          "withheld_local_tax": 90000,
+          "withheld_national_tax": 900000
+        },
+        {
+          "employer_id": "가상현장",
+          "gross_pay": 48000000,
+          "non_taxable_pay": 2000000,
+          "withheld_local_tax": 220000,
+          "withheld_national_tax": 2200000
+        }
+      ],
+      "excluded_statement_ids": [],
+      "used_statement_ids": [
+        "SEH-A",
+        "SEH-B"
+      ]
+    },
+    "rule_id": "A_PAY_STATEMENT_RECONCILIATION",
+    "tax_derivations": [
+      {
+        "inputs": {
+          "dependents": []
+        },
+        "output": {
+          "additional": 0,
+          "basic": 1500000,
+          "rejected": []
+        },
+        "rule_id": "A_PERSONAL"
+      },
+      {
+        "inputs": {
+          "annual_gross": 70000000,
+          "non_taxable": 2000000
+        },
+        "output": {
+          "salary_deduction": 13150000,
+          "salary_income": 54850000,
+          "total_salary": 68000000
+        },
+        "rule_id": "A_SALARY"
+      },
+      {
+        "inputs": {
+          "public_pension_paid": 0
+        },
+        "output": 0,
+        "rule_id": "A_PENSION_DEDUCTION"
+      },
+      {
+        "inputs": {},
+        "output": 0,
+        "rule_id": "A_SPECIAL_DEDUCTION"
+      },
+      {
+        "inputs": {},
+        "output": 0,
+        "rule_id": "A_HOUSING"
+      },
+      {
+        "inputs": {
+          "salary": 68000000,
+          "spending": {}
+        },
+        "output": 0,
+        "rule_id": "A_CARD"
+      },
+      {
+        "inputs": {
+          "accounts": {},
+          "salary": 68000000
+        },
+        "output": 0,
+        "rule_id": "A_PENSION_CREDIT"
+      },
+      {
+        "inputs": {
+          "birth_orders": [],
+          "eligible_children_age_8_plus": 0
+        },
+        "output": 0,
+        "rule_id": "A_CHILD"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 68000000
+        },
+        "output": 0,
+        "rule_id": "A_INSURANCE_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": [
+            {
+              "amount": 1500000,
+              "date": "2025-02-20",
+              "kind": "ordinary",
+              "person_id": "self"
+            },
+            {
+              "amount": 3600000,
+              "date": "2025-09-12",
+              "kind": "infertility",
+              "person_id": "self"
+            }
+          ],
+          "salary": 68000000
+        },
+        "output": 918000,
+        "rule_id": "A_MEDICAL_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 68000000
+        },
+        "output": 0,
+        "rule_id": "A_EDUCATION_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 68000000
+        },
+        "output": 0,
+        "rule_id": "A_DONATION_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 68000000
+        },
+        "output": 0,
+        "rule_id": "A_POLITICAL_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 68000000
+        },
+        "output": 0,
+        "rule_id": "A_HOMETOWN_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 68000000
+        },
+        "output": 0,
+        "rule_id": "A_RENT_CREDIT"
+      },
+      {
+        "inputs": {
+          "tax_base": 53350000
+        },
+        "output": 7044000,
+        "rule_id": "A_TAX_BRACKETS"
+      },
+      {
+        "inputs": {
+          "computed_tax": 7044000,
+          "salary": 68000000
+        },
+        "output": 660000,
+        "rule_id": "A_EMPLOYMENT_CREDIT"
+      },
+      {
+        "inputs": {
+          "deduction_choice": "itemized",
+          "special_deductions_requested": true
+        },
+        "output": {
+          "housing_deduction_applied": 0,
+          "special_credits_applied": {
+            "donation_credit": 0,
+            "education_credit": 0,
+            "hometown_credit": 0,
+            "insurance_credit": 0,
+            "medical_credit": 918000,
+            "political_credit": 0,
+            "rent_credit": 0
+          },
+          "special_income_deduction_applied": 0,
+          "standard_credit": 0
+        },
+        "rule_id": "A_STANDARD"
+      },
+      {
+        "inputs": {
+          "computed_tax": 7044000,
+          "total_tax_credits": 1578000
+        },
+        "output": 5466000,
+        "rule_id": "A_FINAL"
+      },
+      {
+        "inputs": {
+          "final_national_tax": 5466000
+        },
+        "output": 546600,
+        "rule_id": "A_LOCAL"
+      },
+      {
+        "inputs": {
+          "final_local": 546600,
+          "final_national": 5466000,
+          "paid_local": 310000,
+          "paid_national": 3100000
+        },
+        "output": {
+          "local": 236600,
+          "national": 2366000,
+          "total": 2602600
+        },
+        "rule_id": "A_SETTLEMENT"
+      }
+    ]
+  }
+]

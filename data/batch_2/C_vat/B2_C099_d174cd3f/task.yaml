@@ -1,0 +1,51 @@
+task_id: B2_C099_d174cd3f
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상페블전시점의 신고 지점별 전년 금액과 현재 판매 및 두 구매와 예정고지 납부 자료를 검토하세요. 공제 매입세액(deductible_input_vat)과
+  발행 공제(receipt_credit) 및 환급세액(refund_vat)을 answer.json에 제출하세요.
+input_files:
+- path: inputs/01_정산범위.hwpx
+  format: hwpx
+- path: inputs/02_지점별전년.pdf
+  format: pdf
+- path: inputs/03_가족설치.hwpx
+  format: hwpx
+- path: inputs/04_자재인수.pdf
+  format: pdf
+- path: inputs/05_지급.xlsx
+  format: xlsx
+- path: inputs/06_판매원본.pdf
+  format: pdf
+- path: inputs/07_가족전자.hwpx
+  format: hwpx
+- path: inputs/08_표시정정.xlsx
+  format: xlsx
+- path: inputs/09_최종확인.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - receipt_credit
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-ba175ec7-2fcb-5789-8cc7-233909376ec9
+scenario_seed: 15092913924835135983
+scenario_hash: 7af889bd46393190eb8250a8d092cecaab18b254ea1bcc4c0f00da1c495326b4
+authorship:
+  method: individually_written
+  case_id: C099
+  case_sha256: d174cd3fbb5851ef7dc0bca816951c0d12e1882a2acb3f508343dd0430cfc53f
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- receipt_credit
+- refund_vat

@@ -1,0 +1,126 @@
+task_id: B2_B025_e56fa436
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상목공실의 당월 완료금은 실제 지급하지만 소정근로 대가인 고정 수당은 아닙니다. 승인 추가근로의 정확한 통상시급에는 완료금을
+  제외한 뒤 완전 월 총지급과 공제를 계산하여 실제 두 송금과 대조하세요. payroll_calculations와 balance_total을 요청합니다.
+input_files:
+- path: inputs/01_지급기준.pdf
+  format: pdf
+- path: inputs/02_완료및근태.hwpx
+  format: hwpx
+- path: inputs/03_정기실행.xlsx
+  format: xlsx
+- path: inputs/04_완료금표제.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    payroll_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          calculation:
+            type: object
+            properties:
+              effective_payment_date:
+                type: string
+              ordinary_monthly_wage:
+                type: integer
+              ordinary_hourly_wage_floor:
+                type: integer
+              base_pay:
+                type: integer
+              fixed_allowance:
+                type: integer
+              meal_allowance:
+                type: integer
+              variable_allowance:
+                type: integer
+              overtime_pay:
+                type: integer
+              night_pay:
+                type: integer
+              holiday_pay:
+                type: integer
+              weekly_holiday_pay:
+                type: integer
+              paid_holiday_pay:
+                type: integer
+              gross_pay:
+                type: integer
+              taxable_pay:
+                type: integer
+              non_taxable_pay:
+                type: integer
+              pension_base_income:
+                type: integer
+              national_pension:
+                type: integer
+              health_insurance:
+                type: integer
+              long_term_care:
+                type: integer
+              employment_insurance:
+                type: integer
+              income_tax:
+                type: integer
+              local_income_tax:
+                type: integer
+              total_deductions:
+                type: integer
+              net_pay:
+                type: integer
+            required:
+            - effective_payment_date
+            - ordinary_monthly_wage
+            - ordinary_hourly_wage_floor
+            - base_pay
+            - fixed_allowance
+            - meal_allowance
+            - variable_allowance
+            - overtime_pay
+            - night_pay
+            - holiday_pay
+            - weekly_holiday_pay
+            - paid_holiday_pay
+            - gross_pay
+            - taxable_pay
+            - non_taxable_pay
+            - pension_base_income
+            - national_pension
+            - health_insurance
+            - long_term_care
+            - employment_insurance
+            - income_tax
+            - local_income_tax
+            - total_deductions
+            - net_pay
+            additionalProperties: false
+        required:
+        - payroll_id
+        - employee_id
+        - calculation
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - payroll_calculations
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-66b63d02-935d-54a4-82fb-7e79a97d0fbc
+scenario_seed: 16532613310779441848
+scenario_hash: b804eaf8ca382421a2dbfbbabd9287bbf9a985e6649e60a5aa732903ced4f032
+authorship:
+  method: individually_written
+  case_id: B025
+  case_sha256: e56fa4366de742b8bae984b911a134b17a1e88022e3c9cb63e214ac7f3be6828
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- payroll_calculations
+- balance_total

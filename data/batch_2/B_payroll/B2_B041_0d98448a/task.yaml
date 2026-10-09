@@ -1,0 +1,59 @@
+task_id: B2_B041_0d98448a
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상전시도구실 가상태오의한주종료이체를승인합니다. 수요일결근이있고금요일휴게는최종본에서늘었습니다. 당월실적금도지급하며기관자격회신은확정돼있습니다.
+  base_pay, weekly_holiday_pay, variable_allowance, gross_pay와net_pay를 작성해 주세요. 실적금으로결근주를개근처리하지않습니다.
+input_files:
+- path: inputs/01_한주계약.pdf
+  format: pdf
+- path: inputs/02_월요일.xlsx
+  format: xlsx
+- path: inputs/03_금요일이전.xlsx
+  format: xlsx
+- path: inputs/04_금요일최종.xlsx
+  format: xlsx
+- path: inputs/05_결근주.hwpx
+  format: hwpx
+- path: inputs/06_실적금.pdf
+  format: pdf
+- path: inputs/07_연금회신.pdf
+  format: pdf
+- path: inputs/08_건강고용회신.pdf
+  format: pdf
+- path: inputs/09_집행.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    variable_allowance:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - variable_allowance
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-9fdd0513-0f05-57ba-88ab-50fdbecb97a5
+scenario_seed: 979608280954994612
+scenario_hash: 18054850cd115871f3498ec289fd1f6bfc1835ed0bb42983577fb040d3d3e5e6
+authorship:
+  method: individually_written
+  case_id: B041
+  case_sha256: 0d98448a955a7fb42c4670977d95ff742016d17de2c9b7911ed73ccc4976873b
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- variable_allowance
+- gross_pay
+- net_pay

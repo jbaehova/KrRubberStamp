@@ -1,0 +1,140 @@
+task_id: B2_C081_bfe5373c
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상곡선측정의 법인 납품 신고와 은행 실행 원본 및 내부 일정표가 함께 도착했습니다. 기준일 현재 실제 납부한 금액과 실제
+  받은 반환액을 확인하여 신고 계산 filing_calculations와 등록별 정산 registration_settlements 및 paid_total과
+  received_total을 answer.json에 적어 주세요. 납부 계획과 반환 계획을 먼저 상쇄해 실제 현금으로 사용하면 안 됩니다.
+input_files:
+- path: inputs/01_공급확정.pdf
+  format: pdf
+- path: inputs/02_은행실행.xlsx
+  format: xlsx
+- path: inputs/03_납부일정.hwpx
+  format: hwpx
+- path: inputs/04_반환일정.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    filing_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          filing_id:
+            type: string
+          taxpayer_id:
+            type: string
+          registration_id:
+            type: string
+          business_name:
+            type: string
+          calculation:
+            type: object
+            properties:
+              tax_base:
+                type: integer
+              output_vat:
+                type: integer
+              input_vat:
+                type: integer
+              noncreditable_vat:
+                type: integer
+              deductible_input_vat:
+                type: integer
+              receipt_credit:
+                type: integer
+              prepaid_vat:
+                type: integer
+              net_vat:
+                type: integer
+              payable_vat:
+                type: integer
+              refund_vat:
+                type: integer
+              unique_transaction_count:
+                type: integer
+            required:
+            - tax_base
+            - output_vat
+            - input_vat
+            - noncreditable_vat
+            - deductible_input_vat
+            - receipt_credit
+            - prepaid_vat
+            - net_vat
+            - payable_vat
+            - refund_vat
+            - unique_transaction_count
+            additionalProperties: false
+        required:
+        - filing_id
+        - taxpayer_id
+        - registration_id
+        - business_name
+        - calculation
+        additionalProperties: false
+    registration_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          filing_id:
+            type: string
+          taxpayer_id:
+            type: string
+          registration_id:
+            type: string
+          business_name:
+            type: string
+          tax_due:
+            type: integer
+          payable_vat:
+            type: integer
+          refund_vat:
+            type: integer
+          paid:
+            type: integer
+          received:
+            type: integer
+          net_outflow:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - filing_id
+        - taxpayer_id
+        - registration_id
+        - business_name
+        - tax_due
+        - payable_vat
+        - refund_vat
+        - paid
+        - received
+        - net_outflow
+        - balance
+        additionalProperties: false
+    paid_total:
+      type: integer
+    received_total:
+      type: integer
+  required:
+  - filing_calculations
+  - registration_settlements
+  - paid_total
+  - received_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-27659db1-d592-5868-bd34-c18adda9ee2b
+scenario_seed: 13827518964124448496
+scenario_hash: bd014110fbc5fa98e8665ad6755172d065e6ebbf6609e69c2f332b49ed3e09a3
+authorship:
+  method: individually_written
+  case_id: C081
+  case_sha256: bfe5373c8d9d76f070d91c05fa48507227ef2ae0f869378376b757c3c9339f62
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- filing_calculations
+- registration_settlements
+- paid_total
+- received_total

@@ -1,0 +1,68 @@
+task_id: B2_B003_bc5f625c
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상접수센터는 한 직원의 9월과 10월 정상 지급을 월별로 보관합니다. 같은 직원번호가 두 번 나와도 급여번호와 보험 부과월을
+  확인하여 각 월 완전한 실수령액을 산출하고 이체를 해당 월에 연결해 주세요. employee_settlements와 balance_total을
+  제출합니다.
+input_files:
+- path: inputs/01_9월명세.pdf
+  format: pdf
+- path: inputs/02_10월명세.hwpx
+  format: hwpx
+- path: inputs/03_월별집행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - employee_settlements
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8e5be143-e296-5665-8898-d2f8522ade16
+scenario_seed: 13573675951180652229
+scenario_hash: e0a67088b6c30eee9cc35d905a9973d4236c079ec5b167b1cbe8a67069eded83
+authorship:
+  method: individually_written
+  case_id: B003
+  case_sha256: bc5f625c76629ec5ebbe6eb752e0834728b14e948c9b83f2cfa41471cbb9352f
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- employee_settlements
+- balance_total

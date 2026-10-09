@@ -1,0 +1,142 @@
+task_id: B2_D142_6726c9af
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 받침과 커버를 같은 이름의 동서 독립 배송 계정에서 주문합니다. 동계정 커버 가격은 다음날부터 유효합니다. 이름으로 금액을
+  합치지 말고 실제 chosen_offers와 vendor_cart_totals 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_계측약정.pdf
+  format: pdf
+- path: inputs/02_받침요청.xlsx
+  format: xlsx
+- path: inputs/03_커버요청.hwpx
+  format: hwpx
+- path: inputs/04_동배송.pdf
+  format: pdf
+- path: inputs/05_서배송.xlsx
+  format: xlsx
+- path: inputs/06_동받침.hwpx
+  format: hwpx
+- path: inputs/07_동커버.pdf
+  format: pdf
+- path: inputs/08_서받침.xlsx
+  format: xlsx
+- path: inputs/09_서커버.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-1e91fbd6-14eb-5550-8b50-d619fe315a70
+scenario_seed: 7432849989135874773
+scenario_hash: 69840293fe2241960b1e6e7dffcc473b76156a852f89ae66bcb54ffbbc24d66f
+authorship:
+  method: individually_written
+  case_id: D142
+  case_sha256: 6726c9af2735bad52eb833d4f1a548f4f32e0c4869218bb89ec537adfab4e08e
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

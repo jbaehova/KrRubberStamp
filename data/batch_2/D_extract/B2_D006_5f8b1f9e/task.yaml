@@ -1,0 +1,43 @@
+task_id: B2_D006_5f8b1f9e
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 시험구의 서로 다른 발주 행을 인수 기록에 연결해 실제 재고 수량을 합치세요. 가격이 다르다는 이유로 같은 품목의 같은 기초단위
+  재고를 나누지 않습니다. answer.json에는 item_quantities를 품목과 단위순으로 작성하세요.
+input_files:
+- path: inputs/01_시험구두행.hwpx
+  format: hwpx
+- path: inputs/02_시험구수령.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+  required:
+  - item_quantities
+  additionalProperties: false
+canary: KrRubberStamp-canary-cb5b360e-5852-54ba-9ef2-c68a3389dce9
+scenario_seed: 6884631220480329216
+scenario_hash: c39358c7c549377160831e37f2a5673453b831c71254263cb474882b159c77be
+authorship:
+  method: individually_written
+  case_id: D006
+  case_sha256: 5f8b1f9e624b46002d92c1cba5ed65272605d0f271fd18f177f9c1de49632190
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- item_quantities

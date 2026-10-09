@@ -1,0 +1,41 @@
+task_id: B2_C068_60cc95b8
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상오디수리는 완료 용역과 도구 카드의 표시 정정을 마감했습니다. 실제 작업과 현재 유효한 원본을 연결하여 공제 매입세액(deductible_input_vat)
+  및 순정산액(net_vat)과 환급액(refund_vat)을 answer.json에 제출하세요.
+input_files:
+- path: inputs/01_완료용역.pdf
+  format: pdf
+- path: inputs/02_도구인수.hwpx
+  format: hwpx
+- path: inputs/03_발급원본.xlsx
+  format: xlsx
+- path: inputs/04_표시효력.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    net_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - net_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-b08d85e1-20a9-5943-9d90-f35a1cd500f2
+scenario_seed: 6975114542184047286
+scenario_hash: 9e208e0233068f115f27d26854c9547cff3bce53b57df8e57bb80de223e6f34b
+authorship:
+  method: individually_written
+  case_id: C068
+  case_sha256: 60cc95b86a8aa2b6abc56573f01563a4a2975df9c482dd53413ebd8f47e26c58
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- net_vat
+- refund_vat

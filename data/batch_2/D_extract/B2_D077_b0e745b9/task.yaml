@@ -1,0 +1,99 @@
+task_id: B2_D077_b0e745b9
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 두 제안의 총액과 정규화 업체명이 같습니다. 원래 문자열 순서나 제출 순서 대신 견적 ID로 chosen_quote_id와
+  quote_comparisons를 작성해 주세요.
+input_files:
+- path: inputs/01_칸막이요청.hwpx
+  format: hwpx
+- path: inputs/02_Z견적.xlsx
+  format: xlsx
+- path: inputs/03_A가격.pdf
+  format: pdf
+- path: inputs/04_A배송.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_quote_id:
+      type: string
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+  required:
+  - chosen_quote_id
+  - quote_comparisons
+  additionalProperties: false
+canary: KrRubberStamp-canary-10fae2a2-ca70-5cb3-b67a-0407283c2017
+scenario_seed: 12747233934498952516
+scenario_hash: 2d7f359bc1c2e02245ae7fd73c5d930bbce88ab38cc2db2541d38de8da990aab
+authorship:
+  method: individually_written
+  case_id: D077
+  case_sha256: b0e745b9c69d7544f17e1af86fd2ba2b8c96b98a4759337007007971820a2334
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- chosen_quote_id
+- quote_comparisons

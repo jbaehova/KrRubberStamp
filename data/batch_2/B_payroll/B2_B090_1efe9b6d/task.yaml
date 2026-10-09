@@ -1,0 +1,56 @@
+task_id: B2_B090_1efe9b6d
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상원부실 직원은 회사 식사를 제공받고 현금 식대도 받습니다. 긴 주휴일 실제 작업은 같은 날8시간 이후 구간이 있습니다.
+  식대 비과세를 임의로 빼지 말고 휴일 대가와 과세 합계에서 holiday_pay, non_taxable_pay, taxable_pay 및 income_tax를
+  계산하세요.
+input_files:
+- path: inputs/01_임금.pdf
+  format: pdf
+- path: inputs/02_소정.xlsx
+  format: xlsx
+- path: inputs/03_휴일.hwpx
+  format: hwpx
+- path: inputs/04_긴작업.pdf
+  format: pdf
+- path: inputs/05_연금.xlsx
+  format: xlsx
+- path: inputs/06_건강.hwpx
+  format: hwpx
+- path: inputs/07_고용.pdf
+  format: pdf
+- path: inputs/08_배식.xlsx
+  format: xlsx
+- path: inputs/09_지급.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    non_taxable_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+  required:
+  - holiday_pay
+  - non_taxable_pay
+  - taxable_pay
+  - income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-accf0bc6-efee-57a8-9500-e0c41f0f04b9
+scenario_seed: 2233393358496260801
+scenario_hash: 9d7dbccf84ead77df1a33533e0957bf7695606f8879965aa43efc3164847280b
+authorship:
+  method: individually_written
+  case_id: B090
+  case_sha256: 1efe9b6d30e2e2c1590a08185b423b2dfcd5d19ce758b52edcb30caead6df119
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- holiday_pay
+- non_taxable_pay
+- taxable_pay
+- income_tax

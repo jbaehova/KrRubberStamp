@@ -1,0 +1,59 @@
+task_id: B2_D004_7460c50e
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 인쇄판을 인수한 금액과 두 번 실행한 송금을 대조하세요. 약정대로 인수 대금을 구한 뒤 실행 지급을 합쳐 차감합니다. answer.json에는
+  vendor_balances와 payment_total을 작성하세요. 업체명은 NFKC, 공백과 법인 표기 제거 후 소문자로 정리해 이름순으로
+  배열합니다.
+input_files:
+- path: inputs/01_인쇄판약정.pdf
+  format: pdf
+- path: inputs/02_인쇄판입고.hwpx
+  format: hwpx
+- path: inputs/03_인쇄판송금.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    payment_total:
+      type: integer
+  required:
+  - vendor_balances
+  - payment_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-dcdf0537-d89c-5440-ba76-e42fe939470f
+scenario_seed: 8385919170236946252
+scenario_hash: 46b284eb595a76056c23b98dd7d1b77df06503d1983cfdf50662ecffc019006e
+authorship:
+  method: individually_written
+  case_id: D004
+  case_sha256: 7460c50e091c974c9fa9848970a9eeefee69046f7da832ee463fd63110fbfc25
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances
+- payment_total

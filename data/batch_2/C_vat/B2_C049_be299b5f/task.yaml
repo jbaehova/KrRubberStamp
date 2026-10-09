@@ -1,0 +1,56 @@
+task_id: B2_C049_be299b5f
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상하얀받침의 카드 및 현금 판매와 확장 구매를 검토해 주세요. 토지 공사와 매장 집기를 직접 사용 기록으로 구분한 뒤 영수증
+  발행세액공제(receipt_credit), 공제가능 매입세액(deductible_input_vat), 순정산세액(net_vat), 환급세액(refund_vat)을
+  answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_확장의뢰.hwpx
+  format: hwpx
+- path: inputs/02_고지납부.pdf
+  format: pdf
+- path: inputs/03_카드4.pdf
+  format: pdf
+- path: inputs/04_현금5.xlsx
+  format: xlsx
+- path: inputs/05_카드6.pdf
+  format: pdf
+- path: inputs/06_토공.pdf
+  format: pdf
+- path: inputs/07_집기.xlsx
+  format: xlsx
+- path: inputs/08_필지실사.pdf
+  format: pdf
+- path: inputs/09_집기인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    net_vat:
+      type: integer
+    refund_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - deductible_input_vat
+  - net_vat
+  - refund_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-b0dd39bf-1629-52ed-90f1-15a28e915297
+scenario_seed: 13702654176595282688
+scenario_hash: 04e227dce788c3511dab20e4ee091a55c4f5389815a341ce2c9db5115496518b
+authorship:
+  method: individually_written
+  case_id: C049
+  case_sha256: be299b5fb3fc0b00e43a6544d2467e6e58cbd29eabf40a6896a9d9f35769ddb0
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- receipt_credit
+- deductible_input_vat
+- net_vat
+- refund_vat

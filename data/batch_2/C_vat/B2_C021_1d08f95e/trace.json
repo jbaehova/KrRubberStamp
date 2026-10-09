@@ -1,0 +1,363 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "패드인수",
+          "date": "2026-04-03",
+          "description": "양각용 패드를 작업실에 인수했다.",
+          "document_ids": [
+            "패드일반영수",
+            "패드카드"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "양각 작업실"
+          },
+          "operation_id": "양각",
+          "participants": [
+            {
+              "name": "가상한양각",
+              "organization": "가상양각제작",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "패드"
+        }
+      ],
+      "business_name": "가상양각제작",
+      "evidence_documents": [
+        {
+          "amount": 55000,
+          "date": "2026-04-03",
+          "document_id": "양각판매전표",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "양각수금",
+          "stated_vat": 5000,
+          "transaction_id": "양각판매",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 440000,
+          "date": "2026-04-03",
+          "document_id": "패드일반영수",
+          "document_type": "receipt",
+          "includes_vat": true,
+          "payment_id": "패드승인",
+          "stated_vat": null,
+          "transaction_id": "패드",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 440000,
+          "date": "2026-04-03",
+          "document_id": "패드카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "패드승인",
+          "stated_vat": 40000,
+          "transaction_id": "패드",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 유상 양각 작업",
+          "operation_id": "양각",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 55000,
+          "date": "2026-04-03",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "양각수금",
+          "transaction_id": "양각판매"
+        },
+        {
+          "amount": 440000,
+          "date": "2026-04-03",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "패드승인",
+          "transaction_id": "패드"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "amount": 110000,
+          "counterparty_consumer": true,
+          "date": "2026-04-03",
+          "description": "소비자 양각품 전체 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "양각판매"
+        },
+        {
+          "activity_id": "패드인수",
+          "amount": 440000,
+          "counterparty_consumer": false,
+          "date": "2026-04-03",
+          "description": "패드 전체 인수",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": false,
+          "taxable": true,
+          "transaction_id": "패드",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "양각판매전표"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 110000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 55000,
+        "paid_gross": 55000,
+        "supply_base": 100000,
+        "transaction_id": "양각판매",
+        "unissued_receipt_gross": 55000,
+        "unpaid_gross": 55000,
+        "vat": 10000
+      },
+      {
+        "document_ids": [
+          "패드일반영수",
+          "패드카드"
+        ],
+        "documented_input_vat": 40000,
+        "eligible_input_document_ids": [
+          "패드카드"
+        ],
+        "gross": 440000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 440000,
+        "paid_gross": 440000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": false,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 400000,
+        "transaction_id": "패드",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 40000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "양각판매전표"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "양각판매"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "패드일반영수",
+        "패드카드"
+      ],
+      "evidence": [
+        "card_receipt",
+        "receipt"
+      ],
+      "transaction_id": "패드"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-03",
+      "transaction_id": "양각판매"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 110000,
+      "includes_vat": true,
+      "transaction_id": "양각판매"
+    },
+    "output": {
+      "gross": 110000,
+      "supply_base": 100000,
+      "vat": 10000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 100000
+    },
+    "output": 10000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 55000,
+      "transaction_id": "양각판매"
+    },
+    "output": {
+      "eligible_gross": 55000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-03",
+      "transaction_id": "패드"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 440000,
+      "includes_vat": true,
+      "transaction_id": "패드"
+    },
+    "output": {
+      "gross": 440000,
+      "supply_base": 400000,
+      "vat": 40000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 40000,
+      "evidence": [
+        "card_receipt",
+        "receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": false,
+      "transaction_id": "패드",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 40000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 97000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 55000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 715,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 715
+    },
+    "output": 715,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 715,
+      "liability_before_credit": 10000
+    },
+    "output": 715,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 9285,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 9285,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 10000,
+      "prepaid_vat": 0,
+      "receipt_credit": 715
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 40000,
+      "net_vat": 9285,
+      "noncreditable_vat": 40000,
+      "output_vat": 10000,
+      "payable_vat": 9285,
+      "prepaid_vat": 0,
+      "receipt_credit": 715,
+      "refund_vat": 0,
+      "tax_base": 100000,
+      "unique_transaction_count": 2
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

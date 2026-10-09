@@ -1,0 +1,139 @@
+task_id: B2_D107_9d40f700
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 전용 자와 공용 클립을 확보합니다. 자 공급처 클립은 최소 세 포장이며 그 실제 상품액을 자와 함께 무료배송 기준에 넣습니다.
+  chosen_offers와 offer_comparisons 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_각도자요청.pdf
+  format: pdf
+- path: inputs/02_각도자공방.xlsx
+  format: xlsx
+- path: inputs/03_클립창고.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - offer_comparisons
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-a20df7f0-955b-5e38-aadc-9176be89f8bd
+scenario_seed: 11331328244069905128
+scenario_hash: e577b186f4445ddce4fdf6e85b37718606dfdca86f6e5d506eecbab6cb82ae91
+authorship:
+  method: individually_written
+  case_id: D107
+  case_sha256: 9d40f700852332e8898e80fb577fcb393385dd675a8799b7d982bd313622080d
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- offer_comparisons
+- grand_total

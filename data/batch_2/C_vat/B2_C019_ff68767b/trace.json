@@ -1,0 +1,258 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "ground_work",
+          "activity_id": "토지작업",
+          "date": "2026-02-20",
+          "description": "나대지를 최초 평탄화하고 배수로를 설치했다.",
+          "document_ids": [
+            "토지전자",
+            "토지카드"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "야적 부지"
+          },
+          "operation_id": "야적",
+          "participants": [
+            {
+              "name": "가상신현장",
+              "organization": "가상야적정비",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "토지조성"
+        }
+      ],
+      "business_name": "가상야적정비",
+      "evidence_documents": [
+        {
+          "amount": 3000000,
+          "date": "2026-02-20",
+          "document_id": "토지전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 300000,
+          "transaction_id": "토지조성",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 1100000,
+          "date": "2026-02-20",
+          "document_id": "토지카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "토지승인",
+          "stated_vat": 100000,
+          "transaction_id": "토지조성",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 물품 야적 보관 업무",
+          "operation_id": "야적",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 1100000,
+          "date": "2026-02-20",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "토지승인",
+          "transaction_id": "토지조성"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "activity_id": "토지작업",
+          "amount": 3000000,
+          "counterparty_consumer": false,
+          "date": "2026-02-20",
+          "description": "나대지 최초 조성 전체 완료",
+          "direction": "purchase",
+          "includes_vat": false,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "토지조성",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "토지전자",
+          "토지카드"
+        ],
+        "documented_input_vat": 300000,
+        "eligible_input_document_ids": [
+          "토지전자"
+        ],
+        "gross": 3300000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 1100000,
+        "paid_gross": 1100000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "land",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 3000000,
+        "transaction_id": "토지조성",
+        "unissued_receipt_gross": 2200000,
+        "unpaid_gross": 2200000,
+        "vat": 300000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "토지전자",
+        "토지카드"
+      ],
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "transaction_id": "토지조성"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 2
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-20",
+      "transaction_id": "토지조성"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3000000,
+      "includes_vat": false,
+      "transaction_id": "토지조성"
+    },
+    "output": {
+      "gross": 3300000,
+      "supply_base": 3000000,
+      "vat": 300000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 300000,
+      "evidence": [
+        "card_receipt",
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "토지조성",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 300000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 220000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 300000,
+      "net_vat": 0,
+      "noncreditable_vat": 300000,
+      "output_vat": 0,
+      "payable_vat": 0,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 0,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

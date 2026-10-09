@@ -1,0 +1,70 @@
+task_id: B2_B014_75fc171a
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상편집대는 정상 월급의 지급일 전에 자금을 확보합니다. 아직 은행 실행이 없는 완전 월 명세를 계산하여 net_total과
+  balance_total 및 employee_settlements를 작성해 주세요. 총지급액을 그대로 지급 재원으로 잡지 말고 확정 공제 통지를
+  적용합니다.
+input_files:
+- path: inputs/01_승인명세.pdf
+  format: pdf
+- path: inputs/02_실행전원장.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    net_total:
+      type: integer
+    balance_total:
+      type: integer
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - net_total
+  - balance_total
+  - employee_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-fd0f6a89-b38b-5038-87b2-adf228c72385
+scenario_seed: 8501695600206382177
+scenario_hash: 11f5d2d026145c0fee6179f30507eb120689558a25c7ece8375e08fe6b9470c9
+authorship:
+  method: individually_written
+  case_id: B014
+  case_sha256: 75fc171abecd8461953cd423726dc67f747f3435a35db5f55d8c3c423b512e8b
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- net_total
+- balance_total
+- employee_settlements

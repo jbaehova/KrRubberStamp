@@ -1,0 +1,71 @@
+task_id: B2_D011_484d7fd8
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 클램프 본체를 조립할 때 필요한 볼트가 도착했는지 행별 수불로 확인하세요. 본체마다 볼트 두 개가 필요한 약정입니다. 본체
+  납품 완료만으로 조립용 부속도 완료로 보지 않습니다. 포장 환산과 가격 약정에 따라 line_settlements를 answer.json에 행번호순으로
+  작성하세요.
+input_files:
+- path: inputs/01_클램프두행.pdf
+  format: pdf
+- path: inputs/02_클램프입고.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-8973c962-dd3d-5738-9429-f5a07751fc88
+scenario_seed: 5209960910151104692
+scenario_hash: 344c83f5ca86e2282c5eb9506b3a98d04919f602264b72a97223c1d07465a7e7
+authorship:
+  method: individually_written
+  case_id: D011
+  case_sha256: 484d7fd81f3a38b45bb8440cde011f63a9e8e255dfeb369b5a28c8af36cc2b10
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements

@@ -1,0 +1,101 @@
+task_id: B2_D063_6d9215e8
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 정리 씰은 필요한 수량과 최소 주문만큼만 구매하는 약정입니다. 한 업체는 추가 포장을 사면 무료배송이 되지만 현재 요청에는
+  그 추가 구매가 없습니다. quote_comparisons와 chosen_quote_id 및 chosen_total을 작성해 주세요.
+input_files:
+- path: inputs/01_씰요청.pdf
+  format: pdf
+- path: inputs/02_기준견적.xlsx
+  format: xlsx
+- path: inputs/03_고정견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_quote_id:
+      type: string
+    chosen_total:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_quote_id
+  - chosen_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8208ac05-c2ea-5bb3-b360-fbecd976f108
+scenario_seed: 7895397185919992144
+scenario_hash: a965cc507caa9ded5629b19e972dd09d2cf2003fc748da2d83523b2b91b45b8b
+authorship:
+  method: individually_written
+  case_id: D063
+  case_sha256: 6d9215e8b3614150e000949b6ed9a72a2e57864729e4532ea16144a1a186f0fb
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_quote_id
+- chosen_total

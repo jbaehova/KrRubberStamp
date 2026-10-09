@@ -1,0 +1,42 @@
+task_id: B2_C028_49959a5a
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상무늬공방의 대표 가족 집에 설치한 가구는 일부 현금영수증과 전체 전자가 있습니다. 원본들의 실제 공급 범위와 설치 수령자를
+  대조하여 불공제 매입세액(noncreditable_vat)과 공제가능 매입세액(deductible_input_vat) 및 신고 거래 수(unique_transaction_count)를
+  answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_신고범위.hwpx
+  format: hwpx
+- path: inputs/02_설치수령.pdf
+  format: pdf
+- path: inputs/03_현금실행.xlsx
+  format: xlsx
+- path: inputs/04_전체전자.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - noncreditable_vat
+  - deductible_input_vat
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-c322bb12-efc6-5922-b48c-4b2ab47ddc91
+scenario_seed: 5302313851027557224
+scenario_hash: 68552d5ff92f0d9ce695107fae4fad73f649f7aeb296a74b9209327529b04d44
+authorship:
+  method: individually_written
+  case_id: C028
+  case_sha256: 49959a5aca218b685f9705c0c9625abc5cd7fe59dee210f0b1ebc1baf93b398e
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- noncreditable_vat
+- deductible_input_vat
+- unique_transaction_count

@@ -1,0 +1,158 @@
+task_id: B2_A014_3de5f7a9
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상계절인쇄의 가상정가온은 같은 회사의 상반기 및 하반기 발급 증명서와 본인 일반 공익 기부를 제출했습니다. 두 기간을 한
+  사용자의 연간 합계로 묶고 근로소득금액에서 계산하는 기부 한도를 적용하세요. 사용자별 합계와 기부 세액공제가 든 세금 계산 객체를 회신합니다.
+input_files:
+- path: inputs/01_상반기.pdf
+  format: pdf
+- path: inputs/02_하반기.xlsx
+  format: xlsx
+- path: inputs/03_기부접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    employer_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          employer_id:
+            type: string
+          gross_pay:
+            type: integer
+          non_taxable_pay:
+            type: integer
+          withheld_national_tax:
+            type: integer
+          withheld_local_tax:
+            type: integer
+        required:
+        - employer_id
+        - gross_pay
+        - non_taxable_pay
+        - withheld_national_tax
+        - withheld_local_tax
+        additionalProperties: false
+    annual_gross:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - employer_totals
+  - annual_gross
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-e7f8ca1e-e300-53dd-b0ea-fae6cb1ad529
+scenario_seed: 4460243313070016466
+scenario_hash: 291adc09f8b347dda037ece12175abcf62ee22136a33837b4f7be6c0fdd209df
+authorship:
+  method: individually_written
+  case_id: A014
+  case_sha256: 3de5f7a96f5987d2c5d274b634dcac0565a2c7f9b8d5ac40e9162fa840b39e5d
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- employer_totals
+- annual_gross
+- tax_calculation

@@ -1,0 +1,154 @@
+task_id: B2_A091_0c1c09e3
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상태오의 직원 번호를 확인해 원천 자료를 선택하고 초안은 제외하세요. 성년 자녀 명의 임차계약을 가족 자료에 연결하고 같은
+  자녀의 의료 및 카드 사용은 각자의 요건으로 검토하여 채택 및 제외 번호와 세금 계산 객체를 제출합니다.
+input_files:
+- path: inputs/01_운반.pdf
+  format: pdf
+- path: inputs/02_배달.xlsx
+  format: xlsx
+- path: inputs/03_초안.hwpx
+  format: hwpx
+- path: inputs/04_다른직원.pdf
+  format: pdf
+- path: inputs/05_자녀.xlsx
+  format: xlsx
+- path: inputs/06_임차.hwpx
+  format: hwpx
+- path: inputs/07_진료.pdf
+  format: pdf
+- path: inputs/08_카드.xlsx
+  format: xlsx
+- path: inputs/09_접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    used_statement_ids:
+      type: array
+      items:
+        type: string
+    excluded_statement_ids:
+      type: array
+      items:
+        type: string
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - used_statement_ids
+  - excluded_statement_ids
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-cca7618d-1fe4-5af2-ad48-0f2bdd264186
+scenario_seed: 872583300367231169
+scenario_hash: 345f1a0eb338065add3d1a96591ae58c22baac77797b7cfb38ec66f53597ea24
+authorship:
+  method: individually_written
+  case_id: A091
+  case_sha256: 0c1c09e37753a8c1389b59e4826b94a19cc02649f4ced66eb48e7adb3818d2e3
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- used_statement_ids
+- excluded_statement_ids
+- tax_calculation

@@ -1,0 +1,132 @@
+task_id: B2_D118_c2af0029
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 케이스와 덮개 및 걸이를 주문합니다. 덮개걸이 업체의 덮개만 납기에 하루 늦습니다. 실제 적격 조합에서 chosen_offers와
+  vendor_cart_totals 및 feasible_cart_count를 작성해 주세요.
+input_files:
+- path: inputs/01_기록품요청.pdf
+  format: pdf
+- path: inputs/02_덮개걸이.xlsx
+  format: xlsx
+- path: inputs/03_케이스덮개.hwpx
+  format: hwpx
+- path: inputs/04_케이스걸이.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    feasible_cart_count:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - feasible_cart_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-d3a46d6a-c01e-5f22-a7a2-cb8c6079570a
+scenario_seed: 14028431540458955458
+scenario_hash: 66259bcc828fa7294b9238242d6309250506a204449319889561e99fc02e0213
+authorship:
+  method: individually_written
+  case_id: D118
+  case_sha256: c2af002904f122c2d452855df094300b3e268fd1f9bc4e0e02ea5dedd87c3b13
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- feasible_cart_count

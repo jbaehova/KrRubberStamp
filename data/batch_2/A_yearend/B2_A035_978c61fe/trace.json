@@ -1,0 +1,327 @@
+[
+  {
+    "inputs": {
+      "calculation_facts": {
+        "employee_age": 39,
+        "employee_name": "가상채은찬",
+        "employment_end": "2025-12-31",
+        "employment_start": "2025-01-01",
+        "reference_year": 2025,
+        "scope_note": "국내 거주 근로소득자다. 두 지급기간은 이어지며 가족 및 개인 지출공제는 없다. 상반기 정정은 지방세 징수 장부의 기재 수정이며 이미 실행된 실제 원천징수 누계를 반영한다."
+      },
+      "employee_id": "E-EUNCHAN",
+      "pay_statements": [
+        {
+          "employee_id": "E-EUNCHAN",
+          "employer_id": "분리기록",
+          "gross_pay": 27000000,
+          "non_taxable_pay": 1000000,
+          "period_end": "2025-06-30",
+          "period_start": "2025-01-01",
+          "revision": 2,
+          "statement_id": "EC-H1-NEW",
+          "status": "issued",
+          "withheld_local_tax": 235000,
+          "withheld_national_tax": 2000000
+        },
+        {
+          "employee_id": "E-EUNCHAN",
+          "employer_id": "분리기록",
+          "gross_pay": 27000000,
+          "non_taxable_pay": 1000000,
+          "period_end": "2025-06-30",
+          "period_start": "2025-01-01",
+          "revision": 1,
+          "statement_id": "EC-H1-OLD",
+          "status": "issued",
+          "withheld_local_tax": 180000,
+          "withheld_national_tax": 2000000
+        },
+        {
+          "employee_id": "E-EUNCHAN",
+          "employer_id": "분리기록",
+          "gross_pay": 27000000,
+          "non_taxable_pay": 1000000,
+          "period_end": "2025-12-31",
+          "period_start": "2025-07-01",
+          "revision": 1,
+          "statement_id": "EC-H2",
+          "status": "issued",
+          "withheld_local_tax": 210000,
+          "withheld_national_tax": 2100000
+        }
+      ],
+      "processing_policy": "동일 직원의 사용자와 지급기간별로 발급 최고 수정차수를 채택한다. 다른 지급기간은 각자 선택하며 국세 및 지방세는 증명서의 독립된 금액을 합산한다.",
+      "source_contract": "yearend_pay_statement_v1"
+    },
+    "output": {
+      "annual_gross": 54000000,
+      "employer_totals": [
+        {
+          "employer_id": "분리기록",
+          "gross_pay": 54000000,
+          "non_taxable_pay": 2000000,
+          "withheld_local_tax": 445000,
+          "withheld_national_tax": 4100000
+        }
+      ],
+      "excluded_statement_ids": [
+        "EC-H1-OLD"
+      ],
+      "non_taxable": 2000000,
+      "paid_local_tax": 445000,
+      "paid_national_tax": 4100000,
+      "tax_calculation": {
+        "additional_deduction": 0,
+        "basic_deduction": 1500000,
+        "child_credit": 0,
+        "computed_tax": 4462500,
+        "credit_card_deduction": 0,
+        "donation_credit": 0,
+        "education_credit": 0,
+        "eligible_dependents": 0,
+        "employment_credit": 660000,
+        "final_local_tax": 367250,
+        "final_national_tax": 3672500,
+        "hometown_credit": 0,
+        "housing_income_deduction": 0,
+        "income_deduction_limit_excess": 0,
+        "insurance_credit": 0,
+        "medical_credit": 0,
+        "paid_local_tax": 445000,
+        "paid_national_tax": 4100000,
+        "pension_account_credit": 0,
+        "pension_deduction": 0,
+        "political_credit": 0,
+        "rent_credit": 0,
+        "salary_deduction": 12350000,
+        "salary_income": 39650000,
+        "settlement_local_tax": -77750,
+        "settlement_national_tax": -427500,
+        "settlement_total": -505250,
+        "special_income_deduction": 0,
+        "standard_credit": 130000,
+        "tax_base": 38150000,
+        "total_salary": 52000000,
+        "total_tax_credits": 790000
+      },
+      "used_statement_ids": [
+        "EC-H1-NEW",
+        "EC-H2"
+      ]
+    },
+    "reconciliation": {
+      "annual_source_amounts": {
+        "annual_gross": 54000000,
+        "non_taxable": 2000000,
+        "paid_local_tax": 445000,
+        "paid_national_tax": 4100000
+      },
+      "duplicate_statement_ids": [],
+      "employer_totals": [
+        {
+          "employer_id": "분리기록",
+          "gross_pay": 54000000,
+          "non_taxable_pay": 2000000,
+          "withheld_local_tax": 445000,
+          "withheld_national_tax": 4100000
+        }
+      ],
+      "excluded_statement_ids": [
+        "EC-H1-OLD"
+      ],
+      "used_statement_ids": [
+        "EC-H1-NEW",
+        "EC-H2"
+      ]
+    },
+    "rule_id": "A_PAY_STATEMENT_RECONCILIATION",
+    "tax_derivations": [
+      {
+        "inputs": {
+          "dependents": []
+        },
+        "output": {
+          "additional": 0,
+          "basic": 1500000,
+          "rejected": []
+        },
+        "rule_id": "A_PERSONAL"
+      },
+      {
+        "inputs": {
+          "annual_gross": 54000000,
+          "non_taxable": 2000000
+        },
+        "output": {
+          "salary_deduction": 12350000,
+          "salary_income": 39650000,
+          "total_salary": 52000000
+        },
+        "rule_id": "A_SALARY"
+      },
+      {
+        "inputs": {
+          "public_pension_paid": 0
+        },
+        "output": 0,
+        "rule_id": "A_PENSION_DEDUCTION"
+      },
+      {
+        "inputs": {},
+        "output": 0,
+        "rule_id": "A_SPECIAL_DEDUCTION"
+      },
+      {
+        "inputs": {},
+        "output": 0,
+        "rule_id": "A_HOUSING"
+      },
+      {
+        "inputs": {
+          "salary": 52000000,
+          "spending": {}
+        },
+        "output": 0,
+        "rule_id": "A_CARD"
+      },
+      {
+        "inputs": {
+          "accounts": {},
+          "salary": 52000000
+        },
+        "output": 0,
+        "rule_id": "A_PENSION_CREDIT"
+      },
+      {
+        "inputs": {
+          "birth_orders": [],
+          "eligible_children_age_8_plus": 0
+        },
+        "output": 0,
+        "rule_id": "A_CHILD"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 52000000
+        },
+        "output": 0,
+        "rule_id": "A_INSURANCE_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 52000000
+        },
+        "output": 0,
+        "rule_id": "A_MEDICAL_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 52000000
+        },
+        "output": 0,
+        "rule_id": "A_EDUCATION_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 52000000
+        },
+        "output": 0,
+        "rule_id": "A_DONATION_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 52000000
+        },
+        "output": 0,
+        "rule_id": "A_POLITICAL_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 52000000
+        },
+        "output": 0,
+        "rule_id": "A_HOMETOWN_CREDIT"
+      },
+      {
+        "inputs": {
+          "expenses": {},
+          "salary": 52000000
+        },
+        "output": 0,
+        "rule_id": "A_RENT_CREDIT"
+      },
+      {
+        "inputs": {
+          "tax_base": 38150000
+        },
+        "output": 4462500,
+        "rule_id": "A_TAX_BRACKETS"
+      },
+      {
+        "inputs": {
+          "computed_tax": 4462500,
+          "salary": 52000000
+        },
+        "output": 660000,
+        "rule_id": "A_EMPLOYMENT_CREDIT"
+      },
+      {
+        "inputs": {
+          "deduction_choice": "standard",
+          "special_deductions_requested": false
+        },
+        "output": {
+          "housing_deduction_applied": 0,
+          "special_credits_applied": {
+            "donation_credit": 0,
+            "education_credit": 0,
+            "hometown_credit": 0,
+            "insurance_credit": 0,
+            "medical_credit": 0,
+            "political_credit": 0,
+            "rent_credit": 0
+          },
+          "special_income_deduction_applied": 0,
+          "standard_credit": 130000
+        },
+        "rule_id": "A_STANDARD"
+      },
+      {
+        "inputs": {
+          "computed_tax": 4462500,
+          "total_tax_credits": 790000
+        },
+        "output": 3672500,
+        "rule_id": "A_FINAL"
+      },
+      {
+        "inputs": {
+          "final_national_tax": 3672500
+        },
+        "output": 367250,
+        "rule_id": "A_LOCAL"
+      },
+      {
+        "inputs": {
+          "final_local": 367250,
+          "final_national": 3672500,
+          "paid_local": 445000,
+          "paid_national": 4100000
+        },
+        "output": {
+          "local": -77750,
+          "national": -427500,
+          "total": -505250
+        },
+        "rule_id": "A_SETTLEMENT"
+      }
+    ]
+  }
+]

@@ -1,0 +1,130 @@
+task_id: B2_D054_02c29263
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 라벨과 서류 고리를 함께 주문합니다. 품목마다 운임을 붙여 고른 구매처를 단순히 합치지 말고 실제 업체별 상자 운임을 한 번씩
+  적용하세요. chosen_offers와 vendor_cart_totals 및 grand_total을 작성해 함께 승인할 주문 조합을 알려 주세요.
+input_files:
+- path: inputs/01_공동구매요청.pdf
+  format: pdf
+- path: inputs/02_한상자견적.xlsx
+  format: xlsx
+- path: inputs/03_직송견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-0eedfdbd-ee51-5dad-b953-95924f7b0f47
+scenario_seed: 198882288994927837
+scenario_hash: 3df929623748937832e76206d376697e25345b90a8612eeb67958493666dc911
+authorship:
+  method: individually_written
+  case_id: D054
+  case_sha256: 02c292635ba8c4dd0469bf90b33548b2bd8969a95a5fae21b359ec2b7b093d58
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

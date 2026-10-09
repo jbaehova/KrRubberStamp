@@ -1,0 +1,51 @@
+task_id: B2_B089_055e42c5
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상보존실은 오후 소집 날짜를 일요일로 정정했지만 이후 더 늦은 종료시각 초안도 남아 있습니다. 최고 승인 날짜를 적용하고
+  미승인 초안은 제외한 후 독립 오전 카드와 합산하세요.8시간 이후 holiday_pay와 실제 night_pay 및 gross_pay를 제출하세요.
+input_files:
+- path: inputs/01_약정.pdf
+  format: pdf
+- path: inputs/02_오전.pdf
+  format: pdf
+- path: inputs/03_오후.xlsx
+  format: xlsx
+- path: inputs/04_휴일.hwpx
+  format: hwpx
+- path: inputs/05_연금.pdf
+  format: pdf
+- path: inputs/06_건강.xlsx
+  format: xlsx
+- path: inputs/07_고용.hwpx
+  format: hwpx
+- path: inputs/08_세무.pdf
+  format: pdf
+- path: inputs/09_실행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - holiday_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-d3578190-f9b8-5ed5-be74-49417c299188
+scenario_seed: 386820035591588165
+scenario_hash: 998fd24694160b7fa9d4d6a4f129ad679a3570f815be830a558a1d0a4057d4bd
+authorship:
+  method: individually_written
+  case_id: B089
+  case_sha256: 055e42c5dd70c94593ee6d6ae6c9b0f8a934d71af2fd60a9771922bfeb63e09a
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- holiday_pay
+- night_pay
+- gross_pay

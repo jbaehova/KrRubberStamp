@@ -1,0 +1,101 @@
+task_id: B2_D052_82dbf946
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 검수 봉투 10장의 두 구매안을 비교합니다. 운임은 구매포장마다가 아니라 주문 한 번에 붙습니다. quote_comparisons와
+  chosen_quote_id 및 chosen_total을 작성해 실제 주문 전체 비용을 확인해 주세요.
+input_files:
+- path: inputs/01_봉투주문.pdf
+  format: pdf
+- path: inputs/02_개별견적.xlsx
+  format: xlsx
+- path: inputs/03_열장견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_quote_id:
+      type: string
+    chosen_total:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_quote_id
+  - chosen_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8769fdaa-b1ea-51e9-8050-4f60cf7e28d1
+scenario_seed: 9429404325224217003
+scenario_hash: 98e636425270a82076a054078fe6c618e73e7fa180706065d9d3360dc9e85652
+authorship:
+  method: individually_written
+  case_id: D052
+  case_sha256: 82dbf946508579ab92cb19171fec5b36bded635f54e094a21ed540122c34a5b2
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_quote_id
+- chosen_total

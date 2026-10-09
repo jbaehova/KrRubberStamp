@@ -1,0 +1,527 @@
+[
+  {
+    "inputs": {
+      "as_of_date": "2026-08-03",
+      "filings": [
+        {
+          "business_name": "가상잔결매장",
+          "facts": {
+            "activities": [],
+            "business_name": "가상잔결매장",
+            "business_type": "individual",
+            "consumer_facing_business": true,
+            "operations": [],
+            "period_end": "2026-06-30",
+            "period_start": "2026-01-01",
+            "prepaid_assessed_vat": 0,
+            "prior_year_site_supply_base": 80000000,
+            "receipt_credit_previously_claimed": 0,
+            "scope_note": "개인 일반과세 매장의 소비자 대상 국내 과세 판매다. 실제 완료한 판매 전액에 카드 전표를 정상 발행했고 전자 세금계산서는 발행하지 않았다. 이전 발행 공제와 다른 공급 및 매입은 없다.",
+            "source_contract": "vat_activity_evidence_v1",
+            "taxpayer_type": "general",
+            "transactions": [
+              {
+                "amount": 1100000,
+                "counterparty_consumer": true,
+                "date": "2026-06-12",
+                "description": "소비자에게 완납 판매한 수납용품",
+                "direction": "sale",
+                "document_id": "잔결카드전표",
+                "evidence": "card_receipt",
+                "includes_vat": true,
+                "invoice_issued": false,
+                "supplier_general": true,
+                "taxable": true,
+                "transaction_id": "잔결판매",
+                "vat_separately_stated": true
+              }
+            ]
+          },
+          "filing_id": "잔결신고",
+          "registration_id": "가상등록잔결",
+          "taxpayer_id": "가상납세잔결"
+        },
+        {
+          "business_name": "가상직선공방",
+          "facts": {
+            "activities": [],
+            "business_name": "가상직선공방",
+            "business_type": "corporation",
+            "consumer_facing_business": false,
+            "operations": [],
+            "period_end": "2026-06-30",
+            "period_start": "2026-01-01",
+            "prepaid_assessed_vat": 0,
+            "prior_year_site_supply_base": 170000000,
+            "receipt_credit_previously_claimed": 0,
+            "scope_note": "독립 법인 일반과세 공방의 국내 과세 납품이다. 실제 완료한 전체 공급에 적격 세금계산서를 정상 발급했다. 카드 발행이나 매입 및 다른 공제는 없다.",
+            "source_contract": "vat_activity_evidence_v1",
+            "taxpayer_type": "general",
+            "transactions": [
+              {
+                "amount": 942700,
+                "counterparty_consumer": false,
+                "date": "2026-05-26",
+                "description": "발주 회사에 인도한 전시 받침대",
+                "direction": "sale",
+                "document_id": "직선전자원본",
+                "evidence": "tax_invoice",
+                "includes_vat": true,
+                "invoice_issued": true,
+                "supplier_general": true,
+                "taxable": true,
+                "transaction_id": "직선납품",
+                "vat_separately_stated": true
+              }
+            ]
+          },
+          "filing_id": "직선신고",
+          "registration_id": "가상등록직선",
+          "taxpayer_id": "가상납세직선"
+        }
+      ],
+      "processing_policy": "가상 관리조직의 사적 신고 및 현금 대조다. 서로 다른 납세자를 등록번호로 구분한다. 기준일 안에 실행된 정산 납부는 해당 납세자에만 연결한다. 잔액은 신고 납부세액에서 해당 실행 납부를 뺀 차이이며 다른 납세자와 상계하는 법률 판단은 하지 않는다.",
+      "source_contract": "vat_bank_reconciliation_v1",
+      "transfers": [
+        {
+          "amount": 5700,
+          "date": "2026-07-27",
+          "filing_id": "잔결신고",
+          "kind": "settlement_payment",
+          "registration_id": "가상등록잔결",
+          "status": "executed",
+          "transfer_id": "잔결이차납부"
+        },
+        {
+          "amount": 80000,
+          "date": "2026-07-24",
+          "filing_id": "잔결신고",
+          "kind": "settlement_payment",
+          "registration_id": "가상등록잔결",
+          "status": "executed",
+          "transfer_id": "잔결일차납부"
+        },
+        {
+          "amount": 80000,
+          "date": "2026-07-27",
+          "filing_id": "직선신고",
+          "kind": "settlement_payment",
+          "registration_id": "가상등록직선",
+          "status": "executed",
+          "transfer_id": "직선납부"
+        }
+      ]
+    },
+    "output": {
+      "accepted_transfer_ids": [
+        "잔결이차납부",
+        "잔결일차납부",
+        "직선납부"
+      ],
+      "cash_by_registration": [
+        {
+          "balance": 0,
+          "filing_id": "잔결신고",
+          "net_outflow": 85700,
+          "paid": 85700,
+          "received": 0,
+          "registration_id": "가상등록잔결",
+          "tax_due": 85700
+        },
+        {
+          "balance": 5700,
+          "filing_id": "직선신고",
+          "net_outflow": 80000,
+          "paid": 80000,
+          "received": 0,
+          "registration_id": "가상등록직선",
+          "tax_due": 85700
+        }
+      ],
+      "deduplicated_transfer_ids": [],
+      "excluded_transfer_ids": [],
+      "excluded_transfers": [],
+      "filing_derivations": [
+        {
+          "filing_id": "잔결신고",
+          "trace": [
+            {
+              "inputs": {
+                "activities": [],
+                "operations": [],
+                "purchase_links": [],
+                "source_contract": "vat_activity_evidence_v1"
+              },
+              "output": [],
+              "rule_id": "VAT_ACTIVITY_EVIDENCE"
+            },
+            {
+              "inputs": {
+                "document_ids": [
+                  "잔결카드전표"
+                ],
+                "evidence": [
+                  "card_receipt"
+                ],
+                "transaction_id": "잔결판매"
+              },
+              "output": {
+                "counted_once": true,
+                "invoice_issued": false,
+                "occurrences": 1
+              },
+              "rule_id": "VAT_DEDUP"
+            },
+            {
+              "inputs": {
+                "date": "2026-06-12",
+                "transaction_id": "잔결판매"
+              },
+              "output": true,
+              "rule_id": "VAT_PERIOD"
+            },
+            {
+              "inputs": {
+                "amount": 1100000,
+                "includes_vat": true,
+                "transaction_id": "잔결판매"
+              },
+              "output": {
+                "gross": 1100000,
+                "supply_base": 1000000,
+                "vat": 100000
+              },
+              "rule_id": "VAT_TAX_BASE"
+            },
+            {
+              "inputs": {
+                "supply_base": 1000000
+              },
+              "output": 100000,
+              "rule_id": "VAT_OUTPUT_10"
+            },
+            {
+              "inputs": {
+                "counterparty_consumer": true,
+                "evidence": [
+                  "card_receipt"
+                ],
+                "invoice_issued": false,
+                "transaction_id": "잔결판매"
+              },
+              "output": {
+                "eligible_gross": 1100000
+              },
+              "rule_id": "VAT_RECEIPT_BASE"
+            },
+            {
+              "inputs": {
+                "business_type": "individual",
+                "consumer_facing_business": true,
+                "prior_year_site_supply_base": 80000000
+              },
+              "output": true,
+              "rule_id": "VAT_CREDIT_ELIGIBILITY"
+            },
+            {
+              "inputs": {
+                "eligible": true,
+                "eligible_gross": 1100000,
+                "rate_denominator": 1000,
+                "rate_numerator": 13
+              },
+              "output": 14300,
+              "rule_id": "VAT_CREDIT_RATE_2026"
+            },
+            {
+              "inputs": {
+                "already_claimed": 0,
+                "annual_limit": 10000000,
+                "raw_credit": 14300
+              },
+              "output": 14300,
+              "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+            },
+            {
+              "inputs": {
+                "annual_credit": 14300,
+                "liability_before_credit": 100000
+              },
+              "output": 14300,
+              "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+            },
+            {
+              "inputs": {
+                "assessed_notice": 0,
+                "minimum_notice": 500000,
+                "prior_declared_vat_paid": 0
+              },
+              "output": {
+                "assessment_is_consistent": true,
+                "prior_return_payment_deducted_again": false
+              },
+              "rule_id": "VAT_ASSESSMENT_VALIDITY"
+            },
+            {
+              "inputs": {
+                "liability_after_credit": 85700,
+                "prepaid_assessed_vat": 0
+              },
+              "output": 85700,
+              "rule_id": "VAT_PREPAID"
+            },
+            {
+              "inputs": {
+                "deductible_input_vat": 0,
+                "output_vat": 100000,
+                "prepaid_vat": 0,
+                "receipt_credit": 14300
+              },
+              "output": {
+                "deductible_input_vat": 0,
+                "input_vat": 0,
+                "net_vat": 85700,
+                "noncreditable_vat": 0,
+                "output_vat": 100000,
+                "payable_vat": 85700,
+                "prepaid_vat": 0,
+                "receipt_credit": 14300,
+                "refund_vat": 0,
+                "tax_base": 1000000,
+                "unique_transaction_count": 1
+              },
+              "rule_id": "VAT_SETTLEMENT"
+            }
+          ]
+        },
+        {
+          "filing_id": "직선신고",
+          "trace": [
+            {
+              "inputs": {
+                "activities": [],
+                "operations": [],
+                "purchase_links": [],
+                "source_contract": "vat_activity_evidence_v1"
+              },
+              "output": [],
+              "rule_id": "VAT_ACTIVITY_EVIDENCE"
+            },
+            {
+              "inputs": {
+                "document_ids": [
+                  "직선전자원본"
+                ],
+                "evidence": [
+                  "tax_invoice"
+                ],
+                "transaction_id": "직선납품"
+              },
+              "output": {
+                "counted_once": true,
+                "invoice_issued": true,
+                "occurrences": 1
+              },
+              "rule_id": "VAT_DEDUP"
+            },
+            {
+              "inputs": {
+                "date": "2026-05-26",
+                "transaction_id": "직선납품"
+              },
+              "output": true,
+              "rule_id": "VAT_PERIOD"
+            },
+            {
+              "inputs": {
+                "amount": 942700,
+                "includes_vat": true,
+                "transaction_id": "직선납품"
+              },
+              "output": {
+                "gross": 942700,
+                "supply_base": 857000,
+                "vat": 85700
+              },
+              "rule_id": "VAT_TAX_BASE"
+            },
+            {
+              "inputs": {
+                "supply_base": 857000
+              },
+              "output": 85700,
+              "rule_id": "VAT_OUTPUT_10"
+            },
+            {
+              "inputs": {
+                "counterparty_consumer": false,
+                "evidence": [
+                  "tax_invoice"
+                ],
+                "invoice_issued": true,
+                "transaction_id": "직선납품"
+              },
+              "output": {
+                "eligible_gross": 0
+              },
+              "rule_id": "VAT_RECEIPT_BASE"
+            },
+            {
+              "inputs": {
+                "business_type": "corporation",
+                "consumer_facing_business": false,
+                "prior_year_site_supply_base": 170000000
+              },
+              "output": false,
+              "rule_id": "VAT_CREDIT_ELIGIBILITY"
+            },
+            {
+              "inputs": {
+                "eligible": false,
+                "eligible_gross": 0,
+                "rate_denominator": 1000,
+                "rate_numerator": 13
+              },
+              "output": 0,
+              "rule_id": "VAT_CREDIT_RATE_2026"
+            },
+            {
+              "inputs": {
+                "already_claimed": 0,
+                "annual_limit": 10000000,
+                "raw_credit": 0
+              },
+              "output": 0,
+              "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+            },
+            {
+              "inputs": {
+                "annual_credit": 0,
+                "liability_before_credit": 85700
+              },
+              "output": 0,
+              "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+            },
+            {
+              "inputs": {
+                "assessed_notice": 0,
+                "minimum_notice": 500000,
+                "prior_declared_vat_paid": 0
+              },
+              "output": {
+                "assessment_is_consistent": true,
+                "prior_return_payment_deducted_again": false
+              },
+              "rule_id": "VAT_ASSESSMENT_VALIDITY"
+            },
+            {
+              "inputs": {
+                "liability_after_credit": 85700,
+                "prepaid_assessed_vat": 0
+              },
+              "output": 85700,
+              "rule_id": "VAT_PREPAID"
+            },
+            {
+              "inputs": {
+                "deductible_input_vat": 0,
+                "output_vat": 85700,
+                "prepaid_vat": 0,
+                "receipt_credit": 0
+              },
+              "output": {
+                "deductible_input_vat": 0,
+                "input_vat": 0,
+                "net_vat": 85700,
+                "noncreditable_vat": 0,
+                "output_vat": 85700,
+                "payable_vat": 85700,
+                "prepaid_vat": 0,
+                "receipt_credit": 0,
+                "refund_vat": 0,
+                "tax_base": 857000,
+                "unique_transaction_count": 1
+              },
+              "rule_id": "VAT_SETTLEMENT"
+            }
+          ]
+        }
+      ],
+      "settlement": {
+        "balance_total": 5700,
+        "filing_calculations": [
+          {
+            "business_name": "가상잔결매장",
+            "calculation": {
+              "deductible_input_vat": 0,
+              "input_vat": 0,
+              "net_vat": 85700,
+              "noncreditable_vat": 0,
+              "output_vat": 100000,
+              "payable_vat": 85700,
+              "prepaid_vat": 0,
+              "receipt_credit": 14300,
+              "refund_vat": 0,
+              "tax_base": 1000000,
+              "unique_transaction_count": 1
+            },
+            "filing_id": "잔결신고",
+            "registration_id": "가상등록잔결",
+            "taxpayer_id": "가상납세잔결"
+          },
+          {
+            "business_name": "가상직선공방",
+            "calculation": {
+              "deductible_input_vat": 0,
+              "input_vat": 0,
+              "net_vat": 85700,
+              "noncreditable_vat": 0,
+              "output_vat": 85700,
+              "payable_vat": 85700,
+              "prepaid_vat": 0,
+              "receipt_credit": 0,
+              "refund_vat": 0,
+              "tax_base": 857000,
+              "unique_transaction_count": 1
+            },
+            "filing_id": "직선신고",
+            "registration_id": "가상등록직선",
+            "taxpayer_id": "가상납세직선"
+          }
+        ],
+        "paid_total": 165700,
+        "received_total": 0,
+        "registration_settlements": [
+          {
+            "balance": 0,
+            "business_name": "가상잔결매장",
+            "filing_id": "잔결신고",
+            "net_outflow": 85700,
+            "paid": 85700,
+            "payable_vat": 85700,
+            "received": 0,
+            "refund_vat": 0,
+            "registration_id": "가상등록잔결",
+            "tax_due": 85700,
+            "taxpayer_id": "가상납세잔결"
+          },
+          {
+            "balance": 5700,
+            "business_name": "가상직선공방",
+            "filing_id": "직선신고",
+            "net_outflow": 80000,
+            "paid": 80000,
+            "payable_vat": 85700,
+            "received": 0,
+            "refund_vat": 0,
+            "registration_id": "가상등록직선",
+            "tax_due": 85700,
+            "taxpayer_id": "가상납세직선"
+          }
+        ],
+        "tax_due_total": 171400
+      }
+    },
+    "rule_id": "C_VAT_BANK_RECONCILIATION"
+  }
+]

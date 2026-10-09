@@ -1,0 +1,36 @@
+task_id: B2_C003_fde10e0e
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상접이점은 완료 주문의 전체 전자와 현금 부분 발급이 각각 최종 취소됐음을 확인했고 카드 부분 발급만 유효합니다. 공급과
+  지급은 취소되지 않았습니다. 두 종류의 원본 효력을 따로 확인하여 매출세액(output_vat)과 발급 공제(receipt_credit)를 answer.json에
+  적어 주세요.
+input_files:
+- path: inputs/01_완료주문.pdf
+  format: pdf
+- path: inputs/02_발급원본.xlsx
+  format: xlsx
+- path: inputs/03_효력확인.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+  required:
+  - output_vat
+  - receipt_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-4ba30a4e-0785-537d-9a0c-c5df3c285ff2
+scenario_seed: 18293918617669929281
+scenario_hash: fe101b5e81e466f2ecd35dcd8d36fa6e15201d9f226cd59a0fff706ffb14b267
+authorship:
+  method: individually_written
+  case_id: C003
+  case_sha256: fde10e0eb41f0941ddde70ad325f48d69075937fb57b7dea132de0551769a536
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- output_vat
+- receipt_credit

@@ -1,0 +1,59 @@
+task_id: B2_B050_9304f55f
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상생활도구관 가상시후의11월은행이체를종결합니다. 첫일요일은최종휴게승인본을사용하고둘째일요일밤계획은미승인이므로제외합니다. 당월실적금은지급하되통상시급에넣지않습니다.
+  holiday_pay, night_pay, ordinary_monthly_wage, gross_pay와net_pay를작성해유효소집및실적금과기관통지를연결해주세요.
+input_files:
+- path: inputs/01_월급.pdf
+  format: pdf
+- path: inputs/02_실적금.pdf
+  format: pdf
+- path: inputs/03_첫날이전.xlsx
+  format: xlsx
+- path: inputs/04_첫날최종.xlsx
+  format: xlsx
+- path: inputs/05_둘째날낮.xlsx
+  format: xlsx
+- path: inputs/06_둘째날밤.xlsx
+  format: xlsx
+- path: inputs/07_휴일범위.hwpx
+  format: hwpx
+- path: inputs/08_공단통지.pdf
+  format: pdf
+- path: inputs/09_집행세무.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    ordinary_monthly_wage:
+      type: integer
+    gross_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - holiday_pay
+  - night_pay
+  - ordinary_monthly_wage
+  - gross_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-c3a8f955-70b3-5999-84f5-1bfad5f15dc7
+scenario_seed: 10593862011887450816
+scenario_hash: 37ff16879f11c3e4cb68d1daddcf7083e79696e61fd03e7d1dfb4cff270cb3bc
+authorship:
+  method: individually_written
+  case_id: B050
+  case_sha256: 9304f55f020e7ac08bb1dd04774772a1b1b49e3e5e8ed19f191cfba0732c5702
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- holiday_pay
+- night_pay
+- ordinary_monthly_wage
+- gross_pay
+- net_pay

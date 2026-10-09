@@ -1,0 +1,74 @@
+task_id: B2_B016_3c44668d
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상우편실은 한 월급의 은행 원장을 두 경로로 받았습니다. 같은 실행번호의 완전 동일 재전송은 한 번만 계산하고 다른 번호의
+  같은 금액은 별개 실행으로 합산하세요. 완전한 월 명세의 employee_settlements 및 paid_total과 balance_total을
+  제출합니다.
+input_files:
+- path: inputs/01_접수규약.pdf
+  format: pdf
+- path: inputs/02_완전명세.hwpx
+  format: hwpx
+- path: inputs/03_원송신.xlsx
+  format: xlsx
+- path: inputs/04_재전송.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    paid_total:
+      type: integer
+    balance_total:
+      type: integer
+  required:
+  - employee_settlements
+  - paid_total
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-455780de-5086-5c19-8883-357ec6220b09
+scenario_seed: 4342708699568246313
+scenario_hash: 495ab882966f2e2f10e57773217cfd78101ba50a8164e8d69244e551c5f5515b
+authorship:
+  method: individually_written
+  case_id: B016
+  case_sha256: 3c44668db8c38e291ef527a98f036081f3ba43ce4b1571c099c340158c53fa07
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- employee_settlements
+- paid_total
+- balance_total

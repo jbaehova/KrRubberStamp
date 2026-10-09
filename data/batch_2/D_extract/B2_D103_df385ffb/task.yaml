@@ -1,0 +1,126 @@
+task_id: B2_D103_df385ffb
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 본체와 센서는 각각 전용 업체에 주문해야 합니다. 두 배송 계정을 모두 쓰게 되는 구매에서 공용 체결재를 어느 주문에 배정할지
+  chosen_offers와 vendor_cart_totals로 작성해 주세요.
+input_files:
+- path: inputs/01_기록기요청.pdf
+  format: pdf
+- path: inputs/02_본체공방.xlsx
+  format: xlsx
+- path: inputs/03_센서공방.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-dd7197b0-abdc-52f0-a1c7-33b721d004a4
+scenario_seed: 16084711602796533237
+scenario_hash: 84f9e561d0fa94cb37b67615f3057796c9ad27927a0a9c0fd0f0d1af129dc62d
+authorship:
+  method: individually_written
+  case_id: D103
+  case_sha256: df385ffb774a95f5b064846c5d27584b457a3486dc0003aa40da855e20e8c4a1
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals

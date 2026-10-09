@@ -1,0 +1,60 @@
+task_id: B2_D028_b6d33ee9
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 두 가상 주문의 인수 대금과 실행 지급을 정규화 업체 계정으로 합쳐 주세요. 업체명은 NFKC 후 공백과 법인 표기를 제거하고
+  영문은 소문자로 바꿉니다. answer.json에는 vendor_balances와 balance_total을 업체명순으로 작성하세요.
+input_files:
+- path: inputs/01_초기프레임.pdf
+  format: pdf
+- path: inputs/02_후속프레임.hwpx
+  format: hwpx
+- path: inputs/03_프레임입고.xlsx
+  format: xlsx
+- path: inputs/04_프레임계약금.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - vendor_balances
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-8c9970be-9eae-535e-8e7b-ce059c5e34aa
+scenario_seed: 13173942505644028804
+scenario_hash: 9342a3012faf528119dc82841593ff7aa2b218c7a375a7d5a069f13e5cfb39e3
+authorship:
+  method: individually_written
+  case_id: D028
+  case_sha256: b6d33ee90c54f38443ff5dfef25a3728ac511545da32e8e37fc0104d3409bd5b
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances
+- balance_total

@@ -1,0 +1,42 @@
+task_id: B2_C025_26be26db
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상포일가공의 독립 자재 두 구매는 모두 전체 카드 전표의 세액 표시가 없으며 한 구매만 전체 적격 전자가 있습니다. 각 공급
+  참조를 연결하여 공제가능 매입세액(deductible_input_vat)과 불공제 매입세액(noncreditable_vat) 및 매입세액(input_vat)을
+  answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_반입.hwpx
+  format: hwpx
+- path: inputs/02_실행.xlsx
+  format: xlsx
+- path: inputs/03_미표시전표.pdf
+  format: pdf
+- path: inputs/04_은박전자.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    input_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  - input_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-72403da1-95bd-5152-b16a-ceb7637ac04e
+scenario_seed: 2791711544853698381
+scenario_hash: c25e93665797d7994bfc54a9cad03747f08116b5f1c070c18ea77a7d8beeea76
+authorship:
+  method: individually_written
+  case_id: C025
+  case_sha256: 26be26dbe25c974d827cf6d741e308c6df49b95a5a655da008669728fb423935
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat
+- input_vat

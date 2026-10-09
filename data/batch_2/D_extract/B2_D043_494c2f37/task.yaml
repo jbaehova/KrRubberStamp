@@ -1,0 +1,93 @@
+task_id: B2_D043_494c2f37
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 실제 낱개 인수와 반환을 연결해 교체품의 행별 정산을 작성하세요. 포장가격에 순수량을 곱해 포장당 수량으로 나눈 뒤 버리고
+  그 이후 각 행의 세금 포함 여부를 적용합니다. planned 잔금은 실제 지급이 아닙니다. answer.json에는 line_settlements와
+  grand_total과 balance_total을 작성하세요.
+input_files:
+- path: inputs/01_캡표지.pdf
+  format: pdf
+- path: inputs/02_캡포장.xlsx
+  format: xlsx
+- path: inputs/03_핀표지.hwpx
+  format: hwpx
+- path: inputs/04_핀포장.xlsx
+  format: xlsx
+- path: inputs/05_캡입고.pdf
+  format: pdf
+- path: inputs/06_캡반환.hwpx
+  format: hwpx
+- path: inputs/07_핀입고.xlsx
+  format: xlsx
+- path: inputs/08_핀반환.hwpx
+  format: hwpx
+- path: inputs/09_교체품마감.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+    balance_total:
+      type: integer
+  required:
+  - line_settlements
+  - grand_total
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-6bcdbff1-16a7-571e-b36f-df89790d6546
+scenario_seed: 5281648379037715306
+scenario_hash: a865e21aedc5409e1c87b9258055cb1df4f5e93a2845f0e26ba9cf6859479bf1
+authorship:
+  method: individually_written
+  case_id: D043
+  case_sha256: 494c2f37a50f8b6a4c528bf05db5926eb65ab0cb0a719c59199f5daae1b40a65
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- grand_total
+- balance_total

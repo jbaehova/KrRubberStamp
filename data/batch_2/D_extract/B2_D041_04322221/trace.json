@@ -1,0 +1,212 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-05-31",
+      "events": [
+        {
+          "date": "2026-05-22",
+          "event_id": "TM-BACK",
+          "kind": "returned",
+          "line_id": "01",
+          "order_id": "TAPE-METERS",
+          "units": 4
+        },
+        {
+          "date": "2026-05-18",
+          "event_id": "TM-IN",
+          "kind": "received",
+          "line_id": "01",
+          "order_id": "TAPE-METERS",
+          "units": 30
+        },
+        {
+          "date": "2026-05-24",
+          "event_id": "TR-BACK",
+          "kind": "returned",
+          "line_id": "01",
+          "order_id": "TAPE-ROLLS",
+          "units": 1
+        },
+        {
+          "date": "2026-05-19",
+          "event_id": "TR-IN",
+          "kind": "received",
+          "line_id": "01",
+          "order_id": "TAPE-ROLLS",
+          "units": 8
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-05-10",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "m",
+              "item": "보호테이프",
+              "line_id": "01",
+              "ordered_packages": 2,
+              "package_price": 16000,
+              "price_includes_vat": false,
+              "units_per_package": 20
+            }
+          ],
+          "order_id": "TAPE-METERS",
+          "vendor": "가상길이테이프"
+        },
+        {
+          "date": "2026-05-12",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "롤",
+              "item": "보호테이프",
+              "line_id": "01",
+              "ordered_packages": 2,
+              "package_price": 18000,
+              "price_includes_vat": false,
+              "units_per_package": 5
+            }
+          ],
+          "order_id": "TAPE-ROLLS",
+          "vendor": "가상롤테이프"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 10000,
+          "date": "2026-05-13",
+          "order_id": "TAPE-METERS",
+          "payment_id": "TM-PAY",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 인수와 반품은 주문 및 행의 정확한 쌍으로 연결한다. 품명은 NFKC, 공백 제거 및 소문자를 적용하되 기초단위가 다르면 합치지 않는다. 마감까지 포장가격의 순인수 비율을 마지막에 버리고 별도 세액은 10%를 버린다. 실행 지급은 업체별로 차감한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "TM-BACK",
+        "TM-IN",
+        "TR-BACK",
+        "TR-IN"
+      ],
+      "accepted_payment_ids": [
+        "TM-PAY"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "TM-IN",
+          "net_units_after_event": 30
+        },
+        {
+          "event_id": "TR-IN",
+          "net_units_after_event": 8
+        },
+        {
+          "event_id": "TM-BACK",
+          "net_units_after_event": 26
+        },
+        {
+          "event_id": "TR-BACK",
+          "net_units_after_event": 7
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 20800,
+          "line_id": "01",
+          "order_id": "TAPE-METERS",
+          "package_price_times_net_units": 416000,
+          "price_includes_vat": false,
+          "supply": 20800,
+          "total": 22880,
+          "units_per_package": 20,
+          "vat": 2080
+        },
+        {
+          "amount_after_floor": 25200,
+          "line_id": "01",
+          "order_id": "TAPE-ROLLS",
+          "package_price_times_net_units": 126000,
+          "price_includes_vat": false,
+          "supply": 25200,
+          "total": 27720,
+          "units_per_package": 5,
+          "vat": 2520
+        }
+      ],
+      "settlement": {
+        "balance_total": 40600,
+        "grand_total": 50600,
+        "item_quantities": [
+          {
+            "base_unit": "m",
+            "item": "보호테이프",
+            "net_units": 26
+          },
+          {
+            "base_unit": "롤",
+            "item": "보호테이프",
+            "net_units": 7
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "m",
+            "item": "보호테이프",
+            "line_id": "01",
+            "net_units": 26,
+            "order_id": "TAPE-METERS",
+            "ordered_units": 40,
+            "outstanding_units": 14,
+            "received_units": 30,
+            "returned_units": 4,
+            "supply": 20800,
+            "total": 22880,
+            "vat": 2080
+          },
+          {
+            "base_unit": "롤",
+            "item": "보호테이프",
+            "line_id": "01",
+            "net_units": 7,
+            "order_id": "TAPE-ROLLS",
+            "ordered_units": 10,
+            "outstanding_units": 3,
+            "received_units": 8,
+            "returned_units": 1,
+            "supply": 25200,
+            "total": 27720,
+            "vat": 2520
+          }
+        ],
+        "payment_total": 10000,
+        "vendor_balances": [
+          {
+            "balance": 12880,
+            "paid": 10000,
+            "supply": 20800,
+            "total": 22880,
+            "vat": 2080,
+            "vendor": "가상길이테이프"
+          },
+          {
+            "balance": 27720,
+            "paid": 0,
+            "supply": 25200,
+            "total": 27720,
+            "vat": 2520,
+            "vendor": "가상롤테이프"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

@@ -1,0 +1,134 @@
+task_id: B2_C064_fc1470a0
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상탄성가공은 동일 은행 실행이 두 번 전달된 내역과 같은 금액의 별도 실행을 보관했습니다. 전자 납품의 반기 세액을 계산한
+  뒤 실제 실행 ID를 기준으로 paid_total과 registration_settlements를 answer.json에 넣어 주세요. 같은 금액이라는
+  이유만으로 별개 실행까지 제거하지 말아 주세요.
+input_files:
+- path: inputs/01_반기전자.hwpx
+  format: hwpx
+- path: inputs/02_첫실행과전달.pdf
+  format: pdf
+- path: inputs/03_둘째실행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    filing_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          filing_id:
+            type: string
+          taxpayer_id:
+            type: string
+          registration_id:
+            type: string
+          business_name:
+            type: string
+          calculation:
+            type: object
+            properties:
+              tax_base:
+                type: integer
+              output_vat:
+                type: integer
+              input_vat:
+                type: integer
+              noncreditable_vat:
+                type: integer
+              deductible_input_vat:
+                type: integer
+              receipt_credit:
+                type: integer
+              prepaid_vat:
+                type: integer
+              net_vat:
+                type: integer
+              payable_vat:
+                type: integer
+              refund_vat:
+                type: integer
+              unique_transaction_count:
+                type: integer
+            required:
+            - tax_base
+            - output_vat
+            - input_vat
+            - noncreditable_vat
+            - deductible_input_vat
+            - receipt_credit
+            - prepaid_vat
+            - net_vat
+            - payable_vat
+            - refund_vat
+            - unique_transaction_count
+            additionalProperties: false
+        required:
+        - filing_id
+        - taxpayer_id
+        - registration_id
+        - business_name
+        - calculation
+        additionalProperties: false
+    paid_total:
+      type: integer
+    registration_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          filing_id:
+            type: string
+          taxpayer_id:
+            type: string
+          registration_id:
+            type: string
+          business_name:
+            type: string
+          tax_due:
+            type: integer
+          payable_vat:
+            type: integer
+          refund_vat:
+            type: integer
+          paid:
+            type: integer
+          received:
+            type: integer
+          net_outflow:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - filing_id
+        - taxpayer_id
+        - registration_id
+        - business_name
+        - tax_due
+        - payable_vat
+        - refund_vat
+        - paid
+        - received
+        - net_outflow
+        - balance
+        additionalProperties: false
+  required:
+  - filing_calculations
+  - paid_total
+  - registration_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-a8741170-0273-5071-9f61-7991f0e0c5e0
+scenario_seed: 18164267032766928589
+scenario_hash: 28229525bf04d505c6e8ee1c03b3c157221ed881b5b9715cc4364e6527e88a56
+authorship:
+  method: individually_written
+  case_id: C064
+  case_sha256: fc1470a0bd6956cd3a33b915889f1a6d8778d9d11269aaf3f509b87f00579aea
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- filing_calculations
+- paid_total
+- registration_settlements

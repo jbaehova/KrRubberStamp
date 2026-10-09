@@ -1,0 +1,89 @@
+task_id: B2_D044_1bce5528
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 흡착 분말의 마감 재고와 거래처 잔액을 정리하세요. 같은 법인은 정규화해 합치지만 품목의 기초단위 g와 봉은 나눕니다. 실제
+  반품을 차감하고 동일 지급 ID의 같은 계약금 사본은 한 번만 반영합니다. answer.json에는 item_quantities와 vendor_balances와
+  payment_total을 작성하세요.
+input_files:
+- path: inputs/01_중량표지.pdf
+  format: pdf
+- path: inputs/02_중량가격.xlsx
+  format: xlsx
+- path: inputs/03_봉표지.hwpx
+  format: hwpx
+- path: inputs/04_봉가격.xlsx
+  format: xlsx
+- path: inputs/05_중량입고.pdf
+  format: pdf
+- path: inputs/06_중량반환.hwpx
+  format: hwpx
+- path: inputs/07_봉입고.xlsx
+  format: xlsx
+- path: inputs/08_계약금원본사본.hwpx
+  format: hwpx
+- path: inputs/09_분말마감.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    payment_total:
+      type: integer
+  required:
+  - item_quantities
+  - vendor_balances
+  - payment_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-fd15a237-0203-50f4-af63-bed88175d3f7
+scenario_seed: 2003632515358202741
+scenario_hash: ba024eacfe6c00d87c0bfd21f194077fc6e60e40bba0e8ef189eac867f544af8
+authorship:
+  method: individually_written
+  case_id: D044
+  case_sha256: 1bce552832591b7596226e94c958670173bad387a64094cd47b909db6e5f5ad8
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- item_quantities
+- vendor_balances
+- payment_total

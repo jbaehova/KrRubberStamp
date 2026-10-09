@@ -1,0 +1,60 @@
+task_id: B2_D038_8fd99220
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 배선 자재 공급처별 정산 잔액과 전체 잔액을 작성하세요. 한 업체의 선지급 초과액을 다른 업체의 미지급액과 섞어 각 업체 잔액을
+  0으로 만들지 않습니다. answer.json에는 vendor_balances와 balance_total을 업체 이름순으로 작성하세요.
+input_files:
+- path: inputs/01_배선두계약.pdf
+  format: pdf
+- path: inputs/02_피복입고.xlsx
+  format: xlsx
+- path: inputs/03_클립입고.hwpx
+  format: hwpx
+- path: inputs/04_피복지급.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - vendor_balances
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-a2e113d9-dd2a-5174-95e1-8247dbf8ce02
+scenario_seed: 10365476684055259147
+scenario_hash: 1c2e5ae934826d68e3fb3b290c2fe700bb62bb81c6bfaf99e3c87635b63dae92
+authorship:
+  method: individually_written
+  case_id: D038
+  case_sha256: 8fd9922020b5280b3d270aa1d0c60f84d47586ea799ac4f8f2262811567b4c1c
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances
+- balance_total

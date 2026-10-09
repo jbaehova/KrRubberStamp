@@ -13,6 +13,33 @@ from harness import run_fake, stage_task
 from validate import validate_batch
 
 
+def test_complete_source_snapshot_preserves_reviewed_bytes_and_order(tmp_path):
+    source = tmp_path / "source.json"
+    raw = '[ {"case_id":"D002", "title":"second"}, {"title":"first", "case_id":"D001"} ]\n'
+    source.write_text(raw, encoding="utf-8")
+    target = tmp_path / "export/source.json"
+    cases = {case["case_id"]: case for case in read_json(source)}
+    export._write_source_snapshot(source, cases, target, preview=False)
+    assert target.read_bytes() == source.read_bytes()
+
+
+def test_completed_source_snapshot_rejects_unreviewed_extra_cases(tmp_path):
+    source = tmp_path / "source.json"
+    write_json(source, [{"case_id": "D001"}, {"case_id": "D002"}])
+    target = tmp_path / "export/source.json"
+    with pytest.raises(ValueError, match="entire reviewed source"):
+        export._write_source_snapshot(source, {"D001": {"case_id": "D001"}}, target, preview=False)
+    assert not target.exists()
+
+
+def test_preview_source_snapshot_excludes_unselected_cases(tmp_path):
+    source = tmp_path / "source.json"
+    write_json(source, [{"case_id": "D001"}, {"case_id": "D002"}])
+    target = tmp_path / "export/source.json"
+    export._write_source_snapshot(source, {"D001": {"case_id": "D001"}}, target, preview=True)
+    assert read_json(target) == [{"case_id": "D001"}]
+
+
 def test_final_export_name_preserves_1650_instead_of_rounding_to_16k():
     assert export._dataset_name(1650, preview=False) == "KrRubberStamp-1.65K"
     assert export._dataset_name(1200, preview=False) == "KrRubberStamp-1.2K"

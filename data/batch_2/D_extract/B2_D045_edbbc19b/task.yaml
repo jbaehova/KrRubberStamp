@@ -1,0 +1,111 @@
+task_id: B2_D045_edbbc19b
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 조절 손잡이 및 볼트의 마감 이행량을 정리하세요. 실제 과납은 발주량으로 자르지 말고 마감 전 반환만 뺍니다. 마감 뒤 볼트
+  반환은 이번 수량에서 제외합니다. 실행 선지급도 반영해 line_settlements와 vendor_balances를 작성하세요.
+input_files:
+- path: inputs/01_조절주문표지.pdf
+  format: pdf
+- path: inputs/02_손잡이포장.xlsx
+  format: xlsx
+- path: inputs/03_볼트포장.xlsx
+  format: xlsx
+- path: inputs/04_손잡이입고.pdf
+  format: pdf
+- path: inputs/05_볼트입고.hwpx
+  format: hwpx
+- path: inputs/06_손잡이반환.xlsx
+  format: xlsx
+- path: inputs/07_볼트반환.hwpx
+  format: hwpx
+- path: inputs/08_조절계약금.pdf
+  format: pdf
+- path: inputs/09_조절마감.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - line_settlements
+  - vendor_balances
+  additionalProperties: false
+canary: KrRubberStamp-canary-81f80be1-09f3-5066-bf22-fd35e8e9a819
+scenario_seed: 17130498480057693138
+scenario_hash: 6e95138d9aa98a47db65fa9defaff8a6fbad66608e96affaaec3fa37c7d1e0a3
+authorship:
+  method: individually_written
+  case_id: D045
+  case_sha256: edbbc19b393533d24f16ce972ceb4342b7ac5265b03b12220b2d6f15be2a2a1f
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- vendor_balances

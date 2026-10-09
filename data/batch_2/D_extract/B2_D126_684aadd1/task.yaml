@@ -1,0 +1,141 @@
+task_id: B2_D126_684aadd1
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 전용 손잡이와 공용 패킹을 금요일 주문합니다. 공동 업체의 패킹은 달력 이틀 뒤 일요일 도착이므로 월요일 납기에 적격입니다.
+  chosen_offers와 offer_comparisons 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_손잡이약정.pdf
+  format: pdf
+- path: inputs/02_두부품요청.xlsx
+  format: xlsx
+- path: inputs/03_공방견적.hwpx
+  format: hwpx
+- path: inputs/04_패킹대안.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - offer_comparisons
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-b5482ce5-a9f6-54b3-9cb0-5b1f7be2e50f
+scenario_seed: 7515010041905398005
+scenario_hash: 333c694425c7afb45015a4bc09235739113218cd9f5a9c3fb2162f48001fa4e7
+authorship:
+  method: individually_written
+  case_id: D126
+  case_sha256: 684aadd11f43c0f518d91f7520d7e2bef5c461b1fcc46e1f55c8eee18336ca65
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- offer_comparisons
+- grand_total

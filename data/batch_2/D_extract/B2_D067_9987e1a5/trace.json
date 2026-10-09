@@ -1,0 +1,154 @@
+[
+  {
+    "inputs": {
+      "base_unit": "개",
+      "item": "도구캡",
+      "latest_delivery_date": "2026-02-21",
+      "order_date": "2026-02-12",
+      "processing_policy": "합성 사적 구매: 포장수는 필요/포장수량 올림과 최소포장수 중 큰 값. 상품/운임 각각 포함가 10/11 버림 공급가액+차액 세액 또는 별도 10% 버림 세액. 상품 세금포함 총액만 무료배송 기준과 비교. 주문일 효력/실제 구매포장 재고/달력납기를 충족한 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 3,
+          "pack_price": 1100,
+          "pack_units": 10,
+          "price_includes_vat": true,
+          "quote_id": "TOOL-LOT",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 2,
+          "valid_from": "2026-02-01",
+          "valid_until": "2026-02-28",
+          "vendor": "가상캡도매"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 1,
+          "pack_price": 1300,
+          "pack_units": 6,
+          "price_includes_vat": true,
+          "quote_id": "TOOL-READY",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 5,
+          "valid_from": "2026-02-01",
+          "valid_until": "2026-02-28",
+          "vendor": "가상캡재고"
+        }
+      ],
+      "required_units": 17,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "개",
+      "comparison": {
+        "chosen_leftover_units": 1,
+        "chosen_quote_id": "TOOL-READY",
+        "chosen_total": 3900,
+        "chosen_vendor": "가상캡재고",
+        "eligible_quote_count": 1,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-02-14",
+            "eligible": false,
+            "leftover_units": 13,
+            "merchandise_supply": 3000,
+            "merchandise_total": 3300,
+            "merchandise_vat": 300,
+            "obtained_units": 30,
+            "packs": 3,
+            "quote_id": "TOOL-LOT",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": false,
+            "supply": 3000,
+            "total": 3300,
+            "valid_on_order": true,
+            "vat": 300,
+            "vendor": "가상캡도매"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-02-14",
+            "eligible": true,
+            "leftover_units": 1,
+            "merchandise_supply": 3545,
+            "merchandise_total": 3900,
+            "merchandise_vat": 355,
+            "obtained_units": 18,
+            "packs": 3,
+            "quote_id": "TOOL-READY",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 3545,
+            "total": 3900,
+            "valid_on_order": true,
+            "vat": 355,
+            "vendor": "가상캡재고"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 3300,
+          "minimum_packs": 3,
+          "pack_units": 10,
+          "packs_after_minimum": 3,
+          "price_includes_vat": true,
+          "quote_id": "TOOL-LOT",
+          "required_packs_before_minimum": 2,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 3300
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 3900,
+          "minimum_packs": 1,
+          "pack_units": 6,
+          "packs_after_minimum": 3,
+          "price_includes_vat": true,
+          "quote_id": "TOOL-READY",
+          "required_packs_before_minimum": 3,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 3900
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "도구캡",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          3900,
+          "가상캡재고",
+          "TOOL-READY"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            3900,
+            "가상캡재고",
+            "TOOL-READY"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

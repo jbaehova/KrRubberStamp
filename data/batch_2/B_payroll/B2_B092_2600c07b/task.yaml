@@ -1,0 +1,60 @@
+task_id: B2_B092_2600c07b
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상분철실 직원은 한 소정일에 일부 무급 부재했으나 인사는 실제출근 및 개근을 확정했습니다. 평일 밤 추가작업의 더 늦은 종료
+  초안은 아직 승인되지 않았습니다. 부분 부재시간만 기본급에서 제외하고 최고 승인 밤카드와 확정 개근을 연결해 base_pay, weekly_holiday_pay,
+  overtime_pay와 night_pay 및 net_pay를 제출하세요.
+input_files:
+- path: inputs/01_종료약정.pdf
+  format: pdf
+- path: inputs/02_기본집계.xlsx
+  format: xlsx
+- path: inputs/03_개근.hwpx
+  format: hwpx
+- path: inputs/04_밤승인.pdf
+  format: pdf
+- path: inputs/05_연금.xlsx
+  format: xlsx
+- path: inputs/06_건강.hwpx
+  format: hwpx
+- path: inputs/07_고용.pdf
+  format: pdf
+- path: inputs/08_세무.xlsx
+  format: xlsx
+- path: inputs/09_실행.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - overtime_pay
+  - night_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-29bb9868-f68f-5faa-8f74-747a61958dff
+scenario_seed: 2738400208439543665
+scenario_hash: 8ec7ba0bdda37a072e3d25093d7ea53f4d9229f6462090040c47f1080e9e7bc3
+authorship:
+  method: individually_written
+  case_id: B092
+  case_sha256: 2600c07b1ce50771aeef53f00c7a1a9c8c15c9642a67691527a151dd2eb7bdc3
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- overtime_pay
+- night_pay
+- net_pay

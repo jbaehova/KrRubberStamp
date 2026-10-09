@@ -1,0 +1,101 @@
+task_id: B2_D026_e9723041
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 커넥터 인수와 전량 반품 및 이미 실행한 계약금을 대조하세요. 실제 순인수가 0이 되어도 원주문 행과 선지급을 남깁니다. answer.json에는
+  line_settlements와 vendor_balances를 작성하세요.
+input_files:
+- path: inputs/01_커넥터약정.pdf
+  format: pdf
+- path: inputs/02_커넥터입고.xlsx
+  format: xlsx
+- path: inputs/03_커넥터반품.hwpx
+  format: hwpx
+- path: inputs/04_커넥터계약금.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - line_settlements
+  - vendor_balances
+  additionalProperties: false
+canary: KrRubberStamp-canary-bbc06e39-fd2d-54cb-bd39-52fc9a377e6a
+scenario_seed: 16821560614874873447
+scenario_hash: 1e5306a122ca63a867863422d5991d347463e55a4bf93ce74e23db1dd0c7e784
+authorship:
+  method: individually_written
+  case_id: D026
+  case_sha256: e972304139517e677936c2a18406d9e64b7689bb57b2c1ae0396cb1e7698c739
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- vendor_balances

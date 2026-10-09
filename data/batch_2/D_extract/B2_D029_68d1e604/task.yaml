@@ -1,0 +1,47 @@
+task_id: B2_D029_68d1e604
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 표본 캡의 실제 재고를 정리하세요. item은 NFKC 후 공백 제거와 소문자를 적용하고 base_unit은 원문 그대로 유지합니다.
+  서로 다른 주문의 같은 정규화 품목 및 단위 수량을 합칩니다. answer.json에는 item_quantities를 작성하세요.
+input_files:
+- path: inputs/01_전각캡.pdf
+  format: pdf
+- path: inputs/02_반각캡.hwpx
+  format: hwpx
+- path: inputs/03_캡수령.xlsx
+  format: xlsx
+- path: inputs/04_캡재고기준.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+  required:
+  - item_quantities
+  additionalProperties: false
+canary: KrRubberStamp-canary-023cd31c-e312-5d76-b3e5-54e0ce5f8efb
+scenario_seed: 7553070955543548949
+scenario_hash: a5667ab350e1aa0b1c62d58156ce6f392458eb64d246954c23d5b77ede9fb25c
+authorship:
+  method: individually_written
+  case_id: D029
+  case_sha256: 68d1e604247e541518049f32e88b8f873beeb38b36a4b131ab11ac9970a75698
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- item_quantities

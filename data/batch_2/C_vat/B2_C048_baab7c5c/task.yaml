@@ -1,0 +1,52 @@
+task_id: B2_C048_baab7c5c
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상검은자석의 납품 세 건과 회사 카드 및 현금 지급을 확인해 주세요. 대표 가족이 집에서 소비한 식사와 회사에 받은 물품을
+  사용 기록으로 구분하고 각 구매의 보관 증빙을 읽어 공제불가 매입세액(noncreditable_vat), 공제가능 매입세액(deductible_input_vat),
+  납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_정산.hwpx
+  format: hwpx
+- path: inputs/02_납품1.pdf
+  format: pdf
+- path: inputs/03_납품2.xlsx
+  format: xlsx
+- path: inputs/04_납품3.pdf
+  format: pdf
+- path: inputs/05_음식.pdf
+  format: pdf
+- path: inputs/06_현금메모.xlsx
+  format: xlsx
+- path: inputs/07_케이스.pdf
+  format: pdf
+- path: inputs/08_집소비.pdf
+  format: pdf
+- path: inputs/09_재료수령.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    noncreditable_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - noncreditable_vat
+  - deductible_input_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-1f0c8dcf-25b8-5af8-beb4-2531d9b21244
+scenario_seed: 13450981447093172628
+scenario_hash: daf75dc4d7561aa03b58c1e531124ec620e0761d43955b55e22327baeef84fa8
+authorship:
+  method: individually_written
+  case_id: C048
+  case_sha256: baab7c5c1a5bb9942df72ae9e22824d4e8b9a5d5b9fd9d75b9cfe104a4ea764c
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- noncreditable_vat
+- deductible_input_vat
+- payable_vat

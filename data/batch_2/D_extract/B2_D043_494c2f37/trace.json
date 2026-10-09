@@ -1,0 +1,221 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-07-31",
+      "events": [
+        {
+          "date": "2026-07-20",
+          "event_id": "REPAIR-C-BACK",
+          "kind": "returned",
+          "line_id": "C",
+          "order_id": "REPAIR-CAP",
+          "units": 1
+        },
+        {
+          "date": "2026-07-17",
+          "event_id": "REPAIR-C-IN",
+          "kind": "received",
+          "line_id": "C",
+          "order_id": "REPAIR-CAP",
+          "units": 6
+        },
+        {
+          "date": "2026-07-22",
+          "event_id": "REPAIR-P-BACK",
+          "kind": "returned",
+          "line_id": "P",
+          "order_id": "REPAIR-PIN",
+          "units": 3
+        },
+        {
+          "date": "2026-07-18",
+          "event_id": "REPAIR-P-IN",
+          "kind": "received",
+          "line_id": "P",
+          "order_id": "REPAIR-PIN",
+          "units": 12
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-07-10",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "교체캡",
+              "line_id": "C",
+              "ordered_packages": 2,
+              "package_price": 22007,
+              "price_includes_vat": true,
+              "units_per_package": 3
+            }
+          ],
+          "order_id": "REPAIR-CAP",
+          "vendor": "가상교체캡"
+        },
+        {
+          "date": "2026-07-12",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "교체핀",
+              "line_id": "P",
+              "ordered_packages": 2,
+              "package_price": 2105,
+              "price_includes_vat": false,
+              "units_per_package": 7
+            }
+          ],
+          "order_id": "REPAIR-PIN",
+          "vendor": "가상교체핀"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 20000,
+          "date": "2026-07-11",
+          "order_id": "REPAIR-CAP",
+          "payment_id": "REPAIR-C-DEP",
+          "status": "executed"
+        },
+        {
+          "amount": 4000,
+          "date": "2026-07-25",
+          "order_id": "REPAIR-PIN",
+          "payment_id": "REPAIR-P-PLAN",
+          "status": "planned"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 마감까지 순인수량을 구한 뒤 floor(포장가격 곱하기 순수량 나누기 포장당수량)을 적용한다. 낱개 단가를 먼저 버리지 않는다. 포함 행은 금액의 10/11을 버린 공급가액과 차액 세액이며 별도 세액은 10%를 버린다. executed 지급만 차감하고 planned는 제외한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "REPAIR-C-BACK",
+        "REPAIR-C-IN",
+        "REPAIR-P-BACK",
+        "REPAIR-P-IN"
+      ],
+      "accepted_payment_ids": [
+        "REPAIR-C-DEP"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "REPAIR-C-IN",
+          "net_units_after_event": 6
+        },
+        {
+          "event_id": "REPAIR-P-IN",
+          "net_units_after_event": 12
+        },
+        {
+          "event_id": "REPAIR-C-BACK",
+          "net_units_after_event": 5
+        },
+        {
+          "event_id": "REPAIR-P-BACK",
+          "net_units_after_event": 9
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [
+        "REPAIR-P-PLAN"
+      ],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 36678,
+          "line_id": "C",
+          "order_id": "REPAIR-CAP",
+          "package_price_times_net_units": 110035,
+          "price_includes_vat": true,
+          "supply": 33343,
+          "total": 36678,
+          "units_per_package": 3,
+          "vat": 3335
+        },
+        {
+          "amount_after_floor": 2706,
+          "line_id": "P",
+          "order_id": "REPAIR-PIN",
+          "package_price_times_net_units": 18945,
+          "price_includes_vat": false,
+          "supply": 2706,
+          "total": 2976,
+          "units_per_package": 7,
+          "vat": 270
+        }
+      ],
+      "settlement": {
+        "balance_total": 19654,
+        "grand_total": 39654,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "교체캡",
+            "net_units": 5
+          },
+          {
+            "base_unit": "개",
+            "item": "교체핀",
+            "net_units": 9
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "교체캡",
+            "line_id": "C",
+            "net_units": 5,
+            "order_id": "REPAIR-CAP",
+            "ordered_units": 6,
+            "outstanding_units": 1,
+            "received_units": 6,
+            "returned_units": 1,
+            "supply": 33343,
+            "total": 36678,
+            "vat": 3335
+          },
+          {
+            "base_unit": "개",
+            "item": "교체핀",
+            "line_id": "P",
+            "net_units": 9,
+            "order_id": "REPAIR-PIN",
+            "ordered_units": 14,
+            "outstanding_units": 5,
+            "received_units": 12,
+            "returned_units": 3,
+            "supply": 2706,
+            "total": 2976,
+            "vat": 270
+          }
+        ],
+        "payment_total": 20000,
+        "vendor_balances": [
+          {
+            "balance": 16678,
+            "paid": 20000,
+            "supply": 33343,
+            "total": 36678,
+            "vat": 3335,
+            "vendor": "가상교체캡"
+          },
+          {
+            "balance": 2976,
+            "paid": 0,
+            "supply": 2706,
+            "total": 2976,
+            "vat": 270,
+            "vendor": "가상교체핀"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

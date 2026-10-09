@@ -1,0 +1,50 @@
+task_id: B2_B086_5bd266ec
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상편철대 시급 원장의 승인 정규 지급 집계에는 근로자의 날 기본 유급이 이미 포함돼 있습니다. 그날 실제 소집은 별도 추가
+  카드입니다. 집계된 기본 유급은 재지급하지 말고 실제 밤 소집의 holiday_pay, night_pay와 base_pay, paid_holiday_pay
+  및 gross_pay를 제출하세요.
+input_files:
+- path: inputs/01_유급포함.pdf
+  format: pdf
+- path: inputs/02_밤소집.xlsx
+  format: xlsx
+- path: inputs/03_기관.hwpx
+  format: hwpx
+- path: inputs/04_지급.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - base_pay
+  - paid_holiday_pay
+  - holiday_pay
+  - night_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-3a9b7543-598c-5430-99f6-3909634b697f
+scenario_seed: 6616463967180245334
+scenario_hash: 734f454d9db0a4502d3d64d2cd76fb1545a55f4b93668b007aeab95fe9d19ad2
+authorship:
+  method: individually_written
+  case_id: B086
+  case_sha256: 5bd266ec30f3495614e27d4170f041297d8e3c73350028e88dacb677d64aa939
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- base_pay
+- paid_holiday_pay
+- holiday_pay
+- night_pay
+- gross_pay

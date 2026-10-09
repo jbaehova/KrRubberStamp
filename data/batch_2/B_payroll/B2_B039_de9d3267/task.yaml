@@ -1,0 +1,56 @@
+task_id: B2_B039_de9d3267
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상천문필름실은 가상나린의11월 지급을 종결합니다. 저녁작업이 추가 출동에서 소정근무 이동으로 최종 승인됐고 휴게도최종본에서옮겼습니다.
+  급식대상확인과세기관11월보험통지가있습니다. 최신카드로overtime_pay와night_pay를, 급식과추가대가로taxable_pay를 작성한 뒤
+  net_pay를 계산해 은행파일을 마감해 주세요. 근로분류가바뀌어도실제야간은남을수있습니다.
+input_files:
+- path: inputs/01_월급약정.pdf
+  format: pdf
+- path: inputs/02_편성확인.hwpx
+  format: hwpx
+- path: inputs/03_이전카드.xlsx
+  format: xlsx
+- path: inputs/04_최종카드.xlsx
+  format: xlsx
+- path: inputs/05_상시규모.pdf
+  format: pdf
+- path: inputs/06_배식확인.pdf
+  format: pdf
+- path: inputs/07_연금.pdf
+  format: pdf
+- path: inputs/08_건강고용.pdf
+  format: pdf
+- path: inputs/09_실행세무.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    night_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - night_pay
+  - taxable_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-d0e4a796-3633-5895-943c-37dfa92ddee5
+scenario_seed: 16041032868530525576
+scenario_hash: 5cfad829811fb66443bd54435450ba377a164c67d65d39074677a21cf142e581
+authorship:
+  method: individually_written
+  case_id: B039
+  case_sha256: de9d3267a7209588b660b9795f13dd7f122762320570a892b63c0dbc203e8e3b
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- overtime_pay
+- night_pay
+- taxable_pay
+- net_pay

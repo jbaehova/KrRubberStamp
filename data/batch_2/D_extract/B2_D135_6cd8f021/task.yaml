@@ -1,0 +1,132 @@
+task_id: B2_D135_6cd8f021
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 전용 통과 공용 띠를 공동 주문할지 비교합니다. 두 상품액은 무료배송 기준보다 낮고 배송비를 더하면 기준을 넘지만 운임은 기준에
+  포함되지 않습니다. chosen_offers와 vendor_cart_totals 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_운반통약정.pdf
+  format: pdf
+- path: inputs/02_운반물량.xlsx
+  format: xlsx
+- path: inputs/03_운반통공방.hwpx
+  format: hwpx
+- path: inputs/04_운반띠점.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-c1c4d399-8c65-5806-abd8-53aceffac366
+scenario_seed: 7843282778932580032
+scenario_hash: eae33f5296da3e8ccf4d81c237bd357d5ac5846b73e09d2de5896fc170664b78
+authorship:
+  method: individually_written
+  case_id: D135
+  case_sha256: 6cd8f021c7370ec097551c56205640264ae21a26d0a1838e00f440c8d810d04e
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

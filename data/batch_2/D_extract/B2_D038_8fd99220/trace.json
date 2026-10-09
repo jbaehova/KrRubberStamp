@@ -1,0 +1,186 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-09-25",
+      "events": [
+        {
+          "date": "2026-09-20",
+          "event_id": "WIRE-A-IN",
+          "kind": "received",
+          "line_id": "W",
+          "order_id": "WIRE-A",
+          "units": 10
+        },
+        {
+          "date": "2026-09-21",
+          "event_id": "WIRE-B-IN",
+          "kind": "received",
+          "line_id": "W",
+          "order_id": "WIRE-B",
+          "units": 10
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-09-15",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "m",
+              "item": "배선피복",
+              "line_id": "W",
+              "ordered_packages": 1,
+              "package_price": 20000,
+              "price_includes_vat": false,
+              "units_per_package": 10
+            }
+          ],
+          "order_id": "WIRE-A",
+          "vendor": "가상배선피복"
+        },
+        {
+          "date": "2026-09-16",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "배선클립",
+              "line_id": "W",
+              "ordered_packages": 1,
+              "package_price": 10000,
+              "price_includes_vat": false,
+              "units_per_package": 10
+            }
+          ],
+          "order_id": "WIRE-B",
+          "vendor": "가상배선클립"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 33000,
+          "date": "2026-09-18",
+          "order_id": "WIRE-A",
+          "payment_id": "WIRE-A-PAY",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "모든 업체는 가상이다. 마감까지 인수의 포장비율 공급가격을 마지막에 버리고 세액은 10%를 버린다. 실행 지급은 해당 업체 대금에서만 차감한다. 업체별 잔액의 부호를 유지하고 전체는 그 잔액을 합친다. 업체명은 NFKC와 공백 및 법인 표기 제거 후 소문자로 정리한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "WIRE-A-IN",
+        "WIRE-B-IN"
+      ],
+      "accepted_payment_ids": [
+        "WIRE-A-PAY"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "WIRE-A-IN",
+          "net_units_after_event": 10
+        },
+        {
+          "event_id": "WIRE-B-IN",
+          "net_units_after_event": 10
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 20000,
+          "line_id": "W",
+          "order_id": "WIRE-A",
+          "package_price_times_net_units": 200000,
+          "price_includes_vat": false,
+          "supply": 20000,
+          "total": 22000,
+          "units_per_package": 10,
+          "vat": 2000
+        },
+        {
+          "amount_after_floor": 10000,
+          "line_id": "W",
+          "order_id": "WIRE-B",
+          "package_price_times_net_units": 100000,
+          "price_includes_vat": false,
+          "supply": 10000,
+          "total": 11000,
+          "units_per_package": 10,
+          "vat": 1000
+        }
+      ],
+      "settlement": {
+        "balance_total": 0,
+        "grand_total": 33000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "배선클립",
+            "net_units": 10
+          },
+          {
+            "base_unit": "m",
+            "item": "배선피복",
+            "net_units": 10
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "m",
+            "item": "배선피복",
+            "line_id": "W",
+            "net_units": 10,
+            "order_id": "WIRE-A",
+            "ordered_units": 10,
+            "outstanding_units": 0,
+            "received_units": 10,
+            "returned_units": 0,
+            "supply": 20000,
+            "total": 22000,
+            "vat": 2000
+          },
+          {
+            "base_unit": "개",
+            "item": "배선클립",
+            "line_id": "W",
+            "net_units": 10,
+            "order_id": "WIRE-B",
+            "ordered_units": 10,
+            "outstanding_units": 0,
+            "received_units": 10,
+            "returned_units": 0,
+            "supply": 10000,
+            "total": 11000,
+            "vat": 1000
+          }
+        ],
+        "payment_total": 33000,
+        "vendor_balances": [
+          {
+            "balance": 11000,
+            "paid": 0,
+            "supply": 10000,
+            "total": 11000,
+            "vat": 1000,
+            "vendor": "가상배선클립"
+          },
+          {
+            "balance": -11000,
+            "paid": 33000,
+            "supply": 20000,
+            "total": 22000,
+            "vat": 2000,
+            "vendor": "가상배선피복"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

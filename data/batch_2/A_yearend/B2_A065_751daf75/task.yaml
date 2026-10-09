@@ -1,0 +1,140 @@
+task_id: B2_A065_751daf75
+domain: A_yearend
+difficulty: easy
+reference_period: '2025'
+instruction: 가상초아의 마지막 원천 지급기간과 인사부의 실제 재직 종료일을 따로 확인하세요. 12월은 급여 지급이 없는 무급휴직이고 근로관계는
+  연말까지 계속됩니다. 12월에 본인이 낸 대학원 수업료를 실제 재직기간으로 검토하여 연간 급여와 전체 세금 객체를 제출합니다.
+input_files:
+- path: inputs/01_원천.pdf
+  format: pdf
+- path: inputs/02_인사접수.xlsx
+  format: xlsx
+- path: inputs/03_본인학비.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    annual_gross:
+      type: integer
+    used_statement_ids:
+      type: array
+      items:
+        type: string
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - annual_gross
+  - used_statement_ids
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-f33b3fa5-215d-593e-946d-30adb0bbf27e
+scenario_seed: 8439094197199042082
+scenario_hash: 42a101c9ecf4c5000d147601d4684e1f8fcc4684f01f5e967f99b7a6b5320048
+authorship:
+  method: individually_written
+  case_id: A065
+  case_sha256: 751daf75ca1bf622c7a0004a6d760cdc5e57fc2cb3f3f4af879ef649b0696066
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- annual_gross
+- used_statement_ids
+- tax_calculation

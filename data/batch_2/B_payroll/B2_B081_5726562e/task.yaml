@@ -1,0 +1,46 @@
+task_id: B2_B081_5726562e
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상검수대의 월 통상임금에는 현금 식대가 들어 있지만 과세액에서는 비과세를 먼저 빼야 합니다. 한 분의 승인된 평일 추가 작업을
+  정확 시급으로 반영하여 ordinary_monthly_wage, overtime_pay, taxable_pay와 income_tax를 제출하세요.
+  통상임금 분자에 바로 고액 세액 산식을 적용하지 마세요.
+input_files:
+- path: inputs/01_임금.pdf
+  format: pdf
+- path: inputs/02_추가.xlsx
+  format: xlsx
+- path: inputs/03_기관.hwpx
+  format: hwpx
+- path: inputs/04_세무.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    ordinary_monthly_wage:
+      type: integer
+    overtime_pay:
+      type: integer
+    taxable_pay:
+      type: integer
+    income_tax:
+      type: integer
+  required:
+  - ordinary_monthly_wage
+  - overtime_pay
+  - taxable_pay
+  - income_tax
+  additionalProperties: false
+canary: KrRubberStamp-canary-2dc1b44f-c0a4-54cb-8800-3b85e38c069b
+scenario_seed: 6279801488484788892
+scenario_hash: a23695e6841359bb5959a794b516800d62e599e3d46324724aea3bab56169720
+authorship:
+  method: individually_written
+  case_id: B081
+  case_sha256: 5726562e951aea9ccdc7459a03c3f036a1b8568ff74f7debd9ece518f739d7c8
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- ordinary_monthly_wage
+- overtime_pay
+- taxable_pay
+- income_tax

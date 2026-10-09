@@ -1,0 +1,42 @@
+task_id: B2_C024_6c373796
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상빛설치의 설치용 자재 구매 전표에는 세액이 따로 표시되지 않았지만 같은 전체 공급의 적격 전자를 함께 받았습니다. 지급과
+  증빙 원본을 실제 인수에 연결하여 매입세액(input_vat)과 공제가능 매입세액(deductible_input_vat) 및 불공제 매입세액(noncreditable_vat)을
+  answer.json에 작성해 주세요.
+input_files:
+- path: inputs/01_설치반입.hwpx
+  format: hwpx
+- path: inputs/02_실행지급.xlsx
+  format: xlsx
+- path: inputs/03_미표시카드.pdf
+  format: pdf
+- path: inputs/04_보완전자.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    input_vat:
+      type: integer
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+  required:
+  - input_vat
+  - deductible_input_vat
+  - noncreditable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-71992ea9-ecb9-5343-a98d-6ce39c687915
+scenario_seed: 7797762400739133010
+scenario_hash: f263caa55da43529792b2a5863454d903f3f26b16f95938f60c9854b04ac9063
+authorship:
+  method: individually_written
+  case_id: C024
+  case_sha256: 6c373796d2f40652846838cdbecf776a0fc4359c0691f70608ba608ce5ede67c
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- input_vat
+- deductible_input_vat
+- noncreditable_vat

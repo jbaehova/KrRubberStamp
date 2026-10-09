@@ -1,0 +1,126 @@
+task_id: B2_B023_6b13fa5c
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상유리실은 승인된 정규 저녁 교대의 무급 휴게를 같은 길이로 밤 구간으로 옮겼습니다. 최종 휴게에 따른 야간 가산을 계산하고
+  두 실제 실행과 완전한 명세를 대조하세요. payroll_calculations와 balance_total을 요청합니다.
+input_files:
+- path: inputs/01_승인정정.pdf
+  format: pdf
+- path: inputs/02_전체월명세.hwpx
+  format: hwpx
+- path: inputs/03_정기실행.xlsx
+  format: xlsx
+- path: inputs/04_가산실행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    payroll_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          calculation:
+            type: object
+            properties:
+              effective_payment_date:
+                type: string
+              ordinary_monthly_wage:
+                type: integer
+              ordinary_hourly_wage_floor:
+                type: integer
+              base_pay:
+                type: integer
+              fixed_allowance:
+                type: integer
+              meal_allowance:
+                type: integer
+              variable_allowance:
+                type: integer
+              overtime_pay:
+                type: integer
+              night_pay:
+                type: integer
+              holiday_pay:
+                type: integer
+              weekly_holiday_pay:
+                type: integer
+              paid_holiday_pay:
+                type: integer
+              gross_pay:
+                type: integer
+              taxable_pay:
+                type: integer
+              non_taxable_pay:
+                type: integer
+              pension_base_income:
+                type: integer
+              national_pension:
+                type: integer
+              health_insurance:
+                type: integer
+              long_term_care:
+                type: integer
+              employment_insurance:
+                type: integer
+              income_tax:
+                type: integer
+              local_income_tax:
+                type: integer
+              total_deductions:
+                type: integer
+              net_pay:
+                type: integer
+            required:
+            - effective_payment_date
+            - ordinary_monthly_wage
+            - ordinary_hourly_wage_floor
+            - base_pay
+            - fixed_allowance
+            - meal_allowance
+            - variable_allowance
+            - overtime_pay
+            - night_pay
+            - holiday_pay
+            - weekly_holiday_pay
+            - paid_holiday_pay
+            - gross_pay
+            - taxable_pay
+            - non_taxable_pay
+            - pension_base_income
+            - national_pension
+            - health_insurance
+            - long_term_care
+            - employment_insurance
+            - income_tax
+            - local_income_tax
+            - total_deductions
+            - net_pay
+            additionalProperties: false
+        required:
+        - payroll_id
+        - employee_id
+        - calculation
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - payroll_calculations
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-ad1f377b-2f57-5f3c-bb29-86f85fce9fea
+scenario_seed: 7715785860505367121
+scenario_hash: 038b715240742c8d9c1880d25079cc490aec6597bdf7fe6f66cef161e0dc3f90
+authorship:
+  method: individually_written
+  case_id: B023
+  case_sha256: 6b13fa5c3267725171c23d05606f2e68272d56d6ffcc5ddce46f1e024a695daa
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- payroll_calculations
+- balance_total

@@ -1,0 +1,56 @@
+task_id: B2_C045_8b96f588
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상단차고리의 세 판매 주문과 두 재료 구매를 확인해 주세요. 카드 결제와 계산서의 같은 판매를 한 공급으로 묶고 같은 상호라도
+  다른 공급자 ID를 각각 적용해 공제가능 매입세액(deductible_input_vat), 영수증 발행세액공제(receipt_credit), 납부액(payable_vat),
+  고유 거래 수(unique_transaction_count)를 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_등록신고.hwpx
+  format: hwpx
+- path: inputs/02_공급자등록.pdf
+  format: pdf
+- path: inputs/03_판매카드.pdf
+  format: pdf
+- path: inputs/04_판매전자.xlsx
+  format: xlsx
+- path: inputs/05_손님현금.pdf
+  format: pdf
+- path: inputs/06_철심.pdf
+  format: pdf
+- path: inputs/07_도료.xlsx
+  format: xlsx
+- path: inputs/08_철심인수.pdf
+  format: pdf
+- path: inputs/09_도료인수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-93facac0-c8fa-5366-824e-6065bcd4d2f2
+scenario_seed: 10058496783336383351
+scenario_hash: 0cb28eee449290df39f212ecf8336af1418bc4f0165c415c66be6082bc46906c
+authorship:
+  method: individually_written
+  case_id: C045
+  case_sha256: 8b96f588412ca37745975e7ab1c46637f629e2ba272592c82bbbeb7a4f06a4b2
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- deductible_input_vat
+- receipt_credit
+- payable_vat
+- unique_transaction_count

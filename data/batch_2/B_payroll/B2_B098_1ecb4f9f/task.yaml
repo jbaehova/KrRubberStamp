@@ -1,0 +1,60 @@
+task_id: B2_B098_1ecb4f9f
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상분류교환실의 노동절 기본유급은 정규 지급 집계에 들어 있고 어린이날 기본유급은 별도 자료로 남습니다. 노동절 실제 밤 소집의
+  늦은 종료 초안은 미승인입니다. 각 휴일의 포함 위치를 따로 적용하고 승인 밤근로만 계산한 base_pay, paid_holiday_pay, holiday_pay와
+  night_pay 및 net_pay를 제출하세요.
+input_files:
+- path: inputs/01_종료계약.pdf
+  format: pdf
+- path: inputs/02_노동절포함.xlsx
+  format: xlsx
+- path: inputs/03_어린이날.hwpx
+  format: hwpx
+- path: inputs/04_밤승인.pdf
+  format: pdf
+- path: inputs/05_개근.xlsx
+  format: xlsx
+- path: inputs/06_연금.hwpx
+  format: hwpx
+- path: inputs/07_건강.pdf
+  format: pdf
+- path: inputs/08_고용.xlsx
+  format: xlsx
+- path: inputs/09_등록실행.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - paid_holiday_pay
+  - holiday_pay
+  - night_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-38934021-bd87-59d6-bb8a-e588d2abdac9
+scenario_seed: 2218954788485687718
+scenario_hash: 6619066661f0b342b150b4234a41e5a13cbbbee8d0fb0baa4e4184cb4b67370a
+authorship:
+  method: individually_written
+  case_id: B098
+  case_sha256: 1ecb4f9fa45769a6805fee4f973218c608e7f0ff5b0ee70d3db34b2313355bd3
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- base_pay
+- paid_holiday_pay
+- holiday_pay
+- night_pay
+- net_pay

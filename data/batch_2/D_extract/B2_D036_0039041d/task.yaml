@@ -1,0 +1,101 @@
+task_id: B2_D036_0039041d
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 같은 공급처의 기존 계약 인수금액과 새 계약의 실행 선지급을 업체 계정에서 대조하세요. 주문별 인수 상태는 유지하되 지급은
+  해당 공급처 합계에서 차감합니다. answer.json에는 vendor_balances와 line_settlements를 작성하세요.
+input_files:
+- path: inputs/01_기존풀리.pdf
+  format: pdf
+- path: inputs/02_새풀리.hwpx
+  format: hwpx
+- path: inputs/03_기존풀리입고.xlsx
+  format: xlsx
+- path: inputs/04_새계약금.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - vendor_balances
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-11ab1aed-0e5e-56b7-8ef6-83fc2949e103
+scenario_seed: 16048599939303547
+scenario_hash: 674a4bd8886c8bda16580eeca55f31bedd1d60e352c2bf42846121bd686ccedb
+authorship:
+  method: individually_written
+  case_id: D036
+  case_sha256: 0039041dda86487bec0bd5d93e6d76f640e1d11f160998a9d0b169348016f3b9
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances
+- line_settlements

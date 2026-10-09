@@ -1,0 +1,154 @@
+task_id: B2_A094_000912d0
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상현우의 발급 원천 자료를 합산하고 고차수 초안을 제외하세요. 단체 ID와 납부일을 지정 이력에 연결하여 특례 및 공익과
+  종교 기부 한도를 순서대로 계산하고 본인 치료의 의료 문턱도 같은 합산 급여로 적용해 세금 계산 객체를 제출합니다.
+input_files:
+- path: inputs/01_전직.pdf
+  format: pdf
+- path: inputs/02_현직.xlsx
+  format: xlsx
+- path: inputs/03_초안.hwpx
+  format: hwpx
+- path: inputs/04_특례.pdf
+  format: pdf
+- path: inputs/05_공익.xlsx
+  format: xlsx
+- path: inputs/06_종교.hwpx
+  format: hwpx
+- path: inputs/07_지정.pdf
+  format: pdf
+- path: inputs/08_진료.xlsx
+  format: xlsx
+- path: inputs/09_접수.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    used_statement_ids:
+      type: array
+      items:
+        type: string
+    excluded_statement_ids:
+      type: array
+      items:
+        type: string
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - used_statement_ids
+  - excluded_statement_ids
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-52fe5552-900d-53d7-86ae-d771e3cf3ff6
+scenario_seed: 2553962995716461
+scenario_hash: 7cdb38697b1b0db9b347abbb4aa974ea4e44f74a6b0f5942459bcef0b95291ad
+authorship:
+  method: individually_written
+  case_id: A094
+  case_sha256: 000912d0d921116d22525bf42d6fe700954c58d0ac7b7577e378783350652a29
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- used_statement_ids
+- excluded_statement_ids
+- tax_calculation

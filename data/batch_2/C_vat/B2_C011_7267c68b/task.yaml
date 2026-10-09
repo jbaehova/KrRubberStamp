@@ -1,0 +1,134 @@
+task_id: B2_C011_7267c68b
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상잔결매장과 가상직선공방은 별개 납세자입니다. 첫 매장은 카드 판매분을 두 번 나눠 납부했고 공방은 한 번 송금했습니다.
+  신고자료부터 각각 계산한 뒤 등록번호별 실제 납부와 잔액을 대조해 주세요. 전체 은행 합계만 보고 어느 납세자의 미납인지 생략하지 말고 filing_calculations와
+  registration_settlements 및 balance_total을 answer.json에 넣어주세요.
+input_files:
+- path: inputs/01_잔결신고.pdf
+  format: pdf
+- path: inputs/02_직선신고.xlsx
+  format: xlsx
+- path: inputs/03_등록별실행.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    filing_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          filing_id:
+            type: string
+          taxpayer_id:
+            type: string
+          registration_id:
+            type: string
+          business_name:
+            type: string
+          calculation:
+            type: object
+            properties:
+              tax_base:
+                type: integer
+              output_vat:
+                type: integer
+              input_vat:
+                type: integer
+              noncreditable_vat:
+                type: integer
+              deductible_input_vat:
+                type: integer
+              receipt_credit:
+                type: integer
+              prepaid_vat:
+                type: integer
+              net_vat:
+                type: integer
+              payable_vat:
+                type: integer
+              refund_vat:
+                type: integer
+              unique_transaction_count:
+                type: integer
+            required:
+            - tax_base
+            - output_vat
+            - input_vat
+            - noncreditable_vat
+            - deductible_input_vat
+            - receipt_credit
+            - prepaid_vat
+            - net_vat
+            - payable_vat
+            - refund_vat
+            - unique_transaction_count
+            additionalProperties: false
+        required:
+        - filing_id
+        - taxpayer_id
+        - registration_id
+        - business_name
+        - calculation
+        additionalProperties: false
+    registration_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          filing_id:
+            type: string
+          taxpayer_id:
+            type: string
+          registration_id:
+            type: string
+          business_name:
+            type: string
+          tax_due:
+            type: integer
+          payable_vat:
+            type: integer
+          refund_vat:
+            type: integer
+          paid:
+            type: integer
+          received:
+            type: integer
+          net_outflow:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - filing_id
+        - taxpayer_id
+        - registration_id
+        - business_name
+        - tax_due
+        - payable_vat
+        - refund_vat
+        - paid
+        - received
+        - net_outflow
+        - balance
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - filing_calculations
+  - registration_settlements
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-2dff30c4-70f9-5b54-b6f1-e4dce5926a58
+scenario_seed: 8243775946028984158
+scenario_hash: 06ef20c96af8cec605598e99d3a6a1d75f924aa5fef0f6109fff7b766a606a16
+authorship:
+  method: individually_written
+  case_id: C011
+  case_sha256: 7267c68ba6f7a75e2b50ecc6efec1f8d71c8135f96c3342d5838ffe6be725654
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- filing_calculations
+- registration_settlements
+- balance_total

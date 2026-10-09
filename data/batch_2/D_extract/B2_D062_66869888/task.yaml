@@ -1,0 +1,97 @@
+task_id: B2_D062_66869888
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 소형 받침의 여러 구매 포장 상품금액을 먼저 합친 뒤 포함 공급가액과 세액을 나눕니다. quote_comparisons와 chosen_quote_id를
+  작성해 포장당 버린 공급가액을 그대로 더하지 마세요.
+input_files:
+- path: inputs/01_받침원가.pdf
+  format: pdf
+- path: inputs/02_짝포장.xlsx
+  format: xlsx
+- path: inputs/03_낱포장.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_quote_id:
+      type: string
+  required:
+  - quote_comparisons
+  - chosen_quote_id
+  additionalProperties: false
+canary: KrRubberStamp-canary-acfac140-9449-5f05-9d40-876389fce8d2
+scenario_seed: 7387759949108633613
+scenario_hash: 12ab2bf2549f9fe5234b652dc584ffb7ce395e9ff060281ac36eee39d970571c
+authorship:
+  method: individually_written
+  case_id: D062
+  case_sha256: 668698881c7a600de55dd4fc622aadaf5d603c94812acf40eae575eee649b4fe
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_quote_id

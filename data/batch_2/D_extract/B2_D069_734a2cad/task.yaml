@@ -1,0 +1,103 @@
+task_id: B2_D069_734a2cad
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 보호 시트의 상품금액은 무료배송 기준보다 낮지만 운임을 더하면 기준을 넘습니다. quote_comparisons와 chosen_vendor
+  및 chosen_total을 작성해 운임 자체로 무료배송을 만들지 마세요.
+input_files:
+- path: inputs/01_시트요청.hwpx
+  format: hwpx
+- path: inputs/02_배송상품.xlsx
+  format: xlsx
+- path: inputs/03_배송기준.pdf
+  format: pdf
+- path: inputs/04_상점견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_vendor:
+      type: string
+    chosen_total:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_vendor
+  - chosen_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-d7620768-617f-5e2a-b162-f8acdf7edac5
+scenario_seed: 8307501588406145987
+scenario_hash: dbbe871f02c9a01e11242bf29268d2229b3a158350bc7dca9e0dbc55c9ca6b2e
+authorship:
+  method: individually_written
+  case_id: D069
+  case_sha256: 734a2cadfbf113c3f60ffb64b943b9eea797b70178c07cab515d44a45a1031a2
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_vendor
+- chosen_total

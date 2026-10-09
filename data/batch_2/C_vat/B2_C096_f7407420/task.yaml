@@ -1,0 +1,56 @@
+task_id: B2_C096_f7407420
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상브램블메모는 공급자 전환 전후 구매와 별도 강의 장비 및 현재 소매 발급을 인계했습니다. 실제 구매일과 업무 ID 및 유효
+  원본을 연결하여 공제 매입세액(deductible_input_vat)과 불공제세액(noncreditable_vat) 및 발행 공제(receipt_credit)를
+  answer.json에 제출하세요.
+input_files:
+- path: inputs/01_업무범위.hwpx
+  format: hwpx
+- path: inputs/02_등록기간.pdf
+  format: pdf
+- path: inputs/03_사월인수.hwpx
+  format: hwpx
+- path: inputs/04_오월인수.pdf
+  format: pdf
+- path: inputs/05_강의인수.hwpx
+  format: hwpx
+- path: inputs/06_실제지급.xlsx
+  format: xlsx
+- path: inputs/07_소매원본.pdf
+  format: pdf
+- path: inputs/08_사월카드.xlsx
+  format: xlsx
+- path: inputs/09_오월정정.hwpx
+  format: hwpx
+- path: inputs/10_강의전자.pdf
+  format: pdf
+- path: inputs/11_최종효력.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  - receipt_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-a8d81edd-f9d6-5c20-8a6d-b2a672d2f284
+scenario_seed: 17816367807539452728
+scenario_hash: 0e8cc8110ca1d67e064ec55c2389c400af85d5e5042c7eb94bc6601a30d8c0dd
+authorship:
+  method: individually_written
+  case_id: C096
+  case_sha256: f740742034181b38d2c4c62c828355c94ecc4045e54930c3a9fb56495f7fa640
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat
+- receipt_credit

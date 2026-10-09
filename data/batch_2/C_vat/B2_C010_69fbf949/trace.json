@@ -1,0 +1,179 @@
+[
+  {
+    "inputs": {
+      "activities": [],
+      "business_name": "가상원형복원",
+      "evidence_documents": [],
+      "operations": [],
+      "payments": [],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "amount": 825000,
+          "counterparty_consumer": true,
+          "date": "2026-06-09",
+          "description": "복원품 완성 인도 전체 대금",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "복원인도"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 825000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 0,
+        "paid_gross": 0,
+        "supply_base": 750000,
+        "transaction_id": "복원인도",
+        "unissued_receipt_gross": 825000,
+        "unpaid_gross": 825000,
+        "vat": 75000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "복원인도"
+      ],
+      "evidence": [
+        "receipt"
+      ],
+      "transaction_id": "복원인도"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-09",
+      "transaction_id": "복원인도"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 825000,
+      "includes_vat": true,
+      "transaction_id": "복원인도"
+    },
+    "output": {
+      "gross": 825000,
+      "supply_base": 750000,
+      "vat": 75000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 750000
+    },
+    "output": 75000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 0,
+      "transaction_id": "복원인도"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 25000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 75000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 75000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 75000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 75000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 0,
+      "net_vat": 75000,
+      "noncreditable_vat": 0,
+      "output_vat": 75000,
+      "payable_vat": 75000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 750000,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

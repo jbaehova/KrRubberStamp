@@ -1,0 +1,154 @@
+[
+  {
+    "inputs": {
+      "base_unit": "개",
+      "item": "배선고리",
+      "latest_delivery_date": "2026-05-26",
+      "order_date": "2026-05-18",
+      "processing_policy": "합성 사적 구매: 필요/포장수량 올림과 최소포장수의 큰 값 구매. 상품/운임 각각 포함가 10/11 버림 공급가액+차액 세액 또는 별도 10% 버림 세액. 상품 세금포함 총액만 무료배송 기준과 비교. 주문일이 효력 시작~종료에 포함되고 구매포장재고와 달력납기를 충족한 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 1,
+          "pack_price": 600,
+          "pack_units": 5,
+          "price_includes_vat": true,
+          "quote_id": "HOOK-NOW",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-05-18",
+          "valid_until": "2026-05-31",
+          "vendor": "가상고리현재"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 1,
+          "pack_price": 550,
+          "pack_units": 7,
+          "price_includes_vat": true,
+          "quote_id": "HOOK-OLD",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-05-01",
+          "valid_until": "2026-05-17",
+          "vendor": "가상고리이전"
+        }
+      ],
+      "required_units": 14,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "개",
+      "comparison": {
+        "chosen_leftover_units": 1,
+        "chosen_quote_id": "HOOK-NOW",
+        "chosen_total": 1800,
+        "chosen_vendor": "가상고리현재",
+        "eligible_quote_count": 1,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-05-20",
+            "eligible": true,
+            "leftover_units": 1,
+            "merchandise_supply": 1636,
+            "merchandise_total": 1800,
+            "merchandise_vat": 164,
+            "obtained_units": 15,
+            "packs": 3,
+            "quote_id": "HOOK-NOW",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 1636,
+            "total": 1800,
+            "valid_on_order": true,
+            "vat": 164,
+            "vendor": "가상고리현재"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-05-20",
+            "eligible": false,
+            "leftover_units": 0,
+            "merchandise_supply": 1000,
+            "merchandise_total": 1100,
+            "merchandise_vat": 100,
+            "obtained_units": 14,
+            "packs": 2,
+            "quote_id": "HOOK-OLD",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 1000,
+            "total": 1100,
+            "valid_on_order": false,
+            "vat": 100,
+            "vendor": "가상고리이전"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 1800,
+          "minimum_packs": 1,
+          "pack_units": 5,
+          "packs_after_minimum": 3,
+          "price_includes_vat": true,
+          "quote_id": "HOOK-NOW",
+          "required_packs_before_minimum": 3,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 1800
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 1100,
+          "minimum_packs": 1,
+          "pack_units": 7,
+          "packs_after_minimum": 2,
+          "price_includes_vat": true,
+          "quote_id": "HOOK-OLD",
+          "required_packs_before_minimum": 2,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 1100
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "배선고리",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          1800,
+          "가상고리현재",
+          "HOOK-NOW"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            1800,
+            "가상고리현재",
+            "HOOK-NOW"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

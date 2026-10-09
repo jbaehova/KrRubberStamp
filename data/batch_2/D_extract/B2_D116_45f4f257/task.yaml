@@ -1,0 +1,96 @@
+task_id: B2_D116_45f4f257
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 전원함과 전용 커넥터를 모두 확보해야 설치를 승인할 수 있습니다. 전원함 견적은 유효하지만 커넥터 가격이 주문 전에 만료되었습니다.
+  offer_comparisons와 chosen_offers 및 feasible_cart_count와 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_승인약정.pdf
+  format: pdf
+- path: inputs/02_설치품요청.xlsx
+  format: xlsx
+- path: inputs/03_전원함견적.pdf
+  format: pdf
+- path: inputs/04_연결품견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_offers:
+      type: array
+      items: {}
+    feasible_cart_count:
+      type: integer
+    grand_total:
+      type: 'null'
+  required:
+  - offer_comparisons
+  - chosen_offers
+  - feasible_cart_count
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-092fc9b7-c11e-5d41-8fb3-5c32decdd43c
+scenario_seed: 5040920339562829428
+scenario_hash: 9af06246d14abbde66cf054da7d5f74031e6691c8135038ec69123f89e4f0cc3
+authorship:
+  method: individually_written
+  case_id: D116
+  case_sha256: 45f4f25744af16748393521bd91bc902b4a471e9ed1f3e5eddfff5ecd7b01a5b
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- offer_comparisons
+- chosen_offers
+- feasible_cart_count
+- grand_total

@@ -1,0 +1,158 @@
+task_id: B2_A092_f881f6c9
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상아윤의 기간별 수정 원천을 선택하여 연간 총급여를 구하세요. 최종 표준 선택으로 보험과 교육비를 적용하지 않되 본인 문화비
+  및 교통 카드 공제는 급여 기준으로 처리하여 선택 번호와 세금 계산 객체를 제출합니다.
+input_files:
+- path: inputs/01_상반구본.pdf
+  format: pdf
+- path: inputs/02_상반정정.xlsx
+  format: xlsx
+- path: inputs/03_하반.hwpx
+  format: hwpx
+- path: inputs/04_보험.pdf
+  format: pdf
+- path: inputs/05_수업료.xlsx
+  format: xlsx
+- path: inputs/06_신용.hwpx
+  format: hwpx
+- path: inputs/07_문화.pdf
+  format: pdf
+- path: inputs/08_교통.xlsx
+  format: xlsx
+- path: inputs/09_선택.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    used_statement_ids:
+      type: array
+      items:
+        type: string
+    excluded_statement_ids:
+      type: array
+      items:
+        type: string
+    non_taxable:
+      type: integer
+    tax_calculation:
+      type: object
+      properties:
+        total_salary:
+          type: integer
+        salary_deduction:
+          type: integer
+        salary_income:
+          type: integer
+        eligible_dependents:
+          type: integer
+        basic_deduction:
+          type: integer
+        additional_deduction:
+          type: integer
+        pension_deduction:
+          type: integer
+        special_income_deduction:
+          type: integer
+        housing_income_deduction:
+          type: integer
+        income_deduction_limit_excess:
+          type: integer
+        credit_card_deduction:
+          type: integer
+        tax_base:
+          type: integer
+        computed_tax:
+          type: integer
+        employment_credit:
+          type: integer
+        child_credit:
+          type: integer
+        pension_account_credit:
+          type: integer
+        insurance_credit:
+          type: integer
+        medical_credit:
+          type: integer
+        education_credit:
+          type: integer
+        donation_credit:
+          type: integer
+        political_credit:
+          type: integer
+        hometown_credit:
+          type: integer
+        rent_credit:
+          type: integer
+        standard_credit:
+          type: integer
+        total_tax_credits:
+          type: integer
+        final_national_tax:
+          type: integer
+        final_local_tax:
+          type: integer
+        paid_national_tax:
+          type: integer
+        paid_local_tax:
+          type: integer
+        settlement_national_tax:
+          type: integer
+        settlement_local_tax:
+          type: integer
+        settlement_total:
+          type: integer
+      required:
+      - total_salary
+      - salary_deduction
+      - salary_income
+      - eligible_dependents
+      - basic_deduction
+      - additional_deduction
+      - pension_deduction
+      - special_income_deduction
+      - housing_income_deduction
+      - income_deduction_limit_excess
+      - credit_card_deduction
+      - tax_base
+      - computed_tax
+      - employment_credit
+      - child_credit
+      - pension_account_credit
+      - insurance_credit
+      - medical_credit
+      - education_credit
+      - donation_credit
+      - political_credit
+      - hometown_credit
+      - rent_credit
+      - standard_credit
+      - total_tax_credits
+      - final_national_tax
+      - final_local_tax
+      - paid_national_tax
+      - paid_local_tax
+      - settlement_national_tax
+      - settlement_local_tax
+      - settlement_total
+      additionalProperties: false
+  required:
+  - used_statement_ids
+  - excluded_statement_ids
+  - non_taxable
+  - tax_calculation
+  additionalProperties: false
+canary: KrRubberStamp-canary-493f7bed-a6f4-554d-8650-18e2c5281c47
+scenario_seed: 17906864937713402354
+scenario_hash: 8d3988904f16554f800bccef6d83c459dcdfac5b8cd2478e6807a04458feae2c
+authorship:
+  method: individually_written
+  case_id: A092
+  case_sha256: f881f6c9454e01f2910da8d7ae2b9818292f1c04e28067035d4195094e2cd784
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- used_statement_ids
+- excluded_statement_ids
+- non_taxable
+- tax_calculation

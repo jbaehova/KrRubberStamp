@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "개",
+      "item": "소형받침",
+      "latest_delivery_date": "2026-10-14",
+      "order_date": "2026-10-05",
+      "processing_policy": "합성 사적 구매: 필요/포장수량 올림과 최소포장수 중 큰 값 구매. 상품금액은 포장수×포장가격으로 합친 뒤 포함가 10/11 버림 공급가액과 차액 세액 또는 별도 10% 버림 세액 적용. 운임은 자체 금액과 표시로 별도계산. 상품 세금포함 총액만 무료배송 기준 비교. 효력/구매재고/달력납기 충족 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 7,
+          "pack_units": 1,
+          "price_includes_vat": true,
+          "quote_id": "REST-EACH",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 20,
+          "valid_from": "2026-10-01",
+          "valid_until": "2026-10-31",
+          "vendor": "가상받침낱포장"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 12,
+          "pack_units": 2,
+          "price_includes_vat": true,
+          "quote_id": "REST-PAIR",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 20,
+          "valid_from": "2026-10-01",
+          "valid_until": "2026-10-31",
+          "vendor": "가상받침짝포장"
+        }
+      ],
+      "required_units": 5,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "개",
+      "comparison": {
+        "chosen_leftover_units": 0,
+        "chosen_quote_id": "REST-EACH",
+        "chosen_total": 35,
+        "chosen_vendor": "가상받침낱포장",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-10-08",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 31,
+            "merchandise_total": 35,
+            "merchandise_vat": 4,
+            "obtained_units": 5,
+            "packs": 5,
+            "quote_id": "REST-EACH",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 31,
+            "total": 35,
+            "valid_on_order": true,
+            "vat": 4,
+            "vendor": "가상받침낱포장"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-10-08",
+            "eligible": true,
+            "leftover_units": 1,
+            "merchandise_supply": 32,
+            "merchandise_total": 36,
+            "merchandise_vat": 4,
+            "obtained_units": 6,
+            "packs": 3,
+            "quote_id": "REST-PAIR",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 32,
+            "total": 36,
+            "valid_on_order": true,
+            "vat": 4,
+            "vendor": "가상받침짝포장"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 35,
+          "minimum_packs": 1,
+          "pack_units": 1,
+          "packs_after_minimum": 5,
+          "price_includes_vat": true,
+          "quote_id": "REST-EACH",
+          "required_packs_before_minimum": 5,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 35
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 36,
+          "minimum_packs": 1,
+          "pack_units": 2,
+          "packs_after_minimum": 3,
+          "price_includes_vat": true,
+          "quote_id": "REST-PAIR",
+          "required_packs_before_minimum": 3,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 36
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "소형받침",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          35,
+          "가상받침낱포장",
+          "REST-EACH"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            35,
+            "가상받침낱포장",
+            "REST-EACH"
+          ],
+          [
+            36,
+            "가상받침짝포장",
+            "REST-PAIR"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

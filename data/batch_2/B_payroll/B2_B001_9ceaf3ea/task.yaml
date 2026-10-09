@@ -1,0 +1,66 @@
+task_id: B2_B001_9ceaf3ea
+domain: B_payroll
+difficulty: easy
+reference_period: '2026'
+instruction: 가상도면실은 한 직원의 정상 월급을 같은 지급일의 두 번 이체로 집행합니다. 계약과 공단 통지로 완전한 월 실수령액을 계산하고
+  은행 실행 번호 두 건을 해당 명세에 연결해 주세요. employee_settlements와 balance_total을 제출하면 자금팀이 남은
+  동일 지급일 이체를 준비합니다.
+input_files:
+- path: inputs/01_정기명세.pdf
+  format: pdf
+- path: inputs/02_당일집행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    balance_total:
+      type: integer
+  required:
+  - employee_settlements
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-27af91de-aa1d-5554-936a-449edbff681d
+scenario_seed: 11307118001444607600
+scenario_hash: 21e246b8eaf356413a4cbf277a6c458d8b4bf587aac51881fd482a6b3691ba46
+authorship:
+  method: individually_written
+  case_id: B001
+  case_sha256: 9ceaf3ea2587d67075e96de3950aa3ff465123408e668cdd6f33012e0e78149d
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- employee_settlements
+- balance_total

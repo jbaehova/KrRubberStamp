@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "개",
+      "item": "안내홀더",
+      "latest_delivery_date": "2026-06-18",
+      "order_date": "2026-06-10",
+      "processing_policy": "합성 사적 구매 약정: 필요수량/포장수량 올림과 최소포장수 중 큰 값을 구매. 상품과 운임은 각자 포함가 10/11 버림 공급가액과 차액 세액 또는 별도 10% 버림 세액으로 계산. 상품 세금포함 총액만 무료배송 기준과 비교. 주문일 효력/재고포장/달력납기 충족 견적 중 총액/정규화업체/견적ID 순 선택. 배송 과세자격이나 신고 법률판정 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 1,
+          "pack_price": 1000,
+          "pack_units": 6,
+          "price_includes_vat": false,
+          "quote_id": "HOLDER-EX",
+          "shipping_price": 132,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-06-01",
+          "valid_until": "2026-06-30",
+          "vendor": "가상홀더유통"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 2,
+          "minimum_packs": 1,
+          "pack_price": 1100,
+          "pack_units": 6,
+          "price_includes_vat": true,
+          "quote_id": "HOLDER-IN",
+          "shipping_price": 100,
+          "shipping_price_includes_vat": false,
+          "stock_packs": 10,
+          "valid_from": "2026-06-01",
+          "valid_until": "2026-06-30",
+          "vendor": "가상홀더종합"
+        }
+      ],
+      "required_units": 6,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "개",
+      "comparison": {
+        "chosen_leftover_units": 0,
+        "chosen_quote_id": "HOLDER-IN",
+        "chosen_total": 1210,
+        "chosen_vendor": "가상홀더종합",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-06-12",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 1000,
+            "merchandise_total": 1100,
+            "merchandise_vat": 100,
+            "obtained_units": 6,
+            "packs": 1,
+            "quote_id": "HOLDER-EX",
+            "shipping_supply": 120,
+            "shipping_total": 132,
+            "shipping_vat": 12,
+            "stock_sufficient": true,
+            "supply": 1120,
+            "total": 1232,
+            "valid_on_order": true,
+            "vat": 112,
+            "vendor": "가상홀더유통"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-06-12",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 1000,
+            "merchandise_total": 1100,
+            "merchandise_vat": 100,
+            "obtained_units": 6,
+            "packs": 1,
+            "quote_id": "HOLDER-IN",
+            "shipping_supply": 100,
+            "shipping_total": 110,
+            "shipping_vat": 10,
+            "stock_sufficient": true,
+            "supply": 1100,
+            "total": 1210,
+            "valid_on_order": true,
+            "vat": 110,
+            "vendor": "가상홀더종합"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 1000,
+          "minimum_packs": 1,
+          "pack_units": 6,
+          "packs_after_minimum": 1,
+          "price_includes_vat": false,
+          "quote_id": "HOLDER-EX",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 132,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 1100
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 2,
+          "merchandise_amount_before_vat_split": 1100,
+          "minimum_packs": 1,
+          "pack_units": 6,
+          "packs_after_minimum": 1,
+          "price_includes_vat": true,
+          "quote_id": "HOLDER-IN",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 100,
+          "shipping_free": false,
+          "shipping_price_includes_vat": false,
+          "shipping_threshold_basis": 1100
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "안내홀더",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          1210,
+          "가상홀더종합",
+          "HOLDER-IN"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            1210,
+            "가상홀더종합",
+            "HOLDER-IN"
+          ],
+          [
+            1232,
+            "가상홀더유통",
+            "HOLDER-EX"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

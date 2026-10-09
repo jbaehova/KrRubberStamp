@@ -1,0 +1,141 @@
+task_id: B2_D119_9261d9ea
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 전용 유닛과 공용 씰을 함께 주문합니다. 유닛 업체의 낮은 씰 가격은 내일부터 효력이 있어 오늘 주문에 사용할 수 없습니다.
+  chosen_offers와 offer_comparisons 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_유닛주문.pdf
+  format: pdf
+- path: inputs/02_현재유닛.xlsx
+  format: xlsx
+- path: inputs/03_다음가격.hwpx
+  format: hwpx
+- path: inputs/04_씰전문.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - offer_comparisons
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-6c6bccda-9754-569e-a1f3-48c9c3b64f24
+scenario_seed: 10547951403513152788
+scenario_hash: 8316e0916c06868e6b29f4882c6e437a07ca78566db5c2660b6d1978f5c97533
+authorship:
+  method: individually_written
+  case_id: D119
+  case_sha256: 9261d9ea827c05142307c5f8bcb9d927fead3ae3121e2fe7981fdbc92b5e9814
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- offer_comparisons
+- grand_total

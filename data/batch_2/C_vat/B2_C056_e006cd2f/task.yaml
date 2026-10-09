@@ -1,0 +1,35 @@
+task_id: B2_C056_e006cd2f
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상밤나무등의 인계 파일에는 취소 전자와 유효 대체 전자가 함께 있습니다. 실제 카드 지급을 받은 주문의 발행 공제(receipt_credit)와
+  매출세액(output_vat)을 answer.json에 기록하세요.
+input_files:
+- path: inputs/01_판매마감.xlsx
+  format: xlsx
+- path: inputs/02_세원본.pdf
+  format: pdf
+- path: inputs/03_최종효력.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    output_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - output_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-32c575b3-1504-5652-8531-fb8e8287c12c
+scenario_seed: 16142815518265657858
+scenario_hash: fd68fd457312424bf6e6decb4f9b01281e034e0262d902e7bb55621522190a9e
+authorship:
+  method: individually_written
+  case_id: C056
+  case_sha256: e006cd2f80e34a02bf254266333ea333c691cae025e263dce7eba925d2f99180
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- receipt_credit
+- output_vat

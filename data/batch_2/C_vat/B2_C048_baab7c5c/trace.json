@@ -1,0 +1,549 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "meal",
+          "activity_id": "검은-집식사",
+          "date": "2026-04-12",
+          "description": "대표 가족이 집에서 배달 음식을 함께 먹었다. 직원 식사는 없다.",
+          "document_ids": [
+            "검은-음식카드"
+          ],
+          "location": {
+            "kind": "home",
+            "name": "대표 가족 집"
+          },
+          "operation_id": null,
+          "participants": [
+            {
+              "name": "가상황가족",
+              "organization": "가상가족식사",
+              "role": "household_member"
+            }
+          ],
+          "transaction_id": "검은-배달음식"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "검은-자석인수",
+          "date": "2026-04-13",
+          "description": "납품 부품에 넣을 자석 재료를 인수했으나 지급 메모만 남았다.",
+          "document_ids": [
+            "검은-현금메모"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "검은자석 제작실"
+          },
+          "operation_id": "검은-납품",
+          "participants": [
+            {
+              "name": "가상양재료",
+              "organization": "가상검은자석",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "검은-자석재료"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "검은-케이스인수",
+          "date": "2026-04-14",
+          "description": "자석 부품 포장용 케이스를 별도 인수했다.",
+          "document_ids": [
+            "검은-케이스전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "검은자석 제작실"
+          },
+          "operation_id": "검은-납품",
+          "participants": [
+            {
+              "name": "가상양재료",
+              "organization": "가상검은자석",
+              "role": "employee"
+            }
+          ],
+          "transaction_id": "검은-케이스"
+        }
+      ],
+      "operations": [
+        {
+          "description": "기업 자석 부품 공급",
+          "operation_id": "검은-납품",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "검은-집식사",
+          "date": "2026-04-12",
+          "document_id": "검은-음식카드",
+          "transaction_id": "검은-배달음식"
+        },
+        {
+          "activity_id": "검은-자석인수",
+          "date": "2026-04-13",
+          "document_id": "검은-현금메모",
+          "transaction_id": "검은-자석재료"
+        },
+        {
+          "activity_id": "검은-케이스인수",
+          "date": "2026-04-14",
+          "document_id": "검은-케이스전자",
+          "transaction_id": "검은-케이스"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": false,
+        "document_id": "검은-음식카드",
+        "purpose": "private",
+        "transaction_id": "검은-배달음식"
+      },
+      {
+        "business_related": true,
+        "document_id": "검은-현금메모",
+        "purpose": "business",
+        "transaction_id": "검은-자석재료"
+      },
+      {
+        "business_related": true,
+        "document_id": "검은-케이스전자",
+        "purpose": "business",
+        "transaction_id": "검은-케이스"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "검은-전자1"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "검은-납품1"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "검은-전자2"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "검은-납품2"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "검은-전자3"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "검은-납품3"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "검은-음식카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "검은-배달음식"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "검은-현금메모"
+      ],
+      "evidence": [
+        "cash_ledger"
+      ],
+      "transaction_id": "검은-자석재료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "검은-케이스전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "검은-케이스"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-02-08",
+      "transaction_id": "검은-납품1"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1800000,
+      "includes_vat": false,
+      "transaction_id": "검은-납품1"
+    },
+    "output": {
+      "gross": 1980000,
+      "supply_base": 1800000,
+      "vat": 180000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1800000
+    },
+    "output": 180000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "검은-납품1"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-03-08",
+      "transaction_id": "검은-납품2"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 2420000,
+      "includes_vat": true,
+      "transaction_id": "검은-납품2"
+    },
+    "output": {
+      "gross": 2420000,
+      "supply_base": 2200000,
+      "vat": 220000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 2200000
+    },
+    "output": 220000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "검은-납품2"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-08",
+      "transaction_id": "검은-납품3"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3500000,
+      "includes_vat": false,
+      "transaction_id": "검은-납품3"
+    },
+    "output": {
+      "gross": 3850000,
+      "supply_base": 3500000,
+      "vat": 350000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 3500000
+    },
+    "output": 350000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": false,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "invoice_issued": true,
+      "transaction_id": "검은-납품3"
+    },
+    "output": {
+      "eligible_gross": 0
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-12",
+      "transaction_id": "검은-배달음식"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 99000,
+      "includes_vat": true,
+      "transaction_id": "검은-배달음식"
+    },
+    "output": {
+      "gross": 99000,
+      "supply_base": 90000,
+      "vat": 9000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": false,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "private",
+      "supplier_general": true,
+      "transaction_id": "검은-배달음식",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 9000
+    },
+    "rule_id": "VAT_NONBUSINESS"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-13",
+      "transaction_id": "검은-자석재료"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 583000,
+      "includes_vat": true,
+      "transaction_id": "검은-자석재료"
+    },
+    "output": {
+      "gross": 583000,
+      "supply_base": 530000,
+      "vat": 53000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "cash_ledger"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "검은-자석재료",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 53000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-14",
+      "transaction_id": "검은-케이스"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 670000,
+      "includes_vat": false,
+      "transaction_id": "검은-케이스"
+    },
+    "output": {
+      "gross": 737000,
+      "supply_base": 670000,
+      "vat": 67000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "검은-케이스",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 67000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "corporation",
+      "consumer_facing_business": false,
+      "prior_year_site_supply_base": 170000000
+    },
+    "output": false,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": false,
+      "eligible_gross": 0,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 0
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 0,
+      "liability_before_credit": 683000
+    },
+    "output": 0,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 683000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 683000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 67000,
+      "output_vat": 750000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0
+    },
+    "output": {
+      "deductible_input_vat": 67000,
+      "input_vat": 129000,
+      "net_vat": 683000,
+      "noncreditable_vat": 62000,
+      "output_vat": 750000,
+      "payable_vat": 683000,
+      "prepaid_vat": 0,
+      "receipt_credit": 0,
+      "refund_vat": 0,
+      "tax_base": 7500000,
+      "unique_transaction_count": 6
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

@@ -1,0 +1,163 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-01-15",
+      "events": [
+        {
+          "date": "2026-01-13",
+          "event_id": "FILTER-E-IN",
+          "kind": "received",
+          "line_id": "01",
+          "order_id": "FILTER-EAST",
+          "units": 3
+        },
+        {
+          "date": "2026-01-12",
+          "event_id": "FILTER-W-IN",
+          "kind": "received",
+          "line_id": "01",
+          "order_id": "FILTER-WEST",
+          "units": 5
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-01-07",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "송풍필터",
+              "line_id": "01",
+              "ordered_packages": 2,
+              "package_price": 20000,
+              "price_includes_vat": false,
+              "units_per_package": 4
+            }
+          ],
+          "order_id": "FILTER-EAST",
+          "vendor": "가상송풍필터"
+        },
+        {
+          "date": "2026-01-09",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "송풍필터",
+              "line_id": "01",
+              "ordered_packages": 3,
+              "package_price": 11000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "FILTER-WEST",
+          "vendor": "가상송풍필터"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "업체는 가상이다. 주문과 행번호를 함께 써서 입고를 연결한다. 포장수 곱하기 포장당수량에서 순인수량을 뺀다. 행 공급가격은 포장가격 곱하기 순인수량을 포장당수량으로 나눈 뒤 버린다. 별도 세액은 행 공급가액의 10%를 버린다. 마감일까지 실행된 지급만 계산한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "FILTER-E-IN",
+        "FILTER-W-IN"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "FILTER-W-IN",
+          "net_units_after_event": 5
+        },
+        {
+          "event_id": "FILTER-E-IN",
+          "net_units_after_event": 3
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 15000,
+          "line_id": "01",
+          "order_id": "FILTER-EAST",
+          "package_price_times_net_units": 60000,
+          "price_includes_vat": false,
+          "supply": 15000,
+          "total": 16500,
+          "units_per_package": 4,
+          "vat": 1500
+        },
+        {
+          "amount_after_floor": 27500,
+          "line_id": "01",
+          "order_id": "FILTER-WEST",
+          "package_price_times_net_units": 55000,
+          "price_includes_vat": false,
+          "supply": 27500,
+          "total": 30250,
+          "units_per_package": 2,
+          "vat": 2750
+        }
+      ],
+      "settlement": {
+        "balance_total": 46750,
+        "grand_total": 46750,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "송풍필터",
+            "net_units": 8
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "송풍필터",
+            "line_id": "01",
+            "net_units": 3,
+            "order_id": "FILTER-EAST",
+            "ordered_units": 8,
+            "outstanding_units": 5,
+            "received_units": 3,
+            "returned_units": 0,
+            "supply": 15000,
+            "total": 16500,
+            "vat": 1500
+          },
+          {
+            "base_unit": "개",
+            "item": "송풍필터",
+            "line_id": "01",
+            "net_units": 5,
+            "order_id": "FILTER-WEST",
+            "ordered_units": 6,
+            "outstanding_units": 1,
+            "received_units": 5,
+            "returned_units": 0,
+            "supply": 27500,
+            "total": 30250,
+            "vat": 2750
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 46750,
+            "paid": 0,
+            "supply": 42500,
+            "total": 46750,
+            "vat": 4250,
+            "vendor": "가상송풍필터"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

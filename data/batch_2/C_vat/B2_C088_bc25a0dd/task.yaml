@@ -1,0 +1,54 @@
+task_id: B2_C088_bc25a0dd
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상페퍼장식의 두 소비자 주문과 재료 구매를 인계받았습니다. 각 원본 효력 및 공급자 자격을 연결하고 연간 잔여와 납부 제한을
+  비교하여 공제 매입세액(deductible_input_vat)과 발행 공제(receipt_credit) 및 납부액(payable_vat)을 answer.json에
+  제출하세요.
+input_files:
+- path: inputs/01_기신고.pdf
+  format: pdf
+- path: inputs/02_첫인도.hwpx
+  format: hwpx
+- path: inputs/03_둘인도.pdf
+  format: pdf
+- path: inputs/04_재료인수.hwpx
+  format: hwpx
+- path: inputs/05_공급자등록.pdf
+  format: pdf
+- path: inputs/06_실행대장.xlsx
+  format: xlsx
+- path: inputs/07_첫원본.pdf
+  format: pdf
+- path: inputs/08_둘원본.hwpx
+  format: hwpx
+- path: inputs/09_재료카드.xlsx
+  format: xlsx
+- path: inputs/10_최종효력.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-7dc43872-44d7-5923-8b58-600d31618582
+scenario_seed: 13557419126625827826
+scenario_hash: f50a0fc36fea89bbf073bab498cc5225d621e351739adc877864f5cf794189d5
+authorship:
+  method: individually_written
+  case_id: C088
+  case_sha256: bc25a0dd899e7bf2ce2e5158e9d65496c68b6680aae97ade68212d4f16f34666
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- receipt_credit
+- payable_vat

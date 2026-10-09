@@ -1,0 +1,42 @@
+task_id: B2_C036_6cdcd153
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상분홍리본의 첫 완료 주문은 부분 카드와 현금영수증 및 전체 계산서가 함께 있고 둘째 주문은 부분 카드만 있습니다. 거래별
+  원본 범위를 연결하여 매출 공급가액(tax_base)과 발행세액공제(receipt_credit) 및 거래 수(unique_transaction_count)를
+  answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_공급범위.hwpx
+  format: hwpx
+- path: inputs/02_실행.xlsx
+  format: xlsx
+- path: inputs/03_지급발급.pdf
+  format: pdf
+- path: inputs/04_전체계산서.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    tax_base:
+      type: integer
+    receipt_credit:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - tax_base
+  - receipt_credit
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-51bcfaf8-b7e8-5850-b28e-c631380b6e95
+scenario_seed: 7844374805883813529
+scenario_hash: 87a0029440812569e64b1dd60d9025499450f4801eb8f119e04ae4e9dbf6e637
+authorship:
+  method: individually_written
+  case_id: C036
+  case_sha256: 6cdcd1531dba7e996b3e13bb646b51a36e779c3d2c34dd0dd821780809b060df
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- tax_base
+- receipt_credit
+- unique_transaction_count

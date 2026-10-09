@@ -1,0 +1,458 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "ground_work",
+          "activity_id": "하얀-토공",
+          "date": "2026-04-11",
+          "description": "외부 필지의 첫 평탄화만 완료했다. 건물이나 진열 집기 수리는 없다.",
+          "document_ids": [
+            "하얀-토공전자"
+          ],
+          "location": {
+            "kind": "land_parcel",
+            "name": "가상필지-하얀외부"
+          },
+          "operation_id": "하얀-판매",
+          "participants": [
+            {
+              "name": "가상백점주",
+              "organization": "가상하얀받침",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "하얀-평탄"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "하얀-집기",
+          "date": "2026-04-12",
+          "description": "제품 판매에만 사용할 진열 집기를 매장에 인수했다.",
+          "document_ids": [
+            "하얀-집기전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "하얀받침 매장"
+          },
+          "operation_id": "하얀-판매",
+          "participants": [
+            {
+              "name": "가상백점주",
+              "organization": "가상하얀받침",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "하얀-진열"
+        }
+      ],
+      "operations": [
+        {
+          "description": "소비자 받침 제품 판매",
+          "operation_id": "하얀-판매",
+          "output_taxable": true
+        }
+      ],
+      "purchase_links": [
+        {
+          "activity_id": "하얀-토공",
+          "date": "2026-04-11",
+          "document_id": "하얀-토공전자",
+          "transaction_id": "하얀-평탄"
+        },
+        {
+          "activity_id": "하얀-집기",
+          "date": "2026-04-12",
+          "document_id": "하얀-집기전자",
+          "transaction_id": "하얀-진열"
+        }
+      ],
+      "source_contract": "vat_activity_evidence_v1"
+    },
+    "output": [
+      {
+        "business_related": true,
+        "document_id": "하얀-토공전자",
+        "purpose": "land",
+        "transaction_id": "하얀-평탄"
+      },
+      {
+        "business_related": true,
+        "document_id": "하얀-집기전자",
+        "purpose": "business",
+        "transaction_id": "하얀-진열"
+      }
+    ],
+    "rule_id": "VAT_ACTIVITY_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "하얀-집기전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "하얀-진열"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "하얀-카드4"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "하얀-카드1"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "하얀-카드6"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "하얀-카드3"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "하얀-토공전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "하얀-평탄"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "하얀-현금5"
+      ],
+      "evidence": [
+        "cash_receipt"
+      ],
+      "transaction_id": "하얀-현금2"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-12",
+      "transaction_id": "하얀-진열"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1850000,
+      "includes_vat": false,
+      "transaction_id": "하얀-진열"
+    },
+    "output": {
+      "gross": 2035000,
+      "supply_base": 1850000,
+      "vat": 185000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "하얀-진열",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 185000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-25",
+      "transaction_id": "하얀-카드1"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "하얀-카드1"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1000000
+    },
+    "output": 100000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "하얀-카드1"
+    },
+    "output": {
+      "eligible_gross": 1100000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-25",
+      "transaction_id": "하얀-카드3"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 220000,
+      "includes_vat": true,
+      "transaction_id": "하얀-카드3"
+    },
+    "output": {
+      "gross": 220000,
+      "supply_base": 200000,
+      "vat": 20000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 200000
+    },
+    "output": 20000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "하얀-카드3"
+    },
+    "output": {
+      "eligible_gross": 220000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-04-11",
+      "transaction_id": "하얀-평탄"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1500000,
+      "includes_vat": false,
+      "transaction_id": "하얀-평탄"
+    },
+    "output": {
+      "gross": 1650000,
+      "supply_base": 1500000,
+      "vat": 150000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "land",
+      "supplier_general": true,
+      "transaction_id": "하얀-평탄",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 150000
+    },
+    "rule_id": "VAT_EXEMPT_LAND"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-25",
+      "transaction_id": "하얀-현금2"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 880000,
+      "includes_vat": true,
+      "transaction_id": "하얀-현금2"
+    },
+    "output": {
+      "gross": 880000,
+      "supply_base": 800000,
+      "vat": 80000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 800000
+    },
+    "output": 80000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "cash_receipt"
+      ],
+      "invoice_issued": false,
+      "transaction_id": "하얀-현금2"
+    },
+    "output": {
+      "eligible_gross": 880000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 72000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 2200000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 28600,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 28600
+    },
+    "output": 28600,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 28600,
+      "liability_before_credit": 15000
+    },
+    "output": 15000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 800000,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 0,
+      "prepaid_assessed_vat": 800000
+    },
+    "output": -800000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 185000,
+      "output_vat": 200000,
+      "prepaid_vat": 800000,
+      "receipt_credit": 15000
+    },
+    "output": {
+      "deductible_input_vat": 185000,
+      "input_vat": 335000,
+      "net_vat": -800000,
+      "noncreditable_vat": 150000,
+      "output_vat": 200000,
+      "payable_vat": 0,
+      "prepaid_vat": 800000,
+      "receipt_credit": 15000,
+      "refund_vat": 800000,
+      "tax_base": 2000000,
+      "unique_transaction_count": 5
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

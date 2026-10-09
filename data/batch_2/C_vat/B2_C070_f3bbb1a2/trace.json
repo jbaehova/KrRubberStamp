@@ -1,0 +1,270 @@
+[
+  {
+    "inputs": {
+      "activities": [],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-06-23",
+          "document_id": "실제대체",
+          "replaces_document_id": "큰오기",
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-06-23",
+          "document_id": "큰오기",
+          "replaces_document_id": null,
+          "state": "revoked"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 220000,
+          "date": "2026-06-22",
+          "document_id": "실제대체",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "부분카드",
+          "stated_vat": null,
+          "transaction_id": "매듭주문",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 330000,
+          "date": "2026-06-22",
+          "document_id": "큰오기",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "부분카드",
+          "stated_vat": null,
+          "transaction_id": "매듭주문",
+          "vat_separately_stated": false
+        }
+      ],
+      "processing_date": "2026-07-15",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "큰오기"
+      ],
+      "replacement_relations": [
+        {
+          "revoked_document_id": "큰오기",
+          "valid_document_id": "실제대체"
+        }
+      ],
+      "selected_document_ids": [
+        "실제대체"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [],
+      "business_name": "가상복숭아매듭",
+      "evidence_documents": [
+        {
+          "amount": 220000,
+          "date": "2026-06-22",
+          "document_id": "실제대체",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "부분카드",
+          "stated_vat": null,
+          "transaction_id": "매듭주문",
+          "vat_separately_stated": false
+        }
+      ],
+      "operations": [],
+      "payments": [
+        {
+          "amount": 440000,
+          "date": "2026-06-22",
+          "includes_vat": true,
+          "method": "cash",
+          "payment_id": "미발급현금",
+          "transaction_id": "매듭주문"
+        },
+        {
+          "amount": 220000,
+          "date": "2026-06-22",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "부분카드",
+          "transaction_id": "매듭주문"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "amount": 1100000,
+          "counterparty_consumer": true,
+          "date": "2026-06-22",
+          "description": "소비자 매듭 소품 전체 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "매듭주문"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "실제대체"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 1100000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 220000,
+        "paid_gross": 660000,
+        "supply_base": 1000000,
+        "transaction_id": "매듭주문",
+        "unissued_receipt_gross": 880000,
+        "unpaid_gross": 440000,
+        "vat": 100000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "실제대체"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "매듭주문"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-22",
+      "transaction_id": "매듭주문"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1100000,
+      "includes_vat": true,
+      "transaction_id": "매듭주문"
+    },
+    "output": {
+      "gross": 1100000,
+      "supply_base": 1000000,
+      "vat": 100000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1000000
+    },
+    "output": 100000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 220000,
+      "transaction_id": "매듭주문"
+    },
+    "output": {
+      "eligible_gross": 220000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 790000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 220000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 9997000,
+      "annual_limit": 10000000,
+      "raw_credit": 2860
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 2860,
+      "liability_before_credit": 100000
+    },
+    "output": 2860,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 2000000
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 97140,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 97140,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 100000,
+      "prepaid_vat": 0,
+      "receipt_credit": 2860
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 0,
+      "net_vat": 97140,
+      "noncreditable_vat": 0,
+      "output_vat": 100000,
+      "payable_vat": 97140,
+      "prepaid_vat": 0,
+      "receipt_credit": 2860,
+      "refund_vat": 0,
+      "tax_base": 1000000,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

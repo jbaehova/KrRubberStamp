@@ -1,0 +1,491 @@
+[
+  {
+    "inputs": {
+      "activities": [
+        {
+          "action": "delivery",
+          "activity_id": "띠인수",
+          "date": "2026-05-05",
+          "description": "판매 전용 포장 띠 전량을 인수했다.",
+          "document_ids": [
+            "띠전표"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "점선 포장실"
+          },
+          "operation_id": "상자판매",
+          "participants": [
+            {
+              "name": "가상허포장",
+              "organization": "가상점선상자",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "포장띠"
+        },
+        {
+          "action": "delivery",
+          "activity_id": "종이인수",
+          "date": "2026-05-06",
+          "description": "독립 포장지 전량을 인수했다.",
+          "document_ids": [
+            "종이전자"
+          ],
+          "location": {
+            "kind": "worksite",
+            "name": "점선 포장실"
+          },
+          "operation_id": "상자판매",
+          "participants": [
+            {
+              "name": "가상허포장",
+              "organization": "가상점선상자",
+              "role": "proprietor"
+            }
+          ],
+          "transaction_id": "포장지"
+        }
+      ],
+      "business_name": "가상점선상자",
+      "evidence_documents": [
+        {
+          "amount": 3520000,
+          "date": "2026-05-05",
+          "document_id": "띠전표",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "띠승인",
+          "stated_vat": null,
+          "transaction_id": "포장띠",
+          "vat_separately_stated": false
+        },
+        {
+          "amount": 550000000,
+          "date": "2026-06-22",
+          "document_id": "상자전표",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "상자승인",
+          "stated_vat": 50000000,
+          "transaction_id": "상자완료",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 4700000,
+          "date": "2026-05-06",
+          "document_id": "종이전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 470000,
+          "transaction_id": "포장지",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [
+        {
+          "description": "과세 소비자 상자제품 판매",
+          "operation_id": "상자판매",
+          "output_taxable": true
+        }
+      ],
+      "payments": [
+        {
+          "amount": 3520000,
+          "date": "2026-05-05",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "띠승인",
+          "transaction_id": "포장띠"
+        },
+        {
+          "amount": 110000000,
+          "date": "2026-06-22",
+          "includes_vat": true,
+          "method": "cash",
+          "payment_id": "상자미발급",
+          "transaction_id": "상자완료"
+        },
+        {
+          "amount": 550000000,
+          "date": "2026-06-22",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "상자승인",
+          "transaction_id": "상자완료"
+        },
+        {
+          "amount": 1100000,
+          "date": "2026-05-06",
+          "includes_vat": true,
+          "method": "bank_transfer",
+          "payment_id": "종이이체",
+          "transaction_id": "포장지"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "amount": 660000000,
+          "counterparty_consumer": true,
+          "date": "2026-06-22",
+          "description": "예정신고 이후 상자 주문 전체 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "상자완료"
+        },
+        {
+          "activity_id": "띠인수",
+          "amount": 3520000,
+          "counterparty_consumer": false,
+          "date": "2026-05-05",
+          "description": "포장 띠 전체 인수",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "포장띠",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        {
+          "activity_id": "종이인수",
+          "amount": 5170000,
+          "counterparty_consumer": false,
+          "date": "2026-05-06",
+          "description": "포장지 전체 인수",
+          "direction": "purchase",
+          "includes_vat": true,
+          "supplier_general": true,
+          "taxable": true,
+          "transaction_id": "포장지",
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "상자전표"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 660000000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 550000000,
+        "paid_gross": 660000000,
+        "supply_base": 600000000,
+        "transaction_id": "상자완료",
+        "unissued_receipt_gross": 110000000,
+        "unpaid_gross": 0,
+        "vat": 60000000
+      },
+      {
+        "document_ids": [
+          "띠전표"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 3520000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 3520000,
+        "paid_gross": 3520000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 3200000,
+        "transaction_id": "포장띠",
+        "unissued_receipt_gross": 0,
+        "unpaid_gross": 0,
+        "vat": 320000
+      },
+      {
+        "document_ids": [
+          "종이전자"
+        ],
+        "documented_input_vat": 470000,
+        "eligible_input_document_ids": [
+          "종이전자"
+        ],
+        "gross": 5170000,
+        "invoice_issued": true,
+        "issued_receipt_gross": 0,
+        "paid_gross": 1100000,
+        "purchase_activity_facts": {
+          "business_related": true,
+          "purpose": "business",
+          "supplier_general": true,
+          "vehicle_direct_business": false,
+          "vehicle_subject_excise": false
+        },
+        "supply_base": 4700000,
+        "transaction_id": "포장지",
+        "unissued_receipt_gross": 5170000,
+        "unpaid_gross": 4070000,
+        "vat": 470000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "상자전표"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "상자완료"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "띠전표"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "포장띠"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "종이전자"
+      ],
+      "evidence": [
+        "tax_invoice"
+      ],
+      "transaction_id": "포장지"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": true,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-06-22",
+      "transaction_id": "상자완료"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 660000000,
+      "includes_vat": true,
+      "transaction_id": "상자완료"
+    },
+    "output": {
+      "gross": 660000000,
+      "supply_base": 600000000,
+      "vat": 60000000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 600000000
+    },
+    "output": 60000000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 550000000,
+      "transaction_id": "상자완료"
+    },
+    "output": {
+      "eligible_gross": 550000000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-05",
+      "transaction_id": "포장띠"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 3520000,
+      "includes_vat": true,
+      "transaction_id": "포장띠"
+    },
+    "output": {
+      "gross": 3520000,
+      "supply_base": 3200000,
+      "vat": 320000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 0,
+      "evidence": [
+        "card_receipt"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "포장띠",
+      "vat_separately_stated": false,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 0,
+      "noncreditable": 320000
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-06",
+      "transaction_id": "포장지"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 5170000,
+      "includes_vat": true,
+      "transaction_id": "포장지"
+    },
+    "output": {
+      "gross": 5170000,
+      "supply_base": 4700000,
+      "vat": 470000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "business_related": true,
+      "documented_input_vat": 470000,
+      "evidence": [
+        "tax_invoice"
+      ],
+      "purpose": "business",
+      "supplier_general": true,
+      "transaction_id": "포장지",
+      "vat_separately_stated": true,
+      "vehicle_direct_business": false,
+      "vehicle_subject_excise": false
+    },
+    "output": {
+      "deductible": 470000,
+      "noncreditable": 0
+    },
+    "rule_id": "VAT_INPUT_EVIDENCE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 970000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 550000000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 7150000,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 4290000,
+      "annual_limit": 10000000,
+      "raw_credit": 7150000
+    },
+    "output": 5710000,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 5710000,
+      "liability_before_credit": 59530000
+    },
+    "output": 5710000,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 1300000
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 53820000,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 53820000,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 470000,
+      "output_vat": 60000000,
+      "prepaid_vat": 0,
+      "receipt_credit": 5710000
+    },
+    "output": {
+      "deductible_input_vat": 470000,
+      "input_vat": 790000,
+      "net_vat": 53820000,
+      "noncreditable_vat": 320000,
+      "output_vat": 60000000,
+      "payable_vat": 53820000,
+      "prepaid_vat": 0,
+      "receipt_credit": 5710000,
+      "refund_vat": 0,
+      "tax_base": 600000000,
+      "unique_transaction_count": 3
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

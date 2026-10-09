@@ -1,0 +1,130 @@
+task_id: B2_D108_3fab2dac
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 기록장치의 A판과 B링 및 C캡과 D고리를 확보합니다. 네 업체는 순환하여 인접한 두 부품만 취급합니다. 네 계정의 개별 최저가
+  주문보다 마주보는 두 공동 주문이 저렴한지 chosen_offers와 vendor_cart_totals 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_순환요청.pdf
+  format: pdf
+- path: inputs/02_판링캡견적.xlsx
+  format: xlsx
+- path: inputs/03_캡고리판견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-3fa6601a-9426-50e3-b09e-434a6ab5d989
+scenario_seed: 4587810866306494104
+scenario_hash: e508fe29d358683fc3cf117c20525d42a6247269b853670d7ac0f64fc1178dd2
+authorship:
+  method: individually_written
+  case_id: D108
+  case_sha256: 3fab2dacf6e02e98343eb666c829c1a24f3405b1637f82a00e2824303905971d
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

@@ -1,0 +1,78 @@
+task_id: B2_D037_f5ecf117
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 접점 세척 주문의 각 행 가격 조건을 실제 받은 낱개 수량에 적용하세요. 한 주문이라고 모든 행의 부가세 포함 여부를 같게
+  처리하지 않습니다. answer.json에는 line_settlements와 grand_total을 작성하세요.
+input_files:
+- path: inputs/01_접점세척주문.pdf
+  format: pdf
+- path: inputs/02_본체입고.xlsx
+  format: xlsx
+- path: inputs/03_브러시입고.hwpx
+  format: hwpx
+- path: inputs/04_혼합행정산.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - line_settlements
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-1a0b2783-b2d8-54b9-9b4a-4fd26ed93c7d
+scenario_seed: 17720803715152155780
+scenario_hash: faa37c08d45791ae6f53bddb1535d63b91d37d4f47511cead931335083abf218
+authorship:
+  method: individually_written
+  case_id: D037
+  case_sha256: f5ecf11710111484b9c8cd1e727f5db1be4776fe2e85172583fd199ebf86eee5
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- grand_total

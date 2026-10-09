@@ -1,0 +1,209 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-06-30",
+      "events": [
+        {
+          "date": "2026-06-20",
+          "event_id": "DUST-C-BACK",
+          "kind": "returned",
+          "line_id": "C",
+          "order_id": "DUST-CAPS",
+          "units": 2
+        },
+        {
+          "date": "2026-06-20",
+          "event_id": "DUST-C-IN",
+          "kind": "received",
+          "line_id": "C",
+          "order_id": "DUST-CAPS",
+          "units": 7
+        },
+        {
+          "date": "2026-06-20",
+          "event_id": "DUST-C-IN",
+          "kind": "received",
+          "line_id": "C",
+          "order_id": "DUST-CAPS",
+          "units": 7
+        },
+        {
+          "date": "2026-06-22",
+          "event_id": "DUST-R-IN",
+          "kind": "received",
+          "line_id": "R",
+          "order_id": "DUST-RINGS",
+          "units": 8
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-06-14",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "방진캡",
+              "line_id": "C",
+              "ordered_packages": 2,
+              "package_price": 9000,
+              "price_includes_vat": false,
+              "units_per_package": 6
+            }
+          ],
+          "order_id": "DUST-CAPS",
+          "vendor": "가상방진캡"
+        },
+        {
+          "date": "2026-06-15",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "방진고정링",
+              "line_id": "R",
+              "ordered_packages": 1,
+              "package_price": 8000,
+              "price_includes_vat": false,
+              "units_per_package": 8
+            }
+          ],
+          "order_id": "DUST-RINGS",
+          "vendor": "가상고정링"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 5000,
+          "date": "2026-06-16",
+          "order_id": "DUST-CAPS",
+          "payment_id": "DUST-C-PAY",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 날짜별 입고를 먼저 반영하고 그날 반품을 나중에 뺀다. 동일 이벤트 ID와 내용은 한 번만 계산한다. 마감까지 순량의 포장가격 비율을 마지막에 버리고 별도 세액은 10%를 버린다. 업체별 대금에서 실제 실행 지급을 차감한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "DUST-C-BACK",
+        "DUST-C-IN",
+        "DUST-R-IN"
+      ],
+      "accepted_payment_ids": [
+        "DUST-C-PAY"
+      ],
+      "deduplicated_event_ids": [
+        "DUST-C-IN"
+      ],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "DUST-C-IN",
+          "net_units_after_event": 7
+        },
+        {
+          "event_id": "DUST-C-BACK",
+          "net_units_after_event": 5
+        },
+        {
+          "event_id": "DUST-R-IN",
+          "net_units_after_event": 8
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 7500,
+          "line_id": "C",
+          "order_id": "DUST-CAPS",
+          "package_price_times_net_units": 45000,
+          "price_includes_vat": false,
+          "supply": 7500,
+          "total": 8250,
+          "units_per_package": 6,
+          "vat": 750
+        },
+        {
+          "amount_after_floor": 8000,
+          "line_id": "R",
+          "order_id": "DUST-RINGS",
+          "package_price_times_net_units": 64000,
+          "price_includes_vat": false,
+          "supply": 8000,
+          "total": 8800,
+          "units_per_package": 8,
+          "vat": 800
+        }
+      ],
+      "settlement": {
+        "balance_total": 12050,
+        "grand_total": 17050,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "방진고정링",
+            "net_units": 8
+          },
+          {
+            "base_unit": "개",
+            "item": "방진캡",
+            "net_units": 5
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "방진캡",
+            "line_id": "C",
+            "net_units": 5,
+            "order_id": "DUST-CAPS",
+            "ordered_units": 12,
+            "outstanding_units": 7,
+            "received_units": 7,
+            "returned_units": 2,
+            "supply": 7500,
+            "total": 8250,
+            "vat": 750
+          },
+          {
+            "base_unit": "개",
+            "item": "방진고정링",
+            "line_id": "R",
+            "net_units": 8,
+            "order_id": "DUST-RINGS",
+            "ordered_units": 8,
+            "outstanding_units": 0,
+            "received_units": 8,
+            "returned_units": 0,
+            "supply": 8000,
+            "total": 8800,
+            "vat": 800
+          }
+        ],
+        "payment_total": 5000,
+        "vendor_balances": [
+          {
+            "balance": 8800,
+            "paid": 0,
+            "supply": 8000,
+            "total": 8800,
+            "vat": 800,
+            "vendor": "가상고정링"
+          },
+          {
+            "balance": 3250,
+            "paid": 5000,
+            "supply": 7500,
+            "total": 8250,
+            "vat": 750,
+            "vendor": "가상방진캡"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

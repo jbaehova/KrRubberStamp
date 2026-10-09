@@ -1,0 +1,56 @@
+task_id: B2_B047_cceb34c5
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상섬유분류실 가상여울의11월 지급에는 당월 분류 실적금이 추가됐습니다. 건강 통지는 이전 짧은 근로 약정의 낮은 보수월액으로
+  확정돼 있으며 실제 지급액으로 대체하지 않습니다. overtime_pay, health_insurance, long_term_care, net_pay를
+  작성해 평일 추가 카드와 건강 하한을 별도로 반영해 주세요.
+input_files:
+- path: inputs/01_현재계약.pdf
+  format: pdf
+- path: inputs/02_실적금.pdf
+  format: pdf
+- path: inputs/03_추가지원.xlsx
+  format: xlsx
+- path: inputs/04_범위확인.hwpx
+  format: hwpx
+- path: inputs/05_건강통지.pdf
+  format: pdf
+- path: inputs/06_연금통지.pdf
+  format: pdf
+- path: inputs/07_고용통지.pdf
+  format: pdf
+- path: inputs/08_가족식비.hwpx
+  format: hwpx
+- path: inputs/09_은행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - health_insurance
+  - long_term_care
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-e01bce48-9c39-5759-84b4-f91fdd7caa80
+scenario_seed: 14765953826700356458
+scenario_hash: 4299b3f377c5b5a25fb6ee9a73c9ee5eb55e0425edc55c75209b6afa9cbbf25a
+authorship:
+  method: individually_written
+  case_id: B047
+  case_sha256: cceb34c5a24b6b6a6f84fa5e355d9dbbd0797b94202904fa3b8d7d03c71046f4
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- overtime_pay
+- health_insurance
+- long_term_care
+- net_pay

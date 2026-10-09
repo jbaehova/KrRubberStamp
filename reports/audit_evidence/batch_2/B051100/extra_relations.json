@@ -1,0 +1,128 @@
+[
+  {
+    "case_id": "B076",
+    "label": "식대 배식으로 전액 과세해도920000원에서 소득세0원 유지. 주장한 세액 존재 경계는 없음",
+    "interventions": [
+      [
+        [
+          "employer_provides_meals"
+        ],
+        true
+      ]
+    ],
+    "baseline": {
+      "ordinary_monthly_wage": 920000,
+      "taxable_pay": 740000,
+      "income_tax": 0,
+      "net_pay": 913340
+    },
+    "independent_counterfactual": {
+      "ordinary_monthly_wage": 920000,
+      "taxable_pay": 920000,
+      "income_tax": 0,
+      "net_pay": 913340
+    },
+    "changed_requested_fields": [
+      "taxable_pay"
+    ]
+  },
+  {
+    "case_id": "B091",
+    "label": "밤 초안을 실제 승인하면 휴일 및 야간 금액 모두 변함",
+    "interventions": [
+      [
+        [
+          "work_records",
+          2,
+          "status"
+        ],
+        "approved"
+      ],
+      [
+        [
+          "scope"
+        ],
+        "반사실: 같은 일요일 낮9시간과 승인 밤3시간으로 주 추가총12시간 확정. 지정주휴기본월급포함 유지."
+      ]
+    ],
+    "baseline": {
+      "holiday_pay": 168000,
+      "night_pay": 0,
+      "gross_pay": 2676000
+    },
+    "independent_counterfactual": {
+      "holiday_pay": 240000,
+      "night_pay": 18000,
+      "gross_pay": 2766000
+    },
+    "changed_requested_fields": [
+      "holiday_pay",
+      "night_pay",
+      "gross_pay"
+    ]
+  },
+  {
+    "case_id": "B089",
+    "label": "합법12시간 대조에서는 status 하나만으로10시간 낮 확정에서12시간 및 야간1시간으로 변화",
+    "baseline": {
+      "holiday_pay": 192000,
+      "night_pay": 0,
+      "gross_pay": 2700000
+    },
+    "independent_counterfactual": {
+      "holiday_pay": 240000,
+      "night_pay": 6000,
+      "gross_pay": 2754000
+    },
+    "changed_requested_fields": [
+      "holiday_pay",
+      "night_pay",
+      "gross_pay"
+    ]
+  },
+  {
+    "case_id": "B098",
+    "label": "어린이날 집계 위치만 이관하면 총액 유지하며 기본/별도유급 분해 변경",
+    "interventions": [
+      [
+        [
+          "paid_holiday_records",
+          1,
+          "included_in_regular_pay"
+        ],
+        true
+      ],
+      [
+        [
+          "regular_schedule",
+          "working_days"
+        ],
+        10
+      ],
+      [
+        [
+          "scope"
+        ],
+        "반사실: 두 유급휴무 모두 정규지급10일 집계에 포함. 실제8일 및 밤3시간 추가와 두주 개근은 유지."
+      ]
+    ],
+    "baseline": {
+      "base_pay": 432000,
+      "paid_holiday_pay": 48000,
+      "holiday_pay": 54000,
+      "night_pay": 12000,
+      "net_pay": 636230
+    },
+    "independent_counterfactual": {
+      "base_pay": 480000,
+      "paid_holiday_pay": 0,
+      "holiday_pay": 54000,
+      "night_pay": 12000,
+      "net_pay": 636230
+    },
+    "changed_requested_fields": [
+      "base_pay",
+      "paid_holiday_pay"
+    ]
+  }
+]

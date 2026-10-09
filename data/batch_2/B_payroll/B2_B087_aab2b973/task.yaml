@@ -1,0 +1,42 @@
+task_id: B2_B087_aab2b973
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상분책실 시급 직원은 한 소정일에 두 시간만 무급 부재했지만 그날 실제 두 시간 근무했습니다. 인사는 소정일 자체의 결근은
+  없다고 개근을 확정했습니다. 지급 기본 대가는 빠진 두 시간만 제외하고 확정 개근을 적용한 base_pay, weekly_holiday_pay
+  및 net_pay를 제출하세요. 부분 부재를 하루 결근으로 바꾸어 주휴를 지우지 마세요.
+input_files:
+- path: inputs/01_부분부재.pdf
+  format: pdf
+- path: inputs/02_개근확정.xlsx
+  format: xlsx
+- path: inputs/03_기관.hwpx
+  format: hwpx
+- path: inputs/04_실제지급.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    weekly_holiday_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - weekly_holiday_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-5ff13cc2-0129-589a-a90e-d60e0a99fe1a
+scenario_seed: 12300097438198777605
+scenario_hash: 01fac27a89182d18c921311896f970775ec488edd8c03e4a2988701242dd9ace
+authorship:
+  method: individually_written
+  case_id: B087
+  case_sha256: aab2b9738a87c705e2ee1adcdc0d2c520e6a70078b6f7eeab0ed6eb6d3923d39
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- base_pay
+- weekly_holiday_pay
+- net_pay

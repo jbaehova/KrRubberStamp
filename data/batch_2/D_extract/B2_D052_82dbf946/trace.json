@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "장",
+      "item": "검수봉투",
+      "latest_delivery_date": "2026-02-04",
+      "order_date": "2026-01-26",
+      "processing_policy": "합성 사적 구매: 필요/포장수량 올림과 최소포장수 중 큰 값 구매. 상품은 구매포장수×가격이고 운임은 견적의 주문 한번 금액을 한번만 적용. 각각 포함가 10/11 버림 공급가액+차액 세액 또는 별도 10% 버림 세액. 상품 세금포함 총액만 무료배송 기준 비교. 효력/구매재고/달력납기 충족 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 200,
+          "pack_units": 1,
+          "price_includes_vat": true,
+          "quote_id": "ENV-EACH",
+          "shipping_price": 1000,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 100,
+          "valid_from": "2026-01-01",
+          "valid_until": "2026-02-28",
+          "vendor": "가상봉투개별"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 2700,
+          "pack_units": 10,
+          "price_includes_vat": true,
+          "quote_id": "ENV-TEN",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 20,
+          "valid_from": "2026-01-01",
+          "valid_until": "2026-02-28",
+          "vendor": "가상봉투열장"
+        }
+      ],
+      "required_units": 10,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "장",
+      "comparison": {
+        "chosen_leftover_units": 0,
+        "chosen_quote_id": "ENV-TEN",
+        "chosen_total": 2700,
+        "chosen_vendor": "가상봉투열장",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-01-29",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 1818,
+            "merchandise_total": 2000,
+            "merchandise_vat": 182,
+            "obtained_units": 10,
+            "packs": 10,
+            "quote_id": "ENV-EACH",
+            "shipping_supply": 909,
+            "shipping_total": 1000,
+            "shipping_vat": 91,
+            "stock_sufficient": true,
+            "supply": 2727,
+            "total": 3000,
+            "valid_on_order": true,
+            "vat": 273,
+            "vendor": "가상봉투개별"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-01-29",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 2454,
+            "merchandise_total": 2700,
+            "merchandise_vat": 246,
+            "obtained_units": 10,
+            "packs": 1,
+            "quote_id": "ENV-TEN",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 2454,
+            "total": 2700,
+            "valid_on_order": true,
+            "vat": 246,
+            "vendor": "가상봉투열장"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 2000,
+          "minimum_packs": 1,
+          "pack_units": 1,
+          "packs_after_minimum": 10,
+          "price_includes_vat": true,
+          "quote_id": "ENV-EACH",
+          "required_packs_before_minimum": 10,
+          "shipping_amount_before_vat_split": 1000,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 2000
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 2700,
+          "minimum_packs": 1,
+          "pack_units": 10,
+          "packs_after_minimum": 1,
+          "price_includes_vat": true,
+          "quote_id": "ENV-TEN",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 2700
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "검수봉투",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          2700,
+          "가상봉투열장",
+          "ENV-TEN"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            2700,
+            "가상봉투열장",
+            "ENV-TEN"
+          ],
+          [
+            3000,
+            "가상봉투개별",
+            "ENV-EACH"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

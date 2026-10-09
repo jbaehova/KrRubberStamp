@@ -1,0 +1,202 @@
+[
+  {
+    "inputs": {
+      "activities": [],
+      "business_name": "가상매듭공방",
+      "evidence_documents": [
+        {
+          "amount": 264000,
+          "date": "2026-05-12",
+          "document_id": "매듭전표",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "매듭승인",
+          "stated_vat": 24000,
+          "transaction_id": "매듭세트",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [],
+      "payments": [
+        {
+          "amount": 240000,
+          "date": "2026-05-12",
+          "includes_vat": false,
+          "method": "card",
+          "payment_id": "매듭승인",
+          "transaction_id": "매듭세트"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "amount": 760000,
+          "counterparty_consumer": true,
+          "date": "2026-05-12",
+          "description": "완성 매듭 세트 전체 인도",
+          "direction": "sale",
+          "includes_vat": false,
+          "taxable": true,
+          "transaction_id": "매듭세트"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "매듭전표"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 836000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 264000,
+        "paid_gross": 264000,
+        "supply_base": 760000,
+        "transaction_id": "매듭세트",
+        "unissued_receipt_gross": 572000,
+        "unpaid_gross": 572000,
+        "vat": 76000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "매듭전표"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "매듭세트"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-12",
+      "transaction_id": "매듭세트"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 760000,
+      "includes_vat": false,
+      "transaction_id": "매듭세트"
+    },
+    "output": {
+      "gross": 836000,
+      "supply_base": 760000,
+      "vat": 76000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 760000
+    },
+    "output": 76000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 264000,
+      "transaction_id": "매듭세트"
+    },
+    "output": {
+      "eligible_gross": 264000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 29000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 264000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 3432,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 3432
+    },
+    "output": 3432,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 3432,
+      "liability_before_credit": 76000
+    },
+    "output": 3432,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 72568,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 72568,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 76000,
+      "prepaid_vat": 0,
+      "receipt_credit": 3432
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 0,
+      "net_vat": 72568,
+      "noncreditable_vat": 0,
+      "output_vat": 76000,
+      "payable_vat": 72568,
+      "prepaid_vat": 0,
+      "receipt_credit": 3432,
+      "refund_vat": 0,
+      "tax_base": 760000,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

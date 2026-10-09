@@ -1,0 +1,116 @@
+task_id: B2_D040_8be072e7
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 출력기 조달 자료의 마감 행 현황과 실제 지급을 보고하세요. quote는 제거하되 미래 날짜의 실제 order는 0 인수 행으로
+  남깁니다. 마감 뒤 실행 지급과 planned 지급은 이번 현금 집행에 넣지 않습니다. answer.json에는 line_settlements와
+  payment_total과 vendor_balances를 작성하세요.
+input_files:
+- path: inputs/01_현재출력표지.pdf
+  format: pdf
+- path: inputs/02_현재출력가격.xlsx
+  format: xlsx
+- path: inputs/03_미래출력표지.hwpx
+  format: hwpx
+- path: inputs/04_미래출력가격.xlsx
+  format: xlsx
+- path: inputs/05_출력제안.pdf
+  format: pdf
+- path: inputs/06_현재출력수령.xlsx
+  format: xlsx
+- path: inputs/07_미래출력수령.hwpx
+  format: hwpx
+- path: inputs/08_출력지급.pdf
+  format: pdf
+- path: inputs/09_출력스냅샷.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    payment_total:
+      type: integer
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - line_settlements
+  - payment_total
+  - vendor_balances
+  additionalProperties: false
+canary: KrRubberStamp-canary-ed6bbe8b-f338-5a1b-a344-bf7bdf5bd343
+scenario_seed: 10079182303489944322
+scenario_hash: 4eff699345e3ceefae4b5d9e64da3181deac531ade9ed509b337809a1ac627aa
+authorship:
+  method: individually_written
+  case_id: D040
+  case_sha256: 8be072e739ebeb0227b388079bf933c245d0802dcce94033183c910e9cf9f359
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- payment_total
+- vendor_balances

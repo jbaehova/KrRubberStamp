@@ -1,0 +1,283 @@
+[
+  {
+    "inputs": {
+      "activities": [],
+      "document_status_records": [
+        {
+          "confirmed_on": "2026-05-09",
+          "document_id": "접이부분카드",
+          "replaces_document_id": null,
+          "state": "valid"
+        },
+        {
+          "confirmed_on": "2026-05-09",
+          "document_id": "접이전체전자",
+          "replaces_document_id": null,
+          "state": "revoked"
+        },
+        {
+          "confirmed_on": "2026-05-09",
+          "document_id": "접이현금발급",
+          "replaces_document_id": null,
+          "state": "revoked"
+        }
+      ],
+      "evidence_documents": [
+        {
+          "amount": 550000,
+          "date": "2026-05-08",
+          "document_id": "접이부분카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "접이부분",
+          "stated_vat": 50000,
+          "transaction_id": "접이인도",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 1500000,
+          "date": "2026-05-08",
+          "document_id": "접이전체전자",
+          "document_type": "tax_invoice",
+          "includes_vat": false,
+          "payment_id": null,
+          "stated_vat": 150000,
+          "transaction_id": "접이인도",
+          "vat_separately_stated": true
+        },
+        {
+          "amount": 330000,
+          "date": "2026-05-08",
+          "document_id": "접이현금발급",
+          "document_type": "cash_receipt",
+          "includes_vat": true,
+          "payment_id": "접이현금",
+          "stated_vat": 30000,
+          "transaction_id": "접이인도",
+          "vat_separately_stated": true
+        }
+      ],
+      "processing_date": "2026-06-30",
+      "source_contract": "vat_document_lifecycle_v1"
+    },
+    "output": {
+      "excluded_document_ids": [
+        "접이전체전자",
+        "접이현금발급"
+      ],
+      "replacement_relations": [],
+      "selected_document_ids": [
+        "접이부분카드"
+      ]
+    },
+    "rule_id": "C_DOCUMENT_LIFECYCLE_SELECTION"
+  },
+  {
+    "inputs": {
+      "activities": [],
+      "business_name": "가상접이점",
+      "evidence_documents": [
+        {
+          "amount": 550000,
+          "date": "2026-05-08",
+          "document_id": "접이부분카드",
+          "document_type": "card_receipt",
+          "includes_vat": true,
+          "payment_id": "접이부분",
+          "stated_vat": 50000,
+          "transaction_id": "접이인도",
+          "vat_separately_stated": true
+        }
+      ],
+      "operations": [],
+      "payments": [
+        {
+          "amount": 550000,
+          "date": "2026-05-08",
+          "includes_vat": true,
+          "method": "card",
+          "payment_id": "접이부분",
+          "transaction_id": "접이인도"
+        },
+        {
+          "amount": 330000,
+          "date": "2026-05-08",
+          "includes_vat": true,
+          "method": "cash",
+          "payment_id": "접이현금",
+          "transaction_id": "접이인도"
+        }
+      ],
+      "source_contract": "vat_document_reconciliation_v1",
+      "supplies": [
+        {
+          "amount": 1650000,
+          "counterparty_consumer": true,
+          "date": "2026-05-08",
+          "description": "접이 진열대 주문 전량 인도",
+          "direction": "sale",
+          "includes_vat": true,
+          "taxable": true,
+          "transaction_id": "접이인도"
+        }
+      ]
+    },
+    "output": [
+      {
+        "document_ids": [
+          "접이부분카드"
+        ],
+        "documented_input_vat": 0,
+        "eligible_input_document_ids": [],
+        "gross": 1650000,
+        "invoice_issued": false,
+        "issued_receipt_gross": 550000,
+        "paid_gross": 880000,
+        "supply_base": 1500000,
+        "transaction_id": "접이인도",
+        "unissued_receipt_gross": 1100000,
+        "unpaid_gross": 770000,
+        "vat": 150000
+      }
+    ],
+    "rule_id": "C_DOCUMENT_RECONCILIATION"
+  },
+  {
+    "inputs": {
+      "document_ids": [
+        "접이부분카드"
+      ],
+      "evidence": [
+        "card_receipt"
+      ],
+      "transaction_id": "접이인도"
+    },
+    "output": {
+      "counted_once": true,
+      "invoice_issued": false,
+      "occurrences": 1
+    },
+    "rule_id": "VAT_DEDUP"
+  },
+  {
+    "inputs": {
+      "date": "2026-05-08",
+      "transaction_id": "접이인도"
+    },
+    "output": true,
+    "rule_id": "VAT_PERIOD"
+  },
+  {
+    "inputs": {
+      "amount": 1650000,
+      "includes_vat": true,
+      "transaction_id": "접이인도"
+    },
+    "output": {
+      "gross": 1650000,
+      "supply_base": 1500000,
+      "vat": 150000
+    },
+    "rule_id": "VAT_TAX_BASE"
+  },
+  {
+    "inputs": {
+      "supply_base": 1500000
+    },
+    "output": 150000,
+    "rule_id": "VAT_OUTPUT_10"
+  },
+  {
+    "inputs": {
+      "counterparty_consumer": true,
+      "evidence": [
+        "card_receipt"
+      ],
+      "invoice_issued": false,
+      "issued_receipt_gross": 550000,
+      "transaction_id": "접이인도"
+    },
+    "output": {
+      "eligible_gross": 550000
+    },
+    "rule_id": "VAT_RECEIPT_BASE"
+  },
+  {
+    "inputs": {
+      "business_type": "individual",
+      "consumer_facing_business": true,
+      "prior_year_site_supply_base": 220000000
+    },
+    "output": true,
+    "rule_id": "VAT_CREDIT_ELIGIBILITY"
+  },
+  {
+    "inputs": {
+      "eligible": true,
+      "eligible_gross": 550000,
+      "rate_denominator": 1000,
+      "rate_numerator": 13
+    },
+    "output": 7150,
+    "rule_id": "VAT_CREDIT_RATE_2026"
+  },
+  {
+    "inputs": {
+      "already_claimed": 0,
+      "annual_limit": 10000000,
+      "raw_credit": 7150
+    },
+    "output": 7150,
+    "rule_id": "VAT_CREDIT_ANNUAL_LIMIT"
+  },
+  {
+    "inputs": {
+      "annual_credit": 7150,
+      "liability_before_credit": 150000
+    },
+    "output": 7150,
+    "rule_id": "VAT_CREDIT_PAYABLE_LIMIT"
+  },
+  {
+    "inputs": {
+      "assessed_notice": 0,
+      "minimum_notice": 500000,
+      "prior_declared_vat_paid": 0
+    },
+    "output": {
+      "assessment_is_consistent": true,
+      "prior_return_payment_deducted_again": false
+    },
+    "rule_id": "VAT_ASSESSMENT_VALIDITY"
+  },
+  {
+    "inputs": {
+      "liability_after_credit": 142850,
+      "prepaid_assessed_vat": 0
+    },
+    "output": 142850,
+    "rule_id": "VAT_PREPAID"
+  },
+  {
+    "inputs": {
+      "deductible_input_vat": 0,
+      "output_vat": 150000,
+      "prepaid_vat": 0,
+      "receipt_credit": 7150
+    },
+    "output": {
+      "deductible_input_vat": 0,
+      "input_vat": 0,
+      "net_vat": 142850,
+      "noncreditable_vat": 0,
+      "output_vat": 150000,
+      "payable_vat": 142850,
+      "prepaid_vat": 0,
+      "receipt_credit": 7150,
+      "refund_vat": 0,
+      "tax_base": 1500000,
+      "unique_transaction_count": 1
+    },
+    "rule_id": "VAT_SETTLEMENT"
+  }
+]

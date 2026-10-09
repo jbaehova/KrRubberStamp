@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "장",
+      "item": "고정판",
+      "latest_delivery_date": "2026-05-27",
+      "order_date": "2026-05-18",
+      "processing_policy": "합성 사적 구매: 필요/포장수량 올림과 최소포장수 중 큰 값 구매. 상품/운임 각각 포함가 10/11 버림 공급가액+차액 세액 또는 별도 10% 버림 세액. 상품 세금포함 총액만 무료배송 기준 비교. 공급가액만이 아니라 최종총액을 기준으로 효력/재고/달력납기 충족 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 1000,
+          "pack_units": 4,
+          "price_includes_vat": false,
+          "quote_id": "PLATE-EX",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-05-01",
+          "valid_until": "2026-05-31",
+          "vendor": "가상나고정판"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 1101,
+          "pack_units": 4,
+          "price_includes_vat": true,
+          "quote_id": "PLATE-IN",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-05-01",
+          "valid_until": "2026-05-31",
+          "vendor": "가상가고정판"
+        }
+      ],
+      "required_units": 4,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "장",
+      "comparison": {
+        "chosen_leftover_units": 0,
+        "chosen_quote_id": "PLATE-EX",
+        "chosen_total": 1100,
+        "chosen_vendor": "가상나고정판",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-05-21",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 1000,
+            "merchandise_total": 1100,
+            "merchandise_vat": 100,
+            "obtained_units": 4,
+            "packs": 1,
+            "quote_id": "PLATE-EX",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 1000,
+            "total": 1100,
+            "valid_on_order": true,
+            "vat": 100,
+            "vendor": "가상나고정판"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-05-21",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 1000,
+            "merchandise_total": 1101,
+            "merchandise_vat": 101,
+            "obtained_units": 4,
+            "packs": 1,
+            "quote_id": "PLATE-IN",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 1000,
+            "total": 1101,
+            "valid_on_order": true,
+            "vat": 101,
+            "vendor": "가상가고정판"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 1000,
+          "minimum_packs": 1,
+          "pack_units": 4,
+          "packs_after_minimum": 1,
+          "price_includes_vat": false,
+          "quote_id": "PLATE-EX",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 1100
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 1101,
+          "minimum_packs": 1,
+          "pack_units": 4,
+          "packs_after_minimum": 1,
+          "price_includes_vat": true,
+          "quote_id": "PLATE-IN",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 1101
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "고정판",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          1100,
+          "가상나고정판",
+          "PLATE-EX"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            1100,
+            "가상나고정판",
+            "PLATE-EX"
+          ],
+          [
+            1101,
+            "가상가고정판",
+            "PLATE-IN"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

@@ -1,0 +1,55 @@
+task_id: B2_A047_f5becb29
+domain: A_yearend
+difficulty: hard
+reference_period: '2025'
+instruction: 가상두서류봉투의 가상하루진은 어머니 공제는 본인에게, 아버지 공제는 동생에게 배정했습니다. 부모별 카드 및 기부를 최종 배정과
+  연결하고 종교기관 지정 만료를 함께 반영해 카드 소득공제와 기부금 세액공제를 구하세요. 부모 경로우대도 계산합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_어머니.hwpx
+  format: hwpx
+- path: inputs/03_아버지.hwpx
+  format: hwpx
+- path: inputs/04_지정.pdf
+  format: pdf
+- path: inputs/05_어머니공익.pdf
+  format: pdf
+- path: inputs/06_어머니종교.pdf
+  format: pdf
+- path: inputs/07_아버지기부.pdf
+  format: pdf
+- path: inputs/08_어머니카드.xlsx
+  format: xlsx
+- path: inputs/09_아버지카드.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    additional_deduction:
+      type: integer
+    credit_card_deduction:
+      type: integer
+    donation_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - additional_deduction
+  - credit_card_deduction
+  - donation_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-0563b7df-1141-59e3-a0d8-4e37abcfedc0
+scenario_seed: 17707814164846846657
+scenario_hash: 5f5f09e9963ebfd69317db85d435a549819d0dfdfbb3f20c5b4959c888533f7f
+authorship:
+  method: individually_written
+  case_id: A047
+  case_sha256: f5becb29b453a2c1f943736d2b07e55c8db318e0a12176b63630e94ce39107f6
+  source_file: batch_2/A_yearend/cases_001_050.json
+answer_fields:
+- eligible_dependents
+- additional_deduction
+- credit_card_deduction
+- donation_credit

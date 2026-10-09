@@ -1,0 +1,174 @@
+task_id: B2_B042_7b380158
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상전사실의25일 현금 보고를 작성합니다. 직원A의 카드 최종 승인에서는 추가 출동이 소정 이동으로 정정됐고 직원B의 실제
+  지급일은27일입니다. 각 완전 월 명세를 최종 원자료로 계산하고 직원번호 및 명세번호와 실제 지급일이 맞는 이체를 연결하세요. 마감 뒤 직원B
+  현금은 현재 누계에서 제외하되 명세 채무는 남깁니다. payroll_calculations와 employee_settlements 및 paid_total을
+  제출합니다.
+input_files:
+- path: inputs/01_회사마감.pdf
+  format: pdf
+- path: inputs/02_직원A계약.hwpx
+  format: hwpx
+- path: inputs/03_직원B계약.pdf
+  format: pdf
+- path: inputs/04_직원A공제.hwpx
+  format: hwpx
+- path: inputs/05_직원B공제.hwpx
+  format: hwpx
+- path: inputs/06_직원A첫승인.xlsx
+  format: xlsx
+- path: inputs/07_직원A최종승인.xlsx
+  format: xlsx
+- path: inputs/08_직원A실행.xlsx
+  format: xlsx
+- path: inputs/09_직원B실행.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    payroll_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          calculation:
+            type: object
+            properties:
+              effective_payment_date:
+                type: string
+              ordinary_monthly_wage:
+                type: integer
+              ordinary_hourly_wage_floor:
+                type: integer
+              base_pay:
+                type: integer
+              fixed_allowance:
+                type: integer
+              meal_allowance:
+                type: integer
+              variable_allowance:
+                type: integer
+              overtime_pay:
+                type: integer
+              night_pay:
+                type: integer
+              holiday_pay:
+                type: integer
+              weekly_holiday_pay:
+                type: integer
+              paid_holiday_pay:
+                type: integer
+              gross_pay:
+                type: integer
+              taxable_pay:
+                type: integer
+              non_taxable_pay:
+                type: integer
+              pension_base_income:
+                type: integer
+              national_pension:
+                type: integer
+              health_insurance:
+                type: integer
+              long_term_care:
+                type: integer
+              employment_insurance:
+                type: integer
+              income_tax:
+                type: integer
+              local_income_tax:
+                type: integer
+              total_deductions:
+                type: integer
+              net_pay:
+                type: integer
+            required:
+            - effective_payment_date
+            - ordinary_monthly_wage
+            - ordinary_hourly_wage_floor
+            - base_pay
+            - fixed_allowance
+            - meal_allowance
+            - variable_allowance
+            - overtime_pay
+            - night_pay
+            - holiday_pay
+            - weekly_holiday_pay
+            - paid_holiday_pay
+            - gross_pay
+            - taxable_pay
+            - non_taxable_pay
+            - pension_base_income
+            - national_pension
+            - health_insurance
+            - long_term_care
+            - employment_insurance
+            - income_tax
+            - local_income_tax
+            - total_deductions
+            - net_pay
+            additionalProperties: false
+        required:
+        - payroll_id
+        - employee_id
+        - calculation
+        additionalProperties: false
+    employee_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          payroll_id:
+            type: string
+          employee_id:
+            type: string
+          effective_payment_date:
+            type: string
+          insurance_assessment_month:
+            type: string
+          gross_pay:
+            type: integer
+          total_deductions:
+            type: integer
+          net_pay:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - payroll_id
+        - employee_id
+        - effective_payment_date
+        - insurance_assessment_month
+        - gross_pay
+        - total_deductions
+        - net_pay
+        - paid
+        - balance
+        additionalProperties: false
+    paid_total:
+      type: integer
+  required:
+  - payroll_calculations
+  - employee_settlements
+  - paid_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-d53ada7a-95e5-51ab-bd17-2e958e2bf50a
+scenario_seed: 8878848143014561660
+scenario_hash: d414cb86335605959e9e18d79054481b775eeadd48d25e9555b393dccd4fa933
+authorship:
+  method: individually_written
+  case_id: B042
+  case_sha256: 7b3801580b05077cca44109e1b9dbe0e9a8eb457c84e8c959a47b5504f2319dd
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- payroll_calculations
+- employee_settlements
+- paid_total

@@ -1,0 +1,101 @@
+task_id: B2_D064_4c5d390d
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 고정판 견적의 상품 공급가액은 같아 보이지만 세액을 포함한 실제 비용은 다릅니다. quote_comparisons와 chosen_quote_id
+  및 chosen_total을 작성해 공급가액 동률을 지급 총액 동률로 바꾸지 마세요.
+input_files:
+- path: inputs/01_고정판요청.pdf
+  format: pdf
+- path: inputs/02_포함견적.xlsx
+  format: xlsx
+- path: inputs/03_별도견적.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_quote_id:
+      type: string
+    chosen_total:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_quote_id
+  - chosen_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-4932363a-0b4d-5bb9-901e-f6d5b4721963
+scenario_seed: 5502617049626729186
+scenario_hash: f18c7d11fd356a7e5adb7b1d8acf19ed871f82b36fa2c45838cb711d53ac09f3
+authorship:
+  method: individually_written
+  case_id: D064
+  case_sha256: 4c5d390d72025ae2a8fc427cc4a7979d4a9b41dc840f6209313c2c9c35358b24
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_quote_id
+- chosen_total

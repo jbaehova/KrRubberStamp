@@ -1,0 +1,194 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-10-25",
+      "events": [
+        {
+          "date": "2026-10-21",
+          "event_id": "PALLET-0-BACK",
+          "kind": "returned",
+          "line_id": "P",
+          "order_id": "PALLET-01",
+          "units": 1
+        },
+        {
+          "date": "2026-10-18",
+          "event_id": "PALLET-0-IN",
+          "kind": "received",
+          "line_id": "P",
+          "order_id": "PALLET-01",
+          "units": 4
+        },
+        {
+          "date": "2026-10-17",
+          "event_id": "PALLET-O-IN",
+          "kind": "received",
+          "line_id": "P",
+          "order_id": "PALLET-O1",
+          "units": 5
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-10-11",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "검수팔레트",
+              "line_id": "P",
+              "ordered_packages": 1,
+              "package_price": 80000,
+              "price_includes_vat": false,
+              "units_per_package": 4
+            }
+          ],
+          "order_id": "PALLET-01",
+          "vendor": "가상검수팔레트"
+        },
+        {
+          "date": "2026-10-10",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "검수팔레트",
+              "line_id": "P",
+              "ordered_packages": 2,
+              "package_price": 66005,
+              "price_includes_vat": true,
+              "units_per_package": 3
+            }
+          ],
+          "order_id": "PALLET-O1",
+          "vendor": "가상검수팔레트"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 40000,
+          "date": "2026-10-12",
+          "order_id": "PALLET-01",
+          "payment_id": "PAY-01",
+          "status": "executed"
+        },
+        {
+          "amount": 40000,
+          "date": "2026-10-12",
+          "order_id": "PALLET-O1",
+          "payment_id": "PAY-O1",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 주문, 행, 사건, 지급 ID는 원문 그대로 비교한다. 품명과 업체는 NFKC, 공백 제거 및 소문자 처리하고 업체 법인 표기는 제거한다. 마감까지 순인수량의 포장가격 비율을 마지막에 버린다. 포함 행은 대금의 10/11을 버린 공급가액과 차액 세액이며 별도 세액은 공급가액 10%를 버린다. 서로 다른 executed 지급 ID는 각각 업체에 차감한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "PALLET-0-BACK",
+        "PALLET-0-IN",
+        "PALLET-O-IN"
+      ],
+      "accepted_payment_ids": [
+        "PAY-01",
+        "PAY-O1"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "PALLET-O-IN",
+          "net_units_after_event": 5
+        },
+        {
+          "event_id": "PALLET-0-IN",
+          "net_units_after_event": 4
+        },
+        {
+          "event_id": "PALLET-0-BACK",
+          "net_units_after_event": 3
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 60000,
+          "line_id": "P",
+          "order_id": "PALLET-01",
+          "package_price_times_net_units": 240000,
+          "price_includes_vat": false,
+          "supply": 60000,
+          "total": 66000,
+          "units_per_package": 4,
+          "vat": 6000
+        },
+        {
+          "amount_after_floor": 110008,
+          "line_id": "P",
+          "order_id": "PALLET-O1",
+          "package_price_times_net_units": 330025,
+          "price_includes_vat": true,
+          "supply": 100007,
+          "total": 110008,
+          "units_per_package": 3,
+          "vat": 10001
+        }
+      ],
+      "settlement": {
+        "balance_total": 96008,
+        "grand_total": 176008,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "검수팔레트",
+            "net_units": 8
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "검수팔레트",
+            "line_id": "P",
+            "net_units": 3,
+            "order_id": "PALLET-01",
+            "ordered_units": 4,
+            "outstanding_units": 1,
+            "received_units": 4,
+            "returned_units": 1,
+            "supply": 60000,
+            "total": 66000,
+            "vat": 6000
+          },
+          {
+            "base_unit": "개",
+            "item": "검수팔레트",
+            "line_id": "P",
+            "net_units": 5,
+            "order_id": "PALLET-O1",
+            "ordered_units": 6,
+            "outstanding_units": 1,
+            "received_units": 5,
+            "returned_units": 0,
+            "supply": 100007,
+            "total": 110008,
+            "vat": 10001
+          }
+        ],
+        "payment_total": 80000,
+        "vendor_balances": [
+          {
+            "balance": 96008,
+            "paid": 80000,
+            "supply": 160007,
+            "total": 176008,
+            "vat": 16001,
+            "vendor": "가상검수팔레트"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

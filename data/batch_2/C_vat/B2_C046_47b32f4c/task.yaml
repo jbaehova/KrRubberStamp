@@ -1,0 +1,52 @@
+task_id: B2_C046_47b32f4c
+domain: C_vat
+difficulty: hard
+reference_period: 2026-H1
+instruction: 가상남빛대여의 같은 차량은 허가 유효 중 일부 카드 정비를 받았고 말소 뒤에는 세액 미표시 전액 카드 정비를 받았습니다. 두
+  전체 전자와 허가 효력 및 실제 작업을 연결하여 공제가능 매입세액(deductible_input_vat)과 불공제 매입세액(noncreditable_vat)
+  및 거래 수(unique_transaction_count)를 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_신고범위.hwpx
+  format: hwpx
+- path: inputs/02_허가대장.xlsx
+  format: xlsx
+- path: inputs/03_허가공급.pdf
+  format: pdf
+- path: inputs/04_말소공급.pdf
+  format: pdf
+- path: inputs/05_직접사용.hwpx
+  format: hwpx
+- path: inputs/06_사무사용.hwpx
+  format: hwpx
+- path: inputs/07_실행.xlsx
+  format: xlsx
+- path: inputs/08_허가원본.pdf
+  format: pdf
+- path: inputs/09_말소원본.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    unique_transaction_count:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  - unique_transaction_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-619e341b-ead3-5e36-8c93-6d4602beef3c
+scenario_seed: 5166525204344000198
+scenario_hash: 3bfe140f49998be72b6752152f71ca5c4949b38e95d47c5a173d04e70b8b5956
+authorship:
+  method: individually_written
+  case_id: C046
+  case_sha256: 47b32f4cc806cec67a38ed673561ff8718f028c6ae06c19aed994149de3effd4
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat
+- unique_transaction_count

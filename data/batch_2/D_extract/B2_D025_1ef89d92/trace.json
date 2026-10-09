@@ -1,0 +1,118 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-06-25",
+      "events": [
+        {
+          "date": "2026-06-21",
+          "event_id": "GUARD-IN",
+          "kind": "received",
+          "line_id": "D",
+          "order_id": "GUARD-DOOR",
+          "units": 1
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-06-16",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "장비보호문",
+              "line_id": "D",
+              "ordered_packages": 2,
+              "package_price": 110000,
+              "price_includes_vat": true,
+              "units_per_package": 2
+            }
+          ],
+          "order_id": "GUARD-DOOR",
+          "vendor": "가상보호문"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 100000,
+          "date": "2026-06-17",
+          "order_id": "GUARD-DOOR",
+          "payment_id": "GUARD-DEP",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 순인수 포장 비율의 대금을 마지막에 버리고 포함 가격은 행 금액의 10/11을 버린 공급가액과 차액 세액이다. 마감일까지 실행 지급을 차감하며 음수 업체 잔액을 0으로 자르지 않는다. 업체명은 NFKC와 공백 및 법인 표기 제거 후 소문자로 정리한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "GUARD-IN"
+      ],
+      "accepted_payment_ids": [
+        "GUARD-DEP"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "GUARD-IN",
+          "net_units_after_event": 1
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 55000,
+          "line_id": "D",
+          "order_id": "GUARD-DOOR",
+          "package_price_times_net_units": 110000,
+          "price_includes_vat": true,
+          "supply": 50000,
+          "total": 55000,
+          "units_per_package": 2,
+          "vat": 5000
+        }
+      ],
+      "settlement": {
+        "balance_total": -45000,
+        "grand_total": 55000,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "장비보호문",
+            "net_units": 1
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "장비보호문",
+            "line_id": "D",
+            "net_units": 1,
+            "order_id": "GUARD-DOOR",
+            "ordered_units": 4,
+            "outstanding_units": 3,
+            "received_units": 1,
+            "returned_units": 0,
+            "supply": 50000,
+            "total": 55000,
+            "vat": 5000
+          }
+        ],
+        "payment_total": 100000,
+        "vendor_balances": [
+          {
+            "balance": -45000,
+            "paid": 100000,
+            "supply": 50000,
+            "total": 55000,
+            "vat": 5000,
+            "vendor": "가상보호문"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

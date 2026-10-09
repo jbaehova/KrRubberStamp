@@ -1,0 +1,37 @@
+task_id: B2_C076_b39de7e9
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상산딸기점검은 고객 건물 작업팀 식사의 현금 전표를 정정받았습니다. 장소 소유자와 실제 참석자를 나눠 읽고 유효 원본을 연결하여
+  공제 매입세액(deductible_input_vat)과 불공제세액(noncreditable_vat)을 answer.json에 정리하세요.
+input_files:
+- path: inputs/01_출장범위.pdf
+  format: pdf
+- path: inputs/02_실제참석.hwpx
+  format: hwpx
+- path: inputs/03_현금정정.xlsx
+  format: xlsx
+- path: inputs/04_원본확인.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-5457ddb2-20e2-556e-b97e-8a54ce26482b
+scenario_seed: 12942755894900368795
+scenario_hash: aed0910739270e095549e3cca2b1e100282d27af20e61688676c5ce8bc77f94a
+authorship:
+  method: individually_written
+  case_id: C076
+  case_sha256: b39de7e9aa21259b7d29199ae91c269b510c204537e0f4e3dd06446e9bab7d10
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat

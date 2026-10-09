@@ -1,0 +1,131 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-01-31",
+      "events": [
+        {
+          "date": "2026-01-23",
+          "event_id": "STRAP-IN",
+          "kind": "received",
+          "line_id": "S",
+          "order_id": "STRAP-RETURN",
+          "units": 16
+        },
+        {
+          "date": "2026-01-26",
+          "event_id": "STRAP-OUT",
+          "kind": "returned",
+          "line_id": "S",
+          "order_id": "STRAP-RETURN",
+          "units": 8
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-01-20",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "봉인띠",
+              "line_id": "S",
+              "ordered_packages": 2,
+              "package_price": 16000,
+              "price_includes_vat": false,
+              "units_per_package": 8
+            }
+          ],
+          "order_id": "STRAP-RETURN",
+          "vendor": "가상봉인띠"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 10000,
+          "date": "2026-01-21",
+          "order_id": "STRAP-RETURN",
+          "payment_id": "STRAP-PAY",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "거래와 업체는 가상이다. 주문 및 행에 입고와 반품을 연결하고 마감까지 순인수량을 구한다. 포장가격 곱하기 순량을 포장당수량으로 나눈 뒤 버린다. 별도 행 세액은 공급가액 10%를 버린다. 실행 지급을 업체별 대금에서 차감한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "STRAP-IN",
+        "STRAP-OUT"
+      ],
+      "accepted_payment_ids": [
+        "STRAP-PAY"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "STRAP-IN",
+          "net_units_after_event": 16
+        },
+        {
+          "event_id": "STRAP-OUT",
+          "net_units_after_event": 8
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 16000,
+          "line_id": "S",
+          "order_id": "STRAP-RETURN",
+          "package_price_times_net_units": 128000,
+          "price_includes_vat": false,
+          "supply": 16000,
+          "total": 17600,
+          "units_per_package": 8,
+          "vat": 1600
+        }
+      ],
+      "settlement": {
+        "balance_total": 7600,
+        "grand_total": 17600,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "봉인띠",
+            "net_units": 8
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "봉인띠",
+            "line_id": "S",
+            "net_units": 8,
+            "order_id": "STRAP-RETURN",
+            "ordered_units": 16,
+            "outstanding_units": 8,
+            "received_units": 16,
+            "returned_units": 8,
+            "supply": 16000,
+            "total": 17600,
+            "vat": 1600
+          }
+        ],
+        "payment_total": 10000,
+        "vendor_balances": [
+          {
+            "balance": 7600,
+            "paid": 10000,
+            "supply": 16000,
+            "total": 17600,
+            "vat": 1600,
+            "vendor": "가상봉인띠"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

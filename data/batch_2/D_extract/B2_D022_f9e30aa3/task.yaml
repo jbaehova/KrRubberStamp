@@ -1,0 +1,60 @@
+task_id: B2_D022_f9e30aa3
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 마커 인수 대금에서 실제 이체를 차감해 잔액을 확인하세요. 동일 payment_id와 동일 내용의 은행 내역이 반복되면 한
+  번만 실행 지급으로 계산합니다. answer.json에는 vendor_balances와 payment_total을 작성하세요.
+input_files:
+- path: inputs/01_마커인수.pdf
+  format: pdf
+- path: inputs/02_이체원본.xlsx
+  format: xlsx
+- path: inputs/03_이체사본.hwpx
+  format: hwpx
+- path: inputs/04_이체정산.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    payment_total:
+      type: integer
+  required:
+  - vendor_balances
+  - payment_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-9d24c7c1-338d-53e2-bf41-ab7bc0f31380
+scenario_seed: 18006247431838387007
+scenario_hash: 1a933a154af8e8ac08a913c0fa6079df5f090565e3441fc2883d20cedc967250
+authorship:
+  method: individually_written
+  case_id: D022
+  case_sha256: f9e30aa358844b3fdda1ac4e441946f83c01b99c84bdedeba6e69183f9d0a6d2
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- vendor_balances
+- payment_total

@@ -1,0 +1,42 @@
+task_id: B2_C016_17e69c7b
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상구획표의 작업 완료 청구와 같은 날의 식대 및 외주 절단 청구를 대조해 주세요. 식사에 실제로 참석한 조직과 고객 현장에서
+  완료한 외주 업무의 귀속을 각각 읽고 공제가능 매입세액(deductible_input_vat), 공제불가 매입세액(noncreditable_vat),
+  최종 납부액(payable_vat)을 answer.json에 적어 주세요.
+input_files:
+- path: inputs/01_구획신고.hwpx
+  format: hwpx
+- path: inputs/02_설치전자.pdf
+  format: pdf
+- path: inputs/03_철야식대.xlsx
+  format: xlsx
+- path: inputs/04_완료협의.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    deductible_input_vat:
+      type: integer
+    noncreditable_vat:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - deductible_input_vat
+  - noncreditable_vat
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-96dbfefa-bd77-55ee-a386-bdd2f21b26cf
+scenario_seed: 1722235960808734608
+scenario_hash: 8e932f9089348a589a59a72dcdd845b558ecc200c8818fd2d82ea85754a79fd1
+authorship:
+  method: individually_written
+  case_id: C016
+  case_sha256: 17e69c7b47687f90e93afc66cf58bd980c621fd823eda299a2423a55ddaa9e06
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- deductible_input_vat
+- noncreditable_vat
+- payable_vat

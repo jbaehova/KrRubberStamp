@@ -1,0 +1,192 @@
+task_id: B2_D143_0d7c8bac
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 전용 베이스와 공용 패드를 주문합니다. 공방 패드는 최소세포장이라 베이스와 합치면 무료배송이지만 도착은 납기에 늦습니다. chosen_offers와
+  offer_comparisons 및 vendor_cart_totals를 작성해 주세요.
+input_files:
+- path: inputs/01_베이스약정.pdf
+  format: pdf
+- path: inputs/02_베이스요청.xlsx
+  format: xlsx
+- path: inputs/03_패드요청.hwpx
+  format: hwpx
+- path: inputs/04_공방배송.pdf
+  format: pdf
+- path: inputs/05_재고배송.xlsx
+  format: xlsx
+- path: inputs/06_공방베이스.hwpx
+  format: hwpx
+- path: inputs/07_공방패드.pdf
+  format: pdf
+- path: inputs/08_재고베이스.xlsx
+  format: xlsx
+- path: inputs/09_재고패드.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - chosen_offers
+  - offer_comparisons
+  - vendor_cart_totals
+  additionalProperties: false
+canary: KrRubberStamp-canary-a8578838-a93b-53ed-9245-40a4b5a47816
+scenario_seed: 971805191076738179
+scenario_hash: 69706787790d96f7cc69b56b444c58790b9d41f117edd2a2b8941ca1826297cb
+authorship:
+  method: individually_written
+  case_id: D143
+  case_sha256: 0d7c8bac250274834da21a1e79a4c2528054b45cb8c31042ac40d53f03e87eb1
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- offer_comparisons
+- vendor_cart_totals

@@ -1,0 +1,181 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-03-15",
+      "events": [
+        {
+          "date": "2026-03-10",
+          "event_id": "TONGS-1-IN",
+          "kind": "received",
+          "line_id": "T",
+          "order_id": "TONGS-FIRST",
+          "units": 7
+        },
+        {
+          "date": "2026-03-12",
+          "event_id": "TONGS-2-IN",
+          "kind": "received",
+          "line_id": "T",
+          "order_id": "TONGS-SECOND",
+          "units": 4
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-03-05",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "실험집게",
+              "line_id": "T",
+              "ordered_packages": 2,
+              "package_price": 12000,
+              "price_includes_vat": false,
+              "units_per_package": 5
+            }
+          ],
+          "order_id": "TONGS-FIRST",
+          "vendor": "가상실험집게"
+        },
+        {
+          "date": "2026-03-07",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "실험집게",
+              "line_id": "T",
+              "ordered_packages": 1,
+              "package_price": 12000,
+              "price_includes_vat": false,
+              "units_per_package": 5
+            }
+          ],
+          "order_id": "TONGS-SECOND",
+          "vendor": "가상실험집게"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 5000,
+          "date": "2026-03-06",
+          "order_id": "TONGS-FIRST",
+          "payment_id": "TONGS-1-P",
+          "status": "executed"
+        },
+        {
+          "amount": 3000,
+          "date": "2026-03-08",
+          "order_id": "TONGS-SECOND",
+          "payment_id": "TONGS-2-P",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "업체는 가상이다. 마감까지 실제 인수량은 정규화 품명 및 기초단위별로 합친다. 행 공급가격은 포장가격 곱하기 순인수 비율을 마지막에 버리고 세액은 10%를 버린다. 실행 지급은 주문의 업체에 합쳐 인수대금에서 뺀다. 업체명은 NFKC, 공백과 법인 표기 제거 및 소문자를 적용한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "TONGS-1-IN",
+        "TONGS-2-IN"
+      ],
+      "accepted_payment_ids": [
+        "TONGS-1-P",
+        "TONGS-2-P"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "TONGS-1-IN",
+          "net_units_after_event": 7
+        },
+        {
+          "event_id": "TONGS-2-IN",
+          "net_units_after_event": 4
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 16800,
+          "line_id": "T",
+          "order_id": "TONGS-FIRST",
+          "package_price_times_net_units": 84000,
+          "price_includes_vat": false,
+          "supply": 16800,
+          "total": 18480,
+          "units_per_package": 5,
+          "vat": 1680
+        },
+        {
+          "amount_after_floor": 9600,
+          "line_id": "T",
+          "order_id": "TONGS-SECOND",
+          "package_price_times_net_units": 48000,
+          "price_includes_vat": false,
+          "supply": 9600,
+          "total": 10560,
+          "units_per_package": 5,
+          "vat": 960
+        }
+      ],
+      "settlement": {
+        "balance_total": 21040,
+        "grand_total": 29040,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "실험집게",
+            "net_units": 11
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "실험집게",
+            "line_id": "T",
+            "net_units": 7,
+            "order_id": "TONGS-FIRST",
+            "ordered_units": 10,
+            "outstanding_units": 3,
+            "received_units": 7,
+            "returned_units": 0,
+            "supply": 16800,
+            "total": 18480,
+            "vat": 1680
+          },
+          {
+            "base_unit": "개",
+            "item": "실험집게",
+            "line_id": "T",
+            "net_units": 4,
+            "order_id": "TONGS-SECOND",
+            "ordered_units": 5,
+            "outstanding_units": 1,
+            "received_units": 4,
+            "returned_units": 0,
+            "supply": 9600,
+            "total": 10560,
+            "vat": 960
+          }
+        ],
+        "payment_total": 8000,
+        "vendor_balances": [
+          {
+            "balance": 21040,
+            "paid": 8000,
+            "supply": 26400,
+            "total": 29040,
+            "vat": 2640,
+            "vendor": "가상실험집게"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

@@ -1,0 +1,45 @@
+task_id: B2_A078_6e019100
+domain: A_yearend
+difficulty: medium
+reference_period: '2025'
+instruction: 가상민하의 장애인 아버지 명의 계약을 가족 소득 자료와 연결하세요. 기본공제 가족인 계약자 요건과 적격 장애인 특수교육의 소득
+  예외를 구분하여 월세와 교육비 공제액을 제출합니다.
+input_files:
+- path: inputs/01_급여.xlsx
+  format: xlsx
+- path: inputs/02_계약.pdf
+  format: pdf
+- path: inputs/03_가족.hwpx
+  format: hwpx
+- path: inputs/04_재활.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    eligible_dependents:
+      type: integer
+    additional_deduction:
+      type: integer
+    rent_credit:
+      type: integer
+    education_credit:
+      type: integer
+  required:
+  - eligible_dependents
+  - additional_deduction
+  - rent_credit
+  - education_credit
+  additionalProperties: false
+canary: KrRubberStamp-canary-c0b5889e-ed65-5f8d-8b7d-c0a721a18e15
+scenario_seed: 7926776252542643891
+scenario_hash: c3bbb07c1dcf72437d75e81c08f145264b2b5ca8e85dd85a433ce41776b15cc8
+authorship:
+  method: individually_written
+  case_id: A078
+  case_sha256: 6e019100face6eb3b27ef35a30aea777294af007a1e5a72baf2cfef0029359e5
+  source_file: batch_2/A_yearend/cases_051_100.json
+answer_fields:
+- eligible_dependents
+- additional_deduction
+- rent_credit
+- education_credit

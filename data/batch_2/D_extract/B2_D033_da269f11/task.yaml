@@ -1,0 +1,60 @@
+task_id: B2_D033_da269f11
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 보관 거치구의 실제 송금을 확인해 인수 대금에서 차감하세요. 날짜와 금액이 같아도 payment_id가 다른 실행 지급은 각각
+  반영합니다. answer.json에는 payment_total과 vendor_balances를 작성하세요.
+input_files:
+- path: inputs/01_거치구인수.pdf
+  format: pdf
+- path: inputs/02_이체1.xlsx
+  format: xlsx
+- path: inputs/03_이체2.hwpx
+  format: hwpx
+- path: inputs/04_이체식별.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    payment_total:
+      type: integer
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+  required:
+  - payment_total
+  - vendor_balances
+  additionalProperties: false
+canary: KrRubberStamp-canary-bc041d63-6368-59a7-986d-622fc55db05b
+scenario_seed: 15719426444809899610
+scenario_hash: a52179cfc4a6ca25293629749f6d6c2346ce6ee4a66d4f3b58f2f37b2f3599a1
+authorship:
+  method: individually_written
+  case_id: D033
+  case_sha256: da269f1103c68e5aaaf9d5064ee8d68f1f8372cb321ad5bb973b7aefa902ba0d
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- payment_total
+- vendor_balances

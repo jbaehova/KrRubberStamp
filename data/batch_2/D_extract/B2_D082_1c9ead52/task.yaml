@@ -1,0 +1,191 @@
+task_id: B2_D082_1c9ead52
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 종이 봉투와 봉인 띠를 함께 주문합니다. 한 업체의 봉인 띠 할인 견적은 주문 전날 끝났으므로 그 가격으로 무료배송 합계를
+  만들지 마세요. offer_comparisons와 chosen_offers 및 vendor_cart_totals, grand_total과 feasible_cart_count를
+  작성해 실제 승인 가능한 공동 주문을 골라 주세요.
+input_files:
+- path: inputs/01_유효공동주문.pdf
+  format: pdf
+- path: inputs/02_기획봉투.xlsx
+  format: xlsx
+- path: inputs/03_봉인띠가격이력.hwpx
+  format: hwpx
+- path: inputs/04_상시공동견적.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    offer_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+    feasible_cart_count:
+      type: integer
+  required:
+  - offer_comparisons
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  - feasible_cart_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-151305e8-5205-5fb5-8b8a-0dd768873116
+scenario_seed: 2062276248906060446
+scenario_hash: 602be5e4678103b4e9ea35bef074aab14cbd5491bbffa9f5f930ae1a421f94d8
+authorship:
+  method: individually_written
+  case_id: D082
+  case_sha256: 1c9ead526cc5529edc078151a37e7409e989fdcea9c68ff18929f13bf3414fee
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- offer_comparisons
+- chosen_offers
+- vendor_cart_totals
+- grand_total
+- feasible_cart_count

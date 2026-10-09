@@ -1,0 +1,207 @@
+# KrRubberStamp Batch 2 보고서
+
+이번 보고서는 개별 집필을 완료한 Batch 2만 대상으로 합니다.
+
+현재 문항 450개. 파일 용량은 39.2 MiB입니다. 모든 문항과 정답을 공개하며 비공개 분할은 없습니다.
+
+## 집필 방법
+
+각 문항의 업무 요청과 사실관계 및 문서 배치를 따로 집필했습니다. 숫자와 이름만 변경한 시드 생성본은 이번 집필 평가본에 포함하지 않습니다. 원고에서 규칙 엔진으로 정답과 trace를 먼저 계산하고 이후 입력 문서를 렌더링합니다. 원고의 전체 문항 SHA-256과 요청한 answer_fields를 task.yaml에 기록했습니다.
+
+재현성은 고정한 개별 원고를 다시 계산하여 gold와 trace의 바이트가 일치하는 방식으로 확인합니다. scenario_seed는 문서 배치에만 사용합니다. 보조 생성기의 새 시드 출력은 이번 평가본과 같은 문항 다양성을 보장하지 않습니다.
+
+## 분야와 난이도
+
+| 분야 | easy | medium | hard | 합계 |
+|---|---:|---:|---:|---:|
+| A_yearend | 30 | 45 | 25 | 100 |
+| B_payroll | 30 | 45 | 25 | 100 |
+| C_vat | 30 | 45 | 25 | 100 |
+| D_extract | 45 | 68 | 37 | 150 |
+| 합계 | 135 | 203 | 112 | 450 |
+
+난이도 비율은 30%, 45%, 25%입니다.
+
+## 품질 게이트
+
+현재 문항 ID 전체와 일치하는 재검증 450/450 통과 (100%). 원고 정답의 바이트 재현과 실제 문서의 값 복원, 지시문 일관성 및 JSON Schema를 확인했습니다.
+
+검증 결과: [validation JSON](validation_batch_2.json)
+
+최종 재검증 탈락 사유:
+
+```json
+{}
+```
+
+빌드 manifest의 차단 시도 0건. 이 숫자는 해당 빌드 스냅샷의 기록이며 집필 중 모든 수정과 재작업의 총횟수는 아닙니다.
+
+manifest 차단 사유:
+
+```json
+{}
+```
+
+instruction_consistency는 원고와 task.yaml의 지시문 동일성과 예외 수를 확인합니다. 자유문장 안의 사실이나 법률 모순을 독립적으로 분석하는 검사는 아닙니다. 원고 해시와 지시문 및 카나리아의 중복 검사도 의미가 비슷한 문항을 모두 찾아내는 검수가 아닙니다. 집필 다양성과 실제 판단 과정은 사람 검수에서 확인해야 합니다.
+
+| 문서 형식 | 파일 수 |
+|---|---:|
+| hwpx | 631 |
+| pdf | 920 |
+| png | 1 |
+| xlsx | 644 |
+
+| 입력 사실 계약 | 문항 수 |
+|---|---:|
+| extract_cart_procurement_v1 | 56 |
+| extract_fulfillment_v1 | 50 |
+| extract_procurement_v1 | 44 |
+| literal_engine_facts | 16 |
+| payroll_bank_reconciliation_v1 | 64 |
+| payroll_evidence_v1 | 33 |
+| payroll_statement_revision_v1 | 3 |
+| vat_activity_evidence_v1 | 10 |
+| vat_bank_reconciliation_v1 | 5 |
+| vat_document_lifecycle_v1 | 55 |
+| vat_document_reconciliation_v1 | 28 |
+| vat_itemized_activity_evidence_v1 | 2 |
+| yearend_evidence_v1 | 33 |
+| yearend_pay_statement_v1 | 51 |
+
+| 실제 사용한 문서 양식 ID | 파일 수 |
+|---|---:|
+| 0 | 2195 |
+
+## 가짜 솔버 결과
+
+| 솔버 | 문항 수 | 전체 정답률 | 필드 정답률 | 정답 leaf 수 |
+|---|---:|---:|---:|---:|
+| oracle | 450 | 100% | 100% | 12477 |
+| null | 450 | 0% | 0% | 12477 |
+
+oracle은 실제 입력 문서를 추출 맵의 위치로 읽고 엔진을 적용합니다. 정답과 trace 및 집필 원고를 읽어서 답을 만드는 방식이 아닙니다. null은 빈 객체를 제출합니다. 수치는 현재 문항 ID 전체와 일치하는 결과만 사용했습니다. 모델 API와 실제 모델 평가는 실행하지 않았으므로 이 표는 모델 성능 점수가 아닙니다.
+
+## 공식 예시와 미검증 규칙
+
+현재 규칙 출처 78개 중 verified: true는 30개이며 verified: false는 48개입니다. 공식 법령 확인과 독립 공식 수치 예시 회귀 검증을 구분합니다.
+
+원문 출처: [sources.yaml](../rules/sources.yaml)
+
+미검증 규칙:
+
+- `A_EVIDENCE_RECONCILIATION`: 임대차 계약자 식별번호와 인적관계 명부 및 기존 기본공제 가족 자료 연결, 계약과 주민등록 주소 대조, 진료 목적과 카드 청구 명목 및 취학기관 종류, 연말 세대원 주택 목록과 기부단체 지정기간 연결에서 한정된 엔진 사실 복원
+- `A_LOCAL`: 소득세 결정세액 10% 지방소득세. 원 미만 절사
+- `A_PAY_STATEMENT_RECONCILIATION`: 가상 근로자의 사용자별 지급기간 원천증명서에서 발급본 수정차수와 직원 식별번호를 대조하고 급여 및 비과세와 국세 및 지방세 기납부액을 합산하여 기존 2025 계산 엔진에 전달
+- `A_RENT_CREDIT`: 총급여 8000만원 이하 무주택 요건, 연 1000만원 한도, 5500만원 이하 17% 초과 15%, 면적 또는 기준시가 및 전입 요건
+- `A_STANDARD`: 특별소득공제와 특별세액공제 및 월세 공제를 신청하지 않은 근로자 표준세액공제13만원. 신청했지만 인정액0인 경우와 미신청을 구별. 정치자금과 고향사랑 및 연금계좌와 카드 공제는 중복 가능.
+- `B.CHILD_CREDIT`: 1~2월은 자녀1명12,500원 및2명29,160원. 3~12월은1명20,830원 및2명45,830원. 세 번째 이상 추가1명당25,000원 또는33,330원. 음수0 처리.
+- `B.EMPLOYMENT`: 고지 월평균보수에 실업급여 근로자0.9% 적용. 시나리오 약정에 따라10원 미만 버림.
+- `B.EVIDENCE_RECONCILIATION`: 개별 집필 자료의 승인본과 지급 실행 기록을 대조하고 휴게시간을 제외한 근로 구간에서 실제 분수 및 야간 겹침을 계산한다.
+- `B.GROSS`: 지급항목 합계와 식대 비과세 차감 후 간이세액표용 월 급여 산출.
+- `B.HEALTH`: 고지 보수월액에 근로자3.595% 적용. 근로자 부담 하한10,080원 및 상한4,591,740원. 10원 미만 버림.
+- `B.HOLIDAY`: 법정 유급휴일 1일 8시간 이내 150% 및 초과 200% 지급. 휴일 가산과 연장 가산을 별도 중복하지 않음.
+- `B.LOCAL_TAX`: 특별징수 소득세의10%에 지방세기본법 끝수 처리 적용. 10원 미만 버림.
+- `B.LONG_TERM_CARE`: 근로자 건강보험료에0.9448%/7.19%의 정확한 비율 적용 후10원 미만 버림. 13.14%를 중간 근사하여 적용하지 않음.
+- `B.MEAL_EXEMPT`: 식사를 별도 제공받지 않는 근로자의 식대는 월20만원까지 비과세. 비과세 여부와 통상임금 여부는 서로 별도로 적용.
+- `B.NET`: 총지급액에서 근로자 부담 국민연금과 건강보험 및 장기요양, 고용보험, 원천징수 소득세와 지방소득세 차감.
+- `B.NIGHT`: 22시부터 06시까지 야간근로에 통상임금 50% 가산. 연장 또는 휴일 중복에도 추가.
+- `B.ORDINARY`: 정기적 일률적인 소정근로 대가인 기본급과 직무수당 및 정액식대를 월 통상임금에 포함. 원 분수 유지 및 항목별 원 미만 올림은 합성 계약 명시 기준.
+- `B.OVERTIME`: 상시 5인 이상 평일 연장근로에 실제 근로 대가와 50% 가산 지급. 휴일 분을 연장 분에서 제외.
+- `B.PAID_HOLIDAY`: 시급제 공휴일의 유급 임금 100%를 실제 휴일근로 대가와 별도 합산. 단시간 근로자는 4주 소정근로 시간과 통상근로자의 4주 소정근로일 수로 비례. 정규 임금 포함분과 주휴수당 중복 금지.
+- `B.WEEKLY`: 4주 평균 주 소정근로 15시간 이상이고 개근한 주의 주휴시간은 주40시간에 비례. 월급 포함분 중복 지급 금지.
+- `B_PAYROLL_BANK_RECONCILIATION`: 합성 회사의 완전한 월 급여명세를 직원 ID 및 급여 ID로 은행 이체 원장에 연결한다. 기준일 이내 실행 이체만 합산하며 실수령액에서 지급 누계를 차감한 잔액은 음수를 허용한다.
+- `B_PAYROLL_STATEMENT_REVISION`: 직원과 보험 부과월별 완전한 명세 중 최종 승인 개정본을 선택하여 기존 급여 및 은행 대조에 연결
+- `COMMON_FLOOR_WON`: 원 미만 절사 유틸. 개별 엔진은 법규에 따라 별도 호출
+- `COMMON_TEXT_NORMALIZATION`: 정답 문자열 NFKC와 공백 제거 및 casefold 비교
+- `COMMON_TRUNCATE_TEN`: 양수와 음수 금액의 10원 미만을 0 방향으로 절사
+- `C_DOCUMENT_LIFECYCLE_SELECTION`: 최종 확인된 원본 효력과 대체 참조를 대조하여 유효 원본만 기존 공급 및 지급 증빙 계산에 연결
+- `C_DOCUMENT_RECONCILIATION`: 확정 공급과 같은 날 실제 지급 및 개별 발급 증빙을 연결해 부분 매출 발급액과 전체 적격 매입 증빙을 복원
+- `C_VAT_BANK_BATCH_ALLOCATION`: 일괄 은행 실행의 확정 분배 지시를 독립 납세자별 신고 정산 원금과 수수료로 대조
+- `C_VAT_BANK_RECONCILIATION`: 서로 다른 납세자의 독립 신고 계산과 실제 납부 또는 환급 은행 실행을 등록번호별로 대조
+- `C_VAT_ITEMIZED_ACTIVITY`: 확정 청구서의 개당 할인과 품목 행 할인 및 문서 할인과 운송료로 실제 공급가액을 복원
+- `D.aggregate`: 정규화 업체별 합산, 품목별 공급가액 기준 개당 최저 단가 비교, 동률은 업체명 오름차순
+- `D.cart_procurement_comparison`: 품목별 한 견적을 선택하는 전체 장바구니 조합에서 공급사 ID별 상품 합계와 무료배송 기준 및 일회 배송비를 계산하여 최종 구매비를 비교
+- `D.deduplicate`: 동일 문서 번호 자료는 내용이 같을 때 한 번만 합산, 내용이 다르면 오류
+- `D.evidence_reconciliation`: 원본 표지와 품목 부속표를 기록 번호로 연결하고 실제 인수 기록에 따라 집계 대상 거래를 복원
+- `D.fulfillment_reconciliation`: 발주 품목과 실제 입고 및 반품 기록을 연결하여 낱개 수량과 합성 약정 정산액 및 실행 지급 잔액을 계산
+- `D.procurement_comparison`: 필요한 낱개 수를 위한 포장 구매와 최소 주문 및 상품과 배송비의 합계를 비교하고 견적 효력과 재고 및 달력 납기 조건을 대조
+- `D.vat_split`: 부가세 포함 총액의 공급가액은 total*10//11, 세액은 총액과 공급가액의 차이
+- `D.vendor_normalize`: NFKC와 공백 제거 및 법인 접두어 제거로 가상 업체명을 통합
+- `D_INVENTORY_SNAPSHOTS`: 날짜별 실제 재고와 지정 창고 주문 예약 및 가용 수량과 부족 수량을 대조
+- `VAT_ACTIVITY_EVIDENCE`: 개별 집필 활동 기록의 실제 참여자와 장소 및 증빙번호를 연결해 엔진용 매입 사실을 복원
+- `VAT_ASSESSMENT_VALIDITY`: 예정고지액의 최소 50만원과 천원 미만 절사 및 예정신고와 고지 결정의 중복을 검사
+- `VAT_CREDIT_ANNUAL_LIMIT`: 2026년 신용카드 등 발행세액공제 연간 한도 1000만원에서 이미 공제한 금액을 차감
+- `VAT_CREDIT_ELIGIBILITY`: 소비자 상대 사업 개인사업자에 한해 적용하며 법인 및 전년도 사업장별 공급가액 10억원 초과 개인사업자는 제외
+- `VAT_CREDIT_PAYABLE_LIMIT`: 발행세액공제는 차감 전 양수 납부세액을 한도로 하며 초과액으로 환급을 만들지 않음
+- `VAT_EXEMPT_LAND`: 면세사업에 직접 사용한 매입 및 토지 관련 매입세액 불공제
+- `VAT_HOSPITALITY`: 기업업무추진비인 거래처 접대 지출에 관련된 매입세액 불공제
+- `VAT_NONBUSINESS`: 사업과 직접 관련 없는 지출 및 대표 개인 가사 지출의 매입세액 불공제
+- `VAT_PASSENGER_CAR`: 소매업의 개별소비세 과세대상 승용자동차 구입과 임차 및 유지 매입세액 불공제
+
+## 개별 원고 편집 감사
+
+- [authored_batch_2_A001050_final_editorial](authored_batch_2_A001050_final_editorial.md)
+- [authored_batch_2_A001050_rewrite](authored_batch_2_A001050_rewrite.md)
+- [authored_batch_2_A051100_authoring](authored_batch_2_A051100_authoring.md)
+- [authored_batch_2_A051100_editorial](authored_batch_2_A051100_editorial.md)
+- [authored_batch_2_A051100_five_rewrite](authored_batch_2_A051100_five_rewrite.md)
+- [authored_batch_2_A051100_root_closure](authored_batch_2_A051100_root_closure.md)
+- [authored_batch_2_AB001050_editorial](authored_batch_2_AB001050_editorial.md)
+- [authored_batch_2_B001050_final_editorial](authored_batch_2_B001050_final_editorial.md)
+- [authored_batch_2_B001050_premise_closure](authored_batch_2_B001050_premise_closure.md)
+- [authored_batch_2_B001050_rewrite](authored_batch_2_B001050_rewrite.md)
+- [authored_batch_2_B051100_authoring](authored_batch_2_B051100_authoring.md)
+- [authored_batch_2_B051100_editorial](authored_batch_2_B051100_editorial.md)
+- [authored_batch_2_B051100_final_checks](authored_batch_2_B051100_final_checks.md)
+- [authored_batch_2_B051100_root_closure](authored_batch_2_B051100_root_closure.md)
+- [authored_batch_2_B051100_seven_rewrite](authored_batch_2_B051100_seven_rewrite.md)
+- [authored_batch_2_B051100_six_editorial](authored_batch_2_B051100_six_editorial.md)
+- [authored_batch_2_B051100_two_rewrite](authored_batch_2_B051100_two_rewrite.md)
+- [authored_batch_2_C001050_editorial](authored_batch_2_C001050_editorial.md)
+- [authored_batch_2_C001050_final_editorial](authored_batch_2_C001050_final_editorial.md)
+- [authored_batch_2_C001050_final_twelve_rewrite](authored_batch_2_C001050_final_twelve_rewrite.md)
+- [authored_batch_2_C001050_rewrite](authored_batch_2_C001050_rewrite.md)
+- [authored_batch_2_C001050_root_closure](authored_batch_2_C001050_root_closure.md)
+- [authored_batch_2_C051100_authoring](authored_batch_2_C051100_authoring.md)
+- [authored_batch_2_C051100_editorial](authored_batch_2_C051100_editorial.md)
+- [authored_batch_2_C051100_fourteen_rewrite](authored_batch_2_C051100_fourteen_rewrite.md)
+- [authored_batch_2_C051100_root_closure](authored_batch_2_C051100_root_closure.md)
+- [authored_batch_2_C051100_root_closure_checks](authored_batch_2_C051100_root_closure_checks.md)
+- [authored_batch_2_D001050_editorial](authored_batch_2_D001050_editorial.md)
+- [authored_batch_2_D012_rewrite](authored_batch_2_D012_rewrite.md)
+- [authored_batch_2_D051100_editorial](authored_batch_2_D051100_editorial.md)
+- [authored_batch_2_D051100_rewrite](authored_batch_2_D051100_rewrite.md)
+- [authored_batch_2_D101150_authoring](authored_batch_2_D101150_authoring.md)
+- [authored_batch_2_D101150_editorial](authored_batch_2_D101150_editorial.md)
+- [authored_batch_2_D101150_four_rewrite](authored_batch_2_D101150_four_rewrite.md)
+- [authored_batch_2_D101150_root_closure](authored_batch_2_D101150_root_closure.md)
+
+각 기록의 명시된 범위에서 질문과 원자료 및 문서 관계를 직접 읽고, 조건을 바꾸어 요청 답의 변화 또는 불변성을 확인했습니다. 발견한 법률 전제와 날짜 모순 및 의미 중복을 교정했습니다. 이 기록을 전체 450문항의 전문가 승인으로 확대하지 않습니다.
+
+
+연말정산 공식 전체 정산 예시와 간이세액표의 공식 숫자 셀, 부가세 완성 신고서 사례는 서로 다른 근거 단위입니다. 한 사례의 여러 중간값을 여러 독립 완성 사례로 세지 않습니다. 세부 범위는 각 분야 연구 보고서에서 확인해야 합니다. 분야 D는 자체 업무 집계 규약이므로 대응하는 국세청이나 공단 공식 예시가 없습니다.
+
+## 사람 검수
+
+[검수 대기열](REVIEW_QUEUE_BATCH_2.md)에 60문항을 정리했습니다. 현재 상태는 검수 대기입니다. 각 항목에는 업무 목적과 설계 의도, 한국어 지시문과 입력 파일, 정답 및 trace가 있습니다.
+
+## 알려진 한계와 다음 배치 개선
+
+- 공식 규정과 숫자 회귀 테스트를 확보했지만 모든 조건 조합의 독립적인 세무 검수를 완료한 것은 아닙니다. verified: false 규칙과 개별 증빙 판단을 우선 검수해야 합니다.
+- 연말정산은 국내 거주자의 근로소득 정산 범위를 따릅니다. 지원하는 공제의 구체적인 증빙 조건과 제외 항목은 개별 입력과 분야 연구 보고서에 따릅니다.
+- 부가세는 정확히 나누어떨어지는 국내 10% 과세 거래 범위를 따릅니다. 면세 겸업 공통매입 안분과 영세율 및 가산세 등은 지원하지 않습니다.
+- PNG는 원본 PDF에서도 같은 사실을 읽을 수 있는 중복 자료입니다. 스캔만 있는 한국어 OCR 평가 품질을 검증한 것으로 주장하지 않습니다.
+- HWPX의 ZIP 및 XML 구조와 독립 파싱을 확인했습니다. 한컴 앱에서 열기와 인쇄 호환성은 별도로 검수해야 합니다.
+- 렌더러는 공통 표 기반 양식 5종을 지원합니다. 실제 관공서 양식의 시각적인 복제나 각 회사의 구조를 모두 재현하지 않았습니다.
+- 가짜 oracle은 입력과 엔진의 일치를 확인합니다. 모든 세법 해석과 문항의 의미상 다양성을 보증하는 검사는 아닙니다.
+- 모델의 Python 실행은 네트워크를 차단한 Docker 컨테이너를 사용하도록 구현했습니다. 구축 호스트의 Docker 엔진을 사용할 수 없어 실제 컨테이너 실행은 검증하지 못했습니다. 신뢰된 로컬 가짜 솔버는 운영 보안 인증이 아닙니다.
+
+## 공개 준비
+
+코드는 Apache-2.0, 합성 데이터는 CC-BY-4.0이며 폰트는 OFL입니다. 공식 원문은 해당 저작권에 따르며 합성 데이터 라이선스로 재허가하지 않습니다.
+
+uv run krt export-hf --batch 2은 이 배치 450문항의 JSONL과 입력 파일, 공개 정답 및 집필 원고 스냅샷과 데이터카드를 만듭니다. 누적 배포에는 --upto 2를 사용합니다. 내보내기 자체는 Hugging Face 업로드를 수행하지 않습니다.
+
+각 문항과 데이터카드에 카나리아 GUID를 제공합니다. 카나리아 인지만으로 모델의 학습 포함을 확정할 수는 없습니다. 하네스는 입력 문서와 지시문 및 답안 스키마만 제공하며 공개 원고와 정답, trace와 추출 맵 및 카나리아 메타데이터를 모델에 제공하지 않습니다.
+
+<!-- authored-task-set-sha256: d26a2dbb25d89364b8efadee3dc7b85e81c2c97a0c8f7800e509056269fb6291 -->

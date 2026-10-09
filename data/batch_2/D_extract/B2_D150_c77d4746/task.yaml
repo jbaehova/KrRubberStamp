@@ -1,0 +1,144 @@
+task_id: B2_D150_c77d4746
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 프레임과 롤 및 패드와 커버를 확보합니다. 양끝 전용품 업체 이름은 같지만 독립 계정이고 가운데 업체 롤은 납기에 늦습니다.
+  원문 단위를 유지해 chosen_offers와 vendor_cart_totals 및 grand_total을 작성해 주세요.
+input_files:
+- path: inputs/01_보관약정.pdf
+  format: pdf
+- path: inputs/02_양끝요청.xlsx
+  format: xlsx
+- path: inputs/03_봉요청.hwpx
+  format: hwpx
+- path: inputs/04_길이요청.pdf
+  format: pdf
+- path: inputs/05_동계정배송.xlsx
+  format: xlsx
+- path: inputs/06_중간배송.hwpx
+  format: hwpx
+- path: inputs/07_서계정배송.pdf
+  format: pdf
+- path: inputs/08_동계정가격.xlsx
+  format: xlsx
+- path: inputs/09_중간가격.hwpx
+  format: hwpx
+- path: inputs/10_서계정가격.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    chosen_offers:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          item_id:
+            type: string
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - item_id
+        - vendor_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    vendor_cart_totals:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor_id:
+            type: string
+          vendor:
+            type: string
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_free:
+            type: boolean
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - vendor_id
+        - vendor
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_free
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    grand_total:
+      type: integer
+  required:
+  - chosen_offers
+  - vendor_cart_totals
+  - grand_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-fce9e93d-5bf9-5183-a69e-8d59d7daeeb6
+scenario_seed: 14374723955012295923
+scenario_hash: 11c0cc3cae2aa2addbc50b5f59d832be0678d31b14376d843e3cfed5140436c7
+authorship:
+  method: individually_written
+  case_id: D150
+  case_sha256: c77d4746cace5cf3bbdfaf6c8ea8f77798a4cc1ec93344eadfb0f3cd2be8e1d8
+  source_file: batch_2/D_extract/cases_101_150.json
+answer_fields:
+- chosen_offers
+- vendor_cart_totals
+- grand_total

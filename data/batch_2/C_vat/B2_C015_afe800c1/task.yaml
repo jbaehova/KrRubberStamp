@@ -1,0 +1,149 @@
+task_id: B2_C015_afe800c1
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상물빛공방과 가상점선제작은 각각 독립 법인입니다. 물빛은 예정고지 세액을 먼저 냈고 이번 신고에서는 환급이 발생했습니다.
+  은행 원장에는 그 선납도 함께 들어 있으니 신고에서 뺀 금액을 정산 현금에서 또 빼지 말아 주세요. 두 법인의 신고 계산과 등록별 실제 정산을
+  대조해 filing_calculations, registration_settlements, tax_due_total, paid_total, received_total,
+  balance_total을 answer.json으로 남겨주세요.
+input_files:
+- path: inputs/01_물빛신고.pdf
+  format: pdf
+- path: inputs/02_점선신고.xlsx
+  format: xlsx
+- path: inputs/03_예정고지실행.pdf
+  format: pdf
+- path: inputs/04_신고후정산.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    filing_calculations:
+      type: array
+      items:
+        type: object
+        properties:
+          filing_id:
+            type: string
+          taxpayer_id:
+            type: string
+          registration_id:
+            type: string
+          business_name:
+            type: string
+          calculation:
+            type: object
+            properties:
+              tax_base:
+                type: integer
+              output_vat:
+                type: integer
+              input_vat:
+                type: integer
+              noncreditable_vat:
+                type: integer
+              deductible_input_vat:
+                type: integer
+              receipt_credit:
+                type: integer
+              prepaid_vat:
+                type: integer
+              net_vat:
+                type: integer
+              payable_vat:
+                type: integer
+              refund_vat:
+                type: integer
+              unique_transaction_count:
+                type: integer
+            required:
+            - tax_base
+            - output_vat
+            - input_vat
+            - noncreditable_vat
+            - deductible_input_vat
+            - receipt_credit
+            - prepaid_vat
+            - net_vat
+            - payable_vat
+            - refund_vat
+            - unique_transaction_count
+            additionalProperties: false
+        required:
+        - filing_id
+        - taxpayer_id
+        - registration_id
+        - business_name
+        - calculation
+        additionalProperties: false
+    registration_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          filing_id:
+            type: string
+          taxpayer_id:
+            type: string
+          registration_id:
+            type: string
+          business_name:
+            type: string
+          tax_due:
+            type: integer
+          payable_vat:
+            type: integer
+          refund_vat:
+            type: integer
+          paid:
+            type: integer
+          received:
+            type: integer
+          net_outflow:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - filing_id
+        - taxpayer_id
+        - registration_id
+        - business_name
+        - tax_due
+        - payable_vat
+        - refund_vat
+        - paid
+        - received
+        - net_outflow
+        - balance
+        additionalProperties: false
+    tax_due_total:
+      type: integer
+    paid_total:
+      type: integer
+    received_total:
+      type: integer
+    balance_total:
+      type: integer
+  required:
+  - filing_calculations
+  - registration_settlements
+  - tax_due_total
+  - paid_total
+  - received_total
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-ce6788bb-08b8-57a6-8ce3-cfafbbcb060c
+scenario_seed: 12675381982627694749
+scenario_hash: dc1dd7d477467cf3ade8ff974d334682107329a3227104ae5cff5bc522a294d1
+authorship:
+  method: individually_written
+  case_id: C015
+  case_sha256: afe800c192e9089d4086d6b23940a54bb7a1cd5049350dd21a9b7f721fa00489
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- filing_calculations
+- registration_settlements
+- tax_due_total
+- paid_total
+- received_total
+- balance_total

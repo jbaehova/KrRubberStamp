@@ -1,0 +1,113 @@
+task_id: B2_D096_f5f2bbf2
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 연말에 주문할 보관판은 다음 해 첫날까지 도착해야 합니다. 달력일 도착과 최소 주문 재고를 quote_comparisons로
+  대조하고 chosen_quote_id 및 eligible_quote_count를 작성해 주세요.
+input_files:
+- path: inputs/01_연말요청.pdf
+  format: pdf
+- path: inputs/02_연말가격.xlsx
+  format: xlsx
+- path: inputs/03_연말기간.hwpx
+  format: hwpx
+- path: inputs/04_연말재고.pdf
+  format: pdf
+- path: inputs/05_최소가격.xlsx
+  format: xlsx
+- path: inputs/06_최소기간.hwpx
+  format: hwpx
+- path: inputs/07_최소재고.pdf
+  format: pdf
+- path: inputs/08_정시가격.xlsx
+  format: xlsx
+- path: inputs/09_정시이행.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    quote_comparisons:
+      type: array
+      items:
+        type: object
+        properties:
+          quote_id:
+            type: string
+          vendor:
+            type: string
+          packs:
+            type: integer
+          obtained_units:
+            type: integer
+          leftover_units:
+            type: integer
+          merchandise_supply:
+            type: integer
+          merchandise_vat:
+            type: integer
+          merchandise_total:
+            type: integer
+          shipping_supply:
+            type: integer
+          shipping_vat:
+            type: integer
+          shipping_total:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          delivery_date:
+            type: string
+          valid_on_order:
+            type: boolean
+          stock_sufficient:
+            type: boolean
+          delivered_in_time:
+            type: boolean
+          eligible:
+            type: boolean
+        required:
+        - quote_id
+        - vendor
+        - packs
+        - obtained_units
+        - leftover_units
+        - merchandise_supply
+        - merchandise_vat
+        - merchandise_total
+        - shipping_supply
+        - shipping_vat
+        - shipping_total
+        - supply
+        - vat
+        - total
+        - delivery_date
+        - valid_on_order
+        - stock_sufficient
+        - delivered_in_time
+        - eligible
+        additionalProperties: false
+    chosen_quote_id:
+      type: string
+    eligible_quote_count:
+      type: integer
+  required:
+  - quote_comparisons
+  - chosen_quote_id
+  - eligible_quote_count
+  additionalProperties: false
+canary: KrRubberStamp-canary-529d2515-137a-5f49-a963-f9d2e93eae63
+scenario_seed: 17722434131968764145
+scenario_hash: 0c72ccf3c506763b16bf42797b4533c23c2b6723ade6f3bc60df633b231cc6c1
+authorship:
+  method: individually_written
+  case_id: D096
+  case_sha256: f5f2bbf20f41a8f1a5565079319828407c5340bf2bc120aec88fc312b1c6c1ec
+  source_file: batch_2/D_extract/cases_051_100.json
+answer_fields:
+- quote_comparisons
+- chosen_quote_id
+- eligible_quote_count

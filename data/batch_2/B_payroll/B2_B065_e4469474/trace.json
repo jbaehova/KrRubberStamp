@@ -1,0 +1,577 @@
+[
+  {
+    "inputs": {
+      "as_of_date": "2026-11-25",
+      "payrolls": [
+        {
+          "employee_id": "BIND-77",
+          "facts": {
+            "base_salary": 5016000,
+            "company_name": "가상문서봉합실",
+            "eligible_children": 0,
+            "employee_name": "가상서안",
+            "employer_provides_meals": false,
+            "employment_due": true,
+            "employment_notified_income": 5016000,
+            "family_count": 1,
+            "fixed_allowance": 0,
+            "health_due": true,
+            "health_notified_income": 5016000,
+            "holiday_shifts": [],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-11",
+            "meal_allowance": 0,
+            "monthly_divisor_hours": 209,
+            "night_minutes": 0,
+            "overtime_minutes": 120,
+            "pay_basis": "monthly",
+            "payment_date": "2026-11-25",
+            "pension_due": true,
+            "pension_notified_income": 5016000,
+            "qualifying_weeks": 0,
+            "regular_minutes": 10080,
+            "scope": "11월1일부터 정상 주40시간 계약으로 전환했다. 월 환산209시간에 소정과 주휴 기본대가 포함하며 기본급5016000원 전액이다. 실제 추가는11월23일18시부터20시2시간 한 번이고 다른 추가나 야간 및 휴일근로 없다. 정상 월 명세마다 기관 최종 회신값을 적용한다.",
+            "variable_allowance": 0,
+            "weekly_holiday_included": true,
+            "weekly_hours": 40,
+            "withholding_percent": 100,
+            "workplace_employee_count": 8
+          },
+          "payroll_id": "BIND-NOV"
+        },
+        {
+          "employee_id": "BIND-77",
+          "facts": {
+            "base_salary": 2496000,
+            "company_name": "가상문서봉합실",
+            "eligible_children": 0,
+            "employee_name": "가상서안",
+            "employer_provides_meals": false,
+            "employment_due": true,
+            "employment_notified_income": 2496000,
+            "family_count": 1,
+            "fixed_allowance": 0,
+            "health_due": true,
+            "health_notified_income": 2496000,
+            "holiday_shifts": [],
+            "hourly_rate": 0,
+            "insurance_assessment_month": "2026-10",
+            "meal_allowance": 0,
+            "monthly_divisor_hours": 104,
+            "night_minutes": 0,
+            "overtime_minutes": 120,
+            "pay_basis": "monthly",
+            "payment_date": "2026-10-25",
+            "pension_due": true,
+            "pension_notified_income": 2496000,
+            "qualifying_weeks": 0,
+            "regular_minutes": 5040,
+            "scope": "10월 정상 월급 전액. 주월부터금 각4시간 계약이고 약정 월 환산104시간에 소정 및 주휴 기본대가 포함. 현금 지급 항목은 기본급뿐이다. 실제 평일 추가는10월19일18시부터20시2시간 한 번이며 소정근로 종료 후 수행했다. 기타 추가나 야간 및 휴일근로 없다.",
+            "variable_allowance": 0,
+            "weekly_holiday_included": true,
+            "weekly_hours": 20,
+            "withholding_percent": 100,
+            "workplace_employee_count": 8
+          },
+          "payroll_id": "BIND-OCT"
+        }
+      ],
+      "processing_policy": "10월과11월은 같은 직원의 서로 독립한 완전 월 명세다. 확인된 계약별 월 환산시간을 분모로 읽는다. 두 계약은 시간당24000원 수준을 유지하도록 체결되었으며 근로범위 확대가 이미 발생한 별도2시간 작업의 단가 인상을 의미하지 않는다.",
+      "source_contract": "payroll_bank_reconciliation_v1",
+      "transfers": [
+        {
+          "amount": 4200000,
+          "date": "2026-11-25",
+          "employee_id": "BIND-77",
+          "payroll_id": "BIND-NOV",
+          "status": "executed",
+          "transfer_id": "BIND-XNOV"
+        },
+        {
+          "amount": 2200000,
+          "date": "2026-10-25",
+          "employee_id": "BIND-77",
+          "payroll_id": "BIND-OCT",
+          "status": "executed",
+          "transfer_id": "BIND-XOCT"
+        }
+      ]
+    },
+    "output": {
+      "accepted_transfer_ids": [
+        "BIND-XNOV",
+        "BIND-XOCT"
+      ],
+      "cash_by_payroll": [
+        {
+          "paid": 4200000,
+          "payroll_id": "BIND-NOV"
+        },
+        {
+          "paid": 2200000,
+          "payroll_id": "BIND-OCT"
+        }
+      ],
+      "deduplicated_transfer_ids": [],
+      "excluded_transfer_ids": [],
+      "payroll_derivations": [
+        {
+          "payroll_id": "BIND-NOV",
+          "trace": [
+            {
+              "inputs": {
+                "base_salary": 5016000,
+                "fixed_allowance": 0,
+                "hourly_rate": 0,
+                "meal_allowance": 0,
+                "monthly_divisor_hours": 209,
+                "pay_basis": "monthly",
+                "regular_minutes": 10080
+              },
+              "output": {
+                "hourly_exact_denominator": 1,
+                "hourly_exact_numerator": 24000,
+                "ordinary_monthly_wage": 5016000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 120,
+                "premium_applies": true
+              },
+              "output": 72000,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 40
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 0
+              },
+              "output": 0,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 5016000,
+                "fixed_allowance": 0,
+                "holiday_pay": 0,
+                "meal_allowance": 0,
+                "night_pay": 0,
+                "overtime_pay": 72000,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 5088000,
+                "taxable_pay": 5088000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-11",
+                "month": 11,
+                "notified_income": 5016000
+              },
+              "output": {
+                "national_pension": 238260,
+                "pension_base_income": 5016000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 5016000
+              },
+              "output": 180320,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 180320,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 23690,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 5016000
+              },
+              "output": 45140,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 1,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  5080000,
+                  5100000
+                ],
+                "taxable_pay": 5088000
+              },
+              "output": 346690,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 0,
+                "payment_date": "2026-11-25"
+              },
+              "output": 0,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 346690,
+                "child_credit": 0,
+                "eligible_children": 0,
+                "family_count": 1,
+                "payment_date": "2026-11-25",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  5080000,
+                  5100000
+                ],
+                "table_tax_before_children_floor_won": 346690,
+                "taxable_pay": 5088000,
+                "withholding_percent": 100
+              },
+              "output": 346690,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 346690,
+                "rate": "0.1"
+              },
+              "output": 34660,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 868760,
+                "gross_pay": 5088000
+              },
+              "output": 4219240,
+              "rule_id": "B.NET"
+            }
+          ]
+        },
+        {
+          "payroll_id": "BIND-OCT",
+          "trace": [
+            {
+              "inputs": {
+                "base_salary": 2496000,
+                "fixed_allowance": 0,
+                "hourly_rate": 0,
+                "meal_allowance": 0,
+                "monthly_divisor_hours": 104,
+                "pay_basis": "monthly",
+                "regular_minutes": 5040
+              },
+              "output": {
+                "hourly_exact_denominator": 1,
+                "hourly_exact_numerator": 24000,
+                "ordinary_monthly_wage": 2496000
+              },
+              "rule_id": "B.ORDINARY"
+            },
+            {
+              "inputs": {
+                "overtime_minutes_excluding_holiday": 120,
+                "premium_applies": true
+              },
+              "output": 72000,
+              "rule_id": "B.OVERTIME"
+            },
+            {
+              "inputs": {
+                "night_minutes_including_overlap": 0,
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.NIGHT"
+            },
+            {
+              "inputs": {
+                "holiday_shifts": [],
+                "premium_applies": true
+              },
+              "output": 0,
+              "rule_id": "B.HOLIDAY"
+            },
+            {
+              "inputs": {
+                "already_included": true,
+                "qualifying_weeks": 0,
+                "weekly_hours": 20
+              },
+              "output": {
+                "weekly_holiday_entitlement": 0,
+                "weekly_holiday_pay": 0
+              },
+              "rule_id": "B.WEEKLY"
+            },
+            {
+              "inputs": {
+                "employer_provides_meals": false,
+                "meal_allowance": 0
+              },
+              "output": 0,
+              "rule_id": "B.MEAL_EXEMPT"
+            },
+            {
+              "inputs": {
+                "base_pay": 2496000,
+                "fixed_allowance": 0,
+                "holiday_pay": 0,
+                "meal_allowance": 0,
+                "night_pay": 0,
+                "overtime_pay": 72000,
+                "paid_holiday_pay": 0,
+                "variable_allowance": 0,
+                "weekly_holiday_pay": 0
+              },
+              "output": {
+                "gross_pay": 2568000,
+                "taxable_pay": 2568000
+              },
+              "rule_id": "B.GROSS"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.0475",
+                "insurance_assessment_month": "2026-10",
+                "month": 10,
+                "notified_income": 2496000
+              },
+              "output": {
+                "national_pension": 118560,
+                "pension_base_income": 2496000
+              },
+              "rule_id": "B.PENSION"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.03595",
+                "notified_income": 2496000
+              },
+              "output": 89730,
+              "rule_id": "B.HEALTH"
+            },
+            {
+              "inputs": {
+                "health_premium": 89730,
+                "ratio": "0.9448 / 7.19"
+              },
+              "output": 11790,
+              "rule_id": "B.LONG_TERM_CARE"
+            },
+            {
+              "inputs": {
+                "due": true,
+                "employee_rate": "0.009",
+                "notified_income": 2496000
+              },
+              "output": 22460,
+              "rule_id": "B.EMPLOYMENT"
+            },
+            {
+              "inputs": {
+                "family_count": 1,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  2560000,
+                  2570000
+                ],
+                "taxable_pay": 2568000
+              },
+              "output": 37650,
+              "rule_id": "B.TAX_TABLE"
+            },
+            {
+              "inputs": {
+                "eligible_children": 0,
+                "payment_date": "2026-10-25"
+              },
+              "output": 0,
+              "rule_id": "B.CHILD_CREDIT"
+            },
+            {
+              "inputs": {
+                "before_small_tax_waiver": 37650,
+                "child_credit": 0,
+                "eligible_children": 0,
+                "family_count": 1,
+                "payment_date": "2026-10-25",
+                "small_tax_waiver_below_won": 1000,
+                "source_table_sha256": "ab78f130dd263b271ea5cf9c33dd9bf169641724f942f07ff2e261085444a48e",
+                "table_interval_won": [
+                  2560000,
+                  2570000
+                ],
+                "table_tax_before_children_floor_won": 37650,
+                "taxable_pay": 2568000,
+                "withholding_percent": 100
+              },
+              "output": 37650,
+              "rule_id": "B.WITHHOLDING"
+            },
+            {
+              "inputs": {
+                "income_tax": 37650,
+                "rate": "0.1"
+              },
+              "output": 3760,
+              "rule_id": "B.LOCAL_TAX"
+            },
+            {
+              "inputs": {
+                "deductions": 283950,
+                "gross_pay": 2568000
+              },
+              "output": 2284050,
+              "rule_id": "B.NET"
+            }
+          ]
+        }
+      ],
+      "settlement": {
+        "balance_total": 103290,
+        "deductions_total": 1152710,
+        "employee_settlements": [
+          {
+            "balance": 19240,
+            "effective_payment_date": "2026-11-25",
+            "employee_id": "BIND-77",
+            "gross_pay": 5088000,
+            "insurance_assessment_month": "2026-11",
+            "net_pay": 4219240,
+            "paid": 4200000,
+            "payroll_id": "BIND-NOV",
+            "total_deductions": 868760
+          },
+          {
+            "balance": 84050,
+            "effective_payment_date": "2026-10-25",
+            "employee_id": "BIND-77",
+            "gross_pay": 2568000,
+            "insurance_assessment_month": "2026-10",
+            "net_pay": 2284050,
+            "paid": 2200000,
+            "payroll_id": "BIND-OCT",
+            "total_deductions": 283950
+          }
+        ],
+        "gross_total": 7656000,
+        "net_total": 6503290,
+        "paid_total": 6400000,
+        "payroll_calculations": [
+          {
+            "calculation": {
+              "base_pay": 5016000,
+              "effective_payment_date": "2026-11-25",
+              "employment_insurance": 45140,
+              "fixed_allowance": 0,
+              "gross_pay": 5088000,
+              "health_insurance": 180320,
+              "holiday_pay": 0,
+              "income_tax": 346690,
+              "local_income_tax": 34660,
+              "long_term_care": 23690,
+              "meal_allowance": 0,
+              "national_pension": 238260,
+              "net_pay": 4219240,
+              "night_pay": 0,
+              "non_taxable_pay": 0,
+              "ordinary_hourly_wage_floor": 24000,
+              "ordinary_monthly_wage": 5016000,
+              "overtime_pay": 72000,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 5016000,
+              "taxable_pay": 5088000,
+              "total_deductions": 868760,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "BIND-77",
+            "payroll_id": "BIND-NOV"
+          },
+          {
+            "calculation": {
+              "base_pay": 2496000,
+              "effective_payment_date": "2026-10-25",
+              "employment_insurance": 22460,
+              "fixed_allowance": 0,
+              "gross_pay": 2568000,
+              "health_insurance": 89730,
+              "holiday_pay": 0,
+              "income_tax": 37650,
+              "local_income_tax": 3760,
+              "long_term_care": 11790,
+              "meal_allowance": 0,
+              "national_pension": 118560,
+              "net_pay": 2284050,
+              "night_pay": 0,
+              "non_taxable_pay": 0,
+              "ordinary_hourly_wage_floor": 24000,
+              "ordinary_monthly_wage": 2496000,
+              "overtime_pay": 72000,
+              "paid_holiday_pay": 0,
+              "pension_base_income": 2496000,
+              "taxable_pay": 2568000,
+              "total_deductions": 283950,
+              "variable_allowance": 0,
+              "weekly_holiday_pay": 0
+            },
+            "employee_id": "BIND-77",
+            "payroll_id": "BIND-OCT"
+          }
+        ]
+      }
+    },
+    "rule_id": "B_PAYROLL_BANK_RECONCILIATION"
+  }
+]

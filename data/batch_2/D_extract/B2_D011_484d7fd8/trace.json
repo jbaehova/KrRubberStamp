@@ -1,0 +1,160 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-03-02",
+      "events": [
+        {
+          "date": "2026-02-28",
+          "event_id": "CLAMP-BODY-IN",
+          "kind": "received",
+          "line_id": "BODY",
+          "order_id": "CLAMP-SET",
+          "units": 4
+        },
+        {
+          "date": "2026-03-01",
+          "event_id": "CLAMP-BOLT-IN",
+          "kind": "received",
+          "line_id": "BOLT",
+          "order_id": "CLAMP-SET",
+          "units": 6
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-02-24",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "클램프본체",
+              "line_id": "BODY",
+              "ordered_packages": 2,
+              "package_price": 18000,
+              "price_includes_vat": false,
+              "units_per_package": 2
+            },
+            {
+              "base_unit": "개",
+              "item": "클램프볼트",
+              "line_id": "BOLT",
+              "ordered_packages": 1,
+              "package_price": 8000,
+              "price_includes_vat": false,
+              "units_per_package": 8
+            }
+          ],
+          "order_id": "CLAMP-SET",
+          "vendor": "가상클램프기구"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "업체는 가상이다. 본체 한 개의 조립에는 볼트 두 개를 사용한다. 주문 안의 행번호로 각 인수량을 연결한다. 발주 포장수 곱하기 포장당수량에서 순인수를 뺀다. 공급가격은 포장가격 곱하기 순인수 비율을 마지막에 버리고 별도 세액은 10%를 버린다. 마감일까지 실행 지급만 반영한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "CLAMP-BODY-IN",
+        "CLAMP-BOLT-IN"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "CLAMP-BODY-IN",
+          "net_units_after_event": 4
+        },
+        {
+          "event_id": "CLAMP-BOLT-IN",
+          "net_units_after_event": 6
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 36000,
+          "line_id": "BODY",
+          "order_id": "CLAMP-SET",
+          "package_price_times_net_units": 72000,
+          "price_includes_vat": false,
+          "supply": 36000,
+          "total": 39600,
+          "units_per_package": 2,
+          "vat": 3600
+        },
+        {
+          "amount_after_floor": 6000,
+          "line_id": "BOLT",
+          "order_id": "CLAMP-SET",
+          "package_price_times_net_units": 48000,
+          "price_includes_vat": false,
+          "supply": 6000,
+          "total": 6600,
+          "units_per_package": 8,
+          "vat": 600
+        }
+      ],
+      "settlement": {
+        "balance_total": 46200,
+        "grand_total": 46200,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "클램프본체",
+            "net_units": 4
+          },
+          {
+            "base_unit": "개",
+            "item": "클램프볼트",
+            "net_units": 6
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "클램프본체",
+            "line_id": "BODY",
+            "net_units": 4,
+            "order_id": "CLAMP-SET",
+            "ordered_units": 4,
+            "outstanding_units": 0,
+            "received_units": 4,
+            "returned_units": 0,
+            "supply": 36000,
+            "total": 39600,
+            "vat": 3600
+          },
+          {
+            "base_unit": "개",
+            "item": "클램프볼트",
+            "line_id": "BOLT",
+            "net_units": 6,
+            "order_id": "CLAMP-SET",
+            "ordered_units": 8,
+            "outstanding_units": 2,
+            "received_units": 6,
+            "returned_units": 0,
+            "supply": 6000,
+            "total": 6600,
+            "vat": 600
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 46200,
+            "paid": 0,
+            "supply": 42000,
+            "total": 46200,
+            "vat": 4200,
+            "vendor": "가상클램프기구"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

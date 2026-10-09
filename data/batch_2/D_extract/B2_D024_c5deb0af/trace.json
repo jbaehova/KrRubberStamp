@@ -1,0 +1,121 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-06-20",
+      "events": [
+        {
+          "date": "2026-06-15",
+          "event_id": "NAIL-LOT1",
+          "kind": "received",
+          "line_id": "N",
+          "order_id": "NAIL-OVER",
+          "units": 25
+        },
+        {
+          "date": "2026-06-17",
+          "event_id": "NAIL-LOT2",
+          "kind": "received",
+          "line_id": "N",
+          "order_id": "NAIL-OVER",
+          "units": 31
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-06-11",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "나사못30mm",
+              "line_id": "N",
+              "ordered_packages": 2,
+              "package_price": 5000,
+              "price_includes_vat": false,
+              "units_per_package": 25
+            }
+          ],
+          "order_id": "NAIL-OVER",
+          "vendor": "가상나사못"
+        }
+      ],
+      "payments": [],
+      "processing_policy": "업체는 가상이다. 마감까지 실제 입고를 합치고 발주량을 넘겨도 자르지 않는다. 발주 포장수 곱하기 포장당수량에서 순인수를 뺀 음수도 보존한다. 포장가격의 순인수 비율은 마지막에 버리고 별도 세액은 10%를 버린다. 실행 지급만 차감한다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "NAIL-LOT1",
+        "NAIL-LOT2"
+      ],
+      "accepted_payment_ids": [],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "NAIL-LOT1",
+          "net_units_after_event": 25
+        },
+        {
+          "event_id": "NAIL-LOT2",
+          "net_units_after_event": 56
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 11200,
+          "line_id": "N",
+          "order_id": "NAIL-OVER",
+          "package_price_times_net_units": 280000,
+          "price_includes_vat": false,
+          "supply": 11200,
+          "total": 12320,
+          "units_per_package": 25,
+          "vat": 1120
+        }
+      ],
+      "settlement": {
+        "balance_total": 12320,
+        "grand_total": 12320,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "나사못30mm",
+            "net_units": 56
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "나사못30mm",
+            "line_id": "N",
+            "net_units": 56,
+            "order_id": "NAIL-OVER",
+            "ordered_units": 50,
+            "outstanding_units": -6,
+            "received_units": 56,
+            "returned_units": 0,
+            "supply": 11200,
+            "total": 12320,
+            "vat": 1120
+          }
+        ],
+        "payment_total": 0,
+        "vendor_balances": [
+          {
+            "balance": 12320,
+            "paid": 0,
+            "supply": 11200,
+            "total": 12320,
+            "vat": 1120,
+            "vendor": "가상나사못"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

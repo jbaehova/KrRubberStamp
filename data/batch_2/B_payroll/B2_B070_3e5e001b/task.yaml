@@ -1,0 +1,41 @@
+task_id: B2_B070_3e5e001b
+domain: B_payroll
+difficulty: medium
+reference_period: '2026'
+instruction: 가상라벨실 소집카드 한 장의 실제 작업일이 월요일에서 직전 일요일로 정정됐습니다. 최종 승인 날짜를 선택한 후 이미 있던 같은
+  일요일 카드와 하루 합계를 만들고8시간 경계를 적용하세요. overtime_pay, holiday_pay 및 gross_pay를 제출하세요.
+input_files:
+- path: inputs/01_약정.pdf
+  format: pdf
+- path: inputs/02_카드.xlsx
+  format: xlsx
+- path: inputs/03_공제.hwpx
+  format: hwpx
+- path: inputs/04_지급.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    overtime_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    gross_pay:
+      type: integer
+  required:
+  - overtime_pay
+  - holiday_pay
+  - gross_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-7c1cec58-8963-5759-83b3-e37b9979c79e
+scenario_seed: 4494029597820199080
+scenario_hash: 7adab3547fa4a16271fdf8e216552478f8edeed88a986364c9934648d8aa35be
+authorship:
+  method: individually_written
+  case_id: B070
+  case_sha256: 3e5e001bdc2a20a83a876ae1e48b7f6f1716f96ac4bead8d50d768e2c37cd50e
+  source_file: batch_2/B_payroll/cases_051_100.json
+answer_fields:
+- overtime_pay
+- holiday_pay
+- gross_pay

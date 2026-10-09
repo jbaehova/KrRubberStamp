@@ -1,0 +1,74 @@
+task_id: B2_D018_8168d6ec
+domain: D_extract
+difficulty: medium
+reference_period: not-applicable
+instruction: 접지판의 이번 마감일까지 받은 수량으로 납품 대기량을 확인하세요. 뒤에 제공된 도착 기록도 날짜를 대조합니다. answer.json에는
+  line_settlements를 작성하고 발주량과 실제 순인수량 및 남은 수량을 모두 남깁니다.
+input_files:
+- path: inputs/01_접지판발주.pdf
+  format: pdf
+- path: inputs/02_초기접지판.xlsx
+  format: xlsx
+- path: inputs/03_후속접지판.hwpx
+  format: hwpx
+- path: inputs/04_접지판약정.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-2988f156-3ed7-5011-92ad-f19a8c182554
+scenario_seed: 9324939338781715305
+scenario_hash: ff16d4922e11e91612079c4efc04b73b1552cab6f2dd3b3e70832310b3e740ee
+authorship:
+  method: individually_written
+  case_id: D018
+  case_sha256: 8168d6ec48266b699815041b702158513793d59ed593b8a6902faea03eb5a7b1
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements

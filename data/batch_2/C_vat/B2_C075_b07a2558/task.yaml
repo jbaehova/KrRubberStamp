@@ -1,0 +1,37 @@
+task_id: B2_C075_b07a2558
+domain: C_vat
+difficulty: medium
+reference_period: 2026-H1
+instruction: 가상앵두문고는 점포별 연도 대장과 발급 금액 정정을 보냈습니다. 신고 점포의 전년 공급가액 및 현재 유효한 실제 부분 발급을
+  찾아 발행 공제(receipt_credit)와 납부액(payable_vat)을 answer.json에 쓰세요.
+input_files:
+- path: inputs/01_신고점포.pdf
+  format: pdf
+- path: inputs/02_연도대장.xlsx
+  format: xlsx
+- path: inputs/03_지급정정.hwpx
+  format: hwpx
+- path: inputs/04_최종효력.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-6d0dc002-bea3-580d-a8d6-7122d5097c10
+scenario_seed: 12716517557740440202
+scenario_hash: a29742337c30c35e18418cf7b14b0ac71fea26ad0c00b39611fdb08c9d2fe531
+authorship:
+  method: individually_written
+  case_id: C075
+  case_sha256: b07a255801230a8a8d51479bcf64ee9e5a1ed02b48abf58ee9c17c9950050f56
+  source_file: batch_2/C_vat/cases_051_100.json
+answer_fields:
+- receipt_credit
+- payable_vat

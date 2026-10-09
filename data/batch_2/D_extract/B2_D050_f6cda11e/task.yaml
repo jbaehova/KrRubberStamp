@@ -1,0 +1,143 @@
+task_id: B2_D050_f6cda11e
+domain: D_extract
+difficulty: hard
+reference_period: not-applicable
+instruction: 검수 팔레트의 두 주문과 현금 집행을 원문 식별자로 정확히 대조하세요. 주문 및 지급 ID에는 이름 정규화를 적용하지 않습니다.
+  각 반품은 정확한 주문과 행에서 빼고 서로 다른 지급 ID는 모두 반영합니다. 포함 및 별도 포장가격 약정을 따릅니다. answer.json에는
+  line_settlements, item_quantities, vendor_balances, grand_total, payment_total,
+  balance_total을 작성하세요. 주문과 행 및 정규화 품목과 업체의 이름순으로 배열합니다.
+input_files:
+- path: inputs/01_영문주문.pdf
+  format: pdf
+- path: inputs/02_영문가격.xlsx
+  format: xlsx
+- path: inputs/03_숫자주문.hwpx
+  format: hwpx
+- path: inputs/04_숫자가격.xlsx
+  format: xlsx
+- path: inputs/05_영문입고.pdf
+  format: pdf
+- path: inputs/06_숫자입고.hwpx
+  format: hwpx
+- path: inputs/07_숫자반품.xlsx
+  format: xlsx
+- path: inputs/08_독립이체.hwpx
+  format: hwpx
+- path: inputs/09_팔레트약정.pdf
+  format: pdf
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+    item_quantities:
+      type: array
+      items:
+        type: object
+        properties:
+          item:
+            type: string
+          base_unit:
+            type: string
+          net_units:
+            type: integer
+        required:
+        - item
+        - base_unit
+        - net_units
+        additionalProperties: false
+    vendor_balances:
+      type: array
+      items:
+        type: object
+        properties:
+          vendor:
+            type: string
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+          paid:
+            type: integer
+          balance:
+            type: integer
+        required:
+        - vendor
+        - supply
+        - vat
+        - total
+        - paid
+        - balance
+        additionalProperties: false
+    grand_total:
+      type: integer
+    payment_total:
+      type: integer
+    balance_total:
+      type: integer
+  required:
+  - line_settlements
+  - item_quantities
+  - vendor_balances
+  - grand_total
+  - payment_total
+  - balance_total
+  additionalProperties: false
+canary: KrRubberStamp-canary-cfb1baa1-b2e6-5ad6-832a-93ae637a5e47
+scenario_seed: 17784047656428840482
+scenario_hash: bb7791118ee08ffac2dce51f076862eb7f7259f6c782e135ae8bd744bdd3b9c6
+authorship:
+  method: individually_written
+  case_id: D050
+  case_sha256: f6cda11e9e0f26225c32a23319e1c1725743c0f212ead5eb8301ac52da9e723a
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements
+- item_quantities
+- vendor_balances
+- grand_total
+- payment_total
+- balance_total

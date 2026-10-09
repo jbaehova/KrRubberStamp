@@ -1,0 +1,59 @@
+task_id: B2_B049_94de66b8
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상정책도서실 가상여준의6월1~7일시급종료이체를마감합니다. 소정저녁근무와선거일추가회수카드를구별하여base_pay, holiday_pay를작성하고양쪽실제야간을night_pay로모읍니다.
+  미포함선거일기본유급paid_holiday_pay를작성하고개근주휴및확정자격회신을적용한net_pay까지계산해주세요.
+input_files:
+- path: inputs/01_시급계약.pdf
+  format: pdf
+- path: inputs/02_월요일.xlsx
+  format: xlsx
+- path: inputs/03_화요일.xlsx
+  format: xlsx
+- path: inputs/04_금요일.xlsx
+  format: xlsx
+- path: inputs/05_회수카드.xlsx
+  format: xlsx
+- path: inputs/06_공휴일.pdf
+  format: pdf
+- path: inputs/07_주마감.hwpx
+  format: hwpx
+- path: inputs/08_자격.pdf
+  format: pdf
+- path: inputs/09_지급세무.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    base_pay:
+      type: integer
+    holiday_pay:
+      type: integer
+    night_pay:
+      type: integer
+    paid_holiday_pay:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - base_pay
+  - holiday_pay
+  - night_pay
+  - paid_holiday_pay
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-952ff8f2-0b20-561d-9162-a88e6cdfc667
+scenario_seed: 10727124304676876784
+scenario_hash: 3c1479b8b9e9aab990bd5d672e0ab13617612baae5e09924c7cccec1cb216c43
+authorship:
+  method: individually_written
+  case_id: B049
+  case_sha256: 94de66b869b971f0c61b57c3cdfb54e887be8b3e730fa5b2b93e0cf4e7ad377e
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- base_pay
+- holiday_pay
+- night_pay
+- paid_holiday_pay
+- net_pay

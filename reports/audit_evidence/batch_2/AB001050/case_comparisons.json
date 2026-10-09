@@ -1,0 +1,7195 @@
+[
+  {
+    "case_id": "A001",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "227f88fb9cc50cded3b12e9efcd0931df8791c9c65a11240ceace7d5be211255",
+    "closest_batch1_case": "A109",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_104_153.json",
+    "closest_case_sha256": "aaeeeb8b1cbe604638130ba3324f60961c5d9e3b3f6976a10daca288eb7796ad",
+    "requested_fields": [
+      "total_salary",
+      "credit_card_deduction",
+      "tax_base"
+    ],
+    "closest_requested_fields": [
+      "total_salary",
+      "credit_card_deduction",
+      "salary_income",
+      "tax_base"
+    ],
+    "comparison": "신용→직불 문턱 차감과 총급여/카드공제/과세표준이 같다. 3원 잔액과 절사 강조만 추가했다.",
+    "recommended_action": "같은 문턱을 또 계산하는 목적을 버리고 서로 다른 실제 거래 귀속을 확인하는 원자료 관계를 직접 새로 정한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_급여정밀도.xlsx",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ]
+      },
+      {
+        "filename": "02_두결제수단.pdf",
+        "fields": [
+          "cards"
+        ]
+      },
+      {
+        "filename": "03_정산범위.hwpx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A002",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "74cb473d85efb38b99bd5d8db206676a88ab252f9e699bf265e6cb76e59a0bc0",
+    "closest_batch1_case": "A018",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_004_053.json",
+    "closest_case_sha256": "bb9a396eeaad0717c9340b259c26d1d9302c8d0315f91299fe0474917aa2527a",
+    "requested_fields": [
+      "total_salary",
+      "salary_income",
+      "final_national_tax",
+      "settlement_national_tax",
+      "settlement_local_tax"
+    ],
+    "closest_requested_fields": [
+      "salary_deduction",
+      "computed_tax",
+      "final_national_tax",
+      "final_local_tax",
+      "settlement_total"
+    ],
+    "comparison": "낮은 과세소득의 영 결정세액과 달리 지급 전액이 확인된 비과세라 과세 총급여 자체가 영이다. 실제 지방 기납부 누계는 국세 비율과 분리한다.",
+    "recommended_action": "비과세 종류는 확인된 범위라는 전제를 유지한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_비과세지급.pdf",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_징수잔액.xlsx",
+        "fields": [
+          "paid_national_tax",
+          "paid_local_tax"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A003",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "ffd966ef5fa2b0d353c1f1066a8da1e6f92dc4b02846b3356536dc6ccaaefc61",
+    "closest_batch1_case": "A107",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_104_153.json",
+    "closest_case_sha256": "7e5371066851c417ec878c6159472e687ef2c85d6cbaa7c5bcbcb5059e1bea97",
+    "requested_fields": [
+      "political_credit",
+      "hometown_credit",
+      "standard_credit",
+      "total_tax_credits"
+    ],
+    "closest_requested_fields": [
+      "political_credit",
+      "hometown_credit",
+      "donation_credit",
+      "final_national_tax"
+    ],
+    "comparison": "같은 두 본인 전용기부와 독립 소액 구간이다. 80000원을100011원으로 바꾸어 절사를 강조했지만 영수증 연결 관계는 같다.",
+    "recommended_action": "한 기부의 두 독립 납부와 다른 기부의 납부자 귀속 등 합산 단위가 실제로 다른 원자료를 새로 작성한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_정치납부.pdf",
+        "fields": [
+          "donations.0"
+        ]
+      },
+      {
+        "filename": "02_고향납부.hwpx",
+        "fields": [
+          "donations.1"
+        ]
+      },
+      {
+        "filename": "03_선택과급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end",
+          "deduction_choice"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A004",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "f2465543381a54bd4ea86e4ef4ec2941c9a5361a403e6c7c6a206fb33ae6e94b",
+    "closest_batch1_case": "A016",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_004_053.json",
+    "closest_case_sha256": "171d146796e52f052c44f7865895234ae5c6194251ff6ccd713b7911804a348a",
+    "requested_fields": [
+      "medical_credit",
+      "computed_tax",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "medical_credit",
+      "final_national_tax"
+    ],
+    "comparison": "두 안경의 동일인 한도에 두 번째 영수증만의 보전금을 먼저 연결하여 총액 초과/순부담 미달을 구분한다. 기존은 안경 합산과 치료의 연결이다.",
+    "recommended_action": "보전 순서와 연간 사람별 제한을 유지한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_첫안경.pdf",
+        "fields": [
+          "medical.0"
+        ]
+      },
+      {
+        "filename": "02_재구입보전.xlsx",
+        "fields": [
+          "medical.1"
+        ]
+      },
+      {
+        "filename": "03_연간정산.hwpx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A005",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "a76d9896bc84194136920f641dcd40a9586be6594402049de3e84f06a624742f",
+    "closest_batch1_case": "A116",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_104_153.json",
+    "closest_case_sha256": "06576bf4d31b2e67973d904b4b5bb276d094d21f2b741be86222d7ffc50b86f0",
+    "requested_fields": [
+      "basic_deduction",
+      "education_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "education_credit",
+      "basic_deduction",
+      "final_national_tax"
+    ],
+    "comparison": "동일인 두 학부 증명→연간900만원 상한은 그대로다. 전과한 자녀를 동시재학 배우자로 바꾸었고 실제 학교 식별자도 없다.",
+    "recommended_action": "학교 수라는 서술 대신 학생/지급자/서류의 실제 귀속 조인이 달라지는 업무로 새로 작성한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_가족과급여.hwpx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end",
+          "dependents"
+        ]
+      },
+      {
+        "filename": "02_첫학부.pdf",
+        "fields": [
+          "education.0"
+        ]
+      },
+      {
+        "filename": "03_둘째학부.xlsx",
+        "fields": [
+          "education.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A006",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "4c6f37d894eeb4e957214960699cca5c671b802ef662377ac0ee8c3e24ee5c6b",
+    "closest_batch1_case": "A117",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_104_153.json",
+    "closest_case_sha256": "5a85194051e8c92e0a08819ac28529feeb90e63106f680a3d828341673c27eab",
+    "requested_fields": [
+      "salary_income",
+      "political_credit",
+      "hometown_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "political_credit",
+      "salary_income",
+      "computed_tax",
+      "final_national_tax"
+    ],
+    "comparison": "고액 정치의 구간 계산에 다른 본인 전용기부가 이어진다. 다만 기준안의 고향200000원은 잔여 소득에 제한되지 않아서 소득 잔여 조인 주장을 과장하면 안 된다.",
+    "recommended_action": "고향사랑에 남는 소득금액을 중심 판단이라고 주장하려면 실제 잔여 한도가 요청답에 작용하게 한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_급여확정.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_정치수납.pdf",
+        "fields": [
+          "donations.0"
+        ]
+      },
+      {
+        "filename": "03_고향수납.hwpx",
+        "fields": [
+          "donations.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A007",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "cb6888022b946bffb2293662d3686a36aad31ddd4f30c4a4f3fe300c60e24f5b",
+    "closest_batch1_case": "A014",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_004_053.json",
+    "closest_case_sha256": "4bb7739fb3d9ef1d85d6c86242762555864cda5dd9d79165961f9741e6d97761",
+    "requested_fields": [
+      "credit_card_deduction",
+      "tax_base",
+      "computed_tax"
+    ],
+    "closest_requested_fields": [
+      "total_salary",
+      "credit_card_deduction",
+      "tax_base"
+    ],
+    "comparison": "기존 시장/교통 사례는 원시 공제 초과액이 제한하고 새 사례는 시장 자체의율환산108000원이 추가한도를 제한한다. 같은 법규칙 재사용이며 한도 단계의 제한 요소가 다르다.",
+    "recommended_action": "반사실과 산식에서 추가 대상 환산액이 제한하는 것을 명시한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_신용사용.pdf",
+        "fields": [
+          "cards.0"
+        ]
+      },
+      {
+        "filename": "02_시장사용.xlsx",
+        "fields": [
+          "cards.1"
+        ]
+      },
+      {
+        "filename": "03_근로기초.hwpx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A008",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "3ee78ec008d395c6cb36de142e2d0865faae4ade6d29d6c2c220a921981ce9bb",
+    "closest_batch1_case": "A063",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_054_103.json",
+    "closest_case_sha256": "362a3109781c6636af536f90fcccb36b4927aed30ce5e886baec1b389e886e8d",
+    "requested_fields": [
+      "basic_deduction",
+      "additional_deduction",
+      "medical_credit"
+    ],
+    "closest_requested_fields": [
+      "basic_deduction",
+      "additional_deduction",
+      "medical_credit"
+    ],
+    "comparison": "같은65세 이상 부모의 한도 없는 치료에 별도50만원 안경 제한이 함께 남는다. 경로우대70세와 의료65세를 같은 부모에 대조한다.",
+    "recommended_action": "각 제한은 요청 medical_credit에 작용한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_어머니자격.hwpx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end",
+          "dependents"
+        ]
+      },
+      {
+        "filename": "02_치료비.pdf",
+        "fields": [
+          "medical.0"
+        ]
+      },
+      {
+        "filename": "03_안경비.xlsx",
+        "fields": [
+          "medical.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A009",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "4f795d3854661222cbd8e5bd8d955a11de77214069ce8cc2cf95f1b53e1bc446",
+    "closest_batch1_case": "A103",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_054_103.json",
+    "closest_case_sha256": "5baaaaee0b8a89645f22d783bba3f15e8a72087e52e5355e717775330879513f",
+    "requested_fields": [
+      "tax_base",
+      "pension_account_credit",
+      "final_national_tax",
+      "settlement_national_tax"
+    ],
+    "closest_requested_fields": [
+      "education_credit",
+      "medical_credit",
+      "pension_account_credit",
+      "computed_tax",
+      "employment_credit",
+      "total_tax_credits",
+      "final_national_tax",
+      "final_local_tax",
+      "settlement_total"
+    ],
+    "comparison": "세액 영점은 공유하지만 과세표준도 영이며 공적연금 소득공제와 개인계좌 세액공제의 단계 차이를 직접 요청한다.",
+    "recommended_action": "계좌 공제 원액 증가/결정세액 불변을 보인다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_짧은근로.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end",
+          "public_pension_paid",
+          "paid_national_tax"
+        ]
+      },
+      {
+        "filename": "02_개인계좌.pdf",
+        "fields": [
+          "pension_accounts"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A010",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "668030c8e9d2bca5d7c2fcac43a70f7ae4f035c39988acfce02a0cb4735a3c41",
+    "closest_batch1_case": "A204",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_204_253.json",
+    "closest_case_sha256": "c2142151b49fd5202cea3a3dcf64538fabb988fa70cc7c5199e9948e261f77fb",
+    "requested_fields": [
+      "total_salary",
+      "pension_account_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "pension_account_credit",
+      "pension_deduction",
+      "standard_credit",
+      "final_national_tax"
+    ],
+    "comparison": "기존도 저축 자체 한도를 넘고 IRP 납입 일부가 합산 한도에 남는다.11000000원/1원은 같은 관계의 수치 치환이다.",
+    "recommended_action": "계좌 납부의 실제 귀속이나 반납/이체를 지원하는 원자료 계약이 준비된 뒤 그 관계로 다시 집필한다. 현 계약 밖 반납을 임의 지원하지 않는다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_연금저축.pdf",
+        "fields": [
+          "pension_accounts.pension_savings"
+        ]
+      },
+      {
+        "filename": "02_IRP최소납입.hwpx",
+        "fields": [
+          "pension_accounts.irp"
+        ]
+      },
+      {
+        "filename": "03_급여와자격.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A011",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "e4c2a7a225251a2f0fd0115a89969048055131ca8bc29f92d5055245dc0ababb",
+    "closest_batch1_case": "A246",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_204_253.json",
+    "closest_case_sha256": "fbe154a0436d911a7bd284ad19584f7ea30c679bd6805478ea6c8bfac25aef1d",
+    "requested_fields": [
+      "salary_income",
+      "donation_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "donation_credit",
+      "tax_base",
+      "total_tax_credits",
+      "final_national_tax"
+    ],
+    "comparison": "기존의 종교 혼합 한도와 달리 적격 종교기부가 없어 선순위 특례 후 공익30%를 사용한다. 제한 공식 선택은 실제 다르다.",
+    "recommended_action": "종교 없음이 원자료 범위라는 전제를 유지한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_구호증명.pdf",
+        "fields": [
+          "donations.0"
+        ]
+      },
+      {
+        "filename": "02_공익증명.hwpx",
+        "fields": [
+          "donations.1"
+        ]
+      },
+      {
+        "filename": "03_소득자료.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A012",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "a3646749d28beac965bc27d304317623f0341ae10e663b4a235f7b539c2d62e8",
+    "closest_batch1_case": "A055",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_054_103.json",
+    "closest_case_sha256": "6db16a6bf6603281420b01f0542fb02a60af3b2a5028137f0335d8eb03ba56e0",
+    "requested_fields": [
+      "salary_deduction",
+      "computed_tax",
+      "employment_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "salary_income",
+      "tax_base",
+      "computed_tax",
+      "employment_credit",
+      "final_national_tax",
+      "final_local_tax"
+    ],
+    "comparison": "가족/지출 없는 급여에서 공제→산출세액→근로세액공제 한도를 요구한다.70000002원 정밀도 외 자료 연결과 업무는 같다.",
+    "recommended_action": "원단위 경계값만 바꾸지 말고 급여 원자료의 다른 귀속/정정 관계를 직접 설계한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_확정급여.xlsx",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ]
+      },
+      {
+        "filename": "02_기본신청.hwpx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employment_start",
+          "employment_end",
+          "deduction_choice"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A013",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "accd50e743f3edf9feea64d66850e4985fdc53a6dfd7ff52fb015efe82d64b81",
+    "closest_batch1_case": "A105",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_104_153.json",
+    "closest_case_sha256": "fc40a9a7f1b5cf2f5516ff1264a3cc3b16afd52ca4100804427872c232647985",
+    "requested_fields": [
+      "eligible_dependents",
+      "basic_deduction",
+      "additional_deduction"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "basic_deduction",
+      "additional_deduction",
+      "tax_base"
+    ],
+    "comparison": "기존은 직원 한 사람에게 고령/장애 중첩이다. 새 원고는 직원 장애와 두 부모의 나이별 경로우대를 서로 다른 인적기록에 연결한다.",
+    "recommended_action": "부모70/69와 직원 장애의 적용 대상을 분리한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_부모자격.pdf",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "02_본인장애.hwpx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "employee_age",
+          "employee_disabled",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "03_급여.xlsx",
+        "fields": [
+          "annual_gross",
+          "non_taxable"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A014",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "52ace21b4e170c390a533be6ba7447626abc8397550da319f3af52dea032e252",
+    "closest_batch1_case": "A007",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_004_053.json",
+    "closest_case_sha256": "9c98a310a321684e7a815204f921ad898663fb0d2030065c76bff32c989a84f6",
+    "requested_fields": [
+      "education_credit",
+      "standard_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "education_credit",
+      "tax_base",
+      "final_national_tax"
+    ],
+    "comparison": "직원 본인 대학원 무한도에 정상 학부 영수증 하나를 더했다. 모든 서류가 같은 무한도 자기 교육이라 새 선택 관계가 없다.",
+    "recommended_action": "동일인의 기관 문구보다 실제 부담자나 적격 기관 관계가 결론을 바꾸는 증빙을 직접 설계한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_본인학부.pdf",
+        "fields": [
+          "education.0"
+        ]
+      },
+      {
+        "filename": "02_본인대학원.hwpx",
+        "fields": [
+          "education.1"
+        ]
+      },
+      {
+        "filename": "03_급여확인.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A015",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "2ba7f976fa83e4bf2ca21d2fc0a301fbb5af57b3d6dd253fdd8bd93b01aa9f00",
+    "closest_batch1_case": "A093",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_054_103.json",
+    "closest_case_sha256": "982968256741f951e36f84bfa7c0d81ec88d59f1b02a1826422948b5febeb100",
+    "requested_fields": [
+      "salary_income",
+      "political_credit",
+      "hometown_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "salary_income",
+      "political_credit",
+      "hometown_credit",
+      "donation_credit",
+      "computed_tax",
+      "final_national_tax",
+      "settlement_total"
+    ],
+    "comparison": "고액 정상순서와 달리 정치가 근로소득 거의 전부를 먼저 소비해 고향 소액 구간 자체를5원 잔여 소득으로 제한한다. 이 제한은4원 요청답과 의도 불변 정치 절사에 보인다.",
+    "recommended_action": "작은 잔여소득/전용 공제 영점/실제 결정세액을 구분한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_짧은근로.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_정치납부.pdf",
+        "fields": [
+          "donations.0"
+        ]
+      },
+      {
+        "filename": "03_고향납부.hwpx",
+        "fields": [
+          "donations.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A016",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "c0e9a997070b3d213ce315a62f6390dc74287baa3acd53c9f02329ed12f9ff05",
+    "closest_batch1_case": "A095",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_054_103.json",
+    "closest_case_sha256": "91a0b0e5ce91cf2957cabb97826c56b138af0d1207745464982cd52af507d96c",
+    "requested_fields": [
+      "medical_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "basic_deduction",
+      "child_credit",
+      "medical_credit",
+      "final_national_tax",
+      "settlement_total"
+    ],
+    "comparison": "기존 보전은 일반 진료다. 새 원고는 고율 난임 영수증에만 보전금을 연결하고 일반 진료부터 문턱을 차감한다.",
+    "recommended_action": "난임의 보전과 고율을 같은 영수증에 유지한다.",
+    "exceptions": [
+      "난임 시술비 중 대응 보전금은 실제 부담에서 빠진다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_일반진료.pdf",
+        "fields": [
+          "medical.0"
+        ]
+      },
+      {
+        "filename": "03_난임시술.pdf",
+        "fields": [
+          "medical.1.person_id",
+          "medical.1.kind",
+          "medical.1.treatment_purpose",
+          "medical.1.amount",
+          "medical.1.date"
+        ]
+      },
+      {
+        "filename": "04_보전금.hwpx",
+        "fields": [
+          "medical.1.reimbursed"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A017",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "d1db76107e10646930abf8640b9b596750cc2ef5c725a6048eb1c6328e568756",
+    "closest_batch1_case": "A028",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_004_053.json",
+    "closest_case_sha256": "58338f4944059226facb76e736532f776eb3c61a4397e07fb4c2b6ef777a8421",
+    "requested_fields": [
+      "medical_credit",
+      "child_credit",
+      "basic_deduction"
+    ],
+    "closest_requested_fields": [
+      "basic_deduction",
+      "child_credit",
+      "medical_credit"
+    ],
+    "comparison": "두 조리원은 한 출산으로 묶고 쌍둥이는 두 사람으로 등록한다. 별도 미용 제외가 의료비에 작용한다. 출산 사건 수와 신생아 수의 조인이 다르다.",
+    "recommended_action": "쌍둥이 수가 조리원 제한을 두 번 만들지 않는 근거를 유지한다.",
+    "exceptions": [
+      "출산 후 미용 목적 청구는 의료비에 포함하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_근로급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_쌍둥이등록.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_조리원이동.pdf",
+        "fields": [
+          "medical.0",
+          "medical.1"
+        ]
+      },
+      {
+        "filename": "04_별도청구.pdf",
+        "fields": [
+          "medical.2"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A018",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "4de895ccbcb2ac374a95bf721e87472a2a4197d34ec954b43f73109e8cc60307",
+    "closest_batch1_case": "A181",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_154_203.json",
+    "closest_case_sha256": "03ef5fdecc5599d6be4a13ecf00a499a15d3cf2a1445ea2fad2c032cfd198a9e",
+    "requested_fields": [
+      "education_credit",
+      "additional_deduction",
+      "child_credit"
+    ],
+    "closest_requested_fields": [
+      "insurance_credit",
+      "basic_deduction",
+      "additional_deduction"
+    ],
+    "comparison": "전용보험 상품/피보험자 자격과 유사하나 적격 재활기관과 비장애 학생을 교육비 경로로 조인하고 정상 학교비는 남긴다.",
+    "recommended_action": "적격 기관과 학생 자격을 구분한 현재 관계를 유지한다.",
+    "exceptions": [
+      "적격 특수교육 기관 비용이라도 학생에게 세법상 장애인 자격이 없어 해당 공제를 적용하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_학생자격.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_학교비.pdf",
+        "fields": [
+          "education.0"
+        ]
+      },
+      {
+        "filename": "04_재활교육.pdf",
+        "fields": [
+          "education.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A019",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "bc8f649217c9134ce063ea6b0fb4b291aae95f1cffdbf2493e7683202f8d2e62",
+    "closest_batch1_case": "A152",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_104_153.json",
+    "closest_case_sha256": "e22aee08af1c12e35690337a4d808e1a5b76b680064a915e73d74ba269d7eee3",
+    "requested_fields": [
+      "rent_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "rent_credit",
+      "insurance_credit",
+      "credit_card_deduction",
+      "medical_credit",
+      "pension_account_credit",
+      "donation_credit",
+      "final_national_tax"
+    ],
+    "comparison": "넓은 주택의 대체 가격 요건을 먼저 충족시킨 후 동일 계약 두 납부의 퇴직일 포함 여부를 가른다. 기존 기간 경계는 다른 주택/배우자 자료 조합이다.",
+    "recommended_action": "면적은 부적격 예외가 아니라 충족된 대체 요건이라고 명시한다.",
+    "exceptions": [
+      "퇴직 다음 날 낸 월세는 근로기간 지출에서 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_퇴직급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_임대주택.pdf",
+        "fields": [
+          "rent.contract_address",
+          "rent.eligible_contract_holder",
+          "rent.area_sqm",
+          "rent.standard_value"
+        ]
+      },
+      {
+        "filename": "03_세대원장.hwpx",
+        "fields": [
+          "rent.resident_registration_address",
+          "rent.household_homes_at_year_end",
+          "rent.household_head"
+        ]
+      },
+      {
+        "filename": "04_월세이체.xlsx",
+        "fields": [
+          "rent.payments"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A020",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "6e60cd657bd7ceb0c9cf0753f74b409166b52c3848a56d338c68b5f1a6b28454",
+    "closest_batch1_case": "A141",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_104_153.json",
+    "closest_case_sha256": "f7331c0e5c037c4ecf580f8a6f8f8d3b5f12d2d4aa02801229f1bfd5717555c1",
+    "requested_fields": [
+      "eligible_dependents",
+      "credit_card_deduction",
+      "medical_credit"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "child_credit",
+      "credit_card_deduction",
+      "education_credit"
+    ],
+    "comparison": "혼합소득 자녀의 카드 제외는 공유하지만 기존의 본인 학교비 대신 같은 자녀의 의료비가 소득요건 예외로 남는다. 동일인의 두 경로가 반대다.",
+    "recommended_action": "급여420만원/확정 혼합소득141만원의 정합성을 유지한다.",
+    "exceptions": [
+      "근로소득 외 소득이 있는 자녀는 급여 500만원 특례 대상이 아니다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_자녀소득.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_자녀카드.pdf",
+        "fields": [
+          "cards"
+        ]
+      },
+      {
+        "filename": "04_치료비.pdf",
+        "fields": [
+          "medical"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A021",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "114165dbbbc99c064618c9c979ad02522f164e796999eb7b2bb7d430f5d5e31a",
+    "closest_batch1_case": "A234",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_204_253.json",
+    "closest_case_sha256": "20615e968d55ab036ea5202469d6feee880b06b34c4f197678d50625ff3087ac",
+    "requested_fields": [
+      "eligible_dependents",
+      "insurance_credit",
+      "tax_base"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "insurance_credit",
+      "medical_credit"
+    ],
+    "comparison": "나이 미달 부모 한 명의 보험/진료와 달리 두 부모의 같은 보험 유형을59/60세로 나눠 한 명만 합산한다. 사람별 피보험자 귀속을 유지한다.",
+    "recommended_action": "두 보험이 실제 서로 다른 피보험자임을 유지한다.",
+    "exceptions": [
+      "59세 비장애 부모의 보험료는 기본공제 대상 피보험자 비용이 아니다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_부모자격.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_아버지보험.pdf",
+        "fields": [
+          "insurance.0"
+        ]
+      },
+      {
+        "filename": "04_어머니보험.pdf",
+        "fields": [
+          "insurance.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A022",
+    "review_state": "borderline_relationship_review",
+    "case_sha256": "03146cd20218810d2c00c4c1483f23d9ce0bd8dd749d1ea9ce4feb24f18656d3",
+    "closest_batch1_case": "A294",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "82587ae24a46eeb7eae7412e74c36a04df9d691372a3d7fd4c272f48840c8161",
+    "requested_fields": [
+      "basic_deduction",
+      "insurance_credit",
+      "credit_card_deduction"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "additional_deduction",
+      "education_credit",
+      "insurance_credit",
+      "credit_card_deduction"
+    ],
+    "comparison": "형제 보험 인정/카드 제외는 기존 장애인 동생에게도 있었다. 현재는19세 비장애 동생이고 교육/회사부담을 제거했다. 가족 자격의 충족 근거만 바뀐 축소형이라는 위험이 남는다.",
+    "recommended_action": "동거 사실을 사실문서에도 명시하고 기존과 다른 실제 원자료 연결의 필요성을 root가 재검토한다.",
+    "exceptions": [
+      "부양 동생의 카드 사용은 형제자매 관계로 카드 공제에서 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_정산급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_동생등록.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_동생보험.pdf",
+        "fields": [
+          "insurance"
+        ]
+      },
+      {
+        "filename": "04_동생카드.pdf",
+        "fields": [
+          "cards"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A023",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "bddc87233573e0c9556cd73508a5386c48e8146c09fbe20a58db996884be41dd",
+    "closest_batch1_case": "A270",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "e5f2715921de6c0da58cc7a0956e8908ba8cb1ac8b4342e35ebd19ded3f668d4",
+    "requested_fields": [
+      "housing_income_deduction",
+      "education_credit",
+      "tax_base"
+    ],
+    "closest_requested_fields": [
+      "housing_income_deduction",
+      "pension_deduction",
+      "tax_base"
+    ],
+    "comparison": "같은 세대 배우자 두 번째 주택→대출 이자 제외가 같다. 정상 공적연금을 정상 본인 학부비로 바꾸었지만 중심 주택 조인은 변하지 않았다.",
+    "recommended_action": "소유자 변경만으로 새 문제라 주장하지 말고 주택 자료와 이자 지급의 실제 다른 연결을 직접 작성한다.",
+    "exceptions": [
+      "같은 세대 배우자 주택을 포함하면 연말 두 주택으로 주택이자 요건을 충족하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여가족.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end",
+          "dependents"
+        ]
+      },
+      {
+        "filename": "02_세대주택.hwpx",
+        "fields": [
+          "housing_mortgage.household_homes_at_year_end"
+        ]
+      },
+      {
+        "filename": "03_대출계약.pdf",
+        "fields": [
+          "housing_mortgage.borrowed_date",
+          "housing_mortgage.term_years",
+          "housing_mortgage.fixed_rate",
+          "housing_mortgage.non_deferred",
+          "housing_mortgage.other_common_requirements_attested",
+          "housing_mortgage.interest_payments"
+        ]
+      },
+      {
+        "filename": "04_본인학부.pdf",
+        "fields": [
+          "education"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A024",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "cf702ffa97af1f71cdf1c8573d88b2fb94485645177690bd0ccaff59b898972a",
+    "closest_batch1_case": "A029",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_004_053.json",
+    "closest_case_sha256": "7865febe520f8a9057b70d3241471e980b2d337091637ab0bfb4a1616cd25dd3",
+    "requested_fields": [
+      "housing_income_deduction",
+      "special_income_deduction",
+      "tax_base"
+    ],
+    "closest_requested_fields": [
+      "housing_income_deduction",
+      "tax_base"
+    ],
+    "comparison": "10년 거치 변동 대출의 불인정이 같고 별도 정상 의무보험만 더했다. 급여/대출 계약/보험의 독립 산술을 새 관계로 인정하기 어렵다.",
+    "recommended_action": "계약 기간이나 금리 금액 치환을 중단하고 실제 날짜/상환 증빙 관계를 직접 설계한다.",
+    "exceptions": [
+      "10년 거치식 변동금리 계약은 해당 주택이자 공제 유형에 들지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_대출상환.pdf",
+        "fields": [
+          "housing_mortgage.borrowed_date",
+          "housing_mortgage.term_years",
+          "housing_mortgage.fixed_rate",
+          "housing_mortgage.non_deferred",
+          "housing_mortgage.other_common_requirements_attested",
+          "housing_mortgage.household_homes_at_year_end"
+        ]
+      },
+      {
+        "filename": "03_이자납부.xlsx",
+        "fields": [
+          "housing_mortgage.interest_payments"
+        ]
+      },
+      {
+        "filename": "04_의무보험.hwpx",
+        "fields": [
+          "social_insurance"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A025",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "b6e2238e4448d537c29423466b78d6a31d7d9e89142f93729bd9e3c2e7eb3269",
+    "closest_batch1_case": "A284",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "4806afbd4416ab833ece90534212d62bcfea45a4a4558be056bb289f77a153ca",
+    "requested_fields": [
+      "medical_credit",
+      "child_credit",
+      "basic_deduction"
+    ],
+    "closest_requested_fields": [
+      "medical_credit",
+      "donation_credit",
+      "final_national_tax"
+    ],
+    "comparison": "재직 후 의료 제외는 공유하지만 고율 미숙아 비용의 기간 제외와7세 아이의 일반 진료 및 출생 공제를 같은 가족 등록에 연결한다.",
+    "recommended_action": "고율이 기간 제외를 이기지 않는 점이 요청답에 남는다.",
+    "exceptions": [
+      "퇴직 후 납부한 미숙아 진료비는 근로기간 의료비에서 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_퇴직마감.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_자녀등록.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_큰아이진료.pdf",
+        "fields": [
+          "medical.0"
+        ]
+      },
+      {
+        "filename": "04_아기진료.pdf",
+        "fields": [
+          "medical.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A026",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "f40670e091cd6cf024d1958f3fed0d8779b2bdf96bf04483f5398daa0ce3ba12",
+    "closest_batch1_case": "A258",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "1dfd989971c0def7b9550c7eb32cbac175cf0eb0b600173c83bef009c6af9e6c",
+    "requested_fields": [
+      "education_credit",
+      "basic_deduction",
+      "child_credit"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "child_credit",
+      "education_credit",
+      "final_national_tax"
+    ],
+    "comparison": "같은 대학생 두 학기와 달리 동일 학생의 고교/대학 학교급 전환을300만원 소한도 후 연간900만원으로 처리한다.870만원 인정액에 실제 학교급 조인이 작용한다.",
+    "recommended_action": "학교급 소한도와 연간 상한 순서를 유지한다.",
+    "exceptions": [
+      "고교 납부액의 학교급 소한도를 먼저 적용한 뒤 대학 비용과 연간 한도를 적용한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_자녀.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_고교.pdf",
+        "fields": [
+          "education.0"
+        ]
+      },
+      {
+        "filename": "04_대학.pdf",
+        "fields": [
+          "education.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A027",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "8d65af945234c0698341a3487e9c4d2794b36e85253620775ada60655ef998e6",
+    "closest_batch1_case": "A019",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_004_053.json",
+    "closest_case_sha256": "fc11f9cc54c7798f4715f78abde722ff20a55dc544070a6b20e3fd3740d1a998",
+    "requested_fields": [
+      "rent_credit",
+      "insurance_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "rent_credit",
+      "tax_base",
+      "final_national_tax"
+    ],
+    "comparison": "root 재집필 후 계약서의 계약자번호와 인적명부 ID/관계를 조인한다. 기존 주소 대조와 다른 원자료 연결이며 입력의 명의 적격bool을 제거했다.",
+    "recommended_action": "명의 누출 finding만 닫았다. self 변경은 월세1428000원/보험112800원 불변을 보이며 다른 findings는 열려 있다.",
+    "exceptions": [
+      "임대차 계약의 계약자 번호가 직원 번호가 아닌 동거 친구의 인적관계 레코드에 연결된다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_임대차계약.pdf",
+        "fields": [
+          "rent.contract_address",
+          "rent.contract_holder_person_id",
+          "rent.area_sqm",
+          "rent.standard_value",
+          "rent.payments"
+        ]
+      },
+      {
+        "filename": "03_세대관계.hwpx",
+        "fields": [
+          "rent.resident_registration_address",
+          "rent.household_homes_at_year_end",
+          "rent.household_head",
+          "rent.identity_records"
+        ]
+      },
+      {
+        "filename": "04_본인보험.pdf",
+        "fields": [
+          "insurance"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A028",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "66118f80ac8a17a95f66b7570027e1616f763a645cb2133c3066606b687b3e8a",
+    "closest_batch1_case": "A273",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "c347e73e7497655d2986999a9a89d4941961277b27b975039e95bac181cea3a4",
+    "requested_fields": [
+      "credit_card_deduction",
+      "tax_base"
+    ],
+    "closest_requested_fields": [
+      "credit_card_deduction",
+      "tax_base",
+      "computed_tax"
+    ],
+    "comparison": "관리비 제외는 공유하지만 신용 관리비 때문에25% 문턱 소비가 직불로 넘어가는 원자료 위치를 특정한다. 단순 공제율 차감으로 해결되지 않는다.",
+    "recommended_action": "청구 항목과 결제 수단의 두 경로를 유지한다.",
+    "exceptions": [
+      "신용카드로 납부한 공동주택 관리비는 사용액에서 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_신용소비.pdf",
+        "fields": [
+          "cards.0"
+        ]
+      },
+      {
+        "filename": "03_관리비.pdf",
+        "fields": [
+          "cards.1"
+        ]
+      },
+      {
+        "filename": "04_직불소비.hwpx",
+        "fields": [
+          "cards.2"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A029",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "6cd3955ba60767169a152ce637940a5347b8050ec632a016ca68ae5653261238",
+    "closest_batch1_case": "A179",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_154_203.json",
+    "closest_case_sha256": "e225f6e7c0e3d1f7a1f3b92a89f082d8cbbac8b278a4a27155603394c04459eb",
+    "requested_fields": [
+      "medical_credit",
+      "credit_card_deduction",
+      "tax_base"
+    ],
+    "closest_requested_fields": [
+      "medical_credit",
+      "credit_card_deduction",
+      "tax_base"
+    ],
+    "comparison": "미용의 의료 제외/카드 유지에 치료와 같은 금액의 다른 결제수단을 대응한다. 금액 동일성이 거래 동일성을 대신하지 않는다.",
+    "recommended_action": "두 진료와 세 카드의 대응을 날짜/수단으로 독자가 확인할 수 있게 유지한다.",
+    "exceptions": [
+      "미용 목적 병원 청구는 의료비 공제에서만 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_치료.pdf",
+        "fields": [
+          "medical.0"
+        ]
+      },
+      {
+        "filename": "03_미용.pdf",
+        "fields": [
+          "medical.1"
+        ]
+      },
+      {
+        "filename": "04_카드연결.xlsx",
+        "fields": [
+          "cards"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A030",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "a79bb236663c312cafb6d2face77029fcbcb9d4a795e59e6bcfd364fec2f39ca",
+    "closest_batch1_case": "A187",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_154_203.json",
+    "closest_case_sha256": "046139ee1c6874bbd146fdb09dfe134263618ec2e459b7af411f7382dc6faa5a",
+    "requested_fields": [
+      "education_credit",
+      "credit_card_deduction",
+      "child_credit"
+    ],
+    "closest_requested_fields": [
+      "education_credit",
+      "insurance_credit",
+      "child_credit"
+    ],
+    "comparison": "학교/학원 구분은 공유하지만 학원 결제가 카드 소비에도 실제 남아 교육비 제외를 카드에 복제하면 틀린다.",
+    "recommended_action": "학교 송금과 직불 학원 소비의 대응을 유지한다.",
+    "exceptions": [
+      "학교 연령 자녀의 사설학원비는 교육비 공제에 포함하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_가족급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end",
+          "dependents"
+        ]
+      },
+      {
+        "filename": "02_학교.pdf",
+        "fields": [
+          "education.0"
+        ]
+      },
+      {
+        "filename": "03_학원.hwpx",
+        "fields": [
+          "education.1"
+        ]
+      },
+      {
+        "filename": "04_직불.pdf",
+        "fields": [
+          "cards"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A031",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "4b48e588cf5ef90d4a853f1d9cf539ebf0b6e5718c3191e5f2ed74007dd765f7",
+    "closest_batch1_case": "A271",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "ed4b59bf8ff847a170c9ed19b4ad7f62188b0939510075147524675bf031c897",
+    "requested_fields": [
+      "donation_credit",
+      "total_tax_credits",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "donation_credit",
+      "final_national_tax",
+      "settlement_national_tax"
+    ],
+    "comparison": "같은 법인 ID가 공익 지정 종료와 종교 지정 시작을 가지며 공백 하루만 제외된다. 기존은 같은 종류의 지정 재개다.",
+    "recommended_action": "유효 기간과 종류를 함께 조인해야 한다.",
+    "exceptions": [
+      "두 지정기간 사이 공백일에 납부한 기부는 지정기관 기부로 인정하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_기간대장.hwpx",
+        "fields": [
+          "organization_designations"
+        ]
+      },
+      {
+        "filename": "03_종료와공백.pdf",
+        "fields": [
+          "donations.0",
+          "donations.1"
+        ]
+      },
+      {
+        "filename": "04_재지정납부.pdf",
+        "fields": [
+          "donations.2"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A032",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "0522a343a747a7e70cf65255b8150829d83469d607b26811cebef2b8dd462b75",
+    "closest_batch1_case": "A239",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_204_253.json",
+    "closest_case_sha256": "4fa9737a01bd423dba40d56e231467730e7a546a9a42b6066bf1cf23b026542b",
+    "requested_fields": [
+      "eligible_dependents",
+      "donation_credit",
+      "political_credit"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "medical_credit",
+      "donation_credit"
+    ],
+    "comparison": "다른 형제 배정 부모의 공익기부 제외는 같다. 요청을 본인 정치 정상공제와 묶었지만 부모 배정/지출 조인은 그대로다.",
+    "recommended_action": "정상 정치기부를 장식처럼 덧붙이지 말고 원자료 귀속을 확인해야 하는 새로운 관계를 작성한다.",
+    "exceptions": [
+      "형에게 최종 배정한 어머니의 기부는 직원의 가족 기부에 포함하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_최종배정.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_부모기부.pdf",
+        "fields": [
+          "donations.0"
+        ]
+      },
+      {
+        "filename": "04_본인기부.pdf",
+        "fields": [
+          "donations.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A033",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "8c8cb9c95358e2becdf4c3de3a651627f83bde0fe95782f02ed84de477dec011",
+    "closest_batch1_case": "A177",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_154_203.json",
+    "closest_case_sha256": "1853bd0f78686c531c1ead9bc3c02a7705308b7c482ae6e27dffbb2022c87fc9",
+    "requested_fields": [
+      "housing_income_deduction",
+      "special_income_deduction",
+      "tax_base"
+    ],
+    "closest_requested_fields": [
+      "housing_income_deduction",
+      "insurance_credit",
+      "tax_base",
+      "final_national_tax"
+    ],
+    "comparison": "퇴직일/다음날 주택이자 기간 선택이 같고 별도 정상 사회보험은 독립 계산이다. 보험 종류와 납부액을 바꿔도 중심 기간 조인은 같다.",
+    "recommended_action": "퇴직 경계의 금액/날짜 치환 외에 지급별 다른 출처 연결 관계를 직접 작성한다.",
+    "exceptions": [
+      "퇴직 다음 날 실제 납부한 주택이자는 근로기간 이자에 포함하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_근로급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_대출요건.pdf",
+        "fields": [
+          "housing_mortgage.borrowed_date",
+          "housing_mortgage.term_years",
+          "housing_mortgage.fixed_rate",
+          "housing_mortgage.non_deferred",
+          "housing_mortgage.other_common_requirements_attested",
+          "housing_mortgage.household_homes_at_year_end"
+        ]
+      },
+      {
+        "filename": "03_경계이체.xlsx",
+        "fields": [
+          "housing_mortgage.interest_payments"
+        ]
+      },
+      {
+        "filename": "04_보험누계.hwpx",
+        "fields": [
+          "social_insurance"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A034",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "5e86840c40e8dfa1d3f952e88703c5c8dc195759f5323659d6e7be3bcec2d40e",
+    "closest_batch1_case": "A074",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_054_103.json",
+    "closest_case_sha256": "64e2ce3b66785e80ea2e3cc1122e33919d2f349ec9daa53d67de2b22571cd659",
+    "requested_fields": [
+      "insurance_credit",
+      "pension_account_credit",
+      "child_credit"
+    ],
+    "closest_requested_fields": [
+      "insurance_credit",
+      "final_national_tax"
+    ],
+    "comparison": "같은 적격자의 회사 부담 보험 제외와 직원 부담 보험 인정이 같다. 피보험자를 자녀로 바꾸고 정상 IRP를 더했다.",
+    "recommended_action": "납부자의 원천 지급 자료가 실제 선택을 바꾸는 구조를 지원한 뒤 그 문제를 작성한다.",
+    "exceptions": [
+      "회사가 직접 부담한 자녀 보험료는 직원의 납부 공제로 처리하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여가족.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end",
+          "dependents"
+        ]
+      },
+      {
+        "filename": "02_회사보험.pdf",
+        "fields": [
+          "insurance.0"
+        ]
+      },
+      {
+        "filename": "03_자비보험.pdf",
+        "fields": [
+          "insurance.1"
+        ]
+      },
+      {
+        "filename": "04_IRP.hwpx",
+        "fields": [
+          "pension_accounts"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A035",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "2b4e5da9fb29fda9d53525b35dab2226a4b25458a1dc70bc79746701d01da2e3",
+    "closest_batch1_case": "A260",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "0731cf35f3b9cbec11e44c3ee3e7e867672a0576f82dfc7e4996b2d3c756a7ac",
+    "requested_fields": [
+      "insurance_credit",
+      "standard_credit",
+      "hometown_credit",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "insurance_credit",
+      "standard_credit",
+      "final_national_tax"
+    ],
+    "comparison": "최종 특별 신청의 소액 보험 공제를 임의 표준으로 바꾸지 않는 문제는 이미 있다. 이전 표준 철회는 scope 서술뿐이고 이력 자료가 없다. 정상 고향기부가 더해졌다.",
+    "recommended_action": "선택 변경을 업무로 삼으려면 실제 신청 이력/확정 상태를 조인하도록 원자료 계약을 준비하고 재집필한다.",
+    "exceptions": [
+      "최종 특별 신청으로 바뀌어 이전 표준세액공제 선택은 적용하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_최종수정.hwpx",
+        "fields": [
+          "deduction_choice",
+          "special_deductions_requested"
+        ]
+      },
+      {
+        "filename": "03_보험납부.pdf",
+        "fields": [
+          "insurance"
+        ]
+      },
+      {
+        "filename": "04_고향기부.pdf",
+        "fields": [
+          "donations"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A036",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "ffad42e28a10a5c49a75047c3695511d417f5c1718ddb4b5cf7a99f561f6f817",
+    "closest_batch1_case": "A293",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "eeda944c8b3dd8dbbede0cf80e5cf64ecdcee81c56135def4540f19dd9483214",
+    "requested_fields": [
+      "education_credit",
+      "basic_deduction",
+      "additional_deduction"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "education_credit",
+      "insurance_credit",
+      "medical_credit"
+    ],
+    "comparison": "기존 고소득 장애 부모와 달리 무소득 장애 부모가 인적공제는 인정되지만 관계 때문에 일반 학부만 불인정되고 특수교육은 남는다. 제외 사유의 적용 단계가 다르다.",
+    "recommended_action": "소득으로 학부를 제외했다고 설명하지 않는다.",
+    "exceptions": [
+      "직계존속의 일반 학부 수업료는 교육비 세액공제 대상이 아니다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_부모자격.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_일반학부.pdf",
+        "fields": [
+          "education.0"
+        ]
+      },
+      {
+        "filename": "04_특수교육.pdf",
+        "fields": [
+          "education.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A037",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "64a5bd902f88a995092c6b214fb0be545e8c1f1cc3b17daa7edf32ed891fcefa",
+    "closest_batch1_case": "A289",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "4ab291d176428df4ccdac366f53c54d4f9b6e0e642a0b5485270c7544e52d4e0",
+    "requested_fields": [
+      "eligible_dependents",
+      "insurance_credit",
+      "child_credit"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "insurance_credit",
+      "education_credit",
+      "medical_credit"
+    ],
+    "comparison": "두 자녀의 근로소득만 있는500만원 경계와 각각의 보험 귀속은 같다. 장학금/의료를 빼고 경계를1원으로 옮긴 축소형이다.",
+    "recommended_action": "1원 경계 대신 두 소득자료의 실제 귀속/확정 관계가 필요한 문제를 새로 작성한다.",
+    "exceptions": [
+      "근로소득만 있는 둘째 자녀는 총급여 500만원을 1원 넘겨 특례를 적용하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_두자녀소득.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_첫보험.pdf",
+        "fields": [
+          "insurance.0"
+        ]
+      },
+      {
+        "filename": "04_둘보험.pdf",
+        "fields": [
+          "insurance.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A038",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "ca2ca44e75db4a6c0edfebb651b2699dfd4c5b599773ab30d4500005a8b127cd",
+    "closest_batch1_case": "A072",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_054_103.json",
+    "closest_case_sha256": "3499a858ad2366529754f10fd79a6627f0e44e36df2d8ef964583bee4ae97012",
+    "requested_fields": [
+      "basic_deduction",
+      "additional_deduction",
+      "medical_credit",
+      "education_credit"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "basic_deduction",
+      "education_credit"
+    ],
+    "comparison": "고령 형의 가족 대학원 제외에 같은 사람의65세 이상 의료 한도 예외를 결합하고70세 경로우대는 아직 없다.",
+    "recommended_action": "주민등록상 동거 또는 적격 일시퇴거라는 생계 요건을 원자료에 명시한다.",
+    "exceptions": [
+      "직원 본인이 아닌 형의 대학원 수업료는 교육비 공제에 포함하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_형자격.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_형진료.pdf",
+        "fields": [
+          "medical"
+        ]
+      },
+      {
+        "filename": "04_형대학원.pdf",
+        "fields": [
+          "education"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A039",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "88d61485cef3e824bb5e4cdc6b73831982bf6ab76add8cbf3650c920452c735a",
+    "closest_batch1_case": "A095",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_054_103.json",
+    "closest_case_sha256": "91a0b0e5ce91cf2957cabb97826c56b138af0d1207745464982cd52af507d96c",
+    "requested_fields": [
+      "medical_credit",
+      "basic_deduction",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "basic_deduction",
+      "child_credit",
+      "medical_credit",
+      "final_national_tax",
+      "settlement_total"
+    ],
+    "comparison": "보전은 배우자 일반진료에 대응하며 한도보다 작게 낮아지고 본인 일반/난임으로 이어진다. 별도 미용 제외도 요청 medical_credit를 바꾼다.",
+    "recommended_action": "배우자 한도와 고율 진료의 연속 문턱을 구분한다.",
+    "exceptions": [
+      "배우자 치료비의 대응 실손 보전액은 실제 부담에서 제외한다.",
+      "본인 미용 청구는 치료 목적 의료비에 포함하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_배우자.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_입원.pdf",
+        "fields": [
+          "medical.0.person_id",
+          "medical.0.kind",
+          "medical.0.treatment_purpose",
+          "medical.0.amount",
+          "medical.0.date"
+        ]
+      },
+      {
+        "filename": "04_실손.xlsx",
+        "fields": [
+          "medical.0.reimbursed"
+        ]
+      },
+      {
+        "filename": "05_후속진료.pdf",
+        "fields": [
+          "medical.1"
+        ]
+      },
+      {
+        "filename": "06_본인치료.pdf",
+        "fields": [
+          "medical.2"
+        ]
+      },
+      {
+        "filename": "07_난임1.hwpx",
+        "fields": [
+          "medical.3"
+        ]
+      },
+      {
+        "filename": "08_난임2.pdf",
+        "fields": [
+          "medical.4"
+        ]
+      },
+      {
+        "filename": "09_미용.pdf",
+        "fields": [
+          "medical.5"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A040",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "447fee59f1cbbb6ca7f4b48776b0d5e653f6d4b3ef5451b8ac5821753f831b57",
+    "closest_batch1_case": "A276",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "791b72e8baca77fed291e12a6272bfd0a8ba09aad3fcb468bbfcfb4f1be0fcea",
+    "requested_fields": [
+      "education_credit",
+      "basic_deduction",
+      "additional_deduction",
+      "child_credit"
+    ],
+    "closest_requested_fields": [
+      "basic_deduction",
+      "additional_deduction",
+      "education_credit"
+    ],
+    "comparison": "기존 두 장애 학생의 학부/특수교육과 달리 한 학생의 고교→대학 전환 및 특수교육이고 장학금/회사부담이 서로 다른 납부다.",
+    "recommended_action": "회사부담 확인 한 필드 문서를 실제 원천 지급확인과 연결할 수 있는지도 검토한다.",
+    "exceptions": [
+      "대학 수업료 중 대응 장학금은 교육비 실제 부담에서 제외한다.",
+      "회사가 직접 부담한 추가 수업료는 직원 교육비에 포함하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_학생.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_고교.pdf",
+        "fields": [
+          "education.0"
+        ]
+      },
+      {
+        "filename": "04_대학.pdf",
+        "fields": [
+          "education.1.person_id",
+          "education.1.level",
+          "education.1.institution_type",
+          "education.1.amount",
+          "education.1.date"
+        ]
+      },
+      {
+        "filename": "05_장학.xlsx",
+        "fields": [
+          "education.1.scholarship"
+        ]
+      },
+      {
+        "filename": "06_회사부담.hwpx",
+        "fields": [
+          "education.2.paid_by_self"
+        ]
+      },
+      {
+        "filename": "07_추가수업.pdf",
+        "fields": [
+          "education.2.person_id",
+          "education.2.level",
+          "education.2.institution_type",
+          "education.2.amount",
+          "education.2.date"
+        ]
+      },
+      {
+        "filename": "08_재활봄.pdf",
+        "fields": [
+          "education.3"
+        ]
+      },
+      {
+        "filename": "09_재활겨울.pdf",
+        "fields": [
+          "education.4"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A041",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "f23b4b144d771a2d8386c3f0d123a86d10e74b0c240f50feb015591e4381393a",
+    "closest_batch1_case": "A277",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "e9f21bfccbd1739c75eccf0736c7525c40885d69095f4b11093e5c98222d2276",
+    "requested_fields": [
+      "eligible_dependents",
+      "basic_deduction",
+      "additional_deduction",
+      "insurance_credit",
+      "credit_card_deduction"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "insurance_credit",
+      "medical_credit",
+      "credit_card_deduction"
+    ],
+    "comparison": "독립 아버지 제외와 인정 어머니 및 미성년 동생을 합쳐 동생 보험은 인정/카드는 제외한다. 부양 및 관계가 서로 다른 경로로 작용한다.",
+    "recommended_action": "동생의 동거/적격 일시퇴거 전제를 원자료에 명시한다.",
+    "exceptions": [
+      "독립 생계를 유지해 직원이 실제 부양하지 않는 아버지 자료는 제외한다.",
+      "부양하는 동생의 카드 사용은 형제자매 관계로 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_어머니.hwpx",
+        "fields": [
+          "dependents.0"
+        ]
+      },
+      {
+        "filename": "03_아버지.hwpx",
+        "fields": [
+          "dependents.1"
+        ]
+      },
+      {
+        "filename": "04_동생.hwpx",
+        "fields": [
+          "dependents.2"
+        ]
+      },
+      {
+        "filename": "05_어머니카드.pdf",
+        "fields": [
+          "cards.0"
+        ]
+      },
+      {
+        "filename": "06_아버지카드.pdf",
+        "fields": [
+          "cards.1"
+        ]
+      },
+      {
+        "filename": "07_동생교통.pdf",
+        "fields": [
+          "cards.2"
+        ]
+      },
+      {
+        "filename": "08_부모보험.pdf",
+        "fields": [
+          "insurance.0"
+        ]
+      },
+      {
+        "filename": "09_동생보험.pdf",
+        "fields": [
+          "insurance.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A042",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "0df50053e3b442da62ba11c324aa0722b2b7264851ec6ee6a22cff9be330c7ff",
+    "closest_batch1_case": "A251",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_204_253.json",
+    "closest_case_sha256": "5c3b3261f2566b50bba32f3afc4df9aecddded7d1a6113faa12ef9c88f927091",
+    "requested_fields": [
+      "housing_income_deduction",
+      "credit_card_deduction",
+      "income_deduction_limit_excess",
+      "tax_base"
+    ],
+    "closest_requested_fields": [
+      "housing_income_deduction",
+      "credit_card_deduction",
+      "income_deduction_limit_excess",
+      "education_credit",
+      "tax_base"
+    ],
+    "comparison": "종합 한도는 공유하지만 기준안은 합산 한도 직전이다. 관리비 복원과 퇴직 후 교통 복원이 서로 다른 추가 한도/초과액 관계를 만든다. 중간답을 모두 요청했다.",
+    "recommended_action": "최종 과세표준 불변과 중간 공제/한도 초과액 변화를 혼동하지 않는다.",
+    "exceptions": [
+      "관리비 결제는 카드 사용액에서 제외한다.",
+      "퇴직 이후 실제 사용한 교통비는 근로기간 카드 사용에서 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_대출.pdf",
+        "fields": [
+          "housing_mortgage.borrowed_date",
+          "housing_mortgage.term_years",
+          "housing_mortgage.fixed_rate",
+          "housing_mortgage.non_deferred",
+          "housing_mortgage.other_common_requirements_attested",
+          "housing_mortgage.household_homes_at_year_end"
+        ]
+      },
+      {
+        "filename": "03_상반기이자.xlsx",
+        "fields": [
+          "housing_mortgage.interest_payments.0"
+        ]
+      },
+      {
+        "filename": "04_하반기이자.xlsx",
+        "fields": [
+          "housing_mortgage.interest_payments.1"
+        ]
+      },
+      {
+        "filename": "05_신용.pdf",
+        "fields": [
+          "cards.0"
+        ]
+      },
+      {
+        "filename": "06_직불.pdf",
+        "fields": [
+          "cards.1"
+        ]
+      },
+      {
+        "filename": "07_시장.hwpx",
+        "fields": [
+          "cards.2"
+        ]
+      },
+      {
+        "filename": "08_관리비.pdf",
+        "fields": [
+          "cards.3"
+        ]
+      },
+      {
+        "filename": "09_퇴직후교통.pdf",
+        "fields": [
+          "cards.4"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A043",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "f0337a1ff6ecaddf0810de9b47870da077e369944d60f79fc319177ae61a56a1",
+    "closest_batch1_case": "A292",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "a69b0610ed9d829af4922fdc89a9ce83917331ed4a08a21cf4e1e13fd160d18d",
+    "requested_fields": [
+      "rent_credit",
+      "education_credit",
+      "child_credit",
+      "insurance_credit"
+    ],
+    "closest_requested_fields": [
+      "rent_credit",
+      "education_credit",
+      "medical_credit",
+      "final_national_tax"
+    ],
+    "comparison": "세대주 신청 월세 제외를 두 아이별 최종 부부 배정과 연결하여 자녀/학교 공제의 다른 사람별 귀속을 묻는다. 기존 회사부담 본인 학비와 다른 연결이다.",
+    "recommended_action": "월세와 아이 배정은 독립된 operative 예외다.",
+    "exceptions": [
+      "세대주가 주택 공제를 신청해 세대원 월세를 적용하지 않는다.",
+      "배우자에게 최종 배정한 첫 아이의 교육비는 직원 공제로 넣지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_가족배정.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_계약.pdf",
+        "fields": [
+          "rent.contract_address",
+          "rent.eligible_contract_holder",
+          "rent.area_sqm",
+          "rent.standard_value"
+        ]
+      },
+      {
+        "filename": "04_세대.hwpx",
+        "fields": [
+          "rent.resident_registration_address",
+          "rent.household_homes_at_year_end",
+          "rent.household_head",
+          "rent.head_claims_housing"
+        ]
+      },
+      {
+        "filename": "05_상반기월세.xlsx",
+        "fields": [
+          "rent.payments.0"
+        ]
+      },
+      {
+        "filename": "06_하반기월세.xlsx",
+        "fields": [
+          "rent.payments.1"
+        ]
+      },
+      {
+        "filename": "07_첫아이학비.pdf",
+        "fields": [
+          "education.0"
+        ]
+      },
+      {
+        "filename": "08_둘째학비.pdf",
+        "fields": [
+          "education.1"
+        ]
+      },
+      {
+        "filename": "09_본인보험.pdf",
+        "fields": [
+          "insurance"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A044",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "7e5515350d182bebb9a5383db7f8513a6b14c6f50490ad40e820a2b4fa458dee",
+    "closest_batch1_case": "A291",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "7651bcd7ffeb6a2416d9a2dd8dcaeffc39d4160fdf795945fba1ccb3bf324070",
+    "requested_fields": [
+      "salary_income",
+      "donation_credit",
+      "eligible_dependents",
+      "final_national_tax"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "pension_deduction",
+      "donation_credit",
+      "pension_account_credit",
+      "settlement_national_tax"
+    ],
+    "comparison": "종료한 큰 종교기부를 제거하면 종교 혼합 한도식 자체가 사라진다. 다른 배정 부모 기부는 별도 제외라 한도식 선택과 가족 귀속의 두 단계다.",
+    "recommended_action": "지정종료 CF에서 실제 한도식 변경을 기록한다.",
+    "exceptions": [
+      "종료한 종교기관 지정 뒤 기부는 종교기부 한도 계산에 포함하지 않는다.",
+      "누나에게 배정한 아버지의 기부는 직원 가족 기부에서 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_아버지.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_특례대장.pdf",
+        "fields": [
+          "organization_designations.0"
+        ]
+      },
+      {
+        "filename": "04_공익대장.pdf",
+        "fields": [
+          "organization_designations.1"
+        ]
+      },
+      {
+        "filename": "05_종교대장.pdf",
+        "fields": [
+          "organization_designations.2"
+        ]
+      },
+      {
+        "filename": "06_첫특례.hwpx",
+        "fields": [
+          "donations.0"
+        ]
+      },
+      {
+        "filename": "07_특례.pdf",
+        "fields": [
+          "donations.1"
+        ]
+      },
+      {
+        "filename": "08_공익.pdf",
+        "fields": [
+          "donations.2"
+        ]
+      },
+      {
+        "filename": "09_종교.pdf",
+        "fields": [
+          "donations.3"
+        ]
+      },
+      {
+        "filename": "10_부모기부.pdf",
+        "fields": [
+          "donations.4"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A045",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "bb032349bf5126073e1cb19850589fc43730afe2d3762d882e4556ed744fc32d",
+    "closest_batch1_case": "A145",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_104_153.json",
+    "closest_case_sha256": "c31a278d2c64e78fbec0c1c229bf629f361c30cede6030ac703657686790dcaa",
+    "requested_fields": [
+      "basic_deduction",
+      "additional_deduction",
+      "child_credit",
+      "education_credit",
+      "insurance_credit",
+      "medical_credit"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "basic_deduction",
+      "additional_deduction",
+      "education_credit",
+      "medical_credit",
+      "insurance_credit",
+      "credit_card_deduction",
+      "donation_credit",
+      "total_tax_credits",
+      "final_national_tax"
+    ],
+    "comparison": "무소득 장애 손녀 인적공제와 첫 자녀 출생을 다른 세대층으로 연결한다. 손녀 대학원과 회사 치료비를 각각 제외하고 보험/미숙아는 남긴다.",
+    "recommended_action": "성인 손녀와 직원 첫 자녀의 출생 순위를 구분한다.",
+    "exceptions": [
+      "직원 본인이 아닌 손녀의 대학원 납부는 교육비에서 제외한다.",
+      "회사 직접 부담 손녀 치료비는 직원 의료비에 포함하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_손녀.hwpx",
+        "fields": [
+          "dependents.0"
+        ]
+      },
+      {
+        "filename": "03_출생.hwpx",
+        "fields": [
+          "dependents.1"
+        ]
+      },
+      {
+        "filename": "04_학부.pdf",
+        "fields": [
+          "education.0"
+        ]
+      },
+      {
+        "filename": "05_대학원.pdf",
+        "fields": [
+          "education.1"
+        ]
+      },
+      {
+        "filename": "06_손녀보험.pdf",
+        "fields": [
+          "insurance.0"
+        ]
+      },
+      {
+        "filename": "07_아기보험.pdf",
+        "fields": [
+          "insurance.1"
+        ]
+      },
+      {
+        "filename": "08_손녀치료.pdf",
+        "fields": [
+          "medical.0"
+        ]
+      },
+      {
+        "filename": "09_아기치료.pdf",
+        "fields": [
+          "medical.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A046",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "8fcad62b99d45024c7ba22b735ec74fe674f94ffddf2d796f57fdee36a81444d",
+    "closest_batch1_case": "A293",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "eeda944c8b3dd8dbbede0cf80e5cf64ecdcee81c56135def4540f19dd9483214",
+    "requested_fields": [
+      "eligible_dependents",
+      "additional_deduction",
+      "education_credit",
+      "insurance_credit",
+      "medical_credit"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "education_credit",
+      "insurance_credit",
+      "medical_credit"
+    ],
+    "comparison": "장애 부모의 소득 예외는 공유하지만 다른 무소득 자녀의 회사부담 학교비가 두 번째 제외다. 부모 소득 변경은 특수교육/의료를 유지한다.",
+    "recommended_action": "두 사람의 비용 귀속을 유지한다.",
+    "exceptions": [
+      "장애인 아버지의 근로급여가 500만원을 넘어 인적공제 및 보험 자격이 없다.",
+      "자녀 교육비 중 회사 직접 부담 납부는 직원의 교육비가 아니다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_아버지.hwpx",
+        "fields": [
+          "dependents.0"
+        ]
+      },
+      {
+        "filename": "03_자녀.hwpx",
+        "fields": [
+          "dependents.1"
+        ]
+      },
+      {
+        "filename": "04_재활.pdf",
+        "fields": [
+          "education.0"
+        ]
+      },
+      {
+        "filename": "05_회사학비.pdf",
+        "fields": [
+          "education.1"
+        ]
+      },
+      {
+        "filename": "06_아버지보험.pdf",
+        "fields": [
+          "insurance.0"
+        ]
+      },
+      {
+        "filename": "07_자녀보험.pdf",
+        "fields": [
+          "insurance.1"
+        ]
+      },
+      {
+        "filename": "08_부모치료.pdf",
+        "fields": [
+          "medical.0"
+        ]
+      },
+      {
+        "filename": "09_자녀치료.pdf",
+        "fields": [
+          "medical.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A047",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "f5becb29b453a2c1f943736d2b07e55c8db318e0a12176b63630e94ce39107f6",
+    "closest_batch1_case": "A194",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_154_203.json",
+    "closest_case_sha256": "df23c23b22214e8b34c5ff92dbe24445d7d5f430b2d19a3bc22a67c64a97f664",
+    "requested_fields": [
+      "eligible_dependents",
+      "additional_deduction",
+      "credit_card_deduction",
+      "donation_credit"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "donation_credit",
+      "medical_credit",
+      "settlement_total"
+    ],
+    "comparison": "기존 단일 다른배정 부모의 의료/기부와 달리 두 부모별 카드/기부를 배정하고 인정 어머니의 종교기부만 지정종료로 제외한다.",
+    "recommended_action": "가족 배정과 기관 지정의 상이한 키를 유지한다.",
+    "exceptions": [
+      "동생에게 배정한 아버지의 카드 및 기부는 직원 공제에서 제외한다.",
+      "어머니의 종교 기부는 해당 기관 지정 종료 뒤 납부해 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_어머니.hwpx",
+        "fields": [
+          "dependents.0"
+        ]
+      },
+      {
+        "filename": "03_아버지.hwpx",
+        "fields": [
+          "dependents.1"
+        ]
+      },
+      {
+        "filename": "04_지정.pdf",
+        "fields": [
+          "organization_designations"
+        ]
+      },
+      {
+        "filename": "05_어머니공익.pdf",
+        "fields": [
+          "donations.0"
+        ]
+      },
+      {
+        "filename": "06_어머니종교.pdf",
+        "fields": [
+          "donations.1"
+        ]
+      },
+      {
+        "filename": "07_아버지기부.pdf",
+        "fields": [
+          "donations.2"
+        ]
+      },
+      {
+        "filename": "08_어머니카드.xlsx",
+        "fields": [
+          "cards.0"
+        ]
+      },
+      {
+        "filename": "09_아버지카드.xlsx",
+        "fields": [
+          "cards.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A048",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "fb484e2bf4c1181c3c80caa0d7cb080742eceab4ade0853ef50f49da0be8367e",
+    "closest_batch1_case": "A295",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "1a9f62c127d6b9154ab0020c29bf298d325a67c27ca80a4c9d0864f0f6e6d94b",
+    "requested_fields": [
+      "medical_credit",
+      "child_credit",
+      "basic_deduction"
+    ],
+    "closest_requested_fields": [
+      "medical_credit",
+      "child_credit",
+      "final_national_tax"
+    ],
+    "comparison": "같은 출산의 두 조리원이 아니라 같은 해 두 출산 사건이므로 출산별 상한이 둘이다. 본인 안경만 보전되고 배우자 안경은 별도 개인 한도다.",
+    "recommended_action": "두 출산 사건과 두 사람 안경을 서로 다른 합산 단위로 유지한다.",
+    "exceptions": [
+      "본인 안경의 보전금은 그 사람의 안경 순부담에서 제외한다.",
+      "별도 미용 청구는 의료비 비용에 포함하지 않는다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_가족출산.hwpx",
+        "fields": [
+          "dependents"
+        ]
+      },
+      {
+        "filename": "03_첫조리원.pdf",
+        "fields": [
+          "medical.0"
+        ]
+      },
+      {
+        "filename": "04_둘조리원.pdf",
+        "fields": [
+          "medical.1"
+        ]
+      },
+      {
+        "filename": "05_본인안경.pdf",
+        "fields": [
+          "medical.2.person_id",
+          "medical.2.kind",
+          "medical.2.amount",
+          "medical.2.date"
+        ]
+      },
+      {
+        "filename": "06_안경보전.xlsx",
+        "fields": [
+          "medical.2.reimbursed"
+        ]
+      },
+      {
+        "filename": "07_배우자안경.pdf",
+        "fields": [
+          "medical.3"
+        ]
+      },
+      {
+        "filename": "08_미용.pdf",
+        "fields": [
+          "medical.4"
+        ]
+      },
+      {
+        "filename": "09_아이치료.pdf",
+        "fields": [
+          "medical.5"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A049",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "5e56aafae0086f8b187e5e85c4935a6de0d140b8e389da4168d8f6af039b903c",
+    "closest_batch1_case": "A288",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "f8a9310d01d066ebbc5c0cf46046cfe8d074873f15e35a97a1263c6a94df623a",
+    "requested_fields": [
+      "child_credit",
+      "basic_deduction",
+      "insurance_credit",
+      "medical_credit",
+      "education_credit"
+    ],
+    "closest_requested_fields": [
+      "eligible_dependents",
+      "additional_deduction",
+      "child_credit",
+      "education_credit",
+      "medical_credit"
+    ],
+    "comparison": "같은 쌍둥이 출산의 아이별 최종 배정이 출생순위/보험/미숙아에 동시 작용한다. 정상 배정 첫 자녀의 미용 제외는 독립이다.",
+    "recommended_action": "둘째/셋째 배정을 출산 한 사건으로 일괄 처리하지 않는다.",
+    "exceptions": [
+      "배우자에게 배정한 둘째 쌍둥이의 출생 및 보험과 의료비는 직원 공제로 넣지 않는다.",
+      "직원 배정 첫 자녀의 미용 청구는 의료비에서 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "marital_status",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_큰아이.hwpx",
+        "fields": [
+          "dependents.0"
+        ]
+      },
+      {
+        "filename": "03_쌍둥이.hwpx",
+        "fields": [
+          "dependents.1",
+          "dependents.2"
+        ]
+      },
+      {
+        "filename": "04_둘째보험.pdf",
+        "fields": [
+          "insurance.0"
+        ]
+      },
+      {
+        "filename": "05_셋째보험.pdf",
+        "fields": [
+          "insurance.1"
+        ]
+      },
+      {
+        "filename": "06_둘째치료.pdf",
+        "fields": [
+          "medical.0"
+        ]
+      },
+      {
+        "filename": "07_셋째치료.pdf",
+        "fields": [
+          "medical.1"
+        ]
+      },
+      {
+        "filename": "08_미용.pdf",
+        "fields": [
+          "medical.2"
+        ]
+      },
+      {
+        "filename": "09_학교.pdf",
+        "fields": [
+          "education"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "A050",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "727db9a9afad0f1eebd0ae5145bad64cb14e7693e2f35b7d064461e68774e7d7",
+    "closest_batch1_case": "A290",
+    "closest_batch1_source": "authored/batch_1/A_yearend/cases_254_300.json",
+    "closest_case_sha256": "032ac1ca169065722630b3fa1901e935f5d0c671ceaa83967d01dcd7e4f5bb4d",
+    "requested_fields": [
+      "rent_credit",
+      "medical_credit",
+      "credit_card_deduction",
+      "tax_base"
+    ],
+    "closest_requested_fields": [
+      "housing_income_deduction",
+      "credit_card_deduction",
+      "income_deduction_limit_excess",
+      "medical_credit",
+      "final_national_tax"
+    ],
+    "comparison": "관리비/미용 제외는 공유하지만 적격 월세가 실제 남고 소득공제로 낮아진 과세표준과 총급여 의료 문턱을 대조한다. 기존은 큰 주택이자 종합한도 문제다.",
+    "recommended_action": "의료 문턱과 월세율은 과세표준 감소에 따라 다시 계산하지 않는다.",
+    "exceptions": [
+      "직불카드 관리비 납부는 카드 소득공제 사용액에서 제외한다.",
+      "본인 미용 청구는 의료비 비용에서 제외한다."
+    ],
+    "documents": [
+      {
+        "filename": "01_급여.xlsx",
+        "fields": [
+          "source_contract",
+          "reference_year",
+          "employee_name",
+          "scope_note",
+          "annual_gross",
+          "non_taxable",
+          "employee_age",
+          "employment_start",
+          "employment_end"
+        ]
+      },
+      {
+        "filename": "02_연금.pdf",
+        "fields": [
+          "public_pension_paid"
+        ]
+      },
+      {
+        "filename": "03_보험.hwpx",
+        "fields": [
+          "social_insurance"
+        ]
+      },
+      {
+        "filename": "04_계약.pdf",
+        "fields": [
+          "rent.contract_address",
+          "rent.eligible_contract_holder",
+          "rent.area_sqm",
+          "rent.standard_value",
+          "rent.payments"
+        ]
+      },
+      {
+        "filename": "05_세대.hwpx",
+        "fields": [
+          "rent.resident_registration_address",
+          "rent.household_homes_at_year_end",
+          "rent.household_head"
+        ]
+      },
+      {
+        "filename": "06_직불.pdf",
+        "fields": [
+          "cards.0"
+        ]
+      },
+      {
+        "filename": "07_관리비.pdf",
+        "fields": [
+          "cards.1"
+        ]
+      },
+      {
+        "filename": "08_치료.pdf",
+        "fields": [
+          "medical.0"
+        ]
+      },
+      {
+        "filename": "09_미용.pdf",
+        "fields": [
+          "medical.1"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B001",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "970aa6b337d603757fbd0276dc4cfc9af6a9950666d84f402c76f18557a1053c",
+    "closest_batch1_case": "B258",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "7cef498d9fbf6d3ab29f16082b7cf6d490e3b6035d3d35743f3988531ac07566",
+    "requested_fields": [
+      "gross_pay",
+      "total_deductions",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "gross_pay",
+      "total_deductions",
+      "net_pay"
+    ],
+    "comparison": "정액 지급→공단/세무 공제→은행 실지급의 요청 세 필드까지 같다.",
+    "recommended_action": "실제 은행 지급 건과 급여 항목 귀속을 대조하는 원자료 관계가 필요하다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_지급근거.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "workplace_employee_count",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "meal_service",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_공제와집행.xlsx",
+        "fields": [
+          "payment_records",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B002",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "d5e522baf7e6874f6956b78e34b9f3babd4b533b8c669221d078837cdfb9ddac",
+    "closest_batch1_case": "B267",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "5cdb42bcd69f4e13a7da679c51baa770b6ce8563ceea78b59e8c8e0532e2b363",
+    "requested_fields": [
+      "non_taxable_pay",
+      "taxable_pay"
+    ],
+    "closest_requested_fields": [
+      "non_taxable_pay",
+      "taxable_pay",
+      "gross_pay"
+    ],
+    "comparison": "현금 식대의 비과세/과세 계정 분리다. 계정 명칭과 금액 변경 외 새 원자료 관계가 없다.",
+    "recommended_action": "식사 제공 자료의 실제 직원/효력 귀속을 대조하는 계약을 준비한 뒤 직접 작성한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_계정기초.hwpx",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "workplace_employee_count",
+          "meal_service",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_월마감.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "payment_records",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B003",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "b4d25c2a2f136fa953c6effb04214bbfca4dc0c0b35b0bb658236ca6c6f6e6df",
+    "closest_batch1_case": "B064",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_054_103.json",
+    "closest_case_sha256": "52e86c6360767d29e70fc6879bd90c073c100405df23b88ab335e6023eec6da5",
+    "requested_fields": [
+      "ordinary_monthly_wage",
+      "ordinary_hourly_wage_floor"
+    ],
+    "closest_requested_fields": [
+      "ordinary_monthly_wage",
+      "ordinary_hourly_wage_floor",
+      "gross_pay"
+    ],
+    "comparison": "정액 수당 합산 분자÷월 제수→표시 시급이다. 수당과 회사명만 다르다.",
+    "recommended_action": "계약 변경 자료의 실제 유효 시점/항목 연결을 대조하도록 새로 작성한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_단가등록근거.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_정상마감.xlsx",
+        "fields": [
+          "workplace_employee_count",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B004",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "6f521f80d85d87340195f1bcab5d7ab2e7e266fd39db98abd2a5693b8e324ac9",
+    "closest_batch1_case": "B160",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "583d19f88e63fed67af7c5758dbf07e5fa41d6761d5b90a2c1e0750f60cded5e",
+    "requested_fields": [
+      "income_tax",
+      "local_income_tax"
+    ],
+    "closest_requested_fields": [
+      "taxable_pay",
+      "income_tax",
+      "local_income_tax"
+    ],
+    "comparison": "기초 급여/가족 등록을 표에 연결하고 국세→지방세를 요구한다. 정상 자녀 한 명은 기존 정상 가족공제 범위다.",
+    "recommended_action": "최종 가족 승인 원자료와 급여 지급건의 실제 연결이 필요한 업무를 작성한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_지급및가족.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "meal_service",
+          "scope",
+          "withholding_reference"
+        ]
+      },
+      {
+        "filename": "02_지급실행.xlsx",
+        "fields": [
+          "workplace_employee_count",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "payment_records",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B005",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "3a5bf9ba619dc342634b04233526a0dd7bca2419d419e89a670c57c5a7578625",
+    "closest_batch1_case": "B266",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "365db639ca027d157d4a30d8cf53bb0d0a9849aefed9c5cc044457d1016fa0d2",
+    "requested_fields": [
+      "health_insurance",
+      "long_term_care"
+    ],
+    "closest_requested_fields": [
+      "health_insurance",
+      "long_term_care",
+      "total_deductions"
+    ],
+    "comparison": "별도 건강 통지→건강 부담→요양 부담이다. 건강/요양 요청도 같다.",
+    "recommended_action": "같은 공식의 금액을 바꾸지 말고 통지 식별자/확정 이력을 실제 대조한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_공단통지.xlsx",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_지급조건.hwpx",
+        "fields": [
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "workplace_employee_count",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B006",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "990e7875b038d8af419a22cf7a443797419d6827ffe7541976c01f903278ddca",
+    "closest_batch1_case": "B156",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "6c5c98bb5663136348d2b52b388cebe4a60f3cc676ed1e68ffb6489fbc4483d6",
+    "requested_fields": [
+      "national_pension",
+      "health_insurance",
+      "employment_insurance"
+    ],
+    "closest_requested_fields": [
+      "health_insurance",
+      "long_term_care",
+      "employment_insurance"
+    ],
+    "comparison": "기관별 서로 다른 통지 기준을 세 보험에 대응한다. 정상 가입/한도 미적용은 같다.",
+    "recommended_action": "기관 원자료의 다른 직원/부과월을 실제 선택하는 조인이 필요하다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_기관별기초.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_근로계약과마감.xlsx",
+        "fields": [
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "workplace_employee_count",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B007",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "73d75ed86cac3c3e38a8db42d4eb24c482f61af093727662bc65ec487aaf4592",
+    "closest_batch1_case": "B259",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "b4baede576c7497a7a8a10dc00fff14ec1a8695c0fdb89327e2a75c369ab7107",
+    "requested_fields": [
+      "night_pay"
+    ],
+    "closest_requested_fields": [
+      "ordinary_hourly_wage_floor",
+      "night_pay",
+      "gross_pay"
+    ],
+    "comparison": "월급 포함 소정 저녁 카드→별도 야간 가산만 지급이다. 시각/휴게 변경 외 판단 관계가 없다.",
+    "recommended_action": "소정 승인과 실제 시간 기록의 원천 연결을 바꾸는 업무를 직접 작성한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_야간편성.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_단가및지급.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "workplace_employee_count",
+          "payment_records",
+          "meal_service",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B008",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "be5d08a2d92485d7d3b7d637ca4f4b904637c5e8fa26a940413ab5a2317c8461",
+    "closest_batch1_case": "B205",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "ebad8fd6bf130237feb91e251a34ac260a85d238d273bea9af61bb889c77aa69",
+    "requested_fields": [
+      "overtime_pay"
+    ],
+    "closest_requested_fields": [
+      "ordinary_monthly_wage",
+      "overtime_pay",
+      "gross_pay"
+    ],
+    "comparison": "한 평일 추가 카드의 시간과 월 통상시급을 연결하는 한 줄 수당이다.",
+    "recommended_action": "날짜/시각 길이 변경 외 승인 자료의 귀속 판단을 필요하게 새로 작성한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_지원카드.pdf",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_계약과마감.xlsx",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "workplace_employee_count",
+          "payment_records",
+          "meal_service",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B009",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "e47ba7d2e116a15d3c3ea50133171e3dd72122ff8b446d5ef9bcd155eb5086d6",
+    "closest_batch1_case": "B157",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "572d36b9de46de408450f951352cea7af39f4c795683d87cb856f4a12d26c921",
+    "requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay",
+      "gross_pay"
+    ],
+    "comparison": "세6시간 소정 카드→한 주 개근 비례 주휴다. 시급/주시간/업종만 바뀐다.",
+    "recommended_action": "기존 완결 관계를 다시 쓰지 말고 근태 원천과 계약 의무의 다른 연결을 설계한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_안내계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "workplace_employee_count",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_출근및종료.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B010",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "8a8fbae1cd6762af407139fdb82cd9eb077c1eb88882104c1df5a98916a45e13",
+    "closest_batch1_case": "B125",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_104_153.json",
+    "closest_case_sha256": "479ad05d7b1e120cef57b0a7293ae75d485531205155008b5b6e44ebc684767b",
+    "requested_fields": [
+      "overtime_pay",
+      "holiday_pay"
+    ],
+    "closest_requested_fields": [
+      "overtime_pay",
+      "holiday_pay",
+      "gross_pay"
+    ],
+    "comparison": "토요일 무급휴무와 일요일 주휴 지정→토요일 추가를 연장으로 지급한다.",
+    "recommended_action": "휴일 원자료의 실제 다른 귀속/중복 관계를 설계한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_휴무규정.hwpx",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "workplace_employee_count",
+          "holiday_dates",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_토요일작업.xlsx",
+        "fields": [
+          "work_records",
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B011",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "e8c0ed3845c8f13dcdd6f59e0e579f6a24ebe562c657cf3396fd87fea9c81996",
+    "closest_batch1_case": "B161",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "ecb5ed341c3892768f0b7f3092f1d882640e3d9b0201cf05aa3e7712e702f9f2",
+    "requested_fields": [
+      "holiday_pay"
+    ],
+    "closest_requested_fields": [
+      "weekly_holiday_pay",
+      "holiday_pay",
+      "gross_pay"
+    ],
+    "comparison": "월급 포함 주휴 기본 대가와 실제 일요일 출동 별도 휴일 대가다.",
+    "recommended_action": "기존 단일 출동의 날짜/물품 교체를 중단하고 실제 다른 승인 연결을 작성한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_주휴및단가.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "workplace_employee_count",
+          "holiday_dates",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_소집마감.xlsx",
+        "fields": [
+          "work_records",
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B012",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "ae02c4d524af50c547a11e788ccc7d7116e3d7fe0816450b830a4ba424cb113b",
+    "closest_batch1_case": "B013",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_004_053.json",
+    "closest_case_sha256": "dbb6ead2a2b8a441c43812be2ba627442d9a39cf5e122706481875da6a056023",
+    "requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay",
+      "gross_pay"
+    ],
+    "comparison": "정액 월급 포함 주휴를 별도 주휴로 다시 지급하지 않는 관계다.",
+    "recommended_action": "포함 여부가 실제 원천 계약/지급항목 대조에서 결정되도록 새로 작성한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_월급포함계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_마감기초.xlsx",
+        "fields": [
+          "workplace_employee_count",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B013",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "7cfeccf47c9bb87e41f8ddf19f3f9c97428cbcb2e1f284c26f3051d371c3f6ee",
+    "closest_batch1_case": "B118",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_104_153.json",
+    "closest_case_sha256": "cb7d73468a2949be98ccd4ce3505824b54fb0b43abcfe31e10cae615de5396e9",
+    "requested_fields": [
+      "gross_pay",
+      "taxable_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "fixed_allowance",
+      "meal_allowance",
+      "gross_pay",
+      "non_taxable_pay",
+      "net_pay"
+    ],
+    "comparison": "식대는 지급 합계에 넣고 과세합계에서 법정금액을 제외한다. B2 B002의 동일 근거를 결과 필드만 바꾸었다.",
+    "recommended_action": "계정 출력 칸 추가가 아닌 원자료 대조 관계를 바꾼다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_항목별계약.hwpx",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "meal_service",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_확정마감.xlsx",
+        "fields": [
+          "workplace_employee_count",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "payment_records",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B014",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "565cadbbf0c315fca0aeccca22d5f9cad6130e5d1e9713ca76e02b28cfae79b3",
+    "closest_batch1_case": "B265",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "6033b0a1c9c522739c4873677606634d34351c09289e3aaa3228136742acd632",
+    "requested_fields": [
+      "effective_payment_date",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "effective_payment_date",
+      "gross_pay",
+      "net_pay"
+    ],
+    "comparison": "단일 은행 실행일과 공제 후 금액을 등록한다. 요청 날짜/실지급도 같다.",
+    "recommended_action": "실행 건과 대상 급여 귀속을 서로 다른 ID 자료에서 확인하게 새로 작성한다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_급여계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope",
+          "meal_service"
+        ]
+      },
+      {
+        "filename": "02_집행확인.xlsx",
+        "fields": [
+          "workplace_employee_count",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "payment_records",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B015",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "71c539fe2f39ba77e4dad6c21c3f37b1ebca046d7a6fdb0c42d0c3f39f147cbf",
+    "closest_batch1_case": "B154",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "54f97c0047f4b62f25f12f39ff8eac72b8746d3fbfc7e08792a1874e6ffb1914",
+    "requested_fields": [
+      "base_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay",
+      "net_pay"
+    ],
+    "comparison": "15시간 미만 시급 계약의 실제 소정 카드를 무급휴게 제거 후 합산한다. 카드 수와 금액 외 관계가 같다.",
+    "recommended_action": "승인 카드와 계약 범위의 다른 원천 연결이 필요하다.",
+    "exceptions": [],
+    "documents": [
+      {
+        "filename": "01_오전지원계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "workplace_employee_count",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_카드와자격.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B016",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "babb824dc633c55d9fd9ddf609e8b3e97fb487fb1ce2fc5dda91df6db7d818c4",
+    "closest_batch1_case": "B280",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "8bb00371e691c981fe6dab67896f4f1374201c06f6eebfbcbcad70ccc6d6efbf",
+    "requested_fields": [
+      "overtime_pay",
+      "night_pay",
+      "gross_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "overtime_pay",
+      "taxable_pay",
+      "gross_pay"
+    ],
+    "comparison": "같은 시각의 최종 소정 분류는 추가 대가를 없애지만 야간은 유지한다. 기존은 소정→추가로 기본 대가가 생기며 야간 불변을 요청하지 않았다.",
+    "recommended_action": "최종 category와 불변 야간의 두 필드를 유지한다.",
+    "exceptions": [
+      "동일 기록의 최종 승인에서 추가 작업을 소정근로로 정정"
+    ],
+    "documents": [
+      {
+        "filename": "01_이동계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_승인이력.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_보험확정.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "04_지급세무.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B017",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "7715fcd11318884212e2db2b77668e9b3ef57032eb7641e7062374b412e3b1d7",
+    "closest_batch1_case": "B282",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "c57adbea404c631d239002cf6d122fd29f8dec7dd3fe3dc5ee315633ffc71e2a",
+    "requested_fields": [
+      "overtime_pay",
+      "night_pay"
+    ],
+    "closest_requested_fields": [
+      "overtime_pay",
+      "night_pay",
+      "gross_pay"
+    ],
+    "comparison": "같은 승인 record_id/revision/시각의 두 사본→한 번의 연장과 야간이다.",
+    "recommended_action": "같은 ID 복제 사례를 다시 쓰지 말고 다른 원자료 식별 관계를 직접 설계한다.",
+    "exceptions": [
+      "두 부서가 같은 승인 기록을 중복 접수"
+    ],
+    "documents": [
+      {
+        "filename": "01_보존계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_두부서접수.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_공단마감.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "04_세무지급.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B018",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "abbcd1941a2d7ee31d7f759e1714847ce26cab7188e95d0a8fcbd75313357b22",
+    "closest_batch1_case": "B240",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "a54e5e13d8d5530ada62987a1d1dfe541419afb7888263450291cd03c580be96",
+    "requested_fields": [
+      "overtime_pay",
+      "night_pay",
+      "gross_pay"
+    ],
+    "closest_requested_fields": [
+      "overtime_pay",
+      "night_pay",
+      "gross_pay"
+    ],
+    "comparison": "승인 낮 출동과 미승인 밤 초안→밤 제외다. 요청 수당/야간/총지급과 상태 선택이 같다.",
+    "recommended_action": "단순 밤 초안 길이 교체 외 실제 귀속 판단을 새로 작성한다.",
+    "exceptions": [
+      "미승인 밤 재방문 초안을 지급 합계에서 제외"
+    ],
+    "documents": [
+      {
+        "filename": "01_휴무계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_회수카드.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_보험통지.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "04_실행.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B019",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "3139050144cbf1c89ea7985f9ab0bc44dc59ef480c1a27d500d508e606a32d87",
+    "closest_batch1_case": "B235",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "eed9c7f730d3f44dee75d1c477b4035ce9eef619d7c00c2bb8a91f4c21c64126",
+    "requested_fields": [
+      "overtime_pay",
+      "night_pay"
+    ],
+    "closest_requested_fields": [
+      "overtime_pay",
+      "night_pay",
+      "gross_pay"
+    ],
+    "comparison": "22시 경계에 걸친 휴게를 전체 추가시간과 야간 교집합에서 각각 뺀다.",
+    "recommended_action": "휴게 시각 교체 외 새로운 승인/원천 연결을 직접 작성한다.",
+    "exceptions": [
+      "야간 시작 경계를 걸친 무급 휴게"
+    ],
+    "documents": [
+      {
+        "filename": "01_단가근거.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_안전휴게.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_부과.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "04_마감.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B020",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "b99538a82d3bf9caf247be641cfae423e5d629ada6f49b7a9ef4a4ac041fbf47",
+    "closest_batch1_case": "B131",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_104_153.json",
+    "closest_case_sha256": "3f27b69e69fdd446bc11d68691760e40809cccd84ca09e75f3ba73717bc34b53",
+    "requested_fields": [
+      "non_taxable_pay",
+      "taxable_pay",
+      "income_tax"
+    ],
+    "closest_requested_fields": [
+      "ordinary_monthly_wage",
+      "non_taxable_pay",
+      "taxable_pay",
+      "income_tax",
+      "local_income_tax"
+    ],
+    "comparison": "배식+현금 식대→비과세 제거/과세/원천세다.",
+    "recommended_action": "배식 대상과 지급 직원의 원자료 귀속 등 다른 실제 대조가 필요하다.",
+    "exceptions": [
+      "현금 식대와 사용자 제공 식사가 함께 존재"
+    ],
+    "documents": [
+      {
+        "filename": "01_지급계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_배식확인.hwpx",
+        "fields": [
+          "meal_service"
+        ]
+      },
+      {
+        "filename": "03_근태와집행.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "payment_records",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      },
+      {
+        "filename": "04_보험통지.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B021",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "d47d80d6dd05fd7ebccccd713a3e1c3f0b0fa92e9624797620b529fc46706d50",
+    "closest_batch1_case": "B255",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "bf90bd3e238ec487be99eb3d6886a58acdfb5cec9c2d28879e3f93b038f5f936",
+    "requested_fields": [
+      "ordinary_monthly_wage",
+      "overtime_pay",
+      "gross_pay"
+    ],
+    "closest_requested_fields": [
+      "ordinary_monthly_wage",
+      "overtime_pay",
+      "variable_allowance",
+      "gross_pay"
+    ],
+    "comparison": "변동 완료금은 gross에 넣지만 통상 분자에서 빼고 추가 카드 단가를 계산한다.",
+    "recommended_action": "성과금의 증빙 귀속/확정 관계를 직접 새로 작성한다.",
+    "exceptions": [
+      "당월 변동 실적금을 통상임금 분자에서 제외"
+    ],
+    "documents": [
+      {
+        "filename": "01_월급약정.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_완료금.hwpx",
+        "fields": [
+          "variable_allowance",
+          "scope"
+        ]
+      },
+      {
+        "filename": "03_추가지원.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      },
+      {
+        "filename": "04_통지기초.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B022",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "5934a2c8953adaaa5e814243b31d2a360b0fc4043ea4253f06ab717ac19eb4bb",
+    "closest_batch1_case": "B033",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_004_053.json",
+    "closest_case_sha256": "59dec5fa718368417a0f9e84feb5016383499026990ead054a5faed6aeb37d0f",
+    "requested_fields": [
+      "income_tax",
+      "local_income_tax",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "income_tax",
+      "local_income_tax",
+      "total_deductions",
+      "net_pay"
+    ],
+    "comparison": "80%를 국세에 적용하고 다른 공제는 유지하여 실지급을 바꾼다.",
+    "recommended_action": "선택 신청 원자료의 최종 귀속이 필요한 관계를 준비한 뒤 다시 쓴다.",
+    "exceptions": [
+      "유효한80퍼센트 원천징수 선택"
+    ],
+    "documents": [
+      {
+        "filename": "01_월급계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_선택신청.hwpx",
+        "fields": [
+          "withholding_percent",
+          "family_count",
+          "eligible_children",
+          "scope",
+          "withholding_reference"
+        ]
+      },
+      {
+        "filename": "03_정상마감.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "payment_records",
+          "meal_service"
+        ]
+      },
+      {
+        "filename": "04_보험.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B023",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "5ed0e29498a0440228d785634c755f324f79c51dce9d3c6c1c85d580acd3d041",
+    "closest_batch1_case": "B034",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_004_053.json",
+    "closest_case_sha256": "81ac01123296747341c207eadc52455de202177ad62c6bbc39fc6a415d0dcee6",
+    "requested_fields": [
+      "taxable_pay",
+      "income_tax",
+      "local_income_tax"
+    ],
+    "closest_requested_fields": [
+      "income_tax",
+      "local_income_tax",
+      "total_deductions",
+      "net_pay"
+    ],
+    "comparison": "자녀공제 후120%와 지방세를 계산한다. 수치/자녀 수외 연결이 같다.",
+    "recommended_action": "가족 및 신청 자료의 실제 다른 식별 관계를 직접 작성한다.",
+    "exceptions": [
+      "자녀 공제 후120퍼센트 선택 적용"
+    ],
+    "documents": [
+      {
+        "filename": "01_정액.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_가족선택.hwpx",
+        "fields": [
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "scope",
+          "withholding_reference"
+        ]
+      },
+      {
+        "filename": "03_마감.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "payment_records",
+          "meal_service"
+        ]
+      },
+      {
+        "filename": "04_부과.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B024",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "3a5de882817dca47c44aff24a11b08d4dc6ec29c059c5e06a625bf9e572173a7",
+    "closest_batch1_case": "B271",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "2c76f3e1e45c9002e9da349fa340b76fd60348238720cba22511f544b11e8994",
+    "requested_fields": [
+      "effective_payment_date",
+      "income_tax"
+    ],
+    "closest_requested_fields": [
+      "effective_payment_date",
+      "income_tax",
+      "local_income_tax"
+    ],
+    "comparison": "높은3월 approved보다2월 executed 우선→2월 자녀 기준이다.",
+    "recommended_action": "동일 실행/계획 골격의 날짜 치환을 중단하고 다른 지급 귀속 관계를 작성한다.",
+    "exceptions": [
+      "3월 승인 계획보다2월 실행 기록을 우선"
+    ],
+    "documents": [
+      {
+        "filename": "01_2월계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_집행대조.xlsx",
+        "fields": [
+          "payment_records",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_가족확인.hwpx",
+        "fields": [
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "meal_service",
+          "withholding_reference"
+        ]
+      },
+      {
+        "filename": "04_2월부과.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B025",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "61dd9b738064865b3e17290b4dde7c8613ad1e3cc5f88484f48d0879a0776d81",
+    "closest_batch1_case": "B171",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "c8ac0ec3ee581d56569f83be02df672e7afe7c7753fa37a1e9065da614fc42cc",
+    "requested_fields": [
+      "effective_payment_date",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "income_tax",
+      "local_income_tax",
+      "net_pay"
+    ],
+    "comparison": "실행 없음→취소된 높은 revision 제외→유효approved 선택이다. 날짜를12월 안에서 옮긴 것이 차이다.",
+    "recommended_action": "다른 급여 건의 원자료 식별/승인 관계를 실제 구분하게 작성한다.",
+    "exceptions": [
+      "실행 전 승인 변경과 취소된 후속 계획 구별"
+    ],
+    "documents": [
+      {
+        "filename": "01_귀속월약정.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_계획이력.xlsx",
+        "fields": [
+          "payment_records",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_세무조건.hwpx",
+        "fields": [
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      },
+      {
+        "filename": "04_귀속부과.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B026",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "804c231a6c11b142f51d5fcc14939a2928b07f8077cdac84c8f3fa04dc5da807",
+    "closest_batch1_case": "B239",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "a4869a01dd53dc04040e3b861a605c7afa9a3bcb37b8ca990b3611707c82cc6a",
+    "requested_fields": [
+      "effective_payment_date",
+      "pension_base_income",
+      "national_pension"
+    ],
+    "closest_requested_fields": [
+      "effective_payment_date",
+      "pension_base_income",
+      "national_pension"
+    ],
+    "comparison": "7월 실행과6월 부과월 분리는 이미 있다. 하한을 상한으로 바꾸어도 원자료 키/선택/공제 경로는 같다. B129에도6월 고액 보험/7월 계획이 있다.",
+    "recommended_action": "부과월과 실행일 이외 다른 원자료 대조 관계를 직접 작성한다.",
+    "exceptions": [
+      "7월 지급과6월 확정 보험 부과월 분리"
+    ],
+    "documents": [
+      {
+        "filename": "01_6월약정.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_7월실행.xlsx",
+        "fields": [
+          "payment_records",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_6월통지.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "04_세무.hwpx",
+        "fields": [
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B027",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "a08025d006b3305dada3c46c03703becd0e181a26f45062df1d2ef057d9d3ee5",
+    "closest_batch1_case": "B278",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "418e64db5fa4af6809918c7bb2835bdd7e37a0fc51268336ea4c574c5b42beab",
+    "requested_fields": [
+      "national_pension",
+      "health_insurance",
+      "long_term_care"
+    ],
+    "closest_requested_fields": [
+      "national_pension",
+      "health_insurance",
+      "long_term_care",
+      "total_deductions",
+      "net_pay"
+    ],
+    "comparison": "취득월 연금 신청 true/건강 false→요양0원이다. 월급 계약으로 바꿔도 기관 상태 조인은 같다.",
+    "recommended_action": "기관 회신의 실제 대상/확정 이력을 조인하는 업무를 작성한다.",
+    "exceptions": [
+      "입사월 건강 미부과와 연금 취득월 납부의 기관별 차이"
+    ],
+    "documents": [
+      {
+        "filename": "01_입사월계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_취득회신.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "03_첫월마감.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "payment_records"
+        ]
+      },
+      {
+        "filename": "04_가족식비.hwpx",
+        "fields": [
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B028",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "019d2a02a6b56657bb235b621020462f7e913a30c48d2761f0fc5fa6802284ed",
+    "closest_batch1_case": "B075",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_054_103.json",
+    "closest_case_sha256": "698bf120f1634c762eca559e9b5c604746aa8ae7690f04096878cf939469b4e1",
+    "requested_fields": [
+      "national_pension",
+      "employment_insurance",
+      "total_deductions"
+    ],
+    "closest_requested_fields": [
+      "national_pension",
+      "health_insurance",
+      "long_term_care",
+      "employment_insurance",
+      "total_deductions"
+    ],
+    "comparison": "연금 종료와 건강/고용 계속 부과의 기관별 선택이다.",
+    "recommended_action": "연령/금액 치환 대신 원천 통지 식별자를 실제 대조한다.",
+    "exceptions": [
+      "연금 종료 통지와 다른 보험 계속 부과 구별"
+    ],
+    "documents": [
+      {
+        "filename": "01_계속근로계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_종료회신.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "03_근태집행.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "payment_records"
+        ]
+      },
+      {
+        "filename": "04_세무식비.hwpx",
+        "fields": [
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B029",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "3d04455ab8ab656c75d09a1d5f446a4eec1168758db2bd0cedab676430ed4589",
+    "closest_batch1_case": "B029",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_004_053.json",
+    "closest_case_sha256": "9c7280dcf4ee235008ea938be3e2c2255a75ae56df062dd0ef45ed3e532c5250",
+    "requested_fields": [
+      "employment_insurance",
+      "health_insurance",
+      "long_term_care"
+    ],
+    "closest_requested_fields": [
+      "national_pension",
+      "employment_insurance",
+      "health_insurance",
+      "long_term_care",
+      "net_pay"
+    ],
+    "comparison": "66세 신규채용의 연금/고용 미부과와 건강/요양 유지다. 기존 동일 연령/상태 판정이다.",
+    "recommended_action": "같은 연령조건으로 새 사례를 만들지 말고 자격 원천과 지급건의 실제 다른 연결을 쓴다.",
+    "exceptions": [
+      "65세 이후 신규 고용의 실업급여 근로자 부담 미부과"
+    ],
+    "documents": [
+      {
+        "filename": "01_신규계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "employee_age",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_공단자격.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "03_월마감.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "payment_records"
+        ]
+      },
+      {
+        "filename": "04_식비세무.hwpx",
+        "fields": [
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B030",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "fc6243e1da6bf4e928640b65197a7f8a66204d771316ed576e571f34948bc83c",
+    "closest_batch1_case": "B079",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_054_103.json",
+    "closest_case_sha256": "11ccfb78ccc3c0af6837528c37b96246c06aa94d3896dda0b862d43ba721641d",
+    "requested_fields": [
+      "pension_base_income",
+      "national_pension"
+    ],
+    "closest_requested_fields": [
+      "pension_base_income",
+      "national_pension",
+      "health_insurance",
+      "employment_insurance"
+    ],
+    "comparison": "하반기 낮은 연금 통지의 하한 적용이다.",
+    "recommended_action": "통지의 실제 직원/기간 귀속을 새로 대조하게 한다.",
+    "exceptions": [
+      "11월 통지 신고액이 하반기 연금 하한 미만"
+    ],
+    "documents": [
+      {
+        "filename": "01_변경계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_연금통지.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "03_다른기관.hwpx",
+        "fields": [
+          "health_notified_income",
+          "employment_notified_income",
+          "health_due",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "04_마감.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B031",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "c448768c9449ffebf01cd680dc3b548092bfac2d4a8dea19cc4b569fd13865fa",
+    "closest_batch1_case": "B177",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "30008f11f96f1507b79feae9b41639ff7c8b52999345150a6a01bb4d083d2366",
+    "requested_fields": [
+      "health_insurance",
+      "long_term_care"
+    ],
+    "closest_requested_fields": [
+      "health_insurance",
+      "long_term_care",
+      "total_deductions",
+      "net_pay"
+    ],
+    "comparison": "건강 상한을 먼저 적용하고 그 공제에서 요양을 산출한다.",
+    "recommended_action": "금액 이동 외 유효 보험 통지의 원자료 연결을 바꾼다.",
+    "exceptions": [
+      "건강보험 통지액의 산출 보험료가 근로자 월 상한 초과"
+    ],
+    "documents": [
+      {
+        "filename": "01_월급계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_건강통지.pdf",
+        "fields": [
+          "health_notified_income",
+          "health_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "03_나머지부과.hwpx",
+        "fields": [
+          "pension_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "04_정상집행.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B032",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "5d76e988da857ebd682ee73bd73b597ec7256bb96a0e714d058049c5084e4885",
+    "closest_batch1_case": "B179",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "99c19c4d206743d108dab82f4849774c1fb3b74c552f19b7774c5fb96a4fdfc9",
+    "requested_fields": [
+      "pension_base_income",
+      "national_pension"
+    ],
+    "closest_requested_fields": [
+      "pension_base_income",
+      "national_pension",
+      "health_insurance"
+    ],
+    "comparison": "하반기 상한 초과 연금 신고액→상한 기초와 부담액이다.",
+    "recommended_action": "상한금액을 넘긴 숫자 치환이 아닌 원천 통지 선택을 새로 쓴다.",
+    "exceptions": [
+      "하반기 연금 신고액이 적용 상한 초과"
+    ],
+    "documents": [
+      {
+        "filename": "01_급여근거.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_연금신고.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "03_건강고용.hwpx",
+        "fields": [
+          "health_notified_income",
+          "employment_notified_income",
+          "health_due",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "04_마감.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B033",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "06be3165a91deeefc1e525d7765535e07f3a83641862a78326fd773acc4c8d17",
+    "closest_batch1_case": "B238",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "9d5626cc81e1571f8001d613a0e5179536caae2de2220cafb2a358f7ba1f855b",
+    "requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay",
+      "gross_pay"
+    ],
+    "comparison": "한 결근→실제 기본근로 감소와 그 주 주휴 탈락의 두 경로다.",
+    "recommended_action": "같은 결근 사례의 근무일 수를 줄이지 말고 계약 의무와 출근의 새로운 관계를 설계한다.",
+    "exceptions": [
+      "소정근로일의 무급 결근으로 해당 주 주휴 자격 탈락"
+    ],
+    "documents": [
+      {
+        "filename": "01_한주계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_실제카드.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_주마감.hwpx",
+        "fields": [
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      },
+      {
+        "filename": "04_자격.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B034",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "8280a3b9e0bde72520a0d8be89437ae910c802135aa20e03f970ebcd19346f19",
+    "closest_batch1_case": "B176",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "b40604b462df75e66deb49912fc8f9b93abe27d52bdc4deb0d567abcad167c1d",
+    "requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay",
+      "net_pay"
+    ],
+    "comparison": "정확히15시간/세5시간 카드/개근→기본과 주휴다. B2 B009도 같은 양의 주휴 구조다.",
+    "recommended_action": "기존15시간 경계의 시급만 교체하지 않는다.",
+    "exceptions": [
+      "주15시간 포함 경계의 주휴 적용"
+    ],
+    "documents": [
+      {
+        "filename": "01_15시간계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_세출근.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_개근.hwpx",
+        "fields": [
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      },
+      {
+        "filename": "04_자격.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B035",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "3fa8393a7941e877196abd85d5edbd82178d508e1dc7bc343b13d8325aa107d3",
+    "closest_batch1_case": "B236",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "96cc1c0cf8372707527d3ce788ca49338277a6f5b6bdc2d4b28d38ff3faa27e0",
+    "requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay",
+      "gross_pay"
+    ],
+    "comparison": "14시간 계약 개근→기본만 있고 주휴0원이다. raw 카드 복원은 B154에도 있다.",
+    "recommended_action": "기존14시간 숫자/카드 길이 치환 대신 의무 원천 대조 관계를 새로 작성한다.",
+    "exceptions": [
+      "개근했으나 소정 주시간이15시간 미만"
+    ],
+    "documents": [
+      {
+        "filename": "01_14시간계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_화목카드.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_개근종료.hwpx",
+        "fields": [
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      },
+      {
+        "filename": "04_기관확정.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B036",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "dadf55909161af88a1d487dccbac2f3a9767515b2e2047921fed4f9d27a3aac3",
+    "closest_batch1_case": "B245",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "87d1b95b8becc6ac4e2442ccb08bef1e563a553a0252895aa471fbf23a53b91c",
+    "requested_fields": [
+      "paid_holiday_pay",
+      "weekly_holiday_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "paid_holiday_pay",
+      "weekly_holiday_pay",
+      "gross_pay",
+      "net_pay"
+    ],
+    "comparison": "주12시간에서 근로자의 날 유급/주휴 미적용이다. 인원4→8은 노동절 결론을 바꾸지 않는다.",
+    "recommended_action": "기관/근무목적 변경 아닌 실제 유급 원천 관계를 새로 작성한다.",
+    "exceptions": [
+      "주15시간 미만 계약의 근로자의 날 유급 적용"
+    ],
+    "documents": [
+      {
+        "filename": "01_주시간.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_기본유급.hwpx",
+        "fields": [
+          "holiday_dates",
+          "paid_holiday_records",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_출근종료.xlsx",
+        "fields": [
+          "work_records",
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      },
+      {
+        "filename": "04_부과회신.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B037",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "8a087ed403281ba5d4e332d4501398dc0c6a4d9d9c4fcf1f2c5cd4f5d14b8508",
+    "closest_batch1_case": "B226",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "7d957ab13ca63ec92bec554b5d13d8ca1c6217b7cf804372693c2c141bd9eb3c",
+    "requested_fields": [
+      "base_pay",
+      "paid_holiday_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "paid_holiday_pay",
+      "weekly_holiday_pay",
+      "gross_pay"
+    ],
+    "comparison": "시급 실근로/공휴일 기본유급을 다른 층으로 계산한다. 제헌절은 새로운 날짜이나 입력에 holiday_dates와public_holiday가 이미 주어져 달력 충돌 선택 문제는 아니다.",
+    "recommended_action": "오래된 달력과 현행 달력을 업무로 삼으려면 실제 두 출처와 유효일 대조를 넣는다. 단순 날짜 교체라면 재집필한다.",
+    "exceptions": [
+      "2026년5월11일 시행 후 복원된7월17일 제헌절 공휴일"
+    ],
+    "documents": [
+      {
+        "filename": "01_7월계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_공휴일기준.hwpx",
+        "fields": [
+          "holiday_dates",
+          "paid_holiday_records",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_근태마감.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "week_attendance",
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      },
+      {
+        "filename": "04_보험자격.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B038",
+    "review_state": "near_duplicate_high",
+    "case_sha256": "14bc97d51293e90cba65279a3169a0c2c487b8e8271644b52f1d52013e428323",
+    "closest_batch1_case": "B188",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "1765a56a6ce0f7dadf3fb08d297f32dcc2ab5b204b5ac1eff28fbbadddfcc83c",
+    "requested_fields": [
+      "holiday_pay",
+      "overtime_pay"
+    ],
+    "closest_requested_fields": [
+      "holiday_pay",
+      "overtime_pay",
+      "gross_pay"
+    ],
+    "comparison": "동일 휴일의 분할 카드 합계가8시간을 넘겨 하루 합산 가산이다. 두 카드 수/시각만 다르다.",
+    "recommended_action": "동일 일별 합산 골격 외 자료 귀속 관계를 직접 작성한다.",
+    "exceptions": [
+      "한 휴일 두 카드의 합계가 하루8시간 초과"
+    ],
+    "documents": [
+      {
+        "filename": "01_휴일계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "02_하루작업.xlsx",
+        "fields": [
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "03_공단.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "04_실행세무.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B039",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "de9d3267a7209588b660b9795f13dd7f122762320570a892b63c0dbc203e8e3b",
+    "closest_batch1_case": "B244",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "a2a5829971c576458d5e28042054915c4e8db62a95482255ff94c0aa3c605787",
+    "requested_fields": [
+      "overtime_pay",
+      "night_pay",
+      "taxable_pay",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "overtime_pay",
+      "night_pay",
+      "non_taxable_pay",
+      "taxable_pay",
+      "income_tax",
+      "net_pay"
+    ],
+    "comparison": "동일 카드의 최종 category 변경은 추가 대가를 없애고 같은 길이 휴게 이동은 야간만 바꾼다. 배식 과세까지 실제 지급으로 연결한다.",
+    "recommended_action": "세 예외 각각의 변화/불변 증거를 유지한다.",
+    "exceptions": [
+      "최종 승인에서 추가 작업을 소정 이동으로 정정",
+      "최종 휴게가 법정 야간구간 안으로 이동",
+      "현금 식대와 배식 함께 제공"
+    ],
+    "documents": [
+      {
+        "filename": "01_월급약정.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate"
+        ]
+      },
+      {
+        "filename": "02_편성확인.hwpx",
+        "fields": [
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "03_이전카드.xlsx",
+        "fields": [
+          "work_records.0"
+        ]
+      },
+      {
+        "filename": "04_최종카드.xlsx",
+        "fields": [
+          "work_records.1"
+        ]
+      },
+      {
+        "filename": "05_상시규모.pdf",
+        "fields": [
+          "workplace_employee_count",
+          "holiday_dates",
+          "week_attendance"
+        ]
+      },
+      {
+        "filename": "06_배식확인.pdf",
+        "fields": [
+          "meal_service"
+        ]
+      },
+      {
+        "filename": "07_연금.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "08_건강고용.pdf",
+        "fields": [
+          "health_notified_income",
+          "health_due",
+          "employment_notified_income",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "09_실행세무.hwpx",
+        "fields": [
+          "payment_records",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B040",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "9e47e1aff9ee1d2b63458e2e4c457a7c34bc8b2c8d20cf6e206bba257a21ae93",
+    "closest_batch1_case": "B287",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "ec14d2661f9eb900497660f36d92f6fae1b6369efbc988b412e2bbef9dccf9d1",
+    "requested_fields": [
+      "base_pay",
+      "paid_holiday_pay",
+      "holiday_pay",
+      "gross_pay",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "paid_holiday_pay",
+      "weekly_holiday_pay",
+      "holiday_pay",
+      "night_pay",
+      "gross_pay"
+    ],
+    "comparison": "같은 공휴일 기본유급은 이미 기본 집계에 포함되어 추가0원이고 실제 두 소집은 하루8시간 초과를 만든다. 기존은 미포함 기본유급을 따로 지급한다.",
+    "recommended_action": "기본유급 포함 여부를 바꾸는 CF에는 실제 기본 집계도 함께 바꾼다.",
+    "exceptions": [
+      "기본 시급 집계에 어린이날 유급 임금 이미 포함",
+      "어린이날 두 소집의 실제 합계가8시간 초과"
+    ],
+    "documents": [
+      {
+        "filename": "01_시급계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_지급단위.xlsx",
+        "fields": [
+          "regular_schedule"
+        ]
+      },
+      {
+        "filename": "03_휴무약정.hwpx",
+        "fields": [
+          "scope",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "04_기본유급.pdf",
+        "fields": [
+          "holiday_dates",
+          "paid_holiday_records"
+        ]
+      },
+      {
+        "filename": "05_오전소집.xlsx",
+        "fields": [
+          "work_records.0"
+        ]
+      },
+      {
+        "filename": "06_오후소집.xlsx",
+        "fields": [
+          "work_records.1"
+        ]
+      },
+      {
+        "filename": "07_연금자격.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "08_건강고용.pdf",
+        "fields": [
+          "health_notified_income",
+          "health_due",
+          "employment_notified_income",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "09_지급가족.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B041",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "0d98448a955a7fb42c4670977d95ff742016d17de2c9b7911ed73ccc4976873b",
+    "closest_batch1_case": "B192",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "3233d3d35f7f5b350b5c092a1dfda83b9c11a4d1721b93e7c83fe7a10411ef29",
+    "requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay",
+      "variable_allowance",
+      "gross_pay",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "weekly_holiday_pay",
+      "holiday_pay",
+      "gross_pay",
+      "net_pay"
+    ],
+    "comparison": "최종 소정 휴게 감소가 기본근로만 바꾸고 결근 주 주휴 판정은 그대로이며 시간 밖 실적금이 gross/net에 더해진다.",
+    "recommended_action": "휴게/결근/실적의 각 요청답을 보인다.",
+    "exceptions": [
+      "소정근로일 수요일의 무급 결근",
+      "금요일 최종 승인 휴게가 늘어 실제 근로 감소",
+      "당월 변동 실적금을 별도로 지급"
+    ],
+    "documents": [
+      {
+        "filename": "01_한주계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_월요일.xlsx",
+        "fields": [
+          "work_records.0"
+        ]
+      },
+      {
+        "filename": "03_금요일이전.xlsx",
+        "fields": [
+          "work_records.1"
+        ]
+      },
+      {
+        "filename": "04_금요일최종.xlsx",
+        "fields": [
+          "work_records.2"
+        ]
+      },
+      {
+        "filename": "05_결근주.hwpx",
+        "fields": [
+          "week_attendance",
+          "scope",
+          "holiday_dates",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "06_실적금.pdf",
+        "fields": [
+          "variable_allowance"
+        ]
+      },
+      {
+        "filename": "07_연금회신.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "08_건강고용회신.pdf",
+        "fields": [
+          "health_notified_income",
+          "health_due",
+          "employment_notified_income",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "09_집행.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B042",
+    "review_state": "borderline_relationship_review",
+    "case_sha256": "70f4ed6d1452aee99ba9466c7929fc5875715b162e18955c978023fa2d645110",
+    "closest_batch1_case": "B294",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "b5c052504c98bed246a916e41399f9a81b9adca5ca7849b1fe7e7f2732726c0e",
+    "requested_fields": [
+      "holiday_pay",
+      "night_pay",
+      "overtime_pay",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "paid_holiday_pay",
+      "weekly_holiday_pay",
+      "holiday_pay",
+      "night_pay",
+      "gross_pay"
+    ],
+    "comparison": "공휴일 소정 입력을 추가로 정정하고 야간 휴게를 대조하는 관계는 기존에 있다. 새 원고는 월급/8시간 이하이며 같은 길이 휴게 이동과 제헌절을 사용한다.",
+    "recommended_action": "날짜/휴게/월급 기반 차이만으로 새 관계라 승인하지 말고 기존 전체 원자료와 나란히 재검토한다.",
+    "exceptions": [
+      "제헌절 소집의 소정 입력을 추가 근로로 최종 정정",
+      "최종 휴게가 야간구간 안으로 이동"
+    ],
+    "documents": [
+      {
+        "filename": "01_월급약정.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate"
+        ]
+      },
+      {
+        "filename": "02_소집범위.hwpx",
+        "fields": [
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "03_폐기카드.xlsx",
+        "fields": [
+          "work_records.0"
+        ]
+      },
+      {
+        "filename": "04_최종추가.xlsx",
+        "fields": [
+          "work_records.1"
+        ]
+      },
+      {
+        "filename": "05_공휴일.pdf",
+        "fields": [
+          "holiday_dates",
+          "workplace_employee_count",
+          "week_attendance"
+        ]
+      },
+      {
+        "filename": "06_연금.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "07_건강.pdf",
+        "fields": [
+          "health_notified_income",
+          "health_due"
+        ]
+      },
+      {
+        "filename": "08_고용.pdf",
+        "fields": [
+          "employment_notified_income",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "09_집행세무.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B043",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "046f534156b4d60d85bb565ad46ffce8cc18cb19c37dd6df8fea4dabf3ce3a09",
+    "closest_batch1_case": "B295",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "cc157fe30115fd9d5bd2082c9dbb82abf3976d3bb161d9081f4dae416ce2817d",
+    "requested_fields": [
+      "effective_payment_date",
+      "pension_base_income",
+      "national_pension",
+      "income_tax",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "effective_payment_date",
+      "taxable_pay",
+      "income_tax",
+      "national_pension",
+      "total_deductions"
+    ],
+    "comparison": "실행 전 최고 취소 계획을 버린 유효 지급일과 다른6월 보험 상한을 분리하고 두 자녀의 해당 지급일 기준으로 실제 자금 소요를 정한다. 기존 고액경계 중심과 다르다.",
+    "recommended_action": "날짜 변경은 date 요청에 나타나며 보험 부과 CF도 따로 기록한다.",
+    "exceptions": [
+      "미실행 지급의 후속 승인 변경 취소",
+      "7월 계획 지급과6월 보험부과 상한의 분리"
+    ],
+    "documents": [
+      {
+        "filename": "01_정액계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate"
+        ]
+      },
+      {
+        "filename": "02_근로범위.hwpx",
+        "fields": [
+          "weekly_hours",
+          "weekly_holiday_included",
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count",
+          "scope"
+        ]
+      },
+      {
+        "filename": "03_유효계획.xlsx",
+        "fields": [
+          "payment_records.0"
+        ]
+      },
+      {
+        "filename": "04_취소계획.xlsx",
+        "fields": [
+          "payment_records.1"
+        ]
+      },
+      {
+        "filename": "05_가족.hwpx",
+        "fields": [
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      },
+      {
+        "filename": "06_연금.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "07_건강.pdf",
+        "fields": [
+          "health_notified_income",
+          "health_due"
+        ]
+      },
+      {
+        "filename": "08_고용.pdf",
+        "fields": [
+          "employment_notified_income",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "09_식비.pdf",
+        "fields": [
+          "meal_service"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B044",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "da2c9388e898bd61d475f31e50b2466fe359fe42c69d78bd0647a4b25f6b1941",
+    "closest_batch1_case": "B076",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_054_103.json",
+    "closest_case_sha256": "905068374800510dc2d4d7409e88d966f67b856fdecca3205badcedbd268c0ac",
+    "requested_fields": [
+      "effective_payment_date",
+      "national_pension",
+      "health_insurance",
+      "long_term_care",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "gross_pay",
+      "national_pension",
+      "health_insurance",
+      "employment_insurance",
+      "net_pay"
+    ],
+    "comparison": "취득월 기관별 부과에 높은7월 계획보다6월 실행 우선의 다른 자료 관계를 함께 둔다. 실행 상태 CF는 날짜만 바꾸고 동일 보험 월은 유지한다.",
+    "recommended_action": "지급일과 기관 회신은 독립이며 일괄 취득월 미부과라고 하지 않는다.",
+    "exceptions": [
+      "연금 취득월 납부 신청과 건강 미부과의 차이",
+      "높은7월 승인 계획보다6월 실행 기록 우선"
+    ],
+    "documents": [
+      {
+        "filename": "01_첫월약정.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate"
+        ]
+      },
+      {
+        "filename": "02_입사범위.hwpx",
+        "fields": [
+          "weekly_hours",
+          "weekly_holiday_included",
+          "scope"
+        ]
+      },
+      {
+        "filename": "03_근태.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "04_연금신청.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "05_건강회신.pdf",
+        "fields": [
+          "health_notified_income",
+          "health_due"
+        ]
+      },
+      {
+        "filename": "06_고용회신.pdf",
+        "fields": [
+          "employment_notified_income",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "07_선지급.xlsx",
+        "fields": [
+          "payment_records.0"
+        ]
+      },
+      {
+        "filename": "08_예정표.xlsx",
+        "fields": [
+          "payment_records.1"
+        ]
+      },
+      {
+        "filename": "09_가족식비.hwpx",
+        "fields": [
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B045",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "6c0beda47691b61eeb90c6e1abd97ebb4727a05f337b2962a741b58b34ea1a96",
+    "closest_batch1_case": "B286",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "b852bfeabae4c978251df84b1d75941ac2639654c4c5da8d7a00866993e73441",
+    "requested_fields": [
+      "taxable_pay",
+      "income_tax",
+      "local_income_tax",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "taxable_pay",
+      "income_tax",
+      "local_income_tax"
+    ],
+    "comparison": "식대 초과/완료금이 과세 표행을 정하고 지급일 자녀→80%→부징수0원이 이어진다. taxable_pay가 요청돼 상한에 가려진 금액 차이도 보인다.",
+    "recommended_action": "변경 과세액에 해당하는 공식 표 행도 CF 증빙에 맞춘다.",
+    "exceptions": [
+      "현금 식대의 월20만원 초과 과세",
+      "당월 변동 완료금 지급",
+      "80퍼센트 선택 후 원천세1천원 미만 부징수"
+    ],
+    "documents": [
+      {
+        "filename": "01_월급.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_식비.hwpx",
+        "fields": [
+          "meal_allowance",
+          "meal_service"
+        ]
+      },
+      {
+        "filename": "03_완료금.pdf",
+        "fields": [
+          "variable_allowance",
+          "scope"
+        ]
+      },
+      {
+        "filename": "04_지급이력.xlsx",
+        "fields": [
+          "payment_records"
+        ]
+      },
+      {
+        "filename": "05_정상근태.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "06_가족신청.hwpx",
+        "fields": [
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      },
+      {
+        "filename": "07_연금.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "08_건강.pdf",
+        "fields": [
+          "health_notified_income",
+          "health_due"
+        ]
+      },
+      {
+        "filename": "09_고용.pdf",
+        "fields": [
+          "employment_notified_income",
+          "employment_due"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B046",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "6d2da719e5bf4fcb871c41982c3b92d162a1050b2bbc137337ba1b2e03d8bb0c",
+    "closest_batch1_case": "B292",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_254_300.json",
+    "closest_case_sha256": "2d736188e45190679f8ef3e031827986d3d4c48c66a51c1deed232d9b43758f4",
+    "requested_fields": [
+      "paid_holiday_pay",
+      "holiday_pay",
+      "night_pay",
+      "weekly_holiday_pay",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "paid_holiday_pay",
+      "weekly_holiday_pay",
+      "national_pension",
+      "long_term_care",
+      "effective_payment_date"
+    ],
+    "comparison": "4인 사업장 동일 사실이 노동절 기본유급 유지/일반공휴일 유급 제외/실제 밤 법정가산 제외에 서로 다르게 작용한다. 실제 노동절 밤 작업이 있다.",
+    "recommended_action": "5인 CF에서 원래근로의무일과 공휴일 약정도 함께 일관되게 유지한다.",
+    "exceptions": [
+      "상시4명 사업장의 법정 가산 제외",
+      "근로자의 날 유급과 일반 공휴일 유급의 규모 조건 차이"
+    ],
+    "documents": [
+      {
+        "filename": "01_시급.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_규모범위.hwpx",
+        "fields": [
+          "workplace_employee_count",
+          "scope"
+        ]
+      },
+      {
+        "filename": "03_기본집계.xlsx",
+        "fields": [
+          "regular_schedule",
+          "week_attendance"
+        ]
+      },
+      {
+        "filename": "04_휴무일.pdf",
+        "fields": [
+          "holiday_dates"
+        ]
+      },
+      {
+        "filename": "05_근로의날.pdf",
+        "fields": [
+          "paid_holiday_records.0"
+        ]
+      },
+      {
+        "filename": "06_어린이날.pdf",
+        "fields": [
+          "paid_holiday_records.1"
+        ]
+      },
+      {
+        "filename": "07_밤소집.xlsx",
+        "fields": [
+          "work_records"
+        ]
+      },
+      {
+        "filename": "08_자격.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "09_지급.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B047",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "cceb34c5a24b6b6a6f84fa5e355d9dbbd0797b94202904fa3b8d7d03c71046f4",
+    "closest_batch1_case": "B185",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_154_203.json",
+    "closest_case_sha256": "25fb02e37608588b656136a61f1df65f313e5f49363645de37f15545dab888f3",
+    "requested_fields": [
+      "overtime_pay",
+      "health_insurance",
+      "long_term_care",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "ordinary_monthly_wage",
+      "overtime_pay",
+      "taxable_pay",
+      "net_pay"
+    ],
+    "comparison": "실적금 지급/통상단가 분리에 건강 통지 하한→요양→net가 붙는다. 같은 완료금 증액이 보험 통지 자체를 자동 올리지 않는다.",
+    "recommended_action": "건강 하한 CF를 실적금 CF와 분리한다.",
+    "exceptions": [
+      "당월 변동 실적금 지급",
+      "확정 건강 통지의 산출액이 근로자 공제 하한 미만"
+    ],
+    "documents": [
+      {
+        "filename": "01_현재계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_실적금.pdf",
+        "fields": [
+          "variable_allowance"
+        ]
+      },
+      {
+        "filename": "03_추가지원.xlsx",
+        "fields": [
+          "work_records"
+        ]
+      },
+      {
+        "filename": "04_범위확인.hwpx",
+        "fields": [
+          "scope",
+          "workplace_employee_count",
+          "holiday_dates",
+          "week_attendance"
+        ]
+      },
+      {
+        "filename": "05_건강통지.pdf",
+        "fields": [
+          "health_notified_income",
+          "health_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "06_연금통지.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due"
+        ]
+      },
+      {
+        "filename": "07_고용통지.pdf",
+        "fields": [
+          "employment_notified_income",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "08_가족식비.hwpx",
+        "fields": [
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      },
+      {
+        "filename": "09_은행.xlsx",
+        "fields": [
+          "payment_records"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B048",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "96eff0dd5d60b665bdb9098053b52caa55b05fa05a87bb9c9fc825aed91f6a79",
+    "closest_batch1_case": "B247",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "fd5f76f5425aad2e9a5423c40301459530ed4c33379452c9c636dbc23824ac22",
+    "requested_fields": [
+      "ordinary_monthly_wage",
+      "taxable_pay",
+      "income_tax",
+      "local_income_tax",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "ordinary_monthly_wage",
+      "variable_allowance",
+      "taxable_pay",
+      "income_tax",
+      "local_income_tax",
+      "total_deductions"
+    ],
+    "comparison": "배식 현금식대 과세 및 완료금 제외 통상분자와 정확히1000만원 과세를 함께 요청하고13가족/4자녀/80%가 이어진다. 기존 큰 완료금/가족 확장과 제한 지점이 다르다.",
+    "recommended_action": "통상분자와 과세액을 각각 요청해 급식/완료금 차이를 보인다.",
+    "exceptions": [
+      "급식 제공 대상자의 현금 식대 전액 과세",
+      "당월 완료금의 통상임금 제외",
+      "13명 가족의 세액표 열 확장과80퍼센트 선택"
+    ],
+    "documents": [
+      {
+        "filename": "01_정액계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_완료금.pdf",
+        "fields": [
+          "variable_allowance"
+        ]
+      },
+      {
+        "filename": "03_급식.pdf",
+        "fields": [
+          "meal_service"
+        ]
+      },
+      {
+        "filename": "04_가족.hwpx",
+        "fields": [
+          "family_count",
+          "eligible_children",
+          "withholding_reference"
+        ]
+      },
+      {
+        "filename": "05_선택.hwpx",
+        "fields": [
+          "withholding_percent",
+          "scope"
+        ]
+      },
+      {
+        "filename": "06_정상근태.xlsx",
+        "fields": [
+          "regular_schedule",
+          "work_records",
+          "holiday_dates",
+          "week_attendance",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "07_연금.pdf",
+        "fields": [
+          "pension_notified_income",
+          "pension_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "08_건강고용.pdf",
+        "fields": [
+          "health_notified_income",
+          "health_due",
+          "employment_notified_income",
+          "employment_due"
+        ]
+      },
+      {
+        "filename": "09_집행.xlsx",
+        "fields": [
+          "payment_records"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B049",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "94de66b869b971f0c61b57c3cdfb54e887be8b3e730fa5b2b93e0cf4e7ad377e",
+    "closest_batch1_case": "B224",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_204_253.json",
+    "closest_case_sha256": "db4a60e7b7e50e96775094c58f4202026695cc27a9c3c9de3226a89cc91143eb",
+    "requested_fields": [
+      "base_pay",
+      "holiday_pay",
+      "night_pay",
+      "paid_holiday_pay",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "base_pay",
+      "overtime_pay",
+      "night_pay",
+      "gross_pay"
+    ],
+    "comparison": "소정/추가 야간 분리 자체는 공유하지만 선거일 기본유급을 세 번째 층으로 두고 실제 공휴일 추가는 holiday로, 정규는 base로 보낸다.",
+    "recommended_action": "유급 포함 CF는 기본근로 집계도 함께 보정해야 유효하다.",
+    "exceptions": [
+      "소정 야간과 공휴일 추가 야간의 서로 다른 기본 대가",
+      "선거일 휴무 기본 유급이 실제근로 집계에 미포함"
+    ],
+    "documents": [
+      {
+        "filename": "01_시급계약.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "variable_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_월요일.xlsx",
+        "fields": [
+          "work_records.0"
+        ]
+      },
+      {
+        "filename": "03_화요일.xlsx",
+        "fields": [
+          "work_records.1"
+        ]
+      },
+      {
+        "filename": "04_금요일.xlsx",
+        "fields": [
+          "work_records.2"
+        ]
+      },
+      {
+        "filename": "05_회수카드.xlsx",
+        "fields": [
+          "work_records.3"
+        ]
+      },
+      {
+        "filename": "06_공휴일.pdf",
+        "fields": [
+          "holiday_dates",
+          "paid_holiday_records",
+          "workplace_employee_count"
+        ]
+      },
+      {
+        "filename": "07_주마감.hwpx",
+        "fields": [
+          "week_attendance",
+          "scope"
+        ]
+      },
+      {
+        "filename": "08_자격.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "09_지급세무.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "B050",
+    "review_state": "distinct_relationship_identified",
+    "case_sha256": "9304f55f020e7ac08bb1dd04774772a1b1b49e3e5e8ed19f191cfba0732c5702",
+    "closest_batch1_case": "B049",
+    "closest_batch1_source": "authored/batch_1/B_payroll/cases_004_053.json",
+    "closest_case_sha256": "f5840637e59861cffc0ab7ba86798f31a61ba93201a35cdbdeed03a6e7d89575",
+    "requested_fields": [
+      "holiday_pay",
+      "night_pay",
+      "ordinary_monthly_wage",
+      "gross_pay",
+      "net_pay"
+    ],
+    "closest_requested_fields": [
+      "ordinary_monthly_wage",
+      "ordinary_hourly_wage_floor",
+      "non_taxable_pay",
+      "taxable_pay",
+      "holiday_pay",
+      "gross_pay"
+    ],
+    "comparison": "첫날은 최종 휴게가8시간 경계를 바꾸고 둘째날은 다른ID 미승인 밤 초안이 야간0원 여부를 바꾼다. 완료금은 시간 단가와 분리되어 실제 지급에만 더한다.",
+    "recommended_action": "revision 선택과 draft 제외를 각각 다른 개입으로 보인다.",
+    "exceptions": [
+      "첫 주휴일 최종 휴게가 휴일8시간 경계를 변경",
+      "둘째 주휴일 밤 초안 미승인 제외",
+      "당월 변동 실적금의 통상임금 제외"
+    ],
+    "documents": [
+      {
+        "filename": "01_월급.pdf",
+        "fields": [
+          "source_contract",
+          "company_name",
+          "employee_name",
+          "pay_basis",
+          "base_salary",
+          "fixed_allowance",
+          "meal_allowance",
+          "monthly_divisor_hours",
+          "hourly_rate",
+          "weekly_hours",
+          "weekly_holiday_included"
+        ]
+      },
+      {
+        "filename": "02_실적금.pdf",
+        "fields": [
+          "variable_allowance",
+          "scope"
+        ]
+      },
+      {
+        "filename": "03_첫날이전.xlsx",
+        "fields": [
+          "work_records.0"
+        ]
+      },
+      {
+        "filename": "04_첫날최종.xlsx",
+        "fields": [
+          "work_records.1"
+        ]
+      },
+      {
+        "filename": "05_둘째날낮.xlsx",
+        "fields": [
+          "work_records.2"
+        ]
+      },
+      {
+        "filename": "06_둘째날밤.xlsx",
+        "fields": [
+          "work_records.3"
+        ]
+      },
+      {
+        "filename": "07_휴일범위.hwpx",
+        "fields": [
+          "holiday_dates",
+          "workplace_employee_count",
+          "week_attendance"
+        ]
+      },
+      {
+        "filename": "08_공단통지.pdf",
+        "fields": [
+          "pension_notified_income",
+          "health_notified_income",
+          "employment_notified_income",
+          "pension_due",
+          "health_due",
+          "employment_due",
+          "insurance_assessment_month"
+        ]
+      },
+      {
+        "filename": "09_집행세무.hwpx",
+        "fields": [
+          "payment_records",
+          "meal_service",
+          "family_count",
+          "eligible_children",
+          "withholding_percent",
+          "withholding_reference"
+        ]
+      }
+    ]
+  }
+]

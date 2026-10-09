@@ -1,0 +1,70 @@
+task_id: B2_D008_e9fbb95a
+domain: D_extract
+difficulty: easy
+reference_period: not-applicable
+instruction: 촬영용 확산판을 실제 받은 수량으로 정산하세요. 포함 포장가격에 순인수량을 곱하고 포장당수량으로 나눈 뒤 버린 금액의 10/11을
+  다시 버려 공급가액을 구합니다. 차액은 세액입니다. answer.json에는 line_settlements를 작성하세요.
+input_files:
+- path: inputs/01_확산판계약.pdf
+  format: pdf
+- path: inputs/02_확산판입고.xlsx
+  format: xlsx
+answer_schema:
+  type: object
+  properties:
+    line_settlements:
+      type: array
+      items:
+        type: object
+        properties:
+          order_id:
+            type: string
+          line_id:
+            type: string
+          item:
+            type: string
+          base_unit:
+            type: string
+          ordered_units:
+            type: integer
+          received_units:
+            type: integer
+          returned_units:
+            type: integer
+          net_units:
+            type: integer
+          outstanding_units:
+            type: integer
+          supply:
+            type: integer
+          vat:
+            type: integer
+          total:
+            type: integer
+        required:
+        - order_id
+        - line_id
+        - item
+        - base_unit
+        - ordered_units
+        - received_units
+        - returned_units
+        - net_units
+        - outstanding_units
+        - supply
+        - vat
+        - total
+        additionalProperties: false
+  required:
+  - line_settlements
+  additionalProperties: false
+canary: KrRubberStamp-canary-b04fa5ea-6d42-5248-ae8b-3ef6f633e7c9
+scenario_seed: 16860273429331590512
+scenario_hash: 4b13e2f132ab4ea42c4cb31efa9ecabda71eb5a8f61c3dc276186c8829a60b2c
+authorship:
+  method: individually_written
+  case_id: D008
+  case_sha256: e9fbb95abb443d70db15c9907d92d067ff82abfef435222d0b42300532733a48
+  source_file: batch_2/D_extract/cases_001_050.json
+answer_fields:
+- line_settlements

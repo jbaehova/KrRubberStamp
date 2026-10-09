@@ -1,0 +1,40 @@
+task_id: B2_C005_30b01f6c
+domain: C_vat
+difficulty: easy
+reference_period: 2026-H1
+instruction: 가상바늘수선의 완료 수선 한 건은 카드와 현금영수증으로 일부씩 수금했고 잔금은 아직 받지 않았습니다. 지급 실행과 발급 참조를
+  연결하여 전체 매출세액(output_vat)과 발행세액공제(receipt_credit) 및 납부세액(payable_vat)을 answer.json에
+  적어 주세요.
+input_files:
+- path: inputs/01_수선완료.pdf
+  format: pdf
+- path: inputs/02_부분지급.xlsx
+  format: xlsx
+- path: inputs/03_발급원본.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    output_vat:
+      type: integer
+    receipt_credit:
+      type: integer
+    payable_vat:
+      type: integer
+  required:
+  - output_vat
+  - receipt_credit
+  - payable_vat
+  additionalProperties: false
+canary: KrRubberStamp-canary-2758b271-2957-5ce7-b72c-3045789a02a6
+scenario_seed: 3508338662111349764
+scenario_hash: 7637d04d84a29e346cef52986a3714bfe526ddc1d61f608b1760d35a07df2af7
+authorship:
+  method: individually_written
+  case_id: C005
+  case_sha256: 30b01f6cdaea8c04824ceef67f9017fba646aafe097d3fe7d8966ff341d8ddb9
+  source_file: batch_2/C_vat/cases_001_050.json
+answer_fields:
+- output_vat
+- receipt_credit
+- payable_vat

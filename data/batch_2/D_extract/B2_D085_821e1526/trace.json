@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": {
+      "base_unit": "장",
+      "item": "점검스티커",
+      "latest_delivery_date": "2026-10-28",
+      "order_date": "2026-10-19",
+      "processing_policy": "합성 사적 구매: 필요/포장수량 올림과 최소포장수 중 큰 값 구매. 상품/운임 각각 포함가 10/11 버림 공급가액+차액 세액 또는 별도 10% 버림 세액. 상품 세금포함 총액만 무료배송 기준 비교하며 무상상품 자체는 무료운임 보장이 아니다. 효력/재고/달력납기 충족 총액/정규화업체/견적ID 순 선택. 신고판단 아님.",
+      "quotes": [
+        {
+          "free_shipping_at": 1000,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 0,
+          "pack_units": 20,
+          "price_includes_vat": true,
+          "quote_id": "STICKER-GIFT",
+          "shipping_price": 900,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-10-01",
+          "valid_until": "2026-10-31",
+          "vendor": "가상스티커무상"
+        },
+        {
+          "free_shipping_at": null,
+          "lead_days": 3,
+          "minimum_packs": 1,
+          "pack_price": 250,
+          "pack_units": 5,
+          "price_includes_vat": true,
+          "quote_id": "STICKER-PAID",
+          "shipping_price": 0,
+          "shipping_price_includes_vat": true,
+          "stock_packs": 10,
+          "valid_from": "2026-10-01",
+          "valid_until": "2026-10-31",
+          "vendor": "가상스티커판매"
+        }
+      ],
+      "required_units": 15,
+      "source_contract": "extract_procurement_v1"
+    },
+    "output": {
+      "base_unit": "장",
+      "comparison": {
+        "chosen_leftover_units": 0,
+        "chosen_quote_id": "STICKER-PAID",
+        "chosen_total": 750,
+        "chosen_vendor": "가상스티커판매",
+        "eligible_quote_count": 2,
+        "quote_comparisons": [
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-10-22",
+            "eligible": true,
+            "leftover_units": 5,
+            "merchandise_supply": 0,
+            "merchandise_total": 0,
+            "merchandise_vat": 0,
+            "obtained_units": 20,
+            "packs": 1,
+            "quote_id": "STICKER-GIFT",
+            "shipping_supply": 818,
+            "shipping_total": 900,
+            "shipping_vat": 82,
+            "stock_sufficient": true,
+            "supply": 818,
+            "total": 900,
+            "valid_on_order": true,
+            "vat": 82,
+            "vendor": "가상스티커무상"
+          },
+          {
+            "delivered_in_time": true,
+            "delivery_date": "2026-10-22",
+            "eligible": true,
+            "leftover_units": 0,
+            "merchandise_supply": 681,
+            "merchandise_total": 750,
+            "merchandise_vat": 69,
+            "obtained_units": 15,
+            "packs": 3,
+            "quote_id": "STICKER-PAID",
+            "shipping_supply": 0,
+            "shipping_total": 0,
+            "shipping_vat": 0,
+            "stock_sufficient": true,
+            "supply": 681,
+            "total": 750,
+            "valid_on_order": true,
+            "vat": 69,
+            "vendor": "가상스티커판매"
+          }
+        ]
+      },
+      "comparison_arithmetic": [
+        {
+          "free_shipping_at": 1000,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 0,
+          "minimum_packs": 1,
+          "pack_units": 20,
+          "packs_after_minimum": 1,
+          "price_includes_vat": true,
+          "quote_id": "STICKER-GIFT",
+          "required_packs_before_minimum": 1,
+          "shipping_amount_before_vat_split": 900,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 0
+        },
+        {
+          "free_shipping_at": null,
+          "lead_calendar_days": 3,
+          "merchandise_amount_before_vat_split": 750,
+          "minimum_packs": 1,
+          "pack_units": 5,
+          "packs_after_minimum": 3,
+          "price_includes_vat": true,
+          "quote_id": "STICKER-PAID",
+          "required_packs_before_minimum": 3,
+          "shipping_amount_before_vat_split": 0,
+          "shipping_free": false,
+          "shipping_price_includes_vat": true,
+          "shipping_threshold_basis": 750
+        }
+      ],
+      "deduplicated_quote_ids": [],
+      "normalized_item": "점검스티커",
+      "selection": {
+        "chosen_tie_break_tuple": [
+          750,
+          "가상스티커판매",
+          "STICKER-PAID"
+        ],
+        "eligible_tie_break_tuples": [
+          [
+            750,
+            "가상스티커판매",
+            "STICKER-PAID"
+          ],
+          [
+            900,
+            "가상스티커무상",
+            "STICKER-GIFT"
+          ]
+        ],
+        "reason": "lowest_total_then_vendor_then_quote_id",
+        "tie_break_fields": [
+          "total",
+          "vendor",
+          "quote_id"
+        ]
+      }
+    },
+    "rule_id": "D.procurement_comparison"
+  }
+]

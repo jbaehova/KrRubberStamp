@@ -1,0 +1,60 @@
+task_id: B2_B044_da2c9388
+domain: B_payroll
+difficulty: hard
+reference_period: '2026'
+instruction: 가상고문서수장실 가상도윤의6월22일 입사 첫 정액 급여를 확인합니다. 연금 취득월 납부 신청이 승인됐고 건강은6월 미부과입니다.7월
+  지급 계획과 달리6월30일에 은행 실행을 끝냈습니다. effective_payment_date, national_pension, health_insurance,
+  long_term_care, net_pay를 작성해 기관별 상태와 실제 실행을 적용해 주세요.
+input_files:
+- path: inputs/01_첫월약정.pdf
+  format: pdf
+- path: inputs/02_입사범위.hwpx
+  format: hwpx
+- path: inputs/03_근태.xlsx
+  format: xlsx
+- path: inputs/04_연금신청.pdf
+  format: pdf
+- path: inputs/05_건강회신.pdf
+  format: pdf
+- path: inputs/06_고용회신.pdf
+  format: pdf
+- path: inputs/07_선지급.xlsx
+  format: xlsx
+- path: inputs/08_예정표.xlsx
+  format: xlsx
+- path: inputs/09_가족식비.hwpx
+  format: hwpx
+answer_schema:
+  type: object
+  properties:
+    effective_payment_date:
+      type: string
+    national_pension:
+      type: integer
+    health_insurance:
+      type: integer
+    long_term_care:
+      type: integer
+    net_pay:
+      type: integer
+  required:
+  - effective_payment_date
+  - national_pension
+  - health_insurance
+  - long_term_care
+  - net_pay
+  additionalProperties: false
+canary: KrRubberStamp-canary-9dedd8d6-fa2b-54ec-b487-62d1f60c167e
+scenario_seed: 15721102615470718305
+scenario_hash: a582b19d1d5bf296d1814c6f18803156ab940fe0584dc3550614f0372f5f9963
+authorship:
+  method: individually_written
+  case_id: B044
+  case_sha256: da2c9388e898bd61d475f31e50b2466fe359fe42c69d78bd0647a4b25f6b1941
+  source_file: batch_2/B_payroll/cases_001_050.json
+answer_fields:
+- effective_payment_date
+- national_pension
+- health_insurance
+- long_term_care
+- net_pay

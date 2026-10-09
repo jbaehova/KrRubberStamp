@@ -1,0 +1,196 @@
+[
+  {
+    "inputs": {
+      "cutoff_date": "2026-03-31",
+      "events": [
+        {
+          "date": "2026-04-02",
+          "event_id": "COOL-F-IN",
+          "kind": "received",
+          "line_id": "F",
+          "order_id": "COOL-FIX",
+          "units": 10
+        },
+        {
+          "date": "2026-03-24",
+          "event_id": "COOL-P-BACK",
+          "kind": "returned",
+          "line_id": "P",
+          "order_id": "COOL-PANEL",
+          "units": 2
+        },
+        {
+          "date": "2026-03-18",
+          "event_id": "COOL-P-IN",
+          "kind": "received",
+          "line_id": "P",
+          "order_id": "COOL-PANEL",
+          "units": 9
+        }
+      ],
+      "orders": [
+        {
+          "date": "2026-03-20",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "패널고정편",
+              "line_id": "F",
+              "ordered_packages": 2,
+              "package_price": 9500,
+              "price_includes_vat": false,
+              "units_per_package": 5
+            }
+          ],
+          "order_id": "COOL-FIX",
+          "vendor": "㈜가상냉각패널"
+        },
+        {
+          "date": "2026-03-12",
+          "kind": "order",
+          "lines": [
+            {
+              "base_unit": "개",
+              "item": "냉각패널",
+              "line_id": "P",
+              "ordered_packages": 3,
+              "package_price": 44003,
+              "price_includes_vat": true,
+              "units_per_package": 4
+            }
+          ],
+          "order_id": "COOL-PANEL",
+          "vendor": "주식회사 가상냉각패널"
+        }
+      ],
+      "payments": [
+        {
+          "amount": 10000,
+          "date": "2026-03-21",
+          "order_id": "COOL-FIX",
+          "payment_id": "COOL-F-DEP",
+          "status": "executed"
+        },
+        {
+          "amount": 40000,
+          "date": "2026-03-13",
+          "order_id": "COOL-PANEL",
+          "payment_id": "COOL-P-DEP",
+          "status": "executed"
+        }
+      ],
+      "processing_policy": "모든 업체는 가상이다. 마감까지 주문 및 행에 입고와 반품을 연결한다. 가격은 포장가격 곱하기 순인수량을 포장당수량으로 나눈 뒤 버린다. 포함 행은 10/11을 버린 공급가액과 차액 세액이고 별도 행 세액은 10%를 버린다. 마감까지 executed 지급을 차감한다. 업체명은 NFKC, 공백과 법인 표기 제거 후 소문자로 합친다.",
+      "source_contract": "extract_fulfillment_v1"
+    },
+    "output": {
+      "accepted_event_ids": [
+        "COOL-P-BACK",
+        "COOL-P-IN"
+      ],
+      "accepted_payment_ids": [
+        "COOL-F-DEP",
+        "COOL-P-DEP"
+      ],
+      "deduplicated_event_ids": [],
+      "deduplicated_payment_ids": [],
+      "event_timeline": [
+        {
+          "event_id": "COOL-P-IN",
+          "net_units_after_event": 9
+        },
+        {
+          "event_id": "COOL-P-BACK",
+          "net_units_after_event": 7
+        }
+      ],
+      "excluded_after_cutoff_event_ids": [
+        "COOL-F-IN"
+      ],
+      "excluded_payment_ids": [],
+      "excluded_quote_order_ids": [],
+      "line_arithmetic": [
+        {
+          "amount_after_floor": 0,
+          "line_id": "F",
+          "order_id": "COOL-FIX",
+          "package_price_times_net_units": 0,
+          "price_includes_vat": false,
+          "supply": 0,
+          "total": 0,
+          "units_per_package": 5,
+          "vat": 0
+        },
+        {
+          "amount_after_floor": 77005,
+          "line_id": "P",
+          "order_id": "COOL-PANEL",
+          "package_price_times_net_units": 308021,
+          "price_includes_vat": true,
+          "supply": 70004,
+          "total": 77005,
+          "units_per_package": 4,
+          "vat": 7001
+        }
+      ],
+      "settlement": {
+        "balance_total": 27005,
+        "grand_total": 77005,
+        "item_quantities": [
+          {
+            "base_unit": "개",
+            "item": "냉각패널",
+            "net_units": 7
+          },
+          {
+            "base_unit": "개",
+            "item": "패널고정편",
+            "net_units": 0
+          }
+        ],
+        "line_settlements": [
+          {
+            "base_unit": "개",
+            "item": "패널고정편",
+            "line_id": "F",
+            "net_units": 0,
+            "order_id": "COOL-FIX",
+            "ordered_units": 10,
+            "outstanding_units": 10,
+            "received_units": 0,
+            "returned_units": 0,
+            "supply": 0,
+            "total": 0,
+            "vat": 0
+          },
+          {
+            "base_unit": "개",
+            "item": "냉각패널",
+            "line_id": "P",
+            "net_units": 7,
+            "order_id": "COOL-PANEL",
+            "ordered_units": 12,
+            "outstanding_units": 5,
+            "received_units": 9,
+            "returned_units": 2,
+            "supply": 70004,
+            "total": 77005,
+            "vat": 7001
+          }
+        ],
+        "payment_total": 50000,
+        "vendor_balances": [
+          {
+            "balance": 27005,
+            "paid": 50000,
+            "supply": 70004,
+            "total": 77005,
+            "vat": 7001,
+            "vendor": "가상냉각패널"
+          }
+        ]
+      }
+    },
+    "rule_id": "D.fulfillment_reconciliation"
+  }
+]

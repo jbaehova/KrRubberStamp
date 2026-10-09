@@ -1,0 +1,172 @@
+{
+  "answer_fields": [
+    "payroll_calculations",
+    "employee_settlements",
+    "deductions_total",
+    "net_total",
+    "balance_total"
+  ],
+  "case_id": "B082",
+  "design_rationale": "동일 직원과 동일 부과월의 두 완전 승인 명세는 임금과 근태 및 세액표 조건이 같지만 세 기관의 통지 기초가280만원에서312만원으로 정정됐다. 두 명세의 임금을 더하거나 최신 근태만 선택하면 보험 공제가 잘못된다. 최종 승인본 전체를 선택해야 공제액이31090원 늘고 지급 잔액이 양수에서 음수로 바뀐다. 이 차이를 임금이나 통상단가 변경 또는 새로운 체납 판정으로 해석하지 않는다.",
+  "difficulty": "medium",
+  "documents": [
+    {
+      "fields": [
+        "statement_records.0"
+      ],
+      "filename": "01_초기완전명세.pdf",
+      "format": "pdf",
+      "note": "같은 월의 임금 추가분이 아니라 개정 전 완전 명세다.",
+      "title": "정정 전 월 급여 전체 승인 원본"
+    },
+    {
+      "fields": [
+        "statement_records.1"
+      ],
+      "filename": "02_정정완전명세.xlsx",
+      "format": "xlsx",
+      "note": "최종 승인 명세의 임금은 그대로이고 통지 기초만 정정됐다.",
+      "title": "기관 통지 기초를 정정한 월 급여 전체 승인 원본"
+    },
+    {
+      "fields": [
+        "transfers"
+      ],
+      "filename": "03_은행실행.hwpx",
+      "format": "hwpx",
+      "note": "지급은 실제 실행된 한 건이며 명세 두 개를 받았다고 두 번 지급하지 않았다.",
+      "title": "안정된 직원번호와 급여번호의 실제 지급"
+    },
+    {
+      "fields": [
+        "source_contract",
+        "processing_policy",
+        "processing_date",
+        "as_of_date"
+      ],
+      "filename": "04_마감선택.pdf",
+      "format": "pdf",
+      "note": "승인 원본 하나를 고른 뒤 실제 지급과 사적 차이를 대조한다.",
+      "title": "완전 명세 개정 선택과 현금 대조 마감"
+    }
+  ],
+  "domain": "B_payroll",
+  "exceptions": [
+    "기관 통지 기초의 입력 오류가 정정돼 같은 월의 완전 급여명세가 다시 승인됐다."
+  ],
+  "facts": {
+    "as_of_date": "2026-11-25",
+    "processing_date": "2026-11-25",
+    "processing_policy": "가상 회사의 완전 월 명세 대조 규약이다. 직원과 기관 부과월이 같은 원본 중 승인 상태의 가장 높은 개정번호 명세 하나만 유효하다. 개정은 부분 추가분이 아니며 앞 명세의 모든 임금과 보험 및 세액 조건을 대체한다. 실제 은행 실행은 안정된 급여번호와 직원번호 및 명세 지급일로 연결한다. 부호 있는 차이는 내부 현금 대조이고 추가 세법이나 반환 권리를 판정하지 않는다.",
+    "source_contract": "payroll_statement_revision_v1",
+    "statement_records": [
+      {
+        "document_id": "모서리초기월명세",
+        "employee_id": "가상직원채원",
+        "facts": {
+          "base_salary": 3120000,
+          "company_name": "가상모서리제작",
+          "eligible_children": 0,
+          "employee_age": 34,
+          "employee_name": "가상채원",
+          "employment_due": true,
+          "employment_notified_income": 2800000,
+          "family_count": 1,
+          "fixed_allowance": 0,
+          "health_due": true,
+          "health_notified_income": 2800000,
+          "holiday_dates": [],
+          "hourly_rate": 0,
+          "insurance_assessment_month": "2026-11",
+          "meal_allowance": 0,
+          "meal_service": "none",
+          "monthly_divisor_hours": 209,
+          "pay_basis": "monthly",
+          "payment_records": [
+            {
+              "date": "2026-11-25",
+              "revision": 1,
+              "status": "executed"
+            }
+          ],
+          "pension_due": true,
+          "pension_notified_income": 2800000,
+          "scope": "정상 재직한11월 완전 월 급여의 초기 승인 명세다. 정규근로와 유급일의 임금은 기본급에 포함했고 무급부재 및 추가근로는 없다. 별도 수당과 비과세 또는 다른 지급은 없다. 기관에서 받은11월 세 보험 통지 기초를 초기 명세에2800000원으로 잘못 옮긴 기록이며 이 원본의 정정 전 상태를 그대로 제시한다.",
+          "source_contract": "payroll_evidence_v1",
+          "variable_allowance": 0,
+          "week_attendance": [],
+          "weekly_holiday_included": true,
+          "weekly_hours": 40,
+          "withholding_percent": 100,
+          "work_records": [],
+          "workplace_employee_count": 9
+        },
+        "issued_on": "2026-11-20",
+        "payroll_id": "모서리11월",
+        "revision": 1,
+        "statement_scope": "complete_monthly",
+        "status": "approved"
+      },
+      {
+        "document_id": "모서리정정월명세",
+        "employee_id": "가상직원채원",
+        "facts": {
+          "base_salary": 3120000,
+          "company_name": "가상모서리제작",
+          "eligible_children": 0,
+          "employee_age": 34,
+          "employee_name": "가상채원",
+          "employment_due": true,
+          "employment_notified_income": 3120000,
+          "family_count": 1,
+          "fixed_allowance": 0,
+          "health_due": true,
+          "health_notified_income": 3120000,
+          "holiday_dates": [],
+          "hourly_rate": 0,
+          "insurance_assessment_month": "2026-11",
+          "meal_allowance": 0,
+          "meal_service": "none",
+          "monthly_divisor_hours": 209,
+          "pay_basis": "monthly",
+          "payment_records": [
+            {
+              "date": "2026-11-25",
+              "revision": 1,
+              "status": "executed"
+            }
+          ],
+          "pension_due": true,
+          "pension_notified_income": 3120000,
+          "scope": "정상 재직한11월 완전 월 급여의 최종 승인 명세다. 정규근로와 유급일의 임금은 기본급에 포함했고 무급부재 및 추가근로는 없다. 별도 수당과 비과세 또는 다른 지급은 없다. 기관의 확정11월 통지 기초를 각 기관별 금액 칸에 옮겨 초기 전재 오류를 정정했다. 임금과 실제 지급일 및 가족조건은 앞 명세와 동일하다.",
+          "source_contract": "payroll_evidence_v1",
+          "variable_allowance": 0,
+          "week_attendance": [],
+          "weekly_holiday_included": true,
+          "weekly_hours": 40,
+          "withholding_percent": 100,
+          "work_records": [],
+          "workplace_employee_count": 9
+        },
+        "issued_on": "2026-11-24",
+        "payroll_id": "모서리11월",
+        "revision": 2,
+        "statement_scope": "complete_monthly",
+        "status": "approved"
+      }
+    ],
+    "transfers": [
+      {
+        "amount": 2730000,
+        "date": "2026-11-25",
+        "employee_id": "가상직원채원",
+        "payroll_id": "모서리11월",
+        "status": "executed",
+        "transfer_id": "모서리실행한번"
+      }
+    ]
+  },
+  "instruction": "가상모서리제작의 같은 직원 월 명세가 보험 통지 기초 정정으로 다시 승인됐습니다. 임금과 근태는 바뀌지 않았으니 명세 둘을 합산하지 말고 최종 완전 승인본 하나를 사용해 주세요. 실제 은행 실행을 연결하여 payroll_calculations와 employee_settlements 및 deductions_total, net_total, balance_total을 answer.json에 적어 주세요.",
+  "title": "같은 급여의 보험 통지 기초 정정과 실제 지급 잔액",
+  "work_goal": "임금 불변인 보험 통지 기초 정정을 완전 명세 선택에 반영하고 실제 현금과 새 실수령액의 차이를 확인한다."
+}
