@@ -80,7 +80,7 @@ uv run --with datasets python scripts/export_authored_verification.py exports/up
 
 ## 규칙과 검증 범위
 
-[`rules/sources.yaml`](rules/sources.yaml)은 66개 규칙의 공식 출처를 기록합니다. 이 중 30개는 공식 수치 예시로 확인했고, 나머지 36개는 `verified: false`로 공개합니다. [미검증 규칙](reports/unverified_rules.md)과 [DATA_SPEC.md](DATA_SPEC.md)에서 근거와 계산 범위를 확인할 수 있습니다.
+[`rules/sources.yaml`](rules/sources.yaml)은 67개 규칙의 출처를 기록합니다. 이 중 30개는 공식 수치 예시로 확인했고, 나머지 37개는 `verified: false`로 공개합니다. [미검증 규칙](reports/unverified_rules.md)과 [DATA_SPEC.md](DATA_SPEC.md)에서 근거와 계산 범위를 확인할 수 있습니다.
 
 PDF와 XLSX 및 HWPX와 PNG를 지원합니다. PNG는 PDF 원본의 보관 사본이므로 스캔만 읽는 OCR 평가를 보장하지 않습니다. HWPX는 ZIP 구조와 XML 추출을 검사했으며 한컴 실제 앱 호환성은 별도 검수 대상입니다. 모델 코드 실행용 Docker 명령은 테스트했지만 이 구축 환경에서 실제 Docker 엔진 실행은 확인하지 못했습니다.
 

@@ -14,7 +14,12 @@ from pathlib import Path
 import re
 import sys
 
-from KrRubberStamp.export import checked_measurements, collect_authored_tasks, task_set_sha256
+from KrRubberStamp.export import (
+    _dataset_card,
+    checked_measurements,
+    collect_authored_tasks,
+    task_set_sha256,
+)
 from KrRubberStamp.io import read_json
 from KrRubberStamp.tasks import scenario_hash
 
@@ -220,6 +225,9 @@ def publish(plan, api):
     if not isinstance(namespace, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", namespace):
         raise ValueError("Cannot determine the authenticated personal namespace")
     repo_id = f"{namespace}/{DATASET_NAME}"
+    (plan.folder / "README.md").write_text(
+        _dataset_card(plan.manifest, repo_id=repo_id), encoding="utf-8"
+    )
     # Existing repositories may be resumed only for this exact export. We never
     # delete remote files or overwrite a different release under the same name.
     from huggingface_hub.errors import EntryNotFoundError, RepositoryNotFoundError

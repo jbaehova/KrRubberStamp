@@ -16,6 +16,9 @@ from .tasks import canary_for, make_schema, scenario_hash
 
 DIFFICULTIES = (("easy", 90), ("medium", 135), ("hard", 75))
 SUPPORT_REPORTS = (
+    "EXPANSION_DIVERSITY_GUIDE.md",
+    "extract_fulfillment_contract.md",
+    "extract_fulfillment_legacy_integrity.json",
     "authored_vat_204300_editorial.md",
     "audit_evidence/vat_204300/C243_baseline_page_1.png",
     "audit_evidence/vat_204300/C272_post_tire_page_1.png",
@@ -591,6 +594,11 @@ def _write_export(tasks, manifests, evidence, rules, document_root, batches, out
     for batch, values in evidence.items():
         for item in values.values():
             shutil.copy2(item["path"], output / "reports" / item["path"].name)
+        for path in sorted((document_root / "reports").glob(f"authored_batch_{batch}_*.md")):
+            shutil.copy2(path, output / "reports" / path.name)
+        audit_path = document_root / "reports" / "audit_evidence" / f"batch_{batch}"
+        if audit_path.is_dir():
+            shutil.copytree(audit_path, output / "reports" / "audit_evidence" / f"batch_{batch}")
         if not preview:
             for filename in (f"BATCH_{batch}_REPORT.md", f"REVIEW_QUEUE_BATCH_{batch}.md"):
                 path = document_root / "reports" / filename
@@ -606,7 +614,7 @@ def _write_export(tasks, manifests, evidence, rules, document_root, batches, out
     return summary
 
 
-def _dataset_card(summary):
+def _dataset_card(summary, *, repo_id=None):
     name = summary["dataset_name"]
     status = (
         "편집 검토용 미완성 미리보기입니다. 완성된 Batch 1 배포본이 아닙니다."
@@ -687,8 +695,20 @@ def _dataset_card(summary):
         "```python",
         "import json",
         "from datasets import load_dataset",
-        'ds = load_dataset("json", data_files="data/train.jsonl", split="train")',
+        "from huggingface_hub import hf_hub_download",
+        (
+            f'repo_id = "{repo_id}"'
+            if repo_id
+            else f'repo_id = "YOUR_NAMESPACE/{name}"  # Hub 게시 후 실제 주소로 바꿉니다.'
+        ),
+        (
+            'ds = load_dataset(repo_id, data_files="data/train.jsonl", split="train")'
+            if repo_id
+            else 'ds = load_dataset("json", data_files="data/train.jsonl", split="train")'
+        ),
         'gold = json.loads(ds[0]["gold"])',
+        "# Hub의 입력 문서는 문항별 상대 경로로 별도 내려받습니다.",
+        'first_document = hf_hub_download(repo_id, filename=ds[0]["input_files"][0]["path"], repo_type="dataset")',
         "```",
         "",
         'input_files.path와 각 *_path 필드는 이 내보내기 디렉터리를 기준으로 한 상대 경로입니다. 로컬에서는 해당 파일을 직접 읽습니다. Hub 사용자는 hf_hub_download(repo_id, filename=path, repo_type="dataset")로 받을 수 있습니다. 분야마다 구조가 다른 answer_schema와 gold 및 trace는 Arrow 스키마 충돌을 피하기 위해 JSON 문자열로 저장합니다.',
